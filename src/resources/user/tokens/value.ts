@@ -20,29 +20,15 @@ export class BaseValue extends APIResource {
    * ```ts
    * const tokenValue = await client.user.tokens.value.update(
    *   'ed17574386854bf78a67040be0a770b0',
-   *   { body: {} },
    * );
    * ```
    */
-  update(
-    tokenID: string,
-    params: ValueUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<Shared.TokenValue> {
-    const { body } = params;
+  update(tokenID: string, options?: RequestOptions): APIPromise<Shared.TokenValue> {
     return (
-      this._client.put(path`/user/tokens/${tokenID}/value`, { body: body, ...options }) as APIPromise<{
+      this._client.put(path`/user/tokens/${tokenID}/value`, options) as APIPromise<{
         result: Shared.TokenValue;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 export class Value extends BaseValue {}
-
-export interface ValueUpdateParams {
-  body: unknown;
-}
-
-export declare namespace Value {
-  export { type ValueUpdateParams as ValueUpdateParams };
-}

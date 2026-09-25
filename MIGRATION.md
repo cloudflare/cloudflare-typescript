@@ -64,11 +64,20 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.accounts.subscriptions.update()`
 - `client.accounts.subscriptions.delete()`
 - `client.accounts.subscriptions.get()`
+- `client.accounts.subscriptions.getByIdentifier()`
+- `client.accounts.subscriptions.cancelReason.create()`
+- `client.accounts.subscriptions.cancelReason.get()`
+- `client.accounts.subscriptions.actions.append()`
 - `client.accounts.tokens.update()`
 - `client.accounts.tokens.delete()`
 - `client.accounts.tokens.get()`
 - `client.accounts.tokens.value.update()`
 - `client.accounts.logs.audit.history()`
+- `client.accounts.paymentMethods.update()`
+- `client.accounts.paymentMethods.delete()`
+- `client.accounts.paymentMethods.get()`
+- `client.accounts.paymentMethods.setAsDefault()`
+- `client.accounts.receipts.pdf()`
 - `client.organizations.logs.audit.history()`
 - `client.zones.settings.edit()`
 - `client.zones.settings.get()`
@@ -171,6 +180,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.emailSecurity.settings.blockSenders.delete()`
 - `client.emailSecurity.settings.blockSenders.edit()`
 - `client.emailSecurity.settings.blockSenders.get()`
+- `client.emailSecurity.settings.contentPolicies.delete()`
+- `client.emailSecurity.settings.contentPolicies.edit()`
+- `client.emailSecurity.settings.contentPolicies.get()`
+- `client.emailSecurity.settings.domains.update()`
 - `client.emailSecurity.settings.domains.delete()`
 - `client.emailSecurity.settings.domains.edit()`
 - `client.emailSecurity.settings.domains.get()`
@@ -194,7 +207,11 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.emailRouting.addresses.delete()`
 - `client.emailRouting.addresses.edit()`
 - `client.emailRouting.addresses.get()`
+- `client.emailSending.suppressions.delete()`
+- `client.emailSending.suppressions.edit()`
+- `client.emailSending.suppressions.get()`
 - `client.emailSending.subdomains.delete()`
+- `client.emailSending.subdomains.edit()`
 - `client.emailSending.subdomains.get()`
 - `client.emailSending.subdomains.dns.get()`
 - `client.filters.update()`
@@ -243,6 +260,11 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.logpush.jobs.get()`
 - `client.logpush.ownership.create()`
 - `client.logpush.ownership.validate()`
+- `client.logpush.transformers.update()`
+- `client.logpush.transformers.delete()`
+- `client.logpush.transformers.get()`
+- `client.logpush.transformers.content.get()`
+- `client.logpush.transformers.versions.list()`
 - `client.logpush.validate.destination()`
 - `client.logpush.validate.destinationExists()`
 - `client.logpush.validate.origin()`
@@ -443,6 +465,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.addressing.prefixes.serviceBindings.get()`
 - `client.addressing.prefixes.bgpPrefixes.create()`
 - `client.addressing.prefixes.bgpPrefixes.list()`
+- `client.addressing.prefixes.bgpPrefixes.delete()`
 - `client.addressing.prefixes.bgpPrefixes.edit()`
 - `client.addressing.prefixes.bgpPrefixes.get()`
 - `client.addressing.prefixes.advertisementStatus.edit()`
@@ -496,6 +519,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.magicTransit.routes.update()`
 - `client.magicTransit.routes.delete()`
 - `client.magicTransit.routes.get()`
+- `client.magicTransit.bgpFilterProfiles.update()`
+- `client.magicTransit.bgpFilterProfiles.delete()`
+- `client.magicTransit.bgpFilterProfiles.get()`
 - `client.magicTransit.sites.update()`
 - `client.magicTransit.sites.delete()`
 - `client.magicTransit.sites.edit()`
@@ -619,6 +645,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.registrar.registrationStatus.get()`
 - `client.registrar.updateStatus.get()`
 - `client.registrar.extensions.get()`
+- `client.registrar.transferIn.create()`
+- `client.registrar.transferInStatus.get()`
 - `client.registrarSandbox.registrations.edit()`
 - `client.registrarSandbox.registrations.get()`
 - `client.registrarSandbox.registrationStatus.get()`
@@ -714,6 +742,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.r2.superSlurper.jobs.progress()`
 - `client.r2.superSlurper.jobs.resume()`
 - `client.r2.superSlurper.jobs.logs.list()`
+- `client.r2DataCatalog.delete()`
 - `client.r2DataCatalog.disable()`
 - `client.r2DataCatalog.enable()`
 - `client.r2DataCatalog.get()`
@@ -884,6 +913,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.casb.posture.exports.get()`
 - `client.zeroTrust.casb.posture.findingTypes.get()`
 - `client.zeroTrust.casb.posture.findingTypes.remediationTypes.list()`
+- `client.zeroTrust.casb.posture.policies.update()`
+- `client.zeroTrust.casb.posture.policies.delete()`
+- `client.zeroTrust.casb.posture.policies.get()`
 - `client.zeroTrust.casb.posture.webhooks.update()`
 - `client.zeroTrust.casb.posture.webhooks.delete()`
 - `client.zeroTrust.casb.posture.webhooks.evaluateExisting()`
@@ -1018,6 +1050,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.riskScoring.integrations.delete()`
 - `client.zeroTrust.riskScoring.integrations.get()`
 - `client.zeroTrust.riskScoring.integrations.references.get()`
+- `client.zeroTrust.resourceLibrary.applications.update()`
+- `client.zeroTrust.resourceLibrary.applications.delete()`
 - `client.zeroTrust.resourceLibrary.applications.get()`
 - `client.zeroTrust.resourceLibrary.categories.get()`
 - `client.turnstile.widgets.update()`
@@ -1031,6 +1065,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.hyperdrive.configs.delete()`
 - `client.hyperdrive.configs.edit()`
 - `client.hyperdrive.configs.get()`
+- `client.hyperdrive.configs.restart()`
 - `client.rum.siteInfo.update()`
 - `client.rum.siteInfo.delete()`
 - `client.rum.siteInfo.get()`
@@ -1103,6 +1138,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.realtimeKit.presets.delete()`
 - `client.realtimeKit.presets.get()`
 - `client.realtimeKit.presets.getPresetByID()`
+- `client.realtimeKit.presets.replacePresetByID()`
 - `client.realtimeKit.sessions.generateSummaryOfTranscripts()`
 - `client.realtimeKit.sessions.getParticipantDataFromPeerID()`
 - `client.realtimeKit.sessions.getSessionChat()`
@@ -1128,7 +1164,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.realtimeKit.activeSession.getActiveSession()`
 - `client.realtimeKit.activeSession.kickAllParticipants()`
 - `client.realtimeKit.activeSession.kickParticipants()`
-- `client.realtimeKit.livestreams.createIndependentLivestream()`
 - `client.realtimeKit.livestreams.getActiveLivestreamsForLivestreamID()`
 - `client.realtimeKit.livestreams.getAllLivestreams()`
 - `client.realtimeKit.livestreams.getLivestreamAnalyticsComplete()`
@@ -1152,6 +1187,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.moq.relays.tokens.create()`
 - `client.moq.relays.tokens.list()`
 - `client.moq.relays.tokens.delete()`
+- `client.managedDefense.vulnerabilityDiscovery.repositories.get()`
+- `client.managedDefense.vulnerabilityDiscovery.scans.get()`
+- `client.managedDefense.vulnerabilityDiscovery.scans.getReport()`
+- `client.managedDefense.vulnerabilityDiscovery.reports.get()`
 - `client.cloudforceOne.scans.results.get()`
 - `client.cloudforceOne.scans.config.delete()`
 - `client.cloudforceOne.scans.config.edit()`
@@ -1295,9 +1334,12 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.leakedCredentialChecks.detections.update()`
 - `client.leakedCredentialChecks.detections.delete()`
 - `client.leakedCredentialChecks.detections.get()`
+- `client.contentScanning.payloads.update()`
 - `client.contentScanning.payloads.delete()`
 - `client.abuseReports.create()`
 - `client.abuseReports.get()`
+- `client.abuseReports.submitted.get()`
+- `client.abuseReports.submitted.emails.list()`
 - `client.abuseReports.mitigations.list()`
 - `client.abuseReports.mitigations.review()`
 - `client.ai.run()`
@@ -1358,6 +1400,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.browserRendering.devtools.browser.connect()`
 - `client.browserRendering.devtools.browser.protocol()`
 - `client.browserRendering.devtools.browser.version()`
+- `client.browserRendering.devtools.browser.liveView.create()`
 - `client.browserRendering.devtools.browser.page.get()`
 - `client.browserRendering.devtools.browser.targets.create()`
 - `client.browserRendering.devtools.browser.targets.list()`
@@ -1401,9 +1444,13 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.tokenValidation.configuration.edit()`
 - `client.tokenValidation.configuration.get()`
 - `client.tokenValidation.configuration.credentials.update()`
+- `client.tokenValidation.configuration.credentials.edit()`
 - `client.tokenValidation.rules.delete()`
 - `client.tokenValidation.rules.edit()`
 - `client.tokenValidation.rules.get()`
+- `client.fieldExtractors.update()`
+- `client.fieldExtractors.delete()`
+- `client.fieldExtractors.get()`
 
 </details>
 
@@ -1440,28 +1487,16 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 
 <summary>This affects the following methods</summary>
 
-- `client.accounts.tokens.value.update()`
-- `client.user.tokens.value.update()`
-- `client.cache.cacheReserve.clear()`
 - `client.cache.originCloudRegions.bulkUpdate()`
-- `client.dns.records.scan()`
-- `client.dns.zoneTransfers.forceAXFR.create()`
-- `client.dns.zoneTransfers.outgoing.disable()`
-- `client.dns.zoneTransfers.outgoing.enable()`
-- `client.dns.zoneTransfers.outgoing.forceNotify()`
 - `client.emailSecurity.investigate.release.bulk()`
-- `client.emailRouting.disable()`
-- `client.emailRouting.enable()`
+- `client.emailSending.send()`
 - `client.filters.create()`
 - `client.filters.bulkUpdate()`
-- `client.firewall.rules.bulkEdit()`
-- `client.firewall.rules.bulkUpdate()`
 - `client.logs.logExplorer.query.sql()`
 - `client.waitingRooms.rules.create()`
 - `client.waitingRooms.rules.update()`
 - `client.workers.assets.upload.create()`
 - `client.workers.scripts.schedules.update()`
-- `client.workers.scripts.tail.create()`
 - `client.kv.namespaces.bulkDelete()`
 - `client.kv.namespaces.bulkUpdate()`
 - `client.kv.namespaces.keys.bulkDelete()`
@@ -1470,13 +1505,9 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.apiGateway.labels.user.bulkCreate()`
 - `client.apiGateway.operations.bulkCreate()`
 - `client.apiGateway.operations.schemaValidation.edit()`
-- `client.addressing.addressMaps.accounts.update()`
-- `client.addressing.addressMaps.ips.update()`
-- `client.addressing.addressMaps.zones.update()`
 - `client.magicTransit.cfInterconnects.bulkUpdate()`
 - `client.magicTransit.greTunnels.bulkUpdate()`
 - `client.magicTransit.ipsecTunnels.bulkUpdate()`
-- `client.magicTransit.ipsecTunnels.pskGenerate()`
 - `client.magicTransit.cf1Sites.create()`
 - `client.magicTransit.cf1Sites.ramps.create()`
 - `client.DDoSProtection.advancedTCPProtection.prefixes.bulkCreate()`
@@ -1484,7 +1515,6 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.pages.assets.upload()`
 - `client.rules.lists.items.create()`
 - `client.rules.lists.items.update()`
-- `client.stream.keys.create()`
 - `client.alerting.silences.create()`
 - `client.alerting.silences.update()`
 - `client.r2.buckets.objects.upload()`
@@ -1499,13 +1529,9 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.zeroTrust.devices.unrevoke.create()`
 - `client.zeroTrust.seats.edit()`
 - `client.zeroTrust.access.infrastructure.targets.bulkUpdate()`
-- `client.zeroTrust.access.bookmarks.create()`
-- `client.zeroTrust.access.bookmarks.update()`
 - `client.zeroTrust.dlp.datasets.upload.edit()`
 - `client.zeroTrust.dlp.datasets.versions.create()`
 - `client.zeroTrust.dlp.datasets.versions.entries.create()`
-- `client.zeroTrust.gateway.certificates.activate()`
-- `client.zeroTrust.gateway.certificates.deactivate()`
 - `client.vectorize.indexes.insert()`
 - `client.vectorize.indexes.upsert()`
 - `client.urlScanner.scans.bulkCreate()`
@@ -1554,6 +1580,7 @@ client.example.list(undefined, { headers: { ... } });
 - `client.user.auditLogs.list()`
 - `client.user.billing.history.list()`
 - `client.user.organizations.list()`
+- `client.user.spectrumAnalytics.zones.reports.get()`
 - `client.user.tokens.list()`
 - `client.user.tokens.permissionGroups.list()`
 - `client.zones.list()`

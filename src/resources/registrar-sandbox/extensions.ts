@@ -14,7 +14,8 @@ export class BaseExtensions extends APIResource {
 
   /**
    * Returns metadata and JSON Schema documents describing the expected input
-   * structure for registration operations on each supported extension (TLD).
+   * structure for registration and transfer operations on each supported extension
+   * (TLD).
    *
    * This endpoint uses cursor-based pagination. Results are ordered by extension
    * name by default. To fetch the next page, pass the `cursor` value from the
@@ -49,7 +50,8 @@ export class BaseExtensions extends APIResource {
 
   /**
    * Returns metadata and JSON Schema documents describing the expected input
-   * structure for registration operations on a specific extension (TLD).
+   * structure for registration and transfer operations on a specific extension
+   * (TLD).
    *
    * Supports HTTP conditional GET via `ETag`. Include the `ETag` value from a
    * previous response in an `If-None-Match` header to receive a `304 Not Modified`
@@ -82,12 +84,12 @@ export class Extensions extends BaseExtensions {}
 export type ExtensionListResponsesCursorPagination = CursorPagination<ExtensionListResponse>;
 
 /**
- * Extension entry with metadata and JSON Schema documents for the registration
- * operation.
+ * Extension entry with metadata and JSON Schema documents for registration and
+ * transfer operations.
  */
 export interface ExtensionListResponse {
   /**
-   * Extension metadata
+   * Extension metadata.
    */
   metadata: ExtensionListResponse.Metadata;
 
@@ -96,33 +98,39 @@ export interface ExtensionListResponse {
    * on this extension.
    */
   registration_schema: unknown;
+
+  /**
+   * JSON Schema describing the expected input structure for transfer operations on
+   * this extension.
+   */
+  transfer_schema: unknown;
 }
 
 export namespace ExtensionListResponse {
   /**
-   * Extension metadata
+   * Extension metadata.
    */
   export interface Metadata {
     /**
-     * The full name of the extension. For example, "co.uk", or "uk"
+     * The full name of the extension. For example, "co.uk", or "uk".
      */
     name: string;
 
     /**
-     * The tld of the extension. For example, for "co.uk", it's "uk". For "uk", it's
-     * "uk"
+     * The TLD of the extension. For example, for "co.uk", it is "uk". For "uk", it is
+     * "uk".
      */
     tld: string;
   }
 }
 
 /**
- * Extension entry with metadata and JSON Schema documents for the registration
- * operation.
+ * Extension entry with metadata and JSON Schema documents for registration and
+ * transfer operations.
  */
 export interface ExtensionGetResponse {
   /**
-   * Extension metadata
+   * Extension metadata.
    */
   metadata: ExtensionGetResponse.Metadata;
 
@@ -131,21 +139,27 @@ export interface ExtensionGetResponse {
    * on this extension.
    */
   registration_schema: unknown;
+
+  /**
+   * JSON Schema describing the expected input structure for transfer operations on
+   * this extension.
+   */
+  transfer_schema: unknown;
 }
 
 export namespace ExtensionGetResponse {
   /**
-   * Extension metadata
+   * Extension metadata.
    */
   export interface Metadata {
     /**
-     * The full name of the extension. For example, "co.uk", or "uk"
+     * The full name of the extension. For example, "co.uk", or "uk".
      */
     name: string;
 
     /**
-     * The tld of the extension. For example, for "co.uk", it's "uk". For "uk", it's
-     * "uk"
+     * The TLD of the extension. For example, for "co.uk", it is "uk". For "uk", it is
+     * "uk".
      */
     tld: string;
   }
@@ -153,7 +167,7 @@ export namespace ExtensionGetResponse {
 
 export interface ExtensionListParams extends CursorPaginationParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -176,7 +190,7 @@ export interface ExtensionListParams extends CursorPaginationParams {
 
 export interface ExtensionGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

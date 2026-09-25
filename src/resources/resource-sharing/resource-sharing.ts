@@ -310,7 +310,8 @@ export namespace ResourceSharingCreateResponse {
       | 'gateway-destination-ip'
       | 'gateway-block-page-settings'
       | 'gateway-extended-email-matching'
-      | 'idp-federation-grant';
+      | 'idp-federation-grant'
+      | 'trust-grant';
 
     /**
      * Resource Version.
@@ -438,7 +439,8 @@ export namespace ResourceSharingUpdateResponse {
       | 'gateway-destination-ip'
       | 'gateway-block-page-settings'
       | 'gateway-extended-email-matching'
-      | 'idp-federation-grant';
+      | 'idp-federation-grant'
+      | 'trust-grant';
 
     /**
      * Resource Version.
@@ -566,7 +568,8 @@ export namespace ResourceSharingListResponse {
       | 'gateway-destination-ip'
       | 'gateway-block-page-settings'
       | 'gateway-extended-email-matching'
-      | 'idp-federation-grant';
+      | 'idp-federation-grant'
+      | 'trust-grant';
 
     /**
      * Resource Version.
@@ -694,7 +697,8 @@ export namespace ResourceSharingDeleteResponse {
       | 'gateway-destination-ip'
       | 'gateway-block-page-settings'
       | 'gateway-extended-email-matching'
-      | 'idp-federation-grant';
+      | 'idp-federation-grant'
+      | 'trust-grant';
 
     /**
      * Resource Version.
@@ -822,7 +826,8 @@ export namespace ResourceSharingGetResponse {
       | 'gateway-destination-ip'
       | 'gateway-block-page-settings'
       | 'gateway-extended-email-matching'
-      | 'idp-federation-grant';
+      | 'idp-federation-grant'
+      | 'trust-grant';
 
     /**
      * Resource Version.
@@ -909,7 +914,8 @@ export namespace ResourceSharingCreateParams {
       | 'gateway-destination-ip'
       | 'gateway-block-page-settings'
       | 'gateway-extended-email-matching'
-      | 'idp-federation-grant';
+      | 'idp-federation-grant'
+      | 'trust-grant';
   }
 }
 
@@ -966,6 +972,7 @@ export interface ResourceSharingListParams extends V4PagePaginationArrayParams {
     | 'gateway-block-page-settings'
     | 'gateway-extended-email-matching'
     | 'idp-federation-grant'
+    | 'trust-grant'
   >;
 
   /**

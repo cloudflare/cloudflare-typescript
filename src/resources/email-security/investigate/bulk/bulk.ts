@@ -139,9 +139,23 @@ export interface BulkCreateResponse {
 
   job_id: string;
 
+  /**
+   * Messages that were cancelled: rows cancelled via the API before being claimed,
+   * and rows whose in-flight attempt ended when the job reached a terminal state.
+   * Together the counters satisfy total_messages_discovered = messages_pending +
+   * messages_successful + messages_failed + messages_skipped + messages_cancelled.
+   */
+  messages_cancelled: number;
+
   messages_failed: number;
 
   messages_pending: number;
+
+  /**
+   * Messages that discovery skipped (for example, phish submissions, which the job
+   * cannot action).
+   */
+  messages_skipped: number;
 
   messages_successful: number;
 
@@ -171,6 +185,9 @@ export namespace BulkCreateResponse {
 
     type: 'MOVE';
 
+    /**
+     * @deprecated This field is nonfunctional.
+     */
     expected_disposition?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -181,7 +198,8 @@ export namespace BulkCreateResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE';
+      | 'NONE'
+      | null;
   }
 
   export interface Release {
@@ -199,7 +217,16 @@ export namespace BulkCreateResponse {
     /**
      * Delivery status of the message.
      */
-    delivery_status?: 'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued';
+    delivery_status?:
+      | 'delivered'
+      | 'moved'
+      | 'quarantined'
+      | 'rejected'
+      | 'deferred'
+      | 'bounced'
+      | 'queued'
+      | 'move_failed'
+      | null;
 
     detections_only?: boolean;
 
@@ -222,7 +249,8 @@ export namespace BulkCreateResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE';
+      | 'NONE'
+      | null;
 
     message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | null;
 
@@ -235,6 +263,11 @@ export namespace BulkCreateResponse {
     recipient?: string | null;
 
     sender?: string | null;
+
+    /**
+     * Matches messages whose SMTP HELO server IP address equals this value.
+     */
+    smtp_helo_ip?: string | null;
 
     /**
      * Beginning of search date range.
@@ -256,9 +289,23 @@ export interface BulkListResponse {
 
   job_id: string;
 
+  /**
+   * Messages that were cancelled: rows cancelled via the API before being claimed,
+   * and rows whose in-flight attempt ended when the job reached a terminal state.
+   * Together the counters satisfy total_messages_discovered = messages_pending +
+   * messages_successful + messages_failed + messages_skipped + messages_cancelled.
+   */
+  messages_cancelled: number;
+
   messages_failed: number;
 
   messages_pending: number;
+
+  /**
+   * Messages that discovery skipped (for example, phish submissions, which the job
+   * cannot action).
+   */
+  messages_skipped: number;
 
   messages_successful: number;
 
@@ -288,6 +335,9 @@ export namespace BulkListResponse {
 
     type: 'MOVE';
 
+    /**
+     * @deprecated This field is nonfunctional.
+     */
     expected_disposition?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -298,7 +348,8 @@ export namespace BulkListResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE';
+      | 'NONE'
+      | null;
   }
 
   export interface Release {
@@ -316,7 +367,16 @@ export namespace BulkListResponse {
     /**
      * Delivery status of the message.
      */
-    delivery_status?: 'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued';
+    delivery_status?:
+      | 'delivered'
+      | 'moved'
+      | 'quarantined'
+      | 'rejected'
+      | 'deferred'
+      | 'bounced'
+      | 'queued'
+      | 'move_failed'
+      | null;
 
     detections_only?: boolean;
 
@@ -339,7 +399,8 @@ export namespace BulkListResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE';
+      | 'NONE'
+      | null;
 
     message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | null;
 
@@ -352,6 +413,11 @@ export namespace BulkListResponse {
     recipient?: string | null;
 
     sender?: string | null;
+
+    /**
+     * Matches messages whose SMTP HELO server IP address equals this value.
+     */
+    smtp_helo_ip?: string | null;
 
     /**
      * Beginning of search date range.
@@ -377,9 +443,23 @@ export interface BulkGetResponse {
 
   job_id: string;
 
+  /**
+   * Messages that were cancelled: rows cancelled via the API before being claimed,
+   * and rows whose in-flight attempt ended when the job reached a terminal state.
+   * Together the counters satisfy total_messages_discovered = messages_pending +
+   * messages_successful + messages_failed + messages_skipped + messages_cancelled.
+   */
+  messages_cancelled: number;
+
   messages_failed: number;
 
   messages_pending: number;
+
+  /**
+   * Messages that discovery skipped (for example, phish submissions, which the job
+   * cannot action).
+   */
+  messages_skipped: number;
 
   messages_successful: number;
 
@@ -409,6 +489,9 @@ export namespace BulkGetResponse {
 
     type: 'MOVE';
 
+    /**
+     * @deprecated This field is nonfunctional.
+     */
     expected_disposition?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -419,7 +502,8 @@ export namespace BulkGetResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE';
+      | 'NONE'
+      | null;
   }
 
   export interface Release {
@@ -437,7 +521,16 @@ export namespace BulkGetResponse {
     /**
      * Delivery status of the message.
      */
-    delivery_status?: 'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued';
+    delivery_status?:
+      | 'delivered'
+      | 'moved'
+      | 'quarantined'
+      | 'rejected'
+      | 'deferred'
+      | 'bounced'
+      | 'queued'
+      | 'move_failed'
+      | null;
 
     detections_only?: boolean;
 
@@ -460,7 +553,8 @@ export namespace BulkGetResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE';
+      | 'NONE'
+      | null;
 
     message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | null;
 
@@ -475,6 +569,11 @@ export namespace BulkGetResponse {
     sender?: string | null;
 
     /**
+     * Matches messages whose SMTP HELO server IP address equals this value.
+     */
+    smtp_helo_ip?: string | null;
+
+    /**
      * Beginning of search date range.
      */
     start?: string;
@@ -487,7 +586,7 @@ export namespace BulkGetResponse {
 
 export interface BulkCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -507,7 +606,7 @@ export interface BulkCreateParams {
   comment?: string | null;
 
   /**
-   * Body param
+   * Body param: Required when action is 'MOVE'.
    */
   destination?:
     | 'Inbox'
@@ -517,7 +616,7 @@ export interface BulkCreateParams {
     | 'RecoverableItemsPurges';
 
   /**
-   * Body param
+   * @deprecated This field is nonfunctional.
    */
   expected_disposition?:
     | 'MALICIOUS'
@@ -529,7 +628,8 @@ export interface BulkCreateParams {
     | 'ENCRYPTED'
     | 'EXTERNAL'
     | 'UNKNOWN'
-    | 'NONE';
+    | 'NONE'
+    | null;
 }
 
 export namespace BulkCreateParams {
@@ -544,7 +644,16 @@ export namespace BulkCreateParams {
     /**
      * Delivery status of the message.
      */
-    delivery_status?: 'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued';
+    delivery_status?:
+      | 'delivered'
+      | 'moved'
+      | 'quarantined'
+      | 'rejected'
+      | 'deferred'
+      | 'bounced'
+      | 'queued'
+      | 'move_failed'
+      | null;
 
     detections_only?: boolean;
 
@@ -567,7 +676,8 @@ export namespace BulkCreateParams {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE';
+      | 'NONE'
+      | null;
 
     message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | null;
 
@@ -582,6 +692,11 @@ export namespace BulkCreateParams {
     sender?: string | null;
 
     /**
+     * Matches messages whose SMTP HELO server IP address equals this value.
+     */
+    smtp_helo_ip?: string | null;
+
+    /**
      * Beginning of search date range.
      */
     start?: string;
@@ -594,7 +709,7 @@ export namespace BulkCreateParams {
 
 export interface BulkListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -611,14 +726,14 @@ export interface BulkListParams extends V4PagePaginationArrayParams {
 
 export interface BulkDeleteParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }
 
 export interface BulkGetParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }

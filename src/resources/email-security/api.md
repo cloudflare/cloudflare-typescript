@@ -143,6 +143,7 @@ Types:
 - <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyCreateResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyListResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyBatchResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyEditResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyGetResponse</a></code>
 
@@ -151,6 +152,7 @@ Methods:
 - <code title="post /accounts/{account_id}/email-security/settings/allow_policies">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">create</a>({ ...params }) -> AllowPolicyCreateResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/allow_policies">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">list</a>({ ...params }) -> AllowPolicyListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">delete</a>(policyID, { ...params }) -> AllowPolicyDeleteResponse</code>
+- <code title="post /accounts/{account_id}/email-security/settings/allow_policies/batch">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">batch</a>({ ...params }) -> AllowPolicyBatchResponse</code>
 - <code title="patch /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">edit</a>(policyID, { ...params }) -> AllowPolicyEditResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">get</a>(policyID, { ...params }) -> AllowPolicyGetResponse</code>
 
@@ -161,6 +163,7 @@ Types:
 - <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderCreateResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderListResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderBatchResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderEditResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderGetResponse</a></code>
 
@@ -169,23 +172,50 @@ Methods:
 - <code title="post /accounts/{account_id}/email-security/settings/block_senders">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">create</a>({ ...params }) -> BlockSenderCreateResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/block_senders">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">list</a>({ ...params }) -> BlockSenderListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">delete</a>(patternID, { ...params }) -> BlockSenderDeleteResponse</code>
+- <code title="post /accounts/{account_id}/email-security/settings/block_senders/batch">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">batch</a>({ ...params }) -> BlockSenderBatchResponse</code>
 - <code title="patch /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">edit</a>(patternID, { ...params }) -> BlockSenderEditResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">get</a>(patternID, { ...params }) -> BlockSenderGetResponse</code>
+
+### ContentPolicies
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/content-policies.ts">ContentPolicyCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/content-policies.ts">ContentPolicyListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/content-policies.ts">ContentPolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/content-policies.ts">ContentPolicyBatchResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/content-policies.ts">ContentPolicyEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/content-policies.ts">ContentPolicyGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/settings/content_policies">client.emailSecurity.settings.contentPolicies.<a href="./src/resources/email-security/settings/content-policies.ts">create</a>({ ...params }) -> ContentPolicyCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/content_policies">client.emailSecurity.settings.contentPolicies.<a href="./src/resources/email-security/settings/content-policies.ts">list</a>({ ...params }) -> ContentPolicyListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/content_policies/{policy_id}">client.emailSecurity.settings.contentPolicies.<a href="./src/resources/email-security/settings/content-policies.ts">delete</a>(policyID, { ...params }) -> ContentPolicyDeleteResponse</code>
+- <code title="post /accounts/{account_id}/email-security/settings/content_policies/batch">client.emailSecurity.settings.contentPolicies.<a href="./src/resources/email-security/settings/content-policies.ts">batch</a>({ ...params }) -> ContentPolicyBatchResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/content_policies/{policy_id}">client.emailSecurity.settings.contentPolicies.<a href="./src/resources/email-security/settings/content-policies.ts">edit</a>(policyID, { ...params }) -> ContentPolicyEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/content_policies/{policy_id}">client.emailSecurity.settings.contentPolicies.<a href="./src/resources/email-security/settings/content-policies.ts">get</a>(policyID, { ...params }) -> ContentPolicyGetResponse</code>
 
 ### Domains
 
 Types:
 
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainUpdateResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainListResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainBatchResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainBulkDeleteResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainEditResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainGetResponse</a></code>
 
 Methods:
 
+- <code title="post /accounts/{account_id}/email-security/settings/domains">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">create</a>({ ...params }) -> DomainCreateResponse</code>
+- <code title="put /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">update</a>(domainID, { ...params }) -> DomainUpdateResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/domains">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">list</a>({ ...params }) -> DomainListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">delete</a>(domainID, { ...params }) -> DomainDeleteResponse</code>
+- <code title="post /accounts/{account_id}/email-security/settings/domains/batch">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">batch</a>({ ...params }) -> DomainBatchResponse</code>
 - <code title="delete /accounts/{account_id}/email-security/settings/domains">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">bulkDelete</a>({ ...params }) -> DomainBulkDeleteResponsesSinglePage</code>
 - <code title="patch /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">edit</a>(domainID, { ...params }) -> DomainEditResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">get</a>(domainID, { ...params }) -> DomainGetResponse</code>
@@ -233,6 +263,7 @@ Types:
 - <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainCreateResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainListResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainBatchResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainEditResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainGetResponse</a></code>
 
@@ -241,6 +272,7 @@ Methods:
 - <code title="post /accounts/{account_id}/email-security/settings/trusted_domains">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">create</a>({ ...params }) -> TrustedDomainCreateResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/trusted_domains">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">list</a>({ ...params }) -> TrustedDomainListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">delete</a>(trustedDomainID, { ...params }) -> TrustedDomainDeleteResponse</code>
+- <code title="post /accounts/{account_id}/email-security/settings/trusted_domains/batch">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">batch</a>({ ...params }) -> TrustedDomainBatchResponse</code>
 - <code title="patch /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">edit</a>(trustedDomainID, { ...params }) -> TrustedDomainEditResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">get</a>(trustedDomainID, { ...params }) -> TrustedDomainGetResponse</code>
 

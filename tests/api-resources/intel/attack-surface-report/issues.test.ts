@@ -54,6 +54,7 @@ const runTests = (client: PartialCloudflare<{ intel: { attackSurfaceReport: { is
       'product~neq': ['access', 'dns'],
       severity: ['low', 'moderate'],
       'severity~neq': ['low', 'moderate'],
+      source: ['cloudflare'],
       subject: ['example.com'],
       'subject~neq': ['example.com'],
     });
@@ -84,6 +85,7 @@ const runTests = (client: PartialCloudflare<{ intel: { attackSurfaceReport: { is
       'product~neq': ['access', 'dns'],
       severity: ['low', 'moderate'],
       'severity~neq': ['low', 'moderate'],
+      source: ['cloudflare'],
       subject: ['example.com'],
       'subject~neq': ['example.com'],
     });
@@ -114,6 +116,7 @@ const runTests = (client: PartialCloudflare<{ intel: { attackSurfaceReport: { is
       'product~neq': ['access', 'dns'],
       severity: ['low', 'moderate'],
       'severity~neq': ['low', 'moderate'],
+      source: ['cloudflare'],
       subject: ['example.com'],
       'subject~neq': ['example.com'],
     });
@@ -144,6 +147,7 @@ const runTests = (client: PartialCloudflare<{ intel: { attackSurfaceReport: { is
       'product~neq': ['access', 'dns'],
       severity: ['low', 'moderate'],
       'severity~neq': ['low', 'moderate'],
+      source: ['cloudflare'],
       subject: ['example.com'],
       'subject~neq': ['example.com'],
     });

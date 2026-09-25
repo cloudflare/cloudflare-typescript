@@ -148,7 +148,7 @@ export namespace InterruptListResponse {
 
 export interface InterruptCreateParams {
   /**
-   * Path param: Account identifier
+   * Path param
    */
   account_id: string;
 
@@ -192,9 +192,6 @@ export namespace InterruptCreateParams {
 }
 
 export interface InterruptListParams {
-  /**
-   * Account identifier
-   */
   account_id: string;
 }
 

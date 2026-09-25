@@ -206,7 +206,7 @@ export namespace FilterBulkDeleteResponse {
 
 export interface FilterCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: The ID of the account.
    */
   account_id: string;
 
@@ -224,7 +224,7 @@ export interface FilterCreateParams {
 
 export interface FilterListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: The ID of the account.
    */
   account_id: string;
 
@@ -247,7 +247,7 @@ export interface FilterListParams extends V4PagePaginationArrayParams {
 
 export interface FilterBulkDeleteParams {
   /**
-   * Identifier.
+   * The ID of the account.
    */
   account_id: string;
 }

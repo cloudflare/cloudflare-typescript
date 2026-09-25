@@ -262,6 +262,11 @@ export namespace AccessDevicePostureRule {
      * The ID of a device posture integration.
      */
     integration_uid: string;
+
+    /**
+     * The ID of the account that owns the device posture integration.
+     */
+    account_id?: string;
   }
 }
 
@@ -278,6 +283,11 @@ export namespace AccessDevicePostureRuleParam {
      * The ID of a device posture integration.
      */
     integration_uid: string;
+
+    /**
+     * The ID of the account that owns the device posture integration.
+     */
+    account_id?: string;
   }
 }
 
@@ -2568,7 +2578,7 @@ export type PolicyUpdateParams =
 export declare namespace PolicyUpdateParams {
   export interface AccessAppPolicyRequest {
     /**
-     * Path param: UUID.
+     * Path param: The application ID.
      */
     app_id: string;
 
@@ -2693,7 +2703,7 @@ export declare namespace PolicyUpdateParams {
 
   export interface AccessInfraPolicyReq {
     /**
-     * Path param: UUID.
+     * Path param: The application ID.
      */
     app_id: string;
 
@@ -2824,7 +2834,7 @@ export interface PolicyListParams extends V4PagePaginationArrayParams {
 
 export interface PolicyDeleteParams {
   /**
-   * UUID.
+   * The application ID.
    */
   app_id: string;
 
@@ -2841,7 +2851,7 @@ export interface PolicyDeleteParams {
 
 export interface PolicyGetParams {
   /**
-   * UUID.
+   * The application ID.
    */
   app_id: string;
 

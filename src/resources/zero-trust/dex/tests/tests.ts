@@ -303,7 +303,7 @@ export namespace Tests {
 
 export interface TestListParams extends V4PagePaginationParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 

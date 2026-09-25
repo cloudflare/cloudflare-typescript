@@ -23,7 +23,6 @@ export class BaseZones extends APIResource {
    *     {
    *       zone_id: '8ac8489932db6327334c9b6d58544cfe',
    *       account_id: '258def64c72dae45f3e4c8516e2111f2',
-   *       body: {},
    *     },
    *   );
    * ```
@@ -33,10 +32,10 @@ export class BaseZones extends APIResource {
     params: ZoneUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ZoneUpdateResponse> {
-    const { zone_id, account_id, body } = params;
+    const { zone_id, account_id } = params;
     return this._client.put(
       path`/accounts/${account_id}/addressing/address_maps/${addressMapID}/zones/${zone_id}`,
-      { body: body, ...options },
+      options,
     );
   }
 
@@ -219,19 +218,14 @@ export namespace ZoneDeleteResponse {
 
 export interface ZoneUpdateParams {
   /**
-   * Path param: Identifier of a zone.
+   * Identifier of a zone.
    */
   zone_id: string;
 
   /**
-   * Path param: Identifier of a Cloudflare account.
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface ZoneDeleteParams {

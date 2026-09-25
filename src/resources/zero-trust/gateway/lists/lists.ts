@@ -4,7 +4,7 @@ import { APIResource } from '../../../../core/resource';
 import * as ItemsAPI from './items';
 import { BaseItems, ItemListParams, Items } from './items';
 import { APIPromise } from '../../../../core/api-promise';
-import { PagePromise, SinglePage } from '../../../../core/pagination';
+import { PagePromise, SinglePage, V4PagePaginationArray } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -152,7 +152,7 @@ export class Lists extends BaseLists {
 
 export type GatewayListsSinglePage = SinglePage<GatewayList>;
 
-export type GatewayItemsSinglePage = SinglePage<GatewayItem>;
+export type GatewayItemsV4PagePaginationArray = V4PagePaginationArray<GatewayItem>;
 
 export interface GatewayItem {
   created_at?: string;
@@ -239,7 +239,7 @@ export type ListDeleteResponse = unknown;
 
 export interface ListCreateParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -280,7 +280,7 @@ export namespace ListCreateParams {
 
 export interface ListUpdateParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -316,9 +316,62 @@ export namespace ListUpdateParams {
 
 export interface ListListParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: Sort direction. Applies to the field named in `order_by`; when
+   * `order_by` is omitted it applies to the default `created_at` ordering. When
+   * `direction` is omitted the default is field-specific: explicitly choosing
+   * `created_at` or `updated_at` defaults to descending (newest first); `name` and
+   * `item_count` default to ascending; and the default `created_at` ordering used
+   * when `order_by` is omitted is ascending (for backwards compatibility).
+   *
+   * - `asc` — ascending.
+   * - `desc` — descending.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Filter the returned lists by one or more `field:value` pairs.
+   * Repeat the parameter to apply multiple filters; they are combined with logical
+   * AND (a list must satisfy every filter to be returned).
+   *
+   * Supported fields and their matching behaviour:
+   *
+   * - `name` — case-insensitive substring match on the list name.
+   * - `id` — substring match on the list ID (UUID), with or without dashes.
+   * - `type` — exact match on the list type. Supersedes the legacy `type` query
+   *   parameter when both are supplied. Must be one of the valid type values.
+   * - `item_count` — exact integer match on the number of items in the list.
+   *
+   * Each entry must match one of the per-field patterns below: the field must be one
+   * of `name`, `id`, `type`, or `item_count`; `name`/`id` accept any value, `type`
+   * is restricted to the valid list type values, and `item_count` must be a
+   * non-negative integer.
+   */
+  filter?: Array<string>;
+
+  /**
+   * Query param: Field to sort the returned lists by. When omitted, results are
+   * ordered by `created_at` in ascending order (i.e. creation order) for backwards
+   * compatibility. Supported values:
+   *
+   * - `name` — sort alphabetically by list name.
+   * - `created_at` — sort by creation time; defaults to descending unless
+   *   `direction` is set.
+   * - `updated_at` — sort by last-modified time; defaults to descending unless
+   *   `direction` is set.
+   * - `item_count` — sort by number of items in the list.
+   */
+  order_by?: 'name' | 'created_at' | 'updated_at' | 'item_count';
+
+  /**
+   * Query param: Case-insensitive substring match on the list name or description.
+   * When combined with `filter`, both must match (logical AND).
+   */
+  search?: string;
 
   /**
    * Query param: Specify the list type.
@@ -327,12 +380,15 @@ export interface ListListParams {
 }
 
 export interface ListDeleteParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
 export interface ListEditParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -362,6 +418,9 @@ export namespace ListEditParams {
 }
 
 export interface ListGetParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 

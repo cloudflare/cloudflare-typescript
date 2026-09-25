@@ -4,16 +4,13 @@ import { APIResource } from '../../../core/resource';
 import * as OverridesAPI from './overrides';
 import {
   BaseOverrides,
-  Override,
   OverrideCreateParams,
   OverrideDeleteParams,
-  OverrideDeleteResponse,
   OverrideGetParams,
   OverrideListParams,
   OverrideURL,
   OverrideUpdateParams,
   Overrides,
-  OverridesV4PagePaginationArray,
   RewriteAction,
   WAFRule,
 } from './overrides';
@@ -51,12 +48,9 @@ export declare namespace WAF {
   export {
     Overrides as Overrides,
     BaseOverrides as BaseOverrides,
-    type Override as Override,
     type OverrideURL as OverrideURL,
     type RewriteAction as RewriteAction,
     type WAFRule as WAFRule,
-    type OverrideDeleteResponse as OverrideDeleteResponse,
-    type OverridesV4PagePaginationArray as OverridesV4PagePaginationArray,
     type OverrideCreateParams as OverrideCreateParams,
     type OverrideUpdateParams as OverrideUpdateParams,
     type OverrideListParams as OverrideListParams,

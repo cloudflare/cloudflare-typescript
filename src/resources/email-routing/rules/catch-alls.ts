@@ -68,6 +68,9 @@ export interface CatchAllAction {
    */
   type: 'drop' | 'forward' | 'worker';
 
+  /**
+   * List of values for the action. Currently limited to a single value.
+   */
   value?: Array<string>;
 }
 
@@ -80,6 +83,9 @@ export interface CatchAllActionParam {
    */
   type: 'drop' | 'forward' | 'worker';
 
+  /**
+   * List of values for the action. Currently limited to a single value.
+   */
   value?: Array<string>;
 }
 

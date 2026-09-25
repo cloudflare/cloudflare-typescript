@@ -65,8 +65,8 @@ Types:
 
 Methods:
 
-- <code title="put /accounts/{account_id}/addressing/address_maps/{address_map_id}/accounts/{account_id}">client.addressing.addressMaps.accounts.<a href="./src/resources/addressing/address-maps/accounts.ts">update</a>(addressMapID, { ...params }) -> AccountUpdateResponse</code>
-- <code title="delete /accounts/{account_id}/addressing/address_maps/{address_map_id}/accounts/{account_id}">client.addressing.addressMaps.accounts.<a href="./src/resources/addressing/address-maps/accounts.ts">delete</a>(addressMapID, { ...params }) -> AccountDeleteResponse</code>
+- <code title="put /accounts/{account_id}/addressing/address_maps/{address_map_id}/accounts/{member_account_id}">client.addressing.addressMaps.accounts.<a href="./src/resources/addressing/address-maps/accounts.ts">update</a>(memberAccountID, { ...params }) -> AccountUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/addressing/address_maps/{address_map_id}/accounts/{member_account_id}">client.addressing.addressMaps.accounts.<a href="./src/resources/addressing/address-maps/accounts.ts">delete</a>(memberAccountID, { ...params }) -> AccountDeleteResponse</code>
 
 ### IPs
 
@@ -138,11 +138,13 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">BGPPrefix</a></code>
+- <code><a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">BGPPrefixDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">create</a>(prefixID, { ...params }) -> BGPPrefix</code>
 - <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">list</a>(prefixID, { ...params }) -> BGPPrefixesSinglePage</code>
+- <code title="delete /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">delete</a>(bgpPrefixID, { ...params }) -> BGPPrefixDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">edit</a>(bgpPrefixID, { ...params }) -> BGPPrefix</code>
 - <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">get</a>(bgpPrefixID, { ...params }) -> BGPPrefix</code>
 

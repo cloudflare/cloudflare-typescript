@@ -4,6 +4,8 @@ import { APIResource } from '../../../core/resource';
 import * as AllowPoliciesAPI from './allow-policies';
 import {
   AllowPolicies,
+  AllowPolicyBatchParams,
+  AllowPolicyBatchResponse,
   AllowPolicyCreateParams,
   AllowPolicyCreateResponse,
   AllowPolicyDeleteParams,
@@ -20,6 +22,8 @@ import {
 import * as BlockSendersAPI from './block-senders';
 import {
   BaseBlockSenders,
+  BlockSenderBatchParams,
+  BlockSenderBatchResponse,
   BlockSenderCreateParams,
   BlockSenderCreateResponse,
   BlockSenderDeleteParams,
@@ -33,12 +37,34 @@ import {
   BlockSenderListResponsesV4PagePaginationArray,
   BlockSenders,
 } from './block-senders';
+import * as ContentPoliciesAPI from './content-policies';
+import {
+  BaseContentPolicies,
+  ContentPolicies,
+  ContentPolicyBatchParams,
+  ContentPolicyBatchResponse,
+  ContentPolicyCreateParams,
+  ContentPolicyCreateResponse,
+  ContentPolicyDeleteParams,
+  ContentPolicyDeleteResponse,
+  ContentPolicyEditParams,
+  ContentPolicyEditResponse,
+  ContentPolicyGetParams,
+  ContentPolicyGetResponse,
+  ContentPolicyListParams,
+  ContentPolicyListResponse,
+  ContentPolicyListResponsesV4PagePaginationArray,
+} from './content-policies';
 import * as DomainsAPI from './domains';
 import {
   BaseDomains,
+  DomainBatchParams,
+  DomainBatchResponse,
   DomainBulkDeleteParams,
   DomainBulkDeleteResponse,
   DomainBulkDeleteResponsesSinglePage,
+  DomainCreateParams,
+  DomainCreateResponse,
   DomainDeleteParams,
   DomainDeleteResponse,
   DomainEditParams,
@@ -48,6 +74,8 @@ import {
   DomainListParams,
   DomainListResponse,
   DomainListResponsesV4PagePaginationArray,
+  DomainUpdateParams,
+  DomainUpdateResponse,
   Domains,
 } from './domains';
 import * as ImpersonationRegistryAPI from './impersonation-registry';
@@ -85,6 +113,8 @@ import {
 import * as TrustedDomainsAPI from './trusted-domains';
 import {
   BaseTrustedDomains,
+  TrustedDomainBatchParams,
+  TrustedDomainBatchResponse,
   TrustedDomainCreateParams,
   TrustedDomainCreateResponse,
   TrustedDomainDeleteParams,
@@ -124,6 +154,7 @@ export class BaseSettings extends APIResource {
 export class Settings extends BaseSettings {
   allowPolicies: AllowPoliciesAPI.AllowPolicies = new AllowPoliciesAPI.AllowPolicies(this._client);
   blockSenders: BlockSendersAPI.BlockSenders = new BlockSendersAPI.BlockSenders(this._client);
+  contentPolicies: ContentPoliciesAPI.ContentPolicies = new ContentPoliciesAPI.ContentPolicies(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
   impersonationRegistry: ImpersonationRegistryAPI.ImpersonationRegistry =
     new ImpersonationRegistryAPI.ImpersonationRegistry(this._client);
@@ -139,6 +170,8 @@ Settings.AllowPolicies = AllowPolicies;
 Settings.BaseAllowPolicies = BaseAllowPolicies;
 Settings.BlockSenders = BlockSenders;
 Settings.BaseBlockSenders = BaseBlockSenders;
+Settings.ContentPolicies = ContentPolicies;
+Settings.BaseContentPolicies = BaseContentPolicies;
 Settings.Domains = Domains;
 Settings.BaseDomains = BaseDomains;
 Settings.ImpersonationRegistry = ImpersonationRegistry;
@@ -157,12 +190,14 @@ export declare namespace Settings {
     type AllowPolicyCreateResponse as AllowPolicyCreateResponse,
     type AllowPolicyListResponse as AllowPolicyListResponse,
     type AllowPolicyDeleteResponse as AllowPolicyDeleteResponse,
+    type AllowPolicyBatchResponse as AllowPolicyBatchResponse,
     type AllowPolicyEditResponse as AllowPolicyEditResponse,
     type AllowPolicyGetResponse as AllowPolicyGetResponse,
     type AllowPolicyListResponsesV4PagePaginationArray as AllowPolicyListResponsesV4PagePaginationArray,
     type AllowPolicyCreateParams as AllowPolicyCreateParams,
     type AllowPolicyListParams as AllowPolicyListParams,
     type AllowPolicyDeleteParams as AllowPolicyDeleteParams,
+    type AllowPolicyBatchParams as AllowPolicyBatchParams,
     type AllowPolicyEditParams as AllowPolicyEditParams,
     type AllowPolicyGetParams as AllowPolicyGetParams,
   };
@@ -173,28 +208,54 @@ export declare namespace Settings {
     type BlockSenderCreateResponse as BlockSenderCreateResponse,
     type BlockSenderListResponse as BlockSenderListResponse,
     type BlockSenderDeleteResponse as BlockSenderDeleteResponse,
+    type BlockSenderBatchResponse as BlockSenderBatchResponse,
     type BlockSenderEditResponse as BlockSenderEditResponse,
     type BlockSenderGetResponse as BlockSenderGetResponse,
     type BlockSenderListResponsesV4PagePaginationArray as BlockSenderListResponsesV4PagePaginationArray,
     type BlockSenderCreateParams as BlockSenderCreateParams,
     type BlockSenderListParams as BlockSenderListParams,
     type BlockSenderDeleteParams as BlockSenderDeleteParams,
+    type BlockSenderBatchParams as BlockSenderBatchParams,
     type BlockSenderEditParams as BlockSenderEditParams,
     type BlockSenderGetParams as BlockSenderGetParams,
   };
 
   export {
+    ContentPolicies as ContentPolicies,
+    BaseContentPolicies as BaseContentPolicies,
+    type ContentPolicyCreateResponse as ContentPolicyCreateResponse,
+    type ContentPolicyListResponse as ContentPolicyListResponse,
+    type ContentPolicyDeleteResponse as ContentPolicyDeleteResponse,
+    type ContentPolicyBatchResponse as ContentPolicyBatchResponse,
+    type ContentPolicyEditResponse as ContentPolicyEditResponse,
+    type ContentPolicyGetResponse as ContentPolicyGetResponse,
+    type ContentPolicyListResponsesV4PagePaginationArray as ContentPolicyListResponsesV4PagePaginationArray,
+    type ContentPolicyCreateParams as ContentPolicyCreateParams,
+    type ContentPolicyListParams as ContentPolicyListParams,
+    type ContentPolicyDeleteParams as ContentPolicyDeleteParams,
+    type ContentPolicyBatchParams as ContentPolicyBatchParams,
+    type ContentPolicyEditParams as ContentPolicyEditParams,
+    type ContentPolicyGetParams as ContentPolicyGetParams,
+  };
+
+  export {
     Domains as Domains,
     BaseDomains as BaseDomains,
+    type DomainCreateResponse as DomainCreateResponse,
+    type DomainUpdateResponse as DomainUpdateResponse,
     type DomainListResponse as DomainListResponse,
     type DomainDeleteResponse as DomainDeleteResponse,
+    type DomainBatchResponse as DomainBatchResponse,
     type DomainBulkDeleteResponse as DomainBulkDeleteResponse,
     type DomainEditResponse as DomainEditResponse,
     type DomainGetResponse as DomainGetResponse,
     type DomainListResponsesV4PagePaginationArray as DomainListResponsesV4PagePaginationArray,
     type DomainBulkDeleteResponsesSinglePage as DomainBulkDeleteResponsesSinglePage,
+    type DomainCreateParams as DomainCreateParams,
+    type DomainUpdateParams as DomainUpdateParams,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,
+    type DomainBatchParams as DomainBatchParams,
     type DomainBulkDeleteParams as DomainBulkDeleteParams,
     type DomainEditParams as DomainEditParams,
     type DomainGetParams as DomainGetParams,
@@ -238,12 +299,14 @@ export declare namespace Settings {
     type TrustedDomainCreateResponse as TrustedDomainCreateResponse,
     type TrustedDomainListResponse as TrustedDomainListResponse,
     type TrustedDomainDeleteResponse as TrustedDomainDeleteResponse,
+    type TrustedDomainBatchResponse as TrustedDomainBatchResponse,
     type TrustedDomainEditResponse as TrustedDomainEditResponse,
     type TrustedDomainGetResponse as TrustedDomainGetResponse,
     type TrustedDomainListResponsesV4PagePaginationArray as TrustedDomainListResponsesV4PagePaginationArray,
     type TrustedDomainCreateParams as TrustedDomainCreateParams,
     type TrustedDomainListParams as TrustedDomainListParams,
     type TrustedDomainDeleteParams as TrustedDomainDeleteParams,
+    type TrustedDomainBatchParams as TrustedDomainBatchParams,
     type TrustedDomainEditParams as TrustedDomainEditParams,
     type TrustedDomainGetParams as TrustedDomainGetParams,
   };

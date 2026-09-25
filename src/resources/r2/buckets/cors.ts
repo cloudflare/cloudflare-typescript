@@ -29,15 +29,15 @@ export class BaseCORS extends APIResource {
     params: CORSUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CORSUpdateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/r2/buckets/${bucketName}/cors`, {
         body,
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -62,14 +62,14 @@ export class BaseCORS extends APIResource {
     params: CORSDeleteParams,
     options?: RequestOptions,
   ): APIPromise<CORSDeleteResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.delete(path`/accounts/${account_id}/r2/buckets/${bucketName}/cors`, {
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -90,14 +90,14 @@ export class BaseCORS extends APIResource {
    * ```
    */
   get(bucketName: string, params: CORSGetParams, options?: RequestOptions): APIPromise<CORSGetResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucketName}/cors`, {
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -187,7 +187,7 @@ export interface CORSUpdateParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export namespace CORSUpdateParams {
@@ -256,7 +256,7 @@ export interface CORSDeleteParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export interface CORSGetParams {
@@ -269,7 +269,7 @@ export interface CORSGetParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export declare namespace CORS {

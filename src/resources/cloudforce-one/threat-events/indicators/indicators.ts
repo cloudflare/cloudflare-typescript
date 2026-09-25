@@ -27,9 +27,10 @@ export class BaseIndicators extends APIResource {
 
   /**
    * Retrieves indicators across specified datasets, ordered by createdAt descending
-   * then UUID, dataset ID, and shard ID ascending. Use datasetIds=all or
-   * datasetIds=\* to query all datasets for the account. If no datasetIds provided,
-   * uses the default dataset.
+   * then UUID, dataset ID, and shard ID ascending. Use the standalone datasetIds
+   * value 'all'/'\*' for legacy all-datasets behavior, 'analytics' for
+   * isAnalytics=true datasets, or 'operational' for isAnalytics=false datasets. If
+   * no datasetIds are provided, uses the default dataset.
    *
    * @example
    * ```ts
@@ -161,6 +162,11 @@ export namespace IndicatorListResponse {
 
         indicatorType: string;
 
+        /**
+         * RSS article sources from which this indicator was extracted.
+         */
+        sources: Array<Items.Source>;
+
         updatedAt: string;
 
         uuid: string;
@@ -175,9 +181,29 @@ export namespace IndicatorListResponse {
         relatedEvents?: Array<Items.RelatedEvent>;
 
         tags?: Array<Items.Tag>;
+
+        /**
+         * Traffic Light Protocol designation. UPPERCASE. Possible values: CLEAR, GREEN,
+         * AMBER, AMBER-STRICT, RED, PURPLE. Null when not set.
+         */
+        tlp?: string | null;
       }
 
       export namespace Items {
+        export interface Source {
+          resourceId: string;
+
+          resourceType: 'article';
+
+          system: 'threat-signals';
+
+          /**
+           * Threat Signals article title; null for historical provenance without a stored
+           * title.
+           */
+          title: string | null;
+        }
+
         export interface RelatedEvent {
           datasetId: string;
 
@@ -191,6 +217,11 @@ export namespace IndicatorListResponse {
         }
 
         export interface Tag {
+          /**
+           * The UUID of the tag category, or null when the tag is uncategorized.
+           */
+          categoryId?: string | null;
+
           categoryName?: string;
 
           uuid?: string;
@@ -306,8 +337,9 @@ export interface IndicatorListParams {
   cursor?: string;
 
   /**
-   * Query param: Dataset IDs to query indicators from (array of UUIDs), or special
-   * value 'all' or '\*' to query all datasets. If not provided, uses the default
+   * Query param: Dataset UUIDs to query, or one standalone scope value: 'all'/'\*'
+   * for legacy all-datasets behavior, 'analytics' for isAnalytics=true datasets, or
+   * 'operational' for isAnalytics=false datasets. If not provided, uses the default
    * dataset.
    */
   datasetIds?: Array<string>;

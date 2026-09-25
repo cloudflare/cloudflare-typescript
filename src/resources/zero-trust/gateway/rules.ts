@@ -76,12 +76,11 @@ export class BaseRules extends APIResource {
    * ```
    */
   list(params: RuleListParams, options?: RequestOptions): PagePromise<GatewayRulesSinglePage, GatewayRule> {
-    const { account_id } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/gateway/rules`,
-      SinglePage<GatewayRule>,
-      options,
-    );
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(path`/accounts/${account_id}/gateway/rules`, SinglePage<GatewayRule>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -1614,7 +1613,7 @@ export type RuleDeleteResponse = unknown;
 
 export interface RuleCreateParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -1742,7 +1741,7 @@ export namespace RuleCreateParams {
 
 export interface RuleUpdateParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -1869,22 +1868,68 @@ export namespace RuleUpdateParams {
 }
 
 export interface RuleListParams {
+  /**
+   * Path param: Specify the Cloudflare account identifier.
+   */
   account_id: string;
+
+  /**
+   * Query param: Sort direction. When `order_by` is omitted, this controls the
+   * direction of the existing precedence ordering. Shared rules remain first in
+   * either direction. Accepted values are `asc` and `desc`.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Filter the returned rules by one or more `field:value` pairs.
+   * Repeat the parameter to combine filters with logical AND.
+   *
+   * Supported fields are `name`, `id`, `action`, `enabled`, `source_account`,
+   * `is_shared`, `filters`, and `expression` (max 1024 bytes). The `source_account`
+   * value is matched as a normalized UUID substring. The `filters` value must be one
+   * of the rule filter names and matches a member of the rule's `filters` array. The
+   * `expression` filter performs a case-insensitive literal substring match across
+   * traffic, identity, and device posture expressions.
+   */
+  filter?: Array<string>;
+
+  /**
+   * Query param: Field to sort the returned rules by. Supported values are `name`,
+   * `created_at`, `updated_at`, and `precedence`.
+   */
+  order_by?: 'name' | 'created_at' | 'updated_at' | 'precedence';
+
+  /**
+   * Query param: Case-insensitive substring search across rule name and description.
+   */
+  search?: string;
 }
 
 export interface RuleDeleteParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
 export interface RuleGetParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
 export interface RuleListTenantParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
 export interface RuleResetExpirationParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 

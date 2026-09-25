@@ -131,17 +131,10 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Retrieves the raw data associated with an event. Searches across all shards in
-   * the dataset.
+   * Deprecated; use GET /events/datasets/{dataset_id}/events/{event_id}/raw.
+   * Available through 2026-11-28.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.cloudforceOne.threatEvents.datasets.raw(
-   *     'event_id',
-   *     { account_id: 'account_id', dataset_id: 'dataset_id' },
-   *   );
-   * ```
+   * @deprecated Use GET /events/datasets/{dataset_id}/events/{event_id}/raw before 2026-11-28.
    */
   raw(eventID: string, params: DatasetRawParams, options?: RequestOptions): APIPromise<DatasetRawResponse> {
     const { account_id, dataset_id } = params;

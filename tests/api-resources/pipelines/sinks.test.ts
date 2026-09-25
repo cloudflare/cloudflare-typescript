@@ -67,6 +67,7 @@ const runTests = (client: PartialCloudflare<{ pipelines: { sinks: BaseSinks } }>
       },
       format: {
         type: 'json',
+        compression: 'uncompressed',
         decimal_encoding: 'number',
         timestamp_format: 'rfc3339',
         unstructured: true,
@@ -81,12 +82,6 @@ const runTests = (client: PartialCloudflare<{ pipelines: { sinks: BaseSinks } }>
             sql_name: 'sql_name',
           },
         ],
-        format: {
-          type: 'json',
-          decimal_encoding: 'number',
-          timestamp_format: 'rfc3339',
-          unstructured: true,
-        },
         inferred: true,
       },
     });
@@ -129,7 +124,6 @@ const runTests = (client: PartialCloudflare<{ pipelines: { sinks: BaseSinks } }>
   test('delete: required and optional params', async () => {
     const response = await client.pipelines.sinks.delete('0223105f4ecef8ad9ca31a8372d0c353', {
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
-      force: 'force',
     });
   });
 

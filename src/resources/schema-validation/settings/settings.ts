@@ -114,7 +114,7 @@ export interface SettingUpdateResponse {
    *
    * - `"none"` will skip running schema validation entirely for the request
    */
-  validation_override_mitigation_action?: 'none';
+  validation_override_mitigation_action?: 'none' | null;
 }
 
 export interface SettingEditResponse {
@@ -136,7 +136,7 @@ export interface SettingEditResponse {
    *
    * - `"none"` will skip running schema validation entirely for the request
    */
-  validation_override_mitigation_action?: 'none';
+  validation_override_mitigation_action?: 'none' | null;
 }
 
 export interface SettingGetResponse {
@@ -158,7 +158,7 @@ export interface SettingGetResponse {
    *
    * - `"none"` will skip running schema validation entirely for the request
    */
-  validation_override_mitigation_action?: 'none';
+  validation_override_mitigation_action?: 'none' | null;
 }
 
 export interface SettingUpdateParams {

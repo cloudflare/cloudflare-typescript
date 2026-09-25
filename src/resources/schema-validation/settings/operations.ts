@@ -47,7 +47,7 @@ export class BaseOperations extends APIResource {
   }
 
   /**
-   * Lists all per-operation schema validation settings configured for the zone.
+   * Lists per-operation schema validation settings configured for the zone.
    *
    * @example
    * ```ts
@@ -203,28 +203,23 @@ export interface OperationDeleteResponse {
 }
 
 /**
- * Operation ID to per operation setting mapping
+ * Operation ID to updated mitigation action mapping
  */
 export type OperationBulkEditResponse = { [key: string]: OperationBulkEditResponse.item };
 
 export namespace OperationBulkEditResponse {
   export interface item {
     /**
-     * When set, this applies a mitigation action to this operation which supersedes a
-     * global schema validation setting just for this operation
+     * When set, this applies a mitigation action to this operation
      *
      * - `"log"` - log request when request does not conform to schema for this
      *   operation
      * - `"block"` - deny access to the site when request does not conform to schema
      *   for this operation
      * - `"none"` - will skip mitigation for this operation
+     * - `null` - clears any mitigation action
      */
-    mitigation_action: 'log' | 'block' | 'none';
-
-    /**
-     * UUID.
-     */
-    operation_id: string;
+    mitigation_action?: 'log' | 'block' | 'none' | null;
   }
 }
 

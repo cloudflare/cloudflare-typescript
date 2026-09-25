@@ -66,7 +66,7 @@ export interface StatusGetResponse {
 
 export interface StatusEditParams {
   /**
-   * Path param: Identifier.
+   * Path param: The account ID.
    */
   account_id: string;
 
@@ -78,7 +78,7 @@ export interface StatusEditParams {
 
 export interface StatusGetParams {
   /**
-   * Identifier.
+   * The account ID.
    */
   account_id: string;
 }

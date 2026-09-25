@@ -60,6 +60,7 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { crawl: BaseCra
       allowResourceTypes: ['document'],
       authenticate: { password: 'x', username: 'x' },
       bestAttempt: true,
+      contentUse: 'reference',
       cookies: [
         {
           name: 'name',

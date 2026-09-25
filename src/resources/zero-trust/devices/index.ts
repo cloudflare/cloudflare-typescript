@@ -70,14 +70,12 @@ export {
   type OverrideCodeGetResponse,
   type OverrideCodeListParams,
   type OverrideCodeGetParams,
-  type OverrideCodeListResponsesSinglePage,
 } from './override-codes';
 export {
   Policies,
   BasePolicies,
   type DevicePolicyCertificates,
   type FallbackDomain,
-  type FallbackDomainPolicy,
   type SettingsPolicy,
   type SplitTunnelExclude,
   type SplitTunnelInclude,

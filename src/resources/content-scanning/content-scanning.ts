@@ -13,6 +13,9 @@ import {
   PayloadListParams,
   PayloadListResponse,
   PayloadListResponsesSinglePage,
+  PayloadUpdateParams,
+  PayloadUpdateResponse,
+  PayloadUpdateResponsesSinglePage,
   Payloads,
 } from './payloads';
 import * as SettingsAPI from './settings';
@@ -25,7 +28,9 @@ export class BaseContentScanning extends APIResource {
   static override readonly _key: readonly ['contentScanning'] = Object.freeze(['contentScanning'] as const);
 
   /**
-   * Update the Content Scanning status.
+   * Update the Content Scanning status by setting the status value to `enabled` or
+   * `disabled`. This is equivalent to calling the dedicated enable and disable
+   * endpoints.
    *
    * @example
    * ```ts
@@ -51,7 +56,9 @@ export class BaseContentScanning extends APIResource {
   }
 
   /**
-   * Update the Content Scanning status.
+   * Update the Content Scanning status by setting the status value to `enabled` or
+   * `disabled`. This is equivalent to calling the dedicated enable and disable
+   * endpoints.
    *
    * @example
    * ```ts
@@ -77,7 +84,8 @@ export class BaseContentScanning extends APIResource {
   }
 
   /**
-   * Disable Content Scanning.
+   * Disable Content Scanning for a zone. The `cf.waf.content_scan.*` fields are no
+   * longer populated, so rules that reference them stop matching.
    *
    * @example
    * ```ts
@@ -99,7 +107,10 @@ export class BaseContentScanning extends APIResource {
   }
 
   /**
-   * Enable Content Scanning.
+   * Enable Content Scanning for a zone, so that Cloudflare inspects content objects
+   * uploaded to the zone and checks them for malware. Scan results populate the
+   * `cf.waf.content_scan.*` fields, which you can reference in custom rules and rate
+   * limiting rules.
    *
    * @example
    * ```ts
@@ -121,7 +132,8 @@ export class BaseContentScanning extends APIResource {
   }
 
   /**
-   * Retrieve the current status of Content Scanning.
+   * Get the current Content Scanning status for the zone, together with the date the
+   * status was last modified.
    *
    * @example
    * ```ts
@@ -261,12 +273,15 @@ export declare namespace ContentScanning {
     Payloads as Payloads,
     BasePayloads as BasePayloads,
     type PayloadCreateResponse as PayloadCreateResponse,
+    type PayloadUpdateResponse as PayloadUpdateResponse,
     type PayloadListResponse as PayloadListResponse,
     type PayloadDeleteResponse as PayloadDeleteResponse,
     type PayloadCreateResponsesSinglePage as PayloadCreateResponsesSinglePage,
+    type PayloadUpdateResponsesSinglePage as PayloadUpdateResponsesSinglePage,
     type PayloadListResponsesSinglePage as PayloadListResponsesSinglePage,
     type PayloadDeleteResponsesSinglePage as PayloadDeleteResponsesSinglePage,
     type PayloadCreateParams as PayloadCreateParams,
+    type PayloadUpdateParams as PayloadUpdateParams,
     type PayloadListParams as PayloadListParams,
     type PayloadDeleteParams as PayloadDeleteParams,
   };

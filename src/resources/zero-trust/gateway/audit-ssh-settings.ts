@@ -100,7 +100,7 @@ export interface GatewaySettings {
 
 export interface AuditSSHSettingUpdateParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -113,10 +113,16 @@ export interface AuditSSHSettingUpdateParams {
 }
 
 export interface AuditSSHSettingGetParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
 export interface AuditSSHSettingRotateSeedParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 

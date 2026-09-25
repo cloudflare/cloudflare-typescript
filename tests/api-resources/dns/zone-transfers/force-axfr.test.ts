@@ -32,7 +32,6 @@ const runTests = (
   test('create: only required params', async () => {
     const responsePromise = client.dns.zoneTransfers.forceAXFR.create({
       zone_id: '269d8f4853475ca241c4e730be286b20',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +45,6 @@ const runTests = (
   test('create: required and optional params', async () => {
     const response = await client.dns.zoneTransfers.forceAXFR.create({
       zone_id: '269d8f4853475ca241c4e730be286b20',
-      body: {},
     });
   });
 };

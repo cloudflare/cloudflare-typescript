@@ -67,9 +67,9 @@ export namespace SessionListResponse {
     sessionId: string;
 
     /**
-     * Reason for session closure.
+     * Reason code for session closure.
      */
-    closeReason?: string;
+    closeReason?: number;
 
     /**
      * Human-readable close reason.
@@ -125,9 +125,9 @@ export interface SessionGetResponse {
   sessionId: string;
 
   /**
-   * Reason for session closure.
+   * Reason code for session closure.
    */
-  closeReason?: string;
+  closeReason?: number;
 
   /**
    * Human-readable close reason.

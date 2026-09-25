@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as LiveViewAPI from './live-view';
+import { BaseLiveView, LiveView, LiveViewCreateParams, LiveViewCreateResponse } from './live-view';
 import * as PageAPI from './page';
 import { BasePage, Page, PageGetParams } from './page';
 import * as TargetsAPI from './targets';
@@ -87,11 +89,17 @@ export class BaseBrowser extends APIResource {
    * ```
    */
   connect(sessionID: string, params: BrowserConnectParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id, ...query } = params;
+    const { account_id, 'cf-brapi-guardrails': cfBrapiGuardrails, ...query } = params;
     return this._client.get(path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}`, {
       query,
       ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+      headers: buildHeaders([
+        {
+          Accept: '*/*',
+          ...(cfBrapiGuardrails != null ? { 'cf-brapi-guardrails': cfBrapiGuardrails } : undefined),
+        },
+        options?.headers,
+      ]),
     });
   }
 
@@ -173,6 +181,7 @@ export class BaseBrowser extends APIResource {
   }
 }
 export class Browser extends BaseBrowser {
+  liveView: LiveViewAPI.LiveView = new LiveViewAPI.LiveView(this._client);
   page: PageAPI.Page = new PageAPI.Page(this._client);
   targets: TargetsAPI.Targets = new TargetsAPI.Targets(this._client);
 }
@@ -368,6 +377,11 @@ export interface BrowserConnectParams {
    * Query param
    */
   recording?: boolean;
+
+  /**
+   * Header param: Optional base64url-encoded JSON connection guardrails (mode)
+   */
+  'cf-brapi-guardrails'?: string;
 }
 
 export interface BrowserLaunchParams {
@@ -412,6 +426,8 @@ export interface BrowserVersionParams {
   account_id: string;
 }
 
+Browser.LiveView = LiveView;
+Browser.BaseLiveView = BaseLiveView;
 Browser.Page = Page;
 Browser.BasePage = BasePage;
 Browser.Targets = Targets;
@@ -429,6 +445,13 @@ export declare namespace Browser {
     type BrowserLaunchParams as BrowserLaunchParams,
     type BrowserProtocolParams as BrowserProtocolParams,
     type BrowserVersionParams as BrowserVersionParams,
+  };
+
+  export {
+    LiveView as LiveView,
+    BaseLiveView as BaseLiveView,
+    type LiveViewCreateResponse as LiveViewCreateResponse,
+    type LiveViewCreateParams as LiveViewCreateParams,
   };
 
   export { Page as Page, BasePage as BasePage, type PageGetParams as PageGetParams };

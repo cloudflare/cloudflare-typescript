@@ -59,6 +59,7 @@ export { EmailAuth, BaseEmailAuth } from './email-auth/email-auth';
 export { EmailRouting, BaseEmailRouting } from './email-routing/email-routing';
 export { EmailSecurity, BaseEmailSecurity } from './email-security/email-security';
 export { EmailSending, BaseEmailSending } from './email-sending/email-sending';
+export { FieldExtractors, BaseFieldExtractors } from './field-extractors';
 export { Filters, BaseFilters } from './filters';
 export { Firewall, BaseFirewall } from './firewall/firewall';
 export { Flagship, BaseFlagship } from './flagship/flagship';
@@ -90,6 +91,7 @@ export {
   BaseMagicNetworkMonitoring,
 } from './magic-network-monitoring/magic-network-monitoring';
 export { MagicTransit, BaseMagicTransit } from './magic-transit/magic-transit';
+export { ManagedDefense, BaseManagedDefense } from './managed-defense/managed-defense';
 export { ManagedTransforms, BaseManagedTransforms } from './managed-transforms';
 export { Memberships, BaseMemberships } from './memberships';
 export { MoQ, BaseMoQ } from './moq/moq';

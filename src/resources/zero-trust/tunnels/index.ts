@@ -12,7 +12,6 @@ export {
 export {
   Tunnels,
   BaseTunnels,
-  type Connection,
   type TunnelListResponse,
   type TunnelListParams,
   type TunnelListResponsesV4PagePaginationArray,

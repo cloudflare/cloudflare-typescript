@@ -196,7 +196,7 @@ export interface DHCPServer {
   dhcp_pool_start?: string;
 
   /**
-   * A valid IPv4 address.
+   * @deprecated A valid IPv4 address.
    */
   dns_server?: string;
 
@@ -254,7 +254,7 @@ export interface DHCPServerParam {
   dhcp_pool_start?: string;
 
   /**
-   * A valid IPv4 address.
+   * @deprecated A valid IPv4 address.
    */
   dns_server?: string;
 

@@ -255,6 +255,8 @@ Methods:
 
 # [MoQ](src/resources/moq/api.md)
 
+# [ManagedDefense](src/resources/managed-defense/api.md)
+
 # [CloudforceOne](src/resources/cloudforce-one/api.md)
 
 # [AIGateway](src/resources/ai-gateway/api.md)
@@ -304,3 +306,5 @@ Methods:
 # [SchemaValidation](src/resources/schema-validation/api.md)
 
 # [TokenValidation](src/resources/token-validation/api.md)
+
+# [FieldExtractors](src/resources/field-extractors/api.md)

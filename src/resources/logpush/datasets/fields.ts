@@ -28,6 +28,7 @@ export class BaseFields extends APIResource {
   get(
     datasetID:
       | 'access_requests'
+      | 'account_abuse_protection_events'
       | 'audit_logs'
       | 'audit_logs_v2'
       | 'biso_user_actions'
@@ -46,6 +47,7 @@ export class BaseFields extends APIResource {
       | 'gateway_network'
       | 'http_requests'
       | 'ipsec_logs'
+      | 'magic_bgp_logs'
       | 'magic_ids_detections'
       | 'mcp_portal_logs'
       | 'mnm_flow_logs'
@@ -92,7 +94,7 @@ export class BaseFields extends APIResource {
 }
 export class Fields extends BaseFields {}
 
-export type FieldGetResponse = unknown;
+export type FieldGetResponse = { [key: string]: string };
 
 export interface FieldGetParams {
   /**

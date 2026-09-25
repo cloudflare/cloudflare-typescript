@@ -17,4 +17,4 @@ export {
   type TokenUpdateParams,
   type TokenListParams,
 } from './tokens';
-export { Value, BaseValue, type ValueUpdateParams } from './value';
+export { Value, BaseValue } from './value';

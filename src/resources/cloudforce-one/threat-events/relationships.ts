@@ -13,18 +13,10 @@ export class BaseRelationships extends APIResource {
   ] as const);
 
   /**
-   * The `event_id` must be defined (to list existing events (and their IDs), use the
-   * [`Filter and List Events`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/methods/list/)
-   * endpoint). Also, must provide query parameters.
+   * Deprecated; use GET /events/by-id/{event_id}/relationships. Available through
+   * 2026-11-28.
    *
-   * @example
-   * ```ts
-   * const relationships =
-   *   await client.cloudforceOne.threatEvents.relationships.list(
-   *     'event_id',
-   *     { account_id: 'account_id', datasetId: 'datasetId' },
-   *   );
-   * ```
+   * @deprecated Use GET /events/by-id/{event_id}/relationships before 2026-11-28.
    */
   list(
     eventID: string,

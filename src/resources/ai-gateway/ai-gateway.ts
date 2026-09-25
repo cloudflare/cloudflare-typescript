@@ -291,6 +291,12 @@ export interface AIGatewayCreateResponse {
 
   authentication?: boolean;
 
+  /**
+   * Requires customer-provided provider credentials and prevents fallback to Unified
+   * Billing.
+   */
+  byok_only?: boolean;
+
   dlp?: AIGatewayCreateResponse.UnionMember0 | AIGatewayCreateResponse.UnionMember1;
 
   guardrails?: AIGatewayCreateResponse.Guardrails | null;
@@ -317,7 +323,7 @@ export interface AIGatewayCreateResponse {
   retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
 
   /**
-   * Delay between retry attempts in milliseconds (0-5000)
+   * Delay between retry attempts in milliseconds (0-60000)
    */
   retry_delay?: number | null;
 
@@ -537,6 +543,12 @@ export interface AIGatewayUpdateResponse {
 
   authentication?: boolean;
 
+  /**
+   * Requires customer-provided provider credentials and prevents fallback to Unified
+   * Billing.
+   */
+  byok_only?: boolean;
+
   dlp?: AIGatewayUpdateResponse.UnionMember0 | AIGatewayUpdateResponse.UnionMember1;
 
   guardrails?: AIGatewayUpdateResponse.Guardrails | null;
@@ -563,7 +575,7 @@ export interface AIGatewayUpdateResponse {
   retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
 
   /**
-   * Delay between retry attempts in milliseconds (0-5000)
+   * Delay between retry attempts in milliseconds (0-60000)
    */
   retry_delay?: number | null;
 
@@ -783,6 +795,12 @@ export interface AIGatewayListResponse {
 
   authentication?: boolean;
 
+  /**
+   * Requires customer-provided provider credentials and prevents fallback to Unified
+   * Billing.
+   */
+  byok_only?: boolean;
+
   dlp?: AIGatewayListResponse.UnionMember0 | AIGatewayListResponse.UnionMember1;
 
   guardrails?: AIGatewayListResponse.Guardrails | null;
@@ -809,7 +827,7 @@ export interface AIGatewayListResponse {
   retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
 
   /**
-   * Delay between retry attempts in milliseconds (0-5000)
+   * Delay between retry attempts in milliseconds (0-60000)
    */
   retry_delay?: number | null;
 
@@ -1029,6 +1047,12 @@ export interface AIGatewayDeleteResponse {
 
   authentication?: boolean;
 
+  /**
+   * Requires customer-provided provider credentials and prevents fallback to Unified
+   * Billing.
+   */
+  byok_only?: boolean;
+
   dlp?: AIGatewayDeleteResponse.UnionMember0 | AIGatewayDeleteResponse.UnionMember1;
 
   guardrails?: AIGatewayDeleteResponse.Guardrails | null;
@@ -1055,7 +1079,7 @@ export interface AIGatewayDeleteResponse {
   retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
 
   /**
-   * Delay between retry attempts in milliseconds (0-5000)
+   * Delay between retry attempts in milliseconds (0-60000)
    */
   retry_delay?: number | null;
 
@@ -1275,6 +1299,12 @@ export interface AIGatewayGetResponse {
 
   authentication?: boolean;
 
+  /**
+   * Requires customer-provided provider credentials and prevents fallback to Unified
+   * Billing.
+   */
+  byok_only?: boolean;
+
   dlp?: AIGatewayGetResponse.UnionMember0 | AIGatewayGetResponse.UnionMember1;
 
   guardrails?: AIGatewayGetResponse.Guardrails | null;
@@ -1301,7 +1331,7 @@ export interface AIGatewayGetResponse {
   retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
 
   /**
-   * Delay between retry attempts in milliseconds (0-5000)
+   * Delay between retry attempts in milliseconds (0-60000)
    */
   retry_delay?: number | null;
 
@@ -1541,6 +1571,12 @@ export interface AIGatewayCreateParams {
   authentication?: boolean;
 
   /**
+   * Body param: Requires customer-provided provider credentials and prevents
+   * fallback to Unified Billing.
+   */
+  byok_only?: boolean;
+
+  /**
    * Body param
    */
   log_management?: number | null;
@@ -1571,7 +1607,7 @@ export interface AIGatewayCreateParams {
   retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
 
   /**
-   * Body param: Delay between retry attempts in milliseconds (0-5000)
+   * Body param: Delay between retry attempts in milliseconds (0-60000)
    */
   retry_delay?: number | null;
 
@@ -1636,6 +1672,12 @@ export interface AIGatewayUpdateParams {
   authentication?: boolean;
 
   /**
+   * Body param: Requires customer-provided provider credentials and prevents
+   * fallback to Unified Billing.
+   */
+  byok_only?: boolean;
+
+  /**
    * Body param
    */
   dlp?: AIGatewayUpdateParams.UnionMember0 | AIGatewayUpdateParams.UnionMember1;
@@ -1686,7 +1728,7 @@ export interface AIGatewayUpdateParams {
   retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
 
   /**
-   * Body param: Delay between retry attempts in milliseconds (0-5000)
+   * Body param: Delay between retry attempts in milliseconds (0-60000)
    */
   retry_delay?: number | null;
 

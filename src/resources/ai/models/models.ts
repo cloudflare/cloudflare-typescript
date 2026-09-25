@@ -44,7 +44,7 @@ export interface ModelListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: Filter by Author
+   * Query param: Filter by Author.
    */
   author?: string;
 
@@ -55,32 +55,28 @@ export interface ModelListParams extends V4PagePaginationArrayParams {
   format?: 'openrouter';
 
   /**
-   * Query param: Filter to hide experimental models
+   * Query param: Filter to hide experimental models.
    */
   hide_experimental?: boolean;
 
   /**
-   * Query param: If true, include models whose planned_deprecation_date is in the
-   * past — but only within a three-month grace window after that date. Models whose
-   * planned_deprecation_date is more than three months in the past remain hidden
-   * regardless of this flag. Future planned-deprecation dates are always included
-   * regardless of this flag. Defaults to false, preserving the existing behavior of
-   * hiding all past-dated deprecations.
+   * Query param: If true, include models for up to three months after their
+   * deprecation date. Defaults to false.
    */
   include_deprecated?: boolean;
 
   /**
-   * Query param: Search
+   * Query param: Search.
    */
   search?: string;
 
   /**
-   * Query param: Filter by Source Id
+   * Query param: Filter by Source Id.
    */
   source?: number;
 
   /**
-   * Query param: Filter by Task Name
+   * Query param: Filter by Task Name.
    */
   task?: string;
 }

@@ -1167,6 +1167,17 @@ export namespace IdentityProvider {
        * The claim name for email in the id_token response.
        */
       email_claim_name?: string;
+
+      /**
+       * Configures the prompt behavior for Google authentication.
+       */
+      prompt?: 'none' | 'consent' | 'select_account';
+
+      /**
+       * Whether to use a previously authenticated Access email as a Google login hint
+       * when exactly one email matches the Workspace domain.
+       */
+      use_login_hint?: boolean;
     }
 
     /**
@@ -2058,6 +2069,11 @@ export namespace IdentityProvider {
       enable_encryption?: boolean;
 
       /**
+       * Asks the IdP to reauthenticate the user for each SAML authentication request.
+       */
+      force_authn?: boolean;
+
+      /**
        * Add a list of attribute names that will be returned in the response header from
        * the Access callback.
        */
@@ -2072,6 +2088,14 @@ export namespace IdentityProvider {
        * IdP Entity ID or Issuer URL
        */
       issuer_url?: string;
+
+      /**
+       * The maximum URL length the IdP accepts for the SSO redirect URL. When the
+       * constructed SSO URL would exceed this length, the RelayState is stored
+       * server-side and a short nonce is passed to the IdP instead. Set this if your IdP
+       * enforces a URL length limit.
+       */
+      max_sso_url_length?: number;
 
       /**
        * Sign the SAML authentication request with Access credentials. To verify the
@@ -2831,6 +2855,17 @@ export namespace IdentityProviderParam {
        * The claim name for email in the id_token response.
        */
       email_claim_name?: string;
+
+      /**
+       * Configures the prompt behavior for Google authentication.
+       */
+      prompt?: 'none' | 'consent' | 'select_account';
+
+      /**
+       * Whether to use a previously authenticated Access email as a Google login hint
+       * when exactly one email matches the Workspace domain.
+       */
+      use_login_hint?: boolean;
     }
   }
 
@@ -3240,6 +3275,11 @@ export namespace IdentityProviderParam {
       enable_encryption?: boolean;
 
       /**
+       * Asks the IdP to reauthenticate the user for each SAML authentication request.
+       */
+      force_authn?: boolean;
+
+      /**
        * Add a list of attribute names that will be returned in the response header from
        * the Access callback.
        */
@@ -3254,6 +3294,14 @@ export namespace IdentityProviderParam {
        * IdP Entity ID or Issuer URL
        */
       issuer_url?: string;
+
+      /**
+       * The maximum URL length the IdP accepts for the SSO redirect URL. When the
+       * constructed SSO URL would exceed this length, the RelayState is stored
+       * server-side and a short nonce is passed to the IdP instead. Set this if your IdP
+       * enforces a URL length limit.
+       */
+      max_sso_url_length?: number;
 
       /**
        * Sign the SAML authentication request with Access credentials. To verify the
@@ -4173,6 +4221,17 @@ export namespace IdentityProviderListResponse {
        * The claim name for email in the id_token response.
        */
       email_claim_name?: string;
+
+      /**
+       * Configures the prompt behavior for Google authentication.
+       */
+      prompt?: 'none' | 'consent' | 'select_account';
+
+      /**
+       * Whether to use a previously authenticated Access email as a Google login hint
+       * when exactly one email matches the Workspace domain.
+       */
+      use_login_hint?: boolean;
     }
 
     /**
@@ -5064,6 +5123,11 @@ export namespace IdentityProviderListResponse {
       enable_encryption?: boolean;
 
       /**
+       * Asks the IdP to reauthenticate the user for each SAML authentication request.
+       */
+      force_authn?: boolean;
+
+      /**
        * Add a list of attribute names that will be returned in the response header from
        * the Access callback.
        */
@@ -5078,6 +5142,14 @@ export namespace IdentityProviderListResponse {
        * IdP Entity ID or Issuer URL
        */
       issuer_url?: string;
+
+      /**
+       * The maximum URL length the IdP accepts for the SSO redirect URL. When the
+       * constructed SSO URL would exceed this length, the RelayState is stored
+       * server-side and a short nonce is passed to the IdP instead. Set this if your IdP
+       * enforces a URL length limit.
+       */
+      max_sso_url_length?: number;
 
       /**
        * Sign the SAML authentication request with Access credentials. To verify the
@@ -6007,6 +6079,17 @@ export declare namespace IdentityProviderCreateParams {
        * The claim name for email in the id_token response.
        */
       email_claim_name?: string;
+
+      /**
+       * Configures the prompt behavior for Google authentication.
+       */
+      prompt?: 'none' | 'consent' | 'select_account';
+
+      /**
+       * Whether to use a previously authenticated Access email as a Google login hint
+       * when exactly one email matches the Workspace domain.
+       */
+      use_login_hint?: boolean;
     }
   }
 
@@ -6488,6 +6571,11 @@ export declare namespace IdentityProviderCreateParams {
       enable_encryption?: boolean;
 
       /**
+       * Asks the IdP to reauthenticate the user for each SAML authentication request.
+       */
+      force_authn?: boolean;
+
+      /**
        * Add a list of attribute names that will be returned in the response header from
        * the Access callback.
        */
@@ -6502,6 +6590,14 @@ export declare namespace IdentityProviderCreateParams {
        * IdP Entity ID or Issuer URL
        */
       issuer_url?: string;
+
+      /**
+       * The maximum URL length the IdP accepts for the SSO redirect URL. When the
+       * constructed SSO URL would exceed this length, the RelayState is stored
+       * server-side and a short nonce is passed to the IdP instead. Set this if your IdP
+       * enforces a URL length limit.
+       */
+      max_sso_url_length?: number;
 
       /**
        * Sign the SAML authentication request with Access credentials. To verify the
@@ -7152,6 +7248,17 @@ export declare namespace IdentityProviderUpdateParams {
        * The claim name for email in the id_token response.
        */
       email_claim_name?: string;
+
+      /**
+       * Configures the prompt behavior for Google authentication.
+       */
+      prompt?: 'none' | 'consent' | 'select_account';
+
+      /**
+       * Whether to use a previously authenticated Access email as a Google login hint
+       * when exactly one email matches the Workspace domain.
+       */
+      use_login_hint?: boolean;
     }
   }
 
@@ -7633,6 +7740,11 @@ export declare namespace IdentityProviderUpdateParams {
       enable_encryption?: boolean;
 
       /**
+       * Asks the IdP to reauthenticate the user for each SAML authentication request.
+       */
+      force_authn?: boolean;
+
+      /**
        * Add a list of attribute names that will be returned in the response header from
        * the Access callback.
        */
@@ -7647,6 +7759,14 @@ export declare namespace IdentityProviderUpdateParams {
        * IdP Entity ID or Issuer URL
        */
       issuer_url?: string;
+
+      /**
+       * The maximum URL length the IdP accepts for the SSO redirect URL. When the
+       * constructed SSO URL would exceed this length, the RelayState is stored
+       * server-side and a short nonce is passed to the IdP instead. Set this if your IdP
+       * enforces a URL length limit.
+       */
+      max_sso_url_length?: number;
 
       /**
        * Sign the SAML authentication request with Access credentials. To verify the

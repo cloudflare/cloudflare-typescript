@@ -30,7 +30,6 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { bookmarks: 
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.access.bookmarks.create('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -44,14 +43,12 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { bookmarks: 
   test('create: required and optional params', async () => {
     const response = await client.zeroTrust.access.bookmarks.create('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
-      body: {},
     });
   });
 
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.access.bookmarks.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -65,7 +62,6 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { bookmarks: 
   test('update: required and optional params', async () => {
     const response = await client.zeroTrust.access.bookmarks.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
-      body: {},
     });
   });
 

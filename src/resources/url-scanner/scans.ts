@@ -1403,6 +1403,8 @@ export namespace ScanGetResponse {
           }
 
           export interface Discoverability {
+            dnsAid: Discoverability.DNSAid;
+
             linkHeaders: Discoverability.LinkHeaders;
 
             robotsTxt: Discoverability.RobotsTXT;
@@ -1411,6 +1413,62 @@ export namespace ScanGetResponse {
           }
 
           export namespace Discoverability {
+            export interface DNSAid {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<DNSAid.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace DNSAid {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
             export interface LinkHeaders {
               status: string;
 
@@ -1587,6 +1645,10 @@ export namespace ScanGetResponse {
 
             apiCatalog: Discovery.APICatalog;
 
+            ard: Discovery.Ard;
+
+            authMd: Discovery.AuthMd;
+
             mcpServerCard: Discovery.McpServerCard;
 
             oauthDiscovery: Discovery.OAuthDiscovery;
@@ -1722,6 +1784,118 @@ export namespace ScanGetResponse {
             }
 
             export namespace APICatalog {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface Ard {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<Ard.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace Ard {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface AuthMd {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<AuthMd.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace AuthMd {
               export interface Evidence {
                 action: string;
 
@@ -2024,7 +2198,7 @@ export namespace ScanGetResponse {
 
       export namespace RobotsTXT {
         export interface Data {
-          rules: Data.Rules;
+          rules: { [key: string]: Data.Rules };
 
           sitemaps: Array<string>;
 
@@ -2033,28 +2207,22 @@ export namespace ScanGetResponse {
 
         export namespace Data {
           export interface Rules {
-            '*': Rules._;
+            allow: Array<string>;
+
+            disallow: Array<string>;
+
+            contentSignal?: Rules.ContentSignal;
+
+            crawlDelay?: number;
           }
 
           export namespace Rules {
-            export interface _ {
-              allow: Array<string>;
+            export interface ContentSignal {
+              'ai-input'?: string;
 
-              disallow: Array<string>;
+              'ai-train'?: string;
 
-              contentSignal?: _.ContentSignal;
-
-              crawlDelay?: number;
-            }
-
-            export namespace _ {
-              export interface ContentSignal {
-                'ai-input'?: string;
-
-                'ai-train'?: string;
-
-                search?: string;
-              }
+              search?: string;
             }
           }
         }

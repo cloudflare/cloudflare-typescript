@@ -84,7 +84,7 @@ export namespace TestStatOverTime {
 
 export interface PercentileGetParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 

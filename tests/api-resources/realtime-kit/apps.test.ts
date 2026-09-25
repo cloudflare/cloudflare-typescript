@@ -27,7 +27,7 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ realtimeKit: { apps: BaseApps } }>) => {
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('get: only required params', async () => {
     const responsePromise = client.realtimeKit.apps.get({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
@@ -39,7 +39,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { apps: BaseApps } }>
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('get: required and optional params', async () => {
     const response = await client.realtimeKit.apps.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -50,7 +50,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { apps: BaseApps } }>
     });
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('post: only required params', async () => {
     const responsePromise = client.realtimeKit.apps.post({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -65,7 +65,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { apps: BaseApps } }>
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('post: required and optional params', async () => {
     const response = await client.realtimeKit.apps.post({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

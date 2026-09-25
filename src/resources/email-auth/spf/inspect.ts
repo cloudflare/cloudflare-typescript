@@ -123,7 +123,7 @@ export namespace InspectGetResponse {
 
 export interface InspectGetParams {
   /**
-   * Path param: Identifier.
+   * Path param: Zone identifier.
    */
   zone_id: string;
 

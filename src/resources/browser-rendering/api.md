@@ -132,6 +132,16 @@ Methods:
 - <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/protocol">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">protocol</a>(sessionID, { ...params }) -> BrowserProtocolResponse</code>
 - <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/version">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">version</a>(sessionID, { ...params }) -> BrowserVersionResponse</code>
 
+#### LiveView
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/devtools/browser/live-view.ts">LiveViewCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/live_view">client.browserRendering.devtools.browser.liveView.<a href="./src/resources/browser-rendering/devtools/browser/live-view.ts">create</a>(sessionID, { ...params }) -> LiveViewCreateResponse</code>
+
 #### Page
 
 Methods:

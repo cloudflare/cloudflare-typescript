@@ -31,7 +31,6 @@ const runTests = (client: PartialCloudflare<{ accounts: { tokens: { value: BaseV
   test.skip('update: only required params', async () => {
     const responsePromise = client.accounts.tokens.value.update('ed17574386854bf78a67040be0a770b0', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +45,6 @@ const runTests = (client: PartialCloudflare<{ accounts: { tokens: { value: BaseV
   test.skip('update: required and optional params', async () => {
     const response = await client.accounts.tokens.value.update('ed17574386854bf78a67040be0a770b0', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
   });
 };

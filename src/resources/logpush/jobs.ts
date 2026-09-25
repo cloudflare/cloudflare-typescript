@@ -18,27 +18,6 @@ export class BaseJobs extends APIResource {
    * const logpushJob = await client.logpush.jobs.create({
    *   destination_conf: 's3://mybucket/logs?region=us-west-2',
    *   account_id: 'account_id',
-   *   dataset: 'gateway_dns',
-   *   filter:
-   *     '{"where":{"and":[{"key":"ClientRequestPath","operator":"contains","value":"/static"},{"key":"ClientRequestHost","operator":"eq","value":"example.com"}]}}',
-   *   max_upload_bytes: 5000000,
-   *   max_upload_interval_seconds: 30,
-   *   max_upload_records: 1000,
-   *   name: 'example.com',
-   *   output_options: {
-   *     'CVE-2021-44228': false,
-   *     batch_prefix: '',
-   *     batch_suffix: '',
-   *     field_delimiter: ',',
-   *     field_names: ['Datetime', 'DstIP', 'SrcIP'],
-   *     output_type: 'ndjson',
-   *     record_delimiter: '',
-   *     record_prefix: '{',
-   *     record_suffix: '}\n',
-   *     sample_rate: 1,
-   *     timestamp_format: 'unixnano',
-   *   },
-   *   ownership_challenge: '00000000000000000000',
    * });
    * ```
    */
@@ -75,26 +54,6 @@ export class BaseJobs extends APIResource {
    * ```ts
    * const logpushJob = await client.logpush.jobs.update(1, {
    *   account_id: 'account_id',
-   *   destination_conf: 's3://mybucket/logs?region=us-west-2',
-   *   filter:
-   *     '{"where":{"and":[{"key":"ClientRequestPath","operator":"contains","value":"/static"},{"key":"ClientRequestHost","operator":"eq","value":"example.com"}]}}',
-   *   max_upload_bytes: 5000000,
-   *   max_upload_interval_seconds: 30,
-   *   max_upload_records: 1000,
-   *   output_options: {
-   *     'CVE-2021-44228': false,
-   *     batch_prefix: '',
-   *     batch_suffix: '',
-   *     field_delimiter: ',',
-   *     field_names: ['Datetime', 'DstIP', 'SrcIP'],
-   *     output_type: 'ndjson',
-   *     record_delimiter: '',
-   *     record_prefix: '{',
-   *     record_suffix: '}\n',
-   *     sample_rate: 1,
-   *     timestamp_format: 'unixnano',
-   *   },
-   *   ownership_challenge: '00000000000000000000',
    * });
    * ```
    */
@@ -261,6 +220,7 @@ export interface LogpushJob {
    */
   dataset?:
     | 'access_requests'
+    | 'account_abuse_protection_events'
     | 'audit_logs'
     | 'audit_logs_v2'
     | 'biso_user_actions'
@@ -279,6 +239,7 @@ export interface LogpushJob {
     | 'gateway_network'
     | 'http_requests'
     | 'ipsec_logs'
+    | 'magic_bgp_logs'
     | 'magic_ids_detections'
     | 'mcp_portal_logs'
     | 'mnm_flow_logs'
@@ -316,6 +277,12 @@ export interface LogpushJob {
    * are set to null.
    */
   error_message?: string | null;
+
+  /**
+   * When true, excludes DDoS attack traffic from logs. This option is supported for
+   * the `http_requests`, `firewall_events`, and `network_analytics_logs` datasets.
+   */
+  filter_attack_traffic?: boolean;
 
   /**
    * @deprecated This field is deprecated. Please use `max_upload_*` parameters
@@ -464,8 +431,9 @@ export interface OutputOptions {
   record_template?: string | null;
 
   /**
-   * Floating number to specify sampling rate. Sampling is applied on top of
-   * filtering, and regardless of the current `sample_interval` of the data.
+   * Specifies the sampling rate as a floating number greater than 0 and at most 1.
+   * Sampling is applied on top of filtering, and regardless of the current
+   * `sample_interval` of the data.
    */
   sample_rate?: number | null;
 
@@ -546,8 +514,9 @@ export interface OutputOptionsParam {
   record_template?: string | null;
 
   /**
-   * Floating number to specify sampling rate. Sampling is applied on top of
-   * filtering, and regardless of the current `sample_interval` of the data.
+   * Specifies the sampling rate as a floating number greater than 0 and at most 1.
+   * Sampling is applied on top of filtering, and regardless of the current
+   * `sample_interval` of the data.
    */
   sample_rate?: number | null;
 
@@ -592,6 +561,7 @@ export interface JobCreateParams {
    */
   dataset?:
     | 'access_requests'
+    | 'account_abuse_protection_events'
     | 'audit_logs'
     | 'audit_logs_v2'
     | 'biso_user_actions'
@@ -610,6 +580,7 @@ export interface JobCreateParams {
     | 'gateway_network'
     | 'http_requests'
     | 'ipsec_logs'
+    | 'magic_bgp_logs'
     | 'magic_ids_detections'
     | 'mcp_portal_logs'
     | 'mnm_flow_logs'
@@ -639,6 +610,13 @@ export interface JobCreateParams {
    * [Filters](https://developers.cloudflare.com/logs/reference/filters/).
    */
   filter?: string | null;
+
+  /**
+   * Body param: When true, excludes DDoS attack traffic from logs. This option is
+   * supported for the `http_requests`, `firewall_events`, and
+   * `network_analytics_logs` datasets.
+   */
+  filter_attack_traffic?: boolean;
 
   /**
    * @deprecated Body param: This field is deprecated. Please use `max_upload_*`
@@ -738,6 +716,13 @@ export interface JobUpdateParams {
    * [Filters](https://developers.cloudflare.com/logs/reference/filters/).
    */
   filter?: string | null;
+
+  /**
+   * Body param: When true, excludes DDoS attack traffic from logs. This option is
+   * supported for the `http_requests`, `firewall_events`, and
+   * `network_analytics_logs` datasets.
+   */
+  filter_attack_traffic?: boolean;
 
   /**
    * @deprecated Body param: This field is deprecated. Please use `max_upload_*`

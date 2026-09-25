@@ -161,15 +161,16 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: BaseNamesp
       ai_search_options: {
         instance_ids: ['my-ai-search'],
         cache: { cache_threshold: 'super_strict_match', enabled: true },
+        custom_metadata: { test: true, user_id: 'user-123' },
         query_rewrite: {
           enabled: true,
-          model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+          model: 'model',
           rewrite_prompt: 'rewrite_prompt',
         },
         reranking: {
           enabled: true,
           match_threshold: 0,
-          model: '@cf/baai/bge-reranker-base',
+          model: 'model',
         },
         retrieval: {
           boost_by: [{ field: 'timestamp', direction: 'desc' }],
@@ -184,7 +185,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: BaseNamesp
         },
       },
       messages: [{ content: 'string', role: 'system' }],
-      model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+      model: 'model',
       stream: true,
     });
   });
@@ -228,15 +229,16 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: BaseNamesp
       ai_search_options: {
         instance_ids: ['my-ai-search'],
         cache: { cache_threshold: 'super_strict_match', enabled: true },
+        custom_metadata: { test: true, user_id: 'user-123' },
         query_rewrite: {
           enabled: true,
-          model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+          model: 'model',
           rewrite_prompt: 'rewrite_prompt',
         },
         reranking: {
           enabled: true,
           match_threshold: 0,
-          model: '@cf/baai/bge-reranker-base',
+          model: 'model',
         },
         retrieval: {
           boost_by: [{ field: 'timestamp', direction: 'desc' }],

@@ -5,119 +5,28 @@ import * as ConfigsAPI from './configs';
 import {
   BaseConfigs,
   ConfigCreateParams,
+  ConfigCreateResponse,
   ConfigDeleteParams,
   ConfigDeleteResponse,
   ConfigEditParams,
+  ConfigEditResponse,
   ConfigGetParams,
+  ConfigGetResponse,
   ConfigListParams,
+  ConfigListResponse,
+  ConfigListResponsesV4PagePaginationArray,
+  ConfigRestartParams,
+  ConfigRestartResponse,
   ConfigUpdateParams,
+  ConfigUpdateResponse,
   Configs,
 } from './configs';
-import { V4PagePaginationArray } from '../../core/pagination';
 
 export class BaseHyperdriveResource extends APIResource {
   static override readonly _key: readonly ['hyperdrive'] = Object.freeze(['hyperdrive'] as const);
 }
 export class HyperdriveResource extends BaseHyperdriveResource {
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
-}
-
-export type HyperdrivesV4PagePaginationArray = V4PagePaginationArray<Hyperdrive>;
-
-/**
- * Connect to a database through a Workers VPC Service. TLS settings (mTLS,
- * sslmode) cannot be configured on the Hyperdrive when using a VPC Service origin;
- * TLS must be managed on the VPC Service itself.
- */
-export type Configuration =
-  | Configuration.HyperdriveInternetOrigin
-  | Configuration.HyperdriveOverAccessOrigin
-  | Configuration.HyperdriveVPCServiceOrigin;
-
-export namespace Configuration {
-  export interface HyperdriveInternetOrigin {
-    /**
-     * Defines the host (hostname or IP) of your origin database.
-     */
-    host: string;
-
-    /**
-     * Defines the port of your origin database. Defaults to 5432 for PostgreSQL or
-     * 3306 for MySQL if not specified.
-     */
-    port: number;
-
-    /**
-     * Set the name of your origin database.
-     */
-    database?: string;
-
-    /**
-     * Specifies the URL scheme used to connect to your origin database.
-     */
-    scheme?: 'postgres' | 'postgresql' | 'mysql';
-
-    /**
-     * Set the user of your origin database.
-     */
-    user?: string;
-  }
-
-  export interface HyperdriveOverAccessOrigin {
-    /**
-     * Defines the Client ID of the Access token to use when connecting to the origin
-     * database.
-     */
-    access_client_id: string;
-
-    /**
-     * Defines the host (hostname or IP) of your origin database.
-     */
-    host: string;
-
-    /**
-     * Set the name of your origin database.
-     */
-    database?: string;
-
-    /**
-     * Specifies the URL scheme used to connect to your origin database.
-     */
-    scheme?: 'postgres' | 'postgresql' | 'mysql';
-
-    /**
-     * Set the user of your origin database.
-     */
-    user?: string;
-  }
-
-  /**
-   * Connect to a database through a Workers VPC Service. TLS settings (mTLS,
-   * sslmode) cannot be configured on the Hyperdrive when using a VPC Service origin;
-   * TLS must be managed on the VPC Service itself.
-   */
-  export interface HyperdriveVPCServiceOrigin {
-    /**
-     * The identifier of the Workers VPC Service to connect through. Hyperdrive will
-     * egress through the specified VPC Service to reach the origin database.
-     */
-    service_id: string;
-
-    /**
-     * Set the name of your origin database.
-     */
-    database?: string;
-
-    /**
-     * Specifies the URL scheme used to connect to your origin database.
-     */
-    scheme?: 'postgres' | 'postgresql' | 'mysql';
-
-    /**
-     * Set the user of your origin database.
-     */
-    user?: string;
-  }
 }
 
 export interface Hyperdrive {
@@ -132,6 +41,9 @@ export interface Hyperdrive {
    */
   name: string;
 
+  /**
+   * Combines database connection fields with exactly one supported network location.
+   */
   origin:
     | Hyperdrive.PublicDatabase
     | Hyperdrive.AccessProtectedDatabaseBehindCloudflareTunnel
@@ -182,7 +94,8 @@ export namespace Hyperdrive {
     database: string;
 
     /**
-     * Defines the host (hostname or IP) of your origin database.
+     * Defines the publicly reachable hostname or IP of your origin database. Private,
+     * loopback, and link-local IP addresses are not allowed.
      */
     host: string;
 
@@ -296,7 +209,9 @@ export namespace Hyperdrive {
     mtls_certificate_id?: string;
 
     /**
-     * Set SSL mode to 'require', 'verify-ca', or 'verify-full' to verify the CA.
+     * PostgreSQL accepts `require`, `verify-ca`, and `verify-full`. MySQL accepts
+     * `REQUIRED`, `VERIFY_CA`, and `VERIFY_IDENTITY`. The verify modes require a CA
+     * certificate; the require modes cannot be used with a CA certificate.
      */
     sslmode?: string;
   }
@@ -306,17 +221,25 @@ HyperdriveResource.Configs = Configs;
 HyperdriveResource.BaseConfigs = BaseConfigs;
 
 export declare namespace HyperdriveResource {
-  export { type Configuration as Configuration, type Hyperdrive as Hyperdrive };
+  export { type Hyperdrive as Hyperdrive };
 
   export {
     Configs as Configs,
     BaseConfigs as BaseConfigs,
+    type ConfigCreateResponse as ConfigCreateResponse,
+    type ConfigUpdateResponse as ConfigUpdateResponse,
+    type ConfigListResponse as ConfigListResponse,
     type ConfigDeleteResponse as ConfigDeleteResponse,
+    type ConfigEditResponse as ConfigEditResponse,
+    type ConfigGetResponse as ConfigGetResponse,
+    type ConfigRestartResponse as ConfigRestartResponse,
+    type ConfigListResponsesV4PagePaginationArray as ConfigListResponsesV4PagePaginationArray,
     type ConfigCreateParams as ConfigCreateParams,
     type ConfigUpdateParams as ConfigUpdateParams,
     type ConfigListParams as ConfigListParams,
     type ConfigDeleteParams as ConfigDeleteParams,
     type ConfigEditParams as ConfigEditParams,
     type ConfigGetParams as ConfigGetParams,
+    type ConfigRestartParams as ConfigRestartParams,
   };
 }

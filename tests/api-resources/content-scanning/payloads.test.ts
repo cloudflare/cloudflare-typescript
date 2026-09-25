@@ -48,6 +48,27 @@ const runTests = (client: PartialCloudflare<{ contentScanning: { payloads: BaseP
     });
   });
 
+  test('update: only required params', async () => {
+    const responsePromise = client.contentScanning.payloads.update('a350a054caa840c9becd89c3b4f0195b', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      payload: 'lookup_json_string(http.request.body.raw, "file")',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await client.contentScanning.payloads.update('a350a054caa840c9becd89c3b4f0195b', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      payload: 'lookup_json_string(http.request.body.raw, "file")',
+    });
+  });
+
   test('list: only required params', async () => {
     const responsePromise = client.contentScanning.payloads.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',

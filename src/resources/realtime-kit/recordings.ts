@@ -21,7 +21,7 @@ export class BaseRecordings extends APIResource {
    *     'meeting_id',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -48,7 +48,7 @@ export class BaseRecordings extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -73,7 +73,7 @@ export class BaseRecordings extends APIResource {
    * ```ts
    * const response =
    *   await client.realtimeKit.recordings.getRecordings(
-   *     'app_id',
+   *     '14a396e7-ca44-4937-bf1f-050a69118543',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -100,7 +100,7 @@ export class BaseRecordings extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: '2a95132c15732412d22c1476fa83f27a',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *       action: 'stop',
    *     },
    *   );
@@ -127,7 +127,7 @@ export class BaseRecordings extends APIResource {
    * ```ts
    * const response =
    *   await client.realtimeKit.recordings.startRecordings(
-   *     'app_id',
+   *     '14a396e7-ca44-4937-bf1f-050a69118543',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
@@ -177,7 +177,7 @@ export class BaseRecordings extends APIResource {
    * ```ts
    * const response =
    *   await client.realtimeKit.recordings.startTrackRecording(
-   *     'app_id',
+   *     '14a396e7-ca44-4937-bf1f-050a69118543',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
@@ -365,7 +365,7 @@ export namespace RecordingGetOneRecordingResponse {
 
     stop_reason?: Data.StopReason;
 
-    storage_config?: Data.StorageConfig | null;
+    storage_config?: Data.UnionMember0 | Data.UnionMember1 | Data.UnionMember2 | Data.UnionMember3 | null;
   }
 
   export namespace Data {
@@ -431,11 +431,49 @@ export namespace RecordingGetOneRecordingResponse {
       }
     }
 
-    export interface StorageConfig {
+    export interface UnionMember0 {
       /**
-       * Type of storage media.
+       * Authentication method used for "sftp" type storage medium
        */
-      type: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+      auth_method?: 'KEY' | 'PASSWORD';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
+
+      /**
+       * Path relative to the bucket root at which the recording will be placed.
+       */
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
+
+      /**
+       * Region of the storage medium.
+       */
+      region?: string;
+
+      type?: 'gcs';
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface UnionMember1 {
+      access_key: unknown;
+
+      region: unknown;
 
       /**
        * Authentication method used for "sftp" type storage medium
@@ -453,11 +491,35 @@ export namespace RecordingGetOneRecordingResponse {
       host?: string;
 
       /**
-       * SSH destination server password for SFTP type storage medium when auth_method is
-       * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
-       * private key.
+       * Path relative to the bucket root at which the recording will be placed.
        */
-      password?: string;
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
+
+      type?: 'aws' | 'azure' | 'digitalocean';
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface UnionMember2 {
+      auth_method?: 'KEY';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
 
       /**
        * Path relative to the bucket root at which the recording will be placed.
@@ -470,10 +532,43 @@ export namespace RecordingGetOneRecordingResponse {
       port?: number;
 
       /**
-       * Private key used to login to destination SSH server for SFTP type storage
-       * medium, when auth_method used is "KEY"
+       * Region of the storage medium.
        */
-      private_key?: string;
+      region?: string;
+
+      /**
+       * Type of storage media.
+       */
+      type?: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface UnionMember3 {
+      auth_method?: 'PASSWORD';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
+
+      /**
+       * Path relative to the bucket root at which the recording will be placed.
+       */
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
 
       /**
        * Region of the storage medium.
@@ -481,10 +576,9 @@ export namespace RecordingGetOneRecordingResponse {
       region?: string;
 
       /**
-       * Secret key of the storage medium. Similar to `access_key`, it is only writeable
-       * by clients, not readable.
+       * Type of storage media.
        */
-      secret?: string;
+      type?: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
 
       /**
        * SSH destination server username for SFTP type storage medium
@@ -569,7 +663,7 @@ export namespace RecordingGetRecordingsResponse {
      */
     recording_duration?: number;
 
-    storage_config?: Data.StorageConfig | null;
+    storage_config?: Data.UnionMember0 | Data.UnionMember1 | Data.UnionMember2 | Data.UnionMember3 | null;
   }
 
   export namespace Data {
@@ -668,7 +762,12 @@ export namespace RecordingGetRecordingsResponse {
 
         realtimekit_bucket_config?: RecordingConfig.RealtimekitBucketConfig;
 
-        storage_config?: RecordingConfig.StorageConfig | null;
+        storage_config?:
+          | RecordingConfig.UnionMember0
+          | RecordingConfig.UnionMember1
+          | RecordingConfig.UnionMember2
+          | RecordingConfig.UnionMember3
+          | null;
 
         video_config?: RecordingConfig.VideoConfig;
       }
@@ -712,11 +811,49 @@ export namespace RecordingGetRecordingsResponse {
           enabled: boolean;
         }
 
-        export interface StorageConfig {
+        export interface UnionMember0 {
           /**
-           * Type of storage media.
+           * Authentication method used for "sftp" type storage medium
            */
-          type: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+          auth_method?: 'KEY' | 'PASSWORD';
+
+          /**
+           * Name of the storage medium's bucket.
+           */
+          bucket?: string;
+
+          /**
+           * SSH destination server host for SFTP type storage medium
+           */
+          host?: string;
+
+          /**
+           * Path relative to the bucket root at which the recording will be placed.
+           */
+          path?: string;
+
+          /**
+           * SSH destination server port for SFTP type storage medium
+           */
+          port?: number;
+
+          /**
+           * Region of the storage medium.
+           */
+          region?: string;
+
+          type?: 'gcs';
+
+          /**
+           * SSH destination server username for SFTP type storage medium
+           */
+          username?: string;
+        }
+
+        export interface UnionMember1 {
+          access_key: unknown;
+
+          region: unknown;
 
           /**
            * Authentication method used for "sftp" type storage medium
@@ -734,11 +871,35 @@ export namespace RecordingGetRecordingsResponse {
           host?: string;
 
           /**
-           * SSH destination server password for SFTP type storage medium when auth_method is
-           * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
-           * private key.
+           * Path relative to the bucket root at which the recording will be placed.
            */
-          password?: string;
+          path?: string;
+
+          /**
+           * SSH destination server port for SFTP type storage medium
+           */
+          port?: number;
+
+          type?: 'aws' | 'azure' | 'digitalocean';
+
+          /**
+           * SSH destination server username for SFTP type storage medium
+           */
+          username?: string;
+        }
+
+        export interface UnionMember2 {
+          auth_method?: 'KEY';
+
+          /**
+           * Name of the storage medium's bucket.
+           */
+          bucket?: string;
+
+          /**
+           * SSH destination server host for SFTP type storage medium
+           */
+          host?: string;
 
           /**
            * Path relative to the bucket root at which the recording will be placed.
@@ -751,10 +912,43 @@ export namespace RecordingGetRecordingsResponse {
           port?: number;
 
           /**
-           * Private key used to login to destination SSH server for SFTP type storage
-           * medium, when auth_method used is "KEY"
+           * Region of the storage medium.
            */
-          private_key?: string;
+          region?: string;
+
+          /**
+           * Type of storage media.
+           */
+          type?: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+
+          /**
+           * SSH destination server username for SFTP type storage medium
+           */
+          username?: string;
+        }
+
+        export interface UnionMember3 {
+          auth_method?: 'PASSWORD';
+
+          /**
+           * Name of the storage medium's bucket.
+           */
+          bucket?: string;
+
+          /**
+           * SSH destination server host for SFTP type storage medium
+           */
+          host?: string;
+
+          /**
+           * Path relative to the bucket root at which the recording will be placed.
+           */
+          path?: string;
+
+          /**
+           * SSH destination server port for SFTP type storage medium
+           */
+          port?: number;
 
           /**
            * Region of the storage medium.
@@ -762,10 +956,9 @@ export namespace RecordingGetRecordingsResponse {
           region?: string;
 
           /**
-           * Secret key of the storage medium. Similar to `access_key`, it is only writeable
-           * by clients, not readable.
+           * Type of storage media.
            */
-          secret?: string;
+          type?: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
 
           /**
            * SSH destination server username for SFTP type storage medium
@@ -777,7 +970,7 @@ export namespace RecordingGetRecordingsResponse {
           /**
            * Codec using which the recording will be encoded.
            */
-          codec?: 'H264' | 'VP8';
+          codec?: 'H264' | 'VP8' | 'VP9';
 
           /**
            * Controls whether to export video file seperately
@@ -841,11 +1034,49 @@ export namespace RecordingGetRecordingsResponse {
       }
     }
 
-    export interface StorageConfig {
+    export interface UnionMember0 {
       /**
-       * Type of storage media.
+       * Authentication method used for "sftp" type storage medium
        */
-      type: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+      auth_method?: 'KEY' | 'PASSWORD';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
+
+      /**
+       * Path relative to the bucket root at which the recording will be placed.
+       */
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
+
+      /**
+       * Region of the storage medium.
+       */
+      region?: string;
+
+      type?: 'gcs';
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface UnionMember1 {
+      access_key: unknown;
+
+      region: unknown;
 
       /**
        * Authentication method used for "sftp" type storage medium
@@ -863,11 +1094,35 @@ export namespace RecordingGetRecordingsResponse {
       host?: string;
 
       /**
-       * SSH destination server password for SFTP type storage medium when auth_method is
-       * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
-       * private key.
+       * Path relative to the bucket root at which the recording will be placed.
        */
-      password?: string;
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
+
+      type?: 'aws' | 'azure' | 'digitalocean';
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface UnionMember2 {
+      auth_method?: 'KEY';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
 
       /**
        * Path relative to the bucket root at which the recording will be placed.
@@ -880,10 +1135,43 @@ export namespace RecordingGetRecordingsResponse {
       port?: number;
 
       /**
-       * Private key used to login to destination SSH server for SFTP type storage
-       * medium, when auth_method used is "KEY"
+       * Region of the storage medium.
        */
-      private_key?: string;
+      region?: string;
+
+      /**
+       * Type of storage media.
+       */
+      type?: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface UnionMember3 {
+      auth_method?: 'PASSWORD';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
+
+      /**
+       * Path relative to the bucket root at which the recording will be placed.
+       */
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
 
       /**
        * Region of the storage medium.
@@ -891,10 +1179,9 @@ export namespace RecordingGetRecordingsResponse {
       region?: string;
 
       /**
-       * Secret key of the storage medium. Similar to `access_key`, it is only writeable
-       * by clients, not readable.
+       * Type of storage media.
        */
-      secret?: string;
+      type?: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
 
       /**
        * SSH destination server username for SFTP type storage medium
@@ -996,7 +1283,7 @@ export namespace RecordingPauseResumeStopRecordingResponse {
 
     stop_reason?: Data.StopReason;
 
-    storage_config?: Data.StorageConfig | null;
+    storage_config?: Data.UnionMember0 | Data.UnionMember1 | Data.UnionMember2 | Data.UnionMember3 | null;
   }
 
   export namespace Data {
@@ -1062,11 +1349,49 @@ export namespace RecordingPauseResumeStopRecordingResponse {
       }
     }
 
-    export interface StorageConfig {
+    export interface UnionMember0 {
       /**
-       * Type of storage media.
+       * Authentication method used for "sftp" type storage medium
        */
-      type: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+      auth_method?: 'KEY' | 'PASSWORD';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
+
+      /**
+       * Path relative to the bucket root at which the recording will be placed.
+       */
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
+
+      /**
+       * Region of the storage medium.
+       */
+      region?: string;
+
+      type?: 'gcs';
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface UnionMember1 {
+      access_key: unknown;
+
+      region: unknown;
 
       /**
        * Authentication method used for "sftp" type storage medium
@@ -1084,11 +1409,35 @@ export namespace RecordingPauseResumeStopRecordingResponse {
       host?: string;
 
       /**
-       * SSH destination server password for SFTP type storage medium when auth_method is
-       * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
-       * private key.
+       * Path relative to the bucket root at which the recording will be placed.
        */
-      password?: string;
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
+
+      type?: 'aws' | 'azure' | 'digitalocean';
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface UnionMember2 {
+      auth_method?: 'KEY';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
 
       /**
        * Path relative to the bucket root at which the recording will be placed.
@@ -1101,10 +1450,43 @@ export namespace RecordingPauseResumeStopRecordingResponse {
       port?: number;
 
       /**
-       * Private key used to login to destination SSH server for SFTP type storage
-       * medium, when auth_method used is "KEY"
+       * Region of the storage medium.
        */
-      private_key?: string;
+      region?: string;
+
+      /**
+       * Type of storage media.
+       */
+      type?: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface UnionMember3 {
+      auth_method?: 'PASSWORD';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
+
+      /**
+       * Path relative to the bucket root at which the recording will be placed.
+       */
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
 
       /**
        * Region of the storage medium.
@@ -1112,10 +1494,9 @@ export namespace RecordingPauseResumeStopRecordingResponse {
       region?: string;
 
       /**
-       * Secret key of the storage medium. Similar to `access_key`, it is only writeable
-       * by clients, not readable.
+       * Type of storage media.
        */
-      secret?: string;
+      type?: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
 
       /**
        * SSH destination server username for SFTP type storage medium
@@ -1209,7 +1590,7 @@ export namespace RecordingStartRecordingsResponse {
 
     stop_reason?: Data.StopReason;
 
-    storage_config?: Data.StorageConfig | null;
+    storage_config?: Data.UnionMember0 | Data.UnionMember1 | Data.UnionMember2 | Data.UnionMember3 | null;
   }
 
   export namespace Data {
@@ -1275,11 +1656,49 @@ export namespace RecordingStartRecordingsResponse {
       }
     }
 
-    export interface StorageConfig {
+    export interface UnionMember0 {
       /**
-       * Type of storage media.
+       * Authentication method used for "sftp" type storage medium
        */
-      type: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+      auth_method?: 'KEY' | 'PASSWORD';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
+
+      /**
+       * Path relative to the bucket root at which the recording will be placed.
+       */
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
+
+      /**
+       * Region of the storage medium.
+       */
+      region?: string;
+
+      type?: 'gcs';
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface UnionMember1 {
+      access_key: unknown;
+
+      region: unknown;
 
       /**
        * Authentication method used for "sftp" type storage medium
@@ -1297,11 +1716,35 @@ export namespace RecordingStartRecordingsResponse {
       host?: string;
 
       /**
-       * SSH destination server password for SFTP type storage medium when auth_method is
-       * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
-       * private key.
+       * Path relative to the bucket root at which the recording will be placed.
        */
-      password?: string;
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
+
+      type?: 'aws' | 'azure' | 'digitalocean';
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface UnionMember2 {
+      auth_method?: 'KEY';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
 
       /**
        * Path relative to the bucket root at which the recording will be placed.
@@ -1314,10 +1757,43 @@ export namespace RecordingStartRecordingsResponse {
       port?: number;
 
       /**
-       * Private key used to login to destination SSH server for SFTP type storage
-       * medium, when auth_method used is "KEY"
+       * Region of the storage medium.
        */
-      private_key?: string;
+      region?: string;
+
+      /**
+       * Type of storage media.
+       */
+      type?: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface UnionMember3 {
+      auth_method?: 'PASSWORD';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
+
+      /**
+       * Path relative to the bucket root at which the recording will be placed.
+       */
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
 
       /**
        * Region of the storage medium.
@@ -1325,10 +1801,9 @@ export namespace RecordingStartRecordingsResponse {
       region?: string;
 
       /**
-       * Secret key of the storage medium. Similar to `access_key`, it is only writeable
-       * by clients, not readable.
+       * Type of storage media.
        */
-      secret?: string;
+      type?: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
 
       /**
        * SSH destination server username for SFTP type storage medium
@@ -1520,7 +1995,7 @@ export interface RecordingPauseResumeStopRecordingParams {
   account_id: string;
 
   /**
-   * Path param: A Cloudflare-generated unique identifier for an item.
+   * Path param: The app identifier tag.
    */
   app_id: string;
 
@@ -1589,7 +2064,12 @@ export interface RecordingStartRecordingsParams {
   /**
    * Body param
    */
-  storage_config?: RecordingStartRecordingsParams.StorageConfig | null;
+  storage_config?:
+    | RecordingStartRecordingsParams.UnionMember0
+    | RecordingStartRecordingsParams.UnionMember1
+    | RecordingStartRecordingsParams.UnionMember2
+    | RecordingStartRecordingsParams.UnionMember3
+    | null;
 
   /**
    * Body param: Pass a custom url to record arbitary screen
@@ -1655,12 +2135,7 @@ export namespace RecordingStartRecordingsParams {
     rtmp_url?: string;
   }
 
-  export interface StorageConfig {
-    /**
-     * Type of storage media.
-     */
-    type: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
-
+  export interface UnionMember0 {
     /**
      * Access key of the storage medium. Access key is not required for the `gcs`
      * storage media type.
@@ -1718,6 +2193,197 @@ export namespace RecordingStartRecordingsParams {
      */
     secret?: string;
 
+    type?: 'gcs';
+
+    /**
+     * SSH destination server username for SFTP type storage medium
+     */
+    username?: string;
+  }
+
+  export interface UnionMember1 {
+    access_key: unknown;
+
+    region: unknown;
+
+    /**
+     * Authentication method used for "sftp" type storage medium
+     */
+    auth_method?: 'KEY' | 'PASSWORD';
+
+    /**
+     * Name of the storage medium's bucket.
+     */
+    bucket?: string;
+
+    /**
+     * SSH destination server host for SFTP type storage medium
+     */
+    host?: string;
+
+    /**
+     * SSH destination server password for SFTP type storage medium when auth_method is
+     * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
+     * private key.
+     */
+    password?: string;
+
+    /**
+     * Path relative to the bucket root at which the recording will be placed.
+     */
+    path?: string;
+
+    /**
+     * SSH destination server port for SFTP type storage medium
+     */
+    port?: number;
+
+    /**
+     * Private key used to login to destination SSH server for SFTP type storage
+     * medium, when auth_method used is "KEY"
+     */
+    private_key?: string;
+
+    /**
+     * Secret key of the storage medium. Similar to `access_key`, it is only writeable
+     * by clients, not readable.
+     */
+    secret?: string;
+
+    type?: 'aws' | 'azure' | 'digitalocean';
+
+    /**
+     * SSH destination server username for SFTP type storage medium
+     */
+    username?: string;
+  }
+
+  export interface UnionMember2 {
+    /**
+     * Private key used to login to destination SSH server for SFTP type storage
+     * medium, when auth_method used is "KEY"
+     */
+    private_key: string;
+
+    /**
+     * Access key of the storage medium. Access key is not required for the `gcs`
+     * storage media type.
+     *
+     * Note that this field is not readable by clients, only writeable.
+     */
+    access_key?: string;
+
+    auth_method?: 'KEY';
+
+    /**
+     * Name of the storage medium's bucket.
+     */
+    bucket?: string;
+
+    /**
+     * SSH destination server host for SFTP type storage medium
+     */
+    host?: string;
+
+    /**
+     * SSH destination server password for SFTP type storage medium when auth_method is
+     * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
+     * private key.
+     */
+    password?: string;
+
+    /**
+     * Path relative to the bucket root at which the recording will be placed.
+     */
+    path?: string;
+
+    /**
+     * SSH destination server port for SFTP type storage medium
+     */
+    port?: number;
+
+    /**
+     * Region of the storage medium.
+     */
+    region?: string;
+
+    /**
+     * Secret key of the storage medium. Similar to `access_key`, it is only writeable
+     * by clients, not readable.
+     */
+    secret?: string;
+
+    /**
+     * Type of storage media.
+     */
+    type?: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+
+    /**
+     * SSH destination server username for SFTP type storage medium
+     */
+    username?: string;
+  }
+
+  export interface UnionMember3 {
+    /**
+     * SSH destination server password for SFTP type storage medium when auth_method is
+     * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
+     * private key.
+     */
+    password: string;
+
+    /**
+     * Access key of the storage medium. Access key is not required for the `gcs`
+     * storage media type.
+     *
+     * Note that this field is not readable by clients, only writeable.
+     */
+    access_key?: string;
+
+    auth_method?: 'PASSWORD';
+
+    /**
+     * Name of the storage medium's bucket.
+     */
+    bucket?: string;
+
+    /**
+     * SSH destination server host for SFTP type storage medium
+     */
+    host?: string;
+
+    /**
+     * Path relative to the bucket root at which the recording will be placed.
+     */
+    path?: string;
+
+    /**
+     * SSH destination server port for SFTP type storage medium
+     */
+    port?: number;
+
+    /**
+     * Private key used to login to destination SSH server for SFTP type storage
+     * medium, when auth_method used is "KEY"
+     */
+    private_key?: string;
+
+    /**
+     * Region of the storage medium.
+     */
+    region?: string;
+
+    /**
+     * Secret key of the storage medium. Similar to `access_key`, it is only writeable
+     * by clients, not readable.
+     */
+    secret?: string;
+
+    /**
+     * Type of storage media.
+     */
+    type?: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+
     /**
      * SSH destination server username for SFTP type storage medium
      */
@@ -1728,7 +2394,7 @@ export namespace RecordingStartRecordingsParams {
     /**
      * Codec using which the recording will be encoded.
      */
-    codec?: 'H264' | 'VP8';
+    codec?: 'H264' | 'VP8' | 'VP9';
 
     /**
      * Controls whether to export video file seperately

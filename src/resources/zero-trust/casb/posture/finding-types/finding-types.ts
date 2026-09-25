@@ -105,7 +105,7 @@ export interface FindingTypeListResponse {
   name: string;
 
   /**
-   * The severity level of a finding.
+   * Default severity used when no integration-specific severity override exists.
    */
   severity: 'Critical' | 'High' | 'Medium' | 'Low';
 
@@ -113,6 +113,11 @@ export interface FindingTypeListResponse {
    * The SaaS/Cloud vendor of the platform with which the finding is associated.
    */
   vendor: string;
+
+  /**
+   * Detailed description of the finding.
+   */
+  description?: string | null;
 }
 
 export namespace FindingTypeListResponse {
@@ -157,7 +162,7 @@ export interface FindingTypeGetResponse {
   name: string;
 
   /**
-   * The severity level of a finding.
+   * Default severity used when no integration-specific severity override exists.
    */
   severity: 'Critical' | 'High' | 'Medium' | 'Low';
 
@@ -165,6 +170,11 @@ export interface FindingTypeGetResponse {
    * The SaaS/Cloud vendor of the platform with which the finding is associated.
    */
   vendor: string;
+
+  /**
+   * Detailed description of the finding.
+   */
+  description?: string | null;
 }
 
 export namespace FindingTypeGetResponse {
@@ -196,8 +206,15 @@ export interface FindingTypeListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
+   * Query param: Filter finding types by name or ID (case-insensitive substring
+   * match).
+   */
+  search?: string;
+
+  /**
    * Query param: Filter finding types by vendor. Supports multiple comma-separated
-   * values.
+   * values. Each value may be either the vendor enum (GOOGLE_WORKSPACE) or the
+   * friendly name returned by the read routes (Google Workspace).
    */
   vendors?: Array<
     | 'ANTHROPIC'
@@ -216,6 +233,7 @@ export interface FindingTypeListParams extends V4PagePaginationArrayParams {
     | 'SALESFORCE'
     | 'SERVICENOW'
     | 'SLACK'
+    | 'ZOOM'
   >;
 }
 

@@ -12,6 +12,16 @@ import {
   MitigationReviewResponsesSinglePage,
   Mitigations,
 } from './mitigations';
+import * as SubmittedAPI from './submitted/submitted';
+import {
+  BaseSubmitted,
+  Submitted,
+  SubmittedGetParams,
+  SubmittedGetResponse,
+  SubmittedListParams,
+  SubmittedListResponse,
+  SubmittedListResponsesV4PagePagination,
+} from './submitted/submitted';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -117,6 +127,7 @@ export class BaseAbuseReports extends APIResource {
   }
 }
 export class AbuseReports extends BaseAbuseReports {
+  submitted: SubmittedAPI.Submitted = new SubmittedAPI.Submitted(this._client);
   mitigations: MitigationsAPI.Mitigations = new MitigationsAPI.Mitigations(this._client);
 }
 
@@ -1294,6 +1305,8 @@ export interface AbuseReportGetParams {
   account_id: string;
 }
 
+AbuseReports.Submitted = Submitted;
+AbuseReports.BaseSubmitted = BaseSubmitted;
 AbuseReports.Mitigations = Mitigations;
 AbuseReports.BaseMitigations = BaseMitigations;
 
@@ -1306,6 +1319,16 @@ export declare namespace AbuseReports {
     type AbuseReportCreateParams as AbuseReportCreateParams,
     type AbuseReportListParams as AbuseReportListParams,
     type AbuseReportGetParams as AbuseReportGetParams,
+  };
+
+  export {
+    Submitted as Submitted,
+    BaseSubmitted as BaseSubmitted,
+    type SubmittedListResponse as SubmittedListResponse,
+    type SubmittedGetResponse as SubmittedGetResponse,
+    type SubmittedListResponsesV4PagePagination as SubmittedListResponsesV4PagePagination,
+    type SubmittedListParams as SubmittedListParams,
+    type SubmittedGetParams as SubmittedGetParams,
   };
 
   export {

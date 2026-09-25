@@ -18,16 +18,13 @@ export class BaseKeys extends APIResource {
    * ```ts
    * const keys = await client.stream.keys.create({
    *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   body: {},
    * });
    * ```
    */
   create(params: KeyCreateParams, options?: RequestOptions): APIPromise<Keys> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.post(path`/accounts/${account_id}/stream/keys`, { body: body, ...options }) as APIPromise<{
-        result: Keys;
-      }>
+      this._client.post(path`/accounts/${account_id}/stream/keys`, options) as APIPromise<{ result: Keys }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -127,14 +124,9 @@ export interface KeyGetResponse {
 
 export interface KeyCreateParams {
   /**
-   * Path param: Identifier.
+   * Identifier.
    */
   account_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface KeyDeleteParams {

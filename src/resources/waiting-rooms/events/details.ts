@@ -27,13 +27,17 @@ export class BaseDetails extends APIResource {
    * );
    * ```
    */
-  get(eventID: string, params: DetailGetParams, options?: RequestOptions): APIPromise<DetailGetResponse> {
+  get(
+    eventID: string,
+    params: DetailGetParams,
+    options?: RequestOptions,
+  ): APIPromise<DetailGetResponse | null> {
     const { zone_id, waiting_room_id } = params;
     return (
       this._client.get(
         path`/zones/${zone_id}/waiting_rooms/${waiting_room_id}/events/${eventID}/details`,
         options,
-      ) as APIPromise<{ result: DetailGetResponse }>
+      ) as APIPromise<{ result: DetailGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

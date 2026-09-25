@@ -128,7 +128,8 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Delete a specific routing rule.
+   * Deletes a routing rule so matching incoming messages are no longer forwarded by
+   * it.
    *
    * @example
    * ```ts
@@ -187,6 +188,9 @@ export interface Action {
    */
   type: 'drop' | 'forward' | 'worker';
 
+  /**
+   * List of values for the action. Currently limited to a single value.
+   */
   value?: Array<string>;
 }
 
@@ -199,6 +203,9 @@ export interface ActionParam {
    */
   type: 'drop' | 'forward' | 'worker';
 
+  /**
+   * List of values for the action. Currently limited to a single value.
+   */
   value?: Array<string>;
 }
 

@@ -26,15 +26,15 @@ export class BaseSippyResource extends APIResource {
    * ```
    */
   update(bucketName: string, params: SippyUpdateParams, options?: RequestOptions): APIPromise<Sippy> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         body,
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -59,14 +59,14 @@ export class BaseSippyResource extends APIResource {
     params: SippyDeleteParams,
     options?: RequestOptions,
   ): APIPromise<SippyDeleteResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.delete(path`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -87,14 +87,14 @@ export class BaseSippyResource extends APIResource {
    * ```
    */
   get(bucketName: string, params: SippyGetParams, options?: RequestOptions): APIPromise<Sippy> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -205,7 +205,7 @@ export declare namespace SippyUpdateParams {
      * Header param: Jurisdiction where objects in this bucket are guaranteed to be
      * stored.
      */
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
   }
 
   export namespace R2EnableSippyAws {
@@ -284,7 +284,7 @@ export declare namespace SippyUpdateParams {
      * Header param: Jurisdiction where objects in this bucket are guaranteed to be
      * stored.
      */
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
   }
 
   export namespace R2EnableSippyGcs {
@@ -358,7 +358,7 @@ export declare namespace SippyUpdateParams {
      * Header param: Jurisdiction where objects in this bucket are guaranteed to be
      * stored.
      */
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
   }
 
   export namespace R2EnableSippyS3 {
@@ -432,7 +432,7 @@ export declare namespace SippyUpdateParams {
      * Header param: Jurisdiction where objects in this bucket are guaranteed to be
      * stored.
      */
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
   }
 
   export namespace R2EnableSippyAzure {
@@ -503,7 +503,7 @@ export interface SippyDeleteParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export interface SippyGetParams {
@@ -516,7 +516,7 @@ export interface SippyGetParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export declare namespace SippyResource {

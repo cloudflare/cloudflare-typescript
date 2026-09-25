@@ -12,7 +12,8 @@ export class BaseSchemas extends APIResource {
   ] as const);
 
   /**
-   * Retrieves API operations and their features exported as OpenAPI schemas.
+   * Returns tracked web and API operations and their feature configuration rendered
+   * as OpenAPI schemas.
    *
    * @example
    * ```ts
@@ -49,7 +50,7 @@ export interface SchemaListParams {
    * corresponds to the resulting feature object. Have a look at the top-level object
    * description for more details on the specific meaning.
    */
-  feature?: Array<'thresholds' | 'parameter_schemas' | 'schema_info'>;
+  feature?: Array<'thresholds' | 'parameter_schemas' | 'schema_info' | 'confidence_intervals'>;
 
   /**
    * Query param: Receive schema only for the given host(s).

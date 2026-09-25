@@ -93,6 +93,8 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { pacfiles: 
   test('list: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.pacfiles.list({
       account_id: '699d98642c564d2e855e9661899b7252',
+      page: 1,
+      per_page: 1,
     });
   });
 

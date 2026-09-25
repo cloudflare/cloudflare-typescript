@@ -5,18 +5,18 @@ import * as RulesetsAPI from './rulesets';
 import * as RulesAPI from './rules';
 import {
   BaseRules,
-  BlockRule,
+  BlockRule as RulesAPIBlockRule,
   CompressResponseRule,
-  DDoSDynamicRule,
-  ExecuteRule,
-  ForceConnectionCloseRule,
-  LogCustomFieldRule,
-  LogRule,
+  DDoSDynamicRule as RulesAPIDDoSDynamicRule,
+  ExecuteRule as RulesAPIExecuteRule,
+  ForceConnectionCloseRule as RulesAPIForceConnectionCloseRule,
+  LogCustomFieldRule as RulesAPILogCustomFieldRule,
+  LogRule as RulesAPILogRule,
   Logging,
-  ManagedChallengeRule,
-  RedirectRule,
-  RewriteRule,
-  RouteRule,
+  ManagedChallengeRule as RulesAPIManagedChallengeRule,
+  RedirectRule as RulesAPIRedirectRule,
+  RewriteRule as RulesAPIRewriteRule,
+  RouteRule as RulesAPIRouteRule,
   RuleCreateParams,
   RuleCreateResponse,
   RuleDeleteParams,
@@ -25,11 +25,11 @@ import {
   RuleEditResponse,
   Rules,
   RulesetRule,
-  ScoreRule,
-  ServeErrorRule,
-  SetCacheSettingsRule,
+  ScoreRule as RulesAPIScoreRule,
+  ServeErrorRule as RulesAPIServeErrorRule,
+  SetCacheSettingsRule as RulesAPISetCacheSettingsRule,
   SetConfigRule,
-  SkipRule,
+  SkipRule as RulesAPISkipRule,
 } from './rules';
 import * as VersionsAPI from './versions';
 import {
@@ -410,27 +410,27 @@ export namespace RulesetCreateResponse {
      * The list of rules in the ruleset.
      */
     rules: Array<
-      | RulesAPI.BlockRule
-      | Ruleset.RulesetsChallengeRule
-      | RulesAPI.CompressResponseRule
-      | RulesAPI.DDoSDynamicRule
-      | RulesAPI.ExecuteRule
-      | RulesAPI.ForceConnectionCloseRule
-      | Ruleset.RulesetsJSChallengeRule
-      | RulesAPI.LogRule
-      | RulesAPI.LogCustomFieldRule
-      | RulesAPI.ManagedChallengeRule
-      | RulesAPI.RedirectRule
-      | RulesAPI.RewriteRule
-      | RulesAPI.RouteRule
-      | RulesAPI.ScoreRule
-      | RulesAPI.ServeErrorRule
-      | Ruleset.RulesetsSetCacheControlRule
-      | RulesAPI.SetCacheSettingsRule
-      | Ruleset.RulesetsSetCacheTagsRule
-      | RulesAPI.SetConfigRule
-      | RulesAPI.SkipRule
-      | Ruleset.RulesetsTransformResponseHTMLRule
+      | Ruleset.BlockRule
+      | Ruleset.ChallengeRule
+      | Ruleset.ResponseCompressionRule
+      | Ruleset.DDoSDynamicRule
+      | Ruleset.ExecuteRule
+      | Ruleset.ForceConnectionCloseRule
+      | Ruleset.JavaScriptChallengeRule
+      | Ruleset.LogRule
+      | Ruleset.LogCustomFieldRule
+      | Ruleset.ManagedChallengeRule
+      | Ruleset.RedirectRule
+      | Ruleset.RewriteRule
+      | Ruleset.RouteRule
+      | Ruleset.ScoreRule
+      | Ruleset.ServeErrorRule
+      | Ruleset.SetCacheControlRule
+      | Ruleset.SetCacheSettingsRule
+      | Ruleset.SetCacheTagsRule
+      | Ruleset.SetConfigurationRule
+      | Ruleset.SkipRule
+      | Ruleset.TransformResponseHTMLRule
     >;
 
     /**
@@ -445,26 +445,53 @@ export namespace RulesetCreateResponse {
   }
 
   export namespace Ruleset {
-    export interface RulesetsChallengeRule {
+    export interface BlockRule extends Omit<RulesAPI.BlockRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface ChallengeRule {
+      /**
+       * The unique ID of the rule.
+       */
+      id: string;
+
+      /**
+       * The action to perform when the rule matches.
+       */
+      action: 'challenge';
+
+      /**
+       * Whether the rule should be executed.
+       */
+      enabled: boolean;
+
+      /**
+       * The expression defining which traffic will match the rule.
+       */
+      expression: string;
+
       /**
        * The timestamp of when the rule was last modified.
        */
       last_updated: string;
 
       /**
+       * The reference of the rule (the rule's ID by default).
+       */
+      ref: string;
+
+      /**
        * The version of the rule.
        */
       version: string;
-
-      /**
-       * The unique ID of the rule.
-       */
-      id?: string;
-
-      /**
-       * The action to perform when the rule matches.
-       */
-      action?: 'challenge';
 
       /**
        * The parameters configuring the rule's action.
@@ -482,19 +509,9 @@ export namespace RulesetCreateResponse {
       description?: string;
 
       /**
-       * Whether the rule should be executed.
-       */
-      enabled?: boolean;
-
-      /**
        * Configuration for exposed credential checking.
        */
-      exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
-
-      /**
-       * The expression defining which traffic will match the rule.
-       */
-      expression?: string;
+      exposed_credential_check?: ChallengeRule.ExposedCredentialCheck;
 
       /**
        * An object configuring the rule's logging behavior.
@@ -504,15 +521,10 @@ export namespace RulesetCreateResponse {
       /**
        * An object configuring the rule's rate limit behavior.
        */
-      ratelimit?: RulesetsChallengeRule.Ratelimit;
-
-      /**
-       * The reference of the rule (the rule's ID by default).
-       */
-      ref?: string;
+      ratelimit?: ChallengeRule.Ratelimit;
     }
 
-    export namespace RulesetsChallengeRule {
+    export namespace ChallengeRule {
       /**
        * Configuration for exposed credential checking.
        */
@@ -580,26 +592,89 @@ export namespace RulesetCreateResponse {
       }
     }
 
-    export interface RulesetsJSChallengeRule {
+    export interface ResponseCompressionRule extends Omit<RulesAPI.CompressResponseRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface DDoSDynamicRule extends Omit<RulesAPI.DDoSDynamicRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface ExecuteRule extends Omit<RulesAPI.ExecuteRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface ForceConnectionCloseRule extends Omit<RulesAPI.ForceConnectionCloseRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface JavaScriptChallengeRule {
+      /**
+       * The unique ID of the rule.
+       */
+      id: string;
+
+      /**
+       * The action to perform when the rule matches.
+       */
+      action: 'js_challenge';
+
+      /**
+       * Whether the rule should be executed.
+       */
+      enabled: boolean;
+
+      /**
+       * The expression defining which traffic will match the rule.
+       */
+      expression: string;
+
       /**
        * The timestamp of when the rule was last modified.
        */
       last_updated: string;
 
       /**
+       * The reference of the rule (the rule's ID by default).
+       */
+      ref: string;
+
+      /**
        * The version of the rule.
        */
       version: string;
-
-      /**
-       * The unique ID of the rule.
-       */
-      id?: string;
-
-      /**
-       * The action to perform when the rule matches.
-       */
-      action?: 'js_challenge';
 
       /**
        * The parameters configuring the rule's action.
@@ -617,19 +692,9 @@ export namespace RulesetCreateResponse {
       description?: string;
 
       /**
-       * Whether the rule should be executed.
-       */
-      enabled?: boolean;
-
-      /**
        * Configuration for exposed credential checking.
        */
-      exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
-
-      /**
-       * The expression defining which traffic will match the rule.
-       */
-      expression?: string;
+      exposed_credential_check?: JavaScriptChallengeRule.ExposedCredentialCheck;
 
       /**
        * An object configuring the rule's logging behavior.
@@ -639,15 +704,10 @@ export namespace RulesetCreateResponse {
       /**
        * An object configuring the rule's rate limit behavior.
        */
-      ratelimit?: RulesetsJSChallengeRule.Ratelimit;
-
-      /**
-       * The reference of the rule (the rule's ID by default).
-       */
-      ref?: string;
+      ratelimit?: JavaScriptChallengeRule.Ratelimit;
     }
 
-    export namespace RulesetsJSChallengeRule {
+    export namespace JavaScriptChallengeRule {
       /**
        * Configuration for exposed credential checking.
        */
@@ -715,11 +775,129 @@ export namespace RulesetCreateResponse {
       }
     }
 
-    export interface RulesetsSetCacheControlRule {
+    export interface LogRule extends Omit<RulesAPI.LogRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface LogCustomFieldRule extends Omit<RulesAPI.LogCustomFieldRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface ManagedChallengeRule extends Omit<RulesAPI.ManagedChallengeRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface RedirectRule extends Omit<RulesAPI.RedirectRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface RewriteRule extends Omit<RulesAPI.RewriteRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface RouteRule extends Omit<RulesAPI.RouteRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface ScoreRule extends Omit<RulesAPI.ScoreRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface ServeErrorRule extends Omit<RulesAPI.ServeErrorRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface SetCacheControlRule {
+      /**
+       * The unique ID of the rule.
+       */
+      id: string;
+
+      /**
+       * The action to perform when the rule matches.
+       */
+      action: 'set_cache_control';
+
+      enabled: boolean;
+
+      /**
+       * The expression defining which traffic will match the rule.
+       */
+      expression: string;
+
       /**
        * The timestamp of when the rule was last modified.
        */
       last_updated: string;
+
+      /**
+       * The reference of the rule (the rule's ID by default).
+       */
+      ref: string;
 
       /**
        * The version of the rule.
@@ -727,19 +905,9 @@ export namespace RulesetCreateResponse {
       version: string;
 
       /**
-       * The unique ID of the rule.
-       */
-      id?: string;
-
-      /**
-       * The action to perform when the rule matches.
-       */
-      action?: 'set_cache_control';
-
-      /**
        * The parameters configuring the rule's action.
        */
-      action_parameters?: RulesetsSetCacheControlRule.ActionParameters;
+      action_parameters?: SetCacheControlRule.ActionParameters;
 
       /**
        * The categories of the rule.
@@ -752,19 +920,9 @@ export namespace RulesetCreateResponse {
       description?: string;
 
       /**
-       * Whether the rule should be executed.
-       */
-      enabled?: boolean;
-
-      /**
        * Configuration for exposed credential checking.
        */
-      exposed_credential_check?: RulesetsSetCacheControlRule.ExposedCredentialCheck;
-
-      /**
-       * The expression defining which traffic will match the rule.
-       */
-      expression?: string;
+      exposed_credential_check?: SetCacheControlRule.ExposedCredentialCheck;
 
       /**
        * An object configuring the rule's logging behavior.
@@ -774,15 +932,10 @@ export namespace RulesetCreateResponse {
       /**
        * An object configuring the rule's rate limit behavior.
        */
-      ratelimit?: RulesetsSetCacheControlRule.Ratelimit;
-
-      /**
-       * The reference of the rule (the rule's ID by default).
-       */
-      ref?: string;
+      ratelimit?: SetCacheControlRule.Ratelimit;
     }
 
-    export namespace RulesetsSetCacheControlRule {
+    export namespace SetCacheControlRule {
       /**
        * The parameters configuring the rule's action.
        */
@@ -1350,11 +1503,45 @@ export namespace RulesetCreateResponse {
       }
     }
 
-    export interface RulesetsSetCacheTagsRule {
+    export interface SetCacheSettingsRule extends Omit<RulesAPI.SetCacheSettingsRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface SetCacheTagsRule {
+      /**
+       * The unique ID of the rule.
+       */
+      id: string;
+
+      /**
+       * The action to perform when the rule matches.
+       */
+      action: 'set_cache_tags';
+
+      enabled: boolean;
+
+      /**
+       * The expression defining which traffic will match the rule.
+       */
+      expression: string;
+
       /**
        * The timestamp of when the rule was last modified.
        */
       last_updated: string;
+
+      /**
+       * The reference of the rule (the rule's ID by default).
+       */
+      ref: string;
 
       /**
        * The version of the rule.
@@ -1362,25 +1549,15 @@ export namespace RulesetCreateResponse {
       version: string;
 
       /**
-       * The unique ID of the rule.
-       */
-      id?: string;
-
-      /**
-       * The action to perform when the rule matches.
-       */
-      action?: 'set_cache_tags';
-
-      /**
        * The parameters configuring the rule's action.
        */
       action_parameters?:
-        | RulesetsSetCacheTagsRule.AddCacheTagsValues
-        | RulesetsSetCacheTagsRule.AddCacheTagsExpression
-        | RulesetsSetCacheTagsRule.RemoveCacheTagsValues
-        | RulesetsSetCacheTagsRule.RemoveCacheTagsExpression
-        | RulesetsSetCacheTagsRule.SetCacheTagsValues
-        | RulesetsSetCacheTagsRule.SetCacheTagsExpression;
+        | SetCacheTagsRule.AddCacheTagsValues
+        | SetCacheTagsRule.AddCacheTagsExpression
+        | SetCacheTagsRule.RemoveCacheTagsValues
+        | SetCacheTagsRule.RemoveCacheTagsExpression
+        | SetCacheTagsRule.SetCacheTagsValues
+        | SetCacheTagsRule.SetCacheTagsExpression;
 
       /**
        * The categories of the rule.
@@ -1393,19 +1570,9 @@ export namespace RulesetCreateResponse {
       description?: string;
 
       /**
-       * Whether the rule should be executed.
-       */
-      enabled?: boolean;
-
-      /**
        * Configuration for exposed credential checking.
        */
-      exposed_credential_check?: RulesetsSetCacheTagsRule.ExposedCredentialCheck;
-
-      /**
-       * The expression defining which traffic will match the rule.
-       */
-      expression?: string;
+      exposed_credential_check?: SetCacheTagsRule.ExposedCredentialCheck;
 
       /**
        * An object configuring the rule's logging behavior.
@@ -1415,15 +1582,10 @@ export namespace RulesetCreateResponse {
       /**
        * An object configuring the rule's rate limit behavior.
        */
-      ratelimit?: RulesetsSetCacheTagsRule.Ratelimit;
-
-      /**
-       * The reference of the rule (the rule's ID by default).
-       */
-      ref?: string;
+      ratelimit?: SetCacheTagsRule.Ratelimit;
     }
 
-    export namespace RulesetsSetCacheTagsRule {
+    export namespace SetCacheTagsRule {
       /**
        * Add cache tags using a list of values.
        */
@@ -1581,11 +1743,57 @@ export namespace RulesetCreateResponse {
       }
     }
 
-    export interface RulesetsTransformResponseHTMLRule {
+    export interface SetConfigurationRule extends Omit<RulesAPI.SetConfigRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface SkipRule extends Omit<RulesAPI.SkipRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface TransformResponseHTMLRule {
+      /**
+       * The unique ID of the rule.
+       */
+      id: string;
+
+      /**
+       * The action to perform when the rule matches.
+       */
+      action: 'transform_response_html';
+
+      enabled: boolean;
+
+      /**
+       * The expression defining which traffic will match the rule.
+       */
+      expression: string;
+
       /**
        * The timestamp of when the rule was last modified.
        */
       last_updated: string;
+
+      /**
+       * The reference of the rule (the rule's ID by default).
+       */
+      ref: string;
 
       /**
        * The version of the rule.
@@ -1593,19 +1801,9 @@ export namespace RulesetCreateResponse {
       version: string;
 
       /**
-       * The unique ID of the rule.
-       */
-      id?: string;
-
-      /**
-       * The action to perform when the rule matches.
-       */
-      action?: 'transform_response_html';
-
-      /**
        * The parameters configuring the rule's action.
        */
-      action_parameters?: RulesetsTransformResponseHTMLRule.ActionParameters;
+      action_parameters?: TransformResponseHTMLRule.ActionParameters;
 
       /**
        * The categories of the rule.
@@ -1618,19 +1816,9 @@ export namespace RulesetCreateResponse {
       description?: string;
 
       /**
-       * Whether the rule should be executed.
-       */
-      enabled?: boolean;
-
-      /**
        * Configuration for exposed credential checking.
        */
-      exposed_credential_check?: RulesetsTransformResponseHTMLRule.ExposedCredentialCheck;
-
-      /**
-       * The expression defining which traffic will match the rule.
-       */
-      expression?: string;
+      exposed_credential_check?: TransformResponseHTMLRule.ExposedCredentialCheck;
 
       /**
        * An object configuring the rule's logging behavior.
@@ -1640,15 +1828,10 @@ export namespace RulesetCreateResponse {
       /**
        * An object configuring the rule's rate limit behavior.
        */
-      ratelimit?: RulesetsTransformResponseHTMLRule.Ratelimit;
-
-      /**
-       * The reference of the rule (the rule's ID by default).
-       */
-      ref?: string;
+      ratelimit?: TransformResponseHTMLRule.Ratelimit;
     }
 
-    export namespace RulesetsTransformResponseHTMLRule {
+    export namespace TransformResponseHTMLRule {
       /**
        * The parameters configuring the rule's action.
        */
@@ -1767,27 +1950,27 @@ export namespace RulesetUpdateResponse {
      * The list of rules in the ruleset.
      */
     rules: Array<
-      | RulesAPI.BlockRule
-      | Ruleset.RulesetsChallengeRule
-      | RulesAPI.CompressResponseRule
-      | RulesAPI.DDoSDynamicRule
-      | RulesAPI.ExecuteRule
-      | RulesAPI.ForceConnectionCloseRule
-      | Ruleset.RulesetsJSChallengeRule
-      | RulesAPI.LogRule
-      | RulesAPI.LogCustomFieldRule
-      | RulesAPI.ManagedChallengeRule
-      | RulesAPI.RedirectRule
-      | RulesAPI.RewriteRule
-      | RulesAPI.RouteRule
-      | RulesAPI.ScoreRule
-      | RulesAPI.ServeErrorRule
-      | Ruleset.RulesetsSetCacheControlRule
-      | RulesAPI.SetCacheSettingsRule
-      | Ruleset.RulesetsSetCacheTagsRule
-      | RulesAPI.SetConfigRule
-      | RulesAPI.SkipRule
-      | Ruleset.RulesetsTransformResponseHTMLRule
+      | Ruleset.BlockRule
+      | Ruleset.ChallengeRule
+      | Ruleset.ResponseCompressionRule
+      | Ruleset.DDoSDynamicRule
+      | Ruleset.ExecuteRule
+      | Ruleset.ForceConnectionCloseRule
+      | Ruleset.JavaScriptChallengeRule
+      | Ruleset.LogRule
+      | Ruleset.LogCustomFieldRule
+      | Ruleset.ManagedChallengeRule
+      | Ruleset.RedirectRule
+      | Ruleset.RewriteRule
+      | Ruleset.RouteRule
+      | Ruleset.ScoreRule
+      | Ruleset.ServeErrorRule
+      | Ruleset.SetCacheControlRule
+      | Ruleset.SetCacheSettingsRule
+      | Ruleset.SetCacheTagsRule
+      | Ruleset.SetConfigurationRule
+      | Ruleset.SkipRule
+      | Ruleset.TransformResponseHTMLRule
     >;
 
     /**
@@ -1802,26 +1985,53 @@ export namespace RulesetUpdateResponse {
   }
 
   export namespace Ruleset {
-    export interface RulesetsChallengeRule {
+    export interface BlockRule extends Omit<RulesAPI.BlockRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface ChallengeRule {
+      /**
+       * The unique ID of the rule.
+       */
+      id: string;
+
+      /**
+       * The action to perform when the rule matches.
+       */
+      action: 'challenge';
+
+      /**
+       * Whether the rule should be executed.
+       */
+      enabled: boolean;
+
+      /**
+       * The expression defining which traffic will match the rule.
+       */
+      expression: string;
+
       /**
        * The timestamp of when the rule was last modified.
        */
       last_updated: string;
 
       /**
+       * The reference of the rule (the rule's ID by default).
+       */
+      ref: string;
+
+      /**
        * The version of the rule.
        */
       version: string;
-
-      /**
-       * The unique ID of the rule.
-       */
-      id?: string;
-
-      /**
-       * The action to perform when the rule matches.
-       */
-      action?: 'challenge';
 
       /**
        * The parameters configuring the rule's action.
@@ -1839,19 +2049,9 @@ export namespace RulesetUpdateResponse {
       description?: string;
 
       /**
-       * Whether the rule should be executed.
-       */
-      enabled?: boolean;
-
-      /**
        * Configuration for exposed credential checking.
        */
-      exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
-
-      /**
-       * The expression defining which traffic will match the rule.
-       */
-      expression?: string;
+      exposed_credential_check?: ChallengeRule.ExposedCredentialCheck;
 
       /**
        * An object configuring the rule's logging behavior.
@@ -1861,15 +2061,10 @@ export namespace RulesetUpdateResponse {
       /**
        * An object configuring the rule's rate limit behavior.
        */
-      ratelimit?: RulesetsChallengeRule.Ratelimit;
-
-      /**
-       * The reference of the rule (the rule's ID by default).
-       */
-      ref?: string;
+      ratelimit?: ChallengeRule.Ratelimit;
     }
 
-    export namespace RulesetsChallengeRule {
+    export namespace ChallengeRule {
       /**
        * Configuration for exposed credential checking.
        */
@@ -1937,26 +2132,89 @@ export namespace RulesetUpdateResponse {
       }
     }
 
-    export interface RulesetsJSChallengeRule {
+    export interface ResponseCompressionRule extends Omit<RulesAPI.CompressResponseRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface DDoSDynamicRule extends Omit<RulesAPI.DDoSDynamicRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface ExecuteRule extends Omit<RulesAPI.ExecuteRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface ForceConnectionCloseRule extends Omit<RulesAPI.ForceConnectionCloseRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface JavaScriptChallengeRule {
+      /**
+       * The unique ID of the rule.
+       */
+      id: string;
+
+      /**
+       * The action to perform when the rule matches.
+       */
+      action: 'js_challenge';
+
+      /**
+       * Whether the rule should be executed.
+       */
+      enabled: boolean;
+
+      /**
+       * The expression defining which traffic will match the rule.
+       */
+      expression: string;
+
       /**
        * The timestamp of when the rule was last modified.
        */
       last_updated: string;
 
       /**
+       * The reference of the rule (the rule's ID by default).
+       */
+      ref: string;
+
+      /**
        * The version of the rule.
        */
       version: string;
-
-      /**
-       * The unique ID of the rule.
-       */
-      id?: string;
-
-      /**
-       * The action to perform when the rule matches.
-       */
-      action?: 'js_challenge';
 
       /**
        * The parameters configuring the rule's action.
@@ -1974,19 +2232,9 @@ export namespace RulesetUpdateResponse {
       description?: string;
 
       /**
-       * Whether the rule should be executed.
-       */
-      enabled?: boolean;
-
-      /**
        * Configuration for exposed credential checking.
        */
-      exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
-
-      /**
-       * The expression defining which traffic will match the rule.
-       */
-      expression?: string;
+      exposed_credential_check?: JavaScriptChallengeRule.ExposedCredentialCheck;
 
       /**
        * An object configuring the rule's logging behavior.
@@ -1996,15 +2244,10 @@ export namespace RulesetUpdateResponse {
       /**
        * An object configuring the rule's rate limit behavior.
        */
-      ratelimit?: RulesetsJSChallengeRule.Ratelimit;
-
-      /**
-       * The reference of the rule (the rule's ID by default).
-       */
-      ref?: string;
+      ratelimit?: JavaScriptChallengeRule.Ratelimit;
     }
 
-    export namespace RulesetsJSChallengeRule {
+    export namespace JavaScriptChallengeRule {
       /**
        * Configuration for exposed credential checking.
        */
@@ -2072,11 +2315,129 @@ export namespace RulesetUpdateResponse {
       }
     }
 
-    export interface RulesetsSetCacheControlRule {
+    export interface LogRule extends Omit<RulesAPI.LogRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface LogCustomFieldRule extends Omit<RulesAPI.LogCustomFieldRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface ManagedChallengeRule extends Omit<RulesAPI.ManagedChallengeRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface RedirectRule extends Omit<RulesAPI.RedirectRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface RewriteRule extends Omit<RulesAPI.RewriteRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface RouteRule extends Omit<RulesAPI.RouteRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface ScoreRule extends Omit<RulesAPI.ScoreRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface ServeErrorRule extends Omit<RulesAPI.ServeErrorRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface SetCacheControlRule {
+      /**
+       * The unique ID of the rule.
+       */
+      id: string;
+
+      /**
+       * The action to perform when the rule matches.
+       */
+      action: 'set_cache_control';
+
+      enabled: boolean;
+
+      /**
+       * The expression defining which traffic will match the rule.
+       */
+      expression: string;
+
       /**
        * The timestamp of when the rule was last modified.
        */
       last_updated: string;
+
+      /**
+       * The reference of the rule (the rule's ID by default).
+       */
+      ref: string;
 
       /**
        * The version of the rule.
@@ -2084,19 +2445,9 @@ export namespace RulesetUpdateResponse {
       version: string;
 
       /**
-       * The unique ID of the rule.
-       */
-      id?: string;
-
-      /**
-       * The action to perform when the rule matches.
-       */
-      action?: 'set_cache_control';
-
-      /**
        * The parameters configuring the rule's action.
        */
-      action_parameters?: RulesetsSetCacheControlRule.ActionParameters;
+      action_parameters?: SetCacheControlRule.ActionParameters;
 
       /**
        * The categories of the rule.
@@ -2109,19 +2460,9 @@ export namespace RulesetUpdateResponse {
       description?: string;
 
       /**
-       * Whether the rule should be executed.
-       */
-      enabled?: boolean;
-
-      /**
        * Configuration for exposed credential checking.
        */
-      exposed_credential_check?: RulesetsSetCacheControlRule.ExposedCredentialCheck;
-
-      /**
-       * The expression defining which traffic will match the rule.
-       */
-      expression?: string;
+      exposed_credential_check?: SetCacheControlRule.ExposedCredentialCheck;
 
       /**
        * An object configuring the rule's logging behavior.
@@ -2131,15 +2472,10 @@ export namespace RulesetUpdateResponse {
       /**
        * An object configuring the rule's rate limit behavior.
        */
-      ratelimit?: RulesetsSetCacheControlRule.Ratelimit;
-
-      /**
-       * The reference of the rule (the rule's ID by default).
-       */
-      ref?: string;
+      ratelimit?: SetCacheControlRule.Ratelimit;
     }
 
-    export namespace RulesetsSetCacheControlRule {
+    export namespace SetCacheControlRule {
       /**
        * The parameters configuring the rule's action.
        */
@@ -2707,11 +3043,45 @@ export namespace RulesetUpdateResponse {
       }
     }
 
-    export interface RulesetsSetCacheTagsRule {
+    export interface SetCacheSettingsRule extends Omit<RulesAPI.SetCacheSettingsRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface SetCacheTagsRule {
+      /**
+       * The unique ID of the rule.
+       */
+      id: string;
+
+      /**
+       * The action to perform when the rule matches.
+       */
+      action: 'set_cache_tags';
+
+      enabled: boolean;
+
+      /**
+       * The expression defining which traffic will match the rule.
+       */
+      expression: string;
+
       /**
        * The timestamp of when the rule was last modified.
        */
       last_updated: string;
+
+      /**
+       * The reference of the rule (the rule's ID by default).
+       */
+      ref: string;
 
       /**
        * The version of the rule.
@@ -2719,25 +3089,15 @@ export namespace RulesetUpdateResponse {
       version: string;
 
       /**
-       * The unique ID of the rule.
-       */
-      id?: string;
-
-      /**
-       * The action to perform when the rule matches.
-       */
-      action?: 'set_cache_tags';
-
-      /**
        * The parameters configuring the rule's action.
        */
       action_parameters?:
-        | RulesetsSetCacheTagsRule.AddCacheTagsValues
-        | RulesetsSetCacheTagsRule.AddCacheTagsExpression
-        | RulesetsSetCacheTagsRule.RemoveCacheTagsValues
-        | RulesetsSetCacheTagsRule.RemoveCacheTagsExpression
-        | RulesetsSetCacheTagsRule.SetCacheTagsValues
-        | RulesetsSetCacheTagsRule.SetCacheTagsExpression;
+        | SetCacheTagsRule.AddCacheTagsValues
+        | SetCacheTagsRule.AddCacheTagsExpression
+        | SetCacheTagsRule.RemoveCacheTagsValues
+        | SetCacheTagsRule.RemoveCacheTagsExpression
+        | SetCacheTagsRule.SetCacheTagsValues
+        | SetCacheTagsRule.SetCacheTagsExpression;
 
       /**
        * The categories of the rule.
@@ -2750,19 +3110,9 @@ export namespace RulesetUpdateResponse {
       description?: string;
 
       /**
-       * Whether the rule should be executed.
-       */
-      enabled?: boolean;
-
-      /**
        * Configuration for exposed credential checking.
        */
-      exposed_credential_check?: RulesetsSetCacheTagsRule.ExposedCredentialCheck;
-
-      /**
-       * The expression defining which traffic will match the rule.
-       */
-      expression?: string;
+      exposed_credential_check?: SetCacheTagsRule.ExposedCredentialCheck;
 
       /**
        * An object configuring the rule's logging behavior.
@@ -2772,15 +3122,10 @@ export namespace RulesetUpdateResponse {
       /**
        * An object configuring the rule's rate limit behavior.
        */
-      ratelimit?: RulesetsSetCacheTagsRule.Ratelimit;
-
-      /**
-       * The reference of the rule (the rule's ID by default).
-       */
-      ref?: string;
+      ratelimit?: SetCacheTagsRule.Ratelimit;
     }
 
-    export namespace RulesetsSetCacheTagsRule {
+    export namespace SetCacheTagsRule {
       /**
        * Add cache tags using a list of values.
        */
@@ -2938,11 +3283,57 @@ export namespace RulesetUpdateResponse {
       }
     }
 
-    export interface RulesetsTransformResponseHTMLRule {
+    export interface SetConfigurationRule extends Omit<RulesAPI.SetConfigRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface SkipRule extends Omit<RulesAPI.SkipRule, 'action'> {
+      id: string;
+
+      action: string;
+
+      enabled: boolean;
+
+      expression: string;
+
+      ref: string;
+    }
+
+    export interface TransformResponseHTMLRule {
+      /**
+       * The unique ID of the rule.
+       */
+      id: string;
+
+      /**
+       * The action to perform when the rule matches.
+       */
+      action: 'transform_response_html';
+
+      enabled: boolean;
+
+      /**
+       * The expression defining which traffic will match the rule.
+       */
+      expression: string;
+
       /**
        * The timestamp of when the rule was last modified.
        */
       last_updated: string;
+
+      /**
+       * The reference of the rule (the rule's ID by default).
+       */
+      ref: string;
 
       /**
        * The version of the rule.
@@ -2950,19 +3341,9 @@ export namespace RulesetUpdateResponse {
       version: string;
 
       /**
-       * The unique ID of the rule.
-       */
-      id?: string;
-
-      /**
-       * The action to perform when the rule matches.
-       */
-      action?: 'transform_response_html';
-
-      /**
        * The parameters configuring the rule's action.
        */
-      action_parameters?: RulesetsTransformResponseHTMLRule.ActionParameters;
+      action_parameters?: TransformResponseHTMLRule.ActionParameters;
 
       /**
        * The categories of the rule.
@@ -2975,19 +3356,9 @@ export namespace RulesetUpdateResponse {
       description?: string;
 
       /**
-       * Whether the rule should be executed.
-       */
-      enabled?: boolean;
-
-      /**
        * Configuration for exposed credential checking.
        */
-      exposed_credential_check?: RulesetsTransformResponseHTMLRule.ExposedCredentialCheck;
-
-      /**
-       * The expression defining which traffic will match the rule.
-       */
-      expression?: string;
+      exposed_credential_check?: TransformResponseHTMLRule.ExposedCredentialCheck;
 
       /**
        * An object configuring the rule's logging behavior.
@@ -2997,15 +3368,10 @@ export namespace RulesetUpdateResponse {
       /**
        * An object configuring the rule's rate limit behavior.
        */
-      ratelimit?: RulesetsTransformResponseHTMLRule.Ratelimit;
-
-      /**
-       * The reference of the rule (the rule's ID by default).
-       */
-      ref?: string;
+      ratelimit?: TransformResponseHTMLRule.Ratelimit;
     }
 
-    export namespace RulesetsTransformResponseHTMLRule {
+    export namespace TransformResponseHTMLRule {
       /**
        * The parameters configuring the rule's action.
        */
@@ -3158,27 +3524,27 @@ export interface RulesetGetResponse {
    * The list of rules in the ruleset.
    */
   rules: Array<
-    | RulesAPI.BlockRule
-    | RulesetGetResponse.RulesetsChallengeRule
-    | RulesAPI.CompressResponseRule
-    | RulesAPI.DDoSDynamicRule
-    | RulesAPI.ExecuteRule
-    | RulesAPI.ForceConnectionCloseRule
-    | RulesetGetResponse.RulesetsJSChallengeRule
-    | RulesAPI.LogRule
-    | RulesAPI.LogCustomFieldRule
-    | RulesAPI.ManagedChallengeRule
-    | RulesAPI.RedirectRule
-    | RulesAPI.RewriteRule
-    | RulesAPI.RouteRule
-    | RulesAPI.ScoreRule
-    | RulesAPI.ServeErrorRule
-    | RulesetGetResponse.RulesetsSetCacheControlRule
-    | RulesAPI.SetCacheSettingsRule
-    | RulesetGetResponse.RulesetsSetCacheTagsRule
-    | RulesAPI.SetConfigRule
-    | RulesAPI.SkipRule
-    | RulesetGetResponse.RulesetsTransformResponseHTMLRule
+    | RulesetGetResponse.BlockRule
+    | RulesetGetResponse.ChallengeRule
+    | RulesetGetResponse.ResponseCompressionRule
+    | RulesetGetResponse.DDoSDynamicRule
+    | RulesetGetResponse.ExecuteRule
+    | RulesetGetResponse.ForceConnectionCloseRule
+    | RulesetGetResponse.JavaScriptChallengeRule
+    | RulesetGetResponse.LogRule
+    | RulesetGetResponse.LogCustomFieldRule
+    | RulesetGetResponse.ManagedChallengeRule
+    | RulesetGetResponse.RedirectRule
+    | RulesetGetResponse.RewriteRule
+    | RulesetGetResponse.RouteRule
+    | RulesetGetResponse.ScoreRule
+    | RulesetGetResponse.ServeErrorRule
+    | RulesetGetResponse.SetCacheControlRule
+    | RulesetGetResponse.SetCacheSettingsRule
+    | RulesetGetResponse.SetCacheTagsRule
+    | RulesetGetResponse.SetConfigurationRule
+    | RulesetGetResponse.SkipRule
+    | RulesetGetResponse.TransformResponseHTMLRule
   >;
 
   /**
@@ -3193,26 +3559,53 @@ export interface RulesetGetResponse {
 }
 
 export namespace RulesetGetResponse {
-  export interface RulesetsChallengeRule {
+  export interface BlockRule extends Omit<RulesAPI.BlockRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface ChallengeRule {
+    /**
+     * The unique ID of the rule.
+     */
+    id: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action: 'challenge';
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression: string;
+
     /**
      * The timestamp of when the rule was last modified.
      */
     last_updated: string;
 
     /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref: string;
+
+    /**
      * The version of the rule.
      */
     version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -3230,19 +3623,9 @@ export namespace RulesetGetResponse {
     description?: string;
 
     /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
      * Configuration for exposed credential checking.
      */
-    exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
+    exposed_credential_check?: ChallengeRule.ExposedCredentialCheck;
 
     /**
      * An object configuring the rule's logging behavior.
@@ -3252,15 +3635,10 @@ export namespace RulesetGetResponse {
     /**
      * An object configuring the rule's rate limit behavior.
      */
-    ratelimit?: RulesetsChallengeRule.Ratelimit;
-
-    /**
-     * The reference of the rule (the rule's ID by default).
-     */
-    ref?: string;
+    ratelimit?: ChallengeRule.Ratelimit;
   }
 
-  export namespace RulesetsChallengeRule {
+  export namespace ChallengeRule {
     /**
      * Configuration for exposed credential checking.
      */
@@ -3328,26 +3706,89 @@ export namespace RulesetGetResponse {
     }
   }
 
-  export interface RulesetsJSChallengeRule {
+  export interface ResponseCompressionRule extends Omit<RulesAPI.CompressResponseRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface DDoSDynamicRule extends Omit<RulesAPI.DDoSDynamicRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface ExecuteRule extends Omit<RulesAPI.ExecuteRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface ForceConnectionCloseRule extends Omit<RulesAPI.ForceConnectionCloseRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface JavaScriptChallengeRule {
+    /**
+     * The unique ID of the rule.
+     */
+    id: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action: 'js_challenge';
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression: string;
+
     /**
      * The timestamp of when the rule was last modified.
      */
     last_updated: string;
 
     /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref: string;
+
+    /**
      * The version of the rule.
      */
     version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'js_challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -3365,19 +3806,9 @@ export namespace RulesetGetResponse {
     description?: string;
 
     /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
      * Configuration for exposed credential checking.
      */
-    exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
+    exposed_credential_check?: JavaScriptChallengeRule.ExposedCredentialCheck;
 
     /**
      * An object configuring the rule's logging behavior.
@@ -3387,15 +3818,10 @@ export namespace RulesetGetResponse {
     /**
      * An object configuring the rule's rate limit behavior.
      */
-    ratelimit?: RulesetsJSChallengeRule.Ratelimit;
-
-    /**
-     * The reference of the rule (the rule's ID by default).
-     */
-    ref?: string;
+    ratelimit?: JavaScriptChallengeRule.Ratelimit;
   }
 
-  export namespace RulesetsJSChallengeRule {
+  export namespace JavaScriptChallengeRule {
     /**
      * Configuration for exposed credential checking.
      */
@@ -3463,11 +3889,129 @@ export namespace RulesetGetResponse {
     }
   }
 
-  export interface RulesetsSetCacheControlRule {
+  export interface LogRule extends Omit<RulesAPI.LogRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface LogCustomFieldRule extends Omit<RulesAPI.LogCustomFieldRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface ManagedChallengeRule extends Omit<RulesAPI.ManagedChallengeRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface RedirectRule extends Omit<RulesAPI.RedirectRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface RewriteRule extends Omit<RulesAPI.RewriteRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface RouteRule extends Omit<RulesAPI.RouteRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface ScoreRule extends Omit<RulesAPI.ScoreRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface ServeErrorRule extends Omit<RulesAPI.ServeErrorRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface SetCacheControlRule {
+    /**
+     * The unique ID of the rule.
+     */
+    id: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action: 'set_cache_control';
+
+    enabled: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression: string;
+
     /**
      * The timestamp of when the rule was last modified.
      */
     last_updated: string;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref: string;
 
     /**
      * The version of the rule.
@@ -3475,19 +4019,9 @@ export namespace RulesetGetResponse {
     version: string;
 
     /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'set_cache_control';
-
-    /**
      * The parameters configuring the rule's action.
      */
-    action_parameters?: RulesetsSetCacheControlRule.ActionParameters;
+    action_parameters?: SetCacheControlRule.ActionParameters;
 
     /**
      * The categories of the rule.
@@ -3500,19 +4034,9 @@ export namespace RulesetGetResponse {
     description?: string;
 
     /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
      * Configuration for exposed credential checking.
      */
-    exposed_credential_check?: RulesetsSetCacheControlRule.ExposedCredentialCheck;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
+    exposed_credential_check?: SetCacheControlRule.ExposedCredentialCheck;
 
     /**
      * An object configuring the rule's logging behavior.
@@ -3522,15 +4046,10 @@ export namespace RulesetGetResponse {
     /**
      * An object configuring the rule's rate limit behavior.
      */
-    ratelimit?: RulesetsSetCacheControlRule.Ratelimit;
-
-    /**
-     * The reference of the rule (the rule's ID by default).
-     */
-    ref?: string;
+    ratelimit?: SetCacheControlRule.Ratelimit;
   }
 
-  export namespace RulesetsSetCacheControlRule {
+  export namespace SetCacheControlRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -4098,11 +4617,45 @@ export namespace RulesetGetResponse {
     }
   }
 
-  export interface RulesetsSetCacheTagsRule {
+  export interface SetCacheSettingsRule extends Omit<RulesAPI.SetCacheSettingsRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface SetCacheTagsRule {
+    /**
+     * The unique ID of the rule.
+     */
+    id: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action: 'set_cache_tags';
+
+    enabled: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression: string;
+
     /**
      * The timestamp of when the rule was last modified.
      */
     last_updated: string;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref: string;
 
     /**
      * The version of the rule.
@@ -4110,25 +4663,15 @@ export namespace RulesetGetResponse {
     version: string;
 
     /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'set_cache_tags';
-
-    /**
      * The parameters configuring the rule's action.
      */
     action_parameters?:
-      | RulesetsSetCacheTagsRule.AddCacheTagsValues
-      | RulesetsSetCacheTagsRule.AddCacheTagsExpression
-      | RulesetsSetCacheTagsRule.RemoveCacheTagsValues
-      | RulesetsSetCacheTagsRule.RemoveCacheTagsExpression
-      | RulesetsSetCacheTagsRule.SetCacheTagsValues
-      | RulesetsSetCacheTagsRule.SetCacheTagsExpression;
+      | SetCacheTagsRule.AddCacheTagsValues
+      | SetCacheTagsRule.AddCacheTagsExpression
+      | SetCacheTagsRule.RemoveCacheTagsValues
+      | SetCacheTagsRule.RemoveCacheTagsExpression
+      | SetCacheTagsRule.SetCacheTagsValues
+      | SetCacheTagsRule.SetCacheTagsExpression;
 
     /**
      * The categories of the rule.
@@ -4141,19 +4684,9 @@ export namespace RulesetGetResponse {
     description?: string;
 
     /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
      * Configuration for exposed credential checking.
      */
-    exposed_credential_check?: RulesetsSetCacheTagsRule.ExposedCredentialCheck;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
+    exposed_credential_check?: SetCacheTagsRule.ExposedCredentialCheck;
 
     /**
      * An object configuring the rule's logging behavior.
@@ -4163,15 +4696,10 @@ export namespace RulesetGetResponse {
     /**
      * An object configuring the rule's rate limit behavior.
      */
-    ratelimit?: RulesetsSetCacheTagsRule.Ratelimit;
-
-    /**
-     * The reference of the rule (the rule's ID by default).
-     */
-    ref?: string;
+    ratelimit?: SetCacheTagsRule.Ratelimit;
   }
 
-  export namespace RulesetsSetCacheTagsRule {
+  export namespace SetCacheTagsRule {
     /**
      * Add cache tags using a list of values.
      */
@@ -4329,11 +4857,57 @@ export namespace RulesetGetResponse {
     }
   }
 
-  export interface RulesetsTransformResponseHTMLRule {
+  export interface SetConfigurationRule extends Omit<RulesAPI.SetConfigRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface SkipRule extends Omit<RulesAPI.SkipRule, 'action'> {
+    id: string;
+
+    action: string;
+
+    enabled: boolean;
+
+    expression: string;
+
+    ref: string;
+  }
+
+  export interface TransformResponseHTMLRule {
+    /**
+     * The unique ID of the rule.
+     */
+    id: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action: 'transform_response_html';
+
+    enabled: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression: string;
+
     /**
      * The timestamp of when the rule was last modified.
      */
     last_updated: string;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref: string;
 
     /**
      * The version of the rule.
@@ -4341,19 +4915,9 @@ export namespace RulesetGetResponse {
     version: string;
 
     /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'transform_response_html';
-
-    /**
      * The parameters configuring the rule's action.
      */
-    action_parameters?: RulesetsTransformResponseHTMLRule.ActionParameters;
+    action_parameters?: TransformResponseHTMLRule.ActionParameters;
 
     /**
      * The categories of the rule.
@@ -4366,19 +4930,9 @@ export namespace RulesetGetResponse {
     description?: string;
 
     /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
      * Configuration for exposed credential checking.
      */
-    exposed_credential_check?: RulesetsTransformResponseHTMLRule.ExposedCredentialCheck;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
+    exposed_credential_check?: TransformResponseHTMLRule.ExposedCredentialCheck;
 
     /**
      * An object configuring the rule's logging behavior.
@@ -4388,15 +4942,10 @@ export namespace RulesetGetResponse {
     /**
      * An object configuring the rule's rate limit behavior.
      */
-    ratelimit?: RulesetsTransformResponseHTMLRule.Ratelimit;
-
-    /**
-     * The reference of the rule (the rule's ID by default).
-     */
-    ref?: string;
+    ratelimit?: TransformResponseHTMLRule.Ratelimit;
   }
 
-  export namespace RulesetsTransformResponseHTMLRule {
+  export namespace TransformResponseHTMLRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -4805,9 +5354,6 @@ export namespace RulesetCreateParams {
      */
     description?: string;
 
-    /**
-     * Whether the rule should be executed.
-     */
     enabled?: boolean;
 
     /**
@@ -5431,9 +5977,6 @@ export namespace RulesetCreateParams {
      */
     description?: string;
 
-    /**
-     * Whether the rule should be executed.
-     */
     enabled?: boolean;
 
     /**
@@ -5641,9 +6184,6 @@ export namespace RulesetCreateParams {
      */
     description?: string;
 
-    /**
-     * Whether the rule should be executed.
-     */
     enabled?: boolean;
 
     /**
@@ -6081,9 +6621,6 @@ export namespace RulesetUpdateParams {
      */
     description?: string;
 
-    /**
-     * Whether the rule should be executed.
-     */
     enabled?: boolean;
 
     /**
@@ -6707,9 +7244,6 @@ export namespace RulesetUpdateParams {
      */
     description?: string;
 
-    /**
-     * Whether the rule should be executed.
-     */
     enabled?: boolean;
 
     /**
@@ -6917,9 +7451,6 @@ export namespace RulesetUpdateParams {
      */
     description?: string;
 
-    /**
-     * Whether the rule should be executed.
-     */
     enabled?: boolean;
 
     /**
@@ -7110,24 +7641,24 @@ export declare namespace Rulesets {
   export {
     Rules as Rules,
     BaseRules as BaseRules,
-    type BlockRule as BlockRule,
+    type RulesAPIBlockRule as BlockRule,
     type CompressResponseRule as CompressResponseRule,
-    type DDoSDynamicRule as DDoSDynamicRule,
-    type ExecuteRule as ExecuteRule,
-    type ForceConnectionCloseRule as ForceConnectionCloseRule,
-    type LogCustomFieldRule as LogCustomFieldRule,
-    type LogRule as LogRule,
+    type RulesAPIDDoSDynamicRule as DDoSDynamicRule,
+    type RulesAPIExecuteRule as ExecuteRule,
+    type RulesAPIForceConnectionCloseRule as ForceConnectionCloseRule,
+    type RulesAPILogCustomFieldRule as LogCustomFieldRule,
+    type RulesAPILogRule as LogRule,
     type Logging as Logging,
-    type ManagedChallengeRule as ManagedChallengeRule,
-    type RedirectRule as RedirectRule,
-    type RewriteRule as RewriteRule,
-    type RouteRule as RouteRule,
+    type RulesAPIManagedChallengeRule as ManagedChallengeRule,
+    type RulesAPIRedirectRule as RedirectRule,
+    type RulesAPIRewriteRule as RewriteRule,
+    type RulesAPIRouteRule as RouteRule,
     type RulesetRule as RulesetRule,
-    type ScoreRule as ScoreRule,
-    type ServeErrorRule as ServeErrorRule,
-    type SetCacheSettingsRule as SetCacheSettingsRule,
+    type RulesAPIScoreRule as ScoreRule,
+    type RulesAPIServeErrorRule as ServeErrorRule,
+    type RulesAPISetCacheSettingsRule as SetCacheSettingsRule,
     type SetConfigRule as SetConfigRule,
-    type SkipRule as SkipRule,
+    type RulesAPISkipRule as SkipRule,
     type RuleCreateResponse as RuleCreateResponse,
     type RuleDeleteResponse as RuleDeleteResponse,
     type RuleEditResponse as RuleEditResponse,

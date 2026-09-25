@@ -109,7 +109,8 @@ export class BaseServices extends APIResource {
   }
 
   /**
-   * Removes a single Workers VPC connectivity service by its ID.
+   * Removes a single Workers VPC connectivity service by its ID. Any Worker bindings
+   * referencing this service will stop working.
    *
    * @example
    * ```ts

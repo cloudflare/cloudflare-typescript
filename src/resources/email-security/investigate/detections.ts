@@ -68,7 +68,8 @@ export interface DetectionGetResponse {
     | 'ENCRYPTED'
     | 'EXTERNAL'
     | 'UNKNOWN'
-    | 'NONE';
+    | 'NONE'
+    | null;
 }
 
 export namespace DetectionGetResponse {
@@ -130,11 +131,17 @@ export namespace DetectionGetResponse {
     sha256?: string | null;
   }
 
+  /**
+   * A single detection finding for a message.
+   */
   export interface Finding {
     attachment?: string | null;
 
     detail?: string | null;
 
+    /**
+     * Detection result associated with this finding.
+     */
     detection?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -145,7 +152,8 @@ export namespace DetectionGetResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE';
+      | 'NONE'
+      | null;
 
     field?: string | null;
 
@@ -201,17 +209,17 @@ export namespace DetectionGetResponse {
   export interface Validation {
     comment?: string | null;
 
-    dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
+    dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
 
-    dmarc?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
+    dmarc?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
 
-    spf?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
+    spf?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
   }
 }
 
 export interface DetectionGetParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }

@@ -40,10 +40,7 @@ const runTests = (client: PartialCloudflare<{ emailRouting: BaseEmailRouting }>)
   });
 
   test('disable: only required params', async () => {
-    const responsePromise = client.emailRouting.disable({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
-    });
+    const responsePromise = client.emailRouting.disable({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -54,10 +51,7 @@ const runTests = (client: PartialCloudflare<{ emailRouting: BaseEmailRouting }>)
   });
 
   test('disable: required and optional params', async () => {
-    const response = await client.emailRouting.disable({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
-    });
+    const response = await client.emailRouting.disable({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('edit: only required params', async () => {
@@ -81,10 +75,7 @@ const runTests = (client: PartialCloudflare<{ emailRouting: BaseEmailRouting }>)
   });
 
   test('enable: only required params', async () => {
-    const responsePromise = client.emailRouting.enable({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
-    });
+    const responsePromise = client.emailRouting.enable({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -95,10 +86,7 @@ const runTests = (client: PartialCloudflare<{ emailRouting: BaseEmailRouting }>)
   });
 
   test('enable: required and optional params', async () => {
-    const response = await client.emailRouting.enable({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
-    });
+    const response = await client.emailRouting.enable({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('get: only required params', async () => {

@@ -339,7 +339,7 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   min_total_tokens?: number;
 
   /**
-   * @deprecated Query param
+   * @deprecated Query param: Model filter.
    */
   model?: string;
 
@@ -374,7 +374,7 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   response_content_type?: string;
 
   /**
-   * Query param
+   * Query param: Free-text search over log metadata.
    */
   search?: string;
 
@@ -419,6 +419,9 @@ export namespace LogListParams {
 
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
 
+    /**
+     * Filter values.
+     */
     value: Array<string | null | number | boolean>;
   }
 }
@@ -491,6 +494,9 @@ export namespace LogDeleteParams {
 
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
 
+    /**
+     * Filter values.
+     */
     value: Array<string | null | number | boolean>;
   }
 }

@@ -14,7 +14,7 @@ export class BaseLabels extends APIResource {
   ] as const);
 
   /**
-   * Attach label(s) on an operation in endpoint management
+   * Attaches one or more labels to a web or API operation.
    *
    * @example
    * ```ts
@@ -40,7 +40,7 @@ export class BaseLabels extends APIResource {
   }
 
   /**
-   * Replace label(s) on an operation in endpoint management
+   * Replaces the complete label set on a web or API operation.
    *
    * @example
    * ```ts
@@ -66,7 +66,7 @@ export class BaseLabels extends APIResource {
   }
 
   /**
-   * Remove label(s) on an operation in endpoint management
+   * Removes one or more labels from a web or API operation.
    *
    * @example
    * ```ts
@@ -92,7 +92,7 @@ export class BaseLabels extends APIResource {
   }
 
   /**
-   * Bulk attach label(s) on operation(s) in endpoint management
+   * Attaches labels to multiple web or API operations in one request.
    *
    * @example
    * ```ts
@@ -126,7 +126,7 @@ export class BaseLabels extends APIResource {
   }
 
   /**
-   * Bulk remove label(s) on operation(s) in endpoint management
+   * Removes labels from multiple web or API operations in one request.
    *
    * @example
    * ```ts
@@ -151,7 +151,8 @@ export class BaseLabels extends APIResource {
   }
 
   /**
-   * Bulk replace label(s) on operation(s) in endpoint management
+   * Replaces the complete label sets on multiple web or API operations in one
+   * request.
    *
    * @example
    * ```ts

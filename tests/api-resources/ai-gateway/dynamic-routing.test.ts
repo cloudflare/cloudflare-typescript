@@ -37,7 +37,7 @@ const runTests = (client: PartialCloudflare<{ aiGateway: { dynamicRouting: BaseD
           type: 'start',
         },
       ],
-      name: 'name',
+      name: 'x',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -58,7 +58,7 @@ const runTests = (client: PartialCloudflare<{ aiGateway: { dynamicRouting: BaseD
           type: 'start',
         },
       ],
-      name: 'name',
+      name: 'x',
     });
   });
 

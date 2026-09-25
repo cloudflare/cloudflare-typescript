@@ -21,10 +21,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/token-validation/configuration/credentials.ts">CredentialUpdateResponse</a></code>
+- <code><a href="./src/resources/token-validation/configuration/credentials.ts">CredentialEditResponse</a></code>
 
 Methods:
 
 - <code title="put /zones/{zone_id}/token_validation/config/{config_id}/credentials">client.tokenValidation.configuration.credentials.<a href="./src/resources/token-validation/configuration/credentials.ts">update</a>(configID, { ...params }) -> CredentialUpdateResponse</code>
+- <code title="patch /zones/{zone_id}/token_validation/config/{config_id}/credentials">client.tokenValidation.configuration.credentials.<a href="./src/resources/token-validation/configuration/credentials.ts">edit</a>(configID, { ...params }) -> CredentialEditResponse</code>
 
 ## Rules
 

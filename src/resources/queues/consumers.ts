@@ -14,7 +14,7 @@ export class BaseConsumers extends APIResource {
   ] as const);
 
   /**
-   * Creates a new consumer for a Queue
+   * Creates a consumer for a Queue.
    *
    * @example
    * ```ts
@@ -39,7 +39,7 @@ export class BaseConsumers extends APIResource {
   }
 
   /**
-   * Updates the consumer for a queue, or creates one if it does not exist.
+   * Replaces a Queue consumer, or creates it if it does not exist.
    *
    * @example
    * ```ts
@@ -65,7 +65,7 @@ export class BaseConsumers extends APIResource {
   }
 
   /**
-   * Returns the consumers for a Queue
+   * Returns the consumers configured for a Queue.
    *
    * @example
    * ```ts
@@ -92,7 +92,7 @@ export class BaseConsumers extends APIResource {
   }
 
   /**
-   * Deletes the consumer for a queue.
+   * Deletes a consumer from a Queue.
    *
    * @example
    * ```ts
@@ -118,7 +118,7 @@ export class BaseConsumers extends APIResource {
   }
 
   /**
-   * Fetches the consumer for a queue by consumer id
+   * Returns a Queue consumer by identifier.
    *
    * @example
    * ```ts
@@ -148,7 +148,10 @@ export type ConsumersSinglePage = SinglePage<Consumer>;
 /**
  * Response body representing a consumer
  */
-export type Consumer = Consumer.MqWorkerConsumerResponse | Consumer.MqHTTPConsumerResponse;
+export type Consumer =
+  | Consumer.MqWorkerConsumerResponse
+  | Consumer.MqHTTPConsumerResponse
+  | Consumer.MqNotificationConsumerResponse;
 
 export namespace Consumer {
   export interface MqWorkerConsumerResponse {
@@ -253,6 +256,146 @@ export namespace Consumer {
       visibility_timeout_ms?: number;
     }
   }
+
+  export interface MqNotificationConsumerResponse {
+    /**
+     * A Resource identifier.
+     */
+    consumer_id?: string;
+
+    created_on?: string;
+
+    /**
+     * Name of the dead letter queue, or empty string if not configured.
+     */
+    dead_letter_queue?: string;
+
+    queue_name?: string;
+
+    /**
+     * Notification destinations for a Queue. At least one email, webhook, or PagerDuty
+     * destination is required.
+     */
+    settings?:
+      | MqNotificationConsumerResponse.UnionMember0
+      | MqNotificationConsumerResponse.UnionMember1
+      | MqNotificationConsumerResponse.UnionMember2;
+
+    type?: 'notification';
+  }
+
+  export namespace MqNotificationConsumerResponse {
+    export interface UnionMember0 {
+      email: Array<UnionMember0.Email>;
+
+      /**
+       * PagerDuty notification destinations.
+       */
+      pagerduty?: Array<UnionMember0.Pagerduty>;
+
+      /**
+       * Webhook notification destinations.
+       */
+      webhooks?: Array<UnionMember0.Webhook>;
+    }
+
+    export namespace UnionMember0 {
+      export interface Email {
+        /**
+         * The email address.
+         */
+        id: string;
+      }
+
+      export interface Pagerduty {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+
+      export interface Webhook {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+    }
+
+    export interface UnionMember1 {
+      webhooks: Array<UnionMember1.Webhook>;
+
+      /**
+       * Email notification destinations.
+       */
+      email?: Array<UnionMember1.Email>;
+
+      /**
+       * PagerDuty notification destinations.
+       */
+      pagerduty?: Array<UnionMember1.Pagerduty>;
+    }
+
+    export namespace UnionMember1 {
+      export interface Webhook {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+
+      export interface Email {
+        /**
+         * The email address.
+         */
+        id: string;
+      }
+
+      export interface Pagerduty {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+    }
+
+    export interface UnionMember2 {
+      pagerduty: Array<UnionMember2.Pagerduty>;
+
+      /**
+       * Email notification destinations.
+       */
+      email?: Array<UnionMember2.Email>;
+
+      /**
+       * Webhook notification destinations.
+       */
+      webhooks?: Array<UnionMember2.Webhook>;
+    }
+
+    export namespace UnionMember2 {
+      export interface Pagerduty {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+
+      export interface Email {
+        /**
+         * The email address.
+         */
+        id: string;
+      }
+
+      export interface Webhook {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+    }
+  }
 }
 
 export interface ConsumerDeleteResponse {
@@ -268,7 +411,8 @@ export interface ConsumerDeleteResponse {
 
 export type ConsumerCreateParams =
   | ConsumerCreateParams.MqWorkerConsumerRequest
-  | ConsumerCreateParams.MqHTTPConsumerRequest;
+  | ConsumerCreateParams.MqHTTPConsumerRequest
+  | ConsumerCreateParams.MqNotificationConsumerRequest;
 
 export declare namespace ConsumerCreateParams {
   export interface MqWorkerConsumerRequest {
@@ -377,11 +521,151 @@ export declare namespace ConsumerCreateParams {
       visibility_timeout_ms?: number;
     }
   }
+
+  export interface MqNotificationConsumerRequest {
+    /**
+     * Path param: A Resource identifier.
+     */
+    account_id: string;
+
+    /**
+     * Body param: Notification destinations for a Queue. At least one email, webhook,
+     * or PagerDuty destination is required.
+     */
+    settings:
+      | MqNotificationConsumerRequest.UnionMember0
+      | MqNotificationConsumerRequest.UnionMember1
+      | MqNotificationConsumerRequest.UnionMember2;
+
+    /**
+     * Body param
+     */
+    type: 'notification';
+
+    /**
+     * Body param
+     */
+    dead_letter_queue?: string;
+  }
+
+  export namespace MqNotificationConsumerRequest {
+    export interface UnionMember0 {
+      email: Array<UnionMember0.Email>;
+
+      /**
+       * PagerDuty notification destinations.
+       */
+      pagerduty?: Array<UnionMember0.Pagerduty>;
+
+      /**
+       * Webhook notification destinations.
+       */
+      webhooks?: Array<UnionMember0.Webhook>;
+    }
+
+    export namespace UnionMember0 {
+      export interface Email {
+        /**
+         * The email address.
+         */
+        id: string;
+      }
+
+      export interface Pagerduty {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+
+      export interface Webhook {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+    }
+
+    export interface UnionMember1 {
+      webhooks: Array<UnionMember1.Webhook>;
+
+      /**
+       * Email notification destinations.
+       */
+      email?: Array<UnionMember1.Email>;
+
+      /**
+       * PagerDuty notification destinations.
+       */
+      pagerduty?: Array<UnionMember1.Pagerduty>;
+    }
+
+    export namespace UnionMember1 {
+      export interface Webhook {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+
+      export interface Email {
+        /**
+         * The email address.
+         */
+        id: string;
+      }
+
+      export interface Pagerduty {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+    }
+
+    export interface UnionMember2 {
+      pagerduty: Array<UnionMember2.Pagerduty>;
+
+      /**
+       * Email notification destinations.
+       */
+      email?: Array<UnionMember2.Email>;
+
+      /**
+       * Webhook notification destinations.
+       */
+      webhooks?: Array<UnionMember2.Webhook>;
+    }
+
+    export namespace UnionMember2 {
+      export interface Pagerduty {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+
+      export interface Email {
+        /**
+         * The email address.
+         */
+        id: string;
+      }
+
+      export interface Webhook {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+    }
+  }
 }
 
 export type ConsumerUpdateParams =
   | ConsumerUpdateParams.MqWorkerConsumerRequest
-  | ConsumerUpdateParams.MqHTTPConsumerRequest;
+  | ConsumerUpdateParams.MqHTTPConsumerRequest
+  | ConsumerUpdateParams.MqNotificationConsumerRequest;
 
 export declare namespace ConsumerUpdateParams {
   export interface MqWorkerConsumerRequest {
@@ -498,6 +782,150 @@ export declare namespace ConsumerUpdateParams {
        * timeout, the message becomes available for another attempt.
        */
       visibility_timeout_ms?: number;
+    }
+  }
+
+  export interface MqNotificationConsumerRequest {
+    /**
+     * Path param: A Resource identifier.
+     */
+    account_id: string;
+
+    /**
+     * Path param: A Resource identifier.
+     */
+    queue_id: string;
+
+    /**
+     * Body param: Notification destinations for a Queue. At least one email, webhook,
+     * or PagerDuty destination is required.
+     */
+    settings:
+      | MqNotificationConsumerRequest.UnionMember0
+      | MqNotificationConsumerRequest.UnionMember1
+      | MqNotificationConsumerRequest.UnionMember2;
+
+    /**
+     * Body param
+     */
+    type: 'notification';
+
+    /**
+     * Body param
+     */
+    dead_letter_queue?: string;
+  }
+
+  export namespace MqNotificationConsumerRequest {
+    export interface UnionMember0 {
+      email: Array<UnionMember0.Email>;
+
+      /**
+       * PagerDuty notification destinations.
+       */
+      pagerduty?: Array<UnionMember0.Pagerduty>;
+
+      /**
+       * Webhook notification destinations.
+       */
+      webhooks?: Array<UnionMember0.Webhook>;
+    }
+
+    export namespace UnionMember0 {
+      export interface Email {
+        /**
+         * The email address.
+         */
+        id: string;
+      }
+
+      export interface Pagerduty {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+
+      export interface Webhook {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+    }
+
+    export interface UnionMember1 {
+      webhooks: Array<UnionMember1.Webhook>;
+
+      /**
+       * Email notification destinations.
+       */
+      email?: Array<UnionMember1.Email>;
+
+      /**
+       * PagerDuty notification destinations.
+       */
+      pagerduty?: Array<UnionMember1.Pagerduty>;
+    }
+
+    export namespace UnionMember1 {
+      export interface Webhook {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+
+      export interface Email {
+        /**
+         * The email address.
+         */
+        id: string;
+      }
+
+      export interface Pagerduty {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+    }
+
+    export interface UnionMember2 {
+      pagerduty: Array<UnionMember2.Pagerduty>;
+
+      /**
+       * Email notification destinations.
+       */
+      email?: Array<UnionMember2.Email>;
+
+      /**
+       * Webhook notification destinations.
+       */
+      webhooks?: Array<UnionMember2.Webhook>;
+    }
+
+    export namespace UnionMember2 {
+      export interface Pagerduty {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
+
+      export interface Email {
+        /**
+         * The email address.
+         */
+        id: string;
+      }
+
+      export interface Webhook {
+        /**
+         * UUID.
+         */
+        id: string;
+      }
     }
   }
 }

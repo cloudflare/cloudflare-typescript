@@ -608,6 +608,12 @@ export interface WebhookCreateParams {
    * "HMAC-Signing".
    */
   signing_secret?: string;
+
+  /**
+   * Body param: Status of the webhook configuration. Defaults to enabled when
+   * omitted.
+   */
+  status?: 'enabled' | 'disabled';
 }
 
 export namespace WebhookCreateParams {

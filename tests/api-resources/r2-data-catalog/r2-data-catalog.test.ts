@@ -34,6 +34,26 @@ const runTests = (client: PartialCloudflare<{ r2DataCatalog: BaseR2DataCatalog }
     const response = await client.r2DataCatalog.list({ account_id: '0123456789abcdef0123456789abcdef' });
   });
 
+  test('delete: only required params', async () => {
+    const responsePromise = client.r2DataCatalog.delete('my-data-bucket', {
+      account_id: '0123456789abcdef0123456789abcdef',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.r2DataCatalog.delete('my-data-bucket', {
+      account_id: '0123456789abcdef0123456789abcdef',
+      force: true,
+    });
+  });
+
   test('disable: only required params', async () => {
     const responsePromise = client.r2DataCatalog.disable('my-data-bucket', {
       account_id: '0123456789abcdef0123456789abcdef',

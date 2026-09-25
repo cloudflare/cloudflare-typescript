@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as PipelinesAPI from './pipelines';
 import * as SinksAPI from './sinks';
 import {
   BaseSinks,
@@ -246,6 +247,391 @@ export class Pipelines extends BasePipelines {
 }
 
 export type PipelineListV1ResponsesV4PagePaginationArray = V4PagePaginationArray<PipelineListV1Response>;
+
+export type FieldType =
+  | FieldType.Int32
+  | FieldType.Int64
+  | FieldType.Float32
+  | FieldType.Float64
+  | FieldType.Bool
+  | FieldType.String
+  | FieldType.Binary
+  | FieldType.Timestamp
+  | FieldType.Json
+  | FieldType.Struct
+  | FieldType.List;
+
+export namespace FieldType {
+  export interface Int32 {
+    type: 'int32';
+  }
+
+  export interface Int64 {
+    type: 'int64';
+  }
+
+  export interface Float32 {
+    type: 'float32';
+  }
+
+  export interface Float64 {
+    type: 'float64';
+  }
+
+  export interface Bool {
+    type: 'bool';
+  }
+
+  export interface String {
+    type: 'string';
+  }
+
+  export interface Binary {
+    type: 'binary';
+  }
+
+  export interface Timestamp {
+    type: 'timestamp';
+
+    unit?: 'second' | 'millisecond' | 'microsecond' | 'nanosecond';
+  }
+
+  export interface Json {
+    type: 'json';
+  }
+
+  export interface Struct {
+    fields: Array<PipelinesAPI.SourceField>;
+
+    type: 'struct';
+
+    name?: string | null;
+  }
+
+  export interface List {
+    items: PipelinesAPI.SourceField;
+
+    type: 'list';
+  }
+}
+
+export interface ListField {
+  items: SourceField;
+}
+
+export interface ListFieldParam {
+  items: SourceFieldParam;
+}
+
+export type SourceField =
+  | SourceField.Int32
+  | SourceField.Int64
+  | SourceField.Float32
+  | SourceField.Float64
+  | SourceField.Bool
+  | SourceField.String
+  | SourceField.Binary
+  | SourceField.Timestamp
+  | SourceField.Json
+  | SourceField.Struct
+  | SourceField.List;
+
+export namespace SourceField {
+  export interface Int32 {
+    type: 'int32';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Int64 {
+    type: 'int64';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Float32 {
+    type: 'float32';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Float64 {
+    type: 'float64';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Bool {
+    type: 'bool';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface String {
+    type: 'string';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Binary {
+    type: 'binary';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Timestamp {
+    type: 'timestamp';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+
+    unit?: 'second' | 'millisecond' | 'microsecond' | 'nanosecond';
+  }
+
+  export interface Json {
+    type: 'json';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Struct extends Omit<PipelinesAPI.StructField, 'name'> {
+    type: 'struct';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface List extends PipelinesAPI.ListField {
+    type: 'list';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+}
+
+export type SourceFieldParam =
+  | SourceFieldParam.Int32
+  | SourceFieldParam.Int64
+  | SourceFieldParam.Float32
+  | SourceFieldParam.Float64
+  | SourceFieldParam.Bool
+  | SourceFieldParam.String
+  | SourceFieldParam.Binary
+  | SourceFieldParam.Timestamp
+  | SourceFieldParam.Json
+  | SourceFieldParam.Struct
+  | SourceFieldParam.List;
+
+export namespace SourceFieldParam {
+  export interface Int32 {
+    type: 'int32';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Int64 {
+    type: 'int64';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Float32 {
+    type: 'float32';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Float64 {
+    type: 'float64';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Bool {
+    type: 'bool';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface String {
+    type: 'string';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Binary {
+    type: 'binary';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Timestamp {
+    type: 'timestamp';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+
+    unit?: 'second' | 'millisecond' | 'microsecond' | 'nanosecond';
+  }
+
+  export interface Json {
+    type: 'json';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface Struct extends Omit<PipelinesAPI.StructFieldParam, 'name'> {
+    type: 'struct';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+
+  export interface List extends PipelinesAPI.ListFieldParam {
+    type: 'list';
+
+    metadata_key?: string | null;
+
+    name?: string;
+
+    required?: boolean;
+
+    sql_name?: string;
+  }
+}
+
+export interface StructField {
+  fields: Array<SourceField>;
+
+  name?: string | null;
+}
+
+export interface StructFieldParam {
+  fields: Array<SourceFieldParam>;
+
+  name?: string | null;
+}
 
 /**
  * @deprecated [DEPRECATED] Describes the configuration of a pipeline. Use the new
@@ -979,6 +1365,9 @@ export interface PipelineValidateSqlResponse {
    */
   tables: { [key: string]: PipelineValidateSqlResponse.Tables };
 
+  /**
+   * Indicates the processing flow to implement the SQL.
+   */
   graph?: PipelineValidateSqlResponse.Graph;
 }
 
@@ -993,6 +1382,9 @@ export namespace PipelineValidateSqlResponse {
     version: number;
   }
 
+  /**
+   * Indicates the processing flow to implement the SQL.
+   */
   export interface Graph {
     edges: Array<Graph.Edge>;
 
@@ -1430,6 +1822,10 @@ Pipelines.BaseStreams = BaseStreams;
 
 export declare namespace Pipelines {
   export {
+    type FieldType as FieldType,
+    type ListField as ListField,
+    type SourceField as SourceField,
+    type StructField as StructField,
     type PipelineCreateResponse as PipelineCreateResponse,
     type PipelineUpdateResponse as PipelineUpdateResponse,
     type PipelineListResponse as PipelineListResponse,

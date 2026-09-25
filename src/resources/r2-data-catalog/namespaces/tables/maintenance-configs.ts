@@ -92,8 +92,10 @@ export interface MaintenanceConfigUpdateResponse {
   compaction?: MaintenanceConfigUpdateResponse.Compaction;
 
   /**
-   * Configures snapshot expiration settings.
+   * Scheduling interval between normal table maintenance runs.
    */
+  interval?: string;
+
   snapshot_expiration?: MaintenanceConfigUpdateResponse.SnapshotExpiration;
 }
 
@@ -111,17 +113,16 @@ export namespace MaintenanceConfigUpdateResponse {
      * Sets the target file size for compaction in megabytes. Defaults to "128".
      */
     target_size_mb: '64' | '128' | '256' | '512';
+
+    /**
+     * Earliest time when the scheduler can claim this operation. Null when disabled.
+     */
+    next_eligible_at?: string | null;
   }
 
-  /**
-   * Configures snapshot expiration settings.
-   */
   export interface SnapshotExpiration {
     /**
-     * Specifies the maximum age for snapshots. The system deletes snapshots older than
-     * this age. Format: <number><unit> where unit is d (days), h (hours), m (minutes),
-     * or s (seconds). Examples: "7d" (7 days), "48h" (48 hours), "2880m" (2,880
-     * minutes). Defaults to "7d".
+     * Specifies the maximum age for snapshots.
      */
     max_snapshot_age: string;
 
@@ -134,6 +135,11 @@ export namespace MaintenanceConfigUpdateResponse {
      * Specifies the state of maintenance operations.
      */
     state: 'enabled' | 'disabled';
+
+    /**
+     * Earliest time when the scheduler can claim this operation. Null when disabled.
+     */
+    next_eligible_at?: string | null;
   }
 }
 
@@ -158,8 +164,10 @@ export namespace MaintenanceConfigGetResponse {
     compaction?: MaintenanceConfig.Compaction;
 
     /**
-     * Configures snapshot expiration settings.
+     * Scheduling interval between normal table maintenance runs.
      */
+    interval?: string;
+
     snapshot_expiration?: MaintenanceConfig.SnapshotExpiration;
   }
 
@@ -177,17 +185,16 @@ export namespace MaintenanceConfigGetResponse {
        * Sets the target file size for compaction in megabytes. Defaults to "128".
        */
       target_size_mb: '64' | '128' | '256' | '512';
+
+      /**
+       * Earliest time when the scheduler can claim this operation. Null when disabled.
+       */
+      next_eligible_at?: string | null;
     }
 
-    /**
-     * Configures snapshot expiration settings.
-     */
     export interface SnapshotExpiration {
       /**
-       * Specifies the maximum age for snapshots. The system deletes snapshots older than
-       * this age. Format: <number><unit> where unit is d (days), h (hours), m (minutes),
-       * or s (seconds). Examples: "7d" (7 days), "48h" (48 hours), "2880m" (2,880
-       * minutes). Defaults to "7d".
+       * Specifies the maximum age for snapshots.
        */
       max_snapshot_age: string;
 
@@ -200,13 +207,18 @@ export namespace MaintenanceConfigGetResponse {
        * Specifies the state of maintenance operations.
        */
       state: 'enabled' | 'disabled';
+
+      /**
+       * Earliest time when the scheduler can claim this operation. Null when disabled.
+       */
+      next_eligible_at?: string | null;
     }
   }
 }
 
 export interface MaintenanceConfigUpdateParams {
   /**
-   * Path param: Use this to identify the account.
+   * Path param: Identifies the account.
    */
   account_id: string;
 
@@ -271,7 +283,7 @@ export namespace MaintenanceConfigUpdateParams {
 
 export interface MaintenanceConfigGetParams {
   /**
-   * Use this to identify the account.
+   * Identifies the account.
    */
   account_id: string;
 

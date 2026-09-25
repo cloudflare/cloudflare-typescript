@@ -2,8 +2,6 @@
 
 Types:
 
-- <code><a href="./src/resources/brand-protection/brand-protection.ts">Info</a></code>
-- <code><a href="./src/resources/brand-protection/brand-protection.ts">Submit</a></code>
 - <code><a href="./src/resources/brand-protection/brand-protection.ts">BrandProtectionSubmitResponse</a></code>
 - <code><a href="./src/resources/brand-protection/brand-protection.ts">BrandProtectionURLInfoResponse</a></code>
 

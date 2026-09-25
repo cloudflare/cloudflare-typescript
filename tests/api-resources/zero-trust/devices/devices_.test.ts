@@ -46,6 +46,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { devices: { devices: B
       id: ['string'],
       active_registrations: 'include',
       cursor: 'cursor',
+      has_registration_type: 'warp',
       include: 'include',
       last_seen_registration: { policy: '11ffb86f-3f0c-4306-b4a2-e62f872b166a' },
       last_seen_user: { email: 'email' },
@@ -55,6 +56,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { devices: { devices: B
       seen_before: 'seen_before',
       sort_by: 'name',
       sort_order: 'asc',
+      tag: ['environment:production', 'fleet:warehouse'],
     });
   });
 

@@ -86,6 +86,27 @@ const runTests = (client: PartialCloudflare<{ emailSending: { subdomains: BaseSu
     });
   });
 
+  test('edit: only required params', async () => {
+    const responsePromise = client.emailSending.subdomains.edit('aabbccdd11223344aabbccdd11223344', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await client.emailSending.subdomains.edit('aabbccdd11223344aabbccdd11223344', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      drop_suppressed_recipients: true,
+      preview_enabled: true,
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = client.emailSending.subdomains.get('aabbccdd11223344aabbccdd11223344', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',

@@ -52,8 +52,6 @@ export interface ProfileGetResponse {
 
   created_on?: string;
 
-  device_data?: string;
-
   edited_on?: string;
 
   enterprise_billing_email?: string;
@@ -80,11 +78,7 @@ export interface ProfileGetResponse {
 
   payment_first_name?: string;
 
-  payment_gateway?: string;
-
   payment_last_name?: string;
-
-  payment_nonce?: string;
 
   payment_state?: string;
 
@@ -97,8 +91,6 @@ export interface ProfileGetResponse {
   tax_id_type?: string;
 
   telephone?: string;
-
-  use_legacy?: boolean;
 
   validation_code?: string;
 

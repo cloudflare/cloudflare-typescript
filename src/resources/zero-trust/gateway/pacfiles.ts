@@ -2,7 +2,11 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
-import { PagePromise, SinglePage } from '../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -84,12 +88,12 @@ export class BasePacfiles extends APIResource {
   list(
     params: PacfileListParams,
     options?: RequestOptions,
-  ): PagePromise<PacfileListResponsesSinglePage, PacfileListResponse> {
-    const { account_id } = params;
+  ): PagePromise<PacfileListResponsesV4PagePaginationArray, PacfileListResponse> {
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/gateway/pacfiles`,
-      SinglePage<PacfileListResponse>,
-      options,
+      V4PagePaginationArray<PacfileListResponse>,
+      { query, ...options },
     );
   }
 
@@ -141,7 +145,7 @@ export class BasePacfiles extends APIResource {
 }
 export class Pacfiles extends BasePacfiles {}
 
-export type PacfileListResponsesSinglePage = SinglePage<PacfileListResponse>;
+export type PacfileListResponsesV4PagePaginationArray = V4PagePaginationArray<PacfileListResponse>;
 
 export interface PacfileCreateResponse {
   id?: string;
@@ -274,7 +278,7 @@ export interface PacfileGetResponse {
 
 export interface PacfileCreateParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -302,7 +306,7 @@ export interface PacfileCreateParams {
 
 export interface PacfileUpdateParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -322,15 +326,24 @@ export interface PacfileUpdateParams {
   name: string;
 }
 
-export interface PacfileListParams {
+export interface PacfileListParams extends V4PagePaginationArrayParams {
+  /**
+   * Path param: Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
 export interface PacfileDeleteParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
 export interface PacfileGetParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
@@ -341,7 +354,7 @@ export declare namespace Pacfiles {
     type PacfileListResponse as PacfileListResponse,
     type PacfileDeleteResponse as PacfileDeleteResponse,
     type PacfileGetResponse as PacfileGetResponse,
-    type PacfileListResponsesSinglePage as PacfileListResponsesSinglePage,
+    type PacfileListResponsesV4PagePaginationArray as PacfileListResponsesV4PagePaginationArray,
     type PacfileCreateParams as PacfileCreateParams,
     type PacfileUpdateParams as PacfileUpdateParams,
     type PacfileListParams as PacfileListParams,

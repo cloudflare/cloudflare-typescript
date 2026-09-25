@@ -73,7 +73,6 @@ import {
   OverrideCodeGetResponse,
   OverrideCodeListParams,
   OverrideCodeListResponse,
-  OverrideCodeListResponsesSinglePage,
   OverrideCodes,
 } from './override-codes';
 import * as RegistrationsAPI from './registrations';
@@ -113,7 +112,6 @@ import {
   BasePolicies,
   DevicePolicyCertificates,
   FallbackDomain,
-  FallbackDomainPolicy,
   Policies,
   SettingsPolicy,
   SplitTunnelExclude,
@@ -609,7 +607,6 @@ export declare namespace Devices {
     BasePolicies as BasePolicies,
     type DevicePolicyCertificates as DevicePolicyCertificates,
     type FallbackDomain as FallbackDomain,
-    type FallbackDomainPolicy as FallbackDomainPolicy,
     type SettingsPolicy as SettingsPolicy,
     type SplitTunnelExclude as SplitTunnelExclude,
     type SplitTunnelInclude as SplitTunnelInclude,
@@ -674,7 +671,6 @@ export declare namespace Devices {
     BaseOverrideCodes as BaseOverrideCodes,
     type OverrideCodeListResponse as OverrideCodeListResponse,
     type OverrideCodeGetResponse as OverrideCodeGetResponse,
-    type OverrideCodeListResponsesSinglePage as OverrideCodeListResponsesSinglePage,
     type OverrideCodeListParams as OverrideCodeListParams,
     type OverrideCodeGetParams as OverrideCodeGetParams,
   };

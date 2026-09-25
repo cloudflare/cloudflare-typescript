@@ -14,6 +14,6 @@ export {
   type ListDeleteParams,
   type ListEditParams,
   type ListGetParams,
-  type GatewayItemsSinglePage,
+  type GatewayItemsV4PagePaginationArray,
   type GatewayListsSinglePage,
 } from './lists';

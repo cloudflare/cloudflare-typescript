@@ -103,7 +103,7 @@ export namespace ReportListResponse {
 
 export interface ReportListParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 

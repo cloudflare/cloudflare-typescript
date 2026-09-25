@@ -139,7 +139,7 @@ export namespace LoggingSetting {
 
 export interface LoggingUpdateParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -226,6 +226,9 @@ export namespace LoggingUpdateParams {
 }
 
 export interface LoggingGetParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 

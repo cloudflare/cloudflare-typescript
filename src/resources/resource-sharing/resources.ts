@@ -205,7 +205,8 @@ export interface ResourceCreateResponse {
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
     | 'gateway-extended-email-matching'
-    | 'idp-federation-grant';
+    | 'idp-federation-grant'
+    | 'trust-grant';
 
   /**
    * Resource Version.
@@ -258,7 +259,8 @@ export interface ResourceUpdateResponse {
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
     | 'gateway-extended-email-matching'
-    | 'idp-federation-grant';
+    | 'idp-federation-grant'
+    | 'trust-grant';
 
   /**
    * Resource Version.
@@ -311,7 +313,8 @@ export interface ResourceListResponse {
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
     | 'gateway-extended-email-matching'
-    | 'idp-federation-grant';
+    | 'idp-federation-grant'
+    | 'trust-grant';
 
   /**
    * Resource Version.
@@ -364,7 +367,8 @@ export interface ResourceDeleteResponse {
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
     | 'gateway-extended-email-matching'
-    | 'idp-federation-grant';
+    | 'idp-federation-grant'
+    | 'trust-grant';
 
   /**
    * Resource Version.
@@ -417,7 +421,8 @@ export interface ResourceGetResponse {
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
     | 'gateway-extended-email-matching'
-    | 'idp-federation-grant';
+    | 'idp-federation-grant'
+    | 'trust-grant';
 
   /**
    * Resource Version.
@@ -460,7 +465,8 @@ export interface ResourceCreateParams {
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
     | 'gateway-extended-email-matching'
-    | 'idp-federation-grant';
+    | 'idp-federation-grant'
+    | 'trust-grant';
 }
 
 export interface ResourceUpdateParams {
@@ -495,7 +501,8 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
     | 'gateway-extended-email-matching'
-    | 'idp-federation-grant';
+    | 'idp-federation-grant'
+    | 'trust-grant';
 
   /**
    * Query param: Filter share resources by status.

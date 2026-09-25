@@ -69,6 +69,11 @@ export namespace ByDatasetListResponse {
 
     indicatorType: string;
 
+    /**
+     * RSS article sources from which this indicator was extracted.
+     */
+    sources: Array<Indicator.Source>;
+
     updatedAt: string;
 
     uuid: string;
@@ -83,9 +88,29 @@ export namespace ByDatasetListResponse {
     relatedEvents?: Array<Indicator.RelatedEvent>;
 
     tags?: Array<Indicator.Tag>;
+
+    /**
+     * Traffic Light Protocol designation. UPPERCASE. Possible values: CLEAR, GREEN,
+     * AMBER, AMBER-STRICT, RED, PURPLE. Null when not set.
+     */
+    tlp?: string | null;
   }
 
   export namespace Indicator {
+    export interface Source {
+      resourceId: string;
+
+      resourceType: 'article';
+
+      system: 'threat-signals';
+
+      /**
+       * Threat Signals article title; null for historical provenance without a stored
+       * title.
+       */
+      title: string | null;
+    }
+
     export interface RelatedEvent {
       datasetId: string;
 
@@ -99,6 +124,11 @@ export namespace ByDatasetListResponse {
     }
 
     export interface Tag {
+      /**
+       * The UUID of the tag category, or null when the tag is uncategorized.
+       */
+      categoryId?: string | null;
+
       categoryName?: string;
 
       uuid?: string;
@@ -137,6 +167,12 @@ export interface ByDatasetGetResponse {
   relatedEvents?: Array<ByDatasetGetResponse.RelatedEvent>;
 
   tags?: Array<ByDatasetGetResponse.Tag>;
+
+  /**
+   * Traffic Light Protocol designation. UPPERCASE. Possible values: CLEAR, GREEN,
+   * AMBER, AMBER-STRICT, RED, PURPLE. Null when not set.
+   */
+  tlp?: string | null;
 }
 
 export namespace ByDatasetGetResponse {
@@ -153,6 +189,11 @@ export namespace ByDatasetGetResponse {
   }
 
   export interface Tag {
+    /**
+     * The UUID of the tag category, or null when the tag is uncategorized.
+     */
+    categoryId?: string | null;
+
     categoryName?: string;
 
     uuid?: string;

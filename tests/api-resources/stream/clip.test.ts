@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { BaseClipResource } from 'cloudflare/resources/stream/clip';
+import { BaseClip } from 'cloudflare/resources/stream/clip';
 import { Stream } from 'cloudflare/resources/stream/stream';
 
 import Cloudflare from 'cloudflare';
@@ -16,7 +16,7 @@ const partialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [BaseClipResource],
+  resources: [BaseClip],
 });
 
 const parentPartialClient = createClient({
@@ -26,7 +26,7 @@ const parentPartialClient = createClient({
   resources: [Stream],
 });
 
-const runTests = (client: PartialCloudflare<{ stream: { clip: BaseClipResource } }>) => {
+const runTests = (client: PartialCloudflare<{ stream: { clip: BaseClip } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.stream.clip.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

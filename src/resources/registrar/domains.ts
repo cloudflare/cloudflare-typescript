@@ -13,7 +13,7 @@ export class BaseDomains extends APIResource {
   ] as const);
 
   /**
-   * Update individual domain.
+   * Updates an individual domain.
    *
    * @deprecated This operation is deprecated and will reach end of life on September 27, 2026. Use the new Registrar API endpoints (domain-search, domain-check, registrations) instead. Refer to https://developers.cloudflare.com/fundamentals/api/reference/deprecations/ for details.
    */
@@ -32,7 +32,7 @@ export class BaseDomains extends APIResource {
   }
 
   /**
-   * List domains handled by Registrar.
+   * Lists domains handled by Registrar.
    *
    * @deprecated This operation is deprecated and will reach end of life on September 27, 2026. Use the new Registrar API endpoints (domain-search, domain-check, registrations) instead. Refer to https://developers.cloudflare.com/fundamentals/api/reference/deprecations/ for details.
    */
@@ -79,7 +79,7 @@ export interface Domain {
   available?: boolean;
 
   /**
-   * Indicates if the domain can be registered as a new domain.
+   * Indicates eligibility to register the domain as a new domain.
    */
   can_register?: boolean;
 
@@ -109,15 +109,15 @@ export interface Domain {
   registrant_contact?: Domain.RegistrantContact;
 
   /**
-   * A comma-separated list of registry status codes. A full list of status codes can
-   * be found at
-   * [EPP Status Codes](https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en).
+   * A comma-separated list of registry status codes. Refer to
+   * [EPP Status Codes](https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en)
+   * for the full list.
    */
   registry_statuses?: string;
 
   /**
-   * Whether a particular TLD is currently supported by Cloudflare Registrar. Refer
-   * to [TLD Policies](https://www.cloudflare.com/tld-policies/) for a list of
+   * Indicates whether Cloudflare Registrar currently supports a particular TLD.
+   * Refer to [TLD Policies](https://www.cloudflare.com/tld-policies/) for a list of
    * supported TLDs.
    */
   supported_tld?: boolean;
@@ -154,12 +154,12 @@ export namespace Domain {
     country: string | null;
 
     /**
-     * User's first name
+     * User's first name.
      */
     first_name: string | null;
 
     /**
-     * User's last name
+     * User's last name.
      */
     last_name: string | null;
 
@@ -169,7 +169,7 @@ export namespace Domain {
     organization: string;
 
     /**
-     * User's telephone number
+     * User's telephone number.
      */
     phone: string | null;
 
@@ -209,12 +209,12 @@ export namespace Domain {
    */
   export interface TransferIn {
     /**
-     * Form of authorization has been accepted by the registrant.
+     * Status of the registrant authorization step.
      */
     accept_foa?: 'needed' | 'ok';
 
     /**
-     * Shows transfer status with the registry.
+     * Status of the registry transfer-approval step.
      */
     approve_transfer?: 'needed' | 'ok' | 'pending' | 'trying' | 'rejected' | 'unknown';
 
@@ -224,17 +224,17 @@ export namespace Domain {
     can_cancel_transfer?: boolean;
 
     /**
-     * Privacy guards are disabled at the foreign registrar.
+     * Status of the privacy-guard disabling step at the foreign registrar.
      */
     disable_privacy?: 'needed' | 'ok' | 'unknown';
 
     /**
-     * Auth code has been entered and verified.
+     * Status of the auth-code entry and verification step.
      */
     enter_auth_code?: 'needed' | 'ok' | 'pending' | 'trying' | 'rejected';
 
     /**
-     * Domain is unlocked at the foreign registrar.
+     * Status of the domain-unlock step at the foreign registrar.
      */
     unlock_domain?: 'needed' | 'ok' | 'pending' | 'trying' | 'unknown';
   }
@@ -246,7 +246,7 @@ export type DomainGetResponse = unknown;
 
 export interface DomainUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -269,14 +269,14 @@ export interface DomainUpdateParams {
 
 export interface DomainListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface DomainGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

@@ -47,6 +47,7 @@ const runTests = (client: PartialCloudflare<{ workers: { scripts: { settings: Ba
       observability: {
         enabled: true,
         head_sampling_rate: 0.1,
+        issues: { enabled: true },
         logs: {
           enabled: true,
           invocation_logs: true,
@@ -54,6 +55,7 @@ const runTests = (client: PartialCloudflare<{ workers: { scripts: { settings: Ba
           head_sampling_rate: 0.1,
           persist: true,
         },
+        redact_query_string: false,
         traces: {
           destinations: ['cloudflare'],
           enabled: true,

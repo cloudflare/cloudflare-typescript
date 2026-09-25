@@ -45,7 +45,9 @@ export class BaseCloudflared extends APIResource {
   ] as const);
 
   /**
-   * Creates a new Cloudflare Tunnel in an account.
+   * Creates a remotely or locally managed Cloudflare Tunnel in an account. After
+   * creation, retrieve its token and run cloudflared to establish the connector
+   * connection.
    *
    * @example
    * ```ts
@@ -91,7 +93,8 @@ export class BaseCloudflared extends APIResource {
   }
 
   /**
-   * Deletes a Cloudflare Tunnel from an account.
+   * Permanently deletes a Cloudflare Tunnel from an account. The tunnel must have no
+   * active connections.
    *
    * @example
    * ```ts
@@ -116,7 +119,7 @@ export class BaseCloudflared extends APIResource {
   }
 
   /**
-   * Updates an existing Cloudflare Tunnel.
+   * Updates the name or secret of an existing Cloudflare Tunnel.
    *
    * @example
    * ```ts

@@ -7,10 +7,12 @@ export {
   type SubdomainCreateResponse,
   type SubdomainListResponse,
   type SubdomainDeleteResponse,
+  type SubdomainEditResponse,
   type SubdomainGetResponse,
   type SubdomainCreateParams,
   type SubdomainListParams,
   type SubdomainDeleteParams,
+  type SubdomainEditParams,
   type SubdomainGetParams,
   type SubdomainListResponsesSinglePage,
 } from './subdomains';

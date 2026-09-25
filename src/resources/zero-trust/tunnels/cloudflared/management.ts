@@ -10,8 +10,8 @@ export class BaseManagement extends APIResource {
     Object.freeze(['zeroTrust', 'tunnels', 'cloudflared', 'management'] as const);
 
   /**
-   * Gets a management token used to access the management resources (i.e. Streaming
-   * Logs) of a tunnel.
+   * Creates a short-lived management token for the requested Tunnel management
+   * resources, such as streaming logs. Treat the token as a secret.
    *
    * @example
    * ```ts

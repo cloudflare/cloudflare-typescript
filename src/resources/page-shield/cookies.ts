@@ -13,7 +13,7 @@ export class BaseCookies extends APIResource {
   ] as const);
 
   /**
-   * Lists all cookies collected by Page Shield.
+   * Lists cookies detected on the zone.
    *
    * @example
    * ```ts
@@ -38,7 +38,7 @@ export class BaseCookies extends APIResource {
   }
 
   /**
-   * Fetches a cookie collected by Page Shield by cookie ID.
+   * Returns a cookie detected on the zone by cookie ID.
    *
    * @example
    * ```ts

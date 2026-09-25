@@ -49,7 +49,7 @@ export type ReclassifyCreateResponse = unknown;
 
 export interface ReclassifyCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 

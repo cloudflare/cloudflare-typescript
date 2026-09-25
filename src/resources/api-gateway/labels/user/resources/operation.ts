@@ -10,7 +10,8 @@ export class BaseOperation extends APIResource {
     Object.freeze(['apiGateway', 'labels', 'user', 'resources', 'operation'] as const);
 
   /**
-   * Replace all operations(s) attached to a user label
+   * Replaces the complete set of web and API operations attached to the user-defined
+   * label.
    *
    * @example
    * ```ts

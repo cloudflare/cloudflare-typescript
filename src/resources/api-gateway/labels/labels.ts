@@ -37,7 +37,8 @@ export class BaseLabels extends APIResource {
   ] as const);
 
   /**
-   * Retrieve all labels
+   * Returns all managed and user-defined labels available for web and API operations
+   * in the zone.
    *
    * @example
    * ```ts

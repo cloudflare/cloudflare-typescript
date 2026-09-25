@@ -51,6 +51,7 @@ const runTests = (client: PartialCloudflare<{ workers: { beta: { workers: BaseWo
       observability: {
         enabled: true,
         head_sampling_rate: 1,
+        issues: { enabled: true },
         logs: {
           destinations: ['string'],
           enabled: true,
@@ -58,6 +59,7 @@ const runTests = (client: PartialCloudflare<{ workers: { beta: { workers: BaseWo
           invocation_logs: true,
           persist: true,
         },
+        redact_query_string: true,
         traces: {
           destinations: ['string'],
           enabled: true,
@@ -65,6 +67,34 @@ const runTests = (client: PartialCloudflare<{ workers: { beta: { workers: BaseWo
           persist: true,
           propagation_policy: 'authenticated',
         },
+      },
+      previews_base_config: {
+        cache_options: { enabled: true, cross_version_cache: true },
+        env: { MY_ENV_VAR: { type: 'plain_text' } },
+        limits: { cpu_ms: 50, subrequests: 1000 },
+        logpush: true,
+        observability: {
+          enabled: true,
+          head_sampling_rate: 1,
+          issues: { enabled: true },
+          logs: {
+            destinations: ['string'],
+            enabled: true,
+            head_sampling_rate: 1,
+            invocation_logs: true,
+            persist: true,
+          },
+          redact_query_string: true,
+          traces: {
+            destinations: ['string'],
+            enabled: true,
+            head_sampling_rate: 1,
+            persist: true,
+            propagation_policy: 'authenticated',
+          },
+        },
+        placement: { mode: 'smart' },
+        tail_consumers: [{ name: 'my-tail-consumer' }],
       },
       subdomain: { enabled: true, previews_enabled: true },
       tags: ['my-team', 'my-public-api'],
@@ -96,6 +126,7 @@ const runTests = (client: PartialCloudflare<{ workers: { beta: { workers: BaseWo
       observability: {
         enabled: true,
         head_sampling_rate: 1,
+        issues: { enabled: true },
         logs: {
           destinations: ['string'],
           enabled: true,
@@ -103,6 +134,7 @@ const runTests = (client: PartialCloudflare<{ workers: { beta: { workers: BaseWo
           invocation_logs: true,
           persist: true,
         },
+        redact_query_string: true,
         traces: {
           destinations: ['string'],
           enabled: true,
@@ -110,6 +142,34 @@ const runTests = (client: PartialCloudflare<{ workers: { beta: { workers: BaseWo
           persist: true,
           propagation_policy: 'authenticated',
         },
+      },
+      previews_base_config: {
+        cache_options: { enabled: true, cross_version_cache: true },
+        env: { MY_ENV_VAR: { type: 'plain_text' } },
+        limits: { cpu_ms: 50, subrequests: 1000 },
+        logpush: true,
+        observability: {
+          enabled: true,
+          head_sampling_rate: 1,
+          issues: { enabled: true },
+          logs: {
+            destinations: ['string'],
+            enabled: true,
+            head_sampling_rate: 1,
+            invocation_logs: true,
+            persist: true,
+          },
+          redact_query_string: true,
+          traces: {
+            destinations: ['string'],
+            enabled: true,
+            head_sampling_rate: 1,
+            persist: true,
+            propagation_policy: 'authenticated',
+          },
+        },
+        placement: { mode: 'smart' },
+        tail_consumers: [{ name: 'my-tail-consumer' }],
       },
       subdomain: { enabled: true, previews_enabled: true },
       tags: ['my-team', 'my-public-api'],
@@ -156,6 +216,7 @@ const runTests = (client: PartialCloudflare<{ workers: { beta: { workers: BaseWo
   test('delete: required and optional params', async () => {
     const response = await client.workers.beta.workers.delete('worker_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      force: true,
     });
   });
 
@@ -186,6 +247,7 @@ const runTests = (client: PartialCloudflare<{ workers: { beta: { workers: BaseWo
       observability: {
         enabled: true,
         head_sampling_rate: 1,
+        issues: { enabled: true },
         logs: {
           destinations: ['string'],
           enabled: true,
@@ -193,6 +255,7 @@ const runTests = (client: PartialCloudflare<{ workers: { beta: { workers: BaseWo
           invocation_logs: true,
           persist: true,
         },
+        redact_query_string: true,
         traces: {
           destinations: ['string'],
           enabled: true,
@@ -204,6 +267,34 @@ const runTests = (client: PartialCloudflare<{ workers: { beta: { workers: BaseWo
       subdomain: { enabled: true, previews_enabled: true },
       tags: ['my-team', 'my-public-api'],
       tail_consumers: [{ name: 'my-tail-consumer' }],
+      previews_base_config: {
+        cache_options: { enabled: true, cross_version_cache: true },
+        env: { MY_ENV_VAR: { type: 'plain_text' } },
+        limits: { cpu_ms: 50, subrequests: 1000 },
+        logpush: true,
+        observability: {
+          enabled: true,
+          head_sampling_rate: 1,
+          issues: { enabled: true },
+          logs: {
+            destinations: ['string'],
+            enabled: true,
+            head_sampling_rate: 1,
+            invocation_logs: true,
+            persist: true,
+          },
+          redact_query_string: true,
+          traces: {
+            destinations: ['string'],
+            enabled: true,
+            head_sampling_rate: 1,
+            persist: true,
+            propagation_policy: 'authenticated',
+          },
+        },
+        placement: { mode: 'smart' },
+        tail_consumers: [{ name: 'my-tail-consumer' }],
+      },
     });
   });
 

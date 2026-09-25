@@ -53,11 +53,11 @@ export class BaseProxyEndpoints extends APIResource {
     params: ProxyEndpointListParams,
     options?: RequestOptions,
   ): PagePromise<ProxyEndpointsSinglePage, ProxyEndpoint> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/gateway/proxy_endpoints`,
       SinglePage<ProxyEndpoint>,
-      options,
+      { query, ...options },
     );
   }
 
@@ -221,7 +221,7 @@ export type ProxyEndpointCreateParams =
 export declare namespace ProxyEndpointCreateParams {
   export interface ZeroTrustGatewayProxyEndpointIPCreate {
     /**
-     * Path param
+     * Path param: Specify the Cloudflare account identifier.
      */
     account_id: string;
 
@@ -238,7 +238,7 @@ export declare namespace ProxyEndpointCreateParams {
 
   export interface ZeroTrustGatewayProxyEndpointIdentityCreate {
     /**
-     * Path param
+     * Path param: Specify the Cloudflare account identifier.
      */
     account_id: string;
 
@@ -255,16 +255,69 @@ export declare namespace ProxyEndpointCreateParams {
 }
 
 export interface ProxyEndpointListParams {
+  /**
+   * Path param: Specify the Cloudflare account identifier.
+   */
   account_id: string;
+
+  /**
+   * Query param: Sort direction. Only takes effect when `order_by` is also provided;
+   * it is ignored otherwise. When `direction` is omitted the effective direction is
+   * field-specific: `created_at` and `updated_at` default to descending (newest
+   * first); `name` defaults to ascending.
+   *
+   * - `asc` — ascending.
+   * - `desc` — descending.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Filter the returned proxy endpoints by one or more `field:value`
+   * pairs. Repeat the parameter to apply multiple filters; they are combined with
+   * logical AND (an endpoint must satisfy every filter to be returned).
+   *
+   * Supported fields and their matching behaviour:
+   *
+   * - `name` — case-insensitive substring match on the endpoint name.
+   * - `id` — substring match on the endpoint ID (UUID), with or without dashes.
+   * - `kind` — exact match on the endpoint kind. The value must be `ip` or
+   *   `identity`; any other value returns `400`.
+   *
+   * Each entry must match one of the per-field patterns below: the field must be one
+   * of `name`, `id`, or `kind`; `name`/`id` accept any value, while `kind` only
+   * accepts `ip` or `identity`.
+   */
+  filter?: Array<string>;
+
+  /**
+   * Query param: Field to sort the returned endpoints by. When omitted, the order of
+   * results is unspecified. Supported values:
+   *
+   * - `name` — sort alphabetically by endpoint name.
+   * - `created_at` — sort by creation time; defaults to descending unless
+   *   `direction` is set.
+   * - `updated_at` — sort by last-modified time; defaults to descending unless
+   *   `direction` is set.
+   */
+  order_by?: 'name' | 'created_at' | 'updated_at';
+
+  /**
+   * Query param: Case-insensitive substring match on the endpoint name. When
+   * combined with `filter`, both must match (logical AND).
+   */
+  search?: string;
 }
 
 export interface ProxyEndpointDeleteParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
 export interface ProxyEndpointEditParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -280,6 +333,9 @@ export interface ProxyEndpointEditParams {
 }
 
 export interface ProxyEndpointGetParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 

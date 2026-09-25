@@ -84,6 +84,10 @@ export type ZoneTagUpdateResponse =
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectCloudflaredTunnel
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectCustomCertificate
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectCustomHostname
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectCwsDeployment
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectCwsPolicy
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectCwsPolicySet
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectCwsWorkload
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectD1Database
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectDNSRecord
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectDurableObjectNamespace
@@ -141,6 +145,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'access_application';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -183,6 +198,17 @@ export namespace ZoneTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -215,6 +241,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'access_group';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -247,6 +284,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'account';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -279,6 +327,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'account_ruleset';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -311,6 +370,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'ai_gateway';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -343,6 +413,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'alerting_policy';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -375,6 +456,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'alerting_webhook';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -412,6 +504,17 @@ export namespace ZoneTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -444,6 +547,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'cloudflared_tunnel';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -481,6 +595,17 @@ export namespace ZoneTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -518,6 +643,189 @@ export namespace ZoneTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  /**
+   * Response for cws_deployment resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectCwsDeployment {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'cws_deployment';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  /**
+   * Response for cws_policy resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectCwsPolicy {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'cws_policy';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  /**
+   * Response for cws_policy_set resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectCwsPolicySet {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'cws_policy_set';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  /**
+   * Response for cws_workload resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectCwsWorkload {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'cws_workload';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -550,6 +858,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'd1_database';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -587,6 +906,17 @@ export namespace ZoneTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -619,6 +949,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'durable_object_namespace';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -651,6 +992,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'gateway_list';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -683,6 +1035,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'gateway_rule';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -720,6 +1083,17 @@ export namespace ZoneTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -752,6 +1126,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'image';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -784,6 +1169,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'infrastructure_target';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -816,6 +1212,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'kv_namespace';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -853,6 +1260,17 @@ export namespace ZoneTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -885,6 +1303,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'load_balancer_monitor';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -917,6 +1346,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'load_balancer_pool';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -954,6 +1394,17 @@ export namespace ZoneTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -986,6 +1437,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'pages_project';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1018,6 +1480,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'queue';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1050,6 +1523,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'r2_bucket';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1082,6 +1566,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'resource_share';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1114,6 +1609,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'stream_live_input';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1146,6 +1652,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'stream_video';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1178,6 +1695,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'vectorize_index';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1210,6 +1738,17 @@ export namespace ZoneTagUpdateResponse {
     tags: { [key: string]: string };
 
     type: 'worker';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1247,6 +1786,17 @@ export namespace ZoneTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1284,6 +1834,17 @@ export namespace ZoneTagUpdateResponse {
      * Worker ID is required only for worker_version resources
      */
     worker_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1321,6 +1882,17 @@ export namespace ZoneTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1358,6 +1930,17 @@ export namespace ZoneTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 }
 
@@ -1377,6 +1960,10 @@ export type ZoneTagGetResponse =
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectCloudflaredTunnel
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectCustomCertificate
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectCustomHostname
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectCwsDeployment
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectCwsPolicy
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectCwsPolicySet
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectCwsWorkload
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectD1Database
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectDNSRecord
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectDurableObjectNamespace
@@ -1434,6 +2021,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'access_application';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1476,6 +2074,17 @@ export namespace ZoneTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1508,6 +2117,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'access_group';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1540,6 +2160,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'account';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1572,6 +2203,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'account_ruleset';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1604,6 +2246,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'ai_gateway';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1636,6 +2289,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'alerting_policy';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1668,6 +2332,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'alerting_webhook';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1705,6 +2380,17 @@ export namespace ZoneTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1737,6 +2423,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'cloudflared_tunnel';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1774,6 +2471,17 @@ export namespace ZoneTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1811,6 +2519,189 @@ export namespace ZoneTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  /**
+   * Response for cws_deployment resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectCwsDeployment {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'cws_deployment';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  /**
+   * Response for cws_policy resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectCwsPolicy {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'cws_policy';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  /**
+   * Response for cws_policy_set resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectCwsPolicySet {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'cws_policy_set';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  /**
+   * Response for cws_workload resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectCwsWorkload {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'cws_workload';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1843,6 +2734,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'd1_database';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1880,6 +2782,17 @@ export namespace ZoneTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1912,6 +2825,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'durable_object_namespace';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1944,6 +2868,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'gateway_list';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -1976,6 +2911,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'gateway_rule';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2013,6 +2959,17 @@ export namespace ZoneTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2045,6 +3002,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'image';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2077,6 +3045,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'infrastructure_target';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2109,6 +3088,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'kv_namespace';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2146,6 +3136,17 @@ export namespace ZoneTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2178,6 +3179,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'load_balancer_monitor';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2210,6 +3222,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'load_balancer_pool';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2247,6 +3270,17 @@ export namespace ZoneTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2279,6 +3313,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'pages_project';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2311,6 +3356,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'queue';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2343,6 +3399,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'r2_bucket';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2375,6 +3442,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'resource_share';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2407,6 +3485,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'stream_live_input';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2439,6 +3528,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'stream_video';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2471,6 +3571,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'vectorize_index';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2503,6 +3614,17 @@ export namespace ZoneTagGetResponse {
     tags: { [key: string]: string };
 
     type: 'worker';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2540,6 +3662,17 @@ export namespace ZoneTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2577,6 +3710,17 @@ export namespace ZoneTagGetResponse {
      * Worker ID is required only for worker_version resources
      */
     worker_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2614,6 +3758,17 @@ export namespace ZoneTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 
   /**
@@ -2651,6 +3806,17 @@ export namespace ZoneTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
   }
 }
 

@@ -14,6 +14,7 @@ export {
   type BrowserProtocolParams,
   type BrowserVersionParams,
 } from './browser';
+export { LiveView, BaseLiveView, type LiveViewCreateResponse, type LiveViewCreateParams } from './live-view';
 export { Page, BasePage, type PageGetParams } from './page';
 export {
   Targets,

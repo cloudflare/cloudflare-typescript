@@ -39,7 +39,7 @@ export class BaseObjects extends APIResource {
     params: ObjectListParams,
     options?: RequestOptions,
   ): PagePromise<ObjectListResponsesCursorPagination, ObjectListResponse> {
-    const { account_id, jurisdiction, ...query } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/r2/buckets/${bucketName}/objects`,
       CursorPagination<ObjectListResponse>,
@@ -48,8 +48,8 @@ export class BaseObjects extends APIResource {
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -82,14 +82,14 @@ export class BaseObjects extends APIResource {
     params: ObjectDeleteParams,
     options?: RequestOptions,
   ): APIPromise<ObjectDeleteResponse> {
-    const { account_id, bucket_name, jurisdiction } = params;
+    const { account_id, bucket_name, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.delete(path`/accounts/${account_id}/r2/buckets/${bucket_name}/objects/${objectKey}`, {
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -125,7 +125,7 @@ export class BaseObjects extends APIResource {
     const {
       account_id,
       bucket_name,
-      jurisdiction,
+      'cf-r2-jurisdiction': cfR2Jurisdiction,
       'If-Modified-Since': ifModifiedSince,
       'If-None-Match': ifNoneMatch,
     } = params;
@@ -134,8 +134,8 @@ export class BaseObjects extends APIResource {
       headers: buildHeaders([
         {
           Accept: 'application/octet-stream',
-          ...(jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
           : undefined),
           ...(ifModifiedSince != null ? { 'If-Modified-Since': ifModifiedSince } : undefined),
           ...(ifNoneMatch != null ? { 'If-None-Match': ifNoneMatch } : undefined),
@@ -174,7 +174,12 @@ export class BaseObjects extends APIResource {
     params: ObjectUploadParams,
     options?: RequestOptions,
   ): APIPromise<ObjectUploadResponse> {
-    const { account_id, bucket_name, jurisdiction, 'cf-r2-storage-class': cfR2StorageClass } = params;
+    const {
+      account_id,
+      bucket_name,
+      'cf-r2-jurisdiction': cfR2Jurisdiction,
+      'cf-r2-storage-class': cfR2StorageClass,
+    } = params;
     return (
       this._client.put(path`/accounts/${account_id}/r2/buckets/${bucket_name}/objects/${objectKey}`, {
         body: body,
@@ -182,8 +187,8 @@ export class BaseObjects extends APIResource {
         headers: buildHeaders([
           {
             'Content-Type': 'application/octet-stream',
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
             ...(cfR2StorageClass?.toString() != null ?
               { 'cf-r2-storage-class': cfR2StorageClass?.toString() }
@@ -357,7 +362,7 @@ export interface ObjectListParams extends CursorPaginationParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export interface ObjectDeleteParams {
@@ -375,7 +380,7 @@ export interface ObjectDeleteParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export interface ObjectGetParams {
@@ -393,7 +398,7 @@ export interface ObjectGetParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 
   /**
    * Header param: Returns the object only if it has been modified since the
@@ -424,11 +429,10 @@ export interface ObjectUploadParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 
   /**
-   * Header param: Storage class for newly uploaded objects, unless specified
-   * otherwise.
+   * Header param: Storage class for this object. Overrides the bucket default.
    */
   'cf-r2-storage-class'?: 'Standard' | 'InfrequentAccess';
 }

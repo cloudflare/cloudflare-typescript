@@ -11,7 +11,9 @@ export class BaseConnectors extends APIResource {
     Object.freeze(['zeroTrust', 'tunnels', 'cloudflared', 'connectors'] as const);
 
   /**
-   * Fetches connector and connection details for a Cloudflare Tunnel.
+   * Retrieves a connector and its connection details for a Cloudflare Tunnel,
+   * including its cloudflared version, architecture, and connected Cloudflare
+   * locations.
    *
    * @example
    * ```ts

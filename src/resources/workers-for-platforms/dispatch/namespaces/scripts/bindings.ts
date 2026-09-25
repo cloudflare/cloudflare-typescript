@@ -15,7 +15,7 @@ export class BaseBindings extends APIResource {
   ] = Object.freeze(['workersForPlatforms', 'dispatch', 'namespaces', 'scripts', 'bindings'] as const);
 
   /**
-   * Fetch script bindings from a script uploaded to a Workers for Platforms
+   * Fetch bindings from a script uploaded to a Workers for Platforms dispatch
    * namespace.
    *
    * @example
@@ -73,6 +73,7 @@ export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindMTLSCertificate
   | BindingGetResponse.WorkersBindingKindPlainText
   | BindingGetResponse.WorkersBindingKindPipelines
+  | BindingGetResponse.WorkersBindingKindK2
   | BindingGetResponse.WorkersBindingKindQueue
   | BindingGetResponse.WorkersBindingKindRatelimit
   | BindingGetResponse.WorkersBindingKindR2Bucket
@@ -504,6 +505,26 @@ export namespace BindingGetResponse {
     type: 'pipelines';
   }
 
+  /**
+   * A K2 stream binding. Available only to accounts enabled for K2.
+   */
+  export interface WorkersBindingKindK2 {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * ID of a K2 stream owned by the account deploying the Worker.
+     */
+    stream: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'k2';
+  }
+
   export interface WorkersBindingKindQueue {
     /**
      * A JavaScript variable name for the binding.
@@ -588,7 +609,7 @@ export namespace BindingGetResponse {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high' | 'us';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -849,6 +870,12 @@ export namespace BindingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'vpc_network';
+
+    /**
+     * Enables Gateway identity for the binding. Requires network_id to be
+     * "cf1:network" and cannot be combined with tunnel_id.
+     */
+    identity?: 'runtime-email-alpha';
 
     /**
      * Identifier of the network to bind to. Only "cf1:network" is currently supported.

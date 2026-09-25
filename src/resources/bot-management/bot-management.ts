@@ -75,11 +75,6 @@ export class BaseBotManagement extends APIResource {
    * ```ts
    * const botManagement = await client.botManagement.update({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   ai_bots_protection: 'disabled',
-   *   cf_robots_variant: 'off',
-   *   crawler_protection: 'disabled',
-   *   enable_js: true,
-   *   fight_mode: true,
    * });
    * ```
    */
@@ -118,9 +113,37 @@ export class BotManagement extends BaseBotManagement {}
 
 export interface BotFightModeConfiguration {
   /**
+   * Temporary migration flag tracking zones opted out of AI bots managed-rule
+   * updates.
+   */
+  ai_bots_migration_opt_out?: boolean;
+
+  /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI search bots.
+   */
+  ai_search?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI model training bots.
+   */
+  ai_training?: 'disabled' | 'disallow' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI assistant and agent bots.
+   */
+  ai_user?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Enable Bot Preference Sync for this zone. When enabled, Cloudflare can serve
+   * robots.txt content derived from the zone's AI Search, AI User, and AI Training
+   * preferences.
+   */
+  bot_preference_sync_enabled?: boolean;
 
   /**
    * Specifies the Robots Access Control License variant to use.
@@ -155,6 +178,12 @@ export interface BotFightModeConfiguration {
    * then managed robots.txt will be prepended to the existing robots.txt.
    */
   is_robots_txt_managed?: boolean;
+
+  /**
+   * Whether to use JavaScript Detection results submitted through the API for this
+   * zone.
+   */
+  jsd_api_results_enabled?: boolean;
 
   /**
    * A read-only field that shows which unauthorized settings are currently active on
@@ -211,9 +240,37 @@ export namespace BotFightModeConfiguration {
 
 export interface BotFightModeConfigurationParam {
   /**
+   * Temporary migration flag tracking zones opted out of AI bots managed-rule
+   * updates.
+   */
+  ai_bots_migration_opt_out?: boolean;
+
+  /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI search bots.
+   */
+  ai_search?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI model training bots.
+   */
+  ai_training?: 'disabled' | 'disallow' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI assistant and agent bots.
+   */
+  ai_user?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Enable Bot Preference Sync for this zone. When enabled, Cloudflare can serve
+   * robots.txt content derived from the zone's AI Search, AI User, and AI Training
+   * preferences.
+   */
+  bot_preference_sync_enabled?: boolean;
 
   /**
    * Specifies the Robots Access Control License variant to use.
@@ -248,13 +305,40 @@ export interface BotFightModeConfigurationParam {
    * then managed robots.txt will be prepended to the existing robots.txt.
    */
   is_robots_txt_managed?: boolean;
+
+  /**
+   * Whether to use JavaScript Detection results submitted through the API for this
+   * zone.
+   */
+  jsd_api_results_enabled?: boolean;
 }
 
 export interface SubscriptionConfiguration {
   /**
+   * Temporary migration flag tracking zones opted out of AI bots managed-rule
+   * updates.
+   */
+  ai_bots_migration_opt_out?: boolean;
+
+  /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI search bots.
+   */
+  ai_search?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI model training bots.
+   */
+  ai_training?: 'disabled' | 'disallow' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI assistant and agent bots.
+   */
+  ai_user?: 'disabled' | 'block' | 'only_on_ad_pages';
 
   /**
    * Automatically update to the newest bot detection models created by Cloudflare as
@@ -268,6 +352,13 @@ export interface SubscriptionConfiguration {
    * accessing the site. Defaults to true
    */
   bm_cookie_enabled?: boolean;
+
+  /**
+   * Enable Bot Preference Sync for this zone. When enabled, Cloudflare can serve
+   * robots.txt content derived from the zone's AI Search, AI User, and AI Training
+   * preferences.
+   */
+  bot_preference_sync_enabled?: boolean;
 
   /**
    * Specifies the Robots Access Control License variant to use.
@@ -297,6 +388,12 @@ export interface SubscriptionConfiguration {
    * then managed robots.txt will be prepended to the existing robots.txt.
    */
   is_robots_txt_managed?: boolean;
+
+  /**
+   * Whether to use JavaScript Detection results submitted through the API for this
+   * zone.
+   */
+  jsd_api_results_enabled?: boolean;
 
   /**
    * A read-only field that shows which unauthorized settings are currently active on
@@ -359,9 +456,30 @@ export namespace SubscriptionConfiguration {
 
 export interface SubscriptionConfigurationParam {
   /**
+   * Temporary migration flag tracking zones opted out of AI bots managed-rule
+   * updates.
+   */
+  ai_bots_migration_opt_out?: boolean;
+
+  /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI search bots.
+   */
+  ai_search?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI model training bots.
+   */
+  ai_training?: 'disabled' | 'disallow' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI assistant and agent bots.
+   */
+  ai_user?: 'disabled' | 'block' | 'only_on_ad_pages';
 
   /**
    * Automatically update to the newest bot detection models created by Cloudflare as
@@ -377,6 +495,13 @@ export interface SubscriptionConfigurationParam {
   bm_cookie_enabled?: boolean;
 
   /**
+   * Enable Bot Preference Sync for this zone. When enabled, Cloudflare can serve
+   * robots.txt content derived from the zone's AI Search, AI User, and AI Training
+   * preferences.
+   */
+  bot_preference_sync_enabled?: boolean;
+
+  /**
    * Specifies the Robots Access Control License variant to use.
    */
   cf_robots_variant?: 'off' | 'policy_only';
@@ -404,6 +529,12 @@ export interface SubscriptionConfigurationParam {
    * then managed robots.txt will be prepended to the existing robots.txt.
    */
   is_robots_txt_managed?: boolean;
+
+  /**
+   * Whether to use JavaScript Detection results submitted through the API for this
+   * zone.
+   */
+  jsd_api_results_enabled?: boolean;
 
   /**
    * Whether to disable tracking the highest bot score for a session in the Bot
@@ -414,9 +545,37 @@ export interface SubscriptionConfigurationParam {
 
 export interface SuperBotFightModeDefinitelyConfiguration {
   /**
+   * Temporary migration flag tracking zones opted out of AI bots managed-rule
+   * updates.
+   */
+  ai_bots_migration_opt_out?: boolean;
+
+  /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI search bots.
+   */
+  ai_search?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI model training bots.
+   */
+  ai_training?: 'disabled' | 'disallow' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI assistant and agent bots.
+   */
+  ai_user?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Enable Bot Preference Sync for this zone. When enabled, Cloudflare can serve
+   * robots.txt content derived from the zone's AI Search, AI User, and AI Training
+   * preferences.
+   */
+  bot_preference_sync_enabled?: boolean;
 
   /**
    * Specifies the Robots Access Control License variant to use.
@@ -446,6 +605,12 @@ export interface SuperBotFightModeDefinitelyConfiguration {
    * then managed robots.txt will be prepended to the existing robots.txt.
    */
   is_robots_txt_managed?: boolean;
+
+  /**
+   * Whether to use JavaScript Detection results submitted through the API for this
+   * zone.
+   */
+  jsd_api_results_enabled?: boolean;
 
   /**
    * Whether to optimize Super Bot Fight Mode protections for Wordpress.
@@ -503,9 +668,37 @@ export namespace SuperBotFightModeDefinitelyConfiguration {
 
 export interface SuperBotFightModeDefinitelyConfigurationParam {
   /**
+   * Temporary migration flag tracking zones opted out of AI bots managed-rule
+   * updates.
+   */
+  ai_bots_migration_opt_out?: boolean;
+
+  /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI search bots.
+   */
+  ai_search?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI model training bots.
+   */
+  ai_training?: 'disabled' | 'disallow' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI assistant and agent bots.
+   */
+  ai_user?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Enable Bot Preference Sync for this zone. When enabled, Cloudflare can serve
+   * robots.txt content derived from the zone's AI Search, AI User, and AI Training
+   * preferences.
+   */
+  bot_preference_sync_enabled?: boolean;
 
   /**
    * Specifies the Robots Access Control License variant to use.
@@ -535,6 +728,12 @@ export interface SuperBotFightModeDefinitelyConfigurationParam {
    * then managed robots.txt will be prepended to the existing robots.txt.
    */
   is_robots_txt_managed?: boolean;
+
+  /**
+   * Whether to use JavaScript Detection results submitted through the API for this
+   * zone.
+   */
+  jsd_api_results_enabled?: boolean;
 
   /**
    * Whether to optimize Super Bot Fight Mode protections for Wordpress.
@@ -561,9 +760,37 @@ export interface SuperBotFightModeDefinitelyConfigurationParam {
 
 export interface SuperBotFightModeLikelyConfiguration {
   /**
+   * Temporary migration flag tracking zones opted out of AI bots managed-rule
+   * updates.
+   */
+  ai_bots_migration_opt_out?: boolean;
+
+  /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI search bots.
+   */
+  ai_search?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI model training bots.
+   */
+  ai_training?: 'disabled' | 'disallow' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI assistant and agent bots.
+   */
+  ai_user?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Enable Bot Preference Sync for this zone. When enabled, Cloudflare can serve
+   * robots.txt content derived from the zone's AI Search, AI User, and AI Training
+   * preferences.
+   */
+  bot_preference_sync_enabled?: boolean;
 
   /**
    * Specifies the Robots Access Control License variant to use.
@@ -593,6 +820,12 @@ export interface SuperBotFightModeLikelyConfiguration {
    * then managed robots.txt will be prepended to the existing robots.txt.
    */
   is_robots_txt_managed?: boolean;
+
+  /**
+   * Whether to use JavaScript Detection results submitted through the API for this
+   * zone.
+   */
+  jsd_api_results_enabled?: boolean;
 
   /**
    * Whether to optimize Super Bot Fight Mode protections for Wordpress.
@@ -649,9 +882,37 @@ export namespace SuperBotFightModeLikelyConfiguration {
 
 export interface SuperBotFightModeLikelyConfigurationParam {
   /**
+   * Temporary migration flag tracking zones opted out of AI bots managed-rule
+   * updates.
+   */
+  ai_bots_migration_opt_out?: boolean;
+
+  /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI search bots.
+   */
+  ai_search?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI model training bots.
+   */
+  ai_training?: 'disabled' | 'disallow' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Configure robots.txt policy for AI assistant and agent bots.
+   */
+  ai_user?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+  /**
+   * Enable Bot Preference Sync for this zone. When enabled, Cloudflare can serve
+   * robots.txt content derived from the zone's AI Search, AI User, and AI Training
+   * preferences.
+   */
+  bot_preference_sync_enabled?: boolean;
 
   /**
    * Specifies the Robots Access Control License variant to use.
@@ -681,6 +942,12 @@ export interface SuperBotFightModeLikelyConfigurationParam {
    * then managed robots.txt will be prepended to the existing robots.txt.
    */
   is_robots_txt_managed?: boolean;
+
+  /**
+   * Whether to use JavaScript Detection results submitted through the API for this
+   * zone.
+   */
+  jsd_api_results_enabled?: boolean;
 
   /**
    * Whether to optimize Super Bot Fight Mode protections for Wordpress.
@@ -736,9 +1003,37 @@ export declare namespace BotManagementUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: Temporary migration flag tracking zones opted out of AI bots
+     * managed-rule updates.
+     */
+    ai_bots_migration_opt_out?: boolean;
+
+    /**
      * Body param: Enable rule to block AI Scrapers and Crawlers.
      */
     ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Configure robots.txt policy for AI search bots.
+     */
+    ai_search?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Configure robots.txt policy for AI model training bots.
+     */
+    ai_training?: 'disabled' | 'disallow' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Configure robots.txt policy for AI assistant and agent bots.
+     */
+    ai_user?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Enable Bot Preference Sync for this zone. When enabled, Cloudflare
+     * can serve robots.txt content derived from the zone's AI Search, AI User, and AI
+     * Training preferences.
+     */
+    bot_preference_sync_enabled?: boolean;
 
     /**
      * Body param: Specifies the Robots Access Control License variant to use.
@@ -774,6 +1069,12 @@ export declare namespace BotManagementUpdateParams {
      * detected, then managed robots.txt will be prepended to the existing robots.txt.
      */
     is_robots_txt_managed?: boolean;
+
+    /**
+     * Body param: Whether to use JavaScript Detection results submitted through the
+     * API for this zone.
+     */
+    jsd_api_results_enabled?: boolean;
   }
 
   export interface SuperBotFightModeDefinitelyConfiguration {
@@ -783,9 +1084,37 @@ export declare namespace BotManagementUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: Temporary migration flag tracking zones opted out of AI bots
+     * managed-rule updates.
+     */
+    ai_bots_migration_opt_out?: boolean;
+
+    /**
      * Body param: Enable rule to block AI Scrapers and Crawlers.
      */
     ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Configure robots.txt policy for AI search bots.
+     */
+    ai_search?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Configure robots.txt policy for AI model training bots.
+     */
+    ai_training?: 'disabled' | 'disallow' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Configure robots.txt policy for AI assistant and agent bots.
+     */
+    ai_user?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Enable Bot Preference Sync for this zone. When enabled, Cloudflare
+     * can serve robots.txt content derived from the zone's AI Search, AI User, and AI
+     * Training preferences.
+     */
+    bot_preference_sync_enabled?: boolean;
 
     /**
      * Body param: Specifies the Robots Access Control License variant to use.
@@ -816,6 +1145,12 @@ export declare namespace BotManagementUpdateParams {
      * detected, then managed robots.txt will be prepended to the existing robots.txt.
      */
     is_robots_txt_managed?: boolean;
+
+    /**
+     * Body param: Whether to use JavaScript Detection results submitted through the
+     * API for this zone.
+     */
+    jsd_api_results_enabled?: boolean;
 
     /**
      * Body param: Whether to optimize Super Bot Fight Mode protections for Wordpress.
@@ -849,9 +1184,37 @@ export declare namespace BotManagementUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: Temporary migration flag tracking zones opted out of AI bots
+     * managed-rule updates.
+     */
+    ai_bots_migration_opt_out?: boolean;
+
+    /**
      * Body param: Enable rule to block AI Scrapers and Crawlers.
      */
     ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Configure robots.txt policy for AI search bots.
+     */
+    ai_search?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Configure robots.txt policy for AI model training bots.
+     */
+    ai_training?: 'disabled' | 'disallow' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Configure robots.txt policy for AI assistant and agent bots.
+     */
+    ai_user?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Enable Bot Preference Sync for this zone. When enabled, Cloudflare
+     * can serve robots.txt content derived from the zone's AI Search, AI User, and AI
+     * Training preferences.
+     */
+    bot_preference_sync_enabled?: boolean;
 
     /**
      * Body param: Specifies the Robots Access Control License variant to use.
@@ -882,6 +1245,12 @@ export declare namespace BotManagementUpdateParams {
      * detected, then managed robots.txt will be prepended to the existing robots.txt.
      */
     is_robots_txt_managed?: boolean;
+
+    /**
+     * Body param: Whether to use JavaScript Detection results submitted through the
+     * API for this zone.
+     */
+    jsd_api_results_enabled?: boolean;
 
     /**
      * Body param: Whether to optimize Super Bot Fight Mode protections for Wordpress.
@@ -921,9 +1290,30 @@ export declare namespace BotManagementUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: Temporary migration flag tracking zones opted out of AI bots
+     * managed-rule updates.
+     */
+    ai_bots_migration_opt_out?: boolean;
+
+    /**
      * Body param: Enable rule to block AI Scrapers and Crawlers.
      */
     ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Configure robots.txt policy for AI search bots.
+     */
+    ai_search?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Configure robots.txt policy for AI model training bots.
+     */
+    ai_training?: 'disabled' | 'disallow' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Configure robots.txt policy for AI assistant and agent bots.
+     */
+    ai_user?: 'disabled' | 'block' | 'only_on_ad_pages';
 
     /**
      * Body param: Automatically update to the newest bot detection models created by
@@ -937,6 +1327,13 @@ export declare namespace BotManagementUpdateParams {
      * devices accessing the site. Defaults to true
      */
     bm_cookie_enabled?: boolean;
+
+    /**
+     * Body param: Enable Bot Preference Sync for this zone. When enabled, Cloudflare
+     * can serve robots.txt content derived from the zone's AI Search, AI User, and AI
+     * Training preferences.
+     */
+    bot_preference_sync_enabled?: boolean;
 
     /**
      * Body param: Specifies the Robots Access Control License variant to use.
@@ -967,6 +1364,12 @@ export declare namespace BotManagementUpdateParams {
      * detected, then managed robots.txt will be prepended to the existing robots.txt.
      */
     is_robots_txt_managed?: boolean;
+
+    /**
+     * Body param: Whether to use JavaScript Detection results submitted through the
+     * API for this zone.
+     */
+    jsd_api_results_enabled?: boolean;
 
     /**
      * Body param: Whether to disable tracking the highest bot score for a session in

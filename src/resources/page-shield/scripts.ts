@@ -13,28 +13,32 @@ export class BaseScripts extends APIResource {
   ] as const);
 
   /**
-   * Lists all scripts detected by Page Shield.
+   * Lists scripts detected on webpages in the zone, with filtering and pagination.
    *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const script of client.pageShield.scripts.list({
-   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * })) {
+   * for await (const scriptListResponse of client.pageShield.scripts.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
    *   // ...
    * }
    * ```
    */
-  list(params: ScriptListParams, options?: RequestOptions): PagePromise<ScriptsSinglePage, Script> {
+  list(
+    params: ScriptListParams,
+    options?: RequestOptions,
+  ): PagePromise<ScriptListResponsesSinglePage, ScriptListResponse> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(path`/zones/${zone_id}/page_shield/scripts`, SinglePage<Script>, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      path`/zones/${zone_id}/page_shield/scripts`,
+      SinglePage<ScriptListResponse>,
+      { query, ...options },
+    );
   }
 
   /**
-   * Fetches a script detected by Page Shield by script ID.
+   * Returns a script detected on the zone by script ID.
    *
    * @example
    * ```ts
@@ -59,9 +63,9 @@ export class BaseScripts extends APIResource {
 }
 export class Scripts extends BaseScripts {}
 
-export type ScriptsSinglePage = SinglePage<Script>;
+export type ScriptListResponsesSinglePage = SinglePage<ScriptListResponse>;
 
-export interface Script {
+export interface ScriptListResponse {
   /**
    * Identifier
    */
@@ -361,9 +365,9 @@ export interface ScriptGetParams {
 
 export declare namespace Scripts {
   export {
-    type Script as Script,
+    type ScriptListResponse as ScriptListResponse,
     type ScriptGetResponse as ScriptGetResponse,
-    type ScriptsSinglePage as ScriptsSinglePage,
+    type ScriptListResponsesSinglePage as ScriptListResponsesSinglePage,
     type ScriptListParams as ScriptListParams,
     type ScriptGetParams as ScriptGetParams,
   };

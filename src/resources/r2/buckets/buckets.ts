@@ -91,15 +91,15 @@ export class BaseBuckets extends APIResource {
    * ```
    */
   create(params: BucketCreateParams, options?: RequestOptions): APIPromise<Bucket> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/r2/buckets`, {
         body,
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -119,15 +119,15 @@ export class BaseBuckets extends APIResource {
    * ```
    */
   list(params: BucketListParams, options?: RequestOptions): APIPromise<BucketListResponse> {
-    const { account_id, jurisdiction, ...query } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets`, {
         query,
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -152,14 +152,14 @@ export class BaseBuckets extends APIResource {
     params: BucketDeleteParams,
     options?: RequestOptions,
   ): APIPromise<BucketDeleteResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.delete(path`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -183,15 +183,15 @@ export class BaseBuckets extends APIResource {
    * ```
    */
   edit(bucketName: string, params: BucketEditParams, options?: RequestOptions): APIPromise<Bucket> {
-    const { account_id, storage_class, jurisdiction } = params;
+    const { account_id, storage_class, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
         headers: buildHeaders([
           {
             'cf-r2-storage-class': storage_class.toString(),
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -212,14 +212,14 @@ export class BaseBuckets extends APIResource {
    * ```
    */
   get(bucketName: string, params: BucketGetParams, options?: RequestOptions): APIPromise<Bucket> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -253,7 +253,7 @@ export interface Bucket {
   /**
    * Jurisdiction where objects in this bucket are guaranteed to be stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 
   /**
    * Location of the bucket.
@@ -303,7 +303,7 @@ export interface BucketCreateParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export interface BucketListParams {
@@ -349,7 +349,7 @@ export interface BucketListParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export interface BucketDeleteParams {
@@ -362,7 +362,7 @@ export interface BucketDeleteParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export interface BucketEditParams {
@@ -381,7 +381,7 @@ export interface BucketEditParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export interface BucketGetParams {
@@ -394,7 +394,7 @@ export interface BucketGetParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 Buckets.Lifecycle = Lifecycle;

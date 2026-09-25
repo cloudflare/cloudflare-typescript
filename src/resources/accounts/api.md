@@ -39,14 +39,45 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/accounts/subscriptions.ts">SubscriptionDeleteResponse</a></code>
+- <code><a href="./src/resources/accounts/subscriptions/subscriptions.ts">SubscriptionDeleteResponse</a></code>
+- <code><a href="./src/resources/accounts/subscriptions/subscriptions.ts">SubscriptionCancelDowngradeResponse</a></code>
 
 Methods:
 
-- <code title="post /{accounts_or_zones}/{account_or_zone_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">create</a>({ ...params }) -> Subscription</code>
-- <code title="put /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">update</a>(subscriptionIdentifier, { ...params }) -> Subscription</code>
-- <code title="delete /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">delete</a>(subscriptionIdentifier, { ...params }) -> SubscriptionDeleteResponse</code>
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">get</a>({ ...params }) -> SubscriptionsSinglePage</code>
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions/subscriptions.ts">create</a>({ ...params }) -> Subscription</code>
+- <code title="put /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions/subscriptions.ts">update</a>(subscriptionIdentifier, { ...params }) -> Subscription</code>
+- <code title="delete /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions/subscriptions.ts">delete</a>(subscriptionIdentifier, { ...params }) -> SubscriptionDeleteResponse</code>
+- <code title="post /accounts/{account_id}/subscriptions/cancel-downgrade">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions/subscriptions.ts">cancelDowngrade</a>({ ...params }) -> SubscriptionCancelDowngradeResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions/subscriptions.ts">get</a>({ ...params }) -> SubscriptionsSinglePage</code>
+- <code title="get /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions/subscriptions.ts">getByIdentifier</a>(subscriptionIdentifier, { ...params }) -> Subscription</code>
+
+### CancelReason
+
+Types:
+
+- <code><a href="./src/resources/accounts/subscriptions/cancel-reason.ts">CancelReasonCreateResponse</a></code>
+- <code><a href="./src/resources/accounts/subscriptions/cancel-reason.ts">CancelReasonGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/subscriptions/{subscription_identifier}/cancel-reason">client.accounts.subscriptions.cancelReason.<a href="./src/resources/accounts/subscriptions/cancel-reason.ts">create</a>(subscriptionIdentifier, { ...params }) -> CancelReasonCreateResponse</code>
+- <code title="get /accounts/{account_id}/subscriptions/{subscription_identifier}/cancel-reason">client.accounts.subscriptions.cancelReason.<a href="./src/resources/accounts/subscriptions/cancel-reason.ts">get</a>(subscriptionIdentifier, { ...params }) -> CancelReasonGetResponse</code>
+
+### Actions
+
+Methods:
+
+- <code title="post /accounts/{account_id}/subscriptions/{subscription_identifier}/action/append">client.accounts.subscriptions.actions.<a href="./src/resources/accounts/subscriptions/actions.ts">append</a>(subscriptionIdentifier, { ...params }) -> Subscription</code>
+
+### Bulk
+
+Types:
+
+- <code><a href="./src/resources/accounts/subscriptions/bulk.ts">BulkCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/bulk/subscriptions">client.accounts.subscriptions.bulk.<a href="./src/resources/accounts/subscriptions/bulk.ts">create</a>({ ...params }) -> BulkCreateResponse | null</code>
 
 ## Tokens
 
@@ -99,6 +130,16 @@ Methods:
 - <code title="get /accounts/{account_id}/logs/audit/{id}/history">client.accounts.logs.audit.<a href="./src/resources/accounts/logs/audit.ts">history</a>(id, { ...params }) -> AuditHistoryResponse</code>
 - <code title="get /accounts/{account_id}/logs/audit/product_categories">client.accounts.logs.audit.<a href="./src/resources/accounts/logs/audit.ts">productCategories</a>({ ...params }) -> AuditProductCategoriesResponsesSinglePage</code>
 
+## Entitlements
+
+Types:
+
+- <code><a href="./src/resources/accounts/entitlements.ts">EntitlementListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/entitlements">client.accounts.entitlements.<a href="./src/resources/accounts/entitlements.ts">list</a>({ ...params }) -> EntitlementListResponsesSinglePage</code>
+
 ## SpeedSettings
 
 ### Transformations
@@ -110,3 +151,69 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/settings/transformations">client.accounts.speedSettings.transformations.<a href="./src/resources/accounts/speed-settings/transformations.ts">get</a>({ ...params }) -> TransformationsConfigsSinglePage</code>
+
+## PaymentMethods
+
+Types:
+
+- <code><a href="./src/resources/accounts/payment-methods.ts">PaymentMethodCreateResponse</a></code>
+- <code><a href="./src/resources/accounts/payment-methods.ts">PaymentMethodUpdateResponse</a></code>
+- <code><a href="./src/resources/accounts/payment-methods.ts">PaymentMethodListResponse</a></code>
+- <code><a href="./src/resources/accounts/payment-methods.ts">PaymentMethodDeleteResponse</a></code>
+- <code><a href="./src/resources/accounts/payment-methods.ts">PaymentMethodGetResponse</a></code>
+- <code><a href="./src/resources/accounts/payment-methods.ts">PaymentMethodSetAsDefaultResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/payment-methods">client.accounts.paymentMethods.<a href="./src/resources/accounts/payment-methods.ts">create</a>({ ...params }) -> PaymentMethodCreateResponse</code>
+- <code title="put /accounts/{account_id}/payment-methods/{payment_method_id}">client.accounts.paymentMethods.<a href="./src/resources/accounts/payment-methods.ts">update</a>(paymentMethodID, { ...params }) -> PaymentMethodUpdateResponse</code>
+- <code title="get /accounts/{account_id}/payment-methods">client.accounts.paymentMethods.<a href="./src/resources/accounts/payment-methods.ts">list</a>({ ...params }) -> PaymentMethodListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/payment-methods/{payment_method_id}">client.accounts.paymentMethods.<a href="./src/resources/accounts/payment-methods.ts">delete</a>(paymentMethodID, { ...params }) -> PaymentMethodDeleteResponse</code>
+- <code title="get /accounts/{account_id}/payment-methods/{payment_method_id}">client.accounts.paymentMethods.<a href="./src/resources/accounts/payment-methods.ts">get</a>(paymentMethodID, { ...params }) -> PaymentMethodGetResponse</code>
+- <code title="post /accounts/{account_id}/payment-methods/{payment_method_id}/set-as-default">client.accounts.paymentMethods.<a href="./src/resources/accounts/payment-methods.ts">setAsDefault</a>(paymentMethodID, { ...params }) -> PaymentMethodSetAsDefaultResponse</code>
+
+## PayInvoice
+
+Types:
+
+- <code><a href="./src/resources/accounts/pay-invoice.ts">PayInvoiceCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/pay-invoice">client.accounts.payInvoice.<a href="./src/resources/accounts/pay-invoice.ts">create</a>({ ...params }) -> PayInvoiceCreateResponse</code>
+
+## PayBadDebt
+
+Types:
+
+- <code><a href="./src/resources/accounts/pay-bad-debt.ts">PayBadDebtCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/pay-bad-debt">client.accounts.payBadDebt.<a href="./src/resources/accounts/pay-bad-debt.ts">create</a>({ ...params }) -> PayBadDebtCreateResponse</code>
+
+## Receipts
+
+Methods:
+
+- <code title="get /accounts/{account_id}/receipts/{receipt_id}/pdf">client.accounts.receipts.<a href="./src/resources/accounts/receipts.ts">pdf</a>(receiptID, { ...params }) -> Response</code>
+
+## Invoices
+
+Types:
+
+- <code><a href="./src/resources/accounts/invoices.ts">InvoiceEditResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/invoices">client.accounts.invoices.<a href="./src/resources/accounts/invoices.ts">edit</a>({ ...params }) -> InvoiceEditResponse</code>
+
+## ClientSecret
+
+Types:
+
+- <code><a href="./src/resources/accounts/client-secret.ts">ClientSecretCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/client-secret">client.accounts.clientSecret.<a href="./src/resources/accounts/client-secret.ts">create</a>({ ...params }) -> ClientSecretCreateResponse</code>

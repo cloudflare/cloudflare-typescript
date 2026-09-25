@@ -283,7 +283,7 @@ export namespace RuleGetResponse {
 
 export interface RuleCreateParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 
@@ -305,7 +305,7 @@ export interface RuleCreateParams {
 
 export interface RuleUpdateParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 
@@ -327,7 +327,7 @@ export interface RuleUpdateParams {
 
 export interface RuleListParams extends V4PagePaginationParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 
@@ -349,14 +349,14 @@ export interface RuleListParams extends V4PagePaginationParams {
 
 export interface RuleDeleteParams {
   /**
-   * Unique identifier linked to an account.
+   * Unique Cloudflare account ID.
    */
   account_id: string;
 }
 
 export interface RuleGetParams {
   /**
-   * Unique identifier linked to an account.
+   * Unique Cloudflare account ID.
    */
   account_id: string;
 }

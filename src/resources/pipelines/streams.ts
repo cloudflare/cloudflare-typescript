@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as PipelinesAPI from './pipelines';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -99,12 +100,12 @@ export class BaseStreams extends APIResource {
     params: StreamDeleteParams,
     options?: RequestOptions,
   ): APIPromise<StreamDeleteResponse> {
-    const { account_id, force } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(path`/accounts/${account_id}/pipelines/v1/streams/${streamID}`, {
-        query: { force },
-        ...options,
-      }) as APIPromise<{ result: StreamDeleteResponse }>
+      this._client.delete(
+        path`/accounts/${account_id}/pipelines/v1/streams/${streamID}`,
+        options,
+      ) as APIPromise<{ result: StreamDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -162,8 +163,14 @@ export interface StreamCreateResponse {
    */
   endpoint?: string;
 
+  /**
+   * Defines the data format of the events.
+   */
   format?: StreamCreateResponse.Json | StreamCreateResponse.Parquet;
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   schema?: StreamCreateResponse.Schema;
 }
 
@@ -219,158 +226,13 @@ export namespace StreamCreateResponse {
     row_group_bytes?: number | null;
   }
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   export interface Schema {
-    fields?: Array<
-      | Schema.Int32
-      | Schema.Int64
-      | Schema.Float32
-      | Schema.Float64
-      | Schema.Bool
-      | Schema.String
-      | Schema.Binary
-      | Schema.Timestamp
-      | Schema.Json
-      | Schema.Struct
-      | Schema.List
-    >;
-
-    format?: Schema.Json | Schema.Parquet;
+    fields?: Array<PipelinesAPI.SourceField>;
 
     inferred?: boolean | null;
-  }
-
-  export namespace Schema {
-    export interface Int32 {
-      type: 'int32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Int64 {
-      type: 'int64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float32 {
-      type: 'float32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float64 {
-      type: 'float64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Bool {
-      type: 'bool';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface String {
-      type: 'string';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Binary {
-      type: 'binary';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Timestamp {
-      type: 'timestamp';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-
-      unit?: 'second' | 'millisecond' | 'microsecond' | 'nanosecond';
-    }
-
-    export interface Json {
-      type: 'json';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Struct {}
-
-    export interface List {}
-
-    export interface Json {
-      type: 'json';
-
-      decimal_encoding?: 'number' | 'string' | 'bytes';
-
-      timestamp_format?: 'rfc3339' | 'unix_millis';
-
-      unstructured?: boolean;
-    }
-
-    export interface Parquet {
-      type: 'parquet';
-
-      compression?: 'uncompressed' | 'snappy' | 'gzip' | 'zstd' | 'lz4';
-
-      row_group_bytes?: number | null;
-    }
   }
 }
 
@@ -403,7 +265,15 @@ export interface StreamUpdateResponse {
    */
   endpoint?: string;
 
+  /**
+   * Defines the data format of the events.
+   */
   format?: StreamUpdateResponse.Json | StreamUpdateResponse.Parquet;
+
+  /**
+   * Defines the schema of the events in the data stream.
+   */
+  schema?: StreamUpdateResponse.Schema;
 }
 
 export namespace StreamUpdateResponse {
@@ -457,6 +327,15 @@ export namespace StreamUpdateResponse {
 
     row_group_bytes?: number | null;
   }
+
+  /**
+   * Defines the schema of the events in the data stream.
+   */
+  export interface Schema {
+    fields?: Array<PipelinesAPI.SourceField>;
+
+    inferred?: boolean | null;
+  }
 }
 
 export interface StreamListResponse {
@@ -488,8 +367,14 @@ export interface StreamListResponse {
    */
   endpoint?: string;
 
+  /**
+   * Defines the data format of the events.
+   */
   format?: StreamListResponse.Json | StreamListResponse.Parquet;
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   schema?: StreamListResponse.Schema;
 }
 
@@ -545,158 +430,13 @@ export namespace StreamListResponse {
     row_group_bytes?: number | null;
   }
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   export interface Schema {
-    fields?: Array<
-      | Schema.Int32
-      | Schema.Int64
-      | Schema.Float32
-      | Schema.Float64
-      | Schema.Bool
-      | Schema.String
-      | Schema.Binary
-      | Schema.Timestamp
-      | Schema.Json
-      | Schema.Struct
-      | Schema.List
-    >;
-
-    format?: Schema.Json | Schema.Parquet;
+    fields?: Array<PipelinesAPI.SourceField>;
 
     inferred?: boolean | null;
-  }
-
-  export namespace Schema {
-    export interface Int32 {
-      type: 'int32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Int64 {
-      type: 'int64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float32 {
-      type: 'float32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float64 {
-      type: 'float64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Bool {
-      type: 'bool';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface String {
-      type: 'string';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Binary {
-      type: 'binary';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Timestamp {
-      type: 'timestamp';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-
-      unit?: 'second' | 'millisecond' | 'microsecond' | 'nanosecond';
-    }
-
-    export interface Json {
-      type: 'json';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Struct {}
-
-    export interface List {}
-
-    export interface Json {
-      type: 'json';
-
-      decimal_encoding?: 'number' | 'string' | 'bytes';
-
-      timestamp_format?: 'rfc3339' | 'unix_millis';
-
-      unstructured?: boolean;
-    }
-
-    export interface Parquet {
-      type: 'parquet';
-
-      compression?: 'uncompressed' | 'snappy' | 'gzip' | 'zstd' | 'lz4';
-
-      row_group_bytes?: number | null;
-    }
   }
 }
 
@@ -731,8 +471,14 @@ export interface StreamGetResponse {
    */
   endpoint?: string;
 
+  /**
+   * Defines the data format of the events.
+   */
   format?: StreamGetResponse.Json | StreamGetResponse.Parquet;
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   schema?: StreamGetResponse.Schema;
 }
 
@@ -788,158 +534,13 @@ export namespace StreamGetResponse {
     row_group_bytes?: number | null;
   }
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   export interface Schema {
-    fields?: Array<
-      | Schema.Int32
-      | Schema.Int64
-      | Schema.Float32
-      | Schema.Float64
-      | Schema.Bool
-      | Schema.String
-      | Schema.Binary
-      | Schema.Timestamp
-      | Schema.Json
-      | Schema.Struct
-      | Schema.List
-    >;
-
-    format?: Schema.Json | Schema.Parquet;
+    fields?: Array<PipelinesAPI.SourceField>;
 
     inferred?: boolean | null;
-  }
-
-  export namespace Schema {
-    export interface Int32 {
-      type: 'int32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Int64 {
-      type: 'int64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float32 {
-      type: 'float32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float64 {
-      type: 'float64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Bool {
-      type: 'bool';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface String {
-      type: 'string';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Binary {
-      type: 'binary';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Timestamp {
-      type: 'timestamp';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-
-      unit?: 'second' | 'millisecond' | 'microsecond' | 'nanosecond';
-    }
-
-    export interface Json {
-      type: 'json';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Struct {}
-
-    export interface List {}
-
-    export interface Json {
-      type: 'json';
-
-      decimal_encoding?: 'number' | 'string' | 'bytes';
-
-      timestamp_format?: 'rfc3339' | 'unix_millis';
-
-      unstructured?: boolean;
-    }
-
-    export interface Parquet {
-      type: 'parquet';
-
-      compression?: 'uncompressed' | 'snappy' | 'gzip' | 'zstd' | 'lz4';
-
-      row_group_bytes?: number | null;
-    }
   }
 }
 
@@ -955,7 +556,7 @@ export interface StreamCreateParams {
   name: string;
 
   /**
-   * Body param
+   * Body param: Defines the data format of the events.
    */
   format?: StreamCreateParams.Json | StreamCreateParams.Parquet;
 
@@ -965,7 +566,7 @@ export interface StreamCreateParams {
   http?: StreamCreateParams.HTTP;
 
   /**
-   * Body param
+   * Body param: Defines the schema of the events in the data stream.
    */
   schema?: StreamCreateParams.Schema;
 
@@ -1020,158 +621,13 @@ export namespace StreamCreateParams {
     }
   }
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   export interface Schema {
-    fields?: Array<
-      | Schema.Int32
-      | Schema.Int64
-      | Schema.Float32
-      | Schema.Float64
-      | Schema.Bool
-      | Schema.String
-      | Schema.Binary
-      | Schema.Timestamp
-      | Schema.Json
-      | Schema.Struct
-      | Schema.List
-    >;
-
-    format?: Schema.Json | Schema.Parquet;
+    fields?: Array<PipelinesAPI.SourceFieldParam>;
 
     inferred?: boolean | null;
-  }
-
-  export namespace Schema {
-    export interface Int32 {
-      type: 'int32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Int64 {
-      type: 'int64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float32 {
-      type: 'float32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float64 {
-      type: 'float64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Bool {
-      type: 'bool';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface String {
-      type: 'string';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Binary {
-      type: 'binary';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Timestamp {
-      type: 'timestamp';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-
-      unit?: 'second' | 'millisecond' | 'microsecond' | 'nanosecond';
-    }
-
-    export interface Json {
-      type: 'json';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Struct {}
-
-    export interface List {}
-
-    export interface Json {
-      type: 'json';
-
-      decimal_encoding?: 'number' | 'string' | 'bytes';
-
-      timestamp_format?: 'rfc3339' | 'unix_millis';
-
-      unstructured?: boolean;
-    }
-
-    export interface Parquet {
-      type: 'parquet';
-
-      compression?: 'uncompressed' | 'snappy' | 'gzip' | 'zstd' | 'lz4';
-
-      row_group_bytes?: number | null;
-    }
   }
 
   export interface WorkerBinding {
@@ -1253,15 +709,9 @@ export interface StreamListParams extends V4PagePaginationArrayParams {
 
 export interface StreamDeleteParams {
   /**
-   * Path param: Specifies the public ID of the account.
+   * Specifies the public ID of the account.
    */
   account_id: string;
-
-  /**
-   * Query param: Deprecated: Delete stream forcefully, including deleting any
-   * dependent pipelines.
-   */
-  force?: string;
 }
 
 export interface StreamGetParams {

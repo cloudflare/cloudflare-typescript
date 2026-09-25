@@ -232,10 +232,7 @@ export class BaseIPSECTunnels extends APIResource {
    * const response =
    *   await client.magicTransit.ipsecTunnels.pskGenerate(
    *     '023e105f4ecef8ad9ca31a8372d0c353',
-   *     {
-   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       body: {},
-   *     },
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
@@ -244,12 +241,12 @@ export class BaseIPSECTunnels extends APIResource {
     params: IPSECTunnelPSKGenerateParams,
     options?: RequestOptions,
   ): APIPromise<IPSECTunnelPSKGenerateResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.post(path`/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelID}/psk_generate`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: IPSECTunnelPSKGenerateResponse }>
+      this._client.post(
+        path`/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelID}/psk_generate`,
+        options,
+      ) as APIPromise<{ result: IPSECTunnelPSKGenerateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -2186,14 +2183,9 @@ export interface IPSECTunnelGetParams {
 
 export interface IPSECTunnelPSKGenerateParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface IPSECTunnelPSKSetParams {

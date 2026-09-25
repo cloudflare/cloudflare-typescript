@@ -303,7 +303,7 @@ export interface SendingDomainRestrictionGetResponse {
 
 export interface SendingDomainRestrictionCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -325,7 +325,7 @@ export interface SendingDomainRestrictionCreateParams {
 
 export interface SendingDomainRestrictionListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -347,14 +347,14 @@ export interface SendingDomainRestrictionListParams extends V4PagePaginationArra
 
 export interface SendingDomainRestrictionDeleteParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }
 
 export interface SendingDomainRestrictionEditParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -376,7 +376,7 @@ export interface SendingDomainRestrictionEditParams {
 
 export interface SendingDomainRestrictionGetParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }

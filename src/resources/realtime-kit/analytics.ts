@@ -20,7 +20,7 @@ export class BaseAnalytics extends APIResource {
    * ```ts
    * const response =
    *   await client.realtimeKit.analytics.getOrgAnalytics(
-   *     'app_id',
+   *     '14a396e7-ca44-4937-bf1f-050a69118543',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```

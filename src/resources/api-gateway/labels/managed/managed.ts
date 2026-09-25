@@ -15,7 +15,7 @@ export class BaseManaged extends APIResource {
   ] as const);
 
   /**
-   * Retrieve managed label
+   * Returns a managed label and the web and API operations associated with it.
    *
    * @example
    * ```ts

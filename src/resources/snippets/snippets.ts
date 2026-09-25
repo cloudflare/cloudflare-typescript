@@ -8,12 +8,16 @@ import {
   BaseRules,
   RuleDeleteParams,
   RuleDeleteResponse,
+  RuleDeleteResponsesSinglePage,
   RuleGetParams,
   RuleGetResponse,
+  RuleGetResponsesSinglePage,
   RuleListParams,
   RuleListResponse,
+  RuleListResponsesSinglePage,
   RuleUpdateParams,
   RuleUpdateResponse,
+  RuleUpdateResponsesSinglePage,
   Rules,
 } from './rules';
 import { APIPromise } from '../../core/api-promise';
@@ -59,7 +63,8 @@ export class BaseSnippets extends APIResource {
   }
 
   /**
-   * Deletes a snippet belonging to the zone.
+   * Deletes a snippet belonging to the zone. Returns a 4XX response if the zone or
+   * snippet no longer exists.
    */
   delete(
     snippetName: string,
@@ -98,7 +103,7 @@ export class Snippets extends BaseSnippets {
 export type SnippetListResponsesV4PagePaginationArray = V4PagePaginationArray<SnippetListResponse>;
 
 /**
- * Contain the response result.
+ * Define a snippet.
  */
 export interface SnippetUpdateResponse {
   /**
@@ -137,13 +142,10 @@ export interface SnippetListResponse {
   modified_on?: string;
 }
 
-/**
- * Contain the response result.
- */
 export type SnippetDeleteResponse = unknown;
 
 /**
- * Contain the response result.
+ * Define a snippet.
  */
 export interface SnippetGetResponse {
   /**
@@ -236,6 +238,10 @@ export declare namespace Snippets {
     type RuleListResponse as RuleListResponse,
     type RuleDeleteResponse as RuleDeleteResponse,
     type RuleGetResponse as RuleGetResponse,
+    type RuleUpdateResponsesSinglePage as RuleUpdateResponsesSinglePage,
+    type RuleListResponsesSinglePage as RuleListResponsesSinglePage,
+    type RuleDeleteResponsesSinglePage as RuleDeleteResponsesSinglePage,
+    type RuleGetResponsesSinglePage as RuleGetResponsesSinglePage,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,

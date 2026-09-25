@@ -44,6 +44,7 @@ const runTests = (client: PartialCloudflare<{ radar: { trafficAnomalies: BaseTra
       client.radar.trafficAnomalies.get(
         {
           asn: 174,
+          dataSource: 'ALL',
           dateEnd: '2023-09-01T11:41:33.782Z',
           dateRange: '7d',
           dateStart: '2023-09-01T11:41:33.782Z',

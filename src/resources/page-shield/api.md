@@ -2,19 +2,18 @@
 
 Types:
 
-- <code><a href="./src/resources/page-shield/page-shield.ts">Setting</a></code>
 - <code><a href="./src/resources/page-shield/page-shield.ts">PageShieldUpdateResponse</a></code>
+- <code><a href="./src/resources/page-shield/page-shield.ts">PageShieldGetResponse</a></code>
 
 Methods:
 
 - <code title="put /zones/{zone_id}/page_shield">client.pageShield.<a href="./src/resources/page-shield/page-shield.ts">update</a>({ ...params }) -> PageShieldUpdateResponse</code>
-- <code title="get /zones/{zone_id}/page_shield">client.pageShield.<a href="./src/resources/page-shield/page-shield.ts">get</a>({ ...params }) -> Setting | null</code>
+- <code title="get /zones/{zone_id}/page_shield">client.pageShield.<a href="./src/resources/page-shield/page-shield.ts">get</a>({ ...params }) -> PageShieldGetResponse | null</code>
 
 ## Policies
 
 Types:
 
-- <code><a href="./src/resources/page-shield/policies.ts">Policy</a></code>
 - <code><a href="./src/resources/page-shield/policies.ts">PolicyCreateResponse</a></code>
 - <code><a href="./src/resources/page-shield/policies.ts">PolicyUpdateResponse</a></code>
 - <code><a href="./src/resources/page-shield/policies.ts">PolicyListResponse</a></code>
@@ -32,23 +31,24 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/page-shield/connections.ts">Connection</a></code>
+- <code><a href="./src/resources/page-shield/connections.ts">ConnectionListResponse</a></code>
+- <code><a href="./src/resources/page-shield/connections.ts">ConnectionGetResponse</a></code>
 
 Methods:
 
-- <code title="get /zones/{zone_id}/page_shield/connections">client.pageShield.connections.<a href="./src/resources/page-shield/connections.ts">list</a>({ ...params }) -> ConnectionsSinglePage</code>
-- <code title="get /zones/{zone_id}/page_shield/connections/{connection_id}">client.pageShield.connections.<a href="./src/resources/page-shield/connections.ts">get</a>(connectionID, { ...params }) -> Connection | null</code>
+- <code title="get /zones/{zone_id}/page_shield/connections">client.pageShield.connections.<a href="./src/resources/page-shield/connections.ts">list</a>({ ...params }) -> ConnectionListResponsesSinglePage</code>
+- <code title="get /zones/{zone_id}/page_shield/connections/{connection_id}">client.pageShield.connections.<a href="./src/resources/page-shield/connections.ts">get</a>(connectionID, { ...params }) -> ConnectionGetResponse | null</code>
 
 ## Scripts
 
 Types:
 
-- <code><a href="./src/resources/page-shield/scripts.ts">Script</a></code>
+- <code><a href="./src/resources/page-shield/scripts.ts">ScriptListResponse</a></code>
 - <code><a href="./src/resources/page-shield/scripts.ts">ScriptGetResponse</a></code>
 
 Methods:
 
-- <code title="get /zones/{zone_id}/page_shield/scripts">client.pageShield.scripts.<a href="./src/resources/page-shield/scripts.ts">list</a>({ ...params }) -> ScriptsSinglePage</code>
+- <code title="get /zones/{zone_id}/page_shield/scripts">client.pageShield.scripts.<a href="./src/resources/page-shield/scripts.ts">list</a>({ ...params }) -> ScriptListResponsesSinglePage</code>
 - <code title="get /zones/{zone_id}/page_shield/scripts/{script_id}">client.pageShield.scripts.<a href="./src/resources/page-shield/scripts.ts">get</a>(scriptID, { ...params }) -> ScriptGetResponse | null</code>
 
 ## Cookies

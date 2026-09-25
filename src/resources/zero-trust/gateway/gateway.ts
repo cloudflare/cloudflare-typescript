@@ -65,7 +65,7 @@ import {
   PacfileGetResponse,
   PacfileListParams,
   PacfileListResponse,
-  PacfileListResponsesSinglePage,
+  PacfileListResponsesV4PagePaginationArray,
   PacfileUpdateParams,
   PacfileUpdateResponse,
   Pacfiles,
@@ -242,10 +242,16 @@ export interface GatewayListResponse {
 }
 
 export interface GatewayCreateParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
 export interface GatewayListParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
@@ -432,7 +438,7 @@ export declare namespace Gateway {
     type PacfileListResponse as PacfileListResponse,
     type PacfileDeleteResponse as PacfileDeleteResponse,
     type PacfileGetResponse as PacfileGetResponse,
-    type PacfileListResponsesSinglePage as PacfileListResponsesSinglePage,
+    type PacfileListResponsesV4PagePaginationArray as PacfileListResponsesV4PagePaginationArray,
     type PacfileCreateParams as PacfileCreateParams,
     type PacfileUpdateParams as PacfileUpdateParams,
     type PacfileListParams as PacfileListParams,

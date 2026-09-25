@@ -127,6 +127,11 @@ export interface ClassGetParams {
   /**
    * Query param
    */
+  source?: Array<'cloudflare' | 'riskrecon'>;
+
+  /**
+   * Query param
+   */
   subject?: Array<string>;
 
   /**

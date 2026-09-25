@@ -43,8 +43,10 @@ const runTests = (client: PartialCloudflare<{ emailSecurity: { submissions: Base
   test('list: required and optional params', async () => {
     const response = await client.emailSecurity.submissions.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      direction: 'asc',
       end: '2019-12-27T18:11:19.117Z',
       escalated_from_user: true,
+      order: 'submission_id',
       original_disposition: 'MALICIOUS',
       outcome_disposition: 'MALICIOUS',
       page: 1,

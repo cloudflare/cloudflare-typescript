@@ -17,7 +17,7 @@ export class BaseContent extends APIResource {
   ] as const);
 
   /**
-   * Put script content without touching config or metadata.
+   * Replace Worker script content without touching config or metadata.
    *
    * @example
    * ```ts
@@ -65,7 +65,7 @@ export class BaseContent extends APIResource {
   }
 
   /**
-   * Fetch script content only.
+   * Fetch Worker script content only.
    *
    * @example
    * ```ts

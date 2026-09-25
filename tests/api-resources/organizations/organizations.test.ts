@@ -33,7 +33,7 @@ const runTests = (client: PartialCloudflare<{ organizations: BaseOrganizations }
   test('create: required and optional params', async () => {
     const response = await client.organizations.create({
       name: 'name',
-      parent: { id: 'a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8' },
+      parent: { id: 'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8' },
       profile: {
         business_address: 'business_address',
         business_email: 'business_email',
@@ -45,7 +45,7 @@ const runTests = (client: PartialCloudflare<{ organizations: BaseOrganizations }
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.organizations.update('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8', { name: 'name' });
+    const responsePromise = client.organizations.update('a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8', { name: 'name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -56,9 +56,9 @@ const runTests = (client: PartialCloudflare<{ organizations: BaseOrganizations }
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.organizations.update('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8', {
+    const response = await client.organizations.update('a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8', {
       name: 'name',
-      parent: { id: 'a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8' },
+      parent: { id: 'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8' },
       profile: {
         business_address: 'business_address',
         business_email: 'business_email',
@@ -85,7 +85,7 @@ const runTests = (client: PartialCloudflare<{ organizations: BaseOrganizations }
     await expect(
       client.organizations.list(
         {
-          id: ['a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8'],
+          id: ['a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8'],
           containing: {
             account: 'account',
             organization: 'organization',
@@ -98,7 +98,7 @@ const runTests = (client: PartialCloudflare<{ organizations: BaseOrganizations }
           },
           page_size: 0,
           page_token: 'page_token',
-          parent: { id: 'a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8' },
+          parent: { id: 'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8' },
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -106,7 +106,7 @@ const runTests = (client: PartialCloudflare<{ organizations: BaseOrganizations }
   });
 
   test('delete', async () => {
-    const responsePromise = client.organizations.delete('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8');
+    const responsePromise = client.organizations.delete('a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -117,7 +117,7 @@ const runTests = (client: PartialCloudflare<{ organizations: BaseOrganizations }
   });
 
   test('get', async () => {
-    const responsePromise = client.organizations.get('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8');
+    const responsePromise = client.organizations.get('a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

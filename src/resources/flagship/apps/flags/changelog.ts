@@ -79,6 +79,11 @@ export namespace ChangelogListResponse {
       rules: Array<After.Rule>;
 
       /**
+       * Server-inferred value type shared by all of the flag's variations.
+       */
+      type: 'boolean' | 'string' | 'number' | 'json';
+
+      /**
        * Map of variation name to value. All values share the same type (boolean, string,
        * number, or JSON object/array), and each serialized value stays within 10KB.
        */
@@ -87,12 +92,6 @@ export namespace ChangelogListResponse {
       };
 
       description?: string | null;
-
-      /**
-       * Value type of the flag's variations. The API infers this from the variation
-       * values on write, so you can omit it in requests.
-       */
-      type?: 'boolean' | 'string' | 'number' | 'json';
 
       updated_at?: string;
 
@@ -335,6 +334,11 @@ export namespace ChangelogListResponse {
       rules: Array<After.Rule>;
 
       /**
+       * Server-inferred value type shared by all of the flag's variations.
+       */
+      type: 'boolean' | 'string' | 'number' | 'json';
+
+      /**
        * Map of variation name to value. All values share the same type (boolean, string,
        * number, or JSON object/array), and each serialized value stays within 10KB.
        */
@@ -343,12 +347,6 @@ export namespace ChangelogListResponse {
       };
 
       description?: string | null;
-
-      /**
-       * Value type of the flag's variations. The API infers this from the variation
-       * values on write, so you can omit it in requests.
-       */
-      type?: 'boolean' | 'string' | 'number' | 'json';
 
       updated_at?: string;
 
@@ -593,6 +591,11 @@ export namespace ChangelogListResponse {
       rules: Array<After.Rule>;
 
       /**
+       * Server-inferred value type shared by all of the flag's variations.
+       */
+      type: 'boolean' | 'string' | 'number' | 'json';
+
+      /**
        * Map of variation name to value. All values share the same type (boolean, string,
        * number, or JSON object/array), and each serialized value stays within 10KB.
        */
@@ -601,12 +604,6 @@ export namespace ChangelogListResponse {
       };
 
       description?: string | null;
-
-      /**
-       * Value type of the flag's variations. The API infers this from the variation
-       * values on write, so you can omit it in requests.
-       */
-      type?: 'boolean' | 'string' | 'number' | 'json';
 
       updated_at?: string;
 

@@ -11,3 +11,12 @@ export {
   type MitigationListResponsesV4PagePagination,
   type MitigationReviewResponsesSinglePage,
 } from './mitigations';
+export {
+  Submitted,
+  BaseSubmitted,
+  type SubmittedListResponse,
+  type SubmittedGetResponse,
+  type SubmittedListParams,
+  type SubmittedGetParams,
+  type SubmittedListResponsesV4PagePagination,
+} from './submitted/index';

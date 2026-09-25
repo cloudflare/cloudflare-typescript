@@ -32,20 +32,24 @@ export class BaseEvents extends APIResource {
    *   '699d98642c564d2e855e9661899b7252',
    *   {
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     event_end_time: '2021-09-28T17:00:00.000Z',
-   *     event_start_time: '2021-09-28T15:30:00.000Z',
+   *     event_end_time: '2021-09-28T17:00:00Z',
+   *     event_start_time: '2021-09-28T15:30:00Z',
    *     name: 'production_webinar_event',
    *   },
    * );
    * ```
    */
-  create(waitingRoomID: string, params: EventCreateParams, options?: RequestOptions): APIPromise<Event> {
+  create(
+    waitingRoomID: string,
+    params: EventCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<Event | null> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}/events`, {
         body,
         ...options,
-      }) as APIPromise<{ result: Event }>
+      }) as APIPromise<{ result: Event | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -59,20 +63,20 @@ export class BaseEvents extends APIResource {
    *   {
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     waiting_room_id: '699d98642c564d2e855e9661899b7252',
-   *     event_end_time: '2021-09-28T17:00:00.000Z',
-   *     event_start_time: '2021-09-28T15:30:00.000Z',
+   *     event_end_time: '2021-09-28T17:00:00Z',
+   *     event_start_time: '2021-09-28T15:30:00Z',
    *     name: 'production_webinar_event',
    *   },
    * );
    * ```
    */
-  update(eventID: string, params: EventUpdateParams, options?: RequestOptions): APIPromise<Event> {
+  update(eventID: string, params: EventUpdateParams, options?: RequestOptions): APIPromise<Event | null> {
     const { zone_id, waiting_room_id, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/waiting_rooms/${waiting_room_id}/events/${eventID}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: Event }>
+      }) as APIPromise<{ result: Event | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -121,13 +125,13 @@ export class BaseEvents extends APIResource {
     eventID: string,
     params: EventDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<EventDeleteResponse> {
+  ): APIPromise<EventDeleteResponse | null> {
     const { zone_id, waiting_room_id } = params;
     return (
       this._client.delete(
         path`/zones/${zone_id}/waiting_rooms/${waiting_room_id}/events/${eventID}`,
         options,
-      ) as APIPromise<{ result: EventDeleteResponse }>
+      ) as APIPromise<{ result: EventDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -141,20 +145,20 @@ export class BaseEvents extends APIResource {
    *   {
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     waiting_room_id: '699d98642c564d2e855e9661899b7252',
-   *     event_end_time: '2021-09-28T17:00:00.000Z',
-   *     event_start_time: '2021-09-28T15:30:00.000Z',
+   *     event_end_time: '2021-09-28T17:00:00Z',
+   *     event_start_time: '2021-09-28T15:30:00Z',
    *     name: 'production_webinar_event',
    *   },
    * );
    * ```
    */
-  edit(eventID: string, params: EventEditParams, options?: RequestOptions): APIPromise<Event> {
+  edit(eventID: string, params: EventEditParams, options?: RequestOptions): APIPromise<Event | null> {
     const { zone_id, waiting_room_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/waiting_rooms/${waiting_room_id}/events/${eventID}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: Event }>
+      }) as APIPromise<{ result: Event | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -172,13 +176,13 @@ export class BaseEvents extends APIResource {
    * );
    * ```
    */
-  get(eventID: string, params: EventGetParams, options?: RequestOptions): APIPromise<Event> {
+  get(eventID: string, params: EventGetParams, options?: RequestOptions): APIPromise<Event | null> {
     const { zone_id, waiting_room_id } = params;
     return (
       this._client.get(
         path`/zones/${zone_id}/waiting_rooms/${waiting_room_id}/events/${eventID}`,
         options,
-      ) as APIPromise<{ result: Event }>
+      ) as APIPromise<{ result: Event | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

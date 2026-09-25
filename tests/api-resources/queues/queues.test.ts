@@ -37,6 +37,7 @@ const runTests = (client: PartialCloudflare<{ queues: BaseQueues }>) => {
     const response = await client.queues.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       queue_name: 'example-queue',
+      jurisdiction: 'eu',
     });
   });
 
@@ -56,6 +57,7 @@ const runTests = (client: PartialCloudflare<{ queues: BaseQueues }>) => {
   test('update: required and optional params', async () => {
     const response = await client.queues.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      jurisdiction: 'eu',
       queue_name: 'example-queue',
       settings: {
         delivery_delay: 5,
@@ -115,6 +117,7 @@ const runTests = (client: PartialCloudflare<{ queues: BaseQueues }>) => {
   test('edit: required and optional params', async () => {
     const response = await client.queues.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      jurisdiction: 'eu',
       queue_name: 'example-queue',
       settings: {
         delivery_delay: 5,

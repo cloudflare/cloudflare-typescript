@@ -27,11 +27,22 @@ export class BaseRegistrations extends APIResource {
    *   Set this up at
    *   `https://dash.cloudflare.com/{account_id}/billing/payment-info`.
    * - The account must not already be at the maximum supported domain limit. A
-   *   single account may own up to 100 domains in total across registrations created
+   *   single account may own up to 500 domains in total across registrations created
    *   through either the dashboard or this API.
    * - The domain must be on a supported extension for programmatic registration.
    * - Use `POST /domain-check` immediately before calling this endpoint to confirm
    *   real-time availability and pricing.
+   *
+   * ### Supported extensions
+   *
+   * This API supports programmatic registration for all extensions supported by the
+   * dashboard experience, with the following exceptions:
+   *
+   * `giving`, `mom`, `inc`, `lol`, `sh`, `link`, `cc`, `new`
+   *
+   * Cloudflare Registrar supports 400+ extensions in the dashboard. Extensions
+   * listed above can be registered at
+   * `https://dash.cloudflare.com/{account_id}/domains/registrations`.
    *
    * ### Express mode
    *
@@ -202,22 +213,22 @@ export class Registrations extends BaseRegistrations {}
 
 export interface RegistrationCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Cloudflare account ID. Required for all Registrar API operations.
    */
   account_id: string;
 
   /**
-   * Body param: Fully qualified domain name (FQDN) including the extension (e.g.,
-   * `example.com`, `mybrand.app`). The domain name uniquely identifies a
-   * registration — the same domain cannot be registered twice, making it a natural
-   * idempotency key for registration requests.
+   * Body param: Provides a fully qualified domain name (FQDN), including the
+   * extension (e.g., `example.com`, `mybrand.app`). The domain name uniquely
+   * identifies a registration. Cloudflare permits only one registration per domain,
+   * making the domain name a natural idempotency key for registration requests.
    */
   domain_name: string;
 
   /**
-   * Body param: User acknowledgements required by a specific extension or premium
-   * registration flow. The expected keys are described by the extension registration
-   * schema returned by the extension discovery endpoint.
+   * Body param: Provides user acknowledgements for a specific extension or premium
+   * registration flow. The extension registration schema from the extension
+   * discovery endpoint identifies the required keys.
    */
   acknowledgements?: { [key: string]: unknown };
 
@@ -231,60 +242,59 @@ export interface RegistrationCreateParams {
   auto_renew?: boolean;
 
   /**
-   * Body param: Registry-specific contact extension values for the registrant. The
-   * required keys and allowed values vary by extension and are described by
-   * `GET /accounts/{account_id}/registrar/extensions/{extension}` in the
+   * Body param: Provides registry-specific contact extension values for the
+   * registrant. `GET /accounts/{account_id}/registrar/extensions/{extension}`
+   * identifies the required keys and allowed values for each extension in the
    * `registration_schema.properties.contact_extensions` object.
    *
    * Examples include `.us` nexus fields, `.uk` registrant type fields, and `.ca`
-   * legal type fields. Omit this object for extensions whose registration schema
-   * does not include `contact_extensions`.
+   * legal type fields. Omit this object when the extension's registration schema
+   * excludes `contact_extensions`.
    */
   contact_extensions?: { [key: string]: unknown };
 
   /**
-   * Body param: Contact data for the registration request.
+   * Body param: Provides contact data for the registration request.
    *
-   * The per-extension schema returned by
-   * `GET /accounts/{account_id}/registrar/extensions/{extension}` is the
-   * authoritative contract for which contact roles are accepted. Every currently
-   * supported extension requires only `contacts.registrant` from API callers.
-   * Additional roles such as `technical`, `administrator`, and `billing` may be
-   * provided when the extension schema includes them. If a registry requires one of
-   * those roles and the caller omits it, Cloudflare may derive that contact from
-   * `contacts.registrant`.
+   * The per-extension schema from
+   * `GET /accounts/{account_id}/registrar/extensions/{extension}` defines the
+   * accepted contact roles. Every currently supported extension requires only
+   * `contacts.registrant` from API callers. Callers may provide additional roles
+   * such as `technical`, `administrator`, and `billing` when the extension schema
+   * includes them. When a registry requires an omitted role, Cloudflare may derive
+   * that contact from `contacts.registrant`.
    *
-   * If the `contacts` object is omitted entirely from the request, or if
-   * `contacts.registrant` is not provided, the system will use the account's default
-   * address book entry as the registrant contact. This default must be
-   * pre-configured by the account owner at
+   * When the request omits either the entire `contacts` object or
+   * `contacts.registrant`, the system uses the account's default address book entry
+   * as the registrant contact. The account owner must configure this default at
    * `https://dash.cloudflare.com/{account_id}/domains/registrations`, where they can
-   * create or update the address book entry and accept the required agreement. No
-   * API exists for managing address book entries at this time.
+   * create or update the address book entry and accept the required agreement.
+   * Dashboard settings currently provide the only way to manage address book
+   * entries.
    *
-   * If no default address book entry exists and no registrant contact is provided,
-   * the registration request will fail with a validation error.
+   * Without either a default address book entry or a registrant contact, the
+   * registration request fails validation.
    */
   contacts?: RegistrationCreateParams.Contacts;
 
   /**
-   * Body param: WHOIS privacy mode for the registration. Defaults to `redaction`.
+   * Body param: Sets the WHOIS privacy mode for the registration. Defaults to
+   * `redaction`.
    *
-   * - `off`: Do not request WHOIS privacy.
-   * - `redaction`: Request WHOIS redaction where supported by the extension. Some
-   *   extensions do not support privacy/redaction.
+   * - `off`: Disables WHOIS privacy.
+   * - `redaction`: Requests WHOIS redaction where the extension supports it. Some
+   *   extensions exclude privacy and redaction.
    */
-  privacy_mode?: 'redaction';
+  privacy_mode?: 'off' | 'redaction';
 
   /**
-   * Body param: Number of years to register (1–10). If omitted, defaults to the
-   * minimum registration period required by the registry for this extension. For
-   * most extensions this is 1 year, but some extensions require longer minimum terms
-   * (e.g., `.ai` requires a minimum of 2 years).
+   * Body param: Sets the registration term from 1 to 10 years. When omitted, this
+   * field defaults to the registry's minimum registration period for the extension.
+   * Most extensions require 1 year, while some require longer minimum terms (e.g.,
+   * `.ai` requires 2 years).
    *
-   * The registry for each extension may also enforce its own maximum registration
-   * term. If the requested value exceeds the registry's maximum, the registration
-   * will be rejected. When in doubt, use the default by omitting this field.
+   * Each registry may also enforce its own maximum registration term. A request
+   * above that maximum fails. When uncertain, omit this field to use the default.
    */
   years?: number;
 
@@ -300,63 +310,61 @@ export interface RegistrationCreateParams {
 
 export namespace RegistrationCreateParams {
   /**
-   * Contact data for the registration request.
+   * Provides contact data for the registration request.
    *
-   * The per-extension schema returned by
-   * `GET /accounts/{account_id}/registrar/extensions/{extension}` is the
-   * authoritative contract for which contact roles are accepted. Every currently
-   * supported extension requires only `contacts.registrant` from API callers.
-   * Additional roles such as `technical`, `administrator`, and `billing` may be
-   * provided when the extension schema includes them. If a registry requires one of
-   * those roles and the caller omits it, Cloudflare may derive that contact from
-   * `contacts.registrant`.
+   * The per-extension schema from
+   * `GET /accounts/{account_id}/registrar/extensions/{extension}` defines the
+   * accepted contact roles. Every currently supported extension requires only
+   * `contacts.registrant` from API callers. Callers may provide additional roles
+   * such as `technical`, `administrator`, and `billing` when the extension schema
+   * includes them. When a registry requires an omitted role, Cloudflare may derive
+   * that contact from `contacts.registrant`.
    *
-   * If the `contacts` object is omitted entirely from the request, or if
-   * `contacts.registrant` is not provided, the system will use the account's default
-   * address book entry as the registrant contact. This default must be
-   * pre-configured by the account owner at
+   * When the request omits either the entire `contacts` object or
+   * `contacts.registrant`, the system uses the account's default address book entry
+   * as the registrant contact. The account owner must configure this default at
    * `https://dash.cloudflare.com/{account_id}/domains/registrations`, where they can
-   * create or update the address book entry and accept the required agreement. No
-   * API exists for managing address book entries at this time.
+   * create or update the address book entry and accept the required agreement.
+   * Dashboard settings currently provide the only way to manage address book
+   * entries.
    *
-   * If no default address book entry exists and no registrant contact is provided,
-   * the registration request will fail with a validation error.
+   * Without either a default address book entry or a registrant contact, the
+   * registration request fails validation.
    */
   export interface Contacts {
     /**
-     * Contact data for the domain registration. This information is submitted to the
-     * domain registry and, depending on extension and privacy settings, may appear in
-     * public WHOIS records.
+     * Optional administrator contact. Accepted only when the extension schema includes
+     * this role. When the registry requires an omitted contact, Cloudflare may derive
+     * it from `contacts.registrant`.
      */
     administrator?: Contacts.Administrator;
 
     /**
-     * Contact data for the domain registration. This information is submitted to the
-     * domain registry and, depending on extension and privacy settings, may appear in
-     * public WHOIS records.
+     * Optional billing contact. Accepted only when the extension schema includes this
+     * role. When the registry requires an omitted contact, Cloudflare may derive it
+     * from `contacts.registrant`.
      */
     billing?: Contacts.Billing;
 
     /**
-     * Contact data for the domain registration. This information is submitted to the
-     * domain registry and, depending on extension and privacy settings, may appear in
-     * public WHOIS records.
+     * Optional registrant contact. If omitted, the account's default address book
+     * entry is used instead.
      */
     registrant?: Contacts.Registrant;
 
     /**
-     * Contact data for the domain registration. This information is submitted to the
-     * domain registry and, depending on extension and privacy settings, may appear in
-     * public WHOIS records.
+     * Optional technical contact. Accepted only when the extension schema includes
+     * this role. When the registry requires an omitted contact, Cloudflare may derive
+     * it from `contacts.registrant`.
      */
     technical?: Contacts.Technical;
   }
 
   export namespace Contacts {
     /**
-     * Contact data for the domain registration. This information is submitted to the
-     * domain registry and, depending on extension and privacy settings, may appear in
-     * public WHOIS records.
+     * Optional administrator contact. Accepted only when the extension schema includes
+     * this role. When the registry requires an omitted contact, Cloudflare may derive
+     * it from `contacts.registrant`.
      */
     export interface Administrator {
       /**
@@ -366,7 +374,7 @@ export namespace RegistrationCreateParams {
       email: string;
 
       /**
-       * Phone number in E.164 format: `+{country_code}.{number}` with no spaces or
+       * Phone number in E.164 format: `+{country_code}.{number}` without spaces or
        * dashes. Examples: `+1.5555555555` (US), `+44.2071234567` (UK), `+81.312345678`
        * (Japan).
        */
@@ -450,9 +458,9 @@ export namespace RegistrationCreateParams {
     }
 
     /**
-     * Contact data for the domain registration. This information is submitted to the
-     * domain registry and, depending on extension and privacy settings, may appear in
-     * public WHOIS records.
+     * Optional billing contact. Accepted only when the extension schema includes this
+     * role. When the registry requires an omitted contact, Cloudflare may derive it
+     * from `contacts.registrant`.
      */
     export interface Billing {
       /**
@@ -462,7 +470,7 @@ export namespace RegistrationCreateParams {
       email: string;
 
       /**
-       * Phone number in E.164 format: `+{country_code}.{number}` with no spaces or
+       * Phone number in E.164 format: `+{country_code}.{number}` without spaces or
        * dashes. Examples: `+1.5555555555` (US), `+44.2071234567` (UK), `+81.312345678`
        * (Japan).
        */
@@ -546,9 +554,8 @@ export namespace RegistrationCreateParams {
     }
 
     /**
-     * Contact data for the domain registration. This information is submitted to the
-     * domain registry and, depending on extension and privacy settings, may appear in
-     * public WHOIS records.
+     * Optional registrant contact. If omitted, the account's default address book
+     * entry is used instead.
      */
     export interface Registrant {
       /**
@@ -558,7 +565,7 @@ export namespace RegistrationCreateParams {
       email: string;
 
       /**
-       * Phone number in E.164 format: `+{country_code}.{number}` with no spaces or
+       * Phone number in E.164 format: `+{country_code}.{number}` without spaces or
        * dashes. Examples: `+1.5555555555` (US), `+44.2071234567` (UK), `+81.312345678`
        * (Japan).
        */
@@ -642,9 +649,9 @@ export namespace RegistrationCreateParams {
     }
 
     /**
-     * Contact data for the domain registration. This information is submitted to the
-     * domain registry and, depending on extension and privacy settings, may appear in
-     * public WHOIS records.
+     * Optional technical contact. Accepted only when the extension schema includes
+     * this role. When the registry requires an omitted contact, Cloudflare may derive
+     * it from `contacts.registrant`.
      */
     export interface Technical {
       /**
@@ -654,7 +661,7 @@ export namespace RegistrationCreateParams {
       email: string;
 
       /**
-       * Phone number in E.164 format: `+{country_code}.{number}` with no spaces or
+       * Phone number in E.164 format: `+{country_code}.{number}` without spaces or
        * dashes. Examples: `+1.5555555555` (US), `+44.2071234567` (UK), `+81.312345678`
        * (Japan).
        */
@@ -741,7 +748,7 @@ export namespace RegistrationCreateParams {
 
 export interface RegistrationListParams extends CursorPaginationParams {
   /**
-   * Path param: Identifier
+   * Path param: Cloudflare account ID.
    */
   account_id: string;
 
@@ -759,7 +766,7 @@ export interface RegistrationListParams extends CursorPaginationParams {
 
 export interface RegistrationEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Cloudflare account ID.
    */
   account_id: string;
 
@@ -780,7 +787,7 @@ export interface RegistrationEditParams {
 
 export interface RegistrationGetParams {
   /**
-   * Identifier
+   * Cloudflare account ID.
    */
   account_id: string;
 }

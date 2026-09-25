@@ -64,6 +64,20 @@ Methods:
 - <code title="delete /user/organizations/{organization_id}">client.user.organizations.<a href="./src/resources/user/organizations.ts">delete</a>(organizationID) -> OrganizationDeleteResponse</code>
 - <code title="get /user/organizations/{organization_id}">client.user.organizations.<a href="./src/resources/user/organizations.ts">get</a>(organizationID) -> OrganizationGetResponse</code>
 
+## SpectrumAnalytics
+
+### Zones
+
+#### Reports
+
+Types:
+
+- <code><a href="./src/resources/user/spectrum-analytics/zones/reports.ts">ReportGetResponse</a></code>
+
+Methods:
+
+- <code title="get /user/spectrum_analytics/zones/report">client.user.spectrumAnalytics.zones.reports.<a href="./src/resources/user/spectrum-analytics/zones/reports.ts">get</a>({ ...params }) -> ReportGetResponse</code>
+
 ## Subscriptions
 
 Types:
@@ -114,4 +128,4 @@ Methods:
 
 Methods:
 
-- <code title="put /user/tokens/{token_id}/value">client.user.tokens.value.<a href="./src/resources/user/tokens/value.ts">update</a>(tokenID, { ...params }) -> TokenValue</code>
+- <code title="put /user/tokens/{token_id}/value">client.user.tokens.value.<a href="./src/resources/user/tokens/value.ts">update</a>(tokenID) -> TokenValue</code>

@@ -331,10 +331,7 @@ const runTests = (client: PartialCloudflare<{ dns: { records: BaseRecords } }>) 
   });
 
   test('scan: only required params', async () => {
-    const responsePromise = client.dns.records.scan({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
-    });
+    const responsePromise = client.dns.records.scan({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -345,10 +342,7 @@ const runTests = (client: PartialCloudflare<{ dns: { records: BaseRecords } }>) 
   });
 
   test('scan: required and optional params', async () => {
-    const response = await client.dns.records.scan({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
-    });
+    const response = await client.dns.records.scan({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   // mock server returns invalid data

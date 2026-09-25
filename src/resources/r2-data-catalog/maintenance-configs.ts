@@ -88,6 +88,11 @@ export interface MaintenanceConfigUpdateResponse {
   compaction?: MaintenanceConfigUpdateResponse.Compaction;
 
   /**
+   * Scheduling interval between normal table maintenance runs.
+   */
+  interval?: string;
+
+  /**
    * Configures snapshot expiration settings.
    */
   snapshot_expiration?: MaintenanceConfigUpdateResponse.SnapshotExpiration;
@@ -159,6 +164,11 @@ export namespace MaintenanceConfigGetResponse {
     compaction?: MaintenanceConfig.Compaction;
 
     /**
+     * Scheduling interval between normal table maintenance runs.
+     */
+    interval?: string;
+
+    /**
      * Configures snapshot expiration settings.
      */
     snapshot_expiration?: MaintenanceConfig.SnapshotExpiration;
@@ -207,7 +217,7 @@ export namespace MaintenanceConfigGetResponse {
 
 export interface MaintenanceConfigUpdateParams {
   /**
-   * Path param: Use this to identify the account.
+   * Path param: Identifies the account.
    */
   account_id: string;
 
@@ -261,7 +271,7 @@ export namespace MaintenanceConfigUpdateParams {
 
 export interface MaintenanceConfigGetParams {
   /**
-   * Use this to identify the account.
+   * Identifies the account.
    */
   account_id: string;
 }

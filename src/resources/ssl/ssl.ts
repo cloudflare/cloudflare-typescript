@@ -13,7 +13,12 @@ import {
   BaseAutoOriginTLSKex,
 } from './auto-origin-tls-kex';
 import * as RecommendationsAPI from './recommendations';
-import { BaseRecommendations, Recommendations } from './recommendations';
+import {
+  BaseRecommendations,
+  RecommendationGetParams,
+  RecommendationGetResponse,
+  Recommendations,
+} from './recommendations';
 import * as VerificationAPI from './verification';
 import {
   BaseVerificationResource,
@@ -39,7 +44,10 @@ import {
   CertificatePackListResponse,
   CertificatePackListResponsesV4PagePaginationArray,
   CertificatePacks,
+  Host,
   RequestValidity,
+  Status,
+  ValidationMethod,
 } from './certificate-packs/certificate-packs';
 import * as UniversalAPI from './universal/universal';
 import { BaseUniversal, Universal } from './universal/universal';
@@ -84,7 +92,10 @@ export declare namespace SSL {
   export {
     CertificatePacks as CertificatePacks,
     BaseCertificatePacks as BaseCertificatePacks,
+    type Host as Host,
     type RequestValidity as RequestValidity,
+    type Status as Status,
+    type ValidationMethod as ValidationMethod,
     type CertificatePackCreateResponse as CertificatePackCreateResponse,
     type CertificatePackListResponse as CertificatePackListResponse,
     type CertificatePackDeleteResponse as CertificatePackDeleteResponse,
@@ -98,7 +109,12 @@ export declare namespace SSL {
     type CertificatePackGetParams as CertificatePackGetParams,
   };
 
-  export { Recommendations as Recommendations, BaseRecommendations as BaseRecommendations };
+  export {
+    Recommendations as Recommendations,
+    BaseRecommendations as BaseRecommendations,
+    type RecommendationGetResponse as RecommendationGetResponse,
+    type RecommendationGetParams as RecommendationGetParams,
+  };
 
   export {
     AutoOriginTLSKex as AutoOriginTLSKex,

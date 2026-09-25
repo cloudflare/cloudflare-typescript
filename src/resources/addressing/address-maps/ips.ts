@@ -22,16 +22,15 @@ export class BaseIPs extends APIResource {
    *   {
    *     account_id: '258def64c72dae45f3e4c8516e2111f2',
    *     address_map_id: '055817b111884e0227e1be16a0be6ee0',
-   *     body: {},
    *   },
    * );
    * ```
    */
   update(ipAddress: string, params: IPUpdateParams, options?: RequestOptions): APIPromise<IPUpdateResponse> {
-    const { account_id, address_map_id, body } = params;
+    const { account_id, address_map_id } = params;
     return this._client.put(
       path`/accounts/${account_id}/addressing/address_maps/${address_map_id}/ips/${ipAddress}`,
-      { body: body, ...options },
+      options,
     );
   }
 
@@ -209,19 +208,14 @@ export namespace IPDeleteResponse {
 
 export interface IPUpdateParams {
   /**
-   * Path param: Identifier of a Cloudflare account.
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 
   /**
-   * Path param: Identifier of an Address Map.
+   * Identifier of an Address Map.
    */
   address_map_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface IPDeleteParams {

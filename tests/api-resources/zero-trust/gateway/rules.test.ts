@@ -275,6 +275,10 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { rules: Bas
   test('list: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.rules.list({
       account_id: '699d98642c564d2e855e9661899b7252',
+      direction: 'asc',
+      filter: ['string'],
+      order_by: 'name',
+      search: 'search',
     });
   });
 

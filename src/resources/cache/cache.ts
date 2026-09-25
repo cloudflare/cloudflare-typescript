@@ -15,12 +15,10 @@ import {
   CacheReserveResource,
   CacheReserveStatusParams,
   CacheReserveStatusResponse,
-  State,
 } from './cache-reserve';
 import * as OriginCloudRegionsAPI from './origin-cloud-regions';
 import {
   BaseOriginCloudRegions,
-  OriginCloudRegion,
   OriginCloudRegionBulkDeleteParams,
   OriginCloudRegionBulkDeleteResponse,
   OriginCloudRegionBulkUpdateParams,
@@ -28,12 +26,15 @@ import {
   OriginCloudRegionDeleteParams,
   OriginCloudRegionDeleteResponse,
   OriginCloudRegionGetParams,
+  OriginCloudRegionGetResponse,
   OriginCloudRegionListParams,
+  OriginCloudRegionListResponse,
+  OriginCloudRegionListResponsesV4PagePaginationArray,
   OriginCloudRegionSupportedRegionsParams,
   OriginCloudRegionSupportedRegionsResponse,
   OriginCloudRegionUpdateParams,
+  OriginCloudRegionUpdateResponse,
   OriginCloudRegions,
-  OriginCloudRegionsV4PagePaginationArray,
 } from './origin-cloud-regions';
 import * as RegionalTieredCacheAPI from './regional-tiered-cache';
 import {
@@ -61,7 +62,6 @@ import {
 import * as VariantsAPI from './variants';
 import {
   BaseVariants,
-  CacheVariant,
   VariantDeleteParams,
   VariantDeleteResponse,
   VariantEditParams,
@@ -429,7 +429,6 @@ export declare namespace Cache {
     BaseCacheReserveResource as BaseCacheReserveResource,
     type CacheReserve as CacheReserve,
     type CacheReserveClear as CacheReserveClear,
-    type State as State,
     type CacheReserveClearResponse as CacheReserveClearResponse,
     type CacheReserveEditResponse as CacheReserveEditResponse,
     type CacheReserveGetResponse as CacheReserveGetResponse,
@@ -456,7 +455,6 @@ export declare namespace Cache {
   export {
     Variants as Variants,
     BaseVariants as BaseVariants,
-    type CacheVariant as CacheVariant,
     type VariantDeleteResponse as VariantDeleteResponse,
     type VariantEditResponse as VariantEditResponse,
     type VariantGetResponse as VariantGetResponse,
@@ -478,12 +476,14 @@ export declare namespace Cache {
   export {
     OriginCloudRegions as OriginCloudRegions,
     BaseOriginCloudRegions as BaseOriginCloudRegions,
-    type OriginCloudRegion as OriginCloudRegion,
+    type OriginCloudRegionUpdateResponse as OriginCloudRegionUpdateResponse,
+    type OriginCloudRegionListResponse as OriginCloudRegionListResponse,
     type OriginCloudRegionDeleteResponse as OriginCloudRegionDeleteResponse,
     type OriginCloudRegionBulkDeleteResponse as OriginCloudRegionBulkDeleteResponse,
     type OriginCloudRegionBulkUpdateResponse as OriginCloudRegionBulkUpdateResponse,
+    type OriginCloudRegionGetResponse as OriginCloudRegionGetResponse,
     type OriginCloudRegionSupportedRegionsResponse as OriginCloudRegionSupportedRegionsResponse,
-    type OriginCloudRegionsV4PagePaginationArray as OriginCloudRegionsV4PagePaginationArray,
+    type OriginCloudRegionListResponsesV4PagePaginationArray as OriginCloudRegionListResponsesV4PagePaginationArray,
     type OriginCloudRegionUpdateParams as OriginCloudRegionUpdateParams,
     type OriginCloudRegionListParams as OriginCloudRegionListParams,
     type OriginCloudRegionDeleteParams as OriginCloudRegionDeleteParams,

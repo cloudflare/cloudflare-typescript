@@ -50,7 +50,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { objects: BaseObje
       per_page: 1,
       prefix: 'prefix',
       start_after: 'start_after',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -74,7 +74,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { objects: BaseObje
     const response = await client.r2.buckets.objects.delete('path/to/my-object.txt', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -83,7 +83,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { objects: BaseObje
     const response = await client.r2.buckets.objects.get('path/to/my-object.txt', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
       'If-Modified-Since': 'If-Modified-Since',
       'If-None-Match': 'If-None-Match',
     });
@@ -113,7 +113,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { objects: BaseObje
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         bucket_name: 'example-bucket',
-        jurisdiction: 'default',
+        'cf-r2-jurisdiction': 'default',
         'cf-r2-storage-class': 'Standard',
       },
     );

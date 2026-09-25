@@ -27,9 +27,9 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeetings } }>) => {
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('create: only required params', async () => {
-    const responsePromise = client.realtimeKit.meetings.create('app_id', {
+    const responsePromise = client.realtimeKit.meetings.create('14a396e7-ca44-4937-bf1f-050a69118543', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -41,9 +41,9 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('create: required and optional params', async () => {
-    const response = await client.realtimeKit.meetings.create('app_id', {
+    const response = await client.realtimeKit.meetings.create('14a396e7-ca44-4937-bf1f-050a69118543', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       ai_config: {
         summarization: {
@@ -71,7 +71,6 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
         max_seconds: 60,
         realtimekit_bucket_config: { enabled: true },
         storage_config: {
-          type: 'aws',
           access_key: 'access_key',
           auth_method: 'KEY',
           bucket: 'bucket',
@@ -82,6 +81,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
           private_key: 'private_key',
           region: 'us-east-1',
           secret: 'secret',
+          type: 'gcs',
           username: 'username',
         },
         video_config: {
@@ -103,13 +103,13 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     });
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('addParticipant: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.addParticipant(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        app_id: 'app_id',
+        app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
         custom_participant_id: 'custom_participant_id',
         preset_name: 'preset_name',
       },
@@ -123,13 +123,13 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('addParticipant: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.addParticipant(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        app_id: 'app_id',
+        app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
         custom_participant_id: 'custom_participant_id',
         preset_name: 'preset_name',
         name: 'Mary Sue',
@@ -138,11 +138,11 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     );
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('deleteMeetingParticipant: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.deleteMeetingParticipant('participant_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
       meeting_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -154,20 +154,20 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('deleteMeetingParticipant: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.deleteMeetingParticipant('participant_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
       meeting_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('editParticipant: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.editParticipant('participant_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
       meeting_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -179,11 +179,11 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('editParticipant: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.editParticipant('participant_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
       meeting_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       name: 'Jane Doe',
       picture: 'https://example.com',
@@ -191,9 +191,9 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     });
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('get: only required params', async () => {
-    const responsePromise = client.realtimeKit.meetings.get('app_id', {
+    const responsePromise = client.realtimeKit.meetings.get('14a396e7-ca44-4937-bf1f-050a69118543', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -205,9 +205,9 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('get: required and optional params', async () => {
-    const response = await client.realtimeKit.meetings.get('app_id', {
+    const response = await client.realtimeKit.meetings.get('14a396e7-ca44-4937-bf1f-050a69118543', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       end_time: '2019-12-27T18:11:19.117Z',
       page_no: 0,
@@ -218,11 +218,11 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     });
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('getMeetingByID: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.getMeetingByID(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: '14a396e7-ca44-4937-bf1f-050a69118543' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -233,23 +233,23 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('getMeetingByID: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.getMeetingByID(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        app_id: 'app_id',
+        app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
         name: 'name',
       },
     );
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('getMeetingParticipant: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.getMeetingParticipant('participant_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
       meeting_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -261,20 +261,20 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('getMeetingParticipant: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.getMeetingParticipant('participant_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
       meeting_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('getMeetingParticipants: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.getMeetingParticipants(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: '14a396e7-ca44-4937-bf1f-050a69118543' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -285,24 +285,24 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('getMeetingParticipants: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.getMeetingParticipants(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        app_id: 'app_id',
+        app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
         page_no: 0,
         per_page: 0,
       },
     );
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('refreshParticipantToken: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.refreshParticipantToken('participant_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
       meeting_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -314,20 +314,20 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('refreshParticipantToken: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.refreshParticipantToken('participant_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
       meeting_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('replaceMeetingByID: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.replaceMeetingByID(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: '14a396e7-ca44-4937-bf1f-050a69118543' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -338,13 +338,13 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('replaceMeetingByID: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.replaceMeetingByID(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        app_id: 'app_id',
+        app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
         ai_config: {
           summarization: {
             summary_type: 'general',
@@ -371,7 +371,6 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
           max_seconds: 60,
           realtimekit_bucket_config: { enabled: true },
           storage_config: {
-            type: 'aws',
             access_key: 'access_key',
             auth_method: 'KEY',
             bucket: 'bucket',
@@ -382,6 +381,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
             private_key: 'private_key',
             region: 'us-east-1',
             secret: 'secret',
+            type: 'gcs',
             username: 'username',
           },
           video_config: {
@@ -404,11 +404,11 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     );
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('updateMeetingByID: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.updateMeetingByID(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: '14a396e7-ca44-4937-bf1f-050a69118543' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -419,13 +419,13 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // TODO: auth not handled well
   test.skip('updateMeetingByID: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.updateMeetingByID(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        app_id: 'app_id',
+        app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
         ai_config: {
           summarization: {
             summary_type: 'general',
@@ -452,7 +452,6 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
           max_seconds: 60,
           realtimekit_bucket_config: { enabled: true },
           storage_config: {
-            type: 'aws',
             access_key: 'access_key',
             auth_method: 'KEY',
             bucket: 'bucket',
@@ -463,6 +462,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
             private_key: 'private_key',
             region: 'us-east-1',
             secret: 'secret',
+            type: 'gcs',
             username: 'username',
           },
           video_config: {

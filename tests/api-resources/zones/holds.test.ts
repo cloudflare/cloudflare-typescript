@@ -77,7 +77,7 @@ const runTests = (client: PartialCloudflare<{ zones: { holds: BaseHolds } }>) =>
   test('edit: required and optional params', async () => {
     const response = await client.zones.holds.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      hold_after: '2023-01-31T15:56:36+00:00',
+      hold_after: '2023-01-31T15:56:36Z',
       include_subdomains: true,
     });
   });

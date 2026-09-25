@@ -239,6 +239,10 @@ export namespace PortalCreateResponse {
 
     created_by?: string;
 
+    /**
+     * Hide this server's tools and prompts by default. To expose specific
+     * capabilities, set enabled: true for them in updated_tools or updated_prompts.
+     */
     default_disabled?: boolean;
 
     /**
@@ -486,6 +490,10 @@ export namespace PortalUpdateResponse {
 
     created_by?: string;
 
+    /**
+     * Hide this server's tools and prompts by default. To expose specific
+     * capabilities, set enabled: true for them in updated_tools or updated_prompts.
+     */
     default_disabled?: boolean;
 
     /**
@@ -733,6 +741,10 @@ export namespace PortalListResponse {
 
     created_by?: string;
 
+    /**
+     * Hide this server's tools and prompts by default. To expose specific
+     * capabilities, set enabled: true for them in updated_tools or updated_prompts.
+     */
     default_disabled?: boolean;
 
     /**
@@ -1033,6 +1045,10 @@ export namespace PortalReadResponse {
 
     created_by?: string;
 
+    /**
+     * Hide this server's tools and prompts by default. To expose specific
+     * capabilities, set enabled: true for them in updated_tools or updated_prompts.
+     */
     default_disabled?: boolean;
 
     /**
@@ -1240,7 +1256,9 @@ export namespace PortalCreateParams {
     server_id: string;
 
     /**
-     * Disable this server by default for clients connecting through the portal.
+     * Hide this server's tools and prompts by default. To expose specific
+     * capabilities, set enabled: true for them in this server entry's updated_tools or
+     * updated_prompts fields when creating or updating the portal.
      */
     default_disabled?: boolean;
 
@@ -1366,7 +1384,9 @@ export namespace PortalUpdateParams {
     server_id: string;
 
     /**
-     * Disable this server by default for clients connecting through the portal.
+     * Hide this server's tools and prompts by default. To expose specific
+     * capabilities, set enabled: true for them in this server entry's updated_tools or
+     * updated_prompts fields when creating or updating the portal.
      */
     default_disabled?: boolean;
 

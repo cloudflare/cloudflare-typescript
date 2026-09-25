@@ -102,6 +102,45 @@ export class BaseAllowPolicies extends APIResource {
   }
 
   /**
+   * Executes multiple operations atomically. All four operation arrays (deletes,
+   * patches, puts, posts) are required and executed in order. Send empty arrays for
+   * unused operations.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.emailSecurity.settings.allowPolicies.batch({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     deletes: [
+   *       { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415' },
+   *     ],
+   *     patches: [{}],
+   *     posts: [
+   *       {
+   *         is_acceptable_sender: false,
+   *         is_exempt_recipient: false,
+   *         is_regex: false,
+   *         is_trusted_sender: true,
+   *         pattern: 'test@example.com',
+   *         pattern_type: 'EMAIL',
+   *         verify_sender: true,
+   *       },
+   *     ],
+   *     puts: [{}],
+   *   });
+   * ```
+   */
+  batch(params: AllowPolicyBatchParams, options?: RequestOptions): APIPromise<AllowPolicyBatchResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/email-security/settings/allow_policies/batch`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: AllowPolicyBatchResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Updates an existing allow policy. Only provided fields will be modified. Changes
    * take effect for new emails matching the pattern.
    *
@@ -215,9 +254,10 @@ export interface AllowPolicyCreateResponse {
   /**
    * The pattern value to match. The format depends on `pattern_type`: a valid email
    * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
-   * (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP (e.g.
-   * `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP addresses
-   * and rejects private, loopback, link-local, and unspecified addresses.
+   * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
+   * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
+   * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
+   * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
    */
   pattern?: string;
 
@@ -226,8 +266,11 @@ export interface AllowPolicyCreateResponse {
    *
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
-   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+   *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+   *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+   *   link-local, unspecified, and IPv4 broadcast addresses, including their
+   *   IPv4-mapped IPv6 equivalents.
    * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
    *   but it may appear on existing entries.
    */
@@ -296,9 +339,10 @@ export interface AllowPolicyListResponse {
   /**
    * The pattern value to match. The format depends on `pattern_type`: a valid email
    * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
-   * (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP (e.g.
-   * `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP addresses
-   * and rejects private, loopback, link-local, and unspecified addresses.
+   * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
+   * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
+   * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
+   * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
    */
   pattern?: string;
 
@@ -307,8 +351,11 @@ export interface AllowPolicyListResponse {
    *
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
-   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+   *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+   *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+   *   link-local, unspecified, and IPv4 broadcast addresses, including their
+   *   IPv4-mapped IPv6 equivalents.
    * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
    *   but it may appear on existing entries.
    */
@@ -326,6 +373,280 @@ export interface AllowPolicyDeleteResponse {
    * Allow policy identifier.
    */
   id: string;
+}
+
+export interface AllowPolicyBatchResponse {
+  deletes?: Array<AllowPolicyBatchResponse.Delete>;
+
+  patches?: Array<AllowPolicyBatchResponse.Patch>;
+
+  posts?: Array<AllowPolicyBatchResponse.Post>;
+
+  puts?: Array<AllowPolicyBatchResponse.Put>;
+}
+
+export namespace AllowPolicyBatchResponse {
+  export interface Delete {
+    /**
+     * Allow policy identifier.
+     */
+    id: string;
+  }
+
+  /**
+   * An email allow policy.
+   */
+  export interface Patch {
+    /**
+     * Allow policy identifier.
+     */
+    id: string;
+
+    created_at: string;
+
+    /**
+     * @deprecated Use `modified_at` instead.
+     */
+    last_modified: string;
+
+    comments?: string | null;
+
+    /**
+     * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
+     * Malicious and Suspicious dispositions still apply.
+     */
+    is_acceptable_sender?: boolean;
+
+    /**
+     * Bypasses all detections for messages to this recipient.
+     */
+    is_exempt_recipient?: boolean;
+
+    /**
+     * @deprecated Use `is_exempt_recipient` instead.
+     */
+    is_recipient?: boolean;
+
+    is_regex?: boolean;
+
+    /**
+     * @deprecated Use `is_trusted_sender` instead.
+     */
+    is_sender?: boolean;
+
+    /**
+     * @deprecated Use `is_acceptable_sender` instead.
+     */
+    is_spoof?: boolean;
+
+    /**
+     * Bypasses all detections and link following for messages from this sender.
+     */
+    is_trusted_sender?: boolean;
+
+    modified_at?: string;
+
+    /**
+     * The pattern value to match. The format depends on `pattern_type`: a valid email
+     * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+     * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
+     * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
+     * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
+     * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+     */
+    pattern?: string;
+
+    /**
+     * Type of pattern matching.
+     *
+     * - EMAIL: matches a full email address (e.g. `user@example.com`)
+     * - DOMAIN: matches a domain name (e.g. `example.com`)
+     * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+     *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+     *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+     *   link-local, unspecified, and IPv4 broadcast addresses, including their
+     *   IPv4-mapped IPv6 equivalents.
+     * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+     *   but it may appear on existing entries.
+     */
+    pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
+
+    /**
+     * Enforce DMARC, SPF or DKIM authentication. When on, Email Security only honors
+     * policies that pass authentication.
+     */
+    verify_sender?: boolean;
+  }
+
+  /**
+   * An email allow policy.
+   */
+  export interface Post {
+    /**
+     * Allow policy identifier.
+     */
+    id: string;
+
+    created_at: string;
+
+    /**
+     * @deprecated Use `modified_at` instead.
+     */
+    last_modified: string;
+
+    comments?: string | null;
+
+    /**
+     * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
+     * Malicious and Suspicious dispositions still apply.
+     */
+    is_acceptable_sender?: boolean;
+
+    /**
+     * Bypasses all detections for messages to this recipient.
+     */
+    is_exempt_recipient?: boolean;
+
+    /**
+     * @deprecated Use `is_exempt_recipient` instead.
+     */
+    is_recipient?: boolean;
+
+    is_regex?: boolean;
+
+    /**
+     * @deprecated Use `is_trusted_sender` instead.
+     */
+    is_sender?: boolean;
+
+    /**
+     * @deprecated Use `is_acceptable_sender` instead.
+     */
+    is_spoof?: boolean;
+
+    /**
+     * Bypasses all detections and link following for messages from this sender.
+     */
+    is_trusted_sender?: boolean;
+
+    modified_at?: string;
+
+    /**
+     * The pattern value to match. The format depends on `pattern_type`: a valid email
+     * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+     * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
+     * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
+     * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
+     * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+     */
+    pattern?: string;
+
+    /**
+     * Type of pattern matching.
+     *
+     * - EMAIL: matches a full email address (e.g. `user@example.com`)
+     * - DOMAIN: matches a domain name (e.g. `example.com`)
+     * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+     *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+     *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+     *   link-local, unspecified, and IPv4 broadcast addresses, including their
+     *   IPv4-mapped IPv6 equivalents.
+     * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+     *   but it may appear on existing entries.
+     */
+    pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
+
+    /**
+     * Enforce DMARC, SPF or DKIM authentication. When on, Email Security only honors
+     * policies that pass authentication.
+     */
+    verify_sender?: boolean;
+  }
+
+  /**
+   * An email allow policy.
+   */
+  export interface Put {
+    /**
+     * Allow policy identifier.
+     */
+    id: string;
+
+    created_at: string;
+
+    /**
+     * @deprecated Use `modified_at` instead.
+     */
+    last_modified: string;
+
+    comments?: string | null;
+
+    /**
+     * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
+     * Malicious and Suspicious dispositions still apply.
+     */
+    is_acceptable_sender?: boolean;
+
+    /**
+     * Bypasses all detections for messages to this recipient.
+     */
+    is_exempt_recipient?: boolean;
+
+    /**
+     * @deprecated Use `is_exempt_recipient` instead.
+     */
+    is_recipient?: boolean;
+
+    is_regex?: boolean;
+
+    /**
+     * @deprecated Use `is_trusted_sender` instead.
+     */
+    is_sender?: boolean;
+
+    /**
+     * @deprecated Use `is_acceptable_sender` instead.
+     */
+    is_spoof?: boolean;
+
+    /**
+     * Bypasses all detections and link following for messages from this sender.
+     */
+    is_trusted_sender?: boolean;
+
+    modified_at?: string;
+
+    /**
+     * The pattern value to match. The format depends on `pattern_type`: a valid email
+     * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+     * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
+     * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
+     * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
+     * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+     */
+    pattern?: string;
+
+    /**
+     * Type of pattern matching.
+     *
+     * - EMAIL: matches a full email address (e.g. `user@example.com`)
+     * - DOMAIN: matches a domain name (e.g. `example.com`)
+     * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+     *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+     *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+     *   link-local, unspecified, and IPv4 broadcast addresses, including their
+     *   IPv4-mapped IPv6 equivalents.
+     * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+     *   but it may appear on existing entries.
+     */
+    pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
+
+    /**
+     * Enforce DMARC, SPF or DKIM authentication. When on, Email Security only honors
+     * policies that pass authentication.
+     */
+    verify_sender?: boolean;
+  }
 }
 
 /**
@@ -384,9 +705,10 @@ export interface AllowPolicyEditResponse {
   /**
    * The pattern value to match. The format depends on `pattern_type`: a valid email
    * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
-   * (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP (e.g.
-   * `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP addresses
-   * and rejects private, loopback, link-local, and unspecified addresses.
+   * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
+   * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
+   * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
+   * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
    */
   pattern?: string;
 
@@ -395,8 +717,11 @@ export interface AllowPolicyEditResponse {
    *
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
-   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+   *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+   *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+   *   link-local, unspecified, and IPv4 broadcast addresses, including their
+   *   IPv4-mapped IPv6 equivalents.
    * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
    *   but it may appear on existing entries.
    */
@@ -465,9 +790,10 @@ export interface AllowPolicyGetResponse {
   /**
    * The pattern value to match. The format depends on `pattern_type`: a valid email
    * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
-   * (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP (e.g.
-   * `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP addresses
-   * and rejects private, loopback, link-local, and unspecified addresses.
+   * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
+   * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
+   * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
+   * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
    */
   pattern?: string;
 
@@ -476,8 +802,11 @@ export interface AllowPolicyGetResponse {
    *
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
-   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+   *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+   *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+   *   link-local, unspecified, and IPv4 broadcast addresses, including their
+   *   IPv4-mapped IPv6 equivalents.
    * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
    *   but it may appear on existing entries.
    */
@@ -492,7 +821,7 @@ export interface AllowPolicyGetResponse {
 
 export interface AllowPolicyCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -521,9 +850,11 @@ export interface AllowPolicyCreateParams {
   /**
    * Body param: The pattern value to match. The format depends on `pattern_type`: a
    * valid email address for EMAIL (e.g. `user@example.com`), a valid domain name for
-   * DOMAIN (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP
-   * (e.g. `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP
-   * addresses and rejects private, loopback, link-local, and unspecified addresses.
+   * DOMAIN (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for
+   * IP (e.g. `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or
+   * `2606:4700:4700::/48`); the API rejects private or unique-local, loopback,
+   * link-local, unspecified, and IPv4 broadcast addresses, including their
+   * IPv4-mapped IPv6 equivalents.
    */
   pattern: string;
 
@@ -532,8 +863,11 @@ export interface AllowPolicyCreateParams {
    *
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
-   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+   *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+   *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+   *   link-local, unspecified, and IPv4 broadcast addresses, including their
+   *   IPv4-mapped IPv6 equivalents.
    * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
    *   but it may appear on existing entries.
    */
@@ -568,7 +902,7 @@ export interface AllowPolicyCreateParams {
 
 export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -610,8 +944,11 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
    *
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
-   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+   *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+   *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+   *   link-local, unspecified, and IPv4 broadcast addresses, including their
+   *   IPv4-mapped IPv6 equivalents.
    * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
    *   but it may appear on existing entries.
    */
@@ -631,14 +968,263 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
 
 export interface AllowPolicyDeleteParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }
 
+export interface AllowPolicyBatchParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param
+   */
+  deletes: Array<AllowPolicyBatchParams.Delete>;
+
+  /**
+   * Body param
+   */
+  patches: Array<AllowPolicyBatchParams.Patch>;
+
+  /**
+   * Body param
+   */
+  posts: Array<AllowPolicyBatchParams.Post>;
+
+  /**
+   * Body param
+   */
+  puts: Array<AllowPolicyBatchParams.Put>;
+}
+
+export namespace AllowPolicyBatchParams {
+  export interface Delete {
+    /**
+     * Allow policy identifier.
+     */
+    id: string;
+  }
+
+  /**
+   * An email allow policy.
+   */
+  export interface Patch {
+    comments?: string | null;
+
+    /**
+     * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
+     * Malicious and Suspicious dispositions still apply.
+     */
+    is_acceptable_sender?: boolean;
+
+    /**
+     * Bypasses all detections for messages to this recipient.
+     */
+    is_exempt_recipient?: boolean;
+
+    /**
+     * @deprecated Use `is_exempt_recipient` instead.
+     */
+    is_recipient?: boolean;
+
+    is_regex?: boolean;
+
+    /**
+     * @deprecated Use `is_trusted_sender` instead.
+     */
+    is_sender?: boolean;
+
+    /**
+     * @deprecated Use `is_acceptable_sender` instead.
+     */
+    is_spoof?: boolean;
+
+    /**
+     * Bypasses all detections and link following for messages from this sender.
+     */
+    is_trusted_sender?: boolean;
+
+    /**
+     * The pattern value to match. The format depends on `pattern_type`: a valid email
+     * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+     * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
+     * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
+     * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
+     * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+     */
+    pattern?: string;
+
+    /**
+     * Type of pattern matching.
+     *
+     * - EMAIL: matches a full email address (e.g. `user@example.com`)
+     * - DOMAIN: matches a domain name (e.g. `example.com`)
+     * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+     *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+     *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+     *   link-local, unspecified, and IPv4 broadcast addresses, including their
+     *   IPv4-mapped IPv6 equivalents.
+     * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+     *   but it may appear on existing entries.
+     */
+    pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
+
+    /**
+     * Enforce DMARC, SPF or DKIM authentication. When on, Email Security only honors
+     * policies that pass authentication.
+     */
+    verify_sender?: boolean;
+  }
+
+  /**
+   * Create an allow policy.
+   */
+  export interface Post {
+    /**
+     * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
+     * Malicious and Suspicious dispositions still apply.
+     */
+    is_acceptable_sender: boolean;
+
+    /**
+     * Bypasses all detections for messages to this recipient.
+     */
+    is_exempt_recipient: boolean;
+
+    is_regex: boolean;
+
+    /**
+     * Bypasses all detections and link following for messages from this sender.
+     */
+    is_trusted_sender: boolean;
+
+    /**
+     * The pattern value to match. The format depends on `pattern_type`: a valid email
+     * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+     * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
+     * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
+     * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
+     * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+     */
+    pattern: string;
+
+    /**
+     * Type of pattern matching.
+     *
+     * - EMAIL: matches a full email address (e.g. `user@example.com`)
+     * - DOMAIN: matches a domain name (e.g. `example.com`)
+     * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+     *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+     *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+     *   link-local, unspecified, and IPv4 broadcast addresses, including their
+     *   IPv4-mapped IPv6 equivalents.
+     * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+     *   but it may appear on existing entries.
+     */
+    pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
+
+    /**
+     * Enforce DMARC, SPF or DKIM authentication. When on, Email Security only honors
+     * policies that pass authentication.
+     */
+    verify_sender: boolean;
+
+    comments?: string | null;
+
+    /**
+     * @deprecated Use `is_exempt_recipient` instead.
+     */
+    is_recipient?: boolean;
+
+    /**
+     * @deprecated Use `is_trusted_sender` instead.
+     */
+    is_sender?: boolean;
+
+    /**
+     * @deprecated Use `is_acceptable_sender` instead.
+     */
+    is_spoof?: boolean;
+  }
+
+  /**
+   * An email allow policy.
+   */
+  export interface Put {
+    comments?: string | null;
+
+    /**
+     * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
+     * Malicious and Suspicious dispositions still apply.
+     */
+    is_acceptable_sender?: boolean;
+
+    /**
+     * Bypasses all detections for messages to this recipient.
+     */
+    is_exempt_recipient?: boolean;
+
+    /**
+     * @deprecated Use `is_exempt_recipient` instead.
+     */
+    is_recipient?: boolean;
+
+    is_regex?: boolean;
+
+    /**
+     * @deprecated Use `is_trusted_sender` instead.
+     */
+    is_sender?: boolean;
+
+    /**
+     * @deprecated Use `is_acceptable_sender` instead.
+     */
+    is_spoof?: boolean;
+
+    /**
+     * Bypasses all detections and link following for messages from this sender.
+     */
+    is_trusted_sender?: boolean;
+
+    /**
+     * The pattern value to match. The format depends on `pattern_type`: a valid email
+     * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+     * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
+     * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
+     * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
+     * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+     */
+    pattern?: string;
+
+    /**
+     * Type of pattern matching.
+     *
+     * - EMAIL: matches a full email address (e.g. `user@example.com`)
+     * - DOMAIN: matches a domain name (e.g. `example.com`)
+     * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+     *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+     *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+     *   link-local, unspecified, and IPv4 broadcast addresses, including their
+     *   IPv4-mapped IPv6 equivalents.
+     * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+     *   but it may appear on existing entries.
+     */
+    pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
+
+    /**
+     * Enforce DMARC, SPF or DKIM authentication. When on, Email Security only honors
+     * policies that pass authentication.
+     */
+    verify_sender?: boolean;
+  }
+}
+
 export interface AllowPolicyEditParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -687,9 +1273,11 @@ export interface AllowPolicyEditParams {
   /**
    * Body param: The pattern value to match. The format depends on `pattern_type`: a
    * valid email address for EMAIL (e.g. `user@example.com`), a valid domain name for
-   * DOMAIN (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP
-   * (e.g. `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP
-   * addresses and rejects private, loopback, link-local, and unspecified addresses.
+   * DOMAIN (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for
+   * IP (e.g. `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or
+   * `2606:4700:4700::/48`); the API rejects private or unique-local, loopback,
+   * link-local, unspecified, and IPv4 broadcast addresses, including their
+   * IPv4-mapped IPv6 equivalents.
    */
   pattern?: string;
 
@@ -698,8 +1286,11 @@ export interface AllowPolicyEditParams {
    *
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
-   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
+   *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
+   *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
+   *   link-local, unspecified, and IPv4 broadcast addresses, including their
+   *   IPv4-mapped IPv6 equivalents.
    * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
    *   but it may appear on existing entries.
    */
@@ -714,7 +1305,7 @@ export interface AllowPolicyEditParams {
 
 export interface AllowPolicyGetParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }
@@ -724,12 +1315,14 @@ export declare namespace AllowPolicies {
     type AllowPolicyCreateResponse as AllowPolicyCreateResponse,
     type AllowPolicyListResponse as AllowPolicyListResponse,
     type AllowPolicyDeleteResponse as AllowPolicyDeleteResponse,
+    type AllowPolicyBatchResponse as AllowPolicyBatchResponse,
     type AllowPolicyEditResponse as AllowPolicyEditResponse,
     type AllowPolicyGetResponse as AllowPolicyGetResponse,
     type AllowPolicyListResponsesV4PagePaginationArray as AllowPolicyListResponsesV4PagePaginationArray,
     type AllowPolicyCreateParams as AllowPolicyCreateParams,
     type AllowPolicyListParams as AllowPolicyListParams,
     type AllowPolicyDeleteParams as AllowPolicyDeleteParams,
+    type AllowPolicyBatchParams as AllowPolicyBatchParams,
     type AllowPolicyEditParams as AllowPolicyEditParams,
     type AllowPolicyGetParams as AllowPolicyGetParams,
   };

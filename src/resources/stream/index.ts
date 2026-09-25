@@ -18,7 +18,7 @@ export {
   type CaptionGetParams,
   type CaptionsSinglePage,
 } from './captions/index';
-export { ClipResource, BaseClipResource, type Clip, type ClipCreateParams } from './clip';
+export { Clip, BaseClip, type ClipCreateParams } from './clip';
 export { Copy, BaseCopy, type CopyCreateParams } from './copy';
 export {
   DirectUpload,

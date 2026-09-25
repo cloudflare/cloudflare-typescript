@@ -21,12 +21,14 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/content-scanning/payloads.ts">PayloadCreateResponse</a></code>
+- <code><a href="./src/resources/content-scanning/payloads.ts">PayloadUpdateResponse</a></code>
 - <code><a href="./src/resources/content-scanning/payloads.ts">PayloadListResponse</a></code>
 - <code><a href="./src/resources/content-scanning/payloads.ts">PayloadDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_id}/content-upload-scan/payloads">client.contentScanning.payloads.<a href="./src/resources/content-scanning/payloads.ts">create</a>([ ...body ]) -> PayloadCreateResponsesSinglePage</code>
+- <code title="patch /zones/{zone_id}/content-upload-scan/payloads/{expression_id}">client.contentScanning.payloads.<a href="./src/resources/content-scanning/payloads.ts">update</a>(expressionID, { ...params }) -> PayloadUpdateResponsesSinglePage</code>
 - <code title="get /zones/{zone_id}/content-upload-scan/payloads">client.contentScanning.payloads.<a href="./src/resources/content-scanning/payloads.ts">list</a>({ ...params }) -> PayloadListResponsesSinglePage</code>
 - <code title="delete /zones/{zone_id}/content-upload-scan/payloads/{expression_id}">client.contentScanning.payloads.<a href="./src/resources/content-scanning/payloads.ts">delete</a>(expressionID, { ...params }) -> PayloadDeleteResponsesSinglePage</code>
 

@@ -13,7 +13,7 @@ export class BaseSubscriptions extends APIResource {
   ] as const);
 
   /**
-   * Create a new event subscription for a queue
+   * Creates an event subscription for a Queue.
    *
    * @example
    * ```ts
@@ -34,7 +34,7 @@ export class BaseSubscriptions extends APIResource {
   }
 
   /**
-   * Update an existing event subscription
+   * Updates an existing Queue event subscription.
    *
    * @example
    * ```ts
@@ -60,7 +60,8 @@ export class BaseSubscriptions extends APIResource {
   }
 
   /**
-   * Get a paginated list of event subscriptions with optional sorting and filtering
+   * Returns a paginated list of Queue event subscriptions with optional sorting and
+   * filtering.
    *
    * @example
    * ```ts
@@ -85,7 +86,7 @@ export class BaseSubscriptions extends APIResource {
   }
 
   /**
-   * Delete an existing event subscription
+   * Deletes an existing Queue event subscription.
    *
    * @example
    * ```ts
@@ -111,7 +112,7 @@ export class BaseSubscriptions extends APIResource {
   }
 
   /**
-   * Get details about an existing event subscription
+   * Returns an existing Queue event subscription.
    *
    * @example
    * ```ts

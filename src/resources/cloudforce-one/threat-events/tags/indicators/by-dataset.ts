@@ -62,6 +62,12 @@ export namespace ByDatasetListResponse {
     relatedEvents?: Array<Indicator.RelatedEvent>;
 
     tags?: Array<Indicator.Tag>;
+
+    /**
+     * Traffic Light Protocol designation. UPPERCASE. Possible values: CLEAR, GREEN,
+     * AMBER, AMBER-STRICT, RED, PURPLE. Null when not set.
+     */
+    tlp?: string | null;
   }
 
   export namespace Indicator {
@@ -78,6 +84,11 @@ export namespace ByDatasetListResponse {
     }
 
     export interface Tag {
+      /**
+       * The UUID of the tag category, or null when the tag is uncategorized.
+       */
+      categoryId?: string | null;
+
       categoryName?: string;
 
       uuid?: string;

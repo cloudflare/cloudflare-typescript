@@ -42,12 +42,12 @@ export interface AssetCreateParams {
   account_id: string;
 
   /**
-   * Body param: File to upload
+   * Body param: File to upload.
    */
   file: Uploadable;
 
   /**
-   * Body param: Name of the file (adapter_config.json or adapter_model.safetensors)
+   * Body param: Name of the file (adapter_config.json or adapter_model.safetensors).
    */
   file_name: string;
 }

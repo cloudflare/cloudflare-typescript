@@ -20,13 +20,10 @@ export class BaseJobs extends APIResource {
   /**
    * Creates a new indexing job for an AI Search instance.
    *
-   * @example
-   * ```ts
-   * const job = await client.aiSearch.instances.jobs.create(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
-   * ```
+   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
+   * (and descendant paths) instead.
+   *
+   * @deprecated
    */
   create(id: string, params: JobCreateParams, options?: RequestOptions): APIPromise<JobCreateResponse> {
     const { account_id, ...body } = params;
@@ -41,16 +38,10 @@ export class BaseJobs extends APIResource {
   /**
    * Lists indexing jobs for an AI Search instance.
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const jobListResponse of client.aiSearch.instances.jobs.list(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
+   * (and descendant paths) instead.
+   *
+   * @deprecated
    */
   list(
     id: string,
@@ -68,16 +59,10 @@ export class BaseJobs extends APIResource {
   /**
    * Retrieves details for a specific AI Search indexing job.
    *
-   * @example
-   * ```ts
-   * const job = await client.aiSearch.instances.jobs.get(
-   *   'job_id',
-   *   {
-   *     account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *     id: 'my-ai-search',
-   *   },
-   * );
-   * ```
+   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
+   * (and descendant paths) instead.
+   *
+   * @deprecated
    */
   get(jobID: string, params: JobGetParams, options?: RequestOptions): APIPromise<JobGetResponse> {
     const { account_id, id } = params;
@@ -92,16 +77,10 @@ export class BaseJobs extends APIResource {
   /**
    * Lists log entries for an AI Search indexing job.
    *
-   * @example
-   * ```ts
-   * const response = await client.aiSearch.instances.jobs.logs(
-   *   'job_id',
-   *   {
-   *     account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *     id: 'my-ai-search',
-   *   },
-   * );
-   * ```
+   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
+   * (and descendant paths) instead.
+   *
+   * @deprecated
    */
   logs(jobID: string, params: JobLogsParams, options?: RequestOptions): APIPromise<JobLogsResponse> {
     const { account_id, id, ...query } = params;

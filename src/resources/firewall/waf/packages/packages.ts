@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as Shared from '../../../shared';
 import * as GroupsAPI from './groups';
 import {
   BaseGroups,
@@ -74,7 +73,11 @@ export class BasePackages extends APIResource {
    */
   get(packageID: string, params: PackageGetParams, options?: RequestOptions): APIPromise<PackageGetResponse> {
     const { zone_id } = params;
-    return this._client.get(path`/zones/${zone_id}/firewall/waf/packages/${packageID}`, options);
+    return (
+      this._client.get(path`/zones/${zone_id}/firewall/waf/packages/${packageID}`, options) as APIPromise<{
+        result: PackageGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 export class Packages extends BasePackages {
@@ -86,26 +89,7 @@ export type PackageListResponsesV4PagePaginationArray = V4PagePaginationArray<Pa
 
 export type PackageListResponse = unknown;
 
-export type PackageGetResponse = PackageGetResponse.FirewallAPIResponseSingle | PackageGetResponse.Result;
-
-export namespace PackageGetResponse {
-  export interface FirewallAPIResponseSingle {
-    errors: Array<Shared.ResponseInfo>;
-
-    messages: Array<Shared.ResponseInfo>;
-
-    result: unknown | string | null;
-
-    /**
-     * Defines whether the API call was successful.
-     */
-    success: true;
-  }
-
-  export interface Result {
-    result?: unknown;
-  }
-}
+export type PackageGetResponse = unknown | string | null;
 
 export interface PackageListParams extends V4PagePaginationArrayParams {
   /**

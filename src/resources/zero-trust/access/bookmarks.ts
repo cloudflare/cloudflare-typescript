@@ -19,12 +19,11 @@ export class BaseBookmarks extends APIResource {
    * @deprecated
    */
   create(bookmarkID: string, params: BookmarkCreateParams, options?: RequestOptions): APIPromise<Bookmark> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.post(path`/accounts/${account_id}/access/bookmarks/${bookmarkID}`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: Bookmark }>
+      this._client.post(path`/accounts/${account_id}/access/bookmarks/${bookmarkID}`, options) as APIPromise<{
+        result: Bookmark;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -34,12 +33,11 @@ export class BaseBookmarks extends APIResource {
    * @deprecated
    */
   update(bookmarkID: string, params: BookmarkUpdateParams, options?: RequestOptions): APIPromise<Bookmark> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.put(path`/accounts/${account_id}/access/bookmarks/${bookmarkID}`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: Bookmark }>
+      this._client.put(path`/accounts/${account_id}/access/bookmarks/${bookmarkID}`, options) as APIPromise<{
+        result: Bookmark;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -129,27 +127,11 @@ export interface BookmarkDeleteResponse {
 }
 
 export interface BookmarkCreateParams {
-  /**
-   * Path param
-   */
   account_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface BookmarkUpdateParams {
-  /**
-   * Path param
-   */
   account_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface BookmarkListParams {

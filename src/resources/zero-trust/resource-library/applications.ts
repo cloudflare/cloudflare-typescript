@@ -14,7 +14,64 @@ export class BaseApplications extends APIResource {
   ] as const);
 
   /**
-   * List applications with different filters.
+   * Create a custom application for an account.
+   *
+   * @example
+   * ```ts
+   * const application =
+   *   await client.zeroTrust.resourceLibrary.applications.create(
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       hostnames: ['example.com', 'foo.com'],
+   *     },
+   *   );
+   * ```
+   */
+  create(params: ApplicationCreateParams, options?: RequestOptions): APIPromise<ApplicationCreateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/resource-library/applications`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: ApplicationCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Replace the network matchers for a custom application and create a new version.
+   *
+   * @example
+   * ```ts
+   * const application =
+   *   await client.zeroTrust.resourceLibrary.applications.update(
+   *     498,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
+   */
+  update(
+    id: number,
+    params: ApplicationUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<ApplicationUpdateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(path`/accounts/${account_id}/resource-library/applications/${id}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: ApplicationUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List the applications available to an account, both the applications Cloudflare
+   * curates and the custom applications the account has defined.
+   *
+   * Results are paginated. Use `filter` and `search` to narrow the list, `order_by`
+   * to sort it, and `fields` to reduce each result to only the properties you need.
+   *
+   * The authenticated principal must have access to the account identified by
+   * `account_id`.
    *
    * @example
    * ```ts
@@ -36,6 +93,33 @@ export class BaseApplications extends APIResource {
       SinglePage<ApplicationListResponse>,
       { query, ...options },
     );
+  }
+
+  /**
+   * Delete a custom application and all of its versions. Deletion is rejected when
+   * other resources reference the application.
+   *
+   * @example
+   * ```ts
+   * const application =
+   *   await client.zeroTrust.resourceLibrary.applications.delete(
+   *     498,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
+   */
+  delete(
+    id: number,
+    params: ApplicationDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<ApplicationDeleteResponse | null> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        path`/accounts/${account_id}/resource-library/applications/${id}`,
+        options,
+      ) as APIPromise<{ result: ApplicationDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -68,7 +152,7 @@ export class Applications extends BaseApplications {}
 
 export type ApplicationListResponsesSinglePage = SinglePage<ApplicationListResponse>;
 
-export interface ApplicationListResponse {
+export interface ApplicationCreateResponse {
   /**
    * Returns the application ID.
    */
@@ -120,7 +204,9 @@ export interface ApplicationListResponse {
   human_id: string;
 
   /**
-   * IP subnets matched by the application.
+   * IP subnets for this application. Custom application create and update requests
+   * accept IPv4 prefix lengths /8 through /32 and IPv6 prefix lengths /32 through
+   * /128.
    */
   ip_subnets: Array<string>;
 
@@ -159,6 +245,207 @@ export interface ApplicationListResponse {
    */
   application_score_composition?: unknown | null;
 }
+
+export interface ApplicationUpdateResponse {
+  /**
+   * Returns the application ID.
+   */
+  id: number;
+
+  /**
+   * Confidence score for the application. Returns -1 when no score is available.
+   */
+  application_confidence_score: number;
+
+  /**
+   * Returns the application source.
+   */
+  application_source: string;
+
+  /**
+   * Returns the application type.
+   */
+  application_type: string;
+
+  /**
+   * Returns the application type description.
+   */
+  application_type_description: string;
+
+  /**
+   * Returns the category ID.
+   */
+  category_id: number;
+
+  /**
+   * Returns the application creation time.
+   */
+  created_at: string;
+
+  /**
+   * GenAI score for the application. Returns -1 when no score is available.
+   */
+  gen_ai_score: number;
+
+  /**
+   * Hostnames matched by the application.
+   */
+  hostnames: Array<string>;
+
+  /**
+   * Returns the human readable ID.
+   */
+  human_id: string;
+
+  /**
+   * IP subnets for this application. Custom application create and update requests
+   * accept IPv4 prefix lengths /8 through /32 and IPv6 prefix lengths /32 through
+   * /128.
+   */
+  ip_subnets: Array<string>;
+
+  /**
+   * Returns the application name.
+   */
+  name: string;
+
+  /**
+   * Port and protocol pairs matched by the application.
+   */
+  port_protocols: Array<string>;
+
+  /**
+   * Support domains matched by the application.
+   */
+  support_domains: Array<string>;
+
+  /**
+   * Cloudflare products that support this application.
+   */
+  supported: Array<'GATEWAY' | 'ACCESS' | 'CASB'>;
+
+  /**
+   * Returns the application update time.
+   */
+  updated_at: string;
+
+  /**
+   * Returns the application version.
+   */
+  version: string;
+
+  /**
+   * Returns the score composition breakdown for the application.
+   */
+  application_score_composition?: unknown | null;
+}
+
+/**
+ * Describes one application in a list response. This endpoint returns every
+ * property below unless the `fields` query parameter narrows the response, so
+ * treat all of them except `id` as optional.
+ */
+export interface ApplicationListResponse {
+  /**
+   * Returns the application ID.
+   */
+  id: number;
+
+  /**
+   * Confidence score for the application. Returns -1 when no score is available.
+   */
+  application_confidence_score?: number;
+
+  /**
+   * Returns the score composition breakdown for the application.
+   */
+  application_score_composition?: unknown | null;
+
+  /**
+   * Returns the application source.
+   */
+  application_source?: string;
+
+  /**
+   * Returns the application type.
+   */
+  application_type?: string;
+
+  /**
+   * Returns the application type description.
+   */
+  application_type_description?: string;
+
+  /**
+   * Returns the category ID.
+   */
+  category_id?: number;
+
+  /**
+   * Returns the application creation time.
+   */
+  created_at?: string;
+
+  /**
+   * GenAI score for the application. Returns -1 when no score is available.
+   */
+  gen_ai_score?: number;
+
+  /**
+   * Hostnames matched by the application.
+   */
+  hostnames?: Array<string>;
+
+  /**
+   * Returns the human readable ID.
+   */
+  human_id?: string;
+
+  /**
+   * IP subnets for this application. Custom application create and update requests
+   * accept IPv4 prefix lengths /8 through /32 and IPv6 prefix lengths /32 through
+   * /128.
+   */
+  ip_subnets?: Array<string>;
+
+  /**
+   * Returns the application name.
+   */
+  name?: string;
+
+  /**
+   * Port and protocol pairs matched by the application.
+   */
+  port_protocols?: Array<string>;
+
+  /**
+   * The account-specific Gateway review status. Applications with no assigned review
+   * status are returned as `unreviewed`.
+   */
+  review_status?: 'approved' | 'unapproved' | 'in_review' | 'unreviewed';
+
+  /**
+   * Support domains matched by the application.
+   */
+  support_domains?: Array<string>;
+
+  /**
+   * Cloudflare products that support this application.
+   */
+  supported?: Array<'GATEWAY' | 'ACCESS' | 'CASB'>;
+
+  /**
+   * Returns the application update time.
+   */
+  updated_at?: string;
+
+  /**
+   * Returns the application version.
+   */
+  version?: string;
+}
+
+export type ApplicationDeleteResponse = unknown;
 
 export interface ApplicationGetResponse {
   /**
@@ -212,7 +499,9 @@ export interface ApplicationGetResponse {
   human_id: string;
 
   /**
-   * IP subnets matched by the application.
+   * IP subnets for this application. Custom application create and update requests
+   * accept IPv4 prefix lengths /8 through /32 and IPv6 prefix lengths /32 through
+   * /128.
    */
   ip_subnets: Array<string>;
 
@@ -252,11 +541,150 @@ export interface ApplicationGetResponse {
   application_score_composition?: unknown | null;
 }
 
+export type ApplicationCreateParams = ApplicationCreateParams.Variant0 | ApplicationCreateParams.Variant1;
+
+export declare namespace ApplicationCreateParams {
+  export interface Variant0 {
+    /**
+     * Path param: Account ID.
+     */
+    account_id: string;
+
+    /**
+     * Body param: Hostnames matched by the application.
+     */
+    hostnames: Array<string>;
+
+    /**
+     * Body param: Returns the category ID.
+     */
+    category_id?: number;
+
+    /**
+     * Body param: Returns the human readable ID.
+     */
+    human_id?: string;
+
+    /**
+     * Body param: IP subnets for this application. Custom application create and
+     * update requests accept IPv4 prefix lengths /8 through /32 and IPv6 prefix
+     * lengths /32 through /128.
+     */
+    ip_subnets?: Array<string>;
+
+    /**
+     * Body param: Returns the application name.
+     */
+    name?: string;
+
+    /**
+     * Body param: Port and protocol pairs matched by the application.
+     */
+    port_protocols?: Array<string>;
+
+    /**
+     * Body param: Support domains matched by the application.
+     */
+    support_domains?: Array<string>;
+  }
+
+  export interface Variant1 {
+    /**
+     * Path param: Account ID.
+     */
+    account_id: string;
+
+    /**
+     * Body param: IP subnets for this application. Custom application create and
+     * update requests accept IPv4 prefix lengths /8 through /32 and IPv6 prefix
+     * lengths /32 through /128.
+     */
+    ip_subnets: Array<string>;
+
+    /**
+     * Body param: Returns the category ID.
+     */
+    category_id?: number;
+
+    /**
+     * Body param: Hostnames matched by the application.
+     */
+    hostnames?: Array<string>;
+
+    /**
+     * Body param: Returns the human readable ID.
+     */
+    human_id?: string;
+
+    /**
+     * Body param: Returns the application name.
+     */
+    name?: string;
+
+    /**
+     * Body param: Port and protocol pairs matched by the application.
+     */
+    port_protocols?: Array<string>;
+
+    /**
+     * Body param: Support domains matched by the application.
+     */
+    support_domains?: Array<string>;
+  }
+}
+
+export interface ApplicationUpdateParams {
+  /**
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Hostnames matched by the application.
+   */
+  hostnames?: Array<string>;
+
+  /**
+   * Body param: IP subnets for this application. Custom application create and
+   * update requests accept IPv4 prefix lengths /8 through /32 and IPv6 prefix
+   * lengths /32 through /128.
+   */
+  ip_subnets?: Array<string>;
+
+  /**
+   * Body param: Port and protocol pairs matched by the application.
+   */
+  port_protocols?: Array<string>;
+
+  /**
+   * Body param: Support domains matched by the application.
+   */
+  support_domains?: Array<string>;
+}
+
 export interface ApplicationListParams {
   /**
    * Path param: Account ID.
    */
   account_id: string;
+
+  /**
+   * Query param: Return only the listed properties on each application, as a
+   * comma-separated list. Use this to keep responses small when you only need part
+   * of each application — for example populating a picker with `fields=id,name`
+   * instead of downloading every hostname and IP subnet.
+   *
+   * Omit this parameter to receive the full application object.
+   *
+   * `id` is always returned.
+   *
+   * Selectable properties: `id`, `name`, `human_id`, `version`, `hostnames`,
+   * `support_domains`, `ip_subnets`, `port_protocols`, `supported`, `gen_ai_score`,
+   * `application_confidence_score`, `created_at`, `updated_at`, `review_status`.
+   *
+   * Unknown or empty property names return `400`.
+   */
+  fields?: string;
 
   /**
    * Query param: Filter applications using key:value format. Supported filter keys:
@@ -273,7 +701,9 @@ export interface ApplicationListParams {
    * - category_id: Filter by category ID (e.g., category_id:12).
    * - category_name: Filter by category name (e.g., category_name:HR).
    * - supported: Filter by supported Cloudflare product (e.g., supported:ACCESS).
-   *   Values: GATEWAY, ACCESS, CASB. .
+   *   Values: GATEWAY, ACCESS, CASB.
+   * - review_status: Filter by the account's Gateway review status. Values:
+   *   approved, unapproved, in_review, unreviewed. .
    */
   filter?: string;
 
@@ -288,8 +718,10 @@ export interface ApplicationListParams {
   offset?: number;
 
   /**
-   * Query param: Order results by field name and direction (e.g., name:asc). Ignored
-   * when search is provided; results are ranked by relevance instead.
+   * Query param: Order results using field:direction format. Supported fields are
+   * name, id, human_id, category_id, application_type, application_confidence_score,
+   * and gen_ai_score. Supported directions are asc and desc. Ignored when search is
+   * provided; results are ranked by relevance instead.
    */
   order_by?: string;
 
@@ -301,6 +733,13 @@ export interface ApplicationListParams {
   search?: string;
 }
 
+export interface ApplicationDeleteParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
 export interface ApplicationGetParams {
   /**
    * Account ID.
@@ -310,10 +749,16 @@ export interface ApplicationGetParams {
 
 export declare namespace Applications {
   export {
+    type ApplicationCreateResponse as ApplicationCreateResponse,
+    type ApplicationUpdateResponse as ApplicationUpdateResponse,
     type ApplicationListResponse as ApplicationListResponse,
+    type ApplicationDeleteResponse as ApplicationDeleteResponse,
     type ApplicationGetResponse as ApplicationGetResponse,
     type ApplicationListResponsesSinglePage as ApplicationListResponsesSinglePage,
+    type ApplicationCreateParams as ApplicationCreateParams,
+    type ApplicationUpdateParams as ApplicationUpdateParams,
     type ApplicationListParams as ApplicationListParams,
+    type ApplicationDeleteParams as ApplicationDeleteParams,
     type ApplicationGetParams as ApplicationGetParams,
   };
 }

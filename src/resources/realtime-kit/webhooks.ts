@@ -18,7 +18,7 @@ export class BaseWebhooks extends APIResource {
    * ```ts
    * const response =
    *   await client.realtimeKit.webhooks.createWebhook(
-   *     'app_id',
+   *     '14a396e7-ca44-4937-bf1f-050a69118543',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       events: [
@@ -60,7 +60,7 @@ export class BaseWebhooks extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -87,7 +87,7 @@ export class BaseWebhooks extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -114,7 +114,7 @@ export class BaseWebhooks extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -137,9 +137,10 @@ export class BaseWebhooks extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.realtimeKit.webhooks.getWebhooks('app_id', {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
+   *   await client.realtimeKit.webhooks.getWebhooks(
+   *     '14a396e7-ca44-4937-bf1f-050a69118543',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
    * ```
    */
   getWebhooks(
@@ -161,7 +162,7 @@ export class BaseWebhooks extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *       events: [
    *         'meeting.started',
    *         'meeting.ended',

@@ -10,7 +10,7 @@ export class BaseGlobalWARPOverride extends APIResource {
     Object.freeze(['zeroTrust', 'devices', 'resilience', 'globalWARPOverride'] as const);
 
   /**
-   * Sets the Global WARP override state.
+   * Sets the Global WARP disconnect state.
    *
    * @example
    * ```ts
@@ -37,7 +37,7 @@ export class BaseGlobalWARPOverride extends APIResource {
   }
 
   /**
-   * Fetch the Global WARP override state.
+   * Fetch the Global WARP disconnect state.
    *
    * @example
    * ```ts

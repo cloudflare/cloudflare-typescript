@@ -15,7 +15,7 @@ export class BaseAssets extends APIResource {
   ] as const);
 
   /**
-   * Creates a new custom asset.
+   * Creates a custom asset for an account or zone.
    *
    * @example
    * ```ts
@@ -54,7 +54,7 @@ export class BaseAssets extends APIResource {
   }
 
   /**
-   * Updates the configuration of an existing custom asset.
+   * Updates a custom asset for an account or zone.
    *
    * @example
    * ```ts
@@ -99,7 +99,7 @@ export class BaseAssets extends APIResource {
   }
 
   /**
-   * Fetches all the custom assets.
+   * Lists custom assets for an account or zone.
    *
    * @example
    * ```ts
@@ -140,7 +140,7 @@ export class BaseAssets extends APIResource {
   }
 
   /**
-   * Deletes an existing custom asset.
+   * Deletes a custom asset from an account or zone.
    *
    * @example
    * ```ts
@@ -179,7 +179,7 @@ export class BaseAssets extends APIResource {
   }
 
   /**
-   * Fetches the details of a custom asset.
+   * Returns a custom asset for an account or zone.
    *
    * @example
    * ```ts

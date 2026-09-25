@@ -31,7 +31,6 @@ import {
   DNSGetParams,
   DNSGetResponse,
   DNSRecord,
-  DNSRecordsSinglePage,
 } from './dns';
 import * as RulesAPI from './rules/rules';
 import {
@@ -54,7 +53,8 @@ export class BaseEmailRouting extends APIResource {
   static override readonly _key: readonly ['emailRouting'] = Object.freeze(['emailRouting'] as const);
 
   /**
-   * Update the settings for your Email Routing zone.
+   * Apply the provided settings to your Email Routing zone. Omitted settings retain
+   * their current values, as with PATCH.
    *
    * @example
    * ```ts
@@ -79,12 +79,11 @@ export class BaseEmailRouting extends APIResource {
    * @deprecated
    */
   disable(params: EmailRoutingDisableParams, options?: RequestOptions): APIPromise<Settings> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.post(path`/zones/${zone_id}/email/routing/disable`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: Settings }>
+      this._client.post(path`/zones/${zone_id}/email/routing/disable`, options) as APIPromise<{
+        result: Settings;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -113,12 +112,11 @@ export class BaseEmailRouting extends APIResource {
    * @deprecated
    */
   enable(params: EmailRoutingEnableParams, options?: RequestOptions): APIPromise<Settings> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.post(path`/zones/${zone_id}/email/routing/enable`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: Settings }>
+      this._client.post(path`/zones/${zone_id}/email/routing/enable`, options) as APIPromise<{
+        result: Settings;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -236,14 +234,9 @@ export interface EmailRoutingUpdateParams {
 
 export interface EmailRoutingDisableParams {
   /**
-   * Path param: Identifier.
+   * Identifier.
    */
   zone_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface EmailRoutingEditParams {
@@ -272,14 +265,9 @@ export interface EmailRoutingEditParams {
 
 export interface EmailRoutingEnableParams {
   /**
-   * Path param: Identifier.
+   * Identifier.
    */
   zone_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface EmailRoutingGetParams {
@@ -326,7 +314,6 @@ export declare namespace EmailRouting {
     BaseDNS as BaseDNS,
     type DNSRecord as DNSRecord,
     type DNSGetResponse as DNSGetResponse,
-    type DNSRecordsSinglePage as DNSRecordsSinglePage,
     type DNSCreateParams as DNSCreateParams,
     type DNSDeleteParams as DNSDeleteParams,
     type DNSEditParams as DNSEditParams,

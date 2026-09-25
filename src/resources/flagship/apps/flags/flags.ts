@@ -26,8 +26,8 @@ export class BaseFlags extends APIResource {
   ] as const);
 
   /**
-   * Creates a flag. Returns 409 if the key already exists. `type` is inferred from
-   * variation values and may be omitted.
+   * Creates a flag. Returns 409 if the key already exists. `type` is always inferred
+   * from variation values; legacy request-side values are ignored.
    */
   create(appID: string, params: FlagCreateParams, options?: RequestOptions): APIPromise<FlagCreateResponse> {
     const { account_id, ...body } = params;
@@ -136,6 +136,11 @@ export interface FlagCreateResponse {
   rules: Array<FlagCreateResponse.Rule>;
 
   /**
+   * Server-inferred value type shared by all of the flag's variations.
+   */
+  type: 'boolean' | 'string' | 'number' | 'json';
+
+  /**
    * Map of variation name to value. All values share the same type (boolean, string,
    * number, or JSON object/array), and each serialized value stays within 10KB.
    */
@@ -144,12 +149,6 @@ export interface FlagCreateResponse {
   };
 
   description?: string | null;
-
-  /**
-   * Value type of the flag's variations. The API infers this from the variation
-   * values on write, so you can omit it in requests.
-   */
-  type?: 'boolean' | 'string' | 'number' | 'json';
 
   updated_at?: string;
 
@@ -382,6 +381,11 @@ export interface FlagUpdateResponse {
   rules: Array<FlagUpdateResponse.Rule>;
 
   /**
+   * Server-inferred value type shared by all of the flag's variations.
+   */
+  type: 'boolean' | 'string' | 'number' | 'json';
+
+  /**
    * Map of variation name to value. All values share the same type (boolean, string,
    * number, or JSON object/array), and each serialized value stays within 10KB.
    */
@@ -390,12 +394,6 @@ export interface FlagUpdateResponse {
   };
 
   description?: string | null;
-
-  /**
-   * Value type of the flag's variations. The API infers this from the variation
-   * values on write, so you can omit it in requests.
-   */
-  type?: 'boolean' | 'string' | 'number' | 'json';
 
   updated_at?: string;
 
@@ -628,6 +626,11 @@ export interface FlagListResponse {
   rules: Array<FlagListResponse.Rule>;
 
   /**
+   * Server-inferred value type shared by all of the flag's variations.
+   */
+  type: 'boolean' | 'string' | 'number' | 'json';
+
+  /**
    * Map of variation name to value. All values share the same type (boolean, string,
    * number, or JSON object/array), and each serialized value stays within 10KB.
    */
@@ -636,12 +639,6 @@ export interface FlagListResponse {
   };
 
   description?: string | null;
-
-  /**
-   * Value type of the flag's variations. The API infers this from the variation
-   * values on write, so you can omit it in requests.
-   */
-  type?: 'boolean' | 'string' | 'number' | 'json';
 
   updated_at?: string;
 
@@ -878,6 +875,11 @@ export interface FlagGetResponse {
   rules: Array<FlagGetResponse.Rule>;
 
   /**
+   * Server-inferred value type shared by all of the flag's variations.
+   */
+  type: 'boolean' | 'string' | 'number' | 'json';
+
+  /**
    * Map of variation name to value. All values share the same type (boolean, string,
    * number, or JSON object/array), and each serialized value stays within 10KB.
    */
@@ -886,12 +888,6 @@ export interface FlagGetResponse {
   };
 
   description?: string | null;
-
-  /**
-   * Value type of the flag's variations. The API infers this from the variation
-   * values on write, so you can omit it in requests.
-   */
-  type?: 'boolean' | 'string' | 'number' | 'json';
 
   updated_at?: string;
 
@@ -1145,8 +1141,8 @@ export interface FlagCreateParams {
   description?: string | null;
 
   /**
-   * Body param: Value type of the flag's variations. The API infers this from the
-   * variation values on write, so you can omit it in requests.
+   * @deprecated Body param: Deprecated compatibility field. Omit it; the API ignores
+   * this value and infers the type from the flag's variations.
    */
   type?: 'boolean' | 'string' | 'number' | 'json';
 }
@@ -1403,8 +1399,8 @@ export interface FlagUpdateParams {
   description?: string | null;
 
   /**
-   * Body param: Value type of the flag's variations. The API infers this from the
-   * variation values on write, so you can omit it in requests.
+   * @deprecated Body param: Deprecated compatibility field. Omit it; the API ignores
+   * this value and infers the type from the flag's variations.
    */
   type?: 'boolean' | 'string' | 'number' | 'json';
 }

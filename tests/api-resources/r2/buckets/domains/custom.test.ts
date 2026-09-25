@@ -53,7 +53,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { domains: { custom
       zoneId: '36ca64a6d92827b8a6b90be344bb1bfd',
       ciphers: ['string'],
       minTLS: '1.0',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -80,7 +80,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { domains: { custom
       ciphers: ['string'],
       enabled: true,
       minTLS: '1.2',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -102,7 +102,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { domains: { custom
   test.skip('list: required and optional params', async () => {
     const response = await client.r2.buckets.domains.custom.list('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -126,7 +126,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { domains: { custom
     const response = await client.r2.buckets.domains.custom.delete('example-domain/custom-domain.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -150,7 +150,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { domains: { custom
     const response = await client.r2.buckets.domains.custom.get('example-domain/custom-domain.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 };

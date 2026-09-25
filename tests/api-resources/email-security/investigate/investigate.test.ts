@@ -58,6 +58,7 @@ const runTests = (client: PartialCloudflare<{ emailSecurity: { investigate: Base
       query: 'query',
       recipient: 'recipient',
       sender: 'sender',
+      smtp_helo_ip: 'smtp_helo_ip',
       start: '2019-12-27T18:11:19.117Z',
       subject: 'subject',
     });

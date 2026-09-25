@@ -22,14 +22,7 @@ export class BaseReports extends APIResource {
    * [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/)
    * for detailed information about the available query parameters.
    *
-   * @example
-   * ```ts
-   * const report =
-   *   await client.dnsFirewall.analytics.reports.get(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
-   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   *   );
-   * ```
+   * @deprecated This endpoint is deprecated. See [the API deprecation notice](https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-12-09).
    */
   get(
     dnsFirewallID: string,

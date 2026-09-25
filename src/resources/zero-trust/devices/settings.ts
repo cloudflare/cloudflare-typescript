@@ -13,15 +13,9 @@ export class BaseSettings extends APIResource {
   ] as const);
 
   /**
-   * Updates the current device settings for a Zero Trust account.
+   * Deprecated: use "PATCH /accounts/{account_id}/devices/settings" instead
    *
-   * @example
-   * ```ts
-   * const deviceSettings =
-   *   await client.zeroTrust.devices.settings.update({
-   *     account_id: '699d98642c564d2e855e9661899b7252',
-   *   });
-   * ```
+   * @deprecated
    */
   update(params: SettingUpdateParams, options?: RequestOptions): APIPromise<DeviceSettings | null> {
     const { account_id, ...body } = params;
@@ -53,7 +47,7 @@ export class BaseSettings extends APIResource {
   }
 
   /**
-   * Patches the current device settings for a Zero Trust account.
+   * Updates the device settings for a Zero Trust account.
    *
    * @example
    * ```ts

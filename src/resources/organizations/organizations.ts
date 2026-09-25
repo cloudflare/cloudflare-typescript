@@ -138,6 +138,8 @@ export namespace Organization {
     export interface TenantFlags {
       account_creation: string;
 
+      account_creation_applies_tenant_defaults: string;
+
       account_deletion: string;
 
       account_migration: string;

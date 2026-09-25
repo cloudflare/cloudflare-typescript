@@ -16,4 +16,11 @@ export {
   type AppGetParams,
   type AppListResponsesV4PagePaginationArray,
 } from './apps';
+export {
+  Protocols,
+  BaseProtocols,
+  type ProtocolListResponse,
+  type ProtocolListParams,
+  type ProtocolListResponsesSinglePage,
+} from './protocols';
 export { Spectrum, BaseSpectrum } from './spectrum';

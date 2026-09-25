@@ -10,7 +10,7 @@ export class BasePurge extends APIResource {
   static override readonly _key: readonly ['queues', 'purge'] = Object.freeze(['queues', 'purge'] as const);
 
   /**
-   * Deletes all messages from the Queue.
+   * Starts a purge that deletes all messages from a Queue.
    *
    * @example
    * ```ts
@@ -31,7 +31,7 @@ export class BasePurge extends APIResource {
   }
 
   /**
-   * Get details about a Queue's purge status.
+   * Returns the status of a Queue purge operation.
    *
    * @example
    * ```ts
@@ -75,7 +75,7 @@ export interface PurgeStartParams {
   account_id: string;
 
   /**
-   * Body param: Confimation that all messages will be deleted permanently.
+   * Body param: Confirms that all messages will be permanently deleted.
    */
   delete_messages_permanently?: boolean;
 }

@@ -14,7 +14,7 @@ export class BaseConfig extends APIResource {
   ] as const);
 
   /**
-   * Create a new Scan Config
+   * Creates a new scan configuration for Cloudforce One's network scanning service.
    *
    * @example
    * ```ts
@@ -36,7 +36,7 @@ export class BaseConfig extends APIResource {
   }
 
   /**
-   * List Scan Configs
+   * Lists scan configurations for Cloudforce One's network scanning service.
    *
    * @example
    * ```ts
@@ -61,7 +61,7 @@ export class BaseConfig extends APIResource {
   }
 
   /**
-   * Delete a Scan Config
+   * Deletes a scan configuration from Cloudforce One's network scanning service.
    *
    * @example
    * ```ts
@@ -87,7 +87,8 @@ export class BaseConfig extends APIResource {
   }
 
   /**
-   * Update an existing Scan Config
+   * Updates an existing scan configuration in Cloudforce One's network scanning
+   * service.
    *
    * @example
    * ```ts

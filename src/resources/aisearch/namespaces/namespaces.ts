@@ -225,7 +225,7 @@ export class Namespaces extends BaseNamespaces {
 export type NamespaceListResponsesV4PagePaginationArray = V4PagePaginationArray<NamespaceListResponse>;
 
 export interface NamespaceCreateResponse {
-  created_at: string;
+  created_at: string | null;
 
   name: string;
 
@@ -313,7 +313,7 @@ export namespace NamespaceCreateResponse {
 }
 
 export interface NamespaceUpdateResponse {
-  created_at: string;
+  created_at: string | null;
 
   name: string;
 
@@ -401,7 +401,7 @@ export namespace NamespaceUpdateResponse {
 }
 
 export interface NamespaceListResponse {
-  created_at: string;
+  created_at: string | null;
 
   name: string;
 
@@ -515,7 +515,11 @@ export namespace NamespaceChatCompletionsResponse {
 
   export namespace Choice {
     export interface Message {
-      content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
+      content:
+        | string
+        | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2>
+        | string
+        | null;
 
       role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -607,7 +611,7 @@ export namespace NamespaceChatCompletionsResponse {
 }
 
 export interface NamespaceReadResponse {
-  created_at: string;
+  created_at: string | null;
 
   name: string;
 
@@ -971,39 +975,11 @@ export interface NamespaceChatCompletionsParams {
   messages: Array<NamespaceChatCompletionsParams.Message>;
 
   /**
-   * Body param
+   * Body param: A Workers AI model ID or an AI Gateway model ID compatible with the
+   * OpenAI Chat Completions API. An empty string uses the configured or default
+   * model.
    */
-  model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | '';
+  model?: string;
 
   /**
    * Body param
@@ -1018,6 +994,13 @@ export namespace NamespaceChatCompletionsParams {
     instance_ids: Array<string>;
 
     cache?: AISearchOptions.Cache;
+
+    /**
+     * Metadata added to AI Gateway logs for requests triggered by this operation.
+     * Accepts up to 2 string, number, or boolean entries. Keys 'ai-search', 'task',
+     * 'origin', and keys beginning with 'cf.' are reserved.
+     */
+    custom_metadata?: { [key: string]: string | number | boolean };
 
     query_rewrite?: AISearchOptions.QueryRewrite;
 
@@ -1036,37 +1019,11 @@ export namespace NamespaceChatCompletionsParams {
     export interface QueryRewrite {
       enabled?: boolean;
 
-      model?:
-        | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-        | '@cf/zai-org/glm-4.7-flash'
-        | '@cf/meta/llama-3.1-8b-instruct-fast'
-        | '@cf/meta/llama-3.1-8b-instruct-fp8'
-        | '@cf/meta/llama-4-scout-17b-16e-instruct'
-        | '@cf/qwen/qwen3-30b-a3b-fp8'
-        | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-        | '@cf/moonshotai/kimi-k2-instruct'
-        | '@cf/google/gemma-3-12b-it'
-        | '@cf/google/gemma-4-26b-a4b-it'
-        | '@cf/moonshotai/kimi-k2.5'
-        | 'anthropic/claude-3-7-sonnet'
-        | 'anthropic/claude-sonnet-4'
-        | 'anthropic/claude-opus-4'
-        | 'anthropic/claude-3-5-haiku'
-        | 'cerebras/qwen-3-235b-a22b-instruct'
-        | 'cerebras/qwen-3-235b-a22b-thinking'
-        | 'cerebras/llama-3.3-70b'
-        | 'cerebras/llama-4-maverick-17b-128e-instruct'
-        | 'cerebras/llama-4-scout-17b-16e-instruct'
-        | 'cerebras/gpt-oss-120b'
-        | 'google-ai-studio/gemini-2.5-flash'
-        | 'google-ai-studio/gemini-2.5-pro'
-        | 'grok/grok-4'
-        | 'groq/llama-3.3-70b-versatile'
-        | 'groq/llama-3.1-8b-instant'
-        | 'openai/gpt-5'
-        | 'openai/gpt-5-mini'
-        | 'openai/gpt-5-nano'
-        | '';
+      /**
+       * A Workers AI model ID or an AI Gateway model ID compatible with the OpenAI Chat
+       * Completions API. An empty string uses the configured or default model.
+       */
+      model?: string;
 
       rewrite_prompt?: string;
     }
@@ -1076,7 +1033,7 @@ export namespace NamespaceChatCompletionsParams {
 
       match_threshold?: number;
 
-      model?: '@cf/baai/bge-reranker-base' | '';
+      model?: string;
     }
 
     export interface Retrieval {
@@ -1133,7 +1090,11 @@ export namespace NamespaceChatCompletionsParams {
   }
 
   export interface Message {
-    content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
+    content:
+      | string
+      | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2>
+      | string
+      | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -1214,6 +1175,13 @@ export namespace NamespaceSearchParams {
 
     cache?: AISearchOptions.Cache;
 
+    /**
+     * Metadata added to AI Gateway logs for requests triggered by this operation.
+     * Accepts up to 2 string, number, or boolean entries. Keys 'ai-search', 'task',
+     * 'origin', and keys beginning with 'cf.' are reserved.
+     */
+    custom_metadata?: { [key: string]: string | number | boolean };
+
     query_rewrite?: AISearchOptions.QueryRewrite;
 
     reranking?: AISearchOptions.Reranking;
@@ -1231,37 +1199,11 @@ export namespace NamespaceSearchParams {
     export interface QueryRewrite {
       enabled?: boolean;
 
-      model?:
-        | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-        | '@cf/zai-org/glm-4.7-flash'
-        | '@cf/meta/llama-3.1-8b-instruct-fast'
-        | '@cf/meta/llama-3.1-8b-instruct-fp8'
-        | '@cf/meta/llama-4-scout-17b-16e-instruct'
-        | '@cf/qwen/qwen3-30b-a3b-fp8'
-        | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-        | '@cf/moonshotai/kimi-k2-instruct'
-        | '@cf/google/gemma-3-12b-it'
-        | '@cf/google/gemma-4-26b-a4b-it'
-        | '@cf/moonshotai/kimi-k2.5'
-        | 'anthropic/claude-3-7-sonnet'
-        | 'anthropic/claude-sonnet-4'
-        | 'anthropic/claude-opus-4'
-        | 'anthropic/claude-3-5-haiku'
-        | 'cerebras/qwen-3-235b-a22b-instruct'
-        | 'cerebras/qwen-3-235b-a22b-thinking'
-        | 'cerebras/llama-3.3-70b'
-        | 'cerebras/llama-4-maverick-17b-128e-instruct'
-        | 'cerebras/llama-4-scout-17b-16e-instruct'
-        | 'cerebras/gpt-oss-120b'
-        | 'google-ai-studio/gemini-2.5-flash'
-        | 'google-ai-studio/gemini-2.5-pro'
-        | 'grok/grok-4'
-        | 'groq/llama-3.3-70b-versatile'
-        | 'groq/llama-3.1-8b-instant'
-        | 'openai/gpt-5'
-        | 'openai/gpt-5-mini'
-        | 'openai/gpt-5-nano'
-        | '';
+      /**
+       * A Workers AI model ID or an AI Gateway model ID compatible with the OpenAI Chat
+       * Completions API. An empty string uses the configured or default model.
+       */
+      model?: string;
 
       rewrite_prompt?: string;
     }
@@ -1271,7 +1213,7 @@ export namespace NamespaceSearchParams {
 
       match_threshold?: number;
 
-      model?: '@cf/baai/bge-reranker-base' | '';
+      model?: string;
     }
 
     export interface Retrieval {
@@ -1328,7 +1270,11 @@ export namespace NamespaceSearchParams {
   }
 
   export interface Message {
-    content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
+    content:
+      | string
+      | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2>
+      | string
+      | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 

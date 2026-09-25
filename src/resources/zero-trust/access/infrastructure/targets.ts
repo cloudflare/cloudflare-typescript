@@ -237,6 +237,11 @@ export interface TargetCreateResponse {
    * Date and time at which the target was modified
    */
   modified_at: string;
+
+  /**
+   * Tags assigned to the target. Empty when no tags are assigned.
+   */
+  tags?: { [key: string]: string } | null;
 }
 
 export namespace TargetCreateResponse {
@@ -315,6 +320,11 @@ export interface TargetUpdateResponse {
    * Date and time at which the target was modified
    */
   modified_at: string;
+
+  /**
+   * Tags assigned to the target. Empty when no tags are assigned.
+   */
+  tags?: { [key: string]: string } | null;
 }
 
 export namespace TargetUpdateResponse {
@@ -393,6 +403,11 @@ export interface TargetListResponse {
    * Date and time at which the target was modified
    */
   modified_at: string;
+
+  /**
+   * Tags assigned to the target. Empty when no tags are assigned.
+   */
+  tags?: { [key: string]: string } | null;
 }
 
 export namespace TargetListResponse {
@@ -471,6 +486,11 @@ export interface TargetBulkUpdateResponse {
    * Date and time at which the target was modified
    */
   modified_at: string;
+
+  /**
+   * Tags assigned to the target. Empty when no tags are assigned.
+   */
+  tags?: { [key: string]: string } | null;
 }
 
 export namespace TargetBulkUpdateResponse {
@@ -549,6 +569,11 @@ export interface TargetGetResponse {
    * Date and time at which the target was modified
    */
   modified_at: string;
+
+  /**
+   * Tags assigned to the target. Empty when no tags are assigned.
+   */
+  tags?: { [key: string]: string } | null;
 }
 
 export namespace TargetGetResponse {
@@ -620,6 +645,12 @@ export interface TargetCreateParams {
    * Body param: The IPv4/IPv6 address that identifies where to reach a target
    */
   ip: TargetCreateParams.IP;
+
+  /**
+   * Body param: Optional tags to associate with the target. Keys and values are
+   * user-defined strings.
+   */
+  tags?: { [key: string]: string } | null;
 }
 
 export namespace TargetCreateParams {
@@ -691,6 +722,12 @@ export interface TargetUpdateParams {
    * Body param: The IPv4/IPv6 address that identifies where to reach a target
    */
   ip: TargetUpdateParams.IP;
+
+  /**
+   * Body param: Optional tags to associate with the target. Keys and values are
+   * user-defined strings.
+   */
+  tags?: { [key: string]: string } | null;
 }
 
 export namespace TargetUpdateParams {
@@ -837,6 +874,13 @@ export interface TargetListParams extends V4PagePaginationArrayParams {
   order?: 'hostname' | 'created_at';
 
   /**
+   * Query param: Filter by tag key:value pairs. Multiple `tag` params are AND'd.
+   * Format: `tag=key:value` (e.g., `tag=environment:production`). Key and value must
+   * both be non-empty; `tag=:value` and `tag=key:` return 400.
+   */
+  tag?: Array<string>;
+
+  /**
    * Query param: Filters for targets that have any of the following UUIDs. Specify
    * `target_ids` multiple times in query parameter to build list of candidates.
    */
@@ -899,6 +943,12 @@ export namespace TargetBulkUpdateParams {
      * The IPv4/IPv6 address that identifies where to reach a target
      */
     ip: Body.IP;
+
+    /**
+     * Optional tags to associate with the target. Keys and values are user-defined
+     * strings.
+     */
+    tags?: { [key: string]: string } | null;
   }
 
   export namespace Body {

@@ -52,7 +52,7 @@ export class BaseItems extends APIResource {
   }
 
   /**
-   * Deletes a file from a managed AI Search instance and triggers a reindex.
+   * Deletes a file from a managed AI Search instance and removes its indexed data.
    *
    * @example
    * ```ts
@@ -499,6 +499,24 @@ export interface ItemUploadResponse {
   status: 'queued' | 'running' | 'completed' | 'error' | 'skipped' | 'outdated';
 
   error?: string;
+
+  warnings?: Array<ItemUploadResponse.UnionMember0 | ItemUploadResponse.UnionMember1>;
+}
+
+export namespace ItemUploadResponse {
+  export interface UnionMember0 {
+    code: 'custom_metadata_value_not_indexed';
+
+    expected_type: 'text' | 'number' | 'boolean' | 'datetime';
+
+    field: string;
+  }
+
+  export interface UnionMember1 {
+    code: 'custom_metadata_field_not_filterable';
+
+    field: string;
+  }
 }
 
 export interface ItemListParams extends V4PagePaginationArrayParams {

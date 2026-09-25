@@ -4,11 +4,12 @@ import { APIResource } from '../../core/resource';
 import * as ConnectionsAPI from './connections';
 import {
   BaseConnections,
-  Connection,
   ConnectionGetParams,
+  ConnectionGetResponse,
   ConnectionListParams,
+  ConnectionListResponse,
+  ConnectionListResponsesSinglePage,
   Connections,
-  ConnectionsSinglePage,
 } from './connections';
 import * as CookiesAPI from './cookies';
 import {
@@ -24,7 +25,6 @@ import * as PoliciesAPI from './policies';
 import {
   BasePolicies,
   Policies,
-  Policy,
   PolicyCreateParams,
   PolicyCreateResponse,
   PolicyDeleteParams,
@@ -39,12 +39,12 @@ import {
 import * as ScriptsAPI from './scripts';
 import {
   BaseScripts,
-  Script,
   ScriptGetParams,
   ScriptGetResponse,
   ScriptListParams,
+  ScriptListResponse,
+  ScriptListResponsesSinglePage,
   Scripts,
-  ScriptsSinglePage,
 } from './scripts';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -54,7 +54,7 @@ export class BasePageShield extends APIResource {
   static override readonly _key: readonly ['pageShield'] = Object.freeze(['pageShield'] as const);
 
   /**
-   * Updates Page Shield settings.
+   * Updates client-side security enablement and reporting behaviors for the zone.
    *
    * @example
    * ```ts
@@ -73,19 +73,22 @@ export class BasePageShield extends APIResource {
   }
 
   /**
-   * Fetches the Page Shield settings.
+   * Returns the client-side security product enablement status and reporting
+   * behaviors.
    *
    * @example
    * ```ts
-   * const setting = await client.pageShield.get({
+   * const pageShield = await client.pageShield.get({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    * });
    * ```
    */
-  get(params: PageShieldGetParams, options?: RequestOptions): APIPromise<Setting | null> {
+  get(params: PageShieldGetParams, options?: RequestOptions): APIPromise<PageShieldGetResponse | null> {
     const { zone_id } = params;
     return (
-      this._client.get(path`/zones/${zone_id}/page_shield`, options) as APIPromise<{ result: Setting | null }>
+      this._client.get(path`/zones/${zone_id}/page_shield`, options) as APIPromise<{
+        result: PageShieldGetResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -96,14 +99,14 @@ export class PageShield extends BasePageShield {
   cookies: CookiesAPI.Cookies = new CookiesAPI.Cookies(this._client);
 }
 
-export interface Setting {
+export interface PageShieldUpdateResponse {
   /**
-   * When true, indicates that Page Shield is enabled.
+   * When true, indicates that Client-Side Security is enabled.
    */
   enabled: boolean;
 
   /**
-   * The timestamp of when Page Shield was last updated.
+   * The timestamp of when Client-Side Security was last updated.
    */
   updated_at: string;
 
@@ -119,14 +122,14 @@ export interface Setting {
   use_connection_url_path: boolean;
 }
 
-export interface PageShieldUpdateResponse {
+export interface PageShieldGetResponse {
   /**
-   * When true, indicates that Page Shield is enabled.
+   * When true, indicates that Client-Side Security is enabled.
    */
   enabled: boolean;
 
   /**
-   * The timestamp of when Page Shield was last updated.
+   * The timestamp of when Client-Side Security was last updated.
    */
   updated_at: string;
 
@@ -149,7 +152,7 @@ export interface PageShieldUpdateParams {
   zone_id: string;
 
   /**
-   * Body param: When true, indicates that Page Shield is enabled.
+   * Body param: When true, indicates that Client-Side Security is enabled.
    */
   enabled?: boolean;
 
@@ -184,8 +187,8 @@ PageShield.BaseCookies = BaseCookies;
 
 export declare namespace PageShield {
   export {
-    type Setting as Setting,
     type PageShieldUpdateResponse as PageShieldUpdateResponse,
+    type PageShieldGetResponse as PageShieldGetResponse,
     type PageShieldUpdateParams as PageShieldUpdateParams,
     type PageShieldGetParams as PageShieldGetParams,
   };
@@ -193,7 +196,6 @@ export declare namespace PageShield {
   export {
     Policies as Policies,
     BasePolicies as BasePolicies,
-    type Policy as Policy,
     type PolicyCreateResponse as PolicyCreateResponse,
     type PolicyUpdateResponse as PolicyUpdateResponse,
     type PolicyListResponse as PolicyListResponse,
@@ -209,8 +211,9 @@ export declare namespace PageShield {
   export {
     Connections as Connections,
     BaseConnections as BaseConnections,
-    type Connection as Connection,
-    type ConnectionsSinglePage as ConnectionsSinglePage,
+    type ConnectionListResponse as ConnectionListResponse,
+    type ConnectionGetResponse as ConnectionGetResponse,
+    type ConnectionListResponsesSinglePage as ConnectionListResponsesSinglePage,
     type ConnectionListParams as ConnectionListParams,
     type ConnectionGetParams as ConnectionGetParams,
   };
@@ -218,9 +221,9 @@ export declare namespace PageShield {
   export {
     Scripts as Scripts,
     BaseScripts as BaseScripts,
-    type Script as Script,
+    type ScriptListResponse as ScriptListResponse,
     type ScriptGetResponse as ScriptGetResponse,
-    type ScriptsSinglePage as ScriptsSinglePage,
+    type ScriptListResponsesSinglePage as ScriptListResponsesSinglePage,
     type ScriptListParams as ScriptListParams,
     type ScriptGetParams as ScriptGetParams,
   };

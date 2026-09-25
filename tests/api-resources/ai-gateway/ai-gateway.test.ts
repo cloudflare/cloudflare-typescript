@@ -48,6 +48,7 @@ const runTests = (client: PartialCloudflare<{ aiGateway: BaseAIGateway }>) => {
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
       authentication: true,
+      byok_only: true,
       log_management: 10000,
       log_management_strategy: 'STOP_INSERTING',
       logpush: true,
@@ -89,6 +90,7 @@ const runTests = (client: PartialCloudflare<{ aiGateway: BaseAIGateway }>) => {
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
       authentication: true,
+      byok_only: true,
       dlp: {
         action: 'BLOCK',
         enabled: true,

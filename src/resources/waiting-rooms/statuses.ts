@@ -44,11 +44,11 @@ export class BaseStatuses extends APIResource {
     waitingRoomID: string,
     params: StatusGetParams,
     options?: RequestOptions,
-  ): APIPromise<StatusGetResponse> {
+  ): APIPromise<StatusGetResponse | null> {
     const { zone_id } = params;
     return (
       this._client.get(path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}/status`, options) as APIPromise<{
-        result: StatusGetResponse;
+        result: StatusGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }

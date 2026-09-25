@@ -23,6 +23,9 @@ export class BaseRules extends APIResource {
   ] as const);
 
   /**
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
+   *
    * Create one or more firewall rules.
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
@@ -40,6 +43,9 @@ export class BaseRules extends APIResource {
   }
 
   /**
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
+   *
    * Updates an existing firewall rule.
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
@@ -54,6 +60,9 @@ export class BaseRules extends APIResource {
   }
 
   /**
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
+   *
    * Fetches firewall rules in a zone. You can filter the results using several
    * optional parameters.
    *
@@ -72,6 +81,9 @@ export class BaseRules extends APIResource {
   }
 
   /**
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
+   *
    * Deletes an existing firewall rule.
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
@@ -86,6 +98,9 @@ export class BaseRules extends APIResource {
   }
 
   /**
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
+   *
    * Deletes existing firewall rules.
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
@@ -102,6 +117,9 @@ export class BaseRules extends APIResource {
   }
 
   /**
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
+   *
    * Updates the priority of existing firewall rules.
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
@@ -110,15 +128,18 @@ export class BaseRules extends APIResource {
     params: RuleBulkEditParams,
     options?: RequestOptions,
   ): PagePromise<FirewallRulesSinglePage, FirewallRule> {
-    const { zone_id, body } = params;
+    const { zone_id, ...body } = params;
     return this._client.getAPIList(path`/zones/${zone_id}/firewall/rules`, SinglePage<FirewallRule>, {
-      body: body,
+      body,
       method: 'patch',
       ...options,
     });
   }
 
   /**
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
+   *
    * Updates one or more existing firewall rules.
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
@@ -127,15 +148,18 @@ export class BaseRules extends APIResource {
     params: RuleBulkUpdateParams,
     options?: RequestOptions,
   ): PagePromise<FirewallRulesSinglePage, FirewallRule> {
-    const { zone_id, body } = params;
+    const { zone_id, ...body } = params;
     return this._client.getAPIList(path`/zones/${zone_id}/firewall/rules`, SinglePage<FirewallRule>, {
-      body: body,
+      body,
       method: 'put',
       ...options,
     });
   }
 
   /**
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
+   *
    * Updates the priority of an existing firewall rule.
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
@@ -154,6 +178,9 @@ export class BaseRules extends APIResource {
   }
 
   /**
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
+   *
    * Fetches the details of a firewall rule.
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
@@ -426,9 +453,9 @@ export interface RuleBulkEditParams {
   zone_id: string;
 
   /**
-   * Body param
+   * Body param: The unique identifier of the firewall rule.
    */
-  body: unknown;
+  id: string;
 }
 
 export interface RuleBulkUpdateParams {
@@ -438,9 +465,9 @@ export interface RuleBulkUpdateParams {
   zone_id: string;
 
   /**
-   * Body param
+   * Body param: The unique identifier of the firewall rule.
    */
-  body: unknown;
+  id: string;
 }
 
 export interface RuleEditParams {

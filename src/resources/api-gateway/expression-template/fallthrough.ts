@@ -11,19 +11,11 @@ export class BaseFallthrough extends APIResource {
   );
 
   /**
-   * Creates an expression template fallthrough rule for API Shield. Used for
-   * configuring default behavior when no other expression templates match.
+   * Generates a WAF expression template that matches fallthrough traffic for the
+   * supplied API hosts. This operation is deprecated and should not be used for new
+   * integrations.
    *
-   * @example
-   * ```ts
-   * const fallthrough =
-   *   await client.apiGateway.expressionTemplate.fallthrough.create(
-   *     {
-   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       hosts: ['{zone}.domain1.tld', 'domain2.tld'],
-   *     },
-   *   );
-   * ```
+   * @deprecated Use the cf.api_gateway.fallthrough_detected field in custom rule for a more customized logic check.
    */
   create(params: FallthroughCreateParams, options?: RequestOptions): APIPromise<FallthroughCreateResponse> {
     const { zone_id, ...body } = params;

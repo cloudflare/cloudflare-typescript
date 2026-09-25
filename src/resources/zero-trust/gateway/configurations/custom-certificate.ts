@@ -26,6 +26,9 @@ export class BaseCustomCertificate extends APIResource {
 export class CustomCertificate extends BaseCustomCertificate {}
 
 export interface CustomCertificateGetParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 

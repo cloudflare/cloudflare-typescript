@@ -31,7 +31,6 @@ const runTests = (client: PartialCloudflare<{ addressing: { addressMaps: { zones
     const responsePromise = client.addressing.addressMaps.zones.update('055817b111884e0227e1be16a0be6ee0', {
       zone_id: '8ac8489932db6327334c9b6d58544cfe',
       account_id: '258def64c72dae45f3e4c8516e2111f2',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +45,6 @@ const runTests = (client: PartialCloudflare<{ addressing: { addressMaps: { zones
     const response = await client.addressing.addressMaps.zones.update('055817b111884e0227e1be16a0be6ee0', {
       zone_id: '8ac8489932db6327334c9b6d58544cfe',
       account_id: '258def64c72dae45f3e4c8516e2111f2',
-      body: {},
     });
   });
 

@@ -58,6 +58,10 @@ export interface D1 {
    */
   name?: string;
 
+  /**
+   * @deprecated The number of tables in the D1 database. This count is no longer
+   * accurate and should not be relied upon.
+   */
   num_tables?: number;
 
   /**

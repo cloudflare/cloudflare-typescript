@@ -66,11 +66,11 @@ export class BaseWaitingRooms extends APIResource {
    * });
    * ```
    */
-  create(params: WaitingRoomCreateParams, options?: RequestOptions): APIPromise<WaitingRoom> {
+  create(params: WaitingRoomCreateParams, options?: RequestOptions): APIPromise<WaitingRoom | null> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/waiting_rooms`, { body, ...options }) as APIPromise<{
-        result: WaitingRoom;
+        result: WaitingRoom | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -96,13 +96,13 @@ export class BaseWaitingRooms extends APIResource {
     waitingRoomID: string,
     params: WaitingRoomUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<WaitingRoom> {
+  ): APIPromise<WaitingRoom | null> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: WaitingRoom }>
+      }) as APIPromise<{ result: WaitingRoom | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -162,11 +162,11 @@ export class BaseWaitingRooms extends APIResource {
     waitingRoomID: string,
     params: WaitingRoomDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<WaitingRoomDeleteResponse> {
+  ): APIPromise<WaitingRoomDeleteResponse | null> {
     const { zone_id } = params;
     return (
       this._client.delete(path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}`, options) as APIPromise<{
-        result: WaitingRoomDeleteResponse;
+        result: WaitingRoomDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -192,13 +192,13 @@ export class BaseWaitingRooms extends APIResource {
     waitingRoomID: string,
     params: WaitingRoomEditParams,
     options?: RequestOptions,
-  ): APIPromise<WaitingRoom> {
+  ): APIPromise<WaitingRoom | null> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: WaitingRoom }>
+      }) as APIPromise<{ result: WaitingRoom | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -217,11 +217,11 @@ export class BaseWaitingRooms extends APIResource {
     waitingRoomID: string,
     params: WaitingRoomGetParams,
     options?: RequestOptions,
-  ): APIPromise<WaitingRoom> {
+  ): APIPromise<WaitingRoom | null> {
     const { zone_id } = params;
     return (
       this._client.get(path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}`, options) as APIPromise<{
-        result: WaitingRoom;
+        result: WaitingRoom | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }

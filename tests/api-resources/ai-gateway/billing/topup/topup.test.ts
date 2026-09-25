@@ -41,7 +41,11 @@ const runTests = (client: PartialCloudflare<{ aiGateway: { billing: { topup: Bas
 
   // HTTP 404 error from prism
   test.skip('create: required and optional params', async () => {
-    const response = await client.aiGateway.billing.topup.create({ account_id: 'account_id', amount: 5000 });
+    const response = await client.aiGateway.billing.topup.create({
+      account_id: 'account_id',
+      amount: 5000,
+      payment_method_id: 'pm_123',
+    });
   });
 
   // HTTP 404 error from prism

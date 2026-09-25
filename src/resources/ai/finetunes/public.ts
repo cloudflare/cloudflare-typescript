@@ -54,17 +54,17 @@ export interface PublicListParams {
   account_id: string;
 
   /**
-   * Query param: Pagination Limit
+   * Query param: Pagination Limit.
    */
   limit?: number;
 
   /**
-   * Query param: Pagination Offset
+   * Query param: Pagination Offset.
    */
   offset?: number;
 
   /**
-   * Query param: Order By Column Name
+   * Query param: Order By Column Name.
    */
   orderBy?: string;
 }

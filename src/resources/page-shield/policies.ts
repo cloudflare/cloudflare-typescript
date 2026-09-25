@@ -14,7 +14,8 @@ export class BasePolicies extends APIResource {
   ] as const);
 
   /**
-   * Create a Page Shield policy.
+   * Creates a rule that applies a client-side security action when its filter
+   * expression matches.
    *
    * @example
    * ```ts
@@ -39,7 +40,8 @@ export class BasePolicies extends APIResource {
   }
 
   /**
-   * Update a Page Shield policy by ID.
+   * Updates the description, action, expression, enabled state, and policy value for
+   * a content security rule.
    *
    * @example
    * ```ts
@@ -64,7 +66,7 @@ export class BasePolicies extends APIResource {
   }
 
   /**
-   * Lists all Page Shield policies.
+   * Lists content security rules configured for the zone.
    *
    * @example
    * ```ts
@@ -89,7 +91,7 @@ export class BasePolicies extends APIResource {
   }
 
   /**
-   * Delete a Page Shield policy by ID.
+   * Permanently deletes a content security rule by ID.
    *
    * @example
    * ```ts
@@ -108,7 +110,7 @@ export class BasePolicies extends APIResource {
   }
 
   /**
-   * Fetches a Page Shield policy by ID.
+   * Returns a content security rule by ID.
    *
    * @example
    * ```ts
@@ -134,34 +136,6 @@ export class BasePolicies extends APIResource {
 export class Policies extends BasePolicies {}
 
 export type PolicyListResponsesSinglePage = SinglePage<PolicyListResponse>;
-
-export interface Policy {
-  /**
-   * The action to take if the expression matches
-   */
-  action: 'allow' | 'log' | 'add_reporting_directives';
-
-  /**
-   * A description for the policy
-   */
-  description: string;
-
-  /**
-   * Whether the policy is enabled
-   */
-  enabled: boolean;
-
-  /**
-   * The expression which must match for the policy to be applied, using the
-   * Cloudflare Firewall rule expression syntax
-   */
-  expression: string;
-
-  /**
-   * The policy which will be applied
-   */
-  value: string;
-}
 
 export interface PolicyCreateResponse {
   /**
@@ -384,7 +358,6 @@ export interface PolicyGetParams {
 
 export declare namespace Policies {
   export {
-    type Policy as Policy,
     type PolicyCreateResponse as PolicyCreateResponse,
     type PolicyUpdateResponse as PolicyUpdateResponse,
     type PolicyListResponse as PolicyListResponse,

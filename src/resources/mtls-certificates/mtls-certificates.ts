@@ -55,7 +55,7 @@ export class BaseMTLSCertificates extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const mtlsCertificateListResponse of client.mtlsCertificates.list(
+   * for await (const mtlsCertificate of client.mtlsCertificates.list(
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
@@ -65,11 +65,11 @@ export class BaseMTLSCertificates extends APIResource {
   list(
     params: MTLSCertificateListParams,
     options?: RequestOptions,
-  ): PagePromise<MTLSCertificateListResponsesSinglePage, MTLSCertificateListResponse> {
+  ): PagePromise<MTLSCertificatesSinglePage, MTLSCertificate> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/mtls_certificates`,
-      SinglePage<MTLSCertificateListResponse>,
+      SinglePage<MTLSCertificate>,
       { query, ...options },
     );
   }
@@ -91,13 +91,13 @@ export class BaseMTLSCertificates extends APIResource {
     mtlsCertificateID: string,
     params: MTLSCertificateDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<MTLSCertificateDeleteResponse> {
+  ): APIPromise<MTLSCertificate> {
     const { account_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/mtls_certificates/${mtlsCertificateID}`,
         options,
-      ) as APIPromise<{ result: MTLSCertificateDeleteResponse }>
+      ) as APIPromise<{ result: MTLSCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -118,13 +118,13 @@ export class BaseMTLSCertificates extends APIResource {
     mtlsCertificateID: string,
     params: MTLSCertificateGetParams,
     options?: RequestOptions,
-  ): APIPromise<MTLSCertificateGetResponse> {
+  ): APIPromise<MTLSCertificate> {
     const { account_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/mtls_certificates/${mtlsCertificateID}`,
         options,
-      ) as APIPromise<{ result: MTLSCertificateGetResponse }>
+      ) as APIPromise<{ result: MTLSCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -132,7 +132,59 @@ export class MTLSCertificates extends BaseMTLSCertificates {
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
 }
 
-export type MTLSCertificateListResponsesSinglePage = SinglePage<MTLSCertificateListResponse>;
+export type MTLSCertificatesSinglePage = SinglePage<MTLSCertificate>;
+
+export interface MTLSCertificate {
+  /**
+   * Identifier.
+   */
+  id?: string;
+
+  /**
+   * Indicates whether the certificate is a CA or leaf certificate.
+   */
+  ca?: boolean;
+
+  /**
+   * The uploaded root CA certificate.
+   */
+  certificates?: string;
+
+  /**
+   * When the certificate expires.
+   */
+  expires_on?: string;
+
+  /**
+   * The certificate authority that issued the certificate.
+   */
+  issuer?: string;
+
+  /**
+   * Optional unique name for the certificate. Only used for human readability.
+   */
+  name?: string;
+
+  /**
+   * The certificate serial number.
+   */
+  serial_number?: string;
+
+  /**
+   * The type of hash used for the certificate.
+   */
+  signature?: string;
+
+  /**
+   * The type of the certificate, indicating how it was created and who manages it.
+   */
+  type?: 'custom' | 'gateway_managed' | 'access_managed';
+
+  /**
+   * This is the time the certificate was uploaded.
+   */
+  uploaded_on?: string;
+}
 
 export interface MTLSCertificateCreateResponse {
   /**
@@ -184,162 +236,6 @@ export interface MTLSCertificateCreateResponse {
    * This is the time the certificate was updated.
    */
   updated_at?: string;
-
-  /**
-   * This is the time the certificate was uploaded.
-   */
-  uploaded_on?: string;
-}
-
-export interface MTLSCertificateListResponse {
-  /**
-   * Identifier.
-   */
-  id?: string;
-
-  /**
-   * Indicates whether the certificate is a CA or leaf certificate.
-   */
-  ca?: boolean;
-
-  /**
-   * The uploaded root CA certificate.
-   */
-  certificates?: string;
-
-  /**
-   * When the certificate expires.
-   */
-  expires_on?: string;
-
-  /**
-   * The certificate authority that issued the certificate.
-   */
-  issuer?: string;
-
-  /**
-   * Optional unique name for the certificate. Only used for human readability.
-   */
-  name?: string;
-
-  /**
-   * The certificate serial number.
-   */
-  serial_number?: string;
-
-  /**
-   * The type of hash used for the certificate.
-   */
-  signature?: string;
-
-  /**
-   * The type of the certificate, indicating how it was created and who manages it.
-   */
-  type?: 'custom' | 'gateway_managed' | 'access_managed';
-
-  /**
-   * This is the time the certificate was uploaded.
-   */
-  uploaded_on?: string;
-}
-
-export interface MTLSCertificateDeleteResponse {
-  /**
-   * Identifier.
-   */
-  id?: string;
-
-  /**
-   * Indicates whether the certificate is a CA or leaf certificate.
-   */
-  ca?: boolean;
-
-  /**
-   * The uploaded root CA certificate.
-   */
-  certificates?: string;
-
-  /**
-   * When the certificate expires.
-   */
-  expires_on?: string;
-
-  /**
-   * The certificate authority that issued the certificate.
-   */
-  issuer?: string;
-
-  /**
-   * Optional unique name for the certificate. Only used for human readability.
-   */
-  name?: string;
-
-  /**
-   * The certificate serial number.
-   */
-  serial_number?: string;
-
-  /**
-   * The type of hash used for the certificate.
-   */
-  signature?: string;
-
-  /**
-   * The type of the certificate, indicating how it was created and who manages it.
-   */
-  type?: 'custom' | 'gateway_managed' | 'access_managed';
-
-  /**
-   * This is the time the certificate was uploaded.
-   */
-  uploaded_on?: string;
-}
-
-export interface MTLSCertificateGetResponse {
-  /**
-   * Identifier.
-   */
-  id?: string;
-
-  /**
-   * Indicates whether the certificate is a CA or leaf certificate.
-   */
-  ca?: boolean;
-
-  /**
-   * The uploaded root CA certificate.
-   */
-  certificates?: string;
-
-  /**
-   * When the certificate expires.
-   */
-  expires_on?: string;
-
-  /**
-   * The certificate authority that issued the certificate.
-   */
-  issuer?: string;
-
-  /**
-   * Optional unique name for the certificate. Only used for human readability.
-   */
-  name?: string;
-
-  /**
-   * The certificate serial number.
-   */
-  serial_number?: string;
-
-  /**
-   * The type of hash used for the certificate.
-   */
-  signature?: string;
-
-  /**
-   * The type of the certificate, indicating how it was created and who manages it.
-   */
-  type?: 'custom' | 'gateway_managed' | 'access_managed';
 
   /**
    * This is the time the certificate was uploaded.
@@ -409,11 +305,9 @@ MTLSCertificates.BaseAssociations = BaseAssociations;
 
 export declare namespace MTLSCertificates {
   export {
+    type MTLSCertificate as MTLSCertificate,
     type MTLSCertificateCreateResponse as MTLSCertificateCreateResponse,
-    type MTLSCertificateListResponse as MTLSCertificateListResponse,
-    type MTLSCertificateDeleteResponse as MTLSCertificateDeleteResponse,
-    type MTLSCertificateGetResponse as MTLSCertificateGetResponse,
-    type MTLSCertificateListResponsesSinglePage as MTLSCertificateListResponsesSinglePage,
+    type MTLSCertificatesSinglePage as MTLSCertificatesSinglePage,
     type MTLSCertificateCreateParams as MTLSCertificateCreateParams,
     type MTLSCertificateListParams as MTLSCertificateListParams,
     type MTLSCertificateDeleteParams as MTLSCertificateDeleteParams,

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
-import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -28,13 +27,14 @@ export class BaseOverrideCodes extends APIResource {
     deviceID: string,
     params: OverrideCodeListParams,
     options?: RequestOptions,
-  ): PagePromise<OverrideCodeListResponsesSinglePage, OverrideCodeListResponse> {
+  ): APIPromise<OverrideCodeListResponse | null> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/devices/${deviceID}/override_codes`,
-      SinglePage<OverrideCodeListResponse>,
-      options,
-    );
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/devices/${deviceID}/override_codes`,
+        options,
+      ) as APIPromise<{ result: OverrideCodeListResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -66,9 +66,38 @@ export class BaseOverrideCodes extends APIResource {
 }
 export class OverrideCodes extends BaseOverrideCodes {}
 
-export type OverrideCodeListResponsesSinglePage = SinglePage<OverrideCodeListResponse>;
+export interface OverrideCodeListResponse {
+  disable_for_time?: OverrideCodeListResponse.DisableForTime;
+}
 
-export type OverrideCodeListResponse = unknown;
+export namespace OverrideCodeListResponse {
+  export interface DisableForTime {
+    /**
+     * Override code that is valid for 1 hour.
+     */
+    '1'?: string;
+
+    /**
+     * Override code that is valid for 12 hour2.
+     */
+    '12'?: string;
+
+    /**
+     * Override code that is valid for 24 hour.2.
+     */
+    '24'?: string;
+
+    /**
+     * Override code that is valid for 3 hours.
+     */
+    '3'?: string;
+
+    /**
+     * Override code that is valid for 6 hours.
+     */
+    '6'?: string;
+  }
+}
 
 export interface OverrideCodeGetResponse {
   disable_for_time?: { [key: string]: string };
@@ -86,7 +115,6 @@ export declare namespace OverrideCodes {
   export {
     type OverrideCodeListResponse as OverrideCodeListResponse,
     type OverrideCodeGetResponse as OverrideCodeGetResponse,
-    type OverrideCodeListResponsesSinglePage as OverrideCodeListResponsesSinglePage,
     type OverrideCodeListParams as OverrideCodeListParams,
     type OverrideCodeGetParams as OverrideCodeGetParams,
   };

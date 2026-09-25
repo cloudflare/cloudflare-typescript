@@ -18,9 +18,10 @@ export class BaseAISecurity extends APIResource {
   static override readonly _key: readonly ['aiSecurity'] = Object.freeze(['aiSecurity'] as const);
 
   /**
-   * Enable or disable AI Security for Apps for a zone.
-   *
-   * Changes can take up to a minute to propagate to the zone.
+   * Update the AI Security for Apps status for the zone, enabling or disabling the
+   * detection. The detection results are exposed as `cf.llm.prompt.*` fields for use
+   * in custom rules and rate limiting rules; changes can take up to a minute to
+   * propagate.
    *
    * @example
    * ```ts
@@ -39,7 +40,9 @@ export class BaseAISecurity extends APIResource {
   }
 
   /**
-   * Get whether AI Security for Apps is enabled or disabled for a zone.
+   * Get the current AI Security for Apps status for the zone. While enabled,
+   * Cloudflare scans prompts sent to endpoints labeled `cf-llm` for personally
+   * identifiable information, unsafe topics, and prompt injection attempts.
    *
    * @example
    * ```ts

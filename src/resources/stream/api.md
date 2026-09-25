@@ -40,10 +40,6 @@ Methods:
 
 ## Clip
 
-Types:
-
-- <code><a href="./src/resources/stream/clip.ts">Clip</a></code>
-
 Methods:
 
 - <code title="post /accounts/{account_id}/stream/clip">client.stream.clip.<a href="./src/resources/stream/clip.ts">create</a>({ ...params }) -> Video</code>

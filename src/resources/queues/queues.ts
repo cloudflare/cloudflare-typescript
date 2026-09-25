@@ -59,7 +59,7 @@ export class BaseQueues extends APIResource {
   static override readonly _key: readonly ['queues'] = Object.freeze(['queues'] as const);
 
   /**
-   * Create a new queue
+   * Creates a Queue in the account.
    *
    * @example
    * ```ts
@@ -79,9 +79,8 @@ export class BaseQueues extends APIResource {
   }
 
   /**
-   * Updates a Queue. Note that this endpoint does not support partial updates. If
-   * successful, the Queue's configuration is overwritten with the supplied
-   * configuration.
+   * Replaces a Queue's configuration with the supplied configuration. This endpoint
+   * does not support partial updates.
    *
    * @example
    * ```ts
@@ -119,7 +118,7 @@ export class BaseQueues extends APIResource {
   }
 
   /**
-   * Deletes a queue
+   * Deletes a Queue.
    *
    * @example
    * ```ts
@@ -139,7 +138,7 @@ export class BaseQueues extends APIResource {
   }
 
   /**
-   * Updates a Queue.
+   * Updates part of a Queue's configuration.
    *
    * @example
    * ```ts
@@ -160,7 +159,7 @@ export class BaseQueues extends APIResource {
   }
 
   /**
-   * Get details about a specific queue.
+   * Returns details about a specific Queue.
    *
    * @example
    * ```ts
@@ -180,8 +179,8 @@ export class BaseQueues extends APIResource {
   }
 
   /**
-   * Return best-effort metrics for a queue. Values may be approximate due to the
-   * distributed nature of queues.
+   * Returns best-effort metrics for a Queue. Values may be approximate due to the
+   * distributed nature of Queues.
    *
    * @example
    * ```ts
@@ -219,6 +218,8 @@ export interface Queue {
   consumers_total_count?: number;
 
   created_on?: string;
+
+  jurisdiction?: 'eu' | 'us' | 'fedramp';
 
   modified_on?: string;
 
@@ -307,6 +308,11 @@ export interface QueueCreateParams {
    * Body param
    */
   queue_name: string;
+
+  /**
+   * Body param
+   */
+  jurisdiction?: 'eu' | 'us' | 'fedramp';
 }
 
 export interface QueueUpdateParams {
@@ -314,6 +320,11 @@ export interface QueueUpdateParams {
    * Path param: A Resource identifier.
    */
   account_id: string;
+
+  /**
+   * Body param
+   */
+  jurisdiction?: 'eu' | 'us' | 'fedramp';
 
   /**
    * Body param
@@ -364,6 +375,11 @@ export interface QueueEditParams {
    * Path param: A Resource identifier.
    */
   account_id: string;
+
+  /**
+   * Body param
+   */
+  jurisdiction?: 'eu' | 'us' | 'fedramp';
 
   /**
    * Body param

@@ -17,7 +17,7 @@ export class BaseObjects extends APIResource {
   ] as const);
 
   /**
-   * Returns the Durable Objects in a given namespace.
+   * Returns the Durable Objects in a given Durable Object namespace.
    */
   list(
     id: string,

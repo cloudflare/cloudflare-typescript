@@ -3,9 +3,15 @@
 export {
   Applications,
   BaseApplications,
+  type ApplicationCreateResponse,
+  type ApplicationUpdateResponse,
   type ApplicationListResponse,
+  type ApplicationDeleteResponse,
   type ApplicationGetResponse,
+  type ApplicationCreateParams,
+  type ApplicationUpdateParams,
   type ApplicationListParams,
+  type ApplicationDeleteParams,
   type ApplicationGetParams,
   type ApplicationListResponsesSinglePage,
 } from './applications';

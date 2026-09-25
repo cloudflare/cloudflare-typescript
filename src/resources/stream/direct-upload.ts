@@ -15,7 +15,8 @@ export class BaseDirectUpload extends APIResource {
   ] as const);
 
   /**
-   * Creates a direct upload that allows video uploads without an API key.
+   * Creates a direct upload endpoint that allows an end-user to upload a video
+   * without an API key.
    *
    * @example
    * ```ts

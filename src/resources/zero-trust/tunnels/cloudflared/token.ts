@@ -14,7 +14,8 @@ export class BaseToken extends APIResource {
   ] as const);
 
   /**
-   * Gets the token used to associate cloudflared with a specific tunnel.
+   * Retrieves the token used to run cloudflared and associate it with a specific
+   * Cloudflare Tunnel. Treat the token as a secret.
    *
    * @example
    * ```ts

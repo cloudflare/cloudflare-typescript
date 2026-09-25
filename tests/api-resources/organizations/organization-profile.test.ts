@@ -31,7 +31,7 @@ const runTests = (
 ) => {
   test('update: only required params', async () => {
     const responsePromise = client.organizations.organizationProfile.update(
-      'a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8',
+      'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8',
       {
         business_address: 'business_address',
         business_email: 'business_email',
@@ -51,7 +51,7 @@ const runTests = (
 
   test('update: required and optional params', async () => {
     const response = await client.organizations.organizationProfile.update(
-      'a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8',
+      'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8',
       {
         business_address: 'business_address',
         business_email: 'business_email',
@@ -63,7 +63,7 @@ const runTests = (
   });
 
   test('get', async () => {
-    const responsePromise = client.organizations.organizationProfile.get('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8');
+    const responsePromise = client.organizations.organizationProfile.get('a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

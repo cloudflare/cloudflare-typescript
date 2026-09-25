@@ -250,6 +250,11 @@ export namespace InstanceListResponse {
      * Direct link to the asset.
      */
     link?: string | null;
+
+    /**
+     * Timestamp of the asset row version represented by this data.
+     */
+    updated?: string;
   }
 
   export namespace Asset {
@@ -509,6 +514,11 @@ export namespace InstanceArchiveResponse {
      * Direct link to the asset.
      */
     link?: string | null;
+
+    /**
+     * Timestamp of the asset row version represented by this data.
+     */
+    updated?: string;
   }
 
   export namespace Asset {
@@ -814,6 +824,11 @@ export namespace InstanceGetResponse {
      * Direct link to the asset.
      */
     link?: string | null;
+
+    /**
+     * Timestamp of the asset row version represented by this data.
+     */
+    updated?: string;
   }
 
   export namespace Asset {
@@ -1073,6 +1088,11 @@ export namespace InstanceUnarchiveResponse {
      * Direct link to the asset.
      */
     link?: string | null;
+
+    /**
+     * Timestamp of the asset row version represented by this data.
+     */
+    updated?: string;
   }
 
   export namespace Asset {

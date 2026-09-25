@@ -475,7 +475,8 @@ export interface ContentListParams extends V4PagePaginationArrayParams {
     | 'OPENAI'
     | 'SALESFORCE'
     | 'SERVICENOW'
-    | 'SLACK';
+    | 'SLACK'
+    | 'ZOOM';
 }
 
 export interface ContentExportParams {
@@ -539,6 +540,7 @@ export interface ContentExportParams {
     | 'SALESFORCE'
     | 'SERVICENOW'
     | 'SLACK'
+    | 'ZOOM'
   >;
 }
 

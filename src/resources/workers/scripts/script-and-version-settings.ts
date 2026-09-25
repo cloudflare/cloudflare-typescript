@@ -16,7 +16,7 @@ export class BaseScriptAndVersionSettings extends APIResource {
   ] as const);
 
   /**
-   * Patch metadata or config, such as bindings or usage model.
+   * Patch Worker script metadata or config, such as bindings or usage model.
    *
    * @example
    * ```ts
@@ -42,7 +42,7 @@ export class BaseScriptAndVersionSettings extends APIResource {
   }
 
   /**
-   * Get metadata and config, such as bindings or usage model.
+   * Get Worker script metadata and config, such as bindings or usage model.
    *
    * @example
    * ```ts
@@ -103,6 +103,7 @@ export interface ScriptAndVersionSettingEditResponse {
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindMTLSCertificate
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindPlainText
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindPipelines
+    | ScriptAndVersionSettingEditResponse.WorkersBindingKindK2
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindQueue
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindRatelimit
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindR2Bucket
@@ -632,6 +633,26 @@ export namespace ScriptAndVersionSettingEditResponse {
     type: 'pipelines';
   }
 
+  /**
+   * A K2 stream binding. Available only to accounts enabled for K2.
+   */
+  export interface WorkersBindingKindK2 {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * ID of a K2 stream owned by the account deploying the Worker.
+     */
+    stream: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'k2';
+  }
+
   export interface WorkersBindingKindQueue {
     /**
      * A JavaScript variable name for the binding.
@@ -716,7 +737,7 @@ export namespace ScriptAndVersionSettingEditResponse {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high' | 'us';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -977,6 +998,12 @@ export namespace ScriptAndVersionSettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'vpc_network';
+
+    /**
+     * Enables Gateway identity for the binding. Requires network_id to be
+     * "cf1:network" and cannot be combined with tunnel_id.
+     */
+    identity?: 'runtime-email-alpha';
 
     /**
      * Identifier of the network to bind to. Only "cf1:network" is currently supported.
@@ -1280,9 +1307,19 @@ export namespace ScriptAndVersionSettingEditResponse {
     head_sampling_rate?: number | null;
 
     /**
+     * Real-time Issues settings for the Worker.
+     */
+    issues?: Observability.Issues | null;
+
+    /**
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Whether query strings are removed from request URLs in logs and traces.
+     */
+    redact_query_string?: boolean;
 
     /**
      * Trace settings for the Worker.
@@ -1291,6 +1328,16 @@ export namespace ScriptAndVersionSettingEditResponse {
   }
 
   export namespace Observability {
+    /**
+     * Real-time Issues settings for the Worker.
+     */
+    export interface Issues {
+      /**
+       * Whether real-time Issues are enabled for the Worker.
+       */
+      enabled?: boolean;
+    }
+
     /**
      * Log settings for the Worker.
      */
@@ -1349,12 +1396,12 @@ export namespace ScriptAndVersionSettingEditResponse {
 
       /**
        * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-       * requests are handled. "authenticated" (default) honors inbound trace context
-       * only when accompanied by a valid trace auth token. "accept" unconditionally
-       * accepts inbound trace context. Requires the trace propagation feature to be
-       * enabled.
+       * requests are handled. "authenticated" honors inbound trace context only when
+       * accompanied by a valid trace auth token. "accept" unconditionally accepts
+       * inbound trace context. Requires the trace propagation feature to be enabled.
+       * Returns null when the trace propagation feature is not enabled for the account.
        */
-      propagation_policy?: 'authenticated' | 'accept';
+      propagation_policy?: 'authenticated' | 'accept' | null;
     }
   }
 
@@ -1493,6 +1540,7 @@ export interface ScriptAndVersionSettingGetResponse {
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindMTLSCertificate
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindPlainText
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindPipelines
+    | ScriptAndVersionSettingGetResponse.WorkersBindingKindK2
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindQueue
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindRatelimit
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindR2Bucket
@@ -2022,6 +2070,26 @@ export namespace ScriptAndVersionSettingGetResponse {
     type: 'pipelines';
   }
 
+  /**
+   * A K2 stream binding. Available only to accounts enabled for K2.
+   */
+  export interface WorkersBindingKindK2 {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * ID of a K2 stream owned by the account deploying the Worker.
+     */
+    stream: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'k2';
+  }
+
   export interface WorkersBindingKindQueue {
     /**
      * A JavaScript variable name for the binding.
@@ -2106,7 +2174,7 @@ export namespace ScriptAndVersionSettingGetResponse {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high' | 'us';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -2367,6 +2435,12 @@ export namespace ScriptAndVersionSettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'vpc_network';
+
+    /**
+     * Enables Gateway identity for the binding. Requires network_id to be
+     * "cf1:network" and cannot be combined with tunnel_id.
+     */
+    identity?: 'runtime-email-alpha';
 
     /**
      * Identifier of the network to bind to. Only "cf1:network" is currently supported.
@@ -2670,9 +2744,19 @@ export namespace ScriptAndVersionSettingGetResponse {
     head_sampling_rate?: number | null;
 
     /**
+     * Real-time Issues settings for the Worker.
+     */
+    issues?: Observability.Issues | null;
+
+    /**
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Whether query strings are removed from request URLs in logs and traces.
+     */
+    redact_query_string?: boolean;
 
     /**
      * Trace settings for the Worker.
@@ -2681,6 +2765,16 @@ export namespace ScriptAndVersionSettingGetResponse {
   }
 
   export namespace Observability {
+    /**
+     * Real-time Issues settings for the Worker.
+     */
+    export interface Issues {
+      /**
+       * Whether real-time Issues are enabled for the Worker.
+       */
+      enabled?: boolean;
+    }
+
     /**
      * Log settings for the Worker.
      */
@@ -2739,12 +2833,12 @@ export namespace ScriptAndVersionSettingGetResponse {
 
       /**
        * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-       * requests are handled. "authenticated" (default) honors inbound trace context
-       * only when accompanied by a valid trace auth token. "accept" unconditionally
-       * accepts inbound trace context. Requires the trace propagation feature to be
-       * enabled.
+       * requests are handled. "authenticated" honors inbound trace context only when
+       * accompanied by a valid trace auth token. "accept" unconditionally accepts
+       * inbound trace context. Requires the trace propagation feature to be enabled.
+       * Returns null when the trace propagation feature is not enabled for the account.
        */
-      propagation_policy?: 'authenticated' | 'accept';
+      propagation_policy?: 'authenticated' | 'accept' | null;
     }
   }
 
@@ -2896,6 +2990,7 @@ export namespace ScriptAndVersionSettingEditParams {
       | Settings.WorkersBindingKindMTLSCertificate
       | Settings.WorkersBindingKindPlainText
       | Settings.WorkersBindingKindPipelines
+      | Settings.WorkersBindingKindK2
       | Settings.WorkersBindingKindQueue
       | Settings.WorkersBindingKindRatelimit
       | Settings.WorkersBindingKindR2Bucket
@@ -3430,6 +3525,26 @@ export namespace ScriptAndVersionSettingEditParams {
       type: 'pipelines';
     }
 
+    /**
+     * A K2 stream binding. Available only to accounts enabled for K2.
+     */
+    export interface WorkersBindingKindK2 {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * ID of a K2 stream owned by the account deploying the Worker.
+       */
+      stream: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'k2';
+    }
+
     export interface WorkersBindingKindQueue {
       /**
        * A JavaScript variable name for the binding.
@@ -3514,7 +3629,7 @@ export namespace ScriptAndVersionSettingEditParams {
        * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
        * of the R2 bucket.
        */
-      jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
+      jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high' | 'us';
     }
 
     export interface WorkersBindingKindSecretText {
@@ -3794,6 +3909,12 @@ export namespace ScriptAndVersionSettingEditParams {
       type: 'vpc_network';
 
       /**
+       * Enables Gateway identity for the binding. Requires network_id to be
+       * "cf1:network" and cannot be combined with tunnel_id.
+       */
+      identity?: 'runtime-email-alpha';
+
+      /**
        * Identifier of the network to bind to. Only "cf1:network" is currently supported.
        * Mutually exclusive with tunnel_id.
        */
@@ -4055,9 +4176,19 @@ export namespace ScriptAndVersionSettingEditParams {
       head_sampling_rate?: number | null;
 
       /**
+       * Real-time Issues settings for the Worker.
+       */
+      issues?: Observability.Issues | null;
+
+      /**
        * Log settings for the Worker.
        */
       logs?: Observability.Logs | null;
+
+      /**
+       * Whether query strings are removed from request URLs in logs and traces.
+       */
+      redact_query_string?: boolean;
 
       /**
        * Trace settings for the Worker.
@@ -4066,6 +4197,16 @@ export namespace ScriptAndVersionSettingEditParams {
     }
 
     export namespace Observability {
+      /**
+       * Real-time Issues settings for the Worker.
+       */
+      export interface Issues {
+        /**
+         * Whether real-time Issues are enabled for the Worker.
+         */
+        enabled?: boolean;
+      }
+
       /**
        * Log settings for the Worker.
        */
@@ -4124,12 +4265,12 @@ export namespace ScriptAndVersionSettingEditParams {
 
         /**
          * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-         * requests are handled. "authenticated" (default) honors inbound trace context
-         * only when accompanied by a valid trace auth token. "accept" unconditionally
-         * accepts inbound trace context. Requires the trace propagation feature to be
-         * enabled.
+         * requests are handled. "authenticated" honors inbound trace context only when
+         * accompanied by a valid trace auth token. "accept" unconditionally accepts
+         * inbound trace context. Requires the trace propagation feature to be enabled.
+         * Returns null when the trace propagation feature is not enabled for the account.
          */
-        propagation_policy?: 'authenticated' | 'accept';
+        propagation_policy?: 'authenticated' | 'accept' | null;
       }
     }
 

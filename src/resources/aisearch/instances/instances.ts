@@ -31,15 +31,15 @@ export class BaseInstances extends APIResource {
   ] as const);
 
   /**
-   * Create a new AI Search instance with the given configuration.
+   * Create a new AI Search instance with the given configuration. If type is omitted
+   * or null, a non-blank HTTP(S) source infers web-crawler and an existing R2 bucket
+   * source infers r2. A missing or blank source without a type creates a managed
+   * upload-only instance. Search for Agents instances require the default namespace.
    *
-   * @example
-   * ```ts
-   * const instance = await client.aiSearch.instances.create({
-   *   account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *   id: 'my-ai-search',
-   * });
-   * ```
+   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
+   * (and descendant paths) instead.
+   *
+   * @deprecated
    */
   create(params: InstanceCreateParams, options?: RequestOptions): APIPromise<InstanceCreateResponse> {
     const { account_id, ...body } = params;
@@ -52,15 +52,15 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * Update the configuration of an AI Search instance.
+   * Update an AI Search instance. Submitting Search for Agents metadata requires the
+   * default namespace; omitting or removing it is allowed elsewhere. Submit Search
+   * for Agents metadata and restrictive or unknown public endpoint changes or custom
+   * domains in separate PUT requests, even when resubmitting unchanged metadata.
    *
-   * @example
-   * ```ts
-   * const instance = await client.aiSearch.instances.update(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
-   * ```
+   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
+   * (and descendant paths) instead.
+   *
+   * @deprecated
    */
   update(
     id: string,
@@ -79,15 +79,10 @@ export class BaseInstances extends APIResource {
   /**
    * List all AI Search instances in the account.
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const instanceListResponse of client.aiSearch.instances.list(
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
+   * (and descendant paths) instead.
+   *
+   * @deprecated
    */
   list(
     params: InstanceListParams,
@@ -104,13 +99,10 @@ export class BaseInstances extends APIResource {
   /**
    * Permanently delete an AI Search instance and all its indexed data.
    *
-   * @example
-   * ```ts
-   * const instance = await client.aiSearch.instances.delete(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
-   * ```
+   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
+   * (and descendant paths) instead.
+   *
+   * @deprecated
    */
   delete(
     id: string,
@@ -129,17 +121,10 @@ export class BaseInstances extends APIResource {
    * Performs a chat completion request against an AI Search instance, using indexed
    * content as context for generating responses.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.aiSearch.instances.chatCompletions(
-   *     'my-ai-search',
-   *     {
-   *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       messages: [{ content: 'string', role: 'system' }],
-   *     },
-   *   );
-   * ```
+   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
+   * (and descendant paths) instead.
+   *
+   * @deprecated
    */
   chatCompletions(
     id: string,
@@ -156,13 +141,10 @@ export class BaseInstances extends APIResource {
   /**
    * Retrieve the configuration and status of an AI Search instance.
    *
-   * @example
-   * ```ts
-   * const response = await client.aiSearch.instances.read(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
-   * ```
+   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
+   * (and descendant paths) instead.
+   *
+   * @deprecated
    */
   read(id: string, params: InstanceReadParams, options?: RequestOptions): APIPromise<InstanceReadResponse> {
     const { account_id } = params;
@@ -177,13 +159,10 @@ export class BaseInstances extends APIResource {
    * Executes a semantic search query against an AI Search instance to find relevant
    * indexed content.
    *
-   * @example
-   * ```ts
-   * const response = await client.aiSearch.instances.search(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
-   * ```
+   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
+   * (and descendant paths) instead.
+   *
+   * @deprecated
    */
   search(
     id: string,
@@ -202,13 +181,10 @@ export class BaseInstances extends APIResource {
   /**
    * Retrieve usage and indexing statistics for an AI Search instance.
    *
-   * @example
-   * ```ts
-   * const response = await client.aiSearch.instances.stats(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
-   * ```
+   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
+   * (and descendant paths) instead.
+   *
+   * @deprecated
    */
   stats(
     id: string,
@@ -241,38 +217,11 @@ export interface InstanceCreateResponse {
 
   ai_gateway_id?: string | null;
 
-  ai_search_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  /**
+   * A Workers AI model ID or an AI Gateway model ID compatible with the OpenAI Chat
+   * Completions API. An empty string uses the configured or default model.
+   */
+  ai_search_model?: string | null;
 
   cache?: boolean;
 
@@ -293,19 +242,7 @@ export interface InstanceCreateResponse {
 
   custom_metadata?: Array<InstanceCreateResponse.CustomMetadata>;
 
-  embedding_model?:
-    | '@cf/qwen/qwen3-embedding-0.6b'
-    | '@cf/qwen/qwen3-vl-embedding-2b'
-    | '@cf/baai/bge-m3'
-    | '@cf/baai/bge-large-en-v1.5'
-    | '@cf/google/embeddinggemma-300m'
-    | 'google-ai-studio/gemini-embedding-001'
-    | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
-    | 'openai/text-embedding-3-small'
-    | 'openai/text-embedding-3-large'
-    | ''
-    | null;
+  embedding_model?: string | null;
 
   enable?: boolean;
 
@@ -314,13 +251,14 @@ export interface InstanceCreateResponse {
   fusion_method?: 'max' | 'rrf';
 
   /**
-   * @deprecated Deprecated — use index_method instead.
+   * @deprecated Deprecated — use index_method instead. Defaults to true for new
+   * instances; set false to create a vector-only instance.
    */
   hybrid_search_enabled?: boolean;
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to
-   * vector-only.
+   * Controls which storage backends are used during indexing. Defaults to vector and
+   * keyword indexing for new instances.
    */
   index_method?: InstanceCreateResponse.IndexMethod;
 
@@ -344,42 +282,15 @@ export interface InstanceCreateResponse {
 
   reranking?: boolean;
 
-  reranking_model?: '@cf/baai/bge-reranker-base' | '' | null;
+  reranking_model?: string | null;
 
   retrieval_options?: InstanceCreateResponse.RetrievalOptions | null;
 
-  rewrite_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  /**
+   * A Workers AI model ID or an AI Gateway model ID compatible with the OpenAI Chat
+   * Completions API. An empty string uses the configured or default model.
+   */
+  rewrite_model?: string | null;
 
   rewrite_query?: boolean;
 
@@ -399,6 +310,11 @@ export interface InstanceCreateResponse {
 
   token_id?: string;
 
+  /**
+   * Source type. When omitted or null with a non-blank source, HTTP(S) URLs infer
+   * web-crawler and existing R2 bucket names infer r2. A missing or blank source
+   * without a type uses managed upload-only storage.
+   */
   type?: 'r2' | 'web-crawler' | null;
 }
 
@@ -410,8 +326,8 @@ export namespace InstanceCreateResponse {
   }
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to
-   * vector-only.
+   * Controls which storage backends are used during indexing. Defaults to vector and
+   * keyword indexing for new instances.
    */
   export interface IndexMethod {
     /**
@@ -433,6 +349,12 @@ export namespace InstanceCreateResponse {
      * identifiers). Changing this triggers a full re-index. Defaults to porter.
      */
     keyword_tokenizer?: 'porter' | 'trigram';
+
+    /**
+     * Enables OCR ingestion for PDFs and images. Changing this triggers a full
+     * re-index. Defaults to false.
+     */
+    use_ocr?: boolean;
   }
 
   export interface Metadata {
@@ -683,38 +605,11 @@ export interface InstanceUpdateResponse {
 
   ai_gateway_id?: string | null;
 
-  ai_search_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  /**
+   * A Workers AI model ID or an AI Gateway model ID compatible with the OpenAI Chat
+   * Completions API. An empty string uses the configured or default model.
+   */
+  ai_search_model?: string | null;
 
   cache?: boolean;
 
@@ -735,19 +630,7 @@ export interface InstanceUpdateResponse {
 
   custom_metadata?: Array<InstanceUpdateResponse.CustomMetadata>;
 
-  embedding_model?:
-    | '@cf/qwen/qwen3-embedding-0.6b'
-    | '@cf/qwen/qwen3-vl-embedding-2b'
-    | '@cf/baai/bge-m3'
-    | '@cf/baai/bge-large-en-v1.5'
-    | '@cf/google/embeddinggemma-300m'
-    | 'google-ai-studio/gemini-embedding-001'
-    | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
-    | 'openai/text-embedding-3-small'
-    | 'openai/text-embedding-3-large'
-    | ''
-    | null;
+  embedding_model?: string | null;
 
   enable?: boolean;
 
@@ -756,13 +639,14 @@ export interface InstanceUpdateResponse {
   fusion_method?: 'max' | 'rrf';
 
   /**
-   * @deprecated Deprecated — use index_method instead.
+   * @deprecated Deprecated — use index_method instead. Defaults to true for new
+   * instances; set false to create a vector-only instance.
    */
   hybrid_search_enabled?: boolean;
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to
-   * vector-only.
+   * Controls which storage backends are used during indexing. Defaults to vector and
+   * keyword indexing for new instances.
    */
   index_method?: InstanceUpdateResponse.IndexMethod;
 
@@ -786,42 +670,15 @@ export interface InstanceUpdateResponse {
 
   reranking?: boolean;
 
-  reranking_model?: '@cf/baai/bge-reranker-base' | '' | null;
+  reranking_model?: string | null;
 
   retrieval_options?: InstanceUpdateResponse.RetrievalOptions | null;
 
-  rewrite_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  /**
+   * A Workers AI model ID or an AI Gateway model ID compatible with the OpenAI Chat
+   * Completions API. An empty string uses the configured or default model.
+   */
+  rewrite_model?: string | null;
 
   rewrite_query?: boolean;
 
@@ -841,6 +698,11 @@ export interface InstanceUpdateResponse {
 
   token_id?: string;
 
+  /**
+   * Source type. When omitted or null with a non-blank source, HTTP(S) URLs infer
+   * web-crawler and existing R2 bucket names infer r2. A missing or blank source
+   * without a type uses managed upload-only storage.
+   */
   type?: 'r2' | 'web-crawler' | null;
 }
 
@@ -852,8 +714,8 @@ export namespace InstanceUpdateResponse {
   }
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to
-   * vector-only.
+   * Controls which storage backends are used during indexing. Defaults to vector and
+   * keyword indexing for new instances.
    */
   export interface IndexMethod {
     /**
@@ -875,6 +737,12 @@ export namespace InstanceUpdateResponse {
      * identifiers). Changing this triggers a full re-index. Defaults to porter.
      */
     keyword_tokenizer?: 'porter' | 'trigram';
+
+    /**
+     * Enables OCR ingestion for PDFs and images. Changing this triggers a full
+     * re-index. Defaults to false.
+     */
+    use_ocr?: boolean;
   }
 
   export interface Metadata {
@@ -1223,6 +1091,8 @@ export namespace InstanceListResponse {
   export interface IndexingOptions {
     keyword_tokenizer?: 'porter' | 'trigram';
 
+    use_ocr?: boolean;
+
     [k: string]: unknown;
   }
 
@@ -1392,38 +1262,11 @@ export interface InstanceDeleteResponse {
 
   ai_gateway_id?: string | null;
 
-  ai_search_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  /**
+   * A Workers AI model ID or an AI Gateway model ID compatible with the OpenAI Chat
+   * Completions API. An empty string uses the configured or default model.
+   */
+  ai_search_model?: string | null;
 
   cache?: boolean;
 
@@ -1444,19 +1287,7 @@ export interface InstanceDeleteResponse {
 
   custom_metadata?: Array<InstanceDeleteResponse.CustomMetadata>;
 
-  embedding_model?:
-    | '@cf/qwen/qwen3-embedding-0.6b'
-    | '@cf/qwen/qwen3-vl-embedding-2b'
-    | '@cf/baai/bge-m3'
-    | '@cf/baai/bge-large-en-v1.5'
-    | '@cf/google/embeddinggemma-300m'
-    | 'google-ai-studio/gemini-embedding-001'
-    | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
-    | 'openai/text-embedding-3-small'
-    | 'openai/text-embedding-3-large'
-    | ''
-    | null;
+  embedding_model?: string | null;
 
   enable?: boolean;
 
@@ -1465,13 +1296,14 @@ export interface InstanceDeleteResponse {
   fusion_method?: 'max' | 'rrf';
 
   /**
-   * @deprecated Deprecated — use index_method instead.
+   * @deprecated Deprecated — use index_method instead. Defaults to true for new
+   * instances; set false to create a vector-only instance.
    */
   hybrid_search_enabled?: boolean;
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to
-   * vector-only.
+   * Controls which storage backends are used during indexing. Defaults to vector and
+   * keyword indexing for new instances.
    */
   index_method?: InstanceDeleteResponse.IndexMethod;
 
@@ -1495,42 +1327,15 @@ export interface InstanceDeleteResponse {
 
   reranking?: boolean;
 
-  reranking_model?: '@cf/baai/bge-reranker-base' | '' | null;
+  reranking_model?: string | null;
 
   retrieval_options?: InstanceDeleteResponse.RetrievalOptions | null;
 
-  rewrite_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  /**
+   * A Workers AI model ID or an AI Gateway model ID compatible with the OpenAI Chat
+   * Completions API. An empty string uses the configured or default model.
+   */
+  rewrite_model?: string | null;
 
   rewrite_query?: boolean;
 
@@ -1550,6 +1355,11 @@ export interface InstanceDeleteResponse {
 
   token_id?: string;
 
+  /**
+   * Source type. When omitted or null with a non-blank source, HTTP(S) URLs infer
+   * web-crawler and existing R2 bucket names infer r2. A missing or blank source
+   * without a type uses managed upload-only storage.
+   */
   type?: 'r2' | 'web-crawler' | null;
 }
 
@@ -1561,8 +1371,8 @@ export namespace InstanceDeleteResponse {
   }
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to
-   * vector-only.
+   * Controls which storage backends are used during indexing. Defaults to vector and
+   * keyword indexing for new instances.
    */
   export interface IndexMethod {
     /**
@@ -1584,6 +1394,12 @@ export namespace InstanceDeleteResponse {
      * identifiers). Changing this triggers a full re-index. Defaults to porter.
      */
     keyword_tokenizer?: 'porter' | 'trigram';
+
+    /**
+     * Enables OCR ingestion for PDFs and images. Changing this triggers a full
+     * re-index. Defaults to false.
+     */
+    use_ocr?: boolean;
   }
 
   export interface Metadata {
@@ -1845,7 +1661,11 @@ export namespace InstanceChatCompletionsResponse {
 
   export namespace Choice {
     export interface Message {
-      content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
+      content:
+        | string
+        | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2>
+        | string
+        | null;
 
       role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -1940,38 +1760,11 @@ export interface InstanceReadResponse {
 
   ai_gateway_id?: string | null;
 
-  ai_search_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  /**
+   * A Workers AI model ID or an AI Gateway model ID compatible with the OpenAI Chat
+   * Completions API. An empty string uses the configured or default model.
+   */
+  ai_search_model?: string | null;
 
   cache?: boolean;
 
@@ -1992,19 +1785,7 @@ export interface InstanceReadResponse {
 
   custom_metadata?: Array<InstanceReadResponse.CustomMetadata>;
 
-  embedding_model?:
-    | '@cf/qwen/qwen3-embedding-0.6b'
-    | '@cf/qwen/qwen3-vl-embedding-2b'
-    | '@cf/baai/bge-m3'
-    | '@cf/baai/bge-large-en-v1.5'
-    | '@cf/google/embeddinggemma-300m'
-    | 'google-ai-studio/gemini-embedding-001'
-    | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
-    | 'openai/text-embedding-3-small'
-    | 'openai/text-embedding-3-large'
-    | ''
-    | null;
+  embedding_model?: string | null;
 
   enable?: boolean;
 
@@ -2013,13 +1794,14 @@ export interface InstanceReadResponse {
   fusion_method?: 'max' | 'rrf';
 
   /**
-   * @deprecated Deprecated — use index_method instead.
+   * @deprecated Deprecated — use index_method instead. Defaults to true for new
+   * instances; set false to create a vector-only instance.
    */
   hybrid_search_enabled?: boolean;
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to
-   * vector-only.
+   * Controls which storage backends are used during indexing. Defaults to vector and
+   * keyword indexing for new instances.
    */
   index_method?: InstanceReadResponse.IndexMethod;
 
@@ -2043,42 +1825,15 @@ export interface InstanceReadResponse {
 
   reranking?: boolean;
 
-  reranking_model?: '@cf/baai/bge-reranker-base' | '' | null;
+  reranking_model?: string | null;
 
   retrieval_options?: InstanceReadResponse.RetrievalOptions | null;
 
-  rewrite_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  /**
+   * A Workers AI model ID or an AI Gateway model ID compatible with the OpenAI Chat
+   * Completions API. An empty string uses the configured or default model.
+   */
+  rewrite_model?: string | null;
 
   rewrite_query?: boolean;
 
@@ -2098,6 +1853,11 @@ export interface InstanceReadResponse {
 
   token_id?: string;
 
+  /**
+   * Source type. When omitted or null with a non-blank source, HTTP(S) URLs infer
+   * web-crawler and existing R2 bucket names infer r2. A missing or blank source
+   * without a type uses managed upload-only storage.
+   */
   type?: 'r2' | 'web-crawler' | null;
 }
 
@@ -2109,8 +1869,8 @@ export namespace InstanceReadResponse {
   }
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to
-   * vector-only.
+   * Controls which storage backends are used during indexing. Defaults to vector and
+   * keyword indexing for new instances.
    */
   export interface IndexMethod {
     /**
@@ -2132,6 +1892,12 @@ export namespace InstanceReadResponse {
      * identifiers). Changing this triggers a full re-index. Defaults to porter.
      */
     keyword_tokenizer?: 'porter' | 'trigram';
+
+    /**
+     * Enables OCR ingestion for PDFs and images. Changing this triggers a full
+     * re-index. Defaults to false.
+     */
+    use_ocr?: boolean;
   }
 
   export interface Metadata {
@@ -2506,40 +2272,11 @@ export interface InstanceCreateParams {
   ai_gateway_id?: string | null;
 
   /**
-   * Body param
+   * Body param: A Workers AI model ID or an AI Gateway model ID compatible with the
+   * OpenAI Chat Completions API. An empty string uses the configured or default
+   * model.
    */
-  ai_search_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  ai_search_model?: string | null;
 
   /**
    * Body param
@@ -2581,19 +2318,7 @@ export interface InstanceCreateParams {
   /**
    * Body param
    */
-  embedding_model?:
-    | '@cf/qwen/qwen3-embedding-0.6b'
-    | '@cf/qwen/qwen3-vl-embedding-2b'
-    | '@cf/baai/bge-m3'
-    | '@cf/baai/bge-large-en-v1.5'
-    | '@cf/google/embeddinggemma-300m'
-    | 'google-ai-studio/gemini-embedding-001'
-    | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
-    | 'openai/text-embedding-3-small'
-    | 'openai/text-embedding-3-large'
-    | ''
-    | null;
+  embedding_model?: string | null;
 
   /**
    * Body param
@@ -2601,13 +2326,14 @@ export interface InstanceCreateParams {
   fusion_method?: 'max' | 'rrf';
 
   /**
-   * @deprecated Body param: Deprecated — use index_method instead.
+   * @deprecated Body param: Deprecated — use index_method instead. Defaults to true
+   * for new instances; set false to create a vector-only instance.
    */
   hybrid_search_enabled?: boolean;
 
   /**
    * Body param: Controls which storage backends are used during indexing. Defaults
-   * to vector-only.
+   * to vector and keyword indexing for new instances.
    */
   index_method?: InstanceCreateParams.IndexMethod;
 
@@ -2639,7 +2365,7 @@ export interface InstanceCreateParams {
   /**
    * Body param
    */
-  reranking_model?: '@cf/baai/bge-reranker-base' | '' | null;
+  reranking_model?: string | null;
 
   /**
    * Body param
@@ -2647,40 +2373,11 @@ export interface InstanceCreateParams {
   retrieval_options?: InstanceCreateParams.RetrievalOptions | null;
 
   /**
-   * Body param
+   * Body param: A Workers AI model ID or an AI Gateway model ID compatible with the
+   * OpenAI Chat Completions API. An empty string uses the configured or default
+   * model.
    */
-  rewrite_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  rewrite_model?: string | null;
 
   /**
    * Body param
@@ -2715,7 +2412,9 @@ export interface InstanceCreateParams {
   token_id?: string;
 
   /**
-   * Body param
+   * Body param: Source type. When omitted or null with a non-blank source, HTTP(S)
+   * URLs infer web-crawler and existing R2 bucket names infer r2. A missing or blank
+   * source without a type uses managed upload-only storage.
    */
   type?: 'r2' | 'web-crawler' | null;
 }
@@ -2728,8 +2427,8 @@ export namespace InstanceCreateParams {
   }
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to
-   * vector-only.
+   * Controls which storage backends are used during indexing. Defaults to vector and
+   * keyword indexing for new instances.
    */
   export interface IndexMethod {
     /**
@@ -2751,6 +2450,12 @@ export namespace InstanceCreateParams {
      * identifiers). Changing this triggers a full re-index. Defaults to porter.
      */
     keyword_tokenizer?: 'porter' | 'trigram';
+
+    /**
+     * Enables OCR ingestion for PDFs and images. Changing this triggers a full
+     * re-index. Defaults to false.
+     */
+    use_ocr?: boolean;
   }
 
   export interface Metadata {
@@ -3001,40 +2706,11 @@ export interface InstanceUpdateParams {
   ai_gateway_id?: string | null;
 
   /**
-   * Body param
+   * Body param: A Workers AI model ID or an AI Gateway model ID compatible with the
+   * OpenAI Chat Completions API. An empty string uses the configured or default
+   * model.
    */
-  ai_search_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  ai_search_model?: string | null;
 
   /**
    * Body param
@@ -3076,19 +2752,7 @@ export interface InstanceUpdateParams {
   /**
    * Body param
    */
-  embedding_model?:
-    | '@cf/qwen/qwen3-embedding-0.6b'
-    | '@cf/qwen/qwen3-vl-embedding-2b'
-    | '@cf/baai/bge-m3'
-    | '@cf/baai/bge-large-en-v1.5'
-    | '@cf/google/embeddinggemma-300m'
-    | 'google-ai-studio/gemini-embedding-001'
-    | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
-    | 'openai/text-embedding-3-small'
-    | 'openai/text-embedding-3-large'
-    | ''
-    | null;
+  embedding_model?: string | null;
 
   /**
    * Body param
@@ -3097,7 +2761,7 @@ export interface InstanceUpdateParams {
 
   /**
    * Body param: Controls which storage backends are used during indexing. Defaults
-   * to vector-only.
+   * to vector and keyword indexing for new instances.
    */
   index_method?: InstanceUpdateParams.IndexMethod;
 
@@ -3134,7 +2798,7 @@ export interface InstanceUpdateParams {
   /**
    * Body param
    */
-  reranking_model?: '@cf/baai/bge-reranker-base' | '' | null;
+  reranking_model?: string | null;
 
   /**
    * Body param
@@ -3142,40 +2806,11 @@ export interface InstanceUpdateParams {
   retrieval_options?: InstanceUpdateParams.RetrievalOptions | null;
 
   /**
-   * Body param
+   * Body param: A Workers AI model ID or an AI Gateway model ID compatible with the
+   * OpenAI Chat Completions API. An empty string uses the configured or default
+   * model.
    */
-  rewrite_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  rewrite_model?: string | null;
 
   /**
    * Body param
@@ -3205,38 +2840,7 @@ export interface InstanceUpdateParams {
   /**
    * Body param
    */
-  summarization_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  summarization_model?: string | null;
 
   /**
    * Body param: Interval between automatic syncs, in seconds. Allowed values: 900
@@ -3274,8 +2878,8 @@ export namespace InstanceUpdateParams {
   }
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to
-   * vector-only.
+   * Controls which storage backends are used during indexing. Defaults to vector and
+   * keyword indexing for new instances.
    */
   export interface IndexMethod {
     /**
@@ -3297,6 +2901,12 @@ export namespace InstanceUpdateParams {
      * identifiers). Changing this triggers a full re-index. Defaults to porter.
      */
     keyword_tokenizer?: 'porter' | 'trigram';
+
+    /**
+     * Enables OCR ingestion for PDFs and images. Changing this triggers a full
+     * re-index. Defaults to false.
+     */
+    use_ocr?: boolean;
   }
 
   export interface Metadata {
@@ -3542,6 +3152,11 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
+   * Query param: Filter by exact Search for Agents hostname (case-insensitive).
+   */
+  hostname?: string;
+
+  /**
    * Query param: Filter by namespace.
    */
   namespace?: string;
@@ -3583,39 +3198,11 @@ export interface InstanceChatCompletionsParams {
   ai_search_options?: InstanceChatCompletionsParams.AISearchOptions;
 
   /**
-   * Body param
+   * Body param: A Workers AI model ID or an AI Gateway model ID compatible with the
+   * OpenAI Chat Completions API. An empty string uses the configured or default
+   * model.
    */
-  model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | '';
+  model?: string;
 
   /**
    * Body param
@@ -3627,7 +3214,11 @@ export interface InstanceChatCompletionsParams {
 
 export namespace InstanceChatCompletionsParams {
   export interface Message {
-    content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
+    content:
+      | string
+      | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2>
+      | string
+      | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -3673,6 +3264,13 @@ export namespace InstanceChatCompletionsParams {
   export interface AISearchOptions {
     cache?: AISearchOptions.Cache;
 
+    /**
+     * Metadata added to AI Gateway logs for requests triggered by this operation.
+     * Accepts up to 2 string, number, or boolean entries. Keys 'ai-search', 'task',
+     * 'origin', and keys beginning with 'cf.' are reserved.
+     */
+    custom_metadata?: { [key: string]: string | number | boolean };
+
     query_rewrite?: AISearchOptions.QueryRewrite;
 
     reranking?: AISearchOptions.Reranking;
@@ -3690,37 +3288,11 @@ export namespace InstanceChatCompletionsParams {
     export interface QueryRewrite {
       enabled?: boolean;
 
-      model?:
-        | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-        | '@cf/zai-org/glm-4.7-flash'
-        | '@cf/meta/llama-3.1-8b-instruct-fast'
-        | '@cf/meta/llama-3.1-8b-instruct-fp8'
-        | '@cf/meta/llama-4-scout-17b-16e-instruct'
-        | '@cf/qwen/qwen3-30b-a3b-fp8'
-        | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-        | '@cf/moonshotai/kimi-k2-instruct'
-        | '@cf/google/gemma-3-12b-it'
-        | '@cf/google/gemma-4-26b-a4b-it'
-        | '@cf/moonshotai/kimi-k2.5'
-        | 'anthropic/claude-3-7-sonnet'
-        | 'anthropic/claude-sonnet-4'
-        | 'anthropic/claude-opus-4'
-        | 'anthropic/claude-3-5-haiku'
-        | 'cerebras/qwen-3-235b-a22b-instruct'
-        | 'cerebras/qwen-3-235b-a22b-thinking'
-        | 'cerebras/llama-3.3-70b'
-        | 'cerebras/llama-4-maverick-17b-128e-instruct'
-        | 'cerebras/llama-4-scout-17b-16e-instruct'
-        | 'cerebras/gpt-oss-120b'
-        | 'google-ai-studio/gemini-2.5-flash'
-        | 'google-ai-studio/gemini-2.5-pro'
-        | 'grok/grok-4'
-        | 'groq/llama-3.3-70b-versatile'
-        | 'groq/llama-3.1-8b-instant'
-        | 'openai/gpt-5'
-        | 'openai/gpt-5-mini'
-        | 'openai/gpt-5-nano'
-        | '';
+      /**
+       * A Workers AI model ID or an AI Gateway model ID compatible with the OpenAI Chat
+       * Completions API. An empty string uses the configured or default model.
+       */
+      model?: string;
 
       rewrite_prompt?: string;
     }
@@ -3730,7 +3302,7 @@ export namespace InstanceChatCompletionsParams {
 
       match_threshold?: number;
 
-      model?: '@cf/baai/bge-reranker-base' | '';
+      model?: string;
     }
 
     export interface Retrieval {
@@ -3822,6 +3394,13 @@ export namespace InstanceSearchParams {
   export interface AISearchOptions {
     cache?: AISearchOptions.Cache;
 
+    /**
+     * Metadata added to AI Gateway logs for requests triggered by this operation.
+     * Accepts up to 2 string, number, or boolean entries. Keys 'ai-search', 'task',
+     * 'origin', and keys beginning with 'cf.' are reserved.
+     */
+    custom_metadata?: { [key: string]: string | number | boolean };
+
     query_rewrite?: AISearchOptions.QueryRewrite;
 
     reranking?: AISearchOptions.Reranking;
@@ -3839,37 +3418,11 @@ export namespace InstanceSearchParams {
     export interface QueryRewrite {
       enabled?: boolean;
 
-      model?:
-        | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-        | '@cf/zai-org/glm-4.7-flash'
-        | '@cf/meta/llama-3.1-8b-instruct-fast'
-        | '@cf/meta/llama-3.1-8b-instruct-fp8'
-        | '@cf/meta/llama-4-scout-17b-16e-instruct'
-        | '@cf/qwen/qwen3-30b-a3b-fp8'
-        | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-        | '@cf/moonshotai/kimi-k2-instruct'
-        | '@cf/google/gemma-3-12b-it'
-        | '@cf/google/gemma-4-26b-a4b-it'
-        | '@cf/moonshotai/kimi-k2.5'
-        | 'anthropic/claude-3-7-sonnet'
-        | 'anthropic/claude-sonnet-4'
-        | 'anthropic/claude-opus-4'
-        | 'anthropic/claude-3-5-haiku'
-        | 'cerebras/qwen-3-235b-a22b-instruct'
-        | 'cerebras/qwen-3-235b-a22b-thinking'
-        | 'cerebras/llama-3.3-70b'
-        | 'cerebras/llama-4-maverick-17b-128e-instruct'
-        | 'cerebras/llama-4-scout-17b-16e-instruct'
-        | 'cerebras/gpt-oss-120b'
-        | 'google-ai-studio/gemini-2.5-flash'
-        | 'google-ai-studio/gemini-2.5-pro'
-        | 'grok/grok-4'
-        | 'groq/llama-3.3-70b-versatile'
-        | 'groq/llama-3.1-8b-instant'
-        | 'openai/gpt-5'
-        | 'openai/gpt-5-mini'
-        | 'openai/gpt-5-nano'
-        | '';
+      /**
+       * A Workers AI model ID or an AI Gateway model ID compatible with the OpenAI Chat
+       * Completions API. An empty string uses the configured or default model.
+       */
+      model?: string;
 
       rewrite_prompt?: string;
     }
@@ -3879,7 +3432,7 @@ export namespace InstanceSearchParams {
 
       match_threshold?: number;
 
-      model?: '@cf/baai/bge-reranker-base' | '';
+      model?: string;
     }
 
     export interface Retrieval {
@@ -3936,7 +3489,11 @@ export namespace InstanceSearchParams {
   }
 
   export interface Message {
-    content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
+    content:
+      | string
+      | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2>
+      | string
+      | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 

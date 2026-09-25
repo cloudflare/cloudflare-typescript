@@ -94,9 +94,14 @@ export interface SubmissionListResponse {
 
 export interface SubmissionListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Query param: The sorting direction.
+   */
+  direction?: 'asc' | 'desc';
 
   /**
    * Query param: The end of the search date range. Defaults to `now`.
@@ -109,6 +114,17 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
    * not escalated by an end user. When omitted, no filter is applied.
    */
   escalated_from_user?: boolean;
+
+  /**
+   * Query param: Field to sort by.
+   */
+  order?:
+    | 'submission_id'
+    | 'subject'
+    | 'original_disposition'
+    | 'requested_disposition'
+    | 'outcome_disposition'
+    | 'requested_at';
 
   /**
    * Query param

@@ -31,7 +31,6 @@ const runTests = (client: PartialCloudflare<{ addressing: { addressMaps: { ips: 
     const responsePromise = client.addressing.addressMaps.ips.update('192.0.2.1', {
       account_id: '258def64c72dae45f3e4c8516e2111f2',
       address_map_id: '055817b111884e0227e1be16a0be6ee0',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +45,6 @@ const runTests = (client: PartialCloudflare<{ addressing: { addressMaps: { ips: 
     const response = await client.addressing.addressMaps.ips.update('192.0.2.1', {
       account_id: '258def64c72dae45f3e4c8516e2111f2',
       address_map_id: '055817b111884e0227e1be16a0be6ee0',
-      body: {},
     });
   });
 

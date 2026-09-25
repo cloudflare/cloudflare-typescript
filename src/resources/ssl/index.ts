@@ -12,7 +12,10 @@ export {
 export {
   CertificatePacks,
   BaseCertificatePacks,
+  type Host,
   type RequestValidity,
+  type Status,
+  type ValidationMethod,
   type CertificatePackCreateResponse,
   type CertificatePackListResponse,
   type CertificatePackDeleteResponse,
@@ -25,7 +28,12 @@ export {
   type CertificatePackGetParams,
   type CertificatePackListResponsesV4PagePaginationArray,
 } from './certificate-packs/index';
-export { Recommendations, BaseRecommendations } from './recommendations';
+export {
+  Recommendations,
+  BaseRecommendations,
+  type RecommendationGetResponse,
+  type RecommendationGetParams,
+} from './recommendations';
 export { SSL, BaseSSL } from './ssl';
 export { Universal, BaseUniversal } from './universal/index';
 export {

@@ -33,8 +33,10 @@ const runTests = (client: PartialCloudflare<{ accounts: BaseAccounts }>) => {
   test('create: required and optional params', async () => {
     const response = await client.accounts.create({
       name: 'name',
+      standalone: true,
       type: 'standard',
       unit: { id: 'f267e341f3dd4697bd3b9f71dd96247f' },
+      'Idempotency-Key': 'x',
     });
   });
 

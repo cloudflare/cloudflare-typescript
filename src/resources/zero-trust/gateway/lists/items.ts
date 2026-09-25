@@ -2,8 +2,12 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as ListsAPI from './lists';
-import { GatewayItemsSinglePage } from './lists';
-import { PagePromise, SinglePage } from '../../../../core/pagination';
+import { GatewayItemsV4PagePaginationArray } from './lists';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -33,18 +37,21 @@ export class BaseItems extends APIResource {
     listID: string,
     params: ItemListParams,
     options?: RequestOptions,
-  ): PagePromise<GatewayItemsSinglePage, ListsAPI.GatewayItem> {
-    const { account_id } = params;
+  ): PagePromise<GatewayItemsV4PagePaginationArray, ListsAPI.GatewayItem> {
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/gateway/lists/${listID}/items`,
-      SinglePage<ListsAPI.GatewayItem>,
-      options,
+      V4PagePaginationArray<ListsAPI.GatewayItem>,
+      { query, ...options },
     );
   }
 }
 export class Items extends BaseItems {}
 
-export interface ItemListParams {
+export interface ItemListParams extends V4PagePaginationArrayParams {
+  /**
+   * Path param: Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
@@ -52,4 +59,4 @@ export declare namespace Items {
   export { type ItemListParams as ItemListParams };
 }
 
-export { type GatewayItemsSinglePage };
+export { type GatewayItemsV4PagePaginationArray };

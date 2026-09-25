@@ -48,16 +48,10 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Deletes a Source-of-Truth tag category by UUID.
+   * Deprecated; use DELETE /events/tag-categories/{category_uuid}. Available through
+   * 2026-11-28.
    *
-   * @example
-   * ```ts
-   * const category =
-   *   await client.cloudforceOne.threatEvents.tags.categories.delete(
-   *     'category_uuid',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
+   * @deprecated Use DELETE /events/tag-categories/{category_uuid} before 2026-11-28.
    */
   delete(
     categoryUUID: string,
@@ -72,16 +66,10 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Updates a Source-of-Truth tag category by UUID.
+   * Deprecated; use PATCH /events/tag-categories/{category_uuid}. Available through
+   * 2026-11-28.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.cloudforceOne.threatEvents.tags.categories.edit(
-   *     'category_uuid',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
+   * @deprecated Use PATCH /events/tag-categories/{category_uuid} before 2026-11-28.
    */
   edit(
     categoryUUID: string,
@@ -106,7 +94,73 @@ export interface CategoryCreateResponse {
 
   description?: string;
 
+  /**
+   * Parsed FieldDefinition[] defining custom fields for this category, or null if
+   * none.
+   */
+  schema?: Array<CategoryCreateResponse.Schema> | null;
+
   updatedAt?: string;
+}
+
+export namespace CategoryCreateResponse {
+  export interface Schema {
+    key: string;
+
+    kind: 'string' | 'number' | 'enum' | 'date' | 'array' | 'object';
+
+    allowedValues?: Array<string>;
+
+    annotations?: Schema.Annotations;
+
+    /**
+     * Marks a field as unavailable for new values while retaining its definition for
+     * historical values.
+     */
+    deprecated?: boolean;
+
+    /**
+     * Enum values unavailable for new writes but retained in allowedValues for
+     * historical display.
+     */
+    deprecatedValues?: Array<string>;
+
+    element?: unknown;
+
+    enforcement?: 'error' | 'warn' | 'off';
+
+    format?: 'date' | 'url' | 'duration' | 'country';
+
+    label?: string;
+
+    maxLength?: number;
+
+    numberConstraint?: Schema.NumberConstraint;
+
+    /**
+     * Map of property key to FieldDefinition for object fields. Required when kind is
+     * 'object'. See FieldDefinition (recursive).
+     */
+    properties?: { [key: string]: unknown };
+
+    required?: boolean;
+  }
+
+  export namespace Schema {
+    export interface Annotations {
+      confidence?: boolean;
+
+      tlp?: boolean;
+    }
+
+    export interface NumberConstraint {
+      integer?: boolean;
+
+      max?: number;
+
+      min?: number;
+    }
+  }
 }
 
 export interface CategoryListResponse {
@@ -123,7 +177,73 @@ export namespace CategoryListResponse {
 
     description?: string;
 
+    /**
+     * Parsed FieldDefinition[] defining custom fields for this category, or null if
+     * none.
+     */
+    schema?: Array<Category.Schema> | null;
+
     updatedAt?: string;
+  }
+
+  export namespace Category {
+    export interface Schema {
+      key: string;
+
+      kind: 'string' | 'number' | 'enum' | 'date' | 'array' | 'object';
+
+      allowedValues?: Array<string>;
+
+      annotations?: Schema.Annotations;
+
+      /**
+       * Marks a field as unavailable for new values while retaining its definition for
+       * historical values.
+       */
+      deprecated?: boolean;
+
+      /**
+       * Enum values unavailable for new writes but retained in allowedValues for
+       * historical display.
+       */
+      deprecatedValues?: Array<string>;
+
+      element?: unknown;
+
+      enforcement?: 'error' | 'warn' | 'off';
+
+      format?: 'date' | 'url' | 'duration' | 'country';
+
+      label?: string;
+
+      maxLength?: number;
+
+      numberConstraint?: Schema.NumberConstraint;
+
+      /**
+       * Map of property key to FieldDefinition for object fields. Required when kind is
+       * 'object'. See FieldDefinition (recursive).
+       */
+      properties?: { [key: string]: unknown };
+
+      required?: boolean;
+    }
+
+    export namespace Schema {
+      export interface Annotations {
+        confidence?: boolean;
+
+        tlp?: boolean;
+      }
+
+      export interface NumberConstraint {
+        integer?: boolean;
+
+        max?: number;
+
+        min?: number;
+      }
+    }
   }
 }
 
@@ -140,7 +260,73 @@ export interface CategoryEditResponse {
 
   description?: string;
 
+  /**
+   * Parsed FieldDefinition[] defining custom fields for this category, or null if
+   * none.
+   */
+  schema?: Array<CategoryEditResponse.Schema> | null;
+
   updatedAt?: string;
+}
+
+export namespace CategoryEditResponse {
+  export interface Schema {
+    key: string;
+
+    kind: 'string' | 'number' | 'enum' | 'date' | 'array' | 'object';
+
+    allowedValues?: Array<string>;
+
+    annotations?: Schema.Annotations;
+
+    /**
+     * Marks a field as unavailable for new values while retaining its definition for
+     * historical values.
+     */
+    deprecated?: boolean;
+
+    /**
+     * Enum values unavailable for new writes but retained in allowedValues for
+     * historical display.
+     */
+    deprecatedValues?: Array<string>;
+
+    element?: unknown;
+
+    enforcement?: 'error' | 'warn' | 'off';
+
+    format?: 'date' | 'url' | 'duration' | 'country';
+
+    label?: string;
+
+    maxLength?: number;
+
+    numberConstraint?: Schema.NumberConstraint;
+
+    /**
+     * Map of property key to FieldDefinition for object fields. Required when kind is
+     * 'object'. See FieldDefinition (recursive).
+     */
+    properties?: { [key: string]: unknown };
+
+    required?: boolean;
+  }
+
+  export namespace Schema {
+    export interface Annotations {
+      confidence?: boolean;
+
+      tlp?: boolean;
+    }
+
+    export interface NumberConstraint {
+      integer?: boolean;
+
+      max?: number;
+
+      min?: number;
+    }
+  }
 }
 
 export interface CategoryCreateParams {
@@ -158,6 +344,72 @@ export interface CategoryCreateParams {
    * Body param
    */
   description?: string;
+
+  /**
+   * Body param: Optional array of FieldDefinition objects defining custom fields for
+   * tags in this category. Persisted as JSON; returned as a parsed array.
+   */
+  schema?: Array<CategoryCreateParams.Schema>;
+}
+
+export namespace CategoryCreateParams {
+  export interface Schema {
+    key: string;
+
+    kind: 'string' | 'number' | 'enum' | 'date' | 'array' | 'object';
+
+    allowedValues?: Array<string>;
+
+    annotations?: Schema.Annotations;
+
+    /**
+     * Marks a field as unavailable for new values while retaining its definition for
+     * historical values.
+     */
+    deprecated?: boolean;
+
+    /**
+     * Enum values unavailable for new writes but retained in allowedValues for
+     * historical display.
+     */
+    deprecatedValues?: Array<string>;
+
+    element?: unknown;
+
+    enforcement?: 'error' | 'warn' | 'off';
+
+    format?: 'date' | 'url' | 'duration' | 'country';
+
+    label?: string;
+
+    maxLength?: number;
+
+    numberConstraint?: Schema.NumberConstraint;
+
+    /**
+     * Map of property key to FieldDefinition for object fields. Required when kind is
+     * 'object'. See FieldDefinition (recursive).
+     */
+    properties?: { [key: string]: unknown };
+
+    required?: boolean;
+  }
+
+  export namespace Schema {
+    export interface Annotations {
+      confidence?: boolean;
+
+      tlp?: boolean;
+    }
+
+    export interface NumberConstraint {
+      integer?: boolean;
+
+      max?: number;
+
+      min?: number;
+    }
+  }
 }
 
 export interface CategoryListParams {
@@ -194,6 +446,72 @@ export interface CategoryEditParams {
    * Body param
    */
   name?: string;
+
+  /**
+   * Body param: Optional array of FieldDefinition objects. When provided, replaces
+   * the existing field schema. When omitted, the existing schema is preserved.
+   */
+  schema?: Array<CategoryEditParams.Schema>;
+}
+
+export namespace CategoryEditParams {
+  export interface Schema {
+    key: string;
+
+    kind: 'string' | 'number' | 'enum' | 'date' | 'array' | 'object';
+
+    allowedValues?: Array<string>;
+
+    annotations?: Schema.Annotations;
+
+    /**
+     * Marks a field as unavailable for new values while retaining its definition for
+     * historical values.
+     */
+    deprecated?: boolean;
+
+    /**
+     * Enum values unavailable for new writes but retained in allowedValues for
+     * historical display.
+     */
+    deprecatedValues?: Array<string>;
+
+    element?: unknown;
+
+    enforcement?: 'error' | 'warn' | 'off';
+
+    format?: 'date' | 'url' | 'duration' | 'country';
+
+    label?: string;
+
+    maxLength?: number;
+
+    numberConstraint?: Schema.NumberConstraint;
+
+    /**
+     * Map of property key to FieldDefinition for object fields. Required when kind is
+     * 'object'. See FieldDefinition (recursive).
+     */
+    properties?: { [key: string]: unknown };
+
+    required?: boolean;
+  }
+
+  export namespace Schema {
+    export interface Annotations {
+      confidence?: boolean;
+
+      tlp?: boolean;
+    }
+
+    export interface NumberConstraint {
+      integer?: boolean;
+
+      max?: number;
+
+      min?: number;
+    }
+  }
 }
 
 export declare namespace Categories {

@@ -83,25 +83,6 @@ export class BaseVariants extends APIResource {
 }
 export class Variants extends BaseVariants {}
 
-/**
- * Variant support enables caching variants of images with certain file extensions
- * in addition to the original. This only applies when the origin server sends the
- * 'Vary: Accept' response header. If the origin server sends 'Vary: Accept' but
- * does not serve the variant requested, the response will not be cached. This will
- * be indicated with BYPASS cache status in the response headers.
- */
-export interface CacheVariant {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'variants';
-
-  /**
-   * Last time this setting was modified.
-   */
-  modified_on?: string | null;
-}
-
 export interface VariantDeleteResponse {
   /**
    * The identifier of the caching setting.
@@ -410,7 +391,6 @@ export interface VariantGetParams {
 
 export declare namespace Variants {
   export {
-    type CacheVariant as CacheVariant,
     type VariantDeleteResponse as VariantDeleteResponse,
     type VariantEditResponse as VariantEditResponse,
     type VariantGetResponse as VariantGetResponse,

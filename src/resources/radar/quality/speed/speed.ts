@@ -175,7 +175,7 @@ export namespace SpeedHistogramResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -305,7 +305,7 @@ export namespace SpeedSummaryResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -340,18 +340,39 @@ export namespace SpeedSummaryResponse {
   }
 
   export interface Summary0 {
+    /**
+     * A numeric string.
+     */
     bandwidthDownload: string;
 
+    /**
+     * A numeric string.
+     */
     bandwidthUpload: string;
 
+    /**
+     * A numeric string.
+     */
     jitterIdle: string;
 
+    /**
+     * A numeric string.
+     */
     jitterLoaded: string;
 
+    /**
+     * A numeric string.
+     */
     latencyIdle: string;
 
+    /**
+     * A numeric string.
+     */
     latencyLoaded: string;
 
+    /**
+     * A numeric string.
+     */
     packetLoss: string;
   }
 }

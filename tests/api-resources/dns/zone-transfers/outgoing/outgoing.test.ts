@@ -97,7 +97,6 @@ const runTests = (
   test('disable: only required params', async () => {
     const responsePromise = client.dns.zoneTransfers.outgoing.disable({
       zone_id: '269d8f4853475ca241c4e730be286b20',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -111,14 +110,12 @@ const runTests = (
   test('disable: required and optional params', async () => {
     const response = await client.dns.zoneTransfers.outgoing.disable({
       zone_id: '269d8f4853475ca241c4e730be286b20',
-      body: {},
     });
   });
 
   test('enable: only required params', async () => {
     const responsePromise = client.dns.zoneTransfers.outgoing.enable({
       zone_id: '269d8f4853475ca241c4e730be286b20',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -132,14 +129,12 @@ const runTests = (
   test('enable: required and optional params', async () => {
     const response = await client.dns.zoneTransfers.outgoing.enable({
       zone_id: '269d8f4853475ca241c4e730be286b20',
-      body: {},
     });
   });
 
   test('forceNotify: only required params', async () => {
     const responsePromise = client.dns.zoneTransfers.outgoing.forceNotify({
       zone_id: '269d8f4853475ca241c4e730be286b20',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -153,7 +148,6 @@ const runTests = (
   test('forceNotify: required and optional params', async () => {
     const response = await client.dns.zoneTransfers.outgoing.forceNotify({
       zone_id: '269d8f4853475ca241c4e730be286b20',
-      body: {},
     });
   });
 

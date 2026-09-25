@@ -258,6 +258,11 @@ export interface IssueListParams extends V4PagePaginationParams {
   /**
    * Query param
    */
+  source?: Array<'cloudflare' | 'riskrecon'>;
+
+  /**
+   * Query param
+   */
   subject?: Array<string>;
 
   /**
@@ -316,6 +321,11 @@ export interface IssueClassParams {
    * Query param
    */
   'severity~neq'?: Array<SeverityQueryParamParam>;
+
+  /**
+   * Query param
+   */
+  source?: Array<'cloudflare' | 'riskrecon'>;
 
   /**
    * Query param
@@ -382,6 +392,11 @@ export interface IssueSeverityParams {
   /**
    * Query param
    */
+  source?: Array<'cloudflare' | 'riskrecon'>;
+
+  /**
+   * Query param
+   */
   subject?: Array<string>;
 
   /**
@@ -440,6 +455,11 @@ export interface IssueTypeParams {
    * Query param
    */
   'severity~neq'?: Array<SeverityQueryParamParam>;
+
+  /**
+   * Query param
+   */
+  source?: Array<'cloudflare' | 'riskrecon'>;
 
   /**
    * Query param

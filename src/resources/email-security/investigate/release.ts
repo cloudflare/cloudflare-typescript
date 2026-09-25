@@ -66,7 +66,7 @@ export interface ReleaseBulkResponse {
 
 export interface ReleaseBulkParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 

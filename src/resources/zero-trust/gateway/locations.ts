@@ -73,12 +73,11 @@ export class BaseLocations extends APIResource {
    * ```
    */
   list(params: LocationListParams, options?: RequestOptions): PagePromise<LocationsSinglePage, Location> {
-    const { account_id } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/gateway/locations`,
-      SinglePage<Location>,
-      options,
-    );
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(path`/accounts/${account_id}/gateway/locations`, SinglePage<Location>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -405,7 +404,7 @@ export type LocationDeleteResponse = unknown;
 
 export interface LocationCreateParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -483,7 +482,7 @@ export namespace LocationCreateParams {
 
 export interface LocationUpdateParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -560,14 +559,71 @@ export namespace LocationUpdateParams {
 }
 
 export interface LocationListParams {
+  /**
+   * Path param: Specify the Cloudflare account identifier.
+   */
   account_id: string;
+
+  /**
+   * Query param: Sort direction. Only takes effect when `order_by` is also provided;
+   * it is ignored otherwise. When `direction` is omitted the effective direction is
+   * field-specific: `created_at` and `updated_at` default to descending (newest
+   * first); `name` defaults to ascending.
+   *
+   * - `asc` — ascending.
+   * - `desc` — descending.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Filter the returned locations by one or more `field:value` pairs.
+   * Repeat the parameter to apply multiple filters; they are combined with logical
+   * AND (a location must satisfy every filter to be returned).
+   *
+   * Supported fields and their matching behaviour:
+   *
+   * - `name` — case-insensitive substring match on the location name.
+   * - `id` — substring match on the location ID (UUID), with or without dashes.
+   * - `is_default` — whether it is the default for the account.
+   *
+   * Each entry must match one of the per-field patterns below:
+   *
+   * - the field must be one of `name`, `id`, or `is_default`;
+   * - `name`/`id` accept any value;
+   * - `is_default` only accepts `true` or `false`; any other value returns `400`
+   */
+  filter?: Array<string>;
+
+  /**
+   * Query param: Field to sort the returned locations by. When omitted, the order of
+   * results is unspecified. Supported values:
+   *
+   * - `name` — sort alphabetically by location name.
+   * - `created_at` — sort by creation time; defaults to descending unless
+   *   `direction` is set.
+   * - `updated_at` — sort by last-modified time; defaults to descending unless
+   *   `direction` is set.
+   */
+  order_by?: 'name' | 'created_at' | 'updated_at';
+
+  /**
+   * Query param: Case-insensitive substring match on the location name. When
+   * combined with `filter`, both must match (logical AND).
+   */
+  search?: string;
 }
 
 export interface LocationDeleteParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
 export interface LocationGetParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 

@@ -31,7 +31,14 @@ export class BaseEvents extends APIResource {
 }
 export class Events extends BaseEvents {}
 
-export type EventCreateResponse = unknown;
+export interface EventCreateResponse {
+  instanceId: string;
+
+  /**
+   * Accepts ISO 8601 with no timezone offsets and in UTC.
+   */
+  timestamp: string;
+}
 
 export interface EventCreateParams {
   /**
@@ -54,7 +61,7 @@ export interface EventCreateParams {
   /**
    * Body param
    */
-  body?: unknown;
+  body: unknown;
 }
 
 export declare namespace Events {

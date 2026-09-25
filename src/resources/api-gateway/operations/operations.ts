@@ -50,11 +50,8 @@ export class BaseOperations extends APIResource {
   ] as const);
 
   /**
-   * Add one operation to a zone. Endpoints can contain path variables. Host, method,
-   * endpoint will be normalized to a canoncial form when creating an operation and
-   * must be unique on the zone. Inserting an operation that matches an existing one
-   * will return the record of the already existing operation and update its
-   * last_updated date.
+   * Creates one web or API operation. The host, method, and path are normalized; an
+   * existing matching operation is returned instead of duplicated.
    *
    * @example
    * ```ts
@@ -79,8 +76,8 @@ export class BaseOperations extends APIResource {
   }
 
   /**
-   * Lists all API operations tracked by API Shield for a zone with pagination.
-   * Returns operation details including method, path, and feature configurations.
+   * Lists web and API operations tracked for the zone, including each operation's
+   * method, path, and feature configuration.
    *
    * @example
    * ```ts
@@ -105,8 +102,8 @@ export class BaseOperations extends APIResource {
   }
 
   /**
-   * Removes a single API operation from API Shield endpoint management. The
-   * operation will no longer be tracked or protected by API Shield rules.
+   * Deletes a web or API operation from endpoint management so its feature
+   * configuration is no longer tracked.
    *
    * @example
    * ```ts
@@ -126,11 +123,8 @@ export class BaseOperations extends APIResource {
   }
 
   /**
-   * Add one or more operations to a zone. Endpoints can contain path variables.
-   * Host, method, endpoint will be normalized to a canoncial form when creating an
-   * operation and must be unique on the zone. Inserting an operation that matches an
-   * existing one will return the record of the already existing operation and update
-   * its last_updated date.
+   * Creates one or more web or API operations. Hosts, methods, and paths are
+   * normalized; an existing matching operation is returned instead of duplicated.
    *
    * @example
    * ```ts
@@ -164,8 +158,7 @@ export class BaseOperations extends APIResource {
   }
 
   /**
-   * Bulk removes multiple API operations from API Shield endpoint management in a
-   * single request. Efficient for cleaning up unused endpoints.
+   * Deletes multiple web or API operations from endpoint management in one request.
    *
    * @example
    * ```ts
@@ -184,8 +177,8 @@ export class BaseOperations extends APIResource {
   }
 
   /**
-   * Gets detailed information about a specific API operation in API Shield,
-   * including its schema validation settings and traffic statistics.
+   * Returns a web or API operation, including its schema validation settings and
+   * requested feature data.
    *
    * @example
    * ```ts
@@ -493,11 +486,6 @@ export namespace OperationCreateResponse {
       active_schema?: SchemaInfo.ActiveSchema;
 
       /**
-       * Deprecated. Always false.
-       */
-      learned_available?: boolean;
-
-      /**
        * Action taken on requests failing validation.
        */
       mitigation_action?: 'none' | 'log' | 'block' | null;
@@ -514,11 +502,6 @@ export namespace OperationCreateResponse {
         id?: string;
 
         created_at?: string;
-
-        /**
-         * True if schema is Cloudflare-provided.
-         */
-        is_learned?: boolean;
 
         /**
          * Schema file name.
@@ -825,11 +808,6 @@ export namespace OperationListResponse {
       active_schema?: SchemaInfo.ActiveSchema;
 
       /**
-       * Deprecated. Always false.
-       */
-      learned_available?: boolean;
-
-      /**
        * Action taken on requests failing validation.
        */
       mitigation_action?: 'none' | 'log' | 'block' | null;
@@ -846,11 +824,6 @@ export namespace OperationListResponse {
         id?: string;
 
         created_at?: string;
-
-        /**
-         * True if schema is Cloudflare-provided.
-         */
-        is_learned?: boolean;
 
         /**
          * Schema file name.
@@ -1112,11 +1085,6 @@ export namespace OperationBulkCreateResponse {
       active_schema?: SchemaInfo.ActiveSchema;
 
       /**
-       * Deprecated. Always false.
-       */
-      learned_available?: boolean;
-
-      /**
        * Action taken on requests failing validation.
        */
       mitigation_action?: 'none' | 'log' | 'block' | null;
@@ -1133,11 +1101,6 @@ export namespace OperationBulkCreateResponse {
         id?: string;
 
         created_at?: string;
-
-        /**
-         * True if schema is Cloudflare-provided.
-         */
-        is_learned?: boolean;
 
         /**
          * Schema file name.
@@ -1405,11 +1368,6 @@ export namespace OperationGetResponse {
       active_schema?: SchemaInfo.ActiveSchema;
 
       /**
-       * Deprecated. Always false.
-       */
-      learned_available?: boolean;
-
-      /**
        * Action taken on requests failing validation.
        */
       mitigation_action?: 'none' | 'log' | 'block' | null;
@@ -1426,11 +1384,6 @@ export namespace OperationGetResponse {
         id?: string;
 
         created_at?: string;
-
-        /**
-         * True if schema is Cloudflare-provided.
-         */
-        is_learned?: boolean;
 
         /**
          * Schema file name.
@@ -1544,7 +1497,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
    * corresponds to the resulting feature object. Have a look at the top-level object
    * description for more details on the specific meaning.
    */
-  feature?: Array<'thresholds' | 'parameter_schemas' | 'schema_info'>;
+  feature?: Array<'thresholds' | 'parameter_schemas' | 'schema_info' | 'confidence_intervals'>;
 
   /**
    * Query param: Filter results to only include the specified hosts.
@@ -1622,7 +1575,7 @@ export interface OperationGetParams {
    * corresponds to the resulting feature object. Have a look at the top-level object
    * description for more details on the specific meaning.
    */
-  feature?: Array<'thresholds' | 'parameter_schemas' | 'schema_info'>;
+  feature?: Array<'thresholds' | 'parameter_schemas' | 'schema_info' | 'confidence_intervals'>;
 
   /**
    * Query param: When true, includes OpenAPI schemas (both uploaded and learned) for

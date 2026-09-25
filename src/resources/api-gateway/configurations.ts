@@ -12,8 +12,8 @@ export class BaseConfigurations extends APIResource {
   ] as const);
 
   /**
-   * Updates API Shield configuration settings for a zone. Can modify validation
-   * strictness, enforcement mode, and other global settings.
+   * Replaces the zone's authentication identifier characteristics used to identify
+   * distinct API sessions.
    *
    * @example
    * ```ts
@@ -38,8 +38,8 @@ export class BaseConfigurations extends APIResource {
   }
 
   /**
-   * Gets the current API Shield configuration settings for a zone, including
-   * validation behavior and enforcement mode.
+   * Returns the authentication identifier characteristics configured for the zone.
+   * Header, cookie, or JWT claim values identify distinct API sessions.
    *
    * @example
    * ```ts

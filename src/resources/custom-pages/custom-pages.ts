@@ -26,7 +26,7 @@ export class BaseCustomPages extends APIResource {
   static override readonly _key: readonly ['customPages'] = Object.freeze(['customPages'] as const);
 
   /**
-   * Updates the configuration of an existing custom page.
+   * Updates the configuration for a custom page type.
    *
    * @example
    * ```ts
@@ -81,7 +81,7 @@ export class BaseCustomPages extends APIResource {
   }
 
   /**
-   * Fetches all the custom pages.
+   * Lists all custom page configurations for an account or zone.
    *
    * @example
    * ```ts
@@ -122,7 +122,7 @@ export class BaseCustomPages extends APIResource {
   }
 
   /**
-   * Fetches the details of a custom page.
+   * Returns the configuration for a custom page type.
    *
    * @example
    * ```ts

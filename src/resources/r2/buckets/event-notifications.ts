@@ -34,7 +34,7 @@ export class BaseEventNotifications extends APIResource {
     params: EventNotificationUpdateParams,
     options?: RequestOptions,
   ): APIPromise<EventNotificationUpdateResponse> {
-    const { account_id, bucket_name, jurisdiction, ...body } = params;
+    const { account_id, bucket_name, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.put(
         path`/accounts/${account_id}/event_notifications/r2/${bucket_name}/configuration/queues/${queueID}`,
@@ -43,8 +43,8 @@ export class BaseEventNotifications extends APIResource {
           ...options,
           headers: buildHeaders([
             {
-              ...(jurisdiction?.toString() != null ?
-                { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+              ...(cfR2Jurisdiction?.toString() != null ?
+                { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
               : undefined),
             },
             options?.headers,
@@ -71,14 +71,14 @@ export class BaseEventNotifications extends APIResource {
     params: EventNotificationListParams,
     options?: RequestOptions,
   ): APIPromise<EventNotificationListResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.get(path`/accounts/${account_id}/event_notifications/r2/${bucketName}/configuration`, {
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -108,7 +108,7 @@ export class BaseEventNotifications extends APIResource {
     params: EventNotificationDeleteParams,
     options?: RequestOptions,
   ): APIPromise<EventNotificationDeleteResponse> {
-    const { account_id, bucket_name, jurisdiction } = params;
+    const { account_id, bucket_name, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/event_notifications/r2/${bucket_name}/configuration/queues/${queueID}`,
@@ -116,8 +116,8 @@ export class BaseEventNotifications extends APIResource {
           ...options,
           headers: buildHeaders([
             {
-              ...(jurisdiction?.toString() != null ?
-                { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+              ...(cfR2Jurisdiction?.toString() != null ?
+                { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
               : undefined),
             },
             options?.headers,
@@ -147,7 +147,7 @@ export class BaseEventNotifications extends APIResource {
     params: EventNotificationGetParams,
     options?: RequestOptions,
   ): APIPromise<EventNotificationGetResponse> {
-    const { account_id, bucket_name, jurisdiction } = params;
+    const { account_id, bucket_name, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/event_notifications/r2/${bucket_name}/configuration/queues/${queueID}`,
@@ -155,8 +155,8 @@ export class BaseEventNotifications extends APIResource {
           ...options,
           headers: buildHeaders([
             {
-              ...(jurisdiction?.toString() != null ?
-                { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+              ...(cfR2Jurisdiction?.toString() != null ?
+                { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
               : undefined),
             },
             options?.headers,
@@ -308,7 +308,7 @@ export interface EventNotificationUpdateParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export namespace EventNotificationUpdateParams {
@@ -348,7 +348,7 @@ export interface EventNotificationListParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export interface EventNotificationDeleteParams {
@@ -366,7 +366,7 @@ export interface EventNotificationDeleteParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export interface EventNotificationGetParams {
@@ -381,9 +381,10 @@ export interface EventNotificationGetParams {
   bucket_name: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export declare namespace EventNotifications {

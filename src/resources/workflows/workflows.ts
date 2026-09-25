@@ -28,7 +28,7 @@ import {
   InstanceListResponsesV4PagePaginationArray,
   InstanceStepParams,
   InstanceStepResponse,
-  Instances as InstancesAPIInstances,
+  Instances,
 } from './instances/instances';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
@@ -139,7 +139,7 @@ export interface WorkflowListResponse {
 
   created_on: string;
 
-  instances: WorkflowListResponse.Instances;
+  instances: { [key: string]: number };
 
   modified_on: string;
 
@@ -150,29 +150,14 @@ export interface WorkflowListResponse {
   triggered_on: string | null;
 
   schedules?: Array<WorkflowListResponse.Schedule>;
+
+  /**
+   * Whether the bound Worker was deleted, leaving this Workflow inactive.
+   */
+  script_deleted?: boolean;
 }
 
 export namespace WorkflowListResponse {
-  export interface Instances {
-    complete?: number;
-
-    errored?: number;
-
-    paused?: number;
-
-    queued?: number;
-
-    rollingBack?: number;
-
-    running?: number;
-
-    terminated?: number;
-
-    waiting?: number;
-
-    waitingForPause?: number;
-  }
-
   export interface Schedule {
     cron: string;
 
@@ -193,7 +178,7 @@ export interface WorkflowGetResponse {
 
   created_on: string;
 
-  instances: WorkflowGetResponse.Instances;
+  instances: { [key: string]: number };
 
   modified_on: string;
 
@@ -204,29 +189,14 @@ export interface WorkflowGetResponse {
   triggered_on: string | null;
 
   schedules?: Array<WorkflowGetResponse.Schedule>;
+
+  /**
+   * Whether the bound Worker was deleted, leaving this Workflow inactive.
+   */
+  script_deleted?: boolean;
 }
 
 export namespace WorkflowGetResponse {
-  export interface Instances {
-    complete?: number;
-
-    errored?: number;
-
-    paused?: number;
-
-    queued?: number;
-
-    rollingBack?: number;
-
-    running?: number;
-
-    terminated?: number;
-
-    waiting?: number;
-
-    waitingForPause?: number;
-  }
-
   export interface Schedule {
     cron: string;
 
@@ -251,6 +221,11 @@ export interface WorkflowUpdateParams {
   script_name: string;
 
   /**
+   * Body param
+   */
+  concurrency?: WorkflowUpdateParams.Concurrency;
+
+  /**
    * Body param: Default retention applied to instances of this version when they do
    * not set their own retention.
    */
@@ -268,6 +243,15 @@ export interface WorkflowUpdateParams {
 }
 
 export namespace WorkflowUpdateParams {
+  export interface Concurrency {
+    /**
+     * Maximum number of instances of this workflow that can run concurrently.
+     * Additional instances are queued and started as running instances complete. Must
+     * not exceed the account concurrency limit.
+     */
+    limit?: number;
+  }
+
   /**
    * Default retention applied to instances of this version when they do not set
    * their own retention.
@@ -313,7 +297,7 @@ export interface WorkflowGetParams {
   account_id: string;
 }
 
-Workflows.Instances = InstancesAPIInstances;
+Workflows.Instances = Instances;
 Workflows.BaseInstances = BaseInstances;
 Workflows.Versions = Versions;
 Workflows.BaseVersions = BaseVersions;
@@ -332,7 +316,7 @@ export declare namespace Workflows {
   };
 
   export {
-    InstancesAPIInstances as Instances,
+    Instances as Instances,
     BaseInstances as BaseInstances,
     type InstanceCreateResponse as InstanceCreateResponse,
     type InstanceListResponse as InstanceListResponse,

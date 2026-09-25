@@ -210,7 +210,6 @@ const runTests = (client: PartialCloudflare<{ magicTransit: { ipsecTunnels: Base
   test('pskGenerate: only required params', async () => {
     const responsePromise = client.magicTransit.ipsecTunnels.pskGenerate('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -224,7 +223,6 @@ const runTests = (client: PartialCloudflare<{ magicTransit: { ipsecTunnels: Base
   test('pskGenerate: required and optional params', async () => {
     const response = await client.magicTransit.ipsecTunnels.pskGenerate('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
   });
 

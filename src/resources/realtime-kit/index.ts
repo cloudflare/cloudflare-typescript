@@ -29,7 +29,6 @@ export {
 export {
   Livestreams,
   BaseLivestreams,
-  type LivestreamCreateIndependentLivestreamResponse,
   type LivestreamGetActiveLivestreamsForLivestreamIDResponse,
   type LivestreamGetAllLivestreamsResponse,
   type LivestreamGetLivestreamAnalyticsCompleteResponse,
@@ -40,7 +39,6 @@ export {
   type LivestreamGetOrgAnalyticsResponse,
   type LivestreamStartLivestreamingAMeetingResponse,
   type LivestreamStopLivestreamingAMeetingResponse,
-  type LivestreamCreateIndependentLivestreamParams,
   type LivestreamGetActiveLivestreamsForLivestreamIDParams,
   type LivestreamGetAllLivestreamsParams,
   type LivestreamGetLivestreamAnalyticsCompleteParams,
@@ -86,11 +84,13 @@ export {
   type PresetDeleteResponse,
   type PresetGetResponse,
   type PresetGetPresetByIDResponse,
+  type PresetReplacePresetByIDResponse,
   type PresetCreateParams,
   type PresetUpdateParams,
   type PresetDeleteParams,
   type PresetGetParams,
   type PresetGetPresetByIDParams,
+  type PresetReplacePresetByIDParams,
 } from './presets';
 export { RealtimeKit, BaseRealtimeKit } from './realtime-kit';
 export {

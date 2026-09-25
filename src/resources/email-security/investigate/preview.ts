@@ -81,7 +81,7 @@ export interface PreviewGetResponse {
 
 export interface PreviewCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -93,7 +93,7 @@ export interface PreviewCreateParams {
 
 export interface PreviewGetParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }

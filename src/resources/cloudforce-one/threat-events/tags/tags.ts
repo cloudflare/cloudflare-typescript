@@ -121,17 +121,16 @@ export interface TagCreateResponse {
 
   activeDuration?: string;
 
+  activeDuration_annotated?: TagCreateResponse.ActiveDurationAnnotated | null;
+
   actorCategory?: string;
 
-  /**
-   * Confidence (1-10) in the actor variety (actorCategory). CFONE-only: stripped
-   * from responses to non-CFONE accounts.
-   */
-  actorCategoryConfidence?: number;
+  actorCategory_annotated?: TagCreateResponse.ActorCategoryAnnotated | null;
 
   /**
-   * Structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: stripped from
-   * responses to non-CFONE accounts.
+   * Structured aliases ({ value, confidence 1-10, tlp }). Public: returned to all
+   * accounts with per-entry TLP filtering (entries with tlp: purple are removed for
+   * non-CFONE accounts).
    */
   aliases?: Array<TagCreateResponse.Alias>;
 
@@ -139,19 +138,24 @@ export interface TagCreateResponse {
 
   aliasGroupNamesInternal?: Array<string>;
 
-  analyticPriority?: number;
-
-  attributionConfidence?: string;
-
-  attributionConfidenceScore?: number;
-
   attributionOrganization?: string;
+
+  attributionOrganization_annotated?: TagCreateResponse.AttributionOrganizationAnnotated | null;
 
   categoryName?: string;
 
   categoryUuid?: string;
 
+  /**
+   * Overall tag confidence (1-10).
+   */
+  confidence?: number | null;
+
+  createdAt?: string;
+
   dateOfDiscovery?: string;
+
+  description?: string;
 
   externalReferenceLinks?: Array<string>;
 
@@ -161,6 +165,8 @@ export interface TagCreateResponse {
    */
   externalReferences?: Array<TagCreateResponse.ExternalReference>;
 
+  externalReferences_annotated?: Array<TagCreateResponse.ExternalReferencesAnnotated> | null;
+
   /**
    * Internal structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: never
    * returned to non-CFONE accounts.
@@ -169,44 +175,76 @@ export interface TagCreateResponse {
 
   internalDescription?: string;
 
+  lastSeen?: string;
+
   motive?: string;
 
-  /**
-   * Confidence (1-10) in the actor motive. CFONE-only: stripped from responses to
-   * non-CFONE accounts.
-   */
-  motiveConfidence?: number;
+  motive_annotated?: TagCreateResponse.MotiveAnnotated | null;
 
   opsecLevel?: string;
 
-  /**
-   * Confidence (1-10) in the origin-country attribution. CFONE-only: stripped from
-   * responses to non-CFONE accounts.
-   */
-  originCountryConfidence?: number;
-
-  originCountryISO?: string;
-
-  originCountryISOAlpha3?: string;
+  opsecLevel_annotated?: TagCreateResponse.OpsecLevelAnnotated | null;
 
   /**
-   * TLP marking for the origin-country attribution. CFONE-only: stripped from
-   * responses to non-CFONE accounts.
+   * ISO country code (alpha-2 or alpha-3). Normalized to uppercase on read. Null
+   * when stored value is blank/whitespace.
    */
-  originCountryTlp?: 'red' | 'amber' | 'green' | 'white';
+  originCountryISO?: string | null;
+
+  originCountryISO_annotated?: TagCreateResponse.OriginCountryISOAnnotated | null;
 
   priority?: number;
 
+  priority_annotated?: TagCreateResponse.PriorityAnnotated | null;
+
+  /**
+   * Parsed custom field values. Null when the tag has no custom fields.
+   */
+  properties?: { [key: string]: unknown } | null;
+
   sophisticationLevel?: string;
+
+  sophisticationLevel_annotated?: TagCreateResponse.SophisticationLevelAnnotated | null;
+
+  /**
+   * Tag-level TLP handling marking.
+   */
+  tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+
+  updatedAt?: string;
+
+  version?: number;
 }
 
 export namespace TagCreateResponse {
+  export interface ActiveDurationAnnotated {
+    value: string;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface ActorCategoryAnnotated {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
   export interface Alias {
     value: string;
 
     confidence?: number | null;
 
-    tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+  }
+
+  export interface AttributionOrganizationAnnotated {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
   }
 
   export interface ExternalReference {
@@ -215,12 +253,56 @@ export namespace TagCreateResponse {
     description?: string | null;
   }
 
+  export interface ExternalReferencesAnnotated {
+    value: string;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
   export interface InternalAlias {
     value: string;
 
     confidence?: number | null;
 
-    tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+  }
+
+  export interface MotiveAnnotated {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface OpsecLevelAnnotated {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface OriginCountryISOAnnotated {
+    value: string | null;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface PriorityAnnotated {
+    value: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface SophisticationLevelAnnotated {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
   }
 }
 
@@ -248,17 +330,16 @@ export namespace TagListResponse {
 
     activeDuration?: string;
 
+    activeDuration_annotated?: Tag.ActiveDurationAnnotated | null;
+
     actorCategory?: string;
 
-    /**
-     * Confidence (1-10) in the actor variety (actorCategory). CFONE-only: stripped
-     * from responses to non-CFONE accounts.
-     */
-    actorCategoryConfidence?: number;
+    actorCategory_annotated?: Tag.ActorCategoryAnnotated | null;
 
     /**
-     * Structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: stripped from
-     * responses to non-CFONE accounts.
+     * Structured aliases ({ value, confidence 1-10, tlp }). Public: returned to all
+     * accounts with per-entry TLP filtering (entries with tlp: purple are removed for
+     * non-CFONE accounts).
      */
     aliases?: Array<Tag.Alias>;
 
@@ -266,19 +347,24 @@ export namespace TagListResponse {
 
     aliasGroupNamesInternal?: Array<string>;
 
-    analyticPriority?: number;
-
-    attributionConfidence?: string;
-
-    attributionConfidenceScore?: number;
-
     attributionOrganization?: string;
+
+    attributionOrganization_annotated?: Tag.AttributionOrganizationAnnotated | null;
 
     categoryName?: string;
 
     categoryUuid?: string;
 
+    /**
+     * Overall tag confidence (1-10).
+     */
+    confidence?: number | null;
+
+    createdAt?: string;
+
     dateOfDiscovery?: string;
+
+    description?: string;
 
     externalReferenceLinks?: Array<string>;
 
@@ -288,6 +374,8 @@ export namespace TagListResponse {
      */
     externalReferences?: Array<Tag.ExternalReference>;
 
+    externalReferences_annotated?: Array<Tag.ExternalReferencesAnnotated> | null;
+
     /**
      * Internal structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: never
      * returned to non-CFONE accounts.
@@ -296,44 +384,76 @@ export namespace TagListResponse {
 
     internalDescription?: string;
 
+    lastSeen?: string;
+
     motive?: string;
 
-    /**
-     * Confidence (1-10) in the actor motive. CFONE-only: stripped from responses to
-     * non-CFONE accounts.
-     */
-    motiveConfidence?: number;
+    motive_annotated?: Tag.MotiveAnnotated | null;
 
     opsecLevel?: string;
 
-    /**
-     * Confidence (1-10) in the origin-country attribution. CFONE-only: stripped from
-     * responses to non-CFONE accounts.
-     */
-    originCountryConfidence?: number;
-
-    originCountryISO?: string;
-
-    originCountryISOAlpha3?: string;
+    opsecLevel_annotated?: Tag.OpsecLevelAnnotated | null;
 
     /**
-     * TLP marking for the origin-country attribution. CFONE-only: stripped from
-     * responses to non-CFONE accounts.
+     * ISO country code (alpha-2 or alpha-3). Normalized to uppercase on read. Null
+     * when stored value is blank/whitespace.
      */
-    originCountryTlp?: 'red' | 'amber' | 'green' | 'white';
+    originCountryISO?: string | null;
+
+    originCountryISO_annotated?: Tag.OriginCountryISOAnnotated | null;
 
     priority?: number;
 
+    priority_annotated?: Tag.PriorityAnnotated | null;
+
+    /**
+     * Parsed custom field values. Null when the tag has no custom fields.
+     */
+    properties?: { [key: string]: unknown } | null;
+
     sophisticationLevel?: string;
+
+    sophisticationLevel_annotated?: Tag.SophisticationLevelAnnotated | null;
+
+    /**
+     * Tag-level TLP handling marking.
+     */
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+
+    updatedAt?: string;
+
+    version?: number;
   }
 
   export namespace Tag {
+    export interface ActiveDurationAnnotated {
+      value: string;
+
+      tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+    }
+
+    export interface ActorCategoryAnnotated {
+      value: string;
+
+      confidence?: number;
+
+      tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+    }
+
     export interface Alias {
       value: string;
 
       confidence?: number | null;
 
-      tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+      tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+    }
+
+    export interface AttributionOrganizationAnnotated {
+      value: string;
+
+      confidence?: number;
+
+      tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
     }
 
     export interface ExternalReference {
@@ -342,12 +462,56 @@ export namespace TagListResponse {
       description?: string | null;
     }
 
+    export interface ExternalReferencesAnnotated {
+      value: string;
+
+      tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+    }
+
     export interface InternalAlias {
       value: string;
 
       confidence?: number | null;
 
-      tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+      tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+    }
+
+    export interface MotiveAnnotated {
+      value: string;
+
+      confidence?: number;
+
+      tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+    }
+
+    export interface OpsecLevelAnnotated {
+      value: string;
+
+      confidence?: number;
+
+      tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+    }
+
+    export interface OriginCountryISOAnnotated {
+      value: string | null;
+
+      confidence?: number;
+
+      tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+    }
+
+    export interface PriorityAnnotated {
+      value: number;
+
+      tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+    }
+
+    export interface SophisticationLevelAnnotated {
+      value: string;
+
+      confidence?: number;
+
+      tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
     }
   }
 }
@@ -363,17 +527,16 @@ export interface TagEditResponse {
 
   activeDuration?: string;
 
+  activeDuration_annotated?: TagEditResponse.ActiveDurationAnnotated | null;
+
   actorCategory?: string;
 
-  /**
-   * Confidence (1-10) in the actor variety (actorCategory). CFONE-only: stripped
-   * from responses to non-CFONE accounts.
-   */
-  actorCategoryConfidence?: number;
+  actorCategory_annotated?: TagEditResponse.ActorCategoryAnnotated | null;
 
   /**
-   * Structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: stripped from
-   * responses to non-CFONE accounts.
+   * Structured aliases ({ value, confidence 1-10, tlp }). Public: returned to all
+   * accounts with per-entry TLP filtering (entries with tlp: purple are removed for
+   * non-CFONE accounts).
    */
   aliases?: Array<TagEditResponse.Alias>;
 
@@ -381,19 +544,24 @@ export interface TagEditResponse {
 
   aliasGroupNamesInternal?: Array<string>;
 
-  analyticPriority?: number;
-
-  attributionConfidence?: string;
-
-  attributionConfidenceScore?: number;
-
   attributionOrganization?: string;
+
+  attributionOrganization_annotated?: TagEditResponse.AttributionOrganizationAnnotated | null;
 
   categoryName?: string;
 
   categoryUuid?: string;
 
+  /**
+   * Overall tag confidence (1-10).
+   */
+  confidence?: number | null;
+
+  createdAt?: string;
+
   dateOfDiscovery?: string;
+
+  description?: string;
 
   externalReferenceLinks?: Array<string>;
 
@@ -403,6 +571,8 @@ export interface TagEditResponse {
    */
   externalReferences?: Array<TagEditResponse.ExternalReference>;
 
+  externalReferences_annotated?: Array<TagEditResponse.ExternalReferencesAnnotated> | null;
+
   /**
    * Internal structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: never
    * returned to non-CFONE accounts.
@@ -411,44 +581,76 @@ export interface TagEditResponse {
 
   internalDescription?: string;
 
+  lastSeen?: string;
+
   motive?: string;
 
-  /**
-   * Confidence (1-10) in the actor motive. CFONE-only: stripped from responses to
-   * non-CFONE accounts.
-   */
-  motiveConfidence?: number;
+  motive_annotated?: TagEditResponse.MotiveAnnotated | null;
 
   opsecLevel?: string;
 
-  /**
-   * Confidence (1-10) in the origin-country attribution. CFONE-only: stripped from
-   * responses to non-CFONE accounts.
-   */
-  originCountryConfidence?: number;
-
-  originCountryISO?: string;
-
-  originCountryISOAlpha3?: string;
+  opsecLevel_annotated?: TagEditResponse.OpsecLevelAnnotated | null;
 
   /**
-   * TLP marking for the origin-country attribution. CFONE-only: stripped from
-   * responses to non-CFONE accounts.
+   * ISO country code (alpha-2 or alpha-3). Normalized to uppercase on read. Null
+   * when stored value is blank/whitespace.
    */
-  originCountryTlp?: 'red' | 'amber' | 'green' | 'white';
+  originCountryISO?: string | null;
+
+  originCountryISO_annotated?: TagEditResponse.OriginCountryISOAnnotated | null;
 
   priority?: number;
 
+  priority_annotated?: TagEditResponse.PriorityAnnotated | null;
+
+  /**
+   * Parsed custom field values. Null when the tag has no custom fields.
+   */
+  properties?: { [key: string]: unknown } | null;
+
   sophisticationLevel?: string;
+
+  sophisticationLevel_annotated?: TagEditResponse.SophisticationLevelAnnotated | null;
+
+  /**
+   * Tag-level TLP handling marking.
+   */
+  tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+
+  updatedAt?: string;
+
+  version?: number;
 }
 
 export namespace TagEditResponse {
+  export interface ActiveDurationAnnotated {
+    value: string;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface ActorCategoryAnnotated {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
   export interface Alias {
     value: string;
 
     confidence?: number | null;
 
-    tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+  }
+
+  export interface AttributionOrganizationAnnotated {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
   }
 
   export interface ExternalReference {
@@ -457,12 +659,56 @@ export namespace TagEditResponse {
     description?: string | null;
   }
 
+  export interface ExternalReferencesAnnotated {
+    value: string;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
   export interface InternalAlias {
     value: string;
 
     confidence?: number | null;
 
-    tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+  }
+
+  export interface MotiveAnnotated {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface OpsecLevelAnnotated {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface OriginCountryISOAnnotated {
+    value: string | null;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface PriorityAnnotated {
+    value: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface SophisticationLevelAnnotated {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
   }
 }
 
@@ -480,24 +726,17 @@ export interface TagCreateParams {
   /**
    * Body param
    */
-  activeDuration?: string;
+  activeDuration?: string | TagCreateParams.UnionMember1;
 
   /**
-   * Body param: Actor variety. Allowed values: Activist, Competitor, Customer, Crime
-   * Syndicate, Former Employee, Nation State, Organized Crime, Nation State
-   * Affiliated, Terrorist, Unaffiliated.
+   * Body param
    */
-  actorCategory?: string;
+  actorCategory?: string | TagCreateParams.UnionMember1;
 
   /**
-   * Body param: Confidence (1-10) in the actor variety (actorCategory). CFONE-only:
-   * stripped from responses to non-CFONE accounts.
-   */
-  actorCategoryConfidence?: number;
-
-  /**
-   * Body param: Structured aliases ({ value, confidence 1-10, tlp }). CFONE-only:
-   * stripped from responses to non-CFONE accounts.
+   * Body param: Structured aliases ({ value, confidence 1-10, tlp }). Public:
+   * returned to all accounts with per-entry TLP filtering (entries with tlp: purple
+   * are removed for non-CFONE accounts).
    */
   aliases?: Array<TagCreateParams.Alias>;
 
@@ -514,32 +753,29 @@ export interface TagCreateParams {
   /**
    * Body param
    */
-  analyticPriority?: number;
+  attributionOrganization?: string | TagCreateParams.UnionMember1;
 
   /**
-   * Body param
-   */
-  attributionConfidence?: string;
-
-  /**
-   * Body param
-   */
-  attributionConfidenceScore?: number;
-
-  /**
-   * Body param
-   */
-  attributionOrganization?: string;
-
-  /**
-   * Body param
+   * Body param: Tag type (category) UUID. Optional — when present, `properties` is
+   * validated against this category's schema. When absent, the tag is typeless and
+   * properties are accepted free-form.
    */
   categoryUuid?: string;
 
   /**
-   * Body param: Date the actor was discovered (ISO YYYY-MM-DD).
+   * Body param: Overall tag confidence (1-10). Optional.
+   */
+  confidence?: number;
+
+  /**
+   * Body param: Date of discovery (ISO YYYY-MM-DD). Optional.
    */
   dateOfDiscovery?: string;
+
+  /**
+   * Body param
+   */
+  description?: string;
 
   /**
    * Body param
@@ -564,57 +800,80 @@ export interface TagCreateParams {
   internalDescription?: string;
 
   /**
-   * Body param: Actor motive. Allowed values: Convenience, Fear, Fun, Financial,
-   * Grudge, Ideology, Espionage.
+   * Body param
    */
-  motive?: string;
-
-  /**
-   * Body param: Confidence (1-10) in the actor motive. CFONE-only: stripped from
-   * responses to non-CFONE accounts.
-   */
-  motiveConfidence?: number;
+  lastSeen?: string;
 
   /**
    * Body param
    */
-  opsecLevel?: string;
-
-  /**
-   * Body param: Confidence (1-10) in the origin-country attribution. CFONE-only:
-   * stripped from responses to non-CFONE accounts.
-   */
-  originCountryConfidence?: number;
+  motive?: string | TagCreateParams.UnionMember1;
 
   /**
    * Body param
    */
-  originCountryISO?: string;
-
-  /**
-   * Body param: TLP marking for the origin-country attribution. CFONE-only: stripped
-   * from responses to non-CFONE accounts.
-   */
-  originCountryTlp?: 'red' | 'amber' | 'green' | 'white';
+  opsecLevel?: string | TagCreateParams.UnionMember1;
 
   /**
    * Body param
    */
-  priority?: number;
+  originCountryISO?: string | TagCreateParams.UnionMember1;
 
   /**
    * Body param
    */
-  sophisticationLevel?: string;
+  priority?: number | TagCreateParams.PriorityAnnotated;
+
+  /**
+   * Body param: Structured metadata blob. Optional. When `categoryUuid` is given,
+   * validated against this category's schema on write. When typeless, accepted
+   * free-form. Use `{}` for a tag with no custom data.
+   */
+  properties?: { [key: string]: unknown };
+
+  /**
+   * Body param
+   */
+  sophisticationLevel?: string | TagCreateParams.UnionMember1;
+
+  /**
+   * Body param: Tag-level TLP handling marking. Optional. Allowed values: red,
+   * amber, amber-strict, green, clear, purple, amber+strict.
+   */
+  tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
 }
 
 export namespace TagCreateParams {
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
   export interface Alias {
     value: string;
 
     confidence?: number | null;
 
-    tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+  }
+
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
   }
 
   export interface ExternalReference {
@@ -628,7 +887,47 @@ export namespace TagCreateParams {
 
     confidence?: number | null;
 
-    tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+  }
+
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface PriorityAnnotated {
+    value: number;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
   }
 }
 
@@ -652,12 +951,12 @@ export interface TagListParams {
 
   /**
    * Query param: Structured filters as a JSON array of {field, op, value} objects.
-   * Searchable fields: uuid, value, actorCategory, actorCategoryConfidence,
-   * aliasGroupNames, attributionConfidence, attributionConfidenceScore,
-   * attributionOrganization, categoryName, motive, motiveConfidence, opsecLevel,
-   * originCountryISO, originCountryConfidence, sophisticationLevel, priority,
-   * analyticPriority. Operators: equals, not, contains, startsWith, endsWith, gt,
-   * lt, gte, lte, like, in, find. Use 'in' for bulk OR within a single field, e.g.
+   * Searchable fields: uuid, value, categoryName, description, dateOfDiscovery, tlp,
+   * confidence, actorCategory, motive, attributionOrganization, originCountryISO,
+   * aliases, externalReferences, opsecLevel, sophisticationLevel, activeDuration,
+   * priority, lastSeen, aliasGroupNames. Operators: equals, not, contains,
+   * startsWith, endsWith, gt, lt, gte, lte, like, in, find. Use 'in' for bulk OR
+   * within a single field, e.g.
    * filters=[{"field":"originCountryISO","op":"in","value":["IR","CN"]}]. Multiple
    * entries are AND-joined. Max 10 entries per request, max 100 values per 'in'.
    * Per-field notes: `uuid` accepts only 'equals' and 'in' (other operators throw
@@ -685,7 +984,11 @@ export interface TagListParams {
   pageSize?: number;
 
   /**
-   * Query param: Legacy free-text substring match on tag value.
+   * Query param: Free-text substring match on tag value AND custom-field properties.
+   * Searches case-insensitively inside both `Tag.value` and the serialized
+   * `Tag.properties` JSON blob (keys, values, and annotation metadata like
+   * confidence/tlp are all searchable). Same serialized-text tradeoff as
+   * `aliasGroupNames` — substrings can cross JSON boundaries.
    */
   search?: string;
 }
@@ -693,34 +996,19 @@ export interface TagListParams {
 export namespace TagListParams {
   export interface Filter {
     /**
-     * Tag field to search on. Allowed: uuid, value, actorCategory,
-     * actorCategoryConfidence, aliasGroupNames, attributionConfidence,
-     * attributionConfidenceScore, attributionOrganization, categoryName, motive,
-     * motiveConfidence, opsecLevel, originCountryISO, originCountryConfidence,
-     * sophisticationLevel, priority, analyticPriority.
+     * Tag field to search on. Allowed first-class fields: uuid, value, categoryName,
+     * description, dateOfDiscovery, tlp, confidence, actorCategory, motive,
+     * attributionOrganization, originCountryISO, aliases, externalReferences,
+     * opsecLevel, sophisticationLevel, activeDuration, priority, lastSeen,
+     * aliasGroupNames. Also supports properties.<key> to filter on custom field values
+     * (matches both raw values and annotated {value,confidence,tlp} shapes via
+     * COALESCE), and properties.<key>.tlp / properties.<key>.confidence to filter
+     * directly on annotation sub-fields.
      */
-    field:
-      | 'uuid'
-      | 'value'
-      | 'actorCategory'
-      | 'actorCategoryConfidence'
-      | 'aliasGroupNames'
-      | 'attributionConfidence'
-      | 'attributionConfidenceScore'
-      | 'attributionOrganization'
-      | 'categoryName'
-      | 'motive'
-      | 'motiveConfidence'
-      | 'opsecLevel'
-      | 'originCountryISO'
-      | 'originCountryConfidence'
-      | 'sophisticationLevel'
-      | 'priority'
-      | 'analyticPriority';
+    field: string;
 
     /**
-     * Search operator. Use 'in' for bulk OR within a single field, e.g.
-     * {field:"originCountryISO", op:"in", value:["IR","CN"]}.
+     * Search operator. Use 'in' for bulk OR within a single field.
      */
     op:
       | 'equals'
@@ -738,8 +1026,7 @@ export namespace TagListParams {
 
     /**
      * Search value. String or number for most operators. Array for 'in' (max 100
-     * items). Country values may be passed as alpha-2, alpha-3, name, or common alias
-     * (e.g. 'iran', 'IR', 'IRN') and are normalized to alpha-2 server-side.
+     * items).
      */
     value?: string | number | Array<string | number>;
   }
@@ -761,24 +1048,17 @@ export interface TagEditParams {
   /**
    * Body param
    */
-  activeDuration?: string;
+  activeDuration?: string | TagEditParams.UnionMember1;
 
   /**
-   * Body param: Actor variety. Allowed values: Activist, Competitor, Customer, Crime
-   * Syndicate, Former Employee, Nation State, Organized Crime, Nation State
-   * Affiliated, Terrorist, Unaffiliated.
+   * Body param
    */
-  actorCategory?: string;
+  actorCategory?: string | TagEditParams.UnionMember1;
 
   /**
-   * Body param: Confidence (1-10) in the actor variety (actorCategory). CFONE-only:
-   * stripped from responses to non-CFONE accounts.
-   */
-  actorCategoryConfidence?: number;
-
-  /**
-   * Body param: Structured aliases ({ value, confidence 1-10, tlp }). CFONE-only:
-   * stripped from responses to non-CFONE accounts.
+   * Body param: Structured aliases ({ value, confidence 1-10, tlp }). Public:
+   * returned to all accounts with per-entry TLP filtering (entries with tlp: purple
+   * are removed for non-CFONE accounts).
    */
   aliases?: Array<TagEditParams.Alias>;
 
@@ -795,32 +1075,29 @@ export interface TagEditParams {
   /**
    * Body param
    */
-  analyticPriority?: number;
+  attributionOrganization?: string | TagEditParams.UnionMember1;
 
   /**
-   * Body param
-   */
-  attributionConfidence?: string;
-
-  /**
-   * Body param
-   */
-  attributionConfidenceScore?: number;
-
-  /**
-   * Body param
-   */
-  attributionOrganization?: string;
-
-  /**
-   * Body param
+   * Body param: Tag type (category) UUID. When changed, existing `properties` are
+   * re-validated against the new category's schema (400 on mismatch). Set to null to
+   * unlink (typeless; properties stop being validated).
    */
   categoryUuid?: string;
 
   /**
-   * Body param: Date the actor was discovered (ISO YYYY-MM-DD).
+   * Body param: Overall tag confidence (1-10). Omit to preserve existing.
+   */
+  confidence?: number;
+
+  /**
+   * Body param: Date of discovery (ISO YYYY-MM-DD). Omit to preserve existing.
    */
   dateOfDiscovery?: string;
+
+  /**
+   * Body param
+   */
+  description?: string;
 
   /**
    * Body param
@@ -845,48 +1122,49 @@ export interface TagEditParams {
   internalDescription?: string;
 
   /**
-   * Body param: Actor motive. Allowed values: Convenience, Fear, Fun, Financial,
-   * Grudge, Ideology, Espionage.
+   * Body param
    */
-  motive?: string;
-
-  /**
-   * Body param: Confidence (1-10) in the actor motive. CFONE-only: stripped from
-   * responses to non-CFONE accounts.
-   */
-  motiveConfidence?: number;
+  lastSeen?: string;
 
   /**
    * Body param
    */
-  opsecLevel?: string;
-
-  /**
-   * Body param: Confidence (1-10) in the origin-country attribution. CFONE-only:
-   * stripped from responses to non-CFONE accounts.
-   */
-  originCountryConfidence?: number;
+  motive?: string | TagEditParams.UnionMember1;
 
   /**
    * Body param
    */
-  originCountryISO?: string;
-
-  /**
-   * Body param: TLP marking for the origin-country attribution. CFONE-only: stripped
-   * from responses to non-CFONE accounts.
-   */
-  originCountryTlp?: 'red' | 'amber' | 'green' | 'white';
+  opsecLevel?: string | TagEditParams.UnionMember1;
 
   /**
    * Body param
    */
-  priority?: number;
+  originCountryISO?: string | TagEditParams.UnionMember1;
 
   /**
    * Body param
    */
-  sophisticationLevel?: string;
+  priority?: number | TagEditParams.PriorityAnnotated;
+
+  /**
+   * Body param: Custom field values blob. When omitted, the existing value is
+   * preserved. When provided, performs a shallow per-key merge over the stored value
+   * (unmentioned keys are retained). Setting an individual key to null deletes that
+   * key. Validation runs against the merged result, so a partial update may omit a
+   * schema-required key if the stored value supplies it.
+   */
+  properties?: { [key: string]: unknown };
+
+  /**
+   * Body param
+   */
+  sophisticationLevel?: string | TagEditParams.UnionMember1;
+
+  /**
+   * Body param: Tag-level TLP marking. Omit to preserve existing. Cannot be cleared
+   * to null.
+   */
+  tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
 
   /**
    * Body param
@@ -895,12 +1173,36 @@ export interface TagEditParams {
 }
 
 export namespace TagEditParams {
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
   export interface Alias {
     value: string;
 
     confidence?: number | null;
 
-    tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+  }
+
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
   }
 
   export interface ExternalReference {
@@ -914,7 +1216,47 @@ export namespace TagEditParams {
 
     confidence?: number | null;
 
-    tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict' | null;
+  }
+
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface PriorityAnnotated {
+    value: number;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
+  }
+
+  export interface UnionMember1 {
+    value: string;
+
+    confidence?: number;
+
+    tlp?: 'red' | 'amber' | 'amber-strict' | 'green' | 'clear' | 'purple' | 'amber+strict';
   }
 }
 

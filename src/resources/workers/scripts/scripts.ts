@@ -14,6 +14,7 @@ import {
   DeploymentGetParams,
   DeploymentListParams,
   DeploymentListResponse,
+  DeploymentListResponsesV4PagePagination,
   Deployments,
 } from './deployments';
 import * as SchedulesAPI from './schedules';
@@ -142,7 +143,7 @@ export class BaseScripts extends APIResource {
   }
 
   /**
-   * Fetch a list of uploaded workers.
+   * Fetch a list of uploaded Worker scripts.
    *
    * @example
    * ```ts
@@ -192,8 +193,8 @@ export class BaseScripts extends APIResource {
   }
 
   /**
-   * Fetch raw script content for your worker. Note this is the original script
-   * content, not JSON encoded.
+   * Fetch raw content for a Worker script. Note this is the original script content,
+   * not JSON encoded.
    *
    * @example
    * ```ts
@@ -212,7 +213,7 @@ export class BaseScripts extends APIResource {
   }
 
   /**
-   * Search for Workers in an account.
+   * Search for Worker scripts in an account.
    *
    * @example
    * ```ts
@@ -611,9 +612,19 @@ export namespace Script {
     head_sampling_rate?: number | null;
 
     /**
+     * Real-time Issues settings for the Worker.
+     */
+    issues?: Observability.Issues | null;
+
+    /**
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Whether query strings are removed from request URLs in logs and traces.
+     */
+    redact_query_string?: boolean;
 
     /**
      * Trace settings for the Worker.
@@ -622,6 +633,16 @@ export namespace Script {
   }
 
   export namespace Observability {
+    /**
+     * Real-time Issues settings for the Worker.
+     */
+    export interface Issues {
+      /**
+       * Whether real-time Issues are enabled for the Worker.
+       */
+      enabled?: boolean;
+    }
+
     /**
      * Log settings for the Worker.
      */
@@ -680,12 +701,12 @@ export namespace Script {
 
       /**
        * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-       * requests are handled. "authenticated" (default) honors inbound trace context
-       * only when accompanied by a valid trace auth token. "accept" unconditionally
-       * accepts inbound trace context. Requires the trace propagation feature to be
-       * enabled.
+       * requests are handled. "authenticated" honors inbound trace context only when
+       * accompanied by a valid trace auth token. "accept" unconditionally accepts
+       * inbound trace context. Requires the trace propagation feature to be enabled.
+       * Returns null when the trace propagation feature is not enabled for the account.
        */
-      propagation_policy?: 'authenticated' | 'accept';
+      propagation_policy?: 'authenticated' | 'accept' | null;
     }
   }
 
@@ -925,9 +946,19 @@ export namespace ScriptSetting {
     head_sampling_rate?: number | null;
 
     /**
+     * Real-time Issues settings for the Worker.
+     */
+    issues?: Observability.Issues | null;
+
+    /**
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Whether query strings are removed from request URLs in logs and traces.
+     */
+    redact_query_string?: boolean;
 
     /**
      * Trace settings for the Worker.
@@ -936,6 +967,16 @@ export namespace ScriptSetting {
   }
 
   export namespace Observability {
+    /**
+     * Real-time Issues settings for the Worker.
+     */
+    export interface Issues {
+      /**
+       * Whether real-time Issues are enabled for the Worker.
+       */
+      enabled?: boolean;
+    }
+
     /**
      * Log settings for the Worker.
      */
@@ -994,12 +1035,12 @@ export namespace ScriptSetting {
 
       /**
        * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-       * requests are handled. "authenticated" (default) honors inbound trace context
-       * only when accompanied by a valid trace auth token. "accept" unconditionally
-       * accepts inbound trace context. Requires the trace propagation feature to be
-       * enabled.
+       * requests are handled. "authenticated" honors inbound trace context only when
+       * accompanied by a valid trace auth token. "accept" unconditionally accepts
+       * inbound trace context. Requires the trace propagation feature to be enabled.
+       * Returns null when the trace propagation feature is not enabled for the account.
        */
-      propagation_policy?: 'authenticated' | 'accept';
+      propagation_policy?: 'authenticated' | 'accept' | null;
     }
   }
 }
@@ -1372,9 +1413,19 @@ export namespace ScriptUpdateResponse {
     head_sampling_rate?: number | null;
 
     /**
+     * Real-time Issues settings for the Worker.
+     */
+    issues?: Observability.Issues | null;
+
+    /**
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Whether query strings are removed from request URLs in logs and traces.
+     */
+    redact_query_string?: boolean;
 
     /**
      * Trace settings for the Worker.
@@ -1383,6 +1434,16 @@ export namespace ScriptUpdateResponse {
   }
 
   export namespace Observability {
+    /**
+     * Real-time Issues settings for the Worker.
+     */
+    export interface Issues {
+      /**
+       * Whether real-time Issues are enabled for the Worker.
+       */
+      enabled?: boolean;
+    }
+
     /**
      * Log settings for the Worker.
      */
@@ -1441,12 +1502,12 @@ export namespace ScriptUpdateResponse {
 
       /**
        * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-       * requests are handled. "authenticated" (default) honors inbound trace context
-       * only when accompanied by a valid trace auth token. "accept" unconditionally
-       * accepts inbound trace context. Requires the trace propagation feature to be
-       * enabled.
+       * requests are handled. "authenticated" honors inbound trace context only when
+       * accompanied by a valid trace auth token. "accept" unconditionally accepts
+       * inbound trace context. Requires the trace propagation feature to be enabled.
+       * Returns null when the trace propagation feature is not enabled for the account.
        */
-      propagation_policy?: 'authenticated' | 'accept';
+      propagation_policy?: 'authenticated' | 'accept' | null;
     }
   }
 
@@ -2013,9 +2074,19 @@ export namespace ScriptListResponse {
     head_sampling_rate?: number | null;
 
     /**
+     * Real-time Issues settings for the Worker.
+     */
+    issues?: Observability.Issues | null;
+
+    /**
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Whether query strings are removed from request URLs in logs and traces.
+     */
+    redact_query_string?: boolean;
 
     /**
      * Trace settings for the Worker.
@@ -2024,6 +2095,16 @@ export namespace ScriptListResponse {
   }
 
   export namespace Observability {
+    /**
+     * Real-time Issues settings for the Worker.
+     */
+    export interface Issues {
+      /**
+       * Whether real-time Issues are enabled for the Worker.
+       */
+      enabled?: boolean;
+    }
+
     /**
      * Log settings for the Worker.
      */
@@ -2082,12 +2163,12 @@ export namespace ScriptListResponse {
 
       /**
        * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-       * requests are handled. "authenticated" (default) honors inbound trace context
-       * only when accompanied by a valid trace auth token. "accept" unconditionally
-       * accepts inbound trace context. Requires the trace propagation feature to be
-       * enabled.
+       * requests are handled. "authenticated" honors inbound trace context only when
+       * accompanied by a valid trace auth token. "accept" unconditionally accepts
+       * inbound trace context. Requires the trace propagation feature to be enabled.
+       * Returns null when the trace propagation feature is not enabled for the account.
        */
-      propagation_policy?: 'authenticated' | 'accept';
+      propagation_policy?: 'authenticated' | 'accept' | null;
     }
   }
 
@@ -2423,6 +2504,7 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindMTLSCertificate
       | Metadata.WorkersBindingKindPlainText
       | Metadata.WorkersBindingKindPipelines
+      | Metadata.WorkersBindingKindK2
       | Metadata.WorkersBindingKindQueue
       | Metadata.WorkersBindingKindRatelimit
       | Metadata.WorkersBindingKindR2Bucket
@@ -2603,6 +2685,14 @@ export namespace ScriptUpdateParams {
          * of asset serving).
          */
         _redirects?: string;
+
+        /**
+         * The public URL path prefix under which assets are served. A null request value
+         * resets it to `/`; responses represent the root as `/`. All versions in a gradual
+         * deployment must use the same canonical value. To change it, first deploy the
+         * version containing the change at 100%.
+         */
+        base_path?: string | null;
 
         /**
          * Determines the redirects and rewrites of requests for HTML content.
@@ -3045,6 +3135,26 @@ export namespace ScriptUpdateParams {
       type: 'pipelines';
     }
 
+    /**
+     * A K2 stream binding. Available only to accounts enabled for K2.
+     */
+    export interface WorkersBindingKindK2 {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * ID of a K2 stream owned by the account deploying the Worker.
+       */
+      stream: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'k2';
+    }
+
     export interface WorkersBindingKindQueue {
       /**
        * A JavaScript variable name for the binding.
@@ -3129,7 +3239,7 @@ export namespace ScriptUpdateParams {
        * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
        * of the R2 bucket.
        */
-      jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
+      jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high' | 'us';
     }
 
     export interface WorkersBindingKindSecretText {
@@ -3409,6 +3519,12 @@ export namespace ScriptUpdateParams {
       type: 'vpc_network';
 
       /**
+       * Enables Gateway identity for the binding. Requires network_id to be
+       * "cf1:network" and cannot be combined with tunnel_id.
+       */
+      identity?: 'runtime-email-alpha';
+
+      /**
        * Identifier of the network to bind to. Only "cf1:network" is currently supported.
        * Mutually exclusive with tunnel_id.
        */
@@ -3670,9 +3786,19 @@ export namespace ScriptUpdateParams {
       head_sampling_rate?: number | null;
 
       /**
+       * Real-time Issues settings for the Worker.
+       */
+      issues?: Observability.Issues | null;
+
+      /**
        * Log settings for the Worker.
        */
       logs?: Observability.Logs | null;
+
+      /**
+       * Whether query strings are removed from request URLs in logs and traces.
+       */
+      redact_query_string?: boolean;
 
       /**
        * Trace settings for the Worker.
@@ -3681,6 +3807,16 @@ export namespace ScriptUpdateParams {
     }
 
     export namespace Observability {
+      /**
+       * Real-time Issues settings for the Worker.
+       */
+      export interface Issues {
+        /**
+         * Whether real-time Issues are enabled for the Worker.
+         */
+        enabled?: boolean;
+      }
+
       /**
        * Log settings for the Worker.
        */
@@ -3739,12 +3875,12 @@ export namespace ScriptUpdateParams {
 
         /**
          * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-         * requests are handled. "authenticated" (default) honors inbound trace context
-         * only when accompanied by a valid trace auth token. "accept" unconditionally
-         * accepts inbound trace context. Requires the trace propagation feature to be
-         * enabled.
+         * requests are handled. "authenticated" honors inbound trace context only when
+         * accompanied by a valid trace auth token. "accept" unconditionally accepts
+         * inbound trace context. Requires the trace propagation feature to be enabled.
+         * Returns null when the trace propagation feature is not enabled for the account.
          */
-        propagation_policy?: 'authenticated' | 'accept';
+        propagation_policy?: 'authenticated' | 'accept' | null;
       }
     }
 
@@ -3887,9 +4023,10 @@ export interface ScriptDeleteParams {
   account_id: string;
 
   /**
-   * Query param: If set to true, delete will not be stopped by associated service
-   * binding, durable object, or other binding. Any of these associated
-   * bindings/durable objects will be deleted along with the script.
+   * Query param: If true, delete the Worker even when other Workers still reference
+   * it. Service bindings in those Workers may be left broken. Durable Object
+   * namespaces implemented by the deleted Worker are deleted even if other Workers
+   * reference them.
    */
   force?: boolean;
 }
@@ -4027,6 +4164,7 @@ export declare namespace Scripts {
     type Deployment as Deployment,
     type DeploymentListResponse as DeploymentListResponse,
     type DeploymentDeleteResponse as DeploymentDeleteResponse,
+    type DeploymentListResponsesV4PagePagination as DeploymentListResponsesV4PagePagination,
     type DeploymentCreateParams as DeploymentCreateParams,
     type DeploymentListParams as DeploymentListParams,
     type DeploymentDeleteParams as DeploymentDeleteParams,

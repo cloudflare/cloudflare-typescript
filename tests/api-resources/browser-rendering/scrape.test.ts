@@ -28,10 +28,7 @@ const parentPartialClient = createClient({
 
 const runTests = (client: PartialCloudflare<{ browserRendering: { scrape: BaseScrape } }>) => {
   test('create: only required params', async () => {
-    const responsePromise = client.browserRendering.scrape.create({
-      account_id: 'account_id',
-      elements: [{ selector: 'h1' }],
-    });
+    const responsePromise = client.browserRendering.scrape.create({ account_id: 'account_id', url: 'url' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,7 +41,7 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { scrape: BaseSc
   test('create: required and optional params', async () => {
     const response = await client.browserRendering.scrape.create({
       account_id: 'account_id',
-      elements: [{ selector: 'h1' }],
+      url: 'url',
       cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [
@@ -78,6 +75,7 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { scrape: BaseSc
           url: 'url',
         },
       ],
+      elements: [{ selector: 'selector' }],
       emulateMediaType: 'emulateMediaType',
       gotoOptions: {
         referer: 'referer',
@@ -85,12 +83,11 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { scrape: BaseSc
         timeout: 60000,
         waitUntil: 'load',
       },
-      html: '<h1>Hello World!</h1>',
+      html: 'html',
       rejectRequestPattern: ['string'],
       rejectResourceTypes: ['document'],
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
-      url: 'https://www.example.com/',
       userAgent: 'userAgent',
       viewport: {
         height: 0,

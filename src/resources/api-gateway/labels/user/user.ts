@@ -16,7 +16,7 @@ export class BaseUser extends APIResource {
   ] as const);
 
   /**
-   * Update all fields on a label
+   * Replaces all editable fields on a user-defined label.
    *
    * @example
    * ```ts
@@ -37,7 +37,8 @@ export class BaseUser extends APIResource {
   }
 
   /**
-   * Delete user label
+   * Deletes a user-defined label and removes its associations with web and API
+   * operations.
    *
    * @example
    * ```ts
@@ -57,7 +58,7 @@ export class BaseUser extends APIResource {
   }
 
   /**
-   * Create user labels
+   * Creates one or more user-defined labels for classifying web and API operations.
    *
    * @example
    * ```ts
@@ -85,7 +86,8 @@ export class BaseUser extends APIResource {
   }
 
   /**
-   * Delete user labels
+   * Deletes one or more user-defined labels and removes their associations with web
+   * and API operations.
    *
    * @example
    * ```ts
@@ -110,7 +112,7 @@ export class BaseUser extends APIResource {
   }
 
   /**
-   * Update certain fields on a label
+   * Updates only the supplied fields on a user-defined label.
    *
    * @example
    * ```ts
@@ -131,7 +133,7 @@ export class BaseUser extends APIResource {
   }
 
   /**
-   * Retrieve user label
+   * Returns a user-defined label and the web and API operations associated with it.
    *
    * @example
    * ```ts

@@ -12,7 +12,7 @@ export class BaseWebhooks extends APIResource {
   ] as const);
 
   /**
-   * Creates a webhook notification.
+   * Create a webhook for notifications about on-demand video uploads.
    *
    * @example
    * ```ts
@@ -31,7 +31,7 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Deletes a webhook.
+   * Deletes the on-demand video webhook.
    *
    * @example
    * ```ts
@@ -50,7 +50,7 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Retrieves a list of webhooks.
+   * Retrieve current on-demand webhook information.
    *
    * @example
    * ```ts
@@ -79,11 +79,6 @@ export interface WebhookUpdateResponse {
   /**
    * The URL where webhooks will be sent.
    */
-  notification_url?: string;
-
-  /**
-   * The URL where webhooks will be sent.
-   */
   notificationUrl?: string;
 
   /**
@@ -99,11 +94,6 @@ export interface WebhookGetResponse {
    * The date and time the webhook was last modified.
    */
   modified?: string;
-
-  /**
-   * The URL where webhooks will be sent.
-   */
-  notification_url?: string;
 
   /**
    * The URL where webhooks will be sent.
