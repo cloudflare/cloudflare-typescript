@@ -67,6 +67,12 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: Bas
       indicators: [{ indicatorType: 'domain', value: 'malicious.com' }],
       indicatorType: 'domain',
       insight: 'This domain was likely registered for phishing purposes',
+      source: {
+        resourceId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        resourceType: 'article',
+        system: 'threat-signals',
+        title: 'title',
+      },
       tags: ['malware'],
       targetCountry: 'US',
       targetIndustry: 'Agriculture',
@@ -101,9 +107,9 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: Bas
       pageSize: 0,
       search: [
         {
-          field: 'attackerCountry',
+          field: 'attacker',
           op: 'equals',
-          value: 'usa',
+          value: 'x',
         },
       ],
     });

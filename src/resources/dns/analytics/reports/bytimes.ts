@@ -20,13 +20,7 @@ export class BaseBytimes extends APIResource {
    * [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/)
    * for detailed information about the available query parameters.
    *
-   * @example
-   * ```ts
-   * const byTime =
-   *   await client.dns.analytics.reports.bytimes.get({
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
-   * ```
+   * @deprecated This endpoint is deprecated. See [the API deprecation notice](https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-12-09).
    */
   get(params: BytimeGetParams, options?: RequestOptions): APIPromise<ByTime> {
     const { zone_id, ...query } = params;

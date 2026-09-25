@@ -16,6 +16,21 @@ export {
   type AppListResponsesSinglePage,
 } from './apps';
 export {
+  BGPFilterProfiles,
+  BaseBGPFilterProfiles,
+  type BGPFilterProfileCreateResponse,
+  type BGPFilterProfileUpdateResponse,
+  type BGPFilterProfileListResponse,
+  type BGPFilterProfileDeleteResponse,
+  type BGPFilterProfileGetResponse,
+  type BGPFilterProfileCreateParams,
+  type BGPFilterProfileUpdateParams,
+  type BGPFilterProfileListParams,
+  type BGPFilterProfileDeleteParams,
+  type BGPFilterProfileGetParams,
+  type BGPFilterProfileListResponsesSinglePage,
+} from './bgp-filter-profiles';
+export {
   Cf1Sites,
   BaseCf1Sites,
   type Cf1Site,

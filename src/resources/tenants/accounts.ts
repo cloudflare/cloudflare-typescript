@@ -32,6 +32,11 @@ export interface TenantAccount {
   settings: TenantAccount.Settings;
 
   type: 'standard' | 'enterprise';
+
+  /**
+   * Account tags, present only when `include_tags=true` is requested.
+   */
+  tags?: { [key: string]: string };
 }
 
 export namespace TenantAccount {

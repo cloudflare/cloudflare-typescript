@@ -48,6 +48,27 @@ const runTests = (
       account_id: 'account_id',
       name: 'Actor',
       description: 'description',
+      schema: [
+        {
+          key: 'family',
+          kind: 'string',
+          allowedValues: ['low', 'medium', 'high', 'critical'],
+          annotations: { confidence: true, tlp: true },
+          deprecated: true,
+          deprecatedValues: ['string'],
+          enforcement: 'error',
+          format: 'date',
+          label: 'Attacker Name',
+          maxLength: 1,
+          numberConstraint: {
+            integer: true,
+            max: 0,
+            min: 0,
+          },
+          properties: {},
+          required: true,
+        },
+      ],
     });
   });
 
@@ -108,6 +129,27 @@ const runTests = (
       account_id: 'account_id',
       description: 'description',
       name: 'name',
+      schema: [
+        {
+          key: 'family',
+          kind: 'string',
+          allowedValues: ['low', 'medium', 'high', 'critical'],
+          annotations: { confidence: true, tlp: true },
+          deprecated: true,
+          deprecatedValues: ['string'],
+          enforcement: 'error',
+          format: 'date',
+          label: 'Attacker Name',
+          maxLength: 1,
+          numberConstraint: {
+            integer: true,
+            max: 0,
+            min: 0,
+          },
+          properties: {},
+          required: true,
+        },
+      ],
     });
   });
 };

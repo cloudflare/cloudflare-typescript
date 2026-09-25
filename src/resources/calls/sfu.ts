@@ -10,8 +10,8 @@ export class BaseSFU extends APIResource {
   static override readonly _key: readonly ['calls', 'sfu'] = Object.freeze(['calls', 'sfu'] as const);
 
   /**
-   * Creates a new Cloudflare calls app. An app is an unique enviroment where each
-   * Session can access all Tracks within the app.
+   * Creates a Realtime SFU app. An app is an isolated namespace in which sessions
+   * can access the app's tracks.
    *
    * @example
    * ```ts
@@ -30,7 +30,7 @@ export class BaseSFU extends APIResource {
   }
 
   /**
-   * Edit details for a single app.
+   * Updates details for a single Realtime SFU app.
    *
    * @example
    * ```ts
@@ -76,7 +76,7 @@ export class BaseSFU extends APIResource {
   }
 
   /**
-   * Deletes an app from Cloudflare Calls
+   * Deletes a Realtime SFU app.
    *
    * @example
    * ```ts
@@ -96,7 +96,7 @@ export class BaseSFU extends APIResource {
   }
 
   /**
-   * Fetches details for a single Calls app.
+   * Fetches details for a single Realtime SFU app.
    *
    * @example
    * ```ts
@@ -123,115 +123,115 @@ export interface SFUCreateResponse {
   /**
    * The date and time the item was created.
    */
-  created?: string;
+  created: string;
 
   /**
    * The date and time the item was last modified.
    */
-  modified?: string;
+  modified: string;
 
   /**
-   * A short description of Calls app, not shown to end users.
+   * A short description of a Realtime SFU app, not shown to end users.
    */
-  name?: string;
+  name: string;
 
   /**
    * Bearer token
    */
-  secret?: string;
+  secret: string;
 
   /**
    * A Cloudflare-generated unique identifier for a item.
    */
-  uid?: string;
+  uid: string;
 }
 
 export interface SFUUpdateResponse {
   /**
    * The date and time the item was created.
    */
-  created?: string;
+  created: string;
 
   /**
    * The date and time the item was last modified.
    */
-  modified?: string;
+  modified: string;
 
   /**
-   * A short description of Calls app, not shown to end users.
+   * A short description of a Realtime SFU app, not shown to end users.
    */
-  name?: string;
+  name: string;
 
   /**
    * A Cloudflare-generated unique identifier for a item.
    */
-  uid?: string;
+  uid: string;
 }
 
 export interface SFUListResponse {
   /**
    * The date and time the item was created.
    */
-  created?: string;
+  created: string;
 
   /**
    * The date and time the item was last modified.
    */
-  modified?: string;
+  modified: string;
 
   /**
-   * A short description of Calls app, not shown to end users.
+   * A short description of a Realtime SFU app, not shown to end users.
    */
-  name?: string;
+  name: string;
 
   /**
    * A Cloudflare-generated unique identifier for a item.
    */
-  uid?: string;
+  uid: string;
 }
 
 export interface SFUDeleteResponse {
   /**
    * The date and time the item was created.
    */
-  created?: string;
+  created: string;
 
   /**
    * The date and time the item was last modified.
    */
-  modified?: string;
+  modified: string;
 
   /**
-   * A short description of Calls app, not shown to end users.
+   * A short description of a Realtime SFU app, not shown to end users.
    */
-  name?: string;
+  name: string;
 
   /**
    * A Cloudflare-generated unique identifier for a item.
    */
-  uid?: string;
+  uid: string;
 }
 
 export interface SFUGetResponse {
   /**
    * The date and time the item was created.
    */
-  created?: string;
+  created: string;
 
   /**
    * The date and time the item was last modified.
    */
-  modified?: string;
+  modified: string;
 
   /**
-   * A short description of Calls app, not shown to end users.
+   * A short description of a Realtime SFU app, not shown to end users.
    */
-  name?: string;
+  name: string;
 
   /**
    * A Cloudflare-generated unique identifier for a item.
    */
-  uid?: string;
+  uid: string;
 }
 
 export interface SFUCreateParams {
@@ -241,7 +241,7 @@ export interface SFUCreateParams {
   account_id: string;
 
   /**
-   * Body param: A short description of Calls app, not shown to end users.
+   * Body param: A short description of a Realtime SFU app, not shown to end users.
    */
   name?: string;
 }
@@ -253,7 +253,7 @@ export interface SFUUpdateParams {
   account_id: string;
 
   /**
-   * Body param: A short description of Calls app, not shown to end users.
+   * Body param: A short description of a Realtime SFU app, not shown to end users.
    */
   name?: string;
 }

@@ -12,7 +12,7 @@ export class BaseAccountSettings extends APIResource {
   ] as const);
 
   /**
-   * Creates Worker account settings for an account.
+   * Configure Workers account settings for an account.
    *
    * @example
    * ```ts
@@ -36,7 +36,7 @@ export class BaseAccountSettings extends APIResource {
   }
 
   /**
-   * Fetches Worker account settings for an account.
+   * Fetches Workers account settings for an account.
    *
    * @example
    * ```ts

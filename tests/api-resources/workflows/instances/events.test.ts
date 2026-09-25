@@ -32,6 +32,7 @@ const runTests = (client: PartialCloudflare<{ workflows: { instances: { events: 
       account_id: 'account_id',
       workflow_name: 'x',
       instance_id: 'x',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

@@ -15,7 +15,7 @@ export class BaseSettings extends APIResource {
   ] as const);
 
   /**
-   * Patch script-level settings when using
+   * Patch Worker script-level settings when using
    * [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions).
    * Including but not limited to Logpush and Tail Consumers.
    *
@@ -43,7 +43,7 @@ export class BaseSettings extends APIResource {
   }
 
   /**
-   * Get script-level settings when using
+   * Get Worker script-level settings when using
    * [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions).
    * Includes Logpush and Tail Consumers.
    *
@@ -116,9 +116,19 @@ export namespace SettingEditParams {
     head_sampling_rate?: number | null;
 
     /**
+     * Real-time Issues settings for the Worker.
+     */
+    issues?: Observability.Issues | null;
+
+    /**
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Whether query strings are removed from request URLs in logs and traces.
+     */
+    redact_query_string?: boolean;
 
     /**
      * Trace settings for the Worker.
@@ -127,6 +137,16 @@ export namespace SettingEditParams {
   }
 
   export namespace Observability {
+    /**
+     * Real-time Issues settings for the Worker.
+     */
+    export interface Issues {
+      /**
+       * Whether real-time Issues are enabled for the Worker.
+       */
+      enabled?: boolean;
+    }
+
     /**
      * Log settings for the Worker.
      */
@@ -185,12 +205,12 @@ export namespace SettingEditParams {
 
       /**
        * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-       * requests are handled. "authenticated" (default) honors inbound trace context
-       * only when accompanied by a valid trace auth token. "accept" unconditionally
-       * accepts inbound trace context. Requires the trace propagation feature to be
-       * enabled.
+       * requests are handled. "authenticated" honors inbound trace context only when
+       * accompanied by a valid trace auth token. "accept" unconditionally accepts
+       * inbound trace context. Requires the trace propagation feature to be enabled.
+       * Returns null when the trace propagation feature is not enabled for the account.
        */
-      propagation_policy?: 'authenticated' | 'accept';
+      propagation_policy?: 'authenticated' | 'accept' | null;
     }
   }
 }

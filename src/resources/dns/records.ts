@@ -287,9 +287,9 @@ export class BaseRecords extends APIResource {
    * @deprecated This endpoint is deprecated in favor of a new asynchronous version. Please use the [/scan/trigger](https://developers.cloudflare.com/api/resources/dns/subresources/records/methods/scan/trigger) and [/scan/review](https://developers.cloudflare.com/api/resources/dns/subresources/records/methods/scan/review) endpoints instead.
    */
   scan(params: RecordScanParams, options?: RequestOptions): APIPromise<RecordScanResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.post(path`/zones/${zone_id}/dns_records/scan`, { body: body, ...options }) as APIPromise<{
+      this._client.post(path`/zones/${zone_id}/dns_records/scan`, options) as APIPromise<{
         result: RecordScanResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -13527,14 +13527,9 @@ export interface RecordImportParams {
 
 export interface RecordScanParams {
   /**
-   * Path param: Identifier.
+   * Identifier.
    */
   zone_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface RecordScanListParams {

@@ -16,7 +16,8 @@ export class BaseTags extends APIResource {
   ] = Object.freeze(['workersForPlatforms', 'dispatch', 'namespaces', 'scripts', 'tags'] as const);
 
   /**
-   * Put script tags for a script uploaded to a Workers for Platforms namespace.
+   * Replace tags for a script uploaded to a Workers for Platforms dispatch
+   * namespace.
    *
    * @example
    * ```ts
@@ -47,7 +48,7 @@ export class BaseTags extends APIResource {
   }
 
   /**
-   * Fetch tags from a script uploaded to a Workers for Platforms namespace.
+   * Fetch tags from a script uploaded to a Workers for Platforms dispatch namespace.
    *
    * @example
    * ```ts
@@ -77,7 +78,8 @@ export class BaseTags extends APIResource {
   }
 
   /**
-   * Delete script tag for a script uploaded to a Workers for Platforms namespace.
+   * Delete a tag from a script uploaded to a Workers for Platforms dispatch
+   * namespace.
    *
    * @example
    * ```ts

@@ -14,7 +14,10 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Host</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">RequestValidity</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Status</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">ValidationMethod</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackCreateResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackListResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackDeleteResponse</a></code>
@@ -40,6 +43,14 @@ Methods:
 - <code title="get /zones/{zone_id}/ssl/certificate_packs/quota">client.ssl.certificatePacks.quota.<a href="./src/resources/ssl/certificate-packs/quota.ts">get</a>({ ...params }) -> QuotaGetResponse</code>
 
 ## Recommendations
+
+Types:
+
+- <code><a href="./src/resources/ssl/recommendations.ts">RecommendationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/ssl/recommendation">client.ssl.recommendations.<a href="./src/resources/ssl/recommendations.ts">get</a>({ ...params }) -> RecommendationGetResponse</code>
 
 ## AutoOriginTLSKex
 

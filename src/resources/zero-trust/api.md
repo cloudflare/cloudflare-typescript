@@ -138,7 +138,6 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">DevicePolicyCertificates</a></code>
 - <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">FallbackDomain</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">FallbackDomainPolicy</a></code>
 - <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">SettingsPolicy</a></code>
 - <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">SplitTunnelExclude</a></code>
 - <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">SplitTunnelInclude</a></code>
@@ -303,7 +302,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/devices/{device_id}/override_codes">client.zeroTrust.devices.overrideCodes.<a href="./src/resources/zero-trust/devices/override-codes.ts">list</a>(deviceID, { ...params }) -> OverrideCodeListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/devices/{device_id}/override_codes">client.zeroTrust.devices.overrideCodes.<a href="./src/resources/zero-trust/devices/override-codes.ts">list</a>(deviceID, { ...params }) -> OverrideCodeListResponse | null</code>
 - <code title="get /accounts/{account_id}/devices/registrations/{registration_id}/override_codes">client.zeroTrust.devices.overrideCodes.<a href="./src/resources/zero-trust/devices/override-codes.ts">get</a>(registrationID, { ...params }) -> OverrideCodeGetResponse</code>
 
 ## IdentityProviders
@@ -356,13 +355,14 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/organizations/organizations.ts">LoginDesign</a></code>
 - <code><a href="./src/resources/zero-trust/organizations/organizations.ts">Organization</a></code>
+- <code><a href="./src/resources/zero-trust/organizations/organizations.ts">OrganizationListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/organizations/organizations.ts">OrganizationRevokeUsersResponse</a></code>
 
 Methods:
 
 - <code title="post /{accounts_or_zones}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">create</a>({ ...params }) -> Organization</code>
 - <code title="put /{accounts_or_zones}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">update</a>({ ...params }) -> Organization</code>
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">list</a>({ ...params }) -> Organization</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">list</a>({ ...params }) -> OrganizationListResponse</code>
 - <code title="post /{accounts_or_zones}/{account_or_zone_id}/access/organizations/revoke_user">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">revokeUsers</a>({ ...params }) -> OrganizationRevokeUsersResponse</code>
 
 ### DOH
@@ -1004,6 +1004,24 @@ Methods:
 - <code title="get /accounts/{account_id}/data-security/posture/remediations/jobs">client.zeroTrust.casb.posture.remediations.jobs.<a href="./src/resources/zero-trust/casb/posture/remediations/jobs.ts">list</a>({ ...params }) -> JobListResponsesV4PagePaginationArray</code>
 - <code title="post /accounts/{account_id}/data-security/posture/remediations/jobs/export">client.zeroTrust.casb.posture.remediations.jobs.<a href="./src/resources/zero-trust/casb/posture/remediations/jobs.ts">export</a>({ ...params }) -> JobExportResponse</code>
 
+#### Policies
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/posture/policies.ts">PolicyCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/policies.ts">PolicyUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/policies.ts">PolicyListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/policies.ts">PolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/policies.ts">PolicyGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/data-security/posture/policies">client.zeroTrust.casb.posture.policies.<a href="./src/resources/zero-trust/casb/posture/policies.ts">create</a>({ ...params }) -> PolicyCreateResponse</code>
+- <code title="put /accounts/{account_id}/data-security/posture/policies/{policy_id}">client.zeroTrust.casb.posture.policies.<a href="./src/resources/zero-trust/casb/posture/policies.ts">update</a>(policyID, { ...params }) -> PolicyUpdateResponse</code>
+- <code title="get /accounts/{account_id}/data-security/posture/policies">client.zeroTrust.casb.posture.policies.<a href="./src/resources/zero-trust/casb/posture/policies.ts">list</a>({ ...params }) -> PolicyListResponsesCursorPaginationAfter</code>
+- <code title="delete /accounts/{account_id}/data-security/posture/policies/{policy_id}">client.zeroTrust.casb.posture.policies.<a href="./src/resources/zero-trust/casb/posture/policies.ts">delete</a>(policyID, { ...params }) -> PolicyDeleteResponse</code>
+- <code title="get /accounts/{account_id}/data-security/posture/policies/{policy_id}">client.zeroTrust.casb.posture.policies.<a href="./src/resources/zero-trust/casb/posture/policies.ts">get</a>(policyID, { ...params }) -> PolicyGetResponse</code>
+
 #### Webhooks
 
 Types:
@@ -1227,7 +1245,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">Connection</a></code>
 - <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">TunnelListResponse</a></code>
 
 Methods:
@@ -1832,7 +1849,7 @@ Methods:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/gateway/lists/{list_id}/items">client.zeroTrust.gateway.lists.items.<a href="./src/resources/zero-trust/gateway/lists/items.ts">list</a>(listID, { ...params }) -> GatewayItemsSinglePage</code>
+- <code title="get /accounts/{account_id}/gateway/lists/{list_id}/items">client.zeroTrust.gateway.lists.items.<a href="./src/resources/zero-trust/gateway/lists/items.ts">list</a>(listID, { ...params }) -> GatewayItemsV4PagePaginationArray</code>
 
 ### Locations
 
@@ -1939,7 +1956,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/gateway/pacfiles">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">create</a>({ ...params }) -> PacfileCreateResponse</code>
 - <code title="put /accounts/{account_id}/gateway/pacfiles/{pacfile_id}">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">update</a>(pacfileID, { ...params }) -> PacfileUpdateResponse</code>
-- <code title="get /accounts/{account_id}/gateway/pacfiles">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">list</a>({ ...params }) -> PacfileListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/gateway/pacfiles">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">list</a>({ ...params }) -> PacfileListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/gateway/pacfiles/{pacfile_id}">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">delete</a>(pacfileID, { ...params }) -> PacfileDeleteResponse</code>
 - <code title="get /accounts/{account_id}/gateway/pacfiles/{pacfile_id}">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">get</a>(pacfileID, { ...params }) -> PacfileGetResponse</code>
 
@@ -2104,12 +2121,18 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/resource-library/applications.ts">ApplicationCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/resource-library/applications.ts">ApplicationUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/resource-library/applications.ts">ApplicationListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/resource-library/applications.ts">ApplicationDeleteResponse</a></code>
 - <code><a href="./src/resources/zero-trust/resource-library/applications.ts">ApplicationGetResponse</a></code>
 
 Methods:
 
+- <code title="post /accounts/{account_id}/resource-library/applications">client.zeroTrust.resourceLibrary.applications.<a href="./src/resources/zero-trust/resource-library/applications.ts">create</a>({ ...params }) -> ApplicationCreateResponse</code>
+- <code title="patch /accounts/{account_id}/resource-library/applications/{id}">client.zeroTrust.resourceLibrary.applications.<a href="./src/resources/zero-trust/resource-library/applications.ts">update</a>(id, { ...params }) -> ApplicationUpdateResponse</code>
 - <code title="get /accounts/{account_id}/resource-library/applications">client.zeroTrust.resourceLibrary.applications.<a href="./src/resources/zero-trust/resource-library/applications.ts">list</a>({ ...params }) -> ApplicationListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/resource-library/applications/{id}">client.zeroTrust.resourceLibrary.applications.<a href="./src/resources/zero-trust/resource-library/applications.ts">delete</a>(id, { ...params }) -> ApplicationDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/resource-library/applications/{id}">client.zeroTrust.resourceLibrary.applications.<a href="./src/resources/zero-trust/resource-library/applications.ts">get</a>(id, { ...params }) -> ApplicationGetResponse</code>
 
 ### Categories

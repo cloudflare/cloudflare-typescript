@@ -12,36 +12,6 @@ export class BaseLivestreams extends APIResource {
   ] as const);
 
   /**
-   * Creates a livestream for the given App ID and returns ingest server, stream key,
-   * and playback URL. You can pass custom input to the ingest server and stream key,
-   * and freely distribute the content using the playback URL on any player that
-   * supports HLS/LHLS.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.realtimeKit.livestreams.createIndependentLivestream(
-   *     'app_id',
-   *     {
-   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       name: 'prdmmp-xhycsl',
-   *     },
-   *   );
-   * ```
-   */
-  createIndependentLivestream(
-    appID: string,
-    params: LivestreamCreateIndependentLivestreamParams,
-    options?: RequestOptions,
-  ): APIPromise<LivestreamCreateIndependentLivestreamResponse> {
-    const { account_id, ...body } = params;
-    return this._client.post(path`/accounts/${account_id}/realtime/kit/${appID}/livestreams`, {
-      body,
-      ...options,
-    });
-  }
-
-  /**
    * Returns details of all active livestreams for the given livestream ID. Retreive
    * the livestream ID using the `Start livestreaming a meeting` API.
    *
@@ -52,7 +22,7 @@ export class BaseLivestreams extends APIResource {
    *     'livestream_id',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -79,7 +49,7 @@ export class BaseLivestreams extends APIResource {
    * ```ts
    * const response =
    *   await client.realtimeKit.livestreams.getAllLivestreams(
-   *     'app_id',
+   *     '14a396e7-ca44-4937-bf1f-050a69118543',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -103,7 +73,7 @@ export class BaseLivestreams extends APIResource {
    * ```ts
    * const response =
    *   await client.realtimeKit.livestreams.getLivestreamAnalyticsComplete(
-   *     'app_id',
+   *     '14a396e7-ca44-4937-bf1f-050a69118543',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -127,7 +97,7 @@ export class BaseLivestreams extends APIResource {
    * ```ts
    * const response =
    *   await client.realtimeKit.livestreams.getLivestreamAnalyticsDaywise(
-   *     'app_id',
+   *     '14a396e7-ca44-4937-bf1f-050a69118543',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -156,7 +126,7 @@ export class BaseLivestreams extends APIResource {
    *     'livestream-session-id',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -184,7 +154,7 @@ export class BaseLivestreams extends APIResource {
    *     'livestream_id',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -211,7 +181,7 @@ export class BaseLivestreams extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -237,7 +207,7 @@ export class BaseLivestreams extends APIResource {
    * ```ts
    * const response =
    *   await client.realtimeKit.livestreams.getOrgAnalytics(
-   *     'app_id',
+   *     '14a396e7-ca44-4937-bf1f-050a69118543',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -265,7 +235,7 @@ export class BaseLivestreams extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *       name: 'prdmmp-xhycsl',
    *     },
    *   );
@@ -294,7 +264,7 @@ export class BaseLivestreams extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -312,47 +282,6 @@ export class BaseLivestreams extends APIResource {
   }
 }
 export class Livestreams extends BaseLivestreams {}
-
-export interface LivestreamCreateIndependentLivestreamResponse {
-  data?: LivestreamCreateIndependentLivestreamResponse.Data;
-
-  success?: boolean;
-}
-
-export namespace LivestreamCreateIndependentLivestreamResponse {
-  export interface Data {
-    /**
-     * The livestream ID.
-     */
-    id?: string;
-
-    /**
-     * Specifies if the livestream was disabled.
-     */
-    disabled?: boolean;
-
-    /**
-     * The server URL to which the RTMP encoder should send the video and audio data.
-     */
-    ingest_server?: string;
-
-    meeting_id?: string | null;
-
-    name?: string;
-
-    /**
-     * The web address that viewers can use to watch the livestream.
-     */
-    playback_url?: string;
-
-    status?: 'LIVE' | 'IDLE' | 'ERRORED' | 'INVOKED';
-
-    /**
-     * Unique key for accessing each livestream.
-     */
-    stream_key?: string;
-  }
-}
 
 export interface LivestreamGetActiveLivestreamsForLivestreamIDResponse {
   data?: LivestreamGetActiveLivestreamsForLivestreamIDResponse.Data;
@@ -948,18 +877,6 @@ export namespace LivestreamStopLivestreamingAMeetingResponse {
   }
 }
 
-export interface LivestreamCreateIndependentLivestreamParams {
-  /**
-   * Path param: The account identifier tag.
-   */
-  account_id: string;
-
-  /**
-   * Body param: Name of the livestream
-   */
-  name?: string | null;
-}
-
 export interface LivestreamGetActiveLivestreamsForLivestreamIDParams {
   /**
    * The account identifier tag.
@@ -1178,7 +1095,6 @@ export interface LivestreamStopLivestreamingAMeetingParams {
 
 export declare namespace Livestreams {
   export {
-    type LivestreamCreateIndependentLivestreamResponse as LivestreamCreateIndependentLivestreamResponse,
     type LivestreamGetActiveLivestreamsForLivestreamIDResponse as LivestreamGetActiveLivestreamsForLivestreamIDResponse,
     type LivestreamGetAllLivestreamsResponse as LivestreamGetAllLivestreamsResponse,
     type LivestreamGetLivestreamAnalyticsCompleteResponse as LivestreamGetLivestreamAnalyticsCompleteResponse,
@@ -1189,7 +1105,6 @@ export declare namespace Livestreams {
     type LivestreamGetOrgAnalyticsResponse as LivestreamGetOrgAnalyticsResponse,
     type LivestreamStartLivestreamingAMeetingResponse as LivestreamStartLivestreamingAMeetingResponse,
     type LivestreamStopLivestreamingAMeetingResponse as LivestreamStopLivestreamingAMeetingResponse,
-    type LivestreamCreateIndependentLivestreamParams as LivestreamCreateIndependentLivestreamParams,
     type LivestreamGetActiveLivestreamsForLivestreamIDParams as LivestreamGetActiveLivestreamsForLivestreamIDParams,
     type LivestreamGetAllLivestreamsParams as LivestreamGetAllLivestreamsParams,
     type LivestreamGetLivestreamAnalyticsCompleteParams as LivestreamGetLivestreamAnalyticsCompleteParams,

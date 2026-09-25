@@ -49,6 +49,7 @@ const runTests = (
     const response = await client.browserRendering.devtools.browser.page.get('target_id', {
       account_id: 'account_id',
       session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'cf-brapi-guardrails': 'eyJtb2RlIjoicmVhZG9ubHkifQ',
     });
   });
 };

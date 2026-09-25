@@ -49,7 +49,9 @@ export class BaseSinkholes extends APIResource {
   }
 
   /**
-   * Update the name or R2 configuration of the specified sinkhole.
+   * Replaces the name or R2 configuration of the specified sinkhole. This is a full
+   * replacement. All fields, including r2_secret, must be re-supplied. Omitting
+   * r2_secret overwrites the stored value with an empty string.
    *
    * @example
    * ```ts
@@ -193,7 +195,7 @@ export type SinkholeDeleteResponse = unknown;
 
 export interface SinkholeCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: The unique identifier for the Cloudflare account.
    */
   account_id: string;
 
@@ -223,7 +225,7 @@ export interface SinkholeCreateParams {
 
 export interface SinkholeUpdateParams {
   /**
-   * Path param: Identifier.
+   * Path param: The unique identifier for the Cloudflare account.
    */
   account_id: string;
 
@@ -253,21 +255,21 @@ export interface SinkholeUpdateParams {
 
 export interface SinkholeListParams {
   /**
-   * Identifier.
+   * The unique identifier for the Cloudflare account.
    */
   account_id: string;
 }
 
 export interface SinkholeDeleteParams {
   /**
-   * Identifier.
+   * The unique identifier for the Cloudflare account.
    */
   account_id: string;
 }
 
 export interface SinkholeGetParams {
   /**
-   * Identifier.
+   * The unique identifier for the Cloudflare account.
    */
   account_id: string;
 }

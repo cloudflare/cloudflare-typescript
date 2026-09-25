@@ -75,6 +75,11 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { organizations: BaseOr
         touch_policy: 'always',
       },
       mfa_required_for_all_apps: false,
+      service_token_inactivity: {
+        action: 'disable',
+        enabled: true,
+        inactivity_threshold_days: 30,
+      },
       session_duration: '24h',
       ui_read_only_toggle_reason: 'Temporarily turn off the UI read only lock to make a change via the UI',
       user_seat_expiration_inactive_time: '730h',

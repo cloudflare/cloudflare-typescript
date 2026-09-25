@@ -18,6 +18,14 @@ import {
   CustomNameserverUpdateResponsesSinglePage,
   CustomNameservers,
 } from './custom-nameservers';
+import * as EntitlementsAPI from './entitlements';
+import {
+  BaseEntitlements,
+  EntitlementListParams,
+  EntitlementListResponse,
+  EntitlementListResponsesSinglePage,
+  Entitlements,
+} from './entitlements';
 import * as EnvironmentsAPI from './environments';
 import {
   BaseEnvironments,
@@ -45,6 +53,8 @@ import {
   Holds,
   ZoneHold,
 } from './holds';
+import * as NELAPI from './nel';
+import { BaseNEL, NEL as NELResource, NELEditParams, NELGetParams, Setting } from './nel';
 import * as PlansAPI from './plans';
 import {
   AvailableRatePlan,
@@ -65,7 +75,6 @@ import {
 import * as SettingsAPI from './settings';
 import {
   AdvancedDDoS,
-  Aegis,
   AlwaysOnline,
   AlwaysUseHTTPS,
   AutomaticHTTPSRewrites,
@@ -90,7 +99,7 @@ import {
   ImageResizing,
   MinTLSVersion,
   Mirage,
-  NEL,
+  NEL as SettingsAPINEL,
   OpportunisticEncryption,
   OpportunisticOnion,
   OrangeToOrange,
@@ -149,6 +158,8 @@ import {
 } from './transformations-c2pa';
 import * as CTAPI from './ct/ct';
 import { BaseCT, CT } from './ct/ct';
+import * as ObservabilityAPI from './observability/observability';
+import { BaseObservability, Observability } from './observability/observability';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -254,11 +265,13 @@ export class BaseZones extends APIResource {
 }
 export class Zones extends BaseZones {
   activationCheck: ActivationCheckAPI.ActivationCheck = new ActivationCheckAPI.ActivationCheck(this._client);
+  observability: ObservabilityAPI.Observability = new ObservabilityAPI.Observability(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   transformationsAllowedOrigins: TransformationsAllowedOriginsAPI.TransformationsAllowedOrigins =
     new TransformationsAllowedOriginsAPI.TransformationsAllowedOrigins(this._client);
   transformationsC2pa: TransformationsC2paAPI.TransformationsC2paResource =
     new TransformationsC2paAPI.TransformationsC2paResource(this._client);
+  nel: NELAPI.NEL = new NELAPI.NEL(this._client);
   environments: EnvironmentsAPI.Environments = new EnvironmentsAPI.Environments(this._client);
   customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(
     this._client,
@@ -267,6 +280,7 @@ export class Zones extends BaseZones {
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
   plans: PlansAPI.Plans = new PlansAPI.Plans(this._client);
   ratePlans: RatePlansAPI.RatePlans = new RatePlansAPI.RatePlans(this._client);
+  entitlements: EntitlementsAPI.Entitlements = new EntitlementsAPI.Entitlements(this._client);
   ct: CTAPI.CT = new CTAPI.CT(this._client);
 }
 
@@ -720,11 +734,15 @@ export interface ZoneGetParams {
 
 Zones.ActivationCheck = ActivationCheck;
 Zones.BaseActivationCheck = BaseActivationCheck;
+Zones.Observability = Observability;
+Zones.BaseObservability = BaseObservability;
 Zones.Settings = Settings;
 Zones.BaseSettings = BaseSettings;
 Zones.BaseTransformationsAllowedOrigins = BaseTransformationsAllowedOrigins;
 Zones.TransformationsC2paResource = TransformationsC2paResource;
 Zones.BaseTransformationsC2paResource = BaseTransformationsC2paResource;
+Zones.NELResource = NELResource;
+Zones.BaseNEL = BaseNEL;
 Zones.Environments = Environments;
 Zones.BaseEnvironments = BaseEnvironments;
 Zones.CustomNameservers = CustomNameservers;
@@ -737,6 +755,8 @@ Zones.Plans = Plans;
 Zones.BasePlans = BasePlans;
 Zones.RatePlans = RatePlans;
 Zones.BaseRatePlans = BaseRatePlans;
+Zones.Entitlements = Entitlements;
+Zones.BaseEntitlements = BaseEntitlements;
 Zones.CT = CT;
 Zones.BaseCT = BaseCT;
 
@@ -760,11 +780,12 @@ export declare namespace Zones {
     type ActivationCheckTriggerParams as ActivationCheckTriggerParams,
   };
 
+  export { Observability as Observability, BaseObservability as BaseObservability };
+
   export {
     Settings as Settings,
     BaseSettings as BaseSettings,
     type AdvancedDDoS as AdvancedDDoS,
-    type Aegis as Aegis,
     type AlwaysOnline as AlwaysOnline,
     type AlwaysUseHTTPS as AlwaysUseHTTPS,
     type AutomaticHTTPSRewrites as AutomaticHTTPSRewrites,
@@ -788,7 +809,7 @@ export declare namespace Zones {
     type IPV6 as IPV6,
     type MinTLSVersion as MinTLSVersion,
     type Mirage as Mirage,
-    type NEL as NEL,
+    type SettingsAPINEL as NEL,
     type OpportunisticEncryption as OpportunisticEncryption,
     type OpportunisticOnion as OpportunisticOnion,
     type OrangeToOrange as OrangeToOrange,
@@ -832,6 +853,14 @@ export declare namespace Zones {
     type TransformationsC2pa as TransformationsC2pa,
     type TransformationsC2paEditParams as TransformationsC2paEditParams,
     type TransformationsC2paGetParams as TransformationsC2paGetParams,
+  };
+
+  export {
+    NELResource as NELResource,
+    BaseNEL as BaseNEL,
+    type Setting as Setting,
+    type NELEditParams as NELEditParams,
+    type NELGetParams as NELGetParams,
   };
 
   export {
@@ -897,6 +926,14 @@ export declare namespace Zones {
     type RatePlanGetResponse as RatePlanGetResponse,
     type RatePlanGetResponsesSinglePage as RatePlanGetResponsesSinglePage,
     type RatePlanGetParams as RatePlanGetParams,
+  };
+
+  export {
+    Entitlements as Entitlements,
+    BaseEntitlements as BaseEntitlements,
+    type EntitlementListResponse as EntitlementListResponse,
+    type EntitlementListResponsesSinglePage as EntitlementListResponsesSinglePage,
+    type EntitlementListParams as EntitlementListParams,
   };
 
   export { CT as CT, BaseCT as BaseCT };

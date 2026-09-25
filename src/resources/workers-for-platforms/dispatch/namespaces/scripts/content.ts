@@ -20,7 +20,8 @@ export class BaseContent extends APIResource {
   ] = Object.freeze(['workersForPlatforms', 'dispatch', 'namespaces', 'scripts', 'content'] as const);
 
   /**
-   * Put script content for a script uploaded to a Workers for Platforms namespace.
+   * Replace content for a script uploaded to a Workers for Platforms dispatch
+   * namespace.
    *
    * @example
    * ```ts
@@ -71,7 +72,7 @@ export class BaseContent extends APIResource {
   }
 
   /**
-   * Fetch script content from a script uploaded to a Workers for Platforms
+   * Fetch content from a script uploaded to a Workers for Platforms dispatch
    * namespace.
    *
    * @example

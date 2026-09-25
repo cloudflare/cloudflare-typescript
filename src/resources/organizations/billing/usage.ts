@@ -27,6 +27,9 @@ export class BaseUsage extends APIResource {
    *
    * When `from` and `to` are omitted, defaults to the start of the current month
    * through today. The maximum date range is 31 days.
+   *
+   * An organization with no accounts, or an organization ID that does not exist,
+   * returns a successful response with an empty result set rather than an error.
    */
   get(
     organizationID: string,
@@ -54,16 +57,6 @@ export namespace UsageGetResponse {
    * period, aligned with the FinOps FOCUS v1.3 specification.
    */
   export interface UsageGetResponseItem {
-    /**
-     * Public identifier of the Cloudflare account (account tag).
-     */
-    BillingAccountId: string;
-
-    /**
-     * Display name of the Cloudflare account.
-     */
-    BillingAccountName: string;
-
     /**
      * Highest-level classification of a charge based on the nature of how it gets
      * billed. Currently only "Usage" is supported.
@@ -124,17 +117,23 @@ export namespace UsageGetResponse {
     x_BillableMetricId: string;
 
     /**
-     * The display name of the billable metric. Cloudflare extension; replaces FOCUS
-     * SkuMeter.
-     */
-    x_BillableMetricName: string;
-
-    /**
      * A charge serving as the basis for invoicing, inclusive of all reduced rates and
      * discounts while excluding the amortization of upfront charges (one-time or
      * recurring).
      */
     BilledCost?: number | null;
+
+    /**
+     * Public identifier of the Cloudflare account (account tag). Omitted when account
+     * is not part of the requested grouping.
+     */
+    BillingAccountId?: string;
+
+    /**
+     * Display name of the Cloudflare account. Omitted when account is not part of the
+     * requested grouping.
+     */
+    BillingAccountName?: string;
 
     /**
      * Currency that a charge was billed in (ISO 4217).
@@ -223,6 +222,19 @@ export namespace UsageGetResponse {
      * subscription or contract display name.
      */
     SubAccountName?: string;
+
+    /**
+     * Tag values for the requested `GroupBy` keys. Omitted when `GroupBy` is not
+     * provided. Missing keys are omitted, and key-only tags are returned as boolean
+     * `true`. All other tag values are strings.
+     */
+    Tags?: { [key: string]: string | true };
+
+    /**
+     * The display name of the billable metric. Cloudflare extension; replaces FOCUS
+     * SkuMeter.
+     */
+    x_BillableMetricName?: string;
 
     /**
      * The product category the charge belongs to (e.g., "Developer", "Cloudflare

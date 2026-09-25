@@ -38,8 +38,8 @@ export class BaseUserSchemas extends APIResource {
   ] as const);
 
   /**
-   * Uploads a new OpenAPI schema for API Shield schema validation. The schema
-   * defines expected request/response formats for API endpoints.
+   * Uploads an OpenAPI schema that defines expected request formats for API
+   * endpoints. Deprecated; use `/zones/{zone_id}/schema_validation/schemas` instead.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
@@ -55,7 +55,8 @@ export class BaseUserSchemas extends APIResource {
 
   /**
    * Lists all OpenAPI schemas uploaded to API Shield for the zone, including their
-   * validation status and associated operations.
+   * validation status and associated operations. Deprecated; use
+   * `/zones/{zone_id}/schema_validation/schemas` instead.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
@@ -74,6 +75,8 @@ export class BaseUserSchemas extends APIResource {
   /**
    * Permanently removes an uploaded OpenAPI schema from API Shield schema
    * validation. Operations using this schema will lose their validation rules.
+   * Deprecated; use `/zones/{zone_id}/schema_validation/schemas/{schema_id}`
+   * instead.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
@@ -88,7 +91,8 @@ export class BaseUserSchemas extends APIResource {
 
   /**
    * Activates schema validation for an uploaded OpenAPI schema. Requests to matching
-   * endpoints will be validated against the schema definitions.
+   * endpoints will be validated against the schema definitions. Deprecated; use
+   * `/zones/{zone_id}/schema_validation/schemas/{schema_id}` instead.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
@@ -108,7 +112,8 @@ export class BaseUserSchemas extends APIResource {
 
   /**
    * Gets detailed information about a specific uploaded OpenAPI schema, including
-   * its contents and validation configuration.
+   * its contents and validation configuration. Deprecated; use
+   * `/zones/{zone_id}/schema_validation/schemas/{schema_id}` instead.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */

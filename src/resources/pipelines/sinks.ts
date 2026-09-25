@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as PipelinesAPI from './pipelines';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -71,12 +72,11 @@ export class BaseSinks extends APIResource {
    * ```
    */
   delete(sinkID: string, params: SinkDeleteParams, options?: RequestOptions): APIPromise<SinkDeleteResponse> {
-    const { account_id, force } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(path`/accounts/${account_id}/pipelines/v1/sinks/${sinkID}`, {
-        query: { force },
-        ...options,
-      }) as APIPromise<{ result: SinkDeleteResponse }>
+      this._client.delete(path`/accounts/${account_id}/pipelines/v1/sinks/${sinkID}`, options) as APIPromise<{
+        result: SinkDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -131,8 +131,16 @@ export interface SinkCreateResponse {
     | SinkCreateResponse.CloudflarePipelinesR2Table
     | SinkCreateResponse.CloudflarePipelinesR2DataCatalogTable;
 
-  format?: SinkCreateResponse.Json | SinkCreateResponse.Parquet;
+  /**
+   * Defines the output data format of a sink.
+   */
+  format?:
+    | SinkCreateResponse.CloudflarePipelinesSinkJsonFormat
+    | SinkCreateResponse.CloudflarePipelinesSinkParquetFormat;
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   schema?: SinkCreateResponse.Schema;
 }
 
@@ -297,8 +305,13 @@ export namespace SinkCreateResponse {
     }
   }
 
-  export interface Json {
+  export interface CloudflarePipelinesSinkJsonFormat {
     type: 'json';
+
+    /**
+     * Specifies the compression applied to JSON sink output.
+     */
+    compression?: 'uncompressed' | 'gzip';
 
     decimal_encoding?: 'number' | 'string' | 'bytes';
 
@@ -307,7 +320,7 @@ export namespace SinkCreateResponse {
     unstructured?: boolean;
   }
 
-  export interface Parquet {
+  export interface CloudflarePipelinesSinkParquetFormat {
     type: 'parquet';
 
     compression?: 'uncompressed' | 'snappy' | 'gzip' | 'zstd' | 'lz4';
@@ -315,158 +328,13 @@ export namespace SinkCreateResponse {
     row_group_bytes?: number | null;
   }
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   export interface Schema {
-    fields?: Array<
-      | Schema.Int32
-      | Schema.Int64
-      | Schema.Float32
-      | Schema.Float64
-      | Schema.Bool
-      | Schema.String
-      | Schema.Binary
-      | Schema.Timestamp
-      | Schema.Json
-      | Schema.Struct
-      | Schema.List
-    >;
-
-    format?: Schema.Json | Schema.Parquet;
+    fields?: Array<PipelinesAPI.SourceField>;
 
     inferred?: boolean | null;
-  }
-
-  export namespace Schema {
-    export interface Int32 {
-      type: 'int32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Int64 {
-      type: 'int64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float32 {
-      type: 'float32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float64 {
-      type: 'float64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Bool {
-      type: 'bool';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface String {
-      type: 'string';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Binary {
-      type: 'binary';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Timestamp {
-      type: 'timestamp';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-
-      unit?: 'second' | 'millisecond' | 'microsecond' | 'nanosecond';
-    }
-
-    export interface Json {
-      type: 'json';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Struct {}
-
-    export interface List {}
-
-    export interface Json {
-      type: 'json';
-
-      decimal_encoding?: 'number' | 'string' | 'bytes';
-
-      timestamp_format?: 'rfc3339' | 'unix_millis';
-
-      unstructured?: boolean;
-    }
-
-    export interface Parquet {
-      type: 'parquet';
-
-      compression?: 'uncompressed' | 'snappy' | 'gzip' | 'zstd' | 'lz4';
-
-      row_group_bytes?: number | null;
-    }
   }
 }
 
@@ -497,8 +365,16 @@ export interface SinkListResponse {
     | SinkListResponse.CloudflarePipelinesR2TablePublic
     | SinkListResponse.CloudflarePipelinesR2DataCatalogTablePublic;
 
-  format?: SinkListResponse.Json | SinkListResponse.Parquet;
+  /**
+   * Defines the output data format of a sink.
+   */
+  format?:
+    | SinkListResponse.CloudflarePipelinesSinkJsonFormat
+    | SinkListResponse.CloudflarePipelinesSinkParquetFormat;
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   schema?: SinkListResponse.Schema;
 }
 
@@ -647,8 +523,13 @@ export namespace SinkListResponse {
     }
   }
 
-  export interface Json {
+  export interface CloudflarePipelinesSinkJsonFormat {
     type: 'json';
+
+    /**
+     * Specifies the compression applied to JSON sink output.
+     */
+    compression?: 'uncompressed' | 'gzip';
 
     decimal_encoding?: 'number' | 'string' | 'bytes';
 
@@ -657,7 +538,7 @@ export namespace SinkListResponse {
     unstructured?: boolean;
   }
 
-  export interface Parquet {
+  export interface CloudflarePipelinesSinkParquetFormat {
     type: 'parquet';
 
     compression?: 'uncompressed' | 'snappy' | 'gzip' | 'zstd' | 'lz4';
@@ -665,158 +546,13 @@ export namespace SinkListResponse {
     row_group_bytes?: number | null;
   }
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   export interface Schema {
-    fields?: Array<
-      | Schema.Int32
-      | Schema.Int64
-      | Schema.Float32
-      | Schema.Float64
-      | Schema.Bool
-      | Schema.String
-      | Schema.Binary
-      | Schema.Timestamp
-      | Schema.Json
-      | Schema.Struct
-      | Schema.List
-    >;
-
-    format?: Schema.Json | Schema.Parquet;
+    fields?: Array<PipelinesAPI.SourceField>;
 
     inferred?: boolean | null;
-  }
-
-  export namespace Schema {
-    export interface Int32 {
-      type: 'int32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Int64 {
-      type: 'int64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float32 {
-      type: 'float32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float64 {
-      type: 'float64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Bool {
-      type: 'bool';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface String {
-      type: 'string';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Binary {
-      type: 'binary';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Timestamp {
-      type: 'timestamp';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-
-      unit?: 'second' | 'millisecond' | 'microsecond' | 'nanosecond';
-    }
-
-    export interface Json {
-      type: 'json';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Struct {}
-
-    export interface List {}
-
-    export interface Json {
-      type: 'json';
-
-      decimal_encoding?: 'number' | 'string' | 'bytes';
-
-      timestamp_format?: 'rfc3339' | 'unix_millis';
-
-      unstructured?: boolean;
-    }
-
-    export interface Parquet {
-      type: 'parquet';
-
-      compression?: 'uncompressed' | 'snappy' | 'gzip' | 'zstd' | 'lz4';
-
-      row_group_bytes?: number | null;
-    }
   }
 }
 
@@ -849,8 +585,16 @@ export interface SinkGetResponse {
     | SinkGetResponse.CloudflarePipelinesR2TablePublic
     | SinkGetResponse.CloudflarePipelinesR2DataCatalogTablePublic;
 
-  format?: SinkGetResponse.Json | SinkGetResponse.Parquet;
+  /**
+   * Defines the output data format of a sink.
+   */
+  format?:
+    | SinkGetResponse.CloudflarePipelinesSinkJsonFormat
+    | SinkGetResponse.CloudflarePipelinesSinkParquetFormat;
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   schema?: SinkGetResponse.Schema;
 }
 
@@ -999,8 +743,13 @@ export namespace SinkGetResponse {
     }
   }
 
-  export interface Json {
+  export interface CloudflarePipelinesSinkJsonFormat {
     type: 'json';
+
+    /**
+     * Specifies the compression applied to JSON sink output.
+     */
+    compression?: 'uncompressed' | 'gzip';
 
     decimal_encoding?: 'number' | 'string' | 'bytes';
 
@@ -1009,7 +758,7 @@ export namespace SinkGetResponse {
     unstructured?: boolean;
   }
 
-  export interface Parquet {
+  export interface CloudflarePipelinesSinkParquetFormat {
     type: 'parquet';
 
     compression?: 'uncompressed' | 'snappy' | 'gzip' | 'zstd' | 'lz4';
@@ -1017,158 +766,13 @@ export namespace SinkGetResponse {
     row_group_bytes?: number | null;
   }
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   export interface Schema {
-    fields?: Array<
-      | Schema.Int32
-      | Schema.Int64
-      | Schema.Float32
-      | Schema.Float64
-      | Schema.Bool
-      | Schema.String
-      | Schema.Binary
-      | Schema.Timestamp
-      | Schema.Json
-      | Schema.Struct
-      | Schema.List
-    >;
-
-    format?: Schema.Json | Schema.Parquet;
+    fields?: Array<PipelinesAPI.SourceField>;
 
     inferred?: boolean | null;
-  }
-
-  export namespace Schema {
-    export interface Int32 {
-      type: 'int32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Int64 {
-      type: 'int64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float32 {
-      type: 'float32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float64 {
-      type: 'float64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Bool {
-      type: 'bool';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface String {
-      type: 'string';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Binary {
-      type: 'binary';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Timestamp {
-      type: 'timestamp';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-
-      unit?: 'second' | 'millisecond' | 'microsecond' | 'nanosecond';
-    }
-
-    export interface Json {
-      type: 'json';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Struct {}
-
-    export interface List {}
-
-    export interface Json {
-      type: 'json';
-
-      decimal_encoding?: 'number' | 'string' | 'bytes';
-
-      timestamp_format?: 'rfc3339' | 'unix_millis';
-
-      unstructured?: boolean;
-    }
-
-    export interface Parquet {
-      type: 'parquet';
-
-      compression?: 'uncompressed' | 'snappy' | 'gzip' | 'zstd' | 'lz4';
-
-      row_group_bytes?: number | null;
-    }
   }
 }
 
@@ -1196,12 +800,14 @@ export interface SinkCreateParams {
     | SinkCreateParams.CloudflarePipelinesR2DataCatalogTable;
 
   /**
-   * Body param
+   * Body param: Defines the output data format of a sink.
    */
-  format?: SinkCreateParams.Json | SinkCreateParams.Parquet;
+  format?:
+    | SinkCreateParams.CloudflarePipelinesSinkJsonFormat
+    | SinkCreateParams.CloudflarePipelinesSinkParquetFormat;
 
   /**
-   * Body param
+   * Body param: Defines the schema of the events in the data stream.
    */
   schema?: SinkCreateParams.Schema;
 }
@@ -1367,8 +973,13 @@ export namespace SinkCreateParams {
     }
   }
 
-  export interface Json {
+  export interface CloudflarePipelinesSinkJsonFormat {
     type: 'json';
+
+    /**
+     * Specifies the compression applied to JSON sink output.
+     */
+    compression?: 'uncompressed' | 'gzip';
 
     decimal_encoding?: 'number' | 'string' | 'bytes';
 
@@ -1377,7 +988,7 @@ export namespace SinkCreateParams {
     unstructured?: boolean;
   }
 
-  export interface Parquet {
+  export interface CloudflarePipelinesSinkParquetFormat {
     type: 'parquet';
 
     compression?: 'uncompressed' | 'snappy' | 'gzip' | 'zstd' | 'lz4';
@@ -1385,158 +996,13 @@ export namespace SinkCreateParams {
     row_group_bytes?: number | null;
   }
 
+  /**
+   * Defines the schema of the events in the data stream.
+   */
   export interface Schema {
-    fields?: Array<
-      | Schema.Int32
-      | Schema.Int64
-      | Schema.Float32
-      | Schema.Float64
-      | Schema.Bool
-      | Schema.String
-      | Schema.Binary
-      | Schema.Timestamp
-      | Schema.Json
-      | Schema.Struct
-      | Schema.List
-    >;
-
-    format?: Schema.Json | Schema.Parquet;
+    fields?: Array<PipelinesAPI.SourceFieldParam>;
 
     inferred?: boolean | null;
-  }
-
-  export namespace Schema {
-    export interface Int32 {
-      type: 'int32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Int64 {
-      type: 'int64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float32 {
-      type: 'float32';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Float64 {
-      type: 'float64';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Bool {
-      type: 'bool';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface String {
-      type: 'string';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Binary {
-      type: 'binary';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Timestamp {
-      type: 'timestamp';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-
-      unit?: 'second' | 'millisecond' | 'microsecond' | 'nanosecond';
-    }
-
-    export interface Json {
-      type: 'json';
-
-      metadata_key?: string | null;
-
-      name?: string;
-
-      required?: boolean;
-
-      sql_name?: string;
-    }
-
-    export interface Struct {}
-
-    export interface List {}
-
-    export interface Json {
-      type: 'json';
-
-      decimal_encoding?: 'number' | 'string' | 'bytes';
-
-      timestamp_format?: 'rfc3339' | 'unix_millis';
-
-      unstructured?: boolean;
-    }
-
-    export interface Parquet {
-      type: 'parquet';
-
-      compression?: 'uncompressed' | 'snappy' | 'gzip' | 'zstd' | 'lz4';
-
-      row_group_bytes?: number | null;
-    }
   }
 }
 
@@ -1559,15 +1025,9 @@ export interface SinkListParams extends V4PagePaginationArrayParams {
 
 export interface SinkDeleteParams {
   /**
-   * Path param: Specifies the public ID of the account.
+   * Specifies the public ID of the account.
    */
   account_id: string;
-
-  /**
-   * Query param: Deprecated: Delete sink forcefully, including deleting any
-   * dependent pipelines.
-   */
-  force?: string;
 }
 
 export interface SinkGetParams {

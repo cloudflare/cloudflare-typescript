@@ -12,7 +12,10 @@ export class BasePayloads extends APIResource {
   ] as const);
 
   /**
-   * Add custom scan expressions for Content Scanning.
+   * Create one or more Content Scanning custom expressions, appending them to the
+   * existing list of the zone, and return the updated list. Each expression reaches
+   * content objects the scanner cannot find automatically, for example
+   * `lookup_json_string(http.request.body.raw, "file")`.
    *
    * @example
    * ```ts
@@ -45,7 +48,42 @@ export class BasePayloads extends APIResource {
   }
 
   /**
-   * Get a list of existing custom scan expressions for Content Scanning.
+   * Update the Content Scanning custom expression with the given identifier and
+   * return the updated list of expressions.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const payloadUpdateResponse of client.contentScanning.payloads.update(
+   *   'a350a054caa840c9becd89c3b4f0195b',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     payload:
+   *       'lookup_json_string(http.request.body.raw, "file")',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  update(
+    expressionID: string,
+    params: PayloadUpdateParams,
+    options?: RequestOptions,
+  ): PagePromise<PayloadUpdateResponsesSinglePage, PayloadUpdateResponse> {
+    const { zone_id, ...body } = params;
+    return this._client.getAPIList(
+      path`/zones/${zone_id}/content-upload-scan/payloads/${expressionID}`,
+      SinglePage<PayloadUpdateResponse>,
+      { body, method: 'patch', ...options },
+    );
+  }
+
+  /**
+   * List the Content Scanning custom expressions configured for the zone, each with
+   * its own identifier. A custom expression tells the scanner how to reach content
+   * objects in a request it cannot parse on its own, such as files Base64-encoded
+   * inside a JSON body.
    *
    * @example
    * ```ts
@@ -70,7 +108,9 @@ export class BasePayloads extends APIResource {
   }
 
   /**
-   * Delete a Content Scan Custom Expression.
+   * Delete the Content Scanning custom expression with the given identifier and
+   * return the expressions that remain. Content objects reached only by the deleted
+   * expression are no longer scanned.
    *
    * @example
    * ```ts
@@ -100,51 +140,72 @@ export class Payloads extends BasePayloads {}
 
 export type PayloadCreateResponsesSinglePage = SinglePage<PayloadCreateResponse>;
 
+export type PayloadUpdateResponsesSinglePage = SinglePage<PayloadUpdateResponse>;
+
 export type PayloadListResponsesSinglePage = SinglePage<PayloadListResponse>;
 
 export type PayloadDeleteResponsesSinglePage = SinglePage<PayloadDeleteResponse>;
 
 /**
- * Defines a custom scan expression to match Content Scanning on.
+ * Defines a Content Scanning custom expression.
  */
 export interface PayloadCreateResponse {
   /**
-   * defines the unique ID for this custom scan expression.
+   * Defines the unique ID for this Content Scanning custom expression.
    */
   id?: string;
 
   /**
-   * Defines the ruleset expression to use in matching content objects.
+   * Defines the custom content extraction expression used to reach content objects
+   * in the request.
    */
   payload?: string;
 }
 
 /**
- * Defines a custom scan expression to match Content Scanning on.
+ * Defines a Content Scanning custom expression.
+ */
+export interface PayloadUpdateResponse {
+  /**
+   * Defines the unique ID for this Content Scanning custom expression.
+   */
+  id?: string;
+
+  /**
+   * Defines the custom content extraction expression used to reach content objects
+   * in the request.
+   */
+  payload?: string;
+}
+
+/**
+ * Defines a Content Scanning custom expression.
  */
 export interface PayloadListResponse {
   /**
-   * defines the unique ID for this custom scan expression.
+   * Defines the unique ID for this Content Scanning custom expression.
    */
   id?: string;
 
   /**
-   * Defines the ruleset expression to use in matching content objects.
+   * Defines the custom content extraction expression used to reach content objects
+   * in the request.
    */
   payload?: string;
 }
 
 /**
- * Defines a custom scan expression to match Content Scanning on.
+ * Defines a Content Scanning custom expression.
  */
 export interface PayloadDeleteResponse {
   /**
-   * defines the unique ID for this custom scan expression.
+   * Defines the unique ID for this Content Scanning custom expression.
    */
   id?: string;
 
   /**
-   * Defines the ruleset expression to use in matching content objects.
+   * Defines the custom content extraction expression used to reach content objects
+   * in the request.
    */
   payload?: string;
 }
@@ -164,10 +225,24 @@ export interface PayloadCreateParams {
 export namespace PayloadCreateParams {
   export interface Body {
     /**
-     * Defines the ruleset expression to use in matching content objects.
+     * Defines the custom content extraction expression used to reach content objects
+     * in the request.
      */
     payload: string;
   }
+}
+
+export interface PayloadUpdateParams {
+  /**
+   * Path param: Defines an identifier.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Defines the custom content extraction expression used to reach
+   * content objects in the request.
+   */
+  payload: string;
 }
 
 export interface PayloadListParams {
@@ -187,12 +262,15 @@ export interface PayloadDeleteParams {
 export declare namespace Payloads {
   export {
     type PayloadCreateResponse as PayloadCreateResponse,
+    type PayloadUpdateResponse as PayloadUpdateResponse,
     type PayloadListResponse as PayloadListResponse,
     type PayloadDeleteResponse as PayloadDeleteResponse,
     type PayloadCreateResponsesSinglePage as PayloadCreateResponsesSinglePage,
+    type PayloadUpdateResponsesSinglePage as PayloadUpdateResponsesSinglePage,
     type PayloadListResponsesSinglePage as PayloadListResponsesSinglePage,
     type PayloadDeleteResponsesSinglePage as PayloadDeleteResponsesSinglePage,
     type PayloadCreateParams as PayloadCreateParams,
+    type PayloadUpdateParams as PayloadUpdateParams,
     type PayloadListParams as PayloadListParams,
     type PayloadDeleteParams as PayloadDeleteParams,
   };

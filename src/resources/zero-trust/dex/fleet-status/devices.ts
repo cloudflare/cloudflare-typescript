@@ -564,7 +564,7 @@ export namespace DeviceListResponse {
 
 export interface DeviceListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 

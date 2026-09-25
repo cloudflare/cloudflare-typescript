@@ -82,7 +82,7 @@ export class RegistrationStatus extends BaseRegistrationStatus {}
 
 export interface RegistrationStatusGetParams {
   /**
-   * Identifier
+   * Cloudflare account ID. Required for all Registrar API operations.
    */
   account_id: string;
 }

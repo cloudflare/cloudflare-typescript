@@ -54,7 +54,7 @@ export interface QuotaGetResponse {
 
 export interface QuotaGetParams {
   /**
-   * Unique identifier linked to an account.
+   * Unique Cloudflare account ID.
    */
   account_id: string;
 }

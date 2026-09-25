@@ -6,7 +6,6 @@ export {
   BaseCacheReserveResource,
   type CacheReserve,
   type CacheReserveClear,
-  type State,
   type CacheReserveClearResponse,
   type CacheReserveEditResponse,
   type CacheReserveGetResponse,
@@ -19,10 +18,12 @@ export {
 export {
   OriginCloudRegions,
   BaseOriginCloudRegions,
-  type OriginCloudRegion,
+  type OriginCloudRegionUpdateResponse,
+  type OriginCloudRegionListResponse,
   type OriginCloudRegionDeleteResponse,
   type OriginCloudRegionBulkDeleteResponse,
   type OriginCloudRegionBulkUpdateResponse,
+  type OriginCloudRegionGetResponse,
   type OriginCloudRegionSupportedRegionsResponse,
   type OriginCloudRegionUpdateParams,
   type OriginCloudRegionListParams,
@@ -31,7 +32,7 @@ export {
   type OriginCloudRegionBulkUpdateParams,
   type OriginCloudRegionGetParams,
   type OriginCloudRegionSupportedRegionsParams,
-  type OriginCloudRegionsV4PagePaginationArray,
+  type OriginCloudRegionListResponsesV4PagePaginationArray,
 } from './origin-cloud-regions';
 export {
   RegionalTieredCacheResource,
@@ -57,7 +58,6 @@ export {
 export {
   Variants,
   BaseVariants,
-  type CacheVariant,
   type VariantDeleteResponse,
   type VariantEditResponse,
   type VariantGetResponse,

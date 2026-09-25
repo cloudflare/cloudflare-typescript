@@ -21,7 +21,7 @@ export class BaseSessions extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -48,7 +48,7 @@ export class BaseSessions extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -75,7 +75,7 @@ export class BaseSessions extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -102,7 +102,7 @@ export class BaseSessions extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -120,8 +120,8 @@ export class BaseSessions extends APIResource {
   }
 
   /**
-   * Returns details of the given participant ID along with call statistics for the
-   * given session ID.
+   * Returns details of the given participant ID for the given session ID. Use the
+   * peer report endpoint to retrieve call statistics.
    *
    * @example
    * ```ts
@@ -130,7 +130,7 @@ export class BaseSessions extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *       session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     },
    *   );
@@ -158,7 +158,7 @@ export class BaseSessions extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -186,7 +186,7 @@ export class BaseSessions extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -213,7 +213,7 @@ export class BaseSessions extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -236,9 +236,10 @@ export class BaseSessions extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.realtimeKit.sessions.getSessions('app_id', {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
+   *   await client.realtimeKit.sessions.getSessions(
+   *     '14a396e7-ca44-4937-bf1f-050a69118543',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
    * ```
    */
   getSessions(
@@ -2605,7 +2606,7 @@ export interface SessionGetSessionParticipantsParams {
   page_no?: number;
 
   /**
-   * Query param: Number of results per page
+   * Query param: Number of results per page.
    */
   per_page?: number;
 

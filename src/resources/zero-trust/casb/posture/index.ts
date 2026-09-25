@@ -46,6 +46,21 @@ export {
   type FindingUnignoreParams,
   type FindingListResponsesV4PagePaginationArray,
 } from './findings/index';
+export {
+  Policies,
+  BasePolicies,
+  type PolicyCreateResponse,
+  type PolicyUpdateResponse,
+  type PolicyListResponse,
+  type PolicyDeleteResponse,
+  type PolicyGetResponse,
+  type PolicyCreateParams,
+  type PolicyUpdateParams,
+  type PolicyListParams,
+  type PolicyDeleteParams,
+  type PolicyGetParams,
+  type PolicyListResponsesCursorPaginationAfter,
+} from './policies';
 export { Posture, BasePosture } from './posture';
 export { Remediations, BaseRemediations } from './remediations/index';
 export {

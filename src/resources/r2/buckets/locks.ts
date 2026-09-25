@@ -29,15 +29,15 @@ export class BaseLocks extends APIResource {
     params: LockUpdateParams,
     options?: RequestOptions,
   ): APIPromise<LockUpdateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/r2/buckets/${bucketName}/lock`, {
         body,
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -58,14 +58,14 @@ export class BaseLocks extends APIResource {
    * ```
    */
   get(bucketName: string, params: LockGetParams, options?: RequestOptions): APIPromise<LockGetResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucketName}/lock`, {
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -152,7 +152,7 @@ export interface LockUpdateParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export namespace LockUpdateParams {
@@ -220,7 +220,7 @@ export interface LockGetParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export declare namespace Locks {

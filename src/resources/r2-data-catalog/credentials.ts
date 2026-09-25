@@ -47,7 +47,7 @@ export type CredentialCreateResponse = unknown;
 
 export interface CredentialCreateParams {
   /**
-   * Path param: Use this to identify the account.
+   * Path param: Identifies the account.
    */
   account_id: string;
 

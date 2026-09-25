@@ -257,6 +257,13 @@ export interface OAuthClientCreateResponse {
   logo_uri?: string;
 
   /**
+   * Scopes that the authorizing user may decline during consent. Each value must
+   * also appear in `scopes`. The scopes `openid`, `offline`, and `offline_access`
+   * cannot be optional.
+   */
+  optional_scopes?: Array<string>;
+
+  /**
    * URL that points to a privacy policy document.
    */
   policy_uri?: string;
@@ -380,6 +387,13 @@ export interface OAuthClientUpdateResponse {
   logo_uri?: string;
 
   /**
+   * Scopes that the authorizing user may decline during consent. Each value must
+   * also appear in `scopes`. The scopes `openid`, `offline`, and `offline_access`
+   * cannot be optional.
+   */
+  optional_scopes?: Array<string>;
+
+  /**
    * URL that points to a privacy policy document.
    */
   policy_uri?: string;
@@ -501,6 +515,13 @@ export interface OAuthClientListResponse {
    * URL of the client's logo.
    */
   logo_uri?: string;
+
+  /**
+   * Scopes that the authorizing user may decline during consent. Each value must
+   * also appear in `scopes`. The scopes `openid`, `offline`, and `offline_access`
+   * cannot be optional.
+   */
+  optional_scopes?: Array<string>;
 
   /**
    * URL that points to a privacy policy document.
@@ -640,6 +661,13 @@ export interface OAuthClientGetResponse {
   logo_uri?: string;
 
   /**
+   * Scopes that the authorizing user may decline during consent. Each value must
+   * also appear in `scopes`. The scopes `openid`, `offline`, and `offline_access`
+   * cannot be optional.
+   */
+  optional_scopes?: Array<string>;
+
+  /**
    * URL that points to a privacy policy document.
    */
   policy_uri?: string;
@@ -771,6 +799,13 @@ export interface OAuthClientCreateParams {
   logo_uri?: string;
 
   /**
+   * Body param: Scopes that the authorizing user may decline during consent. Each
+   * value must also appear in `scopes`. The scopes `openid`, `offline`, and
+   * `offline_access` cannot be optional.
+   */
+  optional_scopes?: Array<string>;
+
+  /**
    * Body param: URL that points to a privacy policy document.
    */
   policy_uri?: string;
@@ -817,6 +852,13 @@ export interface OAuthClientUpdateParams {
    * Body param: URL of the client's logo.
    */
   logo_uri?: string;
+
+  /**
+   * Body param: Scopes that the authorizing user may decline during consent. Each
+   * value must also appear in `scopes`. The scopes `openid`, `offline`, and
+   * `offline_access` cannot be optional.
+   */
+  optional_scopes?: Array<string>;
 
   /**
    * Body param: URL that points to a privacy policy document.

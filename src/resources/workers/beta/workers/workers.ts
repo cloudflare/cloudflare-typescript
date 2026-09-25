@@ -117,8 +117,11 @@ export class BaseWorkers extends APIResource {
     params: WorkerDeleteParams,
     options?: RequestOptions,
   ): APIPromise<WorkerDeleteResponse> {
-    const { account_id } = params;
-    return this._client.delete(path`/accounts/${account_id}/workers/workers/${workerID}`, options);
+    const { account_id, force } = params;
+    return this._client.delete(path`/accounts/${account_id}/workers/workers/${workerID}`, {
+      query: { force },
+      ...options,
+    });
   }
 
   /**
@@ -233,6 +236,11 @@ export interface Worker {
    * never been deployed.
    */
   deployed_on?: string | null;
+
+  /**
+   * Template configuration used when creating new Previews for this Worker.
+   */
+  previews_base_config?: Worker.PreviewsBaseConfig;
 }
 
 export namespace Worker {
@@ -251,9 +259,19 @@ export namespace Worker {
     head_sampling_rate?: number;
 
     /**
+     * Real-time Issues settings for the Worker.
+     */
+    issues?: Observability.Issues | null;
+
+    /**
      * Log settings for the Worker.
      */
     logs?: Observability.Logs;
+
+    /**
+     * Whether query strings are removed from request URLs in logs and traces.
+     */
+    redact_query_string?: boolean;
 
     /**
      * Trace settings for the Worker.
@@ -262,6 +280,16 @@ export namespace Worker {
   }
 
   export namespace Observability {
+    /**
+     * Real-time Issues settings for the Worker.
+     */
+    export interface Issues {
+      /**
+       * Whether real-time Issues are enabled for the Worker.
+       */
+      enabled?: boolean;
+    }
+
     /**
      * Log settings for the Worker.
      */
@@ -320,12 +348,12 @@ export namespace Worker {
 
       /**
        * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-       * requests are handled. "authenticated" (default) honors inbound trace context
-       * only when accompanied by a valid trace auth token. "accept" unconditionally
-       * accepts inbound trace context. Requires the trace propagation feature to be
-       * enabled.
+       * requests are handled. "authenticated" honors inbound trace context only when
+       * accompanied by a valid trace auth token. "accept" unconditionally accepts
+       * inbound trace context. Requires the trace propagation feature to be enabled.
+       * Returns null when the trace propagation feature is not enabled for the account.
        */
-      propagation_policy?: 'authenticated' | 'accept';
+      propagation_policy?: 'authenticated' | 'accept' | null;
     }
   }
 
@@ -505,6 +533,322 @@ export namespace Worker {
      */
     name: string;
   }
+
+  /**
+   * Template configuration used when creating new Previews for this Worker.
+   */
+  export interface PreviewsBaseConfig {
+    /**
+     * Cache options used when creating new Previews.
+     */
+    cache_options?: PreviewsBaseConfig.CacheOptions;
+
+    /**
+     * Bindings used when creating new Previews, keyed by binding name.
+     */
+    env?: { [key: string]: PreviewsBaseConfig.Env };
+
+    /**
+     * Resource limits enforced at runtime for newly created Previews.
+     */
+    limits?: PreviewsBaseConfig.Limits;
+
+    /**
+     * Whether logpush is enabled when creating new Previews.
+     */
+    logpush?: boolean;
+
+    /**
+     * Observability settings used when creating new Previews.
+     */
+    observability?: PreviewsBaseConfig.Observability;
+
+    /**
+     * Placement configuration used when creating new Previews.
+     */
+    placement?:
+      | PreviewsBaseConfig.Mode
+      | PreviewsBaseConfig.Region
+      | PreviewsBaseConfig.Hostname
+      | PreviewsBaseConfig.Host
+      | PreviewsBaseConfig.UnionMember4
+      | PreviewsBaseConfig.UnionMember5
+      | PreviewsBaseConfig.UnionMember6
+      | PreviewsBaseConfig.UnionMember7;
+
+    /**
+     * Other Workers that should consume logs from newly created Previews.
+     */
+    tail_consumers?: Array<PreviewsBaseConfig.TailConsumer>;
+  }
+
+  export namespace PreviewsBaseConfig {
+    /**
+     * Cache options used when creating new Previews.
+     */
+    export interface CacheOptions {
+      /**
+       * Whether caching is enabled for this Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether cached responses are shared across Worker version uploads. This is
+       * independent of `enabled`. It can stay true while caching is off, so the
+       * preference survives turning caching off and back on.
+       */
+      cross_version_cache?: boolean;
+    }
+
+    /**
+     * A single entry in the `env` map. An entry holds the same payload as an entry of
+     * `bindings` without the `name` property, because the map key supplies the name.
+     * See `binding_item` for the payload of each binding kind.
+     */
+    export interface Env {
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: string;
+
+      [k: string]: unknown;
+    }
+
+    /**
+     * Resource limits enforced at runtime for newly created Previews.
+     */
+    export interface Limits {
+      /**
+       * The amount of CPU time this Worker can use in milliseconds.
+       */
+      cpu_ms?: number;
+
+      /**
+       * The number of subrequests this Worker can make per request.
+       */
+      subrequests?: number;
+    }
+
+    /**
+     * Observability settings used when creating new Previews.
+     */
+    export interface Observability {
+      /**
+       * Whether observability is enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for observability. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Real-time Issues settings for the Worker.
+       */
+      issues?: Observability.Issues | null;
+
+      /**
+       * Log settings for the Worker.
+       */
+      logs?: Observability.Logs;
+
+      /**
+       * Whether query strings are removed from request URLs in logs and traces.
+       */
+      redact_query_string?: boolean;
+
+      /**
+       * Trace settings for the Worker.
+       */
+      traces?: Observability.Traces;
+    }
+
+    export namespace Observability {
+      /**
+       * Real-time Issues settings for the Worker.
+       */
+      export interface Issues {
+        /**
+         * Whether real-time Issues are enabled for the Worker.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Log settings for the Worker.
+       */
+      export interface Logs {
+        /**
+         * A list of destinations where logs will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
+         * Whether logs are enabled for the Worker.
+         */
+        enabled?: boolean;
+
+        /**
+         * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%).
+         */
+        head_sampling_rate?: number;
+
+        /**
+         * Whether
+         * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+         * are enabled for the Worker.
+         */
+        invocation_logs?: boolean;
+
+        /**
+         * Whether log persistence is enabled for the Worker.
+         */
+        persist?: boolean;
+      }
+
+      /**
+       * Trace settings for the Worker.
+       */
+      export interface Traces {
+        /**
+         * A list of destinations where traces will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
+         * Whether traces are enabled for the Worker.
+         */
+        enabled?: boolean;
+
+        /**
+         * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%).
+         */
+        head_sampling_rate?: number;
+
+        /**
+         * Whether trace persistence is enabled for the Worker.
+         */
+        persist?: boolean;
+
+        /**
+         * Controls how inbound trace context (traceparent/tracestate) headers on incoming
+         * requests are handled. "authenticated" honors inbound trace context only when
+         * accompanied by a valid trace auth token. "accept" unconditionally accepts
+         * inbound trace context. Requires the trace propagation feature to be enabled.
+         * Returns null when the trace propagation feature is not enabled for the account.
+         */
+        propagation_policy?: 'authenticated' | 'accept' | null;
+      }
+    }
+
+    export interface Mode {
+      /**
+       * Enables
+       * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+       */
+      mode: 'smart';
+    }
+
+    export interface Region {
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface Hostname {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+    }
+
+    export interface Host {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
+    }
+
+    export interface UnionMember4 {
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface UnionMember5 {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+    }
+
+    export interface UnionMember6 {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
+
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+    }
+
+    export interface UnionMember7 {
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+
+      /**
+       * Array of placement targets (currently limited to single target).
+       */
+      target: Array<UnionMember7.Region | UnionMember7.Hostname | UnionMember7.Host>;
+    }
+
+    export namespace UnionMember7 {
+      export interface Region {
+        /**
+         * Cloud region in format 'provider:region'.
+         */
+        region: string;
+      }
+
+      export interface Hostname {
+        /**
+         * HTTP hostname for targeted placement.
+         */
+        hostname: string;
+      }
+
+      export interface Host {
+        /**
+         * TCP host:port for targeted placement.
+         */
+        host: string;
+      }
+    }
+
+    export interface TailConsumer {
+      /**
+       * Name of the consumer Worker.
+       */
+      name: string;
+    }
+  }
 }
 
 export interface WorkerDeleteResponse {
@@ -574,6 +918,12 @@ export interface WorkerCreateParams {
   observability?: WorkerCreateParams.Observability;
 
   /**
+   * Body param: Template configuration used when creating new Previews for this
+   * Worker.
+   */
+  previews_base_config?: WorkerCreateParams.PreviewsBaseConfig;
+
+  /**
    * Body param: Subdomain settings for the Worker.
    */
   subdomain?: WorkerCreateParams.Subdomain;
@@ -605,9 +955,19 @@ export namespace WorkerCreateParams {
     head_sampling_rate?: number;
 
     /**
+     * Real-time Issues settings for the Worker.
+     */
+    issues?: Observability.Issues | null;
+
+    /**
      * Log settings for the Worker.
      */
     logs?: Observability.Logs;
+
+    /**
+     * Whether query strings are removed from request URLs in logs and traces.
+     */
+    redact_query_string?: boolean;
 
     /**
      * Trace settings for the Worker.
@@ -616,6 +976,16 @@ export namespace WorkerCreateParams {
   }
 
   export namespace Observability {
+    /**
+     * Real-time Issues settings for the Worker.
+     */
+    export interface Issues {
+      /**
+       * Whether real-time Issues are enabled for the Worker.
+       */
+      enabled?: boolean;
+    }
+
     /**
      * Log settings for the Worker.
      */
@@ -674,12 +1044,328 @@ export namespace WorkerCreateParams {
 
       /**
        * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-       * requests are handled. "authenticated" (default) honors inbound trace context
-       * only when accompanied by a valid trace auth token. "accept" unconditionally
-       * accepts inbound trace context. Requires the trace propagation feature to be
-       * enabled.
+       * requests are handled. "authenticated" honors inbound trace context only when
+       * accompanied by a valid trace auth token. "accept" unconditionally accepts
+       * inbound trace context. Requires the trace propagation feature to be enabled.
+       * Returns null when the trace propagation feature is not enabled for the account.
        */
-      propagation_policy?: 'authenticated' | 'accept';
+      propagation_policy?: 'authenticated' | 'accept' | null;
+    }
+  }
+
+  /**
+   * Template configuration used when creating new Previews for this Worker.
+   */
+  export interface PreviewsBaseConfig {
+    /**
+     * Cache options used when creating new Previews.
+     */
+    cache_options?: PreviewsBaseConfig.CacheOptions;
+
+    /**
+     * Bindings used when creating new Previews, keyed by binding name.
+     */
+    env?: { [key: string]: PreviewsBaseConfig.Env };
+
+    /**
+     * Resource limits enforced at runtime for newly created Previews.
+     */
+    limits?: PreviewsBaseConfig.Limits;
+
+    /**
+     * Whether logpush is enabled when creating new Previews.
+     */
+    logpush?: boolean;
+
+    /**
+     * Observability settings used when creating new Previews.
+     */
+    observability?: PreviewsBaseConfig.Observability;
+
+    /**
+     * Placement configuration used when creating new Previews.
+     */
+    placement?:
+      | PreviewsBaseConfig.Mode
+      | PreviewsBaseConfig.Region
+      | PreviewsBaseConfig.Hostname
+      | PreviewsBaseConfig.Host
+      | PreviewsBaseConfig.UnionMember4
+      | PreviewsBaseConfig.UnionMember5
+      | PreviewsBaseConfig.UnionMember6
+      | PreviewsBaseConfig.UnionMember7;
+
+    /**
+     * Other Workers that should consume logs from newly created Previews.
+     */
+    tail_consumers?: Array<PreviewsBaseConfig.TailConsumer>;
+  }
+
+  export namespace PreviewsBaseConfig {
+    /**
+     * Cache options used when creating new Previews.
+     */
+    export interface CacheOptions {
+      /**
+       * Whether caching is enabled for this Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether cached responses are shared across Worker version uploads. This is
+       * independent of `enabled`. It can stay true while caching is off, so the
+       * preference survives turning caching off and back on.
+       */
+      cross_version_cache?: boolean;
+    }
+
+    /**
+     * A single entry in the `env` map. An entry holds the same payload as an entry of
+     * `bindings` without the `name` property, because the map key supplies the name.
+     * See `binding_item` for the payload of each binding kind.
+     */
+    export interface Env {
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: string;
+
+      [k: string]: unknown;
+    }
+
+    /**
+     * Resource limits enforced at runtime for newly created Previews.
+     */
+    export interface Limits {
+      /**
+       * The amount of CPU time this Worker can use in milliseconds.
+       */
+      cpu_ms?: number;
+
+      /**
+       * The number of subrequests this Worker can make per request.
+       */
+      subrequests?: number;
+    }
+
+    /**
+     * Observability settings used when creating new Previews.
+     */
+    export interface Observability {
+      /**
+       * Whether observability is enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for observability. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Real-time Issues settings for the Worker.
+       */
+      issues?: Observability.Issues | null;
+
+      /**
+       * Log settings for the Worker.
+       */
+      logs?: Observability.Logs;
+
+      /**
+       * Whether query strings are removed from request URLs in logs and traces.
+       */
+      redact_query_string?: boolean;
+
+      /**
+       * Trace settings for the Worker.
+       */
+      traces?: Observability.Traces;
+    }
+
+    export namespace Observability {
+      /**
+       * Real-time Issues settings for the Worker.
+       */
+      export interface Issues {
+        /**
+         * Whether real-time Issues are enabled for the Worker.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Log settings for the Worker.
+       */
+      export interface Logs {
+        /**
+         * A list of destinations where logs will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
+         * Whether logs are enabled for the Worker.
+         */
+        enabled?: boolean;
+
+        /**
+         * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%).
+         */
+        head_sampling_rate?: number;
+
+        /**
+         * Whether
+         * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+         * are enabled for the Worker.
+         */
+        invocation_logs?: boolean;
+
+        /**
+         * Whether log persistence is enabled for the Worker.
+         */
+        persist?: boolean;
+      }
+
+      /**
+       * Trace settings for the Worker.
+       */
+      export interface Traces {
+        /**
+         * A list of destinations where traces will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
+         * Whether traces are enabled for the Worker.
+         */
+        enabled?: boolean;
+
+        /**
+         * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%).
+         */
+        head_sampling_rate?: number;
+
+        /**
+         * Whether trace persistence is enabled for the Worker.
+         */
+        persist?: boolean;
+
+        /**
+         * Controls how inbound trace context (traceparent/tracestate) headers on incoming
+         * requests are handled. "authenticated" honors inbound trace context only when
+         * accompanied by a valid trace auth token. "accept" unconditionally accepts
+         * inbound trace context. Requires the trace propagation feature to be enabled.
+         * Returns null when the trace propagation feature is not enabled for the account.
+         */
+        propagation_policy?: 'authenticated' | 'accept' | null;
+      }
+    }
+
+    export interface Mode {
+      /**
+       * Enables
+       * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+       */
+      mode: 'smart';
+    }
+
+    export interface Region {
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface Hostname {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+    }
+
+    export interface Host {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
+    }
+
+    export interface UnionMember4 {
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface UnionMember5 {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+    }
+
+    export interface UnionMember6 {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
+
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+    }
+
+    export interface UnionMember7 {
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+
+      /**
+       * Array of placement targets (currently limited to single target).
+       */
+      target: Array<UnionMember7.Region | UnionMember7.Hostname | UnionMember7.Host>;
+    }
+
+    export namespace UnionMember7 {
+      export interface Region {
+        /**
+         * Cloud region in format 'provider:region'.
+         */
+        region: string;
+      }
+
+      export interface Hostname {
+        /**
+         * HTTP hostname for targeted placement.
+         */
+        hostname: string;
+      }
+
+      export interface Host {
+        /**
+         * TCP host:port for targeted placement.
+         */
+        host: string;
+      }
+    }
+
+    export interface TailConsumer {
+      /**
+       * Name of the consumer Worker.
+       */
+      name: string;
     }
   }
 
@@ -730,6 +1416,12 @@ export interface WorkerUpdateParams {
   observability?: WorkerUpdateParams.Observability;
 
   /**
+   * Body param: Template configuration used when creating new Previews for this
+   * Worker.
+   */
+  previews_base_config?: WorkerUpdateParams.PreviewsBaseConfig;
+
+  /**
    * Body param: Subdomain settings for the Worker.
    */
   subdomain?: WorkerUpdateParams.Subdomain;
@@ -761,9 +1453,19 @@ export namespace WorkerUpdateParams {
     head_sampling_rate?: number;
 
     /**
+     * Real-time Issues settings for the Worker.
+     */
+    issues?: Observability.Issues | null;
+
+    /**
      * Log settings for the Worker.
      */
     logs?: Observability.Logs;
+
+    /**
+     * Whether query strings are removed from request URLs in logs and traces.
+     */
+    redact_query_string?: boolean;
 
     /**
      * Trace settings for the Worker.
@@ -772,6 +1474,16 @@ export namespace WorkerUpdateParams {
   }
 
   export namespace Observability {
+    /**
+     * Real-time Issues settings for the Worker.
+     */
+    export interface Issues {
+      /**
+       * Whether real-time Issues are enabled for the Worker.
+       */
+      enabled?: boolean;
+    }
+
     /**
      * Log settings for the Worker.
      */
@@ -830,12 +1542,328 @@ export namespace WorkerUpdateParams {
 
       /**
        * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-       * requests are handled. "authenticated" (default) honors inbound trace context
-       * only when accompanied by a valid trace auth token. "accept" unconditionally
-       * accepts inbound trace context. Requires the trace propagation feature to be
-       * enabled.
+       * requests are handled. "authenticated" honors inbound trace context only when
+       * accompanied by a valid trace auth token. "accept" unconditionally accepts
+       * inbound trace context. Requires the trace propagation feature to be enabled.
+       * Returns null when the trace propagation feature is not enabled for the account.
        */
-      propagation_policy?: 'authenticated' | 'accept';
+      propagation_policy?: 'authenticated' | 'accept' | null;
+    }
+  }
+
+  /**
+   * Template configuration used when creating new Previews for this Worker.
+   */
+  export interface PreviewsBaseConfig {
+    /**
+     * Cache options used when creating new Previews.
+     */
+    cache_options?: PreviewsBaseConfig.CacheOptions;
+
+    /**
+     * Bindings used when creating new Previews, keyed by binding name.
+     */
+    env?: { [key: string]: PreviewsBaseConfig.Env };
+
+    /**
+     * Resource limits enforced at runtime for newly created Previews.
+     */
+    limits?: PreviewsBaseConfig.Limits;
+
+    /**
+     * Whether logpush is enabled when creating new Previews.
+     */
+    logpush?: boolean;
+
+    /**
+     * Observability settings used when creating new Previews.
+     */
+    observability?: PreviewsBaseConfig.Observability;
+
+    /**
+     * Placement configuration used when creating new Previews.
+     */
+    placement?:
+      | PreviewsBaseConfig.Mode
+      | PreviewsBaseConfig.Region
+      | PreviewsBaseConfig.Hostname
+      | PreviewsBaseConfig.Host
+      | PreviewsBaseConfig.UnionMember4
+      | PreviewsBaseConfig.UnionMember5
+      | PreviewsBaseConfig.UnionMember6
+      | PreviewsBaseConfig.UnionMember7;
+
+    /**
+     * Other Workers that should consume logs from newly created Previews.
+     */
+    tail_consumers?: Array<PreviewsBaseConfig.TailConsumer>;
+  }
+
+  export namespace PreviewsBaseConfig {
+    /**
+     * Cache options used when creating new Previews.
+     */
+    export interface CacheOptions {
+      /**
+       * Whether caching is enabled for this Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether cached responses are shared across Worker version uploads. This is
+       * independent of `enabled`. It can stay true while caching is off, so the
+       * preference survives turning caching off and back on.
+       */
+      cross_version_cache?: boolean;
+    }
+
+    /**
+     * A single entry in the `env` map. An entry holds the same payload as an entry of
+     * `bindings` without the `name` property, because the map key supplies the name.
+     * See `binding_item` for the payload of each binding kind.
+     */
+    export interface Env {
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: string;
+
+      [k: string]: unknown;
+    }
+
+    /**
+     * Resource limits enforced at runtime for newly created Previews.
+     */
+    export interface Limits {
+      /**
+       * The amount of CPU time this Worker can use in milliseconds.
+       */
+      cpu_ms?: number;
+
+      /**
+       * The number of subrequests this Worker can make per request.
+       */
+      subrequests?: number;
+    }
+
+    /**
+     * Observability settings used when creating new Previews.
+     */
+    export interface Observability {
+      /**
+       * Whether observability is enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for observability. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Real-time Issues settings for the Worker.
+       */
+      issues?: Observability.Issues | null;
+
+      /**
+       * Log settings for the Worker.
+       */
+      logs?: Observability.Logs;
+
+      /**
+       * Whether query strings are removed from request URLs in logs and traces.
+       */
+      redact_query_string?: boolean;
+
+      /**
+       * Trace settings for the Worker.
+       */
+      traces?: Observability.Traces;
+    }
+
+    export namespace Observability {
+      /**
+       * Real-time Issues settings for the Worker.
+       */
+      export interface Issues {
+        /**
+         * Whether real-time Issues are enabled for the Worker.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Log settings for the Worker.
+       */
+      export interface Logs {
+        /**
+         * A list of destinations where logs will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
+         * Whether logs are enabled for the Worker.
+         */
+        enabled?: boolean;
+
+        /**
+         * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%).
+         */
+        head_sampling_rate?: number;
+
+        /**
+         * Whether
+         * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+         * are enabled for the Worker.
+         */
+        invocation_logs?: boolean;
+
+        /**
+         * Whether log persistence is enabled for the Worker.
+         */
+        persist?: boolean;
+      }
+
+      /**
+       * Trace settings for the Worker.
+       */
+      export interface Traces {
+        /**
+         * A list of destinations where traces will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
+         * Whether traces are enabled for the Worker.
+         */
+        enabled?: boolean;
+
+        /**
+         * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%).
+         */
+        head_sampling_rate?: number;
+
+        /**
+         * Whether trace persistence is enabled for the Worker.
+         */
+        persist?: boolean;
+
+        /**
+         * Controls how inbound trace context (traceparent/tracestate) headers on incoming
+         * requests are handled. "authenticated" honors inbound trace context only when
+         * accompanied by a valid trace auth token. "accept" unconditionally accepts
+         * inbound trace context. Requires the trace propagation feature to be enabled.
+         * Returns null when the trace propagation feature is not enabled for the account.
+         */
+        propagation_policy?: 'authenticated' | 'accept' | null;
+      }
+    }
+
+    export interface Mode {
+      /**
+       * Enables
+       * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+       */
+      mode: 'smart';
+    }
+
+    export interface Region {
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface Hostname {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+    }
+
+    export interface Host {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
+    }
+
+    export interface UnionMember4 {
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface UnionMember5 {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+    }
+
+    export interface UnionMember6 {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
+
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+    }
+
+    export interface UnionMember7 {
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+
+      /**
+       * Array of placement targets (currently limited to single target).
+       */
+      target: Array<UnionMember7.Region | UnionMember7.Hostname | UnionMember7.Host>;
+    }
+
+    export namespace UnionMember7 {
+      export interface Region {
+        /**
+         * Cloud region in format 'provider:region'.
+         */
+        region: string;
+      }
+
+      export interface Hostname {
+        /**
+         * HTTP hostname for targeted placement.
+         */
+        hostname: string;
+      }
+
+      export interface Host {
+        /**
+         * TCP host:port for targeted placement.
+         */
+        host: string;
+      }
+    }
+
+    export interface TailConsumer {
+      /**
+       * Name of the consumer Worker.
+       */
+      name: string;
     }
   }
 
@@ -883,9 +1911,17 @@ export interface WorkerListParams extends V4PagePaginationArrayParams {
 
 export interface WorkerDeleteParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: If true, delete the Worker even when other Workers still reference
+   * it. Service bindings in those Workers may be left broken. Durable Object
+   * namespaces implemented by the deleted Worker are deleted even if other Workers
+   * reference them.
+   */
+  force?: boolean;
 }
 
 export interface WorkerEditParams {
@@ -923,6 +1959,12 @@ export interface WorkerEditParams {
    * Body param: Other Workers that should consume logs from the Worker.
    */
   tail_consumers: Array<WorkerEditParams.TailConsumer>;
+
+  /**
+   * Body param: Template configuration used when creating new Previews for this
+   * Worker.
+   */
+  previews_base_config?: WorkerEditParams.PreviewsBaseConfig;
 }
 
 export namespace WorkerEditParams {
@@ -941,9 +1983,19 @@ export namespace WorkerEditParams {
     head_sampling_rate?: number;
 
     /**
+     * Real-time Issues settings for the Worker.
+     */
+    issues?: Observability.Issues | null;
+
+    /**
      * Log settings for the Worker.
      */
     logs?: Observability.Logs;
+
+    /**
+     * Whether query strings are removed from request URLs in logs and traces.
+     */
+    redact_query_string?: boolean;
 
     /**
      * Trace settings for the Worker.
@@ -952,6 +2004,16 @@ export namespace WorkerEditParams {
   }
 
   export namespace Observability {
+    /**
+     * Real-time Issues settings for the Worker.
+     */
+    export interface Issues {
+      /**
+       * Whether real-time Issues are enabled for the Worker.
+       */
+      enabled?: boolean;
+    }
+
     /**
      * Log settings for the Worker.
      */
@@ -1010,12 +2072,12 @@ export namespace WorkerEditParams {
 
       /**
        * Controls how inbound trace context (traceparent/tracestate) headers on incoming
-       * requests are handled. "authenticated" (default) honors inbound trace context
-       * only when accompanied by a valid trace auth token. "accept" unconditionally
-       * accepts inbound trace context. Requires the trace propagation feature to be
-       * enabled.
+       * requests are handled. "authenticated" honors inbound trace context only when
+       * accompanied by a valid trace auth token. "accept" unconditionally accepts
+       * inbound trace context. Requires the trace propagation feature to be enabled.
+       * Returns null when the trace propagation feature is not enabled for the account.
        */
-      propagation_policy?: 'authenticated' | 'accept';
+      propagation_policy?: 'authenticated' | 'accept' | null;
     }
   }
 
@@ -1041,6 +2103,322 @@ export namespace WorkerEditParams {
      * Name of the consumer Worker.
      */
     name: string;
+  }
+
+  /**
+   * Template configuration used when creating new Previews for this Worker.
+   */
+  export interface PreviewsBaseConfig {
+    /**
+     * Cache options used when creating new Previews.
+     */
+    cache_options?: PreviewsBaseConfig.CacheOptions;
+
+    /**
+     * Bindings used when creating new Previews, keyed by binding name.
+     */
+    env?: { [key: string]: PreviewsBaseConfig.Env };
+
+    /**
+     * Resource limits enforced at runtime for newly created Previews.
+     */
+    limits?: PreviewsBaseConfig.Limits;
+
+    /**
+     * Whether logpush is enabled when creating new Previews.
+     */
+    logpush?: boolean;
+
+    /**
+     * Observability settings used when creating new Previews.
+     */
+    observability?: PreviewsBaseConfig.Observability;
+
+    /**
+     * Placement configuration used when creating new Previews.
+     */
+    placement?:
+      | PreviewsBaseConfig.Mode
+      | PreviewsBaseConfig.Region
+      | PreviewsBaseConfig.Hostname
+      | PreviewsBaseConfig.Host
+      | PreviewsBaseConfig.UnionMember4
+      | PreviewsBaseConfig.UnionMember5
+      | PreviewsBaseConfig.UnionMember6
+      | PreviewsBaseConfig.UnionMember7;
+
+    /**
+     * Other Workers that should consume logs from newly created Previews.
+     */
+    tail_consumers?: Array<PreviewsBaseConfig.TailConsumer>;
+  }
+
+  export namespace PreviewsBaseConfig {
+    /**
+     * Cache options used when creating new Previews.
+     */
+    export interface CacheOptions {
+      /**
+       * Whether caching is enabled for this Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether cached responses are shared across Worker version uploads. This is
+       * independent of `enabled`. It can stay true while caching is off, so the
+       * preference survives turning caching off and back on.
+       */
+      cross_version_cache?: boolean;
+    }
+
+    /**
+     * A single entry in the `env` map. An entry holds the same payload as an entry of
+     * `bindings` without the `name` property, because the map key supplies the name.
+     * See `binding_item` for the payload of each binding kind.
+     */
+    export interface Env {
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: string;
+
+      [k: string]: unknown;
+    }
+
+    /**
+     * Resource limits enforced at runtime for newly created Previews.
+     */
+    export interface Limits {
+      /**
+       * The amount of CPU time this Worker can use in milliseconds.
+       */
+      cpu_ms?: number;
+
+      /**
+       * The number of subrequests this Worker can make per request.
+       */
+      subrequests?: number;
+    }
+
+    /**
+     * Observability settings used when creating new Previews.
+     */
+    export interface Observability {
+      /**
+       * Whether observability is enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for observability. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Real-time Issues settings for the Worker.
+       */
+      issues?: Observability.Issues | null;
+
+      /**
+       * Log settings for the Worker.
+       */
+      logs?: Observability.Logs;
+
+      /**
+       * Whether query strings are removed from request URLs in logs and traces.
+       */
+      redact_query_string?: boolean;
+
+      /**
+       * Trace settings for the Worker.
+       */
+      traces?: Observability.Traces;
+    }
+
+    export namespace Observability {
+      /**
+       * Real-time Issues settings for the Worker.
+       */
+      export interface Issues {
+        /**
+         * Whether real-time Issues are enabled for the Worker.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Log settings for the Worker.
+       */
+      export interface Logs {
+        /**
+         * A list of destinations where logs will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
+         * Whether logs are enabled for the Worker.
+         */
+        enabled?: boolean;
+
+        /**
+         * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%).
+         */
+        head_sampling_rate?: number;
+
+        /**
+         * Whether
+         * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+         * are enabled for the Worker.
+         */
+        invocation_logs?: boolean;
+
+        /**
+         * Whether log persistence is enabled for the Worker.
+         */
+        persist?: boolean;
+      }
+
+      /**
+       * Trace settings for the Worker.
+       */
+      export interface Traces {
+        /**
+         * A list of destinations where traces will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
+         * Whether traces are enabled for the Worker.
+         */
+        enabled?: boolean;
+
+        /**
+         * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%).
+         */
+        head_sampling_rate?: number;
+
+        /**
+         * Whether trace persistence is enabled for the Worker.
+         */
+        persist?: boolean;
+
+        /**
+         * Controls how inbound trace context (traceparent/tracestate) headers on incoming
+         * requests are handled. "authenticated" honors inbound trace context only when
+         * accompanied by a valid trace auth token. "accept" unconditionally accepts
+         * inbound trace context. Requires the trace propagation feature to be enabled.
+         * Returns null when the trace propagation feature is not enabled for the account.
+         */
+        propagation_policy?: 'authenticated' | 'accept' | null;
+      }
+    }
+
+    export interface Mode {
+      /**
+       * Enables
+       * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+       */
+      mode: 'smart';
+    }
+
+    export interface Region {
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface Hostname {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+    }
+
+    export interface Host {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
+    }
+
+    export interface UnionMember4 {
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface UnionMember5 {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+    }
+
+    export interface UnionMember6 {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
+
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+    }
+
+    export interface UnionMember7 {
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+
+      /**
+       * Array of placement targets (currently limited to single target).
+       */
+      target: Array<UnionMember7.Region | UnionMember7.Hostname | UnionMember7.Host>;
+    }
+
+    export namespace UnionMember7 {
+      export interface Region {
+        /**
+         * Cloud region in format 'provider:region'.
+         */
+        region: string;
+      }
+
+      export interface Hostname {
+        /**
+         * HTTP hostname for targeted placement.
+         */
+        hostname: string;
+      }
+
+      export interface Host {
+        /**
+         * TCP host:port for targeted placement.
+         */
+        host: string;
+      }
+    }
+
+    export interface TailConsumer {
+      /**
+       * Name of the consumer Worker.
+       */
+      name: string;
+    }
   }
 }
 

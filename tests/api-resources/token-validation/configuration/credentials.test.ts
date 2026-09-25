@@ -71,6 +71,49 @@ const runTests = (
       },
     );
   });
+
+  test('edit: only required params', async () => {
+    const responsePromise = client.tokenValidation.configuration.credentials.edit(
+      '4a7ee8d3-dd63-4ceb-9d5f-c27831854ce7',
+      {
+        zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        keys: [
+          {
+            alg: 'RS256',
+            e: 'e',
+            kid: 'kid',
+            kty: 'RSA',
+            n: 'n',
+          },
+        ],
+      },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await client.tokenValidation.configuration.credentials.edit(
+      '4a7ee8d3-dd63-4ceb-9d5f-c27831854ce7',
+      {
+        zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        keys: [
+          {
+            alg: 'RS256',
+            e: 'e',
+            kid: 'kid',
+            kty: 'RSA',
+            n: 'n',
+          },
+        ],
+      },
+    );
+  });
 };
 describe('resource credentials', () => runTests(client));
 describe('resource credentials (tree shakable, base)', () => runTests(partialClient));

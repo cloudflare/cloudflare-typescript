@@ -27,11 +27,11 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ realtimeKit: { activeSession: BaseActiveSession } }>) => {
-  // TODO: HTTP 401 from prism, support api tokens
+  // requires active WebRTC session with real participants
   test.skip('createPoll: only required params', async () => {
     const responsePromise = client.realtimeKit.activeSession.createPoll('meeting_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
       options: ['string'],
       question: 'question',
     });
@@ -44,11 +44,11 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { activeSession: Base
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // requires active WebRTC session with real participants
   test.skip('createPoll: required and optional params', async () => {
     const response = await client.realtimeKit.activeSession.createPoll('meeting_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
       options: ['string'],
       question: 'question',
       anonymous: true,
@@ -56,11 +56,11 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { activeSession: Base
     });
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // requires active WebRTC session with real participants
   test.skip('getActiveSession: only required params', async () => {
     const responsePromise = client.realtimeKit.activeSession.getActiveSession('meeting_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -71,19 +71,19 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { activeSession: Base
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // requires active WebRTC session with real participants
   test.skip('getActiveSession: required and optional params', async () => {
     const response = await client.realtimeKit.activeSession.getActiveSession('meeting_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
     });
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // requires active WebRTC session with real participants
   test.skip('kickAllParticipants: only required params', async () => {
     const responsePromise = client.realtimeKit.activeSession.kickAllParticipants('meeting_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -94,21 +94,19 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { activeSession: Base
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // requires active WebRTC session with real participants
   test.skip('kickAllParticipants: required and optional params', async () => {
     const response = await client.realtimeKit.activeSession.kickAllParticipants('meeting_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
     });
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // requires active WebRTC session with real participants
   test.skip('kickParticipants: only required params', async () => {
     const responsePromise = client.realtimeKit.activeSession.kickParticipants('meeting_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-      custom_participant_ids: ['string'],
-      participant_ids: ['string'],
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -119,13 +117,13 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { activeSession: Base
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // requires active WebRTC session with real participants
   test.skip('kickParticipants: required and optional params', async () => {
     const response = await client.realtimeKit.activeSession.kickParticipants('meeting_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
+      app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
       custom_participant_ids: ['string'],
-      participant_ids: ['string'],
+      participant_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
     });
   });
 };

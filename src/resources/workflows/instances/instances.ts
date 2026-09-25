@@ -311,8 +311,8 @@ export namespace InstanceGetResponse {
     export namespace Config {
       export interface Retries {
         /**
-         * Specifies the delay duration. '[dynamic]' indicates the delay is computed by a
-         * user-supplied function.
+         * Specifies the delay duration. The value '[dynamic]' means that a user-supplied
+         * function computes the delay.
          */
         delay: string | number;
 
@@ -418,10 +418,10 @@ export interface InstanceStepResponse {
   event_type?: string;
 
   /**
-   * Full step output or waitForEvent payload without truncation. Sensitive outputs
-   * are returned as '[REDACTED]'. Populated when status='complete'. May be a
-   * ReadableStream when the step returned one from step.do; stream outputs are
-   * served as application/octet-stream rather than JSON.
+   * Contains the full step output or waitForEvent payload without truncation. Uses
+   * '[REDACTED]' for sensitive outputs. Contains a value when status='complete'. May
+   * contain a ReadableStream when step.do returns one; the response serves stream
+   * outputs as application/octet-stream rather than JSON.
    */
   output?: unknown;
 }
@@ -444,8 +444,8 @@ export interface InstanceCreateParams {
   account_id: string;
 
   /**
-   * Body param: An id of exactly `cf_` followed by 64 lowercase hex characters is
-   * reserved for system-generated instances.
+   * Body param: The system reserves IDs that consist of the `cf_` prefix and exactly
+   * 64 lowercase hexadecimal characters.
    */
   instance_id?: string;
 
@@ -457,7 +457,18 @@ export interface InstanceCreateParams {
   /**
    * Body param
    */
-  location_hint?: 'wnam' | 'weur' | 'enam' | 'eeur' | 'apac' | 'oc' | 'sam' | 'afr' | 'me';
+  location_hint?:
+    | 'wnam'
+    | 'weur'
+    | 'enam'
+    | 'eeur'
+    | 'apac'
+    | 'apac-ne'
+    | 'apac-se'
+    | 'oc'
+    | 'sam'
+    | 'afr'
+    | 'me';
 
   /**
    * Body param: JSON-encoded event payload passed into the new instance.
@@ -530,20 +541,31 @@ export interface InstanceBulkParams {
   /**
    * Body param
    */
-  body?: Array<InstanceBulkParams.Body>;
+  body: Array<InstanceBulkParams.Body>;
 }
 
 export namespace InstanceBulkParams {
   export interface Body {
     /**
-     * An id of exactly `cf_` followed by 64 lowercase hex characters is reserved for
-     * system-generated instances.
+     * The system reserves IDs that consist of the `cf_` prefix and exactly 64
+     * lowercase hexadecimal characters.
      */
     instance_id?: string;
 
     instance_retention?: Body.InstanceRetention;
 
-    location_hint?: 'wnam' | 'weur' | 'enam' | 'eeur' | 'apac' | 'oc' | 'sam' | 'afr' | 'me';
+    location_hint?:
+      | 'wnam'
+      | 'weur'
+      | 'enam'
+      | 'eeur'
+      | 'apac'
+      | 'apac-ne'
+      | 'apac-se'
+      | 'oc'
+      | 'sam'
+      | 'afr'
+      | 'me';
 
     /**
      * JSON-encoded event payload passed into the new instance.

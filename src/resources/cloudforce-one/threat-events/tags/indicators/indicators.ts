@@ -14,7 +14,9 @@ export class BaseIndicators extends APIResource {
   /**
    * Returns indicators associated with the provided tag UUID, with pagination. By
    * default fans out across every indicator dataset the account can read; pass
-   * datasetIds to scope to specific datasets.
+   * datasetIds to scope to UUIDs, analytics datasets, or operational datasets.
+   * Analytics datasets do not expose tag associations, so the analytics scope
+   * returns an empty result.
    *
    * @example
    * ```ts
@@ -67,6 +69,12 @@ export namespace IndicatorListResponse {
     relatedEvents?: Array<Indicator.RelatedEvent>;
 
     tags?: Array<Indicator.Tag>;
+
+    /**
+     * Traffic Light Protocol designation. UPPERCASE. Possible values: CLEAR, GREEN,
+     * AMBER, AMBER-STRICT, RED, PURPLE. Null when not set.
+     */
+    tlp?: string | null;
   }
 
   export namespace Indicator {
@@ -83,6 +91,11 @@ export namespace IndicatorListResponse {
     }
 
     export interface Tag {
+      /**
+       * The UUID of the tag category, or null when the tag is uncategorized.
+       */
+      categoryId?: string | null;
+
       categoryName?: string;
 
       uuid?: string;
@@ -109,9 +122,11 @@ export interface IndicatorListParams {
   account_id: string;
 
   /**
-   * Query param: Dataset UUIDs to scope to (repeat the param for multiple), or 'all'
-   * / '\*' for every readable indicator dataset. Omit to search all readable
-   * datasets.
+   * Query param: Dataset UUIDs to scope to (repeat the param for multiple), or one
+   * standalone scope: 'all'/'\*', 'analytics' for isAnalytics=true datasets, or
+   * 'operational' for isAnalytics=false datasets. Analytics datasets do not expose
+   * tag associations, so 'analytics' returns an empty result. Omit to search all
+   * readable datasets.
    */
   datasetIds?: Array<string>;
 

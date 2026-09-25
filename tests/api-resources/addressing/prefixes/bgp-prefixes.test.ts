@@ -69,6 +69,27 @@ const runTests = (
     });
   });
 
+  test('delete: only required params', async () => {
+    const responsePromise = client.addressing.prefixes.bgpPrefixes.delete(
+      '7009ba364c7a5760798ceb430e603b74',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2', prefix_id: '2af39739cc4e3b5910c918468bb89828' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.addressing.prefixes.bgpPrefixes.delete('7009ba364c7a5760798ceb430e603b74', {
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
+      prefix_id: '2af39739cc4e3b5910c918468bb89828',
+    });
+  });
+
   test('edit: only required params', async () => {
     const responsePromise = client.addressing.prefixes.bgpPrefixes.edit('7009ba364c7a5760798ceb430e603b74', {
       account_id: '258def64c72dae45f3e4c8516e2111f2',

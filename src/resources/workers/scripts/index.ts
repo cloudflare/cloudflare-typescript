@@ -12,6 +12,7 @@ export {
   type DeploymentListParams,
   type DeploymentDeleteParams,
   type DeploymentGetParams,
+  type DeploymentListResponsesV4PagePagination,
 } from './deployments';
 export {
   Schedules,

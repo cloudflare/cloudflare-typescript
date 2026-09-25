@@ -51,7 +51,7 @@ export class UpdateStatus extends BaseUpdateStatus {}
 
 export interface UpdateStatusGetParams {
   /**
-   * Identifier
+   * Cloudflare account ID.
    */
   account_id: string;
 }

@@ -14,8 +14,8 @@ export class BaseUpload extends APIResource {
   ] as const);
 
   /**
-   * Upload assets ahead of creating a Worker version. To learn more about the direct
-   * uploads of assets, see
+   * Upload Worker assets ahead of creating a Worker version. To learn more about the
+   * direct uploads of assets, see
    * https://developers.cloudflare.com/workers/static-assets/direct-upload/.
    *
    * @example

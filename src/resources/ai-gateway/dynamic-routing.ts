@@ -26,7 +26,7 @@ export class BaseDynamicRouting extends APIResource {
    *         type: 'start',
    *       },
    *     ],
-   *     name: 'name',
+   *     name: 'x',
    *   });
    * ```
    */

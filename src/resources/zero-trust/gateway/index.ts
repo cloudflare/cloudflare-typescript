@@ -82,7 +82,7 @@ export {
   type ListDeleteParams,
   type ListEditParams,
   type ListGetParams,
-  type GatewayItemsSinglePage,
+  type GatewayItemsV4PagePaginationArray,
   type GatewayListsSinglePage,
 } from './lists/index';
 export {
@@ -124,7 +124,7 @@ export {
   type PacfileListParams,
   type PacfileDeleteParams,
   type PacfileGetParams,
-  type PacfileListResponsesSinglePage,
+  type PacfileListResponsesV4PagePaginationArray,
 } from './pacfiles';
 export {
   ProxyEndpoints,

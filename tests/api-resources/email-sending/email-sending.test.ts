@@ -24,6 +24,8 @@ const runTests = (client: PartialCloudflare<{ emailSending: BaseEmailSending }>)
       account_id: 'account_id',
       from: 'sender@example.com',
       subject: 'Monthly Report',
+      text: 'Hello',
+      to: ['recipient@example.com'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -47,11 +49,11 @@ const runTests = (client: PartialCloudflare<{ emailSending: BaseEmailSending }>)
           type: 'application/pdf',
         },
       ],
-      bcc: ['recipient-a@example.com', { address: 'recipient-b@example.com', name: 'Recipient B' }],
-      cc: ['recipient-a@example.com', { address: 'recipient-b@example.com', name: 'Recipient B' }],
+      bcc: ['bcc-recipient@example.com'],
+      cc: ['cc-recipient@example.com'],
       headers: { 'X-Custom-Header': 'value' },
       html: '<h1>Hello</h1><p>Please find your report attached.</p>',
-      reply_to: 'user@example.com',
+      reply_to: 'replies@example.com',
       text: 'Hello\n\nPlease find your report attached.',
       to: ['recipient@example.com'],
     });

@@ -117,6 +117,85 @@ const runTests = (
     );
   });
 
+  test('batch: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.allowPolicies.batch({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      deletes: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415' }],
+      patches: [{}],
+      posts: [
+        {
+          is_acceptable_sender: false,
+          is_exempt_recipient: false,
+          is_regex: false,
+          is_trusted_sender: true,
+          pattern: 'test@example.com',
+          pattern_type: 'EMAIL',
+          verify_sender: true,
+        },
+      ],
+      puts: [{}],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('batch: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.allowPolicies.batch({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      deletes: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415' }],
+      patches: [
+        {
+          comments: 'Trust all messages send from test@example.com',
+          is_acceptable_sender: false,
+          is_exempt_recipient: false,
+          is_recipient: false,
+          is_regex: false,
+          is_sender: true,
+          is_spoof: false,
+          is_trusted_sender: true,
+          pattern: 'test@example.com',
+          pattern_type: 'EMAIL',
+          verify_sender: true,
+        },
+      ],
+      posts: [
+        {
+          is_acceptable_sender: false,
+          is_exempt_recipient: false,
+          is_regex: false,
+          is_trusted_sender: true,
+          pattern: 'test@example.com',
+          pattern_type: 'EMAIL',
+          verify_sender: true,
+          comments: 'Trust all messages send from test@example.com',
+          is_recipient: false,
+          is_sender: true,
+          is_spoof: false,
+        },
+      ],
+      puts: [
+        {
+          comments: 'Trust all messages send from test@example.com',
+          is_acceptable_sender: false,
+          is_exempt_recipient: false,
+          is_recipient: false,
+          is_regex: false,
+          is_sender: true,
+          is_spoof: false,
+          is_trusted_sender: true,
+          pattern: 'test@example.com',
+          pattern_type: 'EMAIL',
+          verify_sender: true,
+        },
+      ],
+    });
+  });
+
   // HTTP 422 error from prism
   test.skip('edit: only required params', async () => {
     const responsePromise = client.emailSecurity.settings.allowPolicies.edit(

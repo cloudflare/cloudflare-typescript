@@ -13,7 +13,7 @@ export class BaseTimeTravel extends APIResource {
   ] as const);
 
   /**
-   * Retrieves the current bookmark, or the nearest bookmark at or before a provided
+   * Retrieve the current bookmark, or the nearest bookmark at or before a provided
    * timestamp. Bookmarks can be used with the restore endpoint to revert the
    * database to a previous point in time.
    *
@@ -41,7 +41,7 @@ export class BaseTimeTravel extends APIResource {
   }
 
   /**
-   * Restores a D1 database to a previous point in time either via a bookmark or a
+   * Restore a D1 database to a previous point in time either via a bookmark or a
    * timestamp.
    *
    * @example

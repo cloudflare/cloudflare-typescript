@@ -57,8 +57,6 @@ const runTests = (client: PartialCloudflare<{ magicTransit: { connectors: BaseCo
       interrupt_window_embargo_dates: ['string'],
       interrupt_window_hour_of_day: 0,
       notes: 'notes',
-      primary: true,
-      site_id: 'site_id',
       timezone: 'timezone',
     });
   });
@@ -85,9 +83,7 @@ const runTests = (client: PartialCloudflare<{ magicTransit: { connectors: BaseCo
       interrupt_window_embargo_dates: ['string'],
       interrupt_window_hour_of_day: 0,
       notes: 'notes',
-      primary: true,
       provision_license: true,
-      site_id: 'site_id',
       timezone: 'timezone',
     });
   });
@@ -153,9 +149,7 @@ const runTests = (client: PartialCloudflare<{ magicTransit: { connectors: BaseCo
       interrupt_window_embargo_dates: ['string'],
       interrupt_window_hour_of_day: 0,
       notes: 'notes',
-      primary: true,
       provision_license: true,
-      site_id: 'site_id',
       timezone: 'timezone',
     });
   });

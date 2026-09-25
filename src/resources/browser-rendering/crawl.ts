@@ -226,7 +226,7 @@ export declare namespace CrawlCreateParams {
     actionTimeout?: number;
 
     /**
-     * Body param: Adds a `<script>` tag into the page with the desired URL or content.
+     * Body param: Adds a script element into the page with the desired URL or content.
      */
     addScriptTag?: Array<Variant0.AddScriptTag>;
 
@@ -276,6 +276,14 @@ export declare namespace CrawlCreateParams {
      * Body param: Attempt to proceed when 'awaited' events fail or timeout.
      */
     bestAttempt?: boolean;
+
+    /**
+     * Body param: Intended content use level to respect the `use` Content-Signal
+     * directive in robots.txt. Levels (least to most permissive): 'reference', 'full'.
+     * A URL is disallowed when the publisher's declared `use` level is lower than this
+     * intent. Learn more: https://contentsignals.org/. Default: 'full'.
+     */
+    contentUse?: 'reference' | 'full';
 
     /**
      * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
@@ -614,6 +622,14 @@ export declare namespace CrawlCreateParams {
      * Query param: Cache TTL default is 5s. Set to 0 to disable.
      */
     cacheTTL?: number;
+
+    /**
+     * Body param: Intended content use level to respect the `use` Content-Signal
+     * directive in robots.txt. Levels (least to most permissive): 'reference', 'full'.
+     * A URL is disallowed when the publisher's declared `use` level is lower than this
+     * intent. Learn more: https://contentsignals.org/. Default: 'full'.
+     */
+    contentUse?: 'reference' | 'full';
 
     /**
      * Body param: List of crawl purposes to respect Content-Signal directives in

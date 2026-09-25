@@ -49,6 +49,7 @@ const runTests = (
       annotations: { 'workers/message': 'Fixed bug.', 'workers/tag': 'v1.0.1' },
       assets: {
         config: {
+          base_path: '/docs/',
           html_handling: 'auto-trailing-slash',
           not_found_handling: '404-page',
           run_worker_first: true,
@@ -63,7 +64,7 @@ const runTests = (
         },
       ],
       cache_options: { enabled: true, cross_version_cache: true },
-      compatibility_date: '2021-01-01',
+      compatibility_date: '2021-01-01T00:00:00Z',
       compatibility_flags: ['nodejs_compat'],
       containers: [{ class_name: 'MyDurableObject' }],
       exports: {

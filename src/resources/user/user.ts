@@ -27,6 +27,8 @@ import * as TenantsAPI from './tenants';
 import { BaseTenants, Tenants } from './tenants';
 import * as BillingAPI from './billing/billing';
 import { BaseBilling, Billing } from './billing/billing';
+import * as SpectrumAnalyticsAPI from './spectrum-analytics/spectrum-analytics';
+import { BaseSpectrumAnalytics, SpectrumAnalytics } from './spectrum-analytics/spectrum-analytics';
 import * as TokensAPI from './tokens/tokens';
 import {
   BaseTokens,
@@ -78,6 +80,9 @@ export class User extends BaseUser {
   billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
   invites: InvitesAPI.Invites = new InvitesAPI.Invites(this._client);
   organizations: OrganizationsAPI.Organizations = new OrganizationsAPI.Organizations(this._client);
+  spectrumAnalytics: SpectrumAnalyticsAPI.SpectrumAnalytics = new SpectrumAnalyticsAPI.SpectrumAnalytics(
+    this._client,
+  );
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
   tenants: TenantsAPI.Tenants = new TenantsAPI.Tenants(this._client);
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
@@ -270,6 +275,8 @@ User.Invites = Invites;
 User.BaseInvites = BaseInvites;
 User.Organizations = Organizations;
 User.BaseOrganizations = BaseOrganizations;
+User.SpectrumAnalytics = SpectrumAnalytics;
+User.BaseSpectrumAnalytics = BaseSpectrumAnalytics;
 User.Subscriptions = Subscriptions;
 User.BaseSubscriptions = BaseSubscriptions;
 User.Tenants = Tenants;
@@ -309,6 +316,8 @@ export declare namespace User {
     type OrganizationsV4PagePaginationArray as OrganizationsV4PagePaginationArray,
     type OrganizationListParams as OrganizationListParams,
   };
+
+  export { SpectrumAnalytics as SpectrumAnalytics, BaseSpectrumAnalytics as BaseSpectrumAnalytics };
 
   export {
     Subscriptions as Subscriptions,

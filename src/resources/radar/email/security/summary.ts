@@ -259,7 +259,7 @@ export namespace SummaryARCResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -389,7 +389,7 @@ export namespace SummaryDKIMResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -519,7 +519,7 @@ export namespace SummaryDMARCResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -649,7 +649,7 @@ export namespace SummaryMaliciousResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -791,7 +791,7 @@ export namespace SummarySpamResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -933,7 +933,7 @@ export namespace SummarySPFResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -1063,7 +1063,7 @@ export namespace SummarySpoofResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -1205,7 +1205,7 @@ export namespace SummaryThreatCategoryResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -1357,7 +1357,7 @@ export namespace SummaryTLSVersionResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.

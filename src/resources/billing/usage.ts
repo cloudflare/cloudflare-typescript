@@ -37,6 +37,14 @@ export class BaseUsage extends APIResource {
   /**
    * Returns high-level usage information for the account, including coverage, and
    * subscription metadata.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.billing.usage.getAccountUsageInfoV1({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   getAccountUsageInfoV1(
     params: UsageGetAccountUsageInfoV1Params,
@@ -53,6 +61,14 @@ export class BaseUsage extends APIResource {
   /**
    * Returns billable usage data for the account. When no query parameters are
    * provided, returns usage for the current billing period.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.billing.usage.getAccountUsageV1({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   getAccountUsageV1(
     params: UsageGetAccountUsageV1Params,
@@ -80,6 +96,14 @@ export class BaseUsage extends APIResource {
    *
    * When `from` and `to` are omitted, defaults to the start of the current month
    * through today. The maximum date range is 31 days.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.billing.usage.getAccountUsageV2({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   getAccountUsageV2(
     params: UsageGetAccountUsageV2Params,
@@ -136,16 +160,6 @@ export namespace UsageGetResponse {
    * period, aligned with the FinOps FOCUS v1.3 specification.
    */
   export interface UsageGetResponseItem {
-    /**
-     * Public identifier of the Cloudflare account (account tag).
-     */
-    BillingAccountId: string;
-
-    /**
-     * Display name of the Cloudflare account.
-     */
-    BillingAccountName: string;
-
     /**
      * Highest-level classification of a charge based on the nature of how it gets
      * billed. Currently only "Usage" is supported.
@@ -206,17 +220,23 @@ export namespace UsageGetResponse {
     x_BillableMetricId: string;
 
     /**
-     * The display name of the billable metric. Cloudflare extension; replaces FOCUS
-     * SkuMeter.
-     */
-    x_BillableMetricName: string;
-
-    /**
      * A charge serving as the basis for invoicing, inclusive of all reduced rates and
      * discounts while excluding the amortization of upfront charges (one-time or
      * recurring).
      */
     BilledCost?: number | null;
+
+    /**
+     * Public identifier of the Cloudflare account (account tag). Omitted when account
+     * is not part of the requested grouping.
+     */
+    BillingAccountId?: string;
+
+    /**
+     * Display name of the Cloudflare account. Omitted when account is not part of the
+     * requested grouping.
+     */
+    BillingAccountName?: string;
 
     /**
      * Currency that a charge was billed in (ISO 4217).
@@ -305,6 +325,19 @@ export namespace UsageGetResponse {
      * subscription or contract display name.
      */
     SubAccountName?: string;
+
+    /**
+     * Tag values for the requested `GroupBy` keys. Omitted when `GroupBy` is not
+     * provided. Missing keys are omitted, and key-only tags are returned as boolean
+     * `true`. All other tag values are strings.
+     */
+    Tags?: { [key: string]: string | true };
+
+    /**
+     * The display name of the billable metric. Cloudflare extension; replaces FOCUS
+     * SkuMeter.
+     */
+    x_BillableMetricName?: string;
 
     /**
      * The product category the charge belongs to (e.g., "Developer", "Cloudflare
@@ -489,7 +522,7 @@ export namespace UsageGetAccountUsageV1Response {
     CumulatedContractedCost: number;
 
     /**
-     * Specifies the cumulated pricing quantity for the billing period.
+     * Specifies the portion of usage that is actually subject to a unit price.
      */
     CumulatedPricingQuantity: number;
 
@@ -571,16 +604,6 @@ export namespace UsageGetAccountUsageV2Response {
    */
   export interface UsageGetAccountUsageV2ResponseItem {
     /**
-     * Public identifier of the Cloudflare account (account tag).
-     */
-    BillingAccountId: string;
-
-    /**
-     * Display name of the Cloudflare account.
-     */
-    BillingAccountName: string;
-
-    /**
      * Highest-level classification of a charge based on the nature of how it gets
      * billed. Currently only "Usage" is supported.
      */
@@ -640,17 +663,23 @@ export namespace UsageGetAccountUsageV2Response {
     x_BillableMetricId: string;
 
     /**
-     * The display name of the billable metric. Cloudflare extension; replaces FOCUS
-     * SkuMeter.
-     */
-    x_BillableMetricName: string;
-
-    /**
      * A charge serving as the basis for invoicing, inclusive of all reduced rates and
      * discounts while excluding the amortization of upfront charges (one-time or
      * recurring).
      */
     BilledCost?: number | null;
+
+    /**
+     * Public identifier of the Cloudflare account (account tag). Omitted when account
+     * is not part of the requested grouping.
+     */
+    BillingAccountId?: string;
+
+    /**
+     * Display name of the Cloudflare account. Omitted when account is not part of the
+     * requested grouping.
+     */
+    BillingAccountName?: string;
 
     /**
      * Currency that a charge was billed in (ISO 4217).
@@ -739,6 +768,19 @@ export namespace UsageGetAccountUsageV2Response {
      * subscription or contract display name.
      */
     SubAccountName?: string;
+
+    /**
+     * Tag values for the requested `GroupBy` keys. Omitted when `GroupBy` is not
+     * provided. Missing keys are omitted, and key-only tags are returned as boolean
+     * `true`. All other tag values are strings.
+     */
+    Tags?: { [key: string]: string | true };
+
+    /**
+     * The display name of the billable metric. Cloudflare extension; replaces FOCUS
+     * SkuMeter.
+     */
+    x_BillableMetricName?: string;
 
     /**
      * The product category the charge belongs to (e.g., "Developer", "Cloudflare
@@ -882,7 +924,7 @@ export namespace UsagePaygoResponse {
     CumulatedContractedCost: number;
 
     /**
-     * Specifies the cumulated pricing quantity for the billing period.
+     * Specifies the portion of usage that is actually subject to a unit price.
      */
     CumulatedPricingQuantity: number;
 
@@ -993,7 +1035,7 @@ export namespace UsagePaygoInfoResponse {
 
 export interface UsageGetParams {
   /**
-   * Path param: Represents a Cloudflare resource identifier tag.
+   * Path param: Identifies the Cloudflare account.
    */
   account_id: string;
 
@@ -1016,14 +1058,14 @@ export interface UsageGetParams {
 
 export interface UsageGetAccountUsageInfoV1Params {
   /**
-   * Represents a Cloudflare resource identifier tag.
+   * Identifies the Cloudflare account.
    */
   account_id: string;
 }
 
 export interface UsageGetAccountUsageV1Params {
   /**
-   * Path param: Represents a Cloudflare resource identifier tag.
+   * Path param: Identifies the Cloudflare account.
    */
   account_id: string;
 
@@ -1042,7 +1084,7 @@ export interface UsageGetAccountUsageV1Params {
 
 export interface UsageGetAccountUsageV2Params {
   /**
-   * Path param: Represents a Cloudflare resource identifier tag.
+   * Path param: Identifies the Cloudflare account.
    */
   account_id: string;
 
@@ -1065,7 +1107,7 @@ export interface UsageGetAccountUsageV2Params {
 
 export interface UsagePaygoParams {
   /**
-   * Path param: Represents a Cloudflare resource identifier tag.
+   * Path param: Identifies the Cloudflare account.
    */
   account_id: string;
 
@@ -1084,7 +1126,7 @@ export interface UsagePaygoParams {
 
 export interface UsagePaygoInfoParams {
   /**
-   * Represents a Cloudflare resource identifier tag.
+   * Identifies the Cloudflare account.
    */
   account_id: string;
 }

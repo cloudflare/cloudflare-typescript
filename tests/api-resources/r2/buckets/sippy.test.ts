@@ -57,7 +57,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { sippy: BaseSippyR
         region: 'region',
         secretAccessKey: 'secretAccessKey',
       },
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -79,7 +79,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { sippy: BaseSippyR
   test.skip('delete: required and optional params', async () => {
     const response = await client.r2.buckets.sippy.delete('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -101,7 +101,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { sippy: BaseSippyR
   test.skip('get: required and optional params', async () => {
     const response = await client.r2.buckets.sippy.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 };

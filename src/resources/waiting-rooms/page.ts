@@ -58,11 +58,11 @@ export class BasePage extends APIResource {
    * });
    * ```
    */
-  preview(params: PagePreviewParams, options?: RequestOptions): APIPromise<PagePreviewResponse> {
+  preview(params: PagePreviewParams, options?: RequestOptions): APIPromise<PagePreviewResponse | null> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/waiting_rooms/preview`, { body, ...options }) as APIPromise<{
-        result: PagePreviewResponse;
+        result: PagePreviewResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }

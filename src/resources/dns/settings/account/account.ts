@@ -71,6 +71,9 @@ export class Account extends BaseAccount {
 }
 
 export interface AccountEditResponse {
+  /**
+   * Default settings for new zones created in this account.
+   */
   zone_defaults: AccountEditResponse.ZoneDefaults;
 
   /**
@@ -84,6 +87,9 @@ export interface AccountEditResponse {
 }
 
 export namespace AccountEditResponse {
+  /**
+   * Default settings for new zones created in this account.
+   */
   export interface ZoneDefaults {
     /**
      * Whether to flatten all CNAME records in the zone. Note that, due to DNS
@@ -211,6 +217,9 @@ export namespace AccountEditResponse {
 }
 
 export interface AccountGetResponse {
+  /**
+   * Default settings for new zones created in this account.
+   */
   zone_defaults: AccountGetResponse.ZoneDefaults;
 
   /**
@@ -224,6 +233,9 @@ export interface AccountGetResponse {
 }
 
 export namespace AccountGetResponse {
+  /**
+   * Default settings for new zones created in this account.
+   */
   export interface ZoneDefaults {
     /**
      * Whether to flatten all CNAME records in the zone. Note that, due to DNS
@@ -366,12 +378,15 @@ export interface AccountEditParams {
   enforce_dns_only?: boolean;
 
   /**
-   * Body param
+   * Body param: Default settings for new zones created in this account.
    */
   zone_defaults?: AccountEditParams.ZoneDefaults;
 }
 
 export namespace AccountEditParams {
+  /**
+   * Default settings for new zones created in this account.
+   */
   export interface ZoneDefaults {
     /**
      * Whether to flatten all CNAME records in the zone. Note that, due to DNS

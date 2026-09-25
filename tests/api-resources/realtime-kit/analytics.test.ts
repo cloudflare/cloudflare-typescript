@@ -27,11 +27,12 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ realtimeKit: { analytics: BaseAnalytics } }>) => {
-  // TODO: HTTP 401 from prism, support api tokens
+  // requires accumulated historical data
   test.skip('getOrgAnalytics: only required params', async () => {
-    const responsePromise = client.realtimeKit.analytics.getOrgAnalytics('app_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.realtimeKit.analytics.getOrgAnalytics(
+      '14a396e7-ca44-4937-bf1f-050a69118543',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -41,13 +42,16 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { analytics: BaseAnal
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism, support api tokens
+  // requires accumulated historical data
   test.skip('getOrgAnalytics: required and optional params', async () => {
-    const response = await client.realtimeKit.analytics.getOrgAnalytics('app_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      end_date: '2022-09-22',
-      start_date: '2022-09-01',
-    });
+    const response = await client.realtimeKit.analytics.getOrgAnalytics(
+      '14a396e7-ca44-4937-bf1f-050a69118543',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        end_date: '2022-09-22T00:00:00Z',
+        start_date: '2022-09-01T00:00:00Z',
+      },
+    );
   });
 };
 describe('resource analytics', () => runTests(client));

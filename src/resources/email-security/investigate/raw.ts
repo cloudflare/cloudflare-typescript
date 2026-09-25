@@ -44,7 +44,7 @@ export interface RawGetResponse {
 
 export interface RawGetParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }

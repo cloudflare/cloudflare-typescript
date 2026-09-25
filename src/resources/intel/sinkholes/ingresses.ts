@@ -45,8 +45,8 @@ export class BaseIngresses extends APIResource {
   }
 
   /**
-   * Update the specified ingress rule. The sinkhole must belong to the same account
-   * as the zone.
+   * Replaces the specified ingress rule. The sinkhole must belong to the same
+   * account as the zone.
    *
    * @example
    * ```ts
@@ -202,20 +202,20 @@ export interface IngressGetResponse {
 
 export interface IngressCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: The unique identifier for the Cloudflare zone.
    */
   zone_id: string;
 
   /**
    * Body param: The CIDR block for the ingress rule in IPv4 or IPv6 notation (e.g.,
-   * 192.0.2.0/24). Must be a Cloudflare BYOIP associated with your account.
+   * 192.0.2.0/24). Provide a Cloudflare BYOIP CIDR that your account owns.
    */
   cidr: string;
 }
 
 export interface IngressUpdateParams {
   /**
-   * Path param: Identifier.
+   * Path param: The unique identifier for the Cloudflare zone.
    */
   zone_id: string;
 
@@ -226,14 +226,14 @@ export interface IngressUpdateParams {
 
   /**
    * Body param: The CIDR block for the ingress rule in IPv4 or IPv6 notation (e.g.,
-   * 192.0.2.0/24). Must be a Cloudflare BYOIP associated with your account.
+   * 192.0.2.0/24). Provide a Cloudflare BYOIP CIDR that your account owns.
    */
   cidr: string;
 }
 
 export interface IngressDeleteParams {
   /**
-   * Identifier.
+   * The unique identifier for the Cloudflare zone.
    */
   zone_id: string;
 
@@ -245,7 +245,7 @@ export interface IngressDeleteParams {
 
 export interface IngressGetParams {
   /**
-   * Identifier.
+   * The unique identifier for the Cloudflare zone.
    */
   zone_id: string;
 

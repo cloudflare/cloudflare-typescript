@@ -6,6 +6,7 @@ export {
   type ActivationCheckTriggerResponse,
   type ActivationCheckTriggerParams,
 } from './activation-check';
+export { BaseNEL, type Setting, type NELEditParams, type NELGetParams } from './nel';
 export { CT, BaseCT } from './ct/index';
 export {
   CustomNameservers,
@@ -16,6 +17,13 @@ export {
   type CustomNameserverGetParams,
   type CustomNameserverUpdateResponsesSinglePage,
 } from './custom-nameservers';
+export {
+  Entitlements,
+  BaseEntitlements,
+  type EntitlementListResponse,
+  type EntitlementListParams,
+  type EntitlementListResponsesSinglePage,
+} from './entitlements';
 export {
   Environments,
   BaseEnvironments,
@@ -41,6 +49,7 @@ export {
   type HoldEditParams,
   type HoldGetParams,
 } from './holds';
+export { Observability, BaseObservability } from './observability/index';
 export {
   Plans,
   BasePlans,
@@ -60,7 +69,6 @@ export {
   Settings,
   BaseSettings,
   type AdvancedDDoS,
-  type Aegis,
   type AlwaysOnline,
   type AlwaysUseHTTPS,
   type AutomaticHTTPSRewrites,

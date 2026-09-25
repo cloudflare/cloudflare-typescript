@@ -13,7 +13,8 @@ export class BaseResults extends APIResource {
   ] as const);
 
   /**
-   * Get the Latest Scan Result
+   * Retrieves the latest scan results for a Cloudforce One scan configuration,
+   * including discovered open ports.
    *
    * @example
    * ```ts

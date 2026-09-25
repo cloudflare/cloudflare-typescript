@@ -102,6 +102,66 @@ const runTests = (
     );
   });
 
+  test('batch: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.blockSenders.batch({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      deletes: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415' }],
+      patches: [{}],
+      posts: [
+        {
+          is_regex: false,
+          pattern: 'test@example.com',
+          pattern_type: 'EMAIL',
+        },
+      ],
+      puts: [
+        {
+          is_regex: false,
+          pattern: 'test@example.com',
+          pattern_type: 'EMAIL',
+        },
+      ],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('batch: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.blockSenders.batch({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      deletes: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415' }],
+      patches: [
+        {
+          comments: 'Block sender with email test@example.com',
+          is_regex: false,
+          pattern: 'test@example.com',
+          pattern_type: 'EMAIL',
+        },
+      ],
+      posts: [
+        {
+          is_regex: false,
+          pattern: 'test@example.com',
+          pattern_type: 'EMAIL',
+          comments: 'Block sender with email test@example.com',
+        },
+      ],
+      puts: [
+        {
+          is_regex: false,
+          pattern: 'test@example.com',
+          pattern_type: 'EMAIL',
+          comments: 'Block sender with email test@example.com',
+        },
+      ],
+    });
+  });
+
   // HTTP 422 error from prism
   test.skip('edit: only required params', async () => {
     const responsePromise = client.emailSecurity.settings.blockSenders.edit(

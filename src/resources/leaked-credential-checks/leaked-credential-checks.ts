@@ -27,7 +27,11 @@ export class BaseLeakedCredentialChecks extends APIResource {
   ] as const);
 
   /**
-   * Updates the current status of Leaked Credential Checks.
+   * Update the Leaked Credential Checks status for the zone, enabling or disabling
+   * the detection. While enabled, the detection populates the
+   * `cf.waf.credential_check.*` fields, which you can reference in custom rules and
+   * rate limiting rules to challenge or block requests carrying compromised
+   * credentials.
    *
    * @example
    * ```ts
@@ -51,7 +55,9 @@ export class BaseLeakedCredentialChecks extends APIResource {
   }
 
   /**
-   * Retrieves the current status of Leaked Credential Checks.
+   * Get the current Leaked Credential Checks status for the zone. While enabled,
+   * Cloudflare scans incoming requests for usernames and passwords that were exposed
+   * in known data breaches.
    *
    * @example
    * ```ts

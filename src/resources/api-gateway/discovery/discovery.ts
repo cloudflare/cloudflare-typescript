@@ -21,8 +21,8 @@ export class BaseDiscovery extends APIResource {
   ] as const);
 
   /**
-   * Retrieve the most up to date view of discovered operations, rendered as OpenAPI
-   * schemas
+   * Returns the latest API operations discovered from zone traffic, rendered as
+   * OpenAPI schemas.
    *
    * @example
    * ```ts

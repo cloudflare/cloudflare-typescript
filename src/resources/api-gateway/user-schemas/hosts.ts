@@ -18,7 +18,8 @@ export class BaseHosts extends APIResource {
 
   /**
    * Lists all unique hosts found in uploaded OpenAPI schemas for the zone. Useful
-   * for understanding which domains have schema coverage.
+   * for understanding which domains have schema coverage. Deprecated; use
+   * `/zones/{zone_id}/schema_validation/schemas/hosts` instead.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */

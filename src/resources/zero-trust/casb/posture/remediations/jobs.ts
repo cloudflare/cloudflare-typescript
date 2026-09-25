@@ -252,12 +252,10 @@ export namespace JobCreateResponse {
           | 'Jira'
           | 'Microsoft'
           | 'Microsoft Internal'
-          | 'Okta'
           | 'OpenAI'
           | 'Slack'
           | 'Salesforce'
           | 'ServiceNow'
-          | 'Workday'
           | 'Zoom';
       }
 
@@ -444,12 +442,10 @@ export namespace JobListResponse {
         | 'Jira'
         | 'Microsoft'
         | 'Microsoft Internal'
-        | 'Okta'
         | 'OpenAI'
         | 'Slack'
         | 'Salesforce'
         | 'ServiceNow'
-        | 'Workday'
         | 'Zoom';
     }
 

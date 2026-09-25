@@ -26,8 +26,6 @@ import { AppGetParams, AppGetResponse, AppPostParams, AppPostResponse, Apps, Bas
 import * as LivestreamsAPI from './livestreams';
 import {
   BaseLivestreams,
-  LivestreamCreateIndependentLivestreamParams,
-  LivestreamCreateIndependentLivestreamResponse,
   LivestreamGetActiveLivestreamsForLivestreamIDParams,
   LivestreamGetActiveLivestreamsForLivestreamIDResponse,
   LivestreamGetAllLivestreamsParams,
@@ -88,6 +86,8 @@ import {
   PresetGetPresetByIDParams,
   PresetGetPresetByIDResponse,
   PresetGetResponse,
+  PresetReplacePresetByIDParams,
+  PresetReplacePresetByIDResponse,
   PresetUpdateParams,
   PresetUpdateResponse,
   Presets,
@@ -229,11 +229,13 @@ export declare namespace RealtimeKit {
     type PresetDeleteResponse as PresetDeleteResponse,
     type PresetGetResponse as PresetGetResponse,
     type PresetGetPresetByIDResponse as PresetGetPresetByIDResponse,
+    type PresetReplacePresetByIDResponse as PresetReplacePresetByIDResponse,
     type PresetCreateParams as PresetCreateParams,
     type PresetUpdateParams as PresetUpdateParams,
     type PresetDeleteParams as PresetDeleteParams,
     type PresetGetParams as PresetGetParams,
     type PresetGetPresetByIDParams as PresetGetPresetByIDParams,
+    type PresetReplacePresetByIDParams as PresetReplacePresetByIDParams,
   };
 
   export {
@@ -309,7 +311,6 @@ export declare namespace RealtimeKit {
   export {
     Livestreams as Livestreams,
     BaseLivestreams as BaseLivestreams,
-    type LivestreamCreateIndependentLivestreamResponse as LivestreamCreateIndependentLivestreamResponse,
     type LivestreamGetActiveLivestreamsForLivestreamIDResponse as LivestreamGetActiveLivestreamsForLivestreamIDResponse,
     type LivestreamGetAllLivestreamsResponse as LivestreamGetAllLivestreamsResponse,
     type LivestreamGetLivestreamAnalyticsCompleteResponse as LivestreamGetLivestreamAnalyticsCompleteResponse,
@@ -320,7 +321,6 @@ export declare namespace RealtimeKit {
     type LivestreamGetOrgAnalyticsResponse as LivestreamGetOrgAnalyticsResponse,
     type LivestreamStartLivestreamingAMeetingResponse as LivestreamStartLivestreamingAMeetingResponse,
     type LivestreamStopLivestreamingAMeetingResponse as LivestreamStopLivestreamingAMeetingResponse,
-    type LivestreamCreateIndependentLivestreamParams as LivestreamCreateIndependentLivestreamParams,
     type LivestreamGetActiveLivestreamsForLivestreamIDParams as LivestreamGetActiveLivestreamsForLivestreamIDParams,
     type LivestreamGetAllLivestreamsParams as LivestreamGetAllLivestreamsParams,
     type LivestreamGetLivestreamAnalyticsCompleteParams as LivestreamGetLivestreamAnalyticsCompleteParams,

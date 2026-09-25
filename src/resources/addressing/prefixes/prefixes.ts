@@ -14,6 +14,8 @@ import * as BGPPrefixesAPI from './bgp-prefixes';
 import {
   BGPPrefix,
   BGPPrefixCreateParams,
+  BGPPrefixDeleteParams,
+  BGPPrefixDeleteResponse,
   BGPPrefixEditParams,
   BGPPrefixGetParams,
   BGPPrefixListParams,
@@ -448,9 +450,11 @@ export declare namespace Prefixes {
     BGPPrefixes as BGPPrefixes,
     BaseBGPPrefixes as BaseBGPPrefixes,
     type BGPPrefix as BGPPrefix,
+    type BGPPrefixDeleteResponse as BGPPrefixDeleteResponse,
     type BGPPrefixesSinglePage as BGPPrefixesSinglePage,
     type BGPPrefixCreateParams as BGPPrefixCreateParams,
     type BGPPrefixListParams as BGPPrefixListParams,
+    type BGPPrefixDeleteParams as BGPPrefixDeleteParams,
     type BGPPrefixEditParams as BGPPrefixEditParams,
     type BGPPrefixGetParams as BGPPrefixGetParams,
   };

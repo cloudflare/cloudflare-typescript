@@ -35,11 +35,15 @@ export class BaseLiveInputs extends APIResource {
    * ```
    */
   create(params: LiveInputCreateParams, options?: RequestOptions): APIPromise<LiveInput> {
-    const { account_id, ...body } = params;
+    const { account_id, 'Idempotency-Key': idempotencyKey, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/stream/live_inputs`, {
         body,
         ...options,
+        headers: buildHeaders([
+          { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+          options?.headers,
+        ]),
       }) as APIPromise<{ result: LiveInput }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -91,8 +95,8 @@ export class BaseLiveInputs extends APIResource {
   }
 
   /**
-   * Prevents a live input from being streamed to and makes the live input
-   * inaccessible to any future API calls.
+   * Permanently delete a live input, making it inaccessible and blocking current and
+   * future broadcasts to it. Existing recordings will be retained.
    *
    * @example
    * ```ts
@@ -184,6 +188,19 @@ export interface LiveInput {
   modified?: string;
 
   /**
+   * Details for playing a live input's broadcast using the HLS or DASH manifests.
+   * URLs reference the live input ID.
+   */
+  playback?: LiveInput.Playback;
+
+  /**
+   * When enabled, the live stream is delivered using Low-Latency HLS (LL-HLS),
+   * reducing glass-to-glass latency for viewers at the cost of reduced player
+   * compatibility.
+   */
+  preferLowLatency?: boolean;
+
+  /**
    * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
    * most cases, the video will initially be viewable as a live video and transition
    * to on-demand after a condition is satisfied.
@@ -241,6 +258,22 @@ export interface LiveInput {
 }
 
 export namespace LiveInput {
+  /**
+   * Details for playing a live input's broadcast using the HLS or DASH manifests.
+   * URLs reference the live input ID.
+   */
+  export interface Playback {
+    /**
+     * The DASH manifest URL used to play live video, referencing the live input ID.
+     */
+    dash: string;
+
+    /**
+     * The HLS manifest URL used to play live video, referencing the live input ID.
+     */
+    hls: string;
+  }
+
   /**
    * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
    * most cases, the video will initially be viewable as a live video and transition
@@ -458,11 +491,26 @@ export interface LiveInputCreateParams {
   meta?: unknown;
 
   /**
+   * Body param: When enabled, the live stream is delivered using Low-Latency HLS
+   * (LL-HLS), reducing glass-to-glass latency for viewers at the cost of reduced
+   * player compatibility.
+   */
+  preferLowLatency?: boolean;
+
+  /**
    * Body param: Records the input to a Cloudflare Stream video. Behavior depends on
    * the mode. In most cases, the video will initially be viewable as a live video
    * and transition to on-demand after a condition is satisfied.
    */
   recording?: LiveInputCreateParams.Recording;
+
+  /**
+   * Header param: Prevents duplicate live inputs from being created when retrying
+   * this request. The key is scoped to the account, may contain up to 255 bytes, and
+   * expires six hours after the live input is created. Reusing a key for a deleted
+   * input before expiry returns a 409 Conflict response.
+   */
+  'Idempotency-Key'?: string;
 }
 
 export namespace LiveInputCreateParams {
@@ -538,6 +586,13 @@ export interface LiveInputUpdateParams {
    * record for managing live inputs.
    */
   meta?: unknown;
+
+  /**
+   * Body param: When enabled, the live stream is delivered using Low-Latency HLS
+   * (LL-HLS), reducing glass-to-glass latency for viewers at the cost of reduced
+   * player compatibility.
+   */
+  preferLowLatency?: boolean;
 
   /**
    * Body param: Records the input to a Cloudflare Stream video. Behavior depends on

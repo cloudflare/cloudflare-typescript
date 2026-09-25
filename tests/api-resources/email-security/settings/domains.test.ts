@@ -27,6 +27,80 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ emailSecurity: { settings: { domains: BaseDomains } } }>) => {
+  test('create: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.domains.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      allowed_delivery_modes: ['DIRECT'],
+      domain: 'domain',
+      drop_dispositions: ['MALICIOUS'],
+      ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
+      regions: ['GLOBAL'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.domains.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      allowed_delivery_modes: ['DIRECT'],
+      domain: 'domain',
+      drop_dispositions: ['MALICIOUS'],
+      ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
+      regions: ['GLOBAL'],
+      folder: 'AllItems',
+      integration_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      lookback_hops: 1,
+      require_tls_inbound: true,
+      require_tls_outbound: true,
+      transport: 'transport',
+    });
+  });
+
+  test('update: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.domains.update(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        allowed_delivery_modes: ['DIRECT'],
+        drop_dispositions: ['MALICIOUS'],
+        ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
+        regions: ['GLOBAL'],
+      },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.domains.update(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        allowed_delivery_modes: ['DIRECT'],
+        drop_dispositions: ['MALICIOUS'],
+        ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
+        regions: ['GLOBAL'],
+        folder: 'AllItems',
+        integration_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        lookback_hops: 1,
+        require_tls_inbound: true,
+        require_tls_outbound: true,
+        transport: 'transport',
+      },
+    );
+  });
+
   test('list: only required params', async () => {
     const responsePromise = client.emailSecurity.settings.domains.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -52,7 +126,7 @@ const runTests = (client: PartialCloudflare<{ emailSecurity: { settings: { domai
       page: 1,
       per_page: 20,
       search: 'search',
-      status: 'pending',
+      status: 'PENDING',
     });
   });
 
@@ -75,6 +149,91 @@ const runTests = (client: PartialCloudflare<{ emailSecurity: { settings: { domai
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
+  });
+
+  test('batch: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.domains.batch({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      deletes: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415' }],
+      patches: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415' }],
+      posts: [
+        {
+          allowed_delivery_modes: ['DIRECT'],
+          domain: 'domain',
+          drop_dispositions: ['MALICIOUS'],
+          ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
+          regions: ['GLOBAL'],
+        },
+      ],
+      puts: [
+        {
+          id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+          allowed_delivery_modes: ['DIRECT'],
+          drop_dispositions: ['MALICIOUS'],
+          ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
+          regions: ['GLOBAL'],
+        },
+      ],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('batch: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.domains.batch({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      deletes: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415' }],
+      patches: [
+        {
+          id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+          allowed_delivery_modes: ['DIRECT'],
+          drop_dispositions: ['MALICIOUS'],
+          folder: 'AllItems',
+          integration_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
+          lookback_hops: 1,
+          regions: ['GLOBAL'],
+          require_tls_inbound: true,
+          require_tls_outbound: true,
+          transport: 'transport',
+        },
+      ],
+      posts: [
+        {
+          allowed_delivery_modes: ['DIRECT'],
+          domain: 'domain',
+          drop_dispositions: ['MALICIOUS'],
+          ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
+          regions: ['GLOBAL'],
+          folder: 'AllItems',
+          integration_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          lookback_hops: 1,
+          require_tls_inbound: true,
+          require_tls_outbound: true,
+          transport: 'transport',
+        },
+      ],
+      puts: [
+        {
+          id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+          allowed_delivery_modes: ['DIRECT'],
+          drop_dispositions: ['MALICIOUS'],
+          ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
+          regions: ['GLOBAL'],
+          folder: 'AllItems',
+          integration_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          lookback_hops: 1,
+          require_tls_inbound: true,
+          require_tls_outbound: true,
+          transport: 'transport',
+        },
+      ],
+    });
   });
 
   test('bulkDelete: only required params', async () => {

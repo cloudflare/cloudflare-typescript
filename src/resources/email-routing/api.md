@@ -23,7 +23,7 @@ Types:
 Methods:
 
 - <code title="post /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">create</a>({ ...params }) -> Settings</code>
-- <code title="delete /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">delete</a>({ ...params }) -> DNSRecordsSinglePage</code>
+- <code title="delete /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">delete</a>({ ...params }) -> Settings</code>
 - <code title="patch /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">edit</a>({ ...params }) -> Settings</code>
 - <code title="get /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">get</a>({ ...params }) -> DNSGetResponse</code>
 

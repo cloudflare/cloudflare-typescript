@@ -150,7 +150,7 @@ export namespace IQISummaryResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -185,10 +185,19 @@ export namespace IQISummaryResponse {
   }
 
   export interface Summary0 {
+    /**
+     * A numeric string.
+     */
     p25: string;
 
+    /**
+     * A numeric string.
+     */
     p50: string;
 
+    /**
+     * A numeric string.
+     */
     p75: string;
   }
 }
@@ -295,7 +304,7 @@ export namespace IQITimeseriesGroupsResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.

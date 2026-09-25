@@ -2,6 +2,10 @@
 
 Types:
 
+- <code><a href="./src/resources/pipelines/pipelines.ts">FieldType</a></code>
+- <code><a href="./src/resources/pipelines/pipelines.ts">ListField</a></code>
+- <code><a href="./src/resources/pipelines/pipelines.ts">SourceField</a></code>
+- <code><a href="./src/resources/pipelines/pipelines.ts">StructField</a></code>
 - <code><a href="./src/resources/pipelines/pipelines.ts">PipelineCreateResponse</a></code>
 - <code><a href="./src/resources/pipelines/pipelines.ts">PipelineUpdateResponse</a></code>
 - <code><a href="./src/resources/pipelines/pipelines.ts">PipelineListResponse</a></code>

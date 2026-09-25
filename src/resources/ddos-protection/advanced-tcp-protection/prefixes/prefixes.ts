@@ -281,7 +281,7 @@ export namespace PrefixBulkDeleteResponse {
 
 export interface PrefixCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: The ID of the account.
    */
   account_id: string;
 
@@ -303,7 +303,7 @@ export interface PrefixCreateParams {
 
 export interface PrefixListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: The ID of the account.
    */
   account_id: string;
 
@@ -320,7 +320,7 @@ export interface PrefixListParams extends V4PagePaginationArrayParams {
 
 export interface PrefixBulkCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: The ID of the account.
    */
   account_id: string;
 
@@ -351,7 +351,7 @@ export namespace PrefixBulkCreateParams {
 
 export interface PrefixBulkDeleteParams {
   /**
-   * Identifier.
+   * The ID of the account.
    */
   account_id: string;
 }

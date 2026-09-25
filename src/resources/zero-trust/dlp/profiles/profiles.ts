@@ -876,6 +876,8 @@ export namespace Profile {
       | IntegrationProfile.WordListEntry
     >;
 
+    integration_id: string;
+
     name: string;
 
     shared_entries: Array<

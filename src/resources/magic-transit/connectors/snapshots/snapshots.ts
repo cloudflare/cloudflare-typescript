@@ -604,6 +604,8 @@ export interface SnapshotGetResponse {
    */
   platform?: string;
 
+  routes?: Array<SnapshotGetResponse.Route>;
+
   /**
    * Site identifier
    */
@@ -1125,6 +1127,16 @@ export namespace SnapshotGetResponse {
      */
     operstate: string;
 
+    /**
+     * Comma-separated list of reasons for health score
+     */
+    health_reason?: string;
+
+    /**
+     * Aggregate health score (0-100)
+     */
+    health_score?: number;
+
     ip_addresses?: Array<Interface.IPAddress>;
 
     /**
@@ -1293,6 +1305,41 @@ export namespace SnapshotGetResponse {
      * Total packets transmitted
      */
     sent_packets: number;
+  }
+
+  /**
+   * Snapshot Route
+   */
+  export interface Route {
+    /**
+     * Route destination as default or an IPv4 CIDR
+     */
+    destination: string;
+
+    /**
+     * Interface used by the next hop
+     */
+    interface_name: string;
+
+    /**
+     * Routing decision type: tunnel, breakout, or lan
+     */
+    kind: string;
+
+    /**
+     * Route metric; lower metrics are preferred
+     */
+    metric: number;
+
+    /**
+     * Gateway address for the next hop
+     */
+    gateway?: string;
+
+    /**
+     * Relative weight within an equal-cost route
+     */
+    weight?: number;
   }
 
   /**

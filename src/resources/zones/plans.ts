@@ -94,11 +94,6 @@ export interface AvailableRatePlan {
   is_subscribed?: boolean;
 
   /**
-   * Indicates whether this plan has a legacy discount applied.
-   */
-  legacy_discount?: boolean;
-
-  /**
    * The legacy identifier for this rate plan, if any.
    */
   legacy_id?: string;

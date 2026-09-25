@@ -46,6 +46,25 @@ import {
 } from './validate';
 import * as DatasetsAPI from './datasets/datasets';
 import { BaseDatasets, Datasets } from './datasets/datasets';
+import * as TransformersAPI from './transformers/transformers';
+import {
+  BaseTransformers,
+  TransformerCreateParams,
+  TransformerCreateResponse,
+  TransformerDeleteParams,
+  TransformerDeleteResponse,
+  TransformerGetParams,
+  TransformerGetResponse,
+  TransformerListParams,
+  TransformerListResponse,
+  TransformerListResponsesSinglePage,
+  TransformerPreviewParams,
+  TransformerPreviewResponse,
+  TransformerPreviewResponsesSinglePage,
+  TransformerUpdateParams,
+  TransformerUpdateResponse,
+  Transformers,
+} from './transformers/transformers';
 
 export class BaseLogpush extends APIResource {
   static override readonly _key: readonly ['logpush'] = Object.freeze(['logpush'] as const);
@@ -55,6 +74,7 @@ export class Logpush extends BaseLogpush {
   edge: EdgeAPI.Edge = new EdgeAPI.Edge(this._client);
   jobs: JobsAPI.Jobs = new JobsAPI.Jobs(this._client);
   ownership: OwnershipAPI.Ownership = new OwnershipAPI.Ownership(this._client);
+  transformers: TransformersAPI.Transformers = new TransformersAPI.Transformers(this._client);
   validate: ValidateAPI.Validate = new ValidateAPI.Validate(this._client);
 }
 
@@ -66,6 +86,8 @@ Logpush.Jobs = Jobs;
 Logpush.BaseJobs = BaseJobs;
 Logpush.Ownership = Ownership;
 Logpush.BaseOwnership = BaseOwnership;
+Logpush.Transformers = Transformers;
+Logpush.BaseTransformers = BaseTransformers;
 Logpush.Validate = Validate;
 Logpush.BaseValidate = BaseValidate;
 
@@ -102,6 +124,25 @@ export declare namespace Logpush {
     type OwnershipCreateResponse as OwnershipCreateResponse,
     type OwnershipCreateParams as OwnershipCreateParams,
     type OwnershipValidateParams as OwnershipValidateParams,
+  };
+
+  export {
+    Transformers as Transformers,
+    BaseTransformers as BaseTransformers,
+    type TransformerCreateResponse as TransformerCreateResponse,
+    type TransformerUpdateResponse as TransformerUpdateResponse,
+    type TransformerListResponse as TransformerListResponse,
+    type TransformerDeleteResponse as TransformerDeleteResponse,
+    type TransformerGetResponse as TransformerGetResponse,
+    type TransformerPreviewResponse as TransformerPreviewResponse,
+    type TransformerListResponsesSinglePage as TransformerListResponsesSinglePage,
+    type TransformerPreviewResponsesSinglePage as TransformerPreviewResponsesSinglePage,
+    type TransformerCreateParams as TransformerCreateParams,
+    type TransformerUpdateParams as TransformerUpdateParams,
+    type TransformerListParams as TransformerListParams,
+    type TransformerDeleteParams as TransformerDeleteParams,
+    type TransformerGetParams as TransformerGetParams,
+    type TransformerPreviewParams as TransformerPreviewParams,
   };
 
   export {

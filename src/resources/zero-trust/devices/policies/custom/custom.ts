@@ -36,9 +36,7 @@ export class BaseCustom extends APIResource {
    * const settingsPolicy =
    *   await client.zeroTrust.devices.policies.custom.create({
    *     account_id: '699d98642c564d2e855e9661899b7252',
-   *     match: 'identity.email == "test@cloudflare.com"',
    *     name: 'Allow Developers',
-   *     precedence: 100,
    *   });
    * ```
    */
@@ -71,11 +69,11 @@ export class BaseCustom extends APIResource {
     params: CustomListParams,
     options?: RequestOptions,
   ): PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/policies`,
       SinglePage<PoliciesAPI.SettingsPolicy>,
-      options,
+      { query, ...options },
     );
   }
 
@@ -171,23 +169,9 @@ export interface CustomCreateParams {
   account_id: string;
 
   /**
-   * Body param: The wirefilter expression to match devices. Available values:
-   * "identity.email", "identity.groups.id", "identity.groups.name",
-   * "identity.groups.email", "identity.service_token_uuid",
-   * "identity.saml_attributes", "network", "os.name", "os.version".
-   */
-  match: string;
-
-  /**
    * Body param: The name of the device settings profile.
    */
   name: string;
-
-  /**
-   * Body param: The precedence of the policy. Lower values indicate higher
-   * precedence. Policies will be evaluated in ascending order of this field.
-   */
-  precedence: number;
 
   /**
    * Body param: Whether to allow the user to switch WARP between modes.
@@ -212,9 +196,21 @@ export interface CustomCreateParams {
   auto_connect?: number;
 
   /**
+   * Body param: Browser extension proxy settings. Required when profile_type is
+   * browser_extension and invalid for WARP profiles.
+   */
+  browser_extension_config?: CustomCreateParams.BrowserExtensionConfig | null;
+
+  /**
    * Body param: Turn on the captive portal after the specified amount of time.
    */
   captive_portal?: number;
+
+  /**
+   * Body param: Whether the policy is the account default. WARP group profiles
+   * cannot set this field.
+   */
+  default?: boolean;
 
   /**
    * Body param: A description of the policy.
@@ -280,6 +276,26 @@ export interface CustomCreateParams {
   lan_allow_subnet_size?: number;
 
   /**
+   * Body param: The wirefilter expression to match devices. Available values:
+   * "identity.email", "identity.groups.id", "identity.groups.name",
+   * "identity.groups.email", "identity.service_token_uuid",
+   * "identity.saml_attributes", "network", "os.name", "os.version".
+   */
+  match?: string;
+
+  /**
+   * Body param: The precedence of the policy. Lower values indicate higher
+   * precedence. Policies will be evaluated in ascending order of this field.
+   */
+  precedence?: number;
+
+  /**
+   * Body param: The client type to which the device settings profile applies. This
+   * field is set when the profile is created and cannot be changed.
+   */
+  profile_type?: 'warp' | 'browser_extension';
+
+  /**
    * Body param: Determines if the operating system will register WARP's local
    * interface IP with your on-premises DNS server.
    */
@@ -313,12 +329,34 @@ export interface CustomCreateParams {
   tunnel_protocol?: string;
 
   /**
+   * Body param: Determines whether uninstalling the WARP client requires an override
+   * code. (Windows only).
+   */
+  uninstall_protection?: boolean;
+
+  /**
    * Body param: Virtual network access settings for the device.
    */
   virtual_networks?: CustomCreateParams.VirtualNetworks | null;
 }
 
 export namespace CustomCreateParams {
+  /**
+   * Browser extension proxy settings. Required when profile_type is
+   * browser_extension and invalid for WARP profiles.
+   */
+  export interface BrowserExtensionConfig {
+    /**
+     * Whether the user may disable the browser extension proxy.
+     */
+    proxy_control: 'unlocked' | 'locked';
+
+    /**
+     * Whether the browser extension proxy is active.
+     */
+    proxy_enabled: boolean;
+  }
+
   export interface DNSSearchSuffix {
     /**
      * The DNS search suffix to append when resolving short hostnames.
@@ -359,6 +397,12 @@ export namespace CustomCreateParams {
      * or masque_endpoints must be provided.
      */
     wireguard_endpoints: Array<string>;
+
+    /**
+     * Automatically switch Global Acceleration regions based on device location.
+     * Defaults to false when not provided.
+     */
+    autoswitch?: boolean;
   }
 
   export interface ServiceModeV2 {
@@ -391,7 +435,16 @@ export namespace CustomCreateParams {
 }
 
 export interface CustomListParams {
+  /**
+   * Path param
+   */
   account_id: string;
+
+  /**
+   * Query param: Filter profiles by client type. When omitted, only WARP profiles
+   * are returned.
+   */
+  profile_type?: 'warp' | 'browser_extension';
 }
 
 export interface CustomDeleteParams {
@@ -427,9 +480,21 @@ export interface CustomEditParams {
   auto_connect?: number;
 
   /**
+   * Body param: Browser extension proxy settings. Required when profile_type is
+   * browser_extension and invalid for WARP profiles.
+   */
+  browser_extension_config?: CustomEditParams.BrowserExtensionConfig | null;
+
+  /**
    * Body param: Turn on the captive portal after the specified amount of time.
    */
   captive_portal?: number;
+
+  /**
+   * Body param: Whether the policy is the account default. WARP group profiles
+   * cannot set this field.
+   */
+  default?: boolean;
 
   /**
    * Body param: A description of the policy.
@@ -547,12 +612,34 @@ export interface CustomEditParams {
   tunnel_protocol?: string;
 
   /**
+   * Body param: Determines whether uninstalling the WARP client requires an override
+   * code. (Windows only).
+   */
+  uninstall_protection?: boolean;
+
+  /**
    * Body param: Virtual network access settings for the device.
    */
   virtual_networks?: CustomEditParams.VirtualNetworks | null;
 }
 
 export namespace CustomEditParams {
+  /**
+   * Browser extension proxy settings. Required when profile_type is
+   * browser_extension and invalid for WARP profiles.
+   */
+  export interface BrowserExtensionConfig {
+    /**
+     * Whether the user may disable the browser extension proxy.
+     */
+    proxy_control: 'unlocked' | 'locked';
+
+    /**
+     * Whether the browser extension proxy is active.
+     */
+    proxy_enabled: boolean;
+  }
+
   export interface DNSSearchSuffix {
     /**
      * The DNS search suffix to append when resolving short hostnames.
@@ -593,6 +680,12 @@ export namespace CustomEditParams {
      * or masque_endpoints must be provided.
      */
     wireguard_endpoints: Array<string>;
+
+    /**
+     * Automatically switch Global Acceleration regions based on device location.
+     * Defaults to false when not provided.
+     */
+    autoswitch?: boolean;
   }
 
   export interface ServiceModeV2 {

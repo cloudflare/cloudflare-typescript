@@ -51,9 +51,23 @@ export interface CancelCreateResponse {
 
   job_id: string;
 
+  /**
+   * Messages that were cancelled: rows cancelled via the API before being claimed,
+   * and rows whose in-flight attempt ended when the job reached a terminal state.
+   * Together the counters satisfy total_messages_discovered = messages_pending +
+   * messages_successful + messages_failed + messages_skipped + messages_cancelled.
+   */
+  messages_cancelled: number;
+
   messages_failed: number;
 
   messages_pending: number;
+
+  /**
+   * Messages that discovery skipped (for example, phish submissions, which the job
+   * cannot action).
+   */
+  messages_skipped: number;
 
   messages_successful: number;
 
@@ -83,6 +97,9 @@ export namespace CancelCreateResponse {
 
     type: 'MOVE';
 
+    /**
+     * @deprecated This field is nonfunctional.
+     */
     expected_disposition?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -93,7 +110,8 @@ export namespace CancelCreateResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE';
+      | 'NONE'
+      | null;
   }
 
   export interface Release {
@@ -111,7 +129,16 @@ export namespace CancelCreateResponse {
     /**
      * Delivery status of the message.
      */
-    delivery_status?: 'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued';
+    delivery_status?:
+      | 'delivered'
+      | 'moved'
+      | 'quarantined'
+      | 'rejected'
+      | 'deferred'
+      | 'bounced'
+      | 'queued'
+      | 'move_failed'
+      | null;
 
     detections_only?: boolean;
 
@@ -134,7 +161,8 @@ export namespace CancelCreateResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE';
+      | 'NONE'
+      | null;
 
     message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | null;
 
@@ -149,6 +177,11 @@ export namespace CancelCreateResponse {
     sender?: string | null;
 
     /**
+     * Matches messages whose SMTP HELO server IP address equals this value.
+     */
+    smtp_helo_ip?: string | null;
+
+    /**
      * Beginning of search date range.
      */
     start?: string;
@@ -161,7 +194,7 @@ export namespace CancelCreateResponse {
 
 export interface CancelCreateParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }

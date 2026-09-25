@@ -244,7 +244,7 @@ export namespace JobListResponse {
   export interface R2SourceResponseSchema {
     bucket?: string;
 
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    jurisdiction?: 'default' | 'eu' | 'us' | 'fedramp';
 
     keys?: Array<string> | null;
 
@@ -256,7 +256,7 @@ export namespace JobListResponse {
   export interface Target {
     bucket?: string;
 
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    jurisdiction?: 'default' | 'eu' | 'us' | 'fedramp';
 
     vendor?: SippyAPI.Provider;
   }
@@ -311,7 +311,7 @@ export namespace JobGetResponse {
   export interface R2SourceResponseSchema {
     bucket?: string;
 
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    jurisdiction?: 'default' | 'eu' | 'us' | 'fedramp';
 
     keys?: Array<string> | null;
 
@@ -323,7 +323,7 @@ export namespace JobGetResponse {
   export interface Target {
     bucket?: string;
 
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    jurisdiction?: 'default' | 'eu' | 'us' | 'fedramp';
 
     vendor?: SippyAPI.Provider;
   }
@@ -429,7 +429,7 @@ export namespace JobCreateParams {
 
     vendor: SippyAPI.ProviderParam;
 
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    jurisdiction?: 'default' | 'eu' | 'us' | 'fedramp';
 
     keys?: Array<string> | null;
 
@@ -451,7 +451,7 @@ export namespace JobCreateParams {
 
     vendor: SippyAPI.ProviderParam;
 
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    jurisdiction?: 'default' | 'eu' | 'us' | 'fedramp';
   }
 
   export namespace Target {

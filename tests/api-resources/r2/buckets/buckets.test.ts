@@ -49,7 +49,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: BaseBuckets } }>) =
       name: 'example-bucket',
       locationHint: 'apac',
       storageClass: 'Standard',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -75,7 +75,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: BaseBuckets } }>) =
       order: 'name',
       per_page: 1,
       start_after: 'my-bucket',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -97,7 +97,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: BaseBuckets } }>) =
   test.skip('delete: required and optional params', async () => {
     const response = await client.r2.buckets.delete('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -121,7 +121,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: BaseBuckets } }>) =
     const response = await client.r2.buckets.edit('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       storage_class: 'Standard',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -143,7 +143,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: BaseBuckets } }>) =
   test.skip('get: required and optional params', async () => {
     const response = await client.r2.buckets.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 };

@@ -206,7 +206,7 @@ export namespace SummaryDNSSECResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -348,7 +348,7 @@ export namespace SummaryEdnsResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -490,7 +490,7 @@ export namespace SummaryIPVersionResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -632,7 +632,7 @@ export namespace SummaryProtocolResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -784,7 +784,7 @@ export namespace SummaryQueryTypeResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -914,7 +914,7 @@ export namespace SummaryResponseCodesResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.

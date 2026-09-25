@@ -29,11 +29,8 @@ const parentPartialClient = createClient({
 const runTests = (client: PartialCloudflare<{ addressing: { addressMaps: { accounts: BaseAccounts } } }>) => {
   test('update: only required params', async () => {
     const responsePromise = client.addressing.addressMaps.accounts.update(
-      '055817b111884e0227e1be16a0be6ee0',
-      {
-        account_id: '258def64c72dae45f3e4c8516e2111f2',
-        body: {},
-      },
+      '258def64c72dae45f3e4c8516e2111f2',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2', address_map_id: '055817b111884e0227e1be16a0be6ee0' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -45,16 +42,16 @@ const runTests = (client: PartialCloudflare<{ addressing: { addressMaps: { accou
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.addressing.addressMaps.accounts.update('055817b111884e0227e1be16a0be6ee0', {
+    const response = await client.addressing.addressMaps.accounts.update('258def64c72dae45f3e4c8516e2111f2', {
       account_id: '258def64c72dae45f3e4c8516e2111f2',
-      body: {},
+      address_map_id: '055817b111884e0227e1be16a0be6ee0',
     });
   });
 
   test('delete: only required params', async () => {
     const responsePromise = client.addressing.addressMaps.accounts.delete(
-      '055817b111884e0227e1be16a0be6ee0',
-      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+      '258def64c72dae45f3e4c8516e2111f2',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2', address_map_id: '055817b111884e0227e1be16a0be6ee0' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -66,8 +63,9 @@ const runTests = (client: PartialCloudflare<{ addressing: { addressMaps: { accou
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.addressing.addressMaps.accounts.delete('055817b111884e0227e1be16a0be6ee0', {
+    const response = await client.addressing.addressMaps.accounts.delete('258def64c72dae45f3e4c8516e2111f2', {
       account_id: '258def64c72dae45f3e4c8516e2111f2',
+      address_map_id: '055817b111884e0227e1be16a0be6ee0',
     });
   });
 };

@@ -96,8 +96,11 @@ export interface AggregateListParams {
   aggregateBy: string;
 
   /**
-   * Query param: Dataset ID(s) to filter by. Can be a single dataset ID,
-   * comma-separated list, or array. If not provided, uses default dataset
+   * Query param: Dataset UUIDs to filter by, or one standalone scope value:
+   * 'all'/'\*' for all accessible non-analytics event datasets (analytics datasets
+   * are silently excluded), 'analytics' for isAnalytics=true datasets, or
+   * 'operational' for isAnalytics=false datasets. If not provided, uses the default
+   * dataset.
    */
   datasetId?: Array<string>;
 

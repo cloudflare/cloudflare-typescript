@@ -179,10 +179,11 @@ export interface InvestigateListResponse {
     | 'THREAT_INTEL_SUBMISSION'
     | 'SIMULATION_SUBMISSION'
     | 'API'
-    | 'RETRO_SCAN';
+    | 'RETRO_SCAN'
+    | null;
 
   delivery_status?: Array<
-    'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued'
+    'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued' | 'move_failed'
   > | null;
 
   edf_hash?: string | null;
@@ -201,7 +202,8 @@ export interface InvestigateListResponse {
     | 'ENCRYPTED'
     | 'EXTERNAL'
     | 'UNKNOWN'
-    | 'NONE';
+    | 'NONE'
+    | null;
 
   /**
    * @deprecated Use the `findings` field from GET
@@ -250,7 +252,7 @@ export interface InvestigateListResponse {
 
   to_name?: Array<string> | null;
 
-  validation?: InvestigateListResponse.Validation;
+  validation?: InvestigateListResponse.Validation | null;
 
   x_originating_ip?: string | null;
 }
@@ -363,7 +365,8 @@ export namespace InvestigateListResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE';
+      | 'NONE'
+      | null;
 
     field?: string | null;
 
@@ -381,11 +384,11 @@ export namespace InvestigateListResponse {
   export interface Validation {
     comment?: string | null;
 
-    dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
+    dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
 
-    dmarc?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
+    dmarc?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
 
-    spf?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
+    spf?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
   }
 }
 
@@ -436,10 +439,11 @@ export interface InvestigateGetResponse {
     | 'THREAT_INTEL_SUBMISSION'
     | 'SIMULATION_SUBMISSION'
     | 'API'
-    | 'RETRO_SCAN';
+    | 'RETRO_SCAN'
+    | null;
 
   delivery_status?: Array<
-    'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued'
+    'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued' | 'move_failed'
   > | null;
 
   edf_hash?: string | null;
@@ -458,7 +462,8 @@ export interface InvestigateGetResponse {
     | 'ENCRYPTED'
     | 'EXTERNAL'
     | 'UNKNOWN'
-    | 'NONE';
+    | 'NONE'
+    | null;
 
   /**
    * @deprecated Use the `findings` field from GET
@@ -507,7 +512,7 @@ export interface InvestigateGetResponse {
 
   to_name?: Array<string> | null;
 
-  validation?: InvestigateGetResponse.Validation;
+  validation?: InvestigateGetResponse.Validation | null;
 
   x_originating_ip?: string | null;
 }
@@ -620,7 +625,8 @@ export namespace InvestigateGetResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE';
+      | 'NONE'
+      | null;
 
     field?: string | null;
 
@@ -638,17 +644,17 @@ export namespace InvestigateGetResponse {
   export interface Validation {
     comment?: string | null;
 
-    dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
+    dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
 
-    dmarc?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
+    dmarc?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
 
-    spf?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
+    spf?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
   }
 }
 
 export interface InvestigateListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -665,7 +671,15 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: Delivery status to filter by.
    */
-  delivery_status?: 'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued';
+  delivery_status?:
+    | 'delivered'
+    | 'moved'
+    | 'quarantined'
+    | 'rejected'
+    | 'deferred'
+    | 'bounced'
+    | 'queued'
+    | 'move_failed';
 
   /**
    * Query param: Whether to include only detections in search results.
@@ -718,6 +732,12 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   sender?: string;
 
   /**
+   * Query param: Matches messages whose SMTP HELO server IP address equals this
+   * value.
+   */
+  smtp_helo_ip?: string;
+
+  /**
    * Query param: The beginning of the search date range. Defaults to
    * `now - 30 days`. Must not be in the future.
    */
@@ -731,7 +751,7 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
 
 export interface InvestigateGetParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 

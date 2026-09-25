@@ -215,7 +215,7 @@ export namespace AllowlistBulkDeleteResponse {
 
 export interface AllowlistCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: The ID of the account.
    */
   account_id: string;
 
@@ -237,7 +237,7 @@ export interface AllowlistCreateParams {
 
 export interface AllowlistListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: The ID of the account.
    */
   account_id: string;
 
@@ -254,7 +254,7 @@ export interface AllowlistListParams extends V4PagePaginationArrayParams {
 
 export interface AllowlistBulkDeleteParams {
   /**
-   * Identifier.
+   * The ID of the account.
    */
   account_id: string;
 }

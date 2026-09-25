@@ -58,7 +58,7 @@ const runTests = (
           suffix: '.jpeg',
         },
       ],
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -80,7 +80,7 @@ const runTests = (
   test.skip('list: required and optional params', async () => {
     const response = await client.r2.buckets.eventNotifications.list('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -104,7 +104,7 @@ const runTests = (
     const response = await client.r2.buckets.eventNotifications.delete('queue_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -128,7 +128,7 @@ const runTests = (
     const response = await client.r2.buckets.eventNotifications.get('queue_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 };

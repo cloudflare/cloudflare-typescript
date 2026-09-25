@@ -116,16 +116,10 @@ export class BaseRegistrations extends APIResource {
   }
 
   /**
-   * Revokes a list of WARP registrations.
+   * Revokes a list of WARP registrations. Prefer "delete" operation instead,
+   * "revoke" does not release virtual IPs.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.zeroTrust.devices.registrations.revoke({
-   *     account_id: 'account_id',
-   *     id: ['string'],
-   *   });
-   * ```
+   * @deprecated
    */
   revoke(
     params: RegistrationRevokeParams,
@@ -143,14 +137,7 @@ export class BaseRegistrations extends APIResource {
   /**
    * Unrevokes a list of WARP registrations.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.zeroTrust.devices.registrations.unrevoke({
-   *     account_id: 'account_id',
-   *     id: ['string'],
-   *   });
-   * ```
+   * @deprecated
    */
   unrevoke(
     params: RegistrationUnrevokeParams,
@@ -198,6 +185,11 @@ export interface RegistrationListResponse {
    * The RFC3339 timestamp when the registration was last seen.
    */
   last_seen_at: string;
+
+  /**
+   * The registration client type, derived from device_type.
+   */
+  registration_type: 'warp' | 'browser_extension';
 
   /**
    * The RFC3339 timestamp when the registration was last updated.
@@ -350,6 +342,11 @@ export interface RegistrationGetResponse {
   last_seen_at: string;
 
   /**
+   * The registration client type, derived from device_type.
+   */
+  registration_type: 'warp' | 'browser_extension';
+
+  /**
    * The RFC3339 timestamp when the registration was last updated.
    */
   updated_at: string;
@@ -495,6 +492,11 @@ export interface RegistrationListParams extends CursorPaginationParams {
    * Query param
    */
   policy?: RegistrationListParams.Policy;
+
+  /**
+   * Query param: Filter by registration client type.
+   */
+  registration_type?: 'warp' | 'browser_extension';
 
   /**
    * Query param: Filter by registration details.

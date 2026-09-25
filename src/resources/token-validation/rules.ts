@@ -18,7 +18,7 @@ export class BaseRules extends APIResource {
   ] as const);
 
   /**
-   * Create a token validation rule.
+   * Creates a token validation rule for the zone.
    *
    * @example
    * ```ts
@@ -46,7 +46,8 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * List token validation rules
+   * Lists token validation rules for the zone, with filters for configuration,
+   * action, state, ID, and host.
    *
    * @example
    * ```ts
@@ -71,7 +72,7 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Delete a zone token validation rule.
+   * Deletes a token validation rule from the zone.
    *
    * @example
    * ```ts
@@ -91,9 +92,7 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Create zone token validation rules.
-   *
-   * A request can create multiple Token Validation Rules.
+   * Creates multiple token validation rules for the zone in one request.
    *
    * @example
    * ```ts
@@ -132,13 +131,8 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Edit token validation rules.
-   *
-   * A request can update multiple Token Validation Rules.
-   *
-   * Rules can be re-ordered using the `position` field.
-   *
-   * Returns all updated rules.
+   * Updates and reorders multiple token validation rules in one request, then
+   * returns the updated rules.
    *
    * @example
    * ```ts
@@ -166,7 +160,7 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Edit a zone token validation rule.
+   * Updates only the supplied fields on a token validation rule.
    *
    * @example
    * ```ts
@@ -188,7 +182,7 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Get a zone token validation rule.
+   * Returns a token validation rule by ID.
    *
    * @example
    * ```ts

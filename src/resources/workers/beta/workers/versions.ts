@@ -20,7 +20,7 @@ export class BaseVersions extends APIResource {
   ] as const);
 
   /**
-   * Create a new version.
+   * Create a new version for a Worker.
    *
    * @example
    * ```ts
@@ -70,7 +70,7 @@ export class BaseVersions extends APIResource {
   }
 
   /**
-   * Delete a version.
+   * Delete a Worker version.
    *
    * @example
    * ```ts
@@ -97,7 +97,7 @@ export class BaseVersions extends APIResource {
   }
 
   /**
-   * Get details about a specific version.
+   * Get details about a specific Worker version.
    *
    * @example
    * ```ts
@@ -164,6 +164,16 @@ export interface Version {
   assets?: Version.Assets;
 
   /**
+   * Email of the user who created the version.
+   */
+  author_email?: string;
+
+  /**
+   * Identifier of the user who created the version.
+   */
+  author_id?: string;
+
+  /**
    * List of bindings attached to a Worker. You can find more about bindings on our
    * docs:
    * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
@@ -189,6 +199,7 @@ export interface Version {
     | Version.WorkersBindingKindMTLSCertificate
     | Version.WorkersBindingKindPlainText
     | Version.WorkersBindingKindPipelines
+    | Version.WorkersBindingKindK2
     | Version.WorkersBindingKindQueue
     | Version.WorkersBindingKindRatelimit
     | Version.WorkersBindingKindR2Bucket
@@ -380,6 +391,14 @@ export namespace Version {
      * Configuration for assets within a Worker.
      */
     export interface Config {
+      /**
+       * The public URL path prefix under which assets are served. A null request value
+       * resets it to `/`; responses represent the root as `/`. All versions in a gradual
+       * deployment must use the same canonical value. To change it, first deploy the
+       * version containing the change at 100%.
+       */
+      base_path?: string | null;
+
       /**
        * Determines the redirects and rewrites of requests for HTML content.
        */
@@ -814,6 +833,26 @@ export namespace Version {
     type: 'pipelines';
   }
 
+  /**
+   * A K2 stream binding. Available only to accounts enabled for K2.
+   */
+  export interface WorkersBindingKindK2 {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * ID of a K2 stream owned by the account deploying the Worker.
+     */
+    stream: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'k2';
+  }
+
   export interface WorkersBindingKindQueue {
     /**
      * A JavaScript variable name for the binding.
@@ -898,7 +937,7 @@ export namespace Version {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high' | 'us';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -1159,6 +1198,12 @@ export namespace Version {
      * The kind of resource that the binding provides.
      */
     type: 'vpc_network';
+
+    /**
+     * Enables Gateway identity for the binding. Requires network_id to be
+     * "cf1:network" and cannot be combined with tunnel_id.
+     */
+    identity?: 'runtime-email-alpha';
 
     /**
      * Identifier of the network to bind to. Only "cf1:network" is currently supported.
@@ -1860,6 +1905,7 @@ export interface VersionCreateParams {
     | VersionCreateParams.WorkersBindingKindMTLSCertificate
     | VersionCreateParams.WorkersBindingKindPlainText
     | VersionCreateParams.WorkersBindingKindPipelines
+    | VersionCreateParams.WorkersBindingKindK2
     | VersionCreateParams.WorkersBindingKindQueue
     | VersionCreateParams.WorkersBindingKindRatelimit
     | VersionCreateParams.WorkersBindingKindR2Bucket
@@ -2022,6 +2068,14 @@ export namespace VersionCreateParams {
      * Configuration for assets within a Worker.
      */
     export interface Config {
+      /**
+       * The public URL path prefix under which assets are served. A null request value
+       * resets it to `/`; responses represent the root as `/`. All versions in a gradual
+       * deployment must use the same canonical value. To change it, first deploy the
+       * version containing the change at 100%.
+       */
+      base_path?: string | null;
+
       /**
        * Determines the redirects and rewrites of requests for HTML content.
        */
@@ -2456,6 +2510,26 @@ export namespace VersionCreateParams {
     type: 'pipelines';
   }
 
+  /**
+   * A K2 stream binding. Available only to accounts enabled for K2.
+   */
+  export interface WorkersBindingKindK2 {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * ID of a K2 stream owned by the account deploying the Worker.
+     */
+    stream: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'k2';
+  }
+
   export interface WorkersBindingKindQueue {
     /**
      * A JavaScript variable name for the binding.
@@ -2540,7 +2614,7 @@ export namespace VersionCreateParams {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high' | 'us';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -2818,6 +2892,12 @@ export namespace VersionCreateParams {
      * The kind of resource that the binding provides.
      */
     type: 'vpc_network';
+
+    /**
+     * Enables Gateway identity for the binding. Requires network_id to be
+     * "cf1:network" and cannot be combined with tunnel_id.
+     */
+    identity?: 'runtime-email-alpha';
 
     /**
      * Identifier of the network to bind to. Only "cf1:network" is currently supported.

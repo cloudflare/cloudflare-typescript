@@ -2,12 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as LocationsAPI from './locations';
-import {
-  BaseLocations,
-  LocationGetParams,
-  LocationGetResponse,
-  Locations as LocationsAPILocations,
-} from './locations';
+import { BaseLocations, LocationGetParams, LocationGetResponse, Locations } from './locations';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
@@ -49,6 +44,14 @@ export interface TrafficAnomalyGetResponse {
 
 export namespace TrafficAnomalyGetResponse {
   export interface TrafficAnomaly {
+    asnDetails: TrafficAnomaly.ASNDetails | null;
+
+    endDate: string | null;
+
+    locationDetails: TrafficAnomaly.LocationDetails | null;
+
+    originDetails: TrafficAnomaly.OriginDetails | null;
+
     startDate: string;
 
     status: string;
@@ -57,28 +60,20 @@ export namespace TrafficAnomalyGetResponse {
 
     uuid: string;
 
-    asnDetails?: TrafficAnomaly.ASNDetails;
-
-    endDate?: string;
-
-    locationDetails?: TrafficAnomaly.LocationDetails;
-
-    originDetails?: TrafficAnomaly.OriginDetails;
-
-    visibleInDataSources?: Array<string>;
+    visibleInDataSources: Array<string> | null;
   }
 
   export namespace TrafficAnomaly {
     export interface ASNDetails {
       asn: string;
 
-      name: string;
+      location: ASNDetails.Location | null;
 
-      locations?: ASNDetails.Locations;
+      name: string | null;
     }
 
     export namespace ASNDetails {
-      export interface Locations {
+      export interface Location {
         code: string;
 
         name: string;
@@ -92,7 +87,7 @@ export namespace TrafficAnomalyGetResponse {
     }
 
     export interface OriginDetails {
-      name: string;
+      name: string | null;
 
       origin: string;
     }
@@ -105,6 +100,36 @@ export interface TrafficAnomalyGetParams {
    * (ASN) as integer.
    */
   asn?: number;
+
+  /**
+   * Filters results by data source.
+   */
+  dataSource?:
+    | 'ALL'
+    | 'AI_BOTS'
+    | 'AI_GATEWAY'
+    | 'BGP'
+    | 'BOTS'
+    | 'CONNECTION_ANOMALY'
+    | 'CT'
+    | 'DNS'
+    | 'DNS_MAGNITUDE'
+    | 'DNS_AS112'
+    | 'DOS'
+    | 'EMAIL_ROUTING'
+    | 'EMAIL_SECURITY'
+    | 'FW'
+    | 'FW_PG'
+    | 'HTTP'
+    | 'HTTP_CONTROL'
+    | 'HTTP_CRAWLER_REFERER'
+    | 'HTTP_ORIGINS'
+    | 'IQI'
+    | 'LEAKED_CREDENTIALS'
+    | 'NET'
+    | 'ROBOTS_TXT'
+    | 'SPEED'
+    | 'WORKERS_AI';
 
   /**
    * End of the date range (inclusive). Alternative to `dateRange`; provide together
@@ -163,7 +188,7 @@ export interface TrafficAnomalyGetParams {
   type?: Array<'LOCATION' | 'AS' | 'ORIGIN'>;
 }
 
-TrafficAnomalies.Locations = LocationsAPILocations;
+TrafficAnomalies.Locations = Locations;
 TrafficAnomalies.BaseLocations = BaseLocations;
 
 export declare namespace TrafficAnomalies {
@@ -173,7 +198,7 @@ export declare namespace TrafficAnomalies {
   };
 
   export {
-    LocationsAPILocations as Locations,
+    Locations as Locations,
     BaseLocations as BaseLocations,
     type LocationGetResponse as LocationGetResponse,
     type LocationGetParams as LocationGetParams,

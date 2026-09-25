@@ -40,7 +40,8 @@ export class BaseConnections extends APIResource {
   }
 
   /**
-   * Fetches connection details for a Cloudflare Tunnel.
+   * Lists the connections for a Cloudflare Tunnel, including connector IDs,
+   * cloudflared versions, and Cloudflare locations.
    *
    * @example
    * ```ts
@@ -133,6 +134,12 @@ export namespace Client {
      * The Cloudflare data center used for this connection.
      */
     colo_name?: string;
+
+    /**
+     * @deprecated This functionality has been removed. The is_pending_reconnect field
+     * will now always report false.
+     */
+    is_pending_reconnect?: boolean;
 
     /**
      * Timestamp of when the connection was established.

@@ -12,7 +12,7 @@ import {
   PermissionGroups,
 } from './permission-groups';
 import * as ValueAPI from './value';
-import { BaseValue, Value, ValueUpdateParams } from './value';
+import { BaseValue, Value } from './value';
 import { APIPromise } from '../../../core/api-promise';
 import {
   PagePromise,
@@ -412,7 +412,7 @@ export declare namespace Tokens {
     type PermissionGroupListParams as PermissionGroupListParams,
   };
 
-  export { Value as Value, BaseValue as BaseValue, type ValueUpdateParams as ValueUpdateParams };
+  export { Value as Value, BaseValue as BaseValue };
 }
 
 export { type TokensV4PagePaginationArray };

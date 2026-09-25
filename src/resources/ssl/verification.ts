@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as CertificatePacksAPI from './certificate-packs/certificate-packs';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -94,7 +95,7 @@ export interface Verification {
   /**
    * Validation method in use for a certificate pack order.
    */
-  validation_method?: 'http' | 'cname' | 'txt';
+  validation_method?: CertificatePacksAPI.ValidationMethod;
 
   /**
    * Certificate's required verification information.

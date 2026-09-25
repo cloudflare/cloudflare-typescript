@@ -85,7 +85,7 @@ export namespace RatePlanGetResponse {
     name?: 'zones' | 'page_rules' | 'dedicated_certificates' | 'dedicated_certificates_custom';
 
     /**
-     * The unit price of the addon.
+     * The unit price of the component.
      */
     unit_price?: number;
   }

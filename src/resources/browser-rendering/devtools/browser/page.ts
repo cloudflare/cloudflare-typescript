@@ -26,10 +26,19 @@ export class BasePage extends APIResource {
    * ```
    */
   get(targetID: string, params: PageGetParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id, session_id } = params;
+    const { account_id, session_id, 'cf-brapi-guardrails': cfBrapiGuardrails } = params;
     return this._client.get(
       path`/accounts/${account_id}/browser-rendering/devtools/browser/${session_id}/page/${targetID}`,
-      { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
+      {
+        ...options,
+        headers: buildHeaders([
+          {
+            Accept: '*/*',
+            ...(cfBrapiGuardrails != null ? { 'cf-brapi-guardrails': cfBrapiGuardrails } : undefined),
+          },
+          options?.headers,
+        ]),
+      },
     );
   }
 }
@@ -37,14 +46,19 @@ export class Page extends BasePage {}
 
 export interface PageGetParams {
   /**
-   * Account ID.
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Browser session ID.
+   * Path param: Browser session ID.
    */
   session_id: string;
+
+  /**
+   * Header param: Optional base64url-encoded JSON connection guardrails (mode)
+   */
+  'cf-brapi-guardrails'?: string;
 }
 
 export declare namespace Page {

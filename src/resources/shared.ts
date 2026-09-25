@@ -229,6 +229,12 @@ export namespace CloudflareTunnel {
     colo_name?: string;
 
     /**
+     * @deprecated This functionality has been removed. The is_pending_reconnect field
+     * will now always report false.
+     */
+    is_pending_reconnect?: boolean;
+
+    /**
      * Timestamp of when the connection was established.
      */
     opened_at?: string;
@@ -746,6 +752,18 @@ export interface Subscription {
    * The state that the subscription is in.
    */
   state?: 'Trial' | 'Provisioned' | 'Paid' | 'AwaitingPayment' | 'Cancelled' | 'Failed' | 'Expired';
+}
+
+export interface SubscriptionParam {
+  /**
+   * How often the subscription is renewed automatically.
+   */
+  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
+
+  /**
+   * The rate plan applied to the subscription.
+   */
+  rate_plan?: RatePlanParam;
 }
 
 /**

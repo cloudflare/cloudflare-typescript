@@ -2,11 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
-import {
-  PagePromise,
-  V4PagePaginationArray,
-  type V4PagePaginationArrayParams,
-} from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -25,13 +21,13 @@ export class BaseOverrides extends APIResource {
    *
    * @deprecated
    */
-  create(params: OverrideCreateParams, options?: RequestOptions): APIPromise<Override> {
+  create(params: OverrideCreateParams, options?: RequestOptions): APIPromise<void> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(path`/zones/${zone_id}/firewall/waf/overrides`, { body, ...options }) as APIPromise<{
-        result: Override;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.post(path`/zones/${zone_id}/firewall/waf/overrides`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -42,14 +38,13 @@ export class BaseOverrides extends APIResource {
    *
    * @deprecated
    */
-  update(overridesID: string, params: OverrideUpdateParams, options?: RequestOptions): APIPromise<Override> {
+  update(overridesID: string, params: OverrideUpdateParams, options?: RequestOptions): APIPromise<void> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(path`/zones/${zone_id}/firewall/waf/overrides/${overridesID}`, {
-        body,
-        ...options,
-      }) as APIPromise<{ result: Override }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.put(path`/zones/${zone_id}/firewall/waf/overrides/${overridesID}`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -60,16 +55,13 @@ export class BaseOverrides extends APIResource {
    *
    * @deprecated
    */
-  list(
-    params: OverrideListParams,
-    options?: RequestOptions,
-  ): PagePromise<OverridesV4PagePaginationArray, Override> {
+  list(params: OverrideListParams, options?: RequestOptions): APIPromise<void> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(
-      path`/zones/${zone_id}/firewall/waf/overrides`,
-      V4PagePaginationArray<Override>,
-      { query, ...options },
-    );
+    return this._client.get(path`/zones/${zone_id}/firewall/waf/overrides`, {
+      query,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -80,18 +72,12 @@ export class BaseOverrides extends APIResource {
    *
    * @deprecated
    */
-  delete(
-    overridesID: string,
-    params: OverrideDeleteParams,
-    options?: RequestOptions,
-  ): APIPromise<OverrideDeleteResponse> {
+  delete(overridesID: string, params: OverrideDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { zone_id } = params;
-    return (
-      this._client.delete(
-        path`/zones/${zone_id}/firewall/waf/overrides/${overridesID}`,
-        options,
-      ) as APIPromise<{ result: OverrideDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(path`/zones/${zone_id}/firewall/waf/overrides/${overridesID}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -102,73 +88,15 @@ export class BaseOverrides extends APIResource {
    *
    * @deprecated
    */
-  get(overridesID: string, params: OverrideGetParams, options?: RequestOptions): APIPromise<Override> {
+  get(overridesID: string, params: OverrideGetParams, options?: RequestOptions): APIPromise<void> {
     const { zone_id } = params;
-    return (
-      this._client.get(path`/zones/${zone_id}/firewall/waf/overrides/${overridesID}`, options) as APIPromise<{
-        result: Override;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.get(path`/zones/${zone_id}/firewall/waf/overrides/${overridesID}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 }
 export class Overrides extends BaseOverrides {}
-
-export type OverridesV4PagePaginationArray = V4PagePaginationArray<Override>;
-
-export interface Override {
-  /**
-   * The unique identifier of the WAF override.
-   */
-  id?: string;
-
-  /**
-   * An informative summary of the current URI-based WAF override.
-   */
-  description?: string | null;
-
-  /**
-   * An object that allows you to enable or disable WAF rule groups for the current
-   * WAF override. Each key of this object must be the ID of a WAF rule group, and
-   * each value must be a valid WAF action (usually `default` or `disable`). When
-   * creating a new URI-based WAF override, you must provide a `groups` object or a
-   * `rules` object.
-   */
-  groups?: { [key: string]: unknown };
-
-  /**
-   * When true, indicates that the rule is currently paused.
-   */
-  paused?: boolean;
-
-  /**
-   * The relative priority of the current URI-based WAF override when multiple
-   * overrides match a single URL. A lower number indicates higher priority. Higher
-   * priority overrides may overwrite values set by lower priority overrides.
-   */
-  priority?: number;
-
-  /**
-   * Specifies that, when a WAF rule matches, its configured action will be replaced
-   * by the action configured in this object.
-   */
-  rewrite_action?: RewriteAction;
-
-  /**
-   * An object that allows you to override the action of specific WAF rules. Each key
-   * of this object must be the ID of a WAF rule, and each value must be a valid WAF
-   * action. Unless you are disabling a rule, ensure that you also enable the rule
-   * group that this WAF rule belongs to. When creating a new URI-based WAF override,
-   * you must provide a `groups` object or a `rules` object.
-   */
-  rules?: WAFRule;
-
-  /**
-   * The URLs to include in the current WAF override. You can use wildcards. Each
-   * entered URL will be escaped before use, which means you can only use simple
-   * wildcard patterns.
-   */
-  urls?: Array<OverrideURL>;
-}
 
 export type OverrideURL = string;
 
@@ -254,13 +182,6 @@ export type WAFRule = { [key: string]: 'challenge' | 'block' | 'simulate' | 'dis
  */
 export type WAFRuleParam = { [key: string]: 'challenge' | 'block' | 'simulate' | 'disable' | 'default' };
 
-export interface OverrideDeleteResponse {
-  /**
-   * The unique identifier of the WAF override.
-   */
-  id?: string;
-}
-
 export interface OverrideCreateParams {
   /**
    * Path param: Defines an identifier.
@@ -309,11 +230,21 @@ export interface OverrideUpdateParams {
   urls: Array<OverrideURLParam>;
 }
 
-export interface OverrideListParams extends V4PagePaginationArrayParams {
+export interface OverrideListParams {
   /**
    * Path param: Defines an identifier.
    */
   zone_id: string;
+
+  /**
+   * Query param: The page number of paginated results.
+   */
+  page?: number;
+
+  /**
+   * Query param: The number of WAF overrides per page.
+   */
+  per_page?: number;
 }
 
 export interface OverrideDeleteParams {
@@ -332,12 +263,9 @@ export interface OverrideGetParams {
 
 export declare namespace Overrides {
   export {
-    type Override as Override,
     type OverrideURL as OverrideURL,
     type RewriteAction as RewriteAction,
     type WAFRule as WAFRule,
-    type OverrideDeleteResponse as OverrideDeleteResponse,
-    type OverridesV4PagePaginationArray as OverridesV4PagePaginationArray,
     type OverrideCreateParams as OverrideCreateParams,
     type OverrideUpdateParams as OverrideUpdateParams,
     type OverrideListParams as OverrideListParams,

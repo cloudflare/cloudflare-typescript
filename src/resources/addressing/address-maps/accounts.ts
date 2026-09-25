@@ -19,23 +19,23 @@ export class BaseAccounts extends APIResource {
    * ```ts
    * const account =
    *   await client.addressing.addressMaps.accounts.update(
-   *     '055817b111884e0227e1be16a0be6ee0',
+   *     '258def64c72dae45f3e4c8516e2111f2',
    *     {
    *       account_id: '258def64c72dae45f3e4c8516e2111f2',
-   *       body: {},
+   *       address_map_id: '055817b111884e0227e1be16a0be6ee0',
    *     },
    *   );
    * ```
    */
   update(
-    addressMapID: string,
+    memberAccountID: string,
     params: AccountUpdateParams,
     options?: RequestOptions,
   ): APIPromise<AccountUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id, address_map_id } = params;
     return this._client.put(
-      path`/accounts/${account_id}/addressing/address_maps/${addressMapID}/accounts/${account_id}`,
-      { body: body, ...options },
+      path`/accounts/${account_id}/addressing/address_maps/${address_map_id}/accounts/${memberAccountID}`,
+      options,
     );
   }
 
@@ -46,19 +46,22 @@ export class BaseAccounts extends APIResource {
    * ```ts
    * const account =
    *   await client.addressing.addressMaps.accounts.delete(
-   *     '055817b111884e0227e1be16a0be6ee0',
-   *     { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   *     '258def64c72dae45f3e4c8516e2111f2',
+   *     {
+   *       account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *       address_map_id: '055817b111884e0227e1be16a0be6ee0',
+   *     },
    *   );
    * ```
    */
   delete(
-    addressMapID: string,
+    memberAccountID: string,
     params: AccountDeleteParams,
     options?: RequestOptions,
   ): APIPromise<AccountDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, address_map_id } = params;
     return this._client.delete(
-      path`/accounts/${account_id}/addressing/address_maps/${addressMapID}/accounts/${account_id}`,
+      path`/accounts/${account_id}/addressing/address_maps/${address_map_id}/accounts/${memberAccountID}`,
       options,
     );
   }
@@ -215,14 +218,14 @@ export namespace AccountDeleteResponse {
 
 export interface AccountUpdateParams {
   /**
-   * Path param: Identifier of a Cloudflare account.
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 
   /**
-   * Body param
+   * Identifier of an Address Map.
    */
-  body: unknown;
+  address_map_id: string;
 }
 
 export interface AccountDeleteParams {
@@ -230,6 +233,11 @@ export interface AccountDeleteParams {
    * Identifier of a Cloudflare account.
    */
   account_id: string;
+
+  /**
+   * Identifier of an Address Map.
+   */
+  address_map_id: string;
 }
 
 export declare namespace Accounts {

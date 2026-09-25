@@ -21,11 +21,11 @@ export class BaseSettings extends APIResource {
    * });
    * ```
    */
-  update(params: SettingUpdateParams, options?: RequestOptions): APIPromise<SettingUpdateResponse> {
+  update(params: SettingUpdateParams, options?: RequestOptions): APIPromise<SettingUpdateResponse | null> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/waiting_rooms/settings`, { body, ...options }) as APIPromise<{
-        result: SettingUpdateResponse;
+        result: SettingUpdateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,11 +40,11 @@ export class BaseSettings extends APIResource {
    * });
    * ```
    */
-  edit(params: SettingEditParams, options?: RequestOptions): APIPromise<SettingEditResponse> {
+  edit(params: SettingEditParams, options?: RequestOptions): APIPromise<SettingEditResponse | null> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/waiting_rooms/settings`, { body, ...options }) as APIPromise<{
-        result: SettingEditResponse;
+        result: SettingEditResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -59,11 +59,11 @@ export class BaseSettings extends APIResource {
    * });
    * ```
    */
-  get(params: SettingGetParams, options?: RequestOptions): APIPromise<SettingGetResponse> {
+  get(params: SettingGetParams, options?: RequestOptions): APIPromise<SettingGetResponse | null> {
     const { zone_id } = params;
     return (
       this._client.get(path`/zones/${zone_id}/waiting_rooms/settings`, options) as APIPromise<{
-        result: SettingGetResponse;
+        result: SettingGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }

@@ -44,7 +44,9 @@ export class BaseMitigations extends APIResource {
   }
 
   /**
-   * Request a review for mitigations on an account.
+   * Request a review for mitigations on an account. Repeating a request for a
+   * mitigation with an unresolved appeal is idempotent and returns that mitigation
+   * in the in-review state.
    *
    * @example
    * ```ts
@@ -98,7 +100,7 @@ export namespace MitigationListResponse {
     /**
      * The type of entity targeted by a mitigation.
      */
-    entity_type: 'url_pattern' | 'account' | 'zone';
+    entity_type: 'url_pattern' | 'account' | 'zone' | 'custom_expression';
 
     /**
      * The status of a mitigation
@@ -108,27 +110,7 @@ export namespace MitigationListResponse {
     /**
      * The type of mitigation applied to a reported entity.
      */
-    type:
-      | 'account_suspend'
-      | 'copyright_interstitial'
-      | 'geo_block'
-      | 'legal_block'
-      | 'malware_interstitial'
-      | 'misleading_interstitial'
-      | 'network_block'
-      | 'phishing_interstitial'
-      | 'playfairite_enforce'
-      | 'r2_takedown_account'
-      | 'r2_takedown_bucket'
-      | 'r2_takedown_object'
-      | 'rate_limit_cache'
-      | 'redirect_video_stream'
-      | 'zone_fint'
-      | 'registrar_freeze'
-      | 'registrar_parking'
-      | 'stream_block_account'
-      | 'user_suspend'
-      | 'workers_takedown_by_zone_id';
+    type: string;
   }
 }
 
@@ -149,7 +131,7 @@ export interface MitigationReviewResponse {
   /**
    * The type of entity targeted by a mitigation.
    */
-  entity_type: 'url_pattern' | 'account' | 'zone';
+  entity_type: 'url_pattern' | 'account' | 'zone' | 'custom_expression';
 
   /**
    * The status of a mitigation
@@ -159,27 +141,7 @@ export interface MitigationReviewResponse {
   /**
    * The type of mitigation applied to a reported entity.
    */
-  type:
-    | 'account_suspend'
-    | 'copyright_interstitial'
-    | 'geo_block'
-    | 'legal_block'
-    | 'malware_interstitial'
-    | 'misleading_interstitial'
-    | 'network_block'
-    | 'phishing_interstitial'
-    | 'playfairite_enforce'
-    | 'r2_takedown_account'
-    | 'r2_takedown_bucket'
-    | 'r2_takedown_object'
-    | 'rate_limit_cache'
-    | 'redirect_video_stream'
-    | 'zone_fint'
-    | 'registrar_freeze'
-    | 'registrar_parking'
-    | 'stream_block_account'
-    | 'user_suspend'
-    | 'workers_takedown_by_zone_id';
+  type: string;
 }
 
 export interface MitigationListParams extends V4PagePaginationParams {
@@ -201,7 +163,7 @@ export interface MitigationListParams extends V4PagePaginationParams {
   /**
    * Query param: Filter by the type of entity the mitigation impacts.
    */
-  entity_type?: 'url_pattern' | 'account' | 'zone';
+  entity_type?: 'url_pattern' | 'account' | 'zone' | 'custom_expression';
 
   /**
    * Query param: A property to sort by, followed by the order
@@ -224,29 +186,9 @@ export interface MitigationListParams extends V4PagePaginationParams {
   /**
    * Query param: Filter by the type of mitigation. This filter parameter can be
    * specified multiple times to include multiple types of mitigations in the result
-   * set, e.g. ?type=rate_limit_cache&type=legal_block.
+   * set.
    */
-  type?:
-    | 'account_suspend'
-    | 'copyright_interstitial'
-    | 'geo_block'
-    | 'legal_block'
-    | 'malware_interstitial'
-    | 'misleading_interstitial'
-    | 'network_block'
-    | 'phishing_interstitial'
-    | 'playfairite_enforce'
-    | 'r2_takedown_account'
-    | 'r2_takedown_bucket'
-    | 'r2_takedown_object'
-    | 'rate_limit_cache'
-    | 'redirect_video_stream'
-    | 'zone_fint'
-    | 'registrar_freeze'
-    | 'registrar_parking'
-    | 'stream_block_account'
-    | 'user_suspend'
-    | 'workers_takedown_by_zone_id';
+  type?: string;
 }
 
 export interface MitigationReviewParams {

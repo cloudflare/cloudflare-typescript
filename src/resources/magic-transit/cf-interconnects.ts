@@ -185,18 +185,18 @@ export namespace CfInterconnectUpdateResponse {
     description?: string;
 
     /**
-     * The configuration specific to GRE interconnects.
+     * Omitted in responses for version 1.5 interconnects.
      */
     gre?: ModifiedInterconnect.GRE;
 
-    health_check?: MagicTransitAPI.HealthCheck;
+    health_check?: ModifiedInterconnect.HealthCheck;
 
     /**
      * The IPv4 interface address for the interconnect. For MPLS Interconnects, use a
-     * /30 or /31 prefix. For GRE Interconnects, a /29, /30, or /31 prefix may be used.
-     * A /29 prefix is only allowed for v1.5 interconnects, and the address must be the
-     * .3 host of the subnet (the fourth address overall; the network address is not
-     * usable). Select the subnet from RFC 1918 or the approved link-local ranges.
+     * /30 or /31 prefix. For GRE Interconnects, a /30 or /31 prefix may be used.
+     * Version 1.5 interconnects require a /31 prefix and may also use a prefix from
+     * the account's authorized prefixes; otherwise, select the subnet from RFC 1918 or
+     * the approved link-local ranges.
      */
     interface_address?: string;
 
@@ -302,7 +302,7 @@ export namespace CfInterconnectUpdateResponse {
     }
 
     /**
-     * The configuration specific to GRE interconnects.
+     * Omitted in responses for version 1.5 interconnects.
      */
     export interface GRE {
       /**
@@ -310,6 +310,75 @@ export namespace CfInterconnectUpdateResponse {
        * of the Interconnect.
        */
       cloudflare_endpoint?: string;
+    }
+
+    export interface HealthCheck {
+      /**
+       * The direction of the flow of the healthcheck. Either unidirectional, where the
+       * probe comes to you via the interconnect and the result comes back to Cloudflare
+       * via the open Internet, or bidirectional where both the probe and result come and
+       * go via the interconnect.
+       */
+      direction?: 'unidirectional' | 'bidirectional';
+
+      /**
+       * Determines whether to run healthchecks for a tunnel.
+       */
+      enabled?: boolean;
+
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
+
+      /**
+       * The source IPv4 address used for bidirectional health checks. Supported only for
+       * version 1.5 interconnects. It is required when `direction` is `bidirectional`
+       * and must be omitted (and is cleared) when `direction` is `unidirectional`. The
+       * address must be within RFC1918 space, the approved link-local range
+       * 169.254.240.0/20, or the Cloudflare reserved range 198.41.199.224/27.
+       */
+      source?: string;
+
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+       * object form if the x-magic-new-hc-target header is set to true and string form
+       * if x-magic-new-hc-target is absent or set to false.
+       */
+      target?: HealthCheck.MagicHealthCheckTarget | string;
+
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
+    }
+
+    export namespace HealthCheck {
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target.
+       */
+      export interface MagicHealthCheckTarget {
+        /**
+         * The effective health check target. If 'saved' is empty, then this field will be
+         * populated with the calculated default value on GET requests. Ignored in POST,
+         * PUT, and PATCH requests.
+         */
+        effective?: string;
+
+        /**
+         * The saved health check target. Setting the value to the empty string indicates
+         * that the calculated default value will be used.
+         */
+        saved?: string;
+      }
     }
   }
 }
@@ -350,18 +419,18 @@ export namespace CfInterconnectListResponse {
     description?: string;
 
     /**
-     * The configuration specific to GRE interconnects.
+     * Omitted in responses for version 1.5 interconnects.
      */
     gre?: Interconnect.GRE;
 
-    health_check?: MagicTransitAPI.HealthCheck;
+    health_check?: Interconnect.HealthCheck;
 
     /**
      * The IPv4 interface address for the interconnect. For MPLS Interconnects, use a
-     * /30 or /31 prefix. For GRE Interconnects, a /29, /30, or /31 prefix may be used.
-     * A /29 prefix is only allowed for v1.5 interconnects, and the address must be the
-     * .3 host of the subnet (the fourth address overall; the network address is not
-     * usable). Select the subnet from RFC 1918 or the approved link-local ranges.
+     * /30 or /31 prefix. For GRE Interconnects, a /30 or /31 prefix may be used.
+     * Version 1.5 interconnects require a /31 prefix and may also use a prefix from
+     * the account's authorized prefixes; otherwise, select the subnet from RFC 1918 or
+     * the approved link-local ranges.
      */
     interface_address?: string;
 
@@ -467,7 +536,7 @@ export namespace CfInterconnectListResponse {
     }
 
     /**
-     * The configuration specific to GRE interconnects.
+     * Omitted in responses for version 1.5 interconnects.
      */
     export interface GRE {
       /**
@@ -475,6 +544,75 @@ export namespace CfInterconnectListResponse {
        * of the Interconnect.
        */
       cloudflare_endpoint?: string;
+    }
+
+    export interface HealthCheck {
+      /**
+       * The direction of the flow of the healthcheck. Either unidirectional, where the
+       * probe comes to you via the interconnect and the result comes back to Cloudflare
+       * via the open Internet, or bidirectional where both the probe and result come and
+       * go via the interconnect.
+       */
+      direction?: 'unidirectional' | 'bidirectional';
+
+      /**
+       * Determines whether to run healthchecks for a tunnel.
+       */
+      enabled?: boolean;
+
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
+
+      /**
+       * The source IPv4 address used for bidirectional health checks. Supported only for
+       * version 1.5 interconnects. It is required when `direction` is `bidirectional`
+       * and must be omitted (and is cleared) when `direction` is `unidirectional`. The
+       * address must be within RFC1918 space, the approved link-local range
+       * 169.254.240.0/20, or the Cloudflare reserved range 198.41.199.224/27.
+       */
+      source?: string;
+
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+       * object form if the x-magic-new-hc-target header is set to true and string form
+       * if x-magic-new-hc-target is absent or set to false.
+       */
+      target?: HealthCheck.MagicHealthCheckTarget | string;
+
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
+    }
+
+    export namespace HealthCheck {
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target.
+       */
+      export interface MagicHealthCheckTarget {
+        /**
+         * The effective health check target. If 'saved' is empty, then this field will be
+         * populated with the calculated default value on GET requests. Ignored in POST,
+         * PUT, and PATCH requests.
+         */
+        effective?: string;
+
+        /**
+         * The saved health check target. Setting the value to the empty string indicates
+         * that the calculated default value will be used.
+         */
+        saved?: string;
+      }
     }
   }
 }
@@ -517,18 +655,18 @@ export namespace CfInterconnectBulkUpdateResponse {
     description?: string;
 
     /**
-     * The configuration specific to GRE interconnects.
+     * Omitted in responses for version 1.5 interconnects.
      */
     gre?: ModifiedInterconnect.GRE;
 
-    health_check?: MagicTransitAPI.HealthCheck;
+    health_check?: ModifiedInterconnect.HealthCheck;
 
     /**
      * The IPv4 interface address for the interconnect. For MPLS Interconnects, use a
-     * /30 or /31 prefix. For GRE Interconnects, a /29, /30, or /31 prefix may be used.
-     * A /29 prefix is only allowed for v1.5 interconnects, and the address must be the
-     * .3 host of the subnet (the fourth address overall; the network address is not
-     * usable). Select the subnet from RFC 1918 or the approved link-local ranges.
+     * /30 or /31 prefix. For GRE Interconnects, a /30 or /31 prefix may be used.
+     * Version 1.5 interconnects require a /31 prefix and may also use a prefix from
+     * the account's authorized prefixes; otherwise, select the subnet from RFC 1918 or
+     * the approved link-local ranges.
      */
     interface_address?: string;
 
@@ -634,7 +772,7 @@ export namespace CfInterconnectBulkUpdateResponse {
     }
 
     /**
-     * The configuration specific to GRE interconnects.
+     * Omitted in responses for version 1.5 interconnects.
      */
     export interface GRE {
       /**
@@ -642,6 +780,75 @@ export namespace CfInterconnectBulkUpdateResponse {
        * of the Interconnect.
        */
       cloudflare_endpoint?: string;
+    }
+
+    export interface HealthCheck {
+      /**
+       * The direction of the flow of the healthcheck. Either unidirectional, where the
+       * probe comes to you via the interconnect and the result comes back to Cloudflare
+       * via the open Internet, or bidirectional where both the probe and result come and
+       * go via the interconnect.
+       */
+      direction?: 'unidirectional' | 'bidirectional';
+
+      /**
+       * Determines whether to run healthchecks for a tunnel.
+       */
+      enabled?: boolean;
+
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
+
+      /**
+       * The source IPv4 address used for bidirectional health checks. Supported only for
+       * version 1.5 interconnects. It is required when `direction` is `bidirectional`
+       * and must be omitted (and is cleared) when `direction` is `unidirectional`. The
+       * address must be within RFC1918 space, the approved link-local range
+       * 169.254.240.0/20, or the Cloudflare reserved range 198.41.199.224/27.
+       */
+      source?: string;
+
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+       * object form if the x-magic-new-hc-target header is set to true and string form
+       * if x-magic-new-hc-target is absent or set to false.
+       */
+      target?: HealthCheck.MagicHealthCheckTarget | string;
+
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
+    }
+
+    export namespace HealthCheck {
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target.
+       */
+      export interface MagicHealthCheckTarget {
+        /**
+         * The effective health check target. If 'saved' is empty, then this field will be
+         * populated with the calculated default value on GET requests. Ignored in POST,
+         * PUT, and PATCH requests.
+         */
+        effective?: string;
+
+        /**
+         * The saved health check target. Setting the value to the empty string indicates
+         * that the calculated default value will be used.
+         */
+        saved?: string;
+      }
     }
   }
 }
@@ -682,18 +889,18 @@ export namespace CfInterconnectGetResponse {
     description?: string;
 
     /**
-     * The configuration specific to GRE interconnects.
+     * Omitted in responses for version 1.5 interconnects.
      */
     gre?: Interconnect.GRE;
 
-    health_check?: MagicTransitAPI.HealthCheck;
+    health_check?: Interconnect.HealthCheck;
 
     /**
      * The IPv4 interface address for the interconnect. For MPLS Interconnects, use a
-     * /30 or /31 prefix. For GRE Interconnects, a /29, /30, or /31 prefix may be used.
-     * A /29 prefix is only allowed for v1.5 interconnects, and the address must be the
-     * .3 host of the subnet (the fourth address overall; the network address is not
-     * usable). Select the subnet from RFC 1918 or the approved link-local ranges.
+     * /30 or /31 prefix. For GRE Interconnects, a /30 or /31 prefix may be used.
+     * Version 1.5 interconnects require a /31 prefix and may also use a prefix from
+     * the account's authorized prefixes; otherwise, select the subnet from RFC 1918 or
+     * the approved link-local ranges.
      */
     interface_address?: string;
 
@@ -799,7 +1006,7 @@ export namespace CfInterconnectGetResponse {
     }
 
     /**
-     * The configuration specific to GRE interconnects.
+     * Omitted in responses for version 1.5 interconnects.
      */
     export interface GRE {
       /**
@@ -807,6 +1014,75 @@ export namespace CfInterconnectGetResponse {
        * of the Interconnect.
        */
       cloudflare_endpoint?: string;
+    }
+
+    export interface HealthCheck {
+      /**
+       * The direction of the flow of the healthcheck. Either unidirectional, where the
+       * probe comes to you via the interconnect and the result comes back to Cloudflare
+       * via the open Internet, or bidirectional where both the probe and result come and
+       * go via the interconnect.
+       */
+      direction?: 'unidirectional' | 'bidirectional';
+
+      /**
+       * Determines whether to run healthchecks for a tunnel.
+       */
+      enabled?: boolean;
+
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
+
+      /**
+       * The source IPv4 address used for bidirectional health checks. Supported only for
+       * version 1.5 interconnects. It is required when `direction` is `bidirectional`
+       * and must be omitted (and is cleared) when `direction` is `unidirectional`. The
+       * address must be within RFC1918 space, the approved link-local range
+       * 169.254.240.0/20, or the Cloudflare reserved range 198.41.199.224/27.
+       */
+      source?: string;
+
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+       * object form if the x-magic-new-hc-target header is set to true and string form
+       * if x-magic-new-hc-target is absent or set to false.
+       */
+      target?: HealthCheck.MagicHealthCheckTarget | string;
+
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
+    }
+
+    export namespace HealthCheck {
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target.
+       */
+      export interface MagicHealthCheckTarget {
+        /**
+         * The effective health check target. If 'saved' is empty, then this field will be
+         * populated with the calculated default value on GET requests. Ignored in POST,
+         * PUT, and PATCH requests.
+         */
+        effective?: string;
+
+        /**
+         * The saved health check target. Setting the value to the empty string indicates
+         * that the calculated default value will be used.
+         */
+        saved?: string;
+      }
     }
   }
 }
@@ -835,22 +1111,22 @@ export interface CfInterconnectUpdateParams {
   description?: string;
 
   /**
-   * Body param: The configuration specific to GRE interconnects.
+   * Body param: Not configurable for version 1.5 interconnects; supplying it returns
+   * an error.
    */
   gre?: CfInterconnectUpdateParams.GRE;
 
   /**
    * Body param
    */
-  health_check?: MagicTransitAPI.HealthCheckParam;
+  health_check?: CfInterconnectUpdateParams.HealthCheck;
 
   /**
    * Body param: The IPv4 interface address for the interconnect. For MPLS
-   * Interconnects, use a /30 or /31 prefix. For GRE Interconnects, a /29, /30, or
-   * /31 prefix may be used. A /29 prefix is only allowed for v1.5 interconnects, and
-   * the address must be the .3 host of the subnet (the fourth address overall; the
-   * network address is not usable). Select the subnet from RFC 1918 or the approved
-   * link-local ranges.
+   * Interconnects, use a /30 or /31 prefix. For GRE Interconnects, a /30 or /31
+   * prefix may be used. Version 1.5 interconnects require a /31 prefix and may also
+   * use a prefix from the account's authorized prefixes; otherwise, select the
+   * subnet from RFC 1918 or the approved link-local ranges.
    */
   interface_address?: string;
 
@@ -943,7 +1219,7 @@ export namespace CfInterconnectUpdateParams {
   }
 
   /**
-   * The configuration specific to GRE interconnects.
+   * Not configurable for version 1.5 interconnects; supplying it returns an error.
    */
   export interface GRE {
     /**
@@ -951,6 +1227,68 @@ export namespace CfInterconnectUpdateParams {
      * of the Interconnect.
      */
     cloudflare_endpoint?: string;
+  }
+
+  export interface HealthCheck {
+    /**
+     * The direction of the flow of the healthcheck. Either unidirectional, where the
+     * probe comes to you via the interconnect and the result comes back to Cloudflare
+     * via the open Internet, or bidirectional where both the probe and result come and
+     * go via the interconnect.
+     */
+    direction?: 'unidirectional' | 'bidirectional';
+
+    /**
+     * Determines whether to run healthchecks for a tunnel.
+     */
+    enabled?: boolean;
+
+    /**
+     * How frequent the health check is run. The default value is `mid`.
+     */
+    rate?: MagicTransitAPI.HealthCheckRateParam;
+
+    /**
+     * The source IPv4 address used for bidirectional health checks. Supported only for
+     * version 1.5 interconnects. It is required when `direction` is `bidirectional`
+     * and must be omitted (and is cleared) when `direction` is `unidirectional`. The
+     * address must be within RFC1918 space, the approved link-local range
+     * 169.254.240.0/20, or the Cloudflare reserved range 198.41.199.224/27.
+     */
+    source?: string;
+
+    /**
+     * The destination address in a request type health check. After the healthcheck is
+     * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+     * to this address. This field defaults to `customer_gre_endpoint address`. This
+     * field is ignored for bidirectional healthchecks as the interface_address (not
+     * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+     * object form if the x-magic-new-hc-target header is set to true and string form
+     * if x-magic-new-hc-target is absent or set to false.
+     */
+    target?: HealthCheck.MagicHealthCheckTarget | string;
+
+    /**
+     * The type of healthcheck to run, reply or request. The default value is `reply`.
+     */
+    type?: MagicTransitAPI.HealthCheckTypeParam;
+  }
+
+  export namespace HealthCheck {
+    /**
+     * The destination address in a request type health check. After the healthcheck is
+     * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+     * to this address. This field defaults to `customer_gre_endpoint address`. This
+     * field is ignored for bidirectional healthchecks as the interface_address (not
+     * assigned to the Cloudflare side of the tunnel) is used as the target.
+     */
+    export interface MagicHealthCheckTarget {
+      /**
+       * The saved health check target. Setting the value to the empty string indicates
+       * that the calculated default value will be used.
+       */
+      saved?: string;
+    }
   }
 }
 

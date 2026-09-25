@@ -177,7 +177,7 @@ export namespace ServiceBinding {
      * When a binding has been deployed to a majority of Cloudflare datacenters, the
      * binding will become active and can be used with its associated service.
      */
-    state?: 'provisioning' | 'active';
+    state?: 'provisioning' | 'active' | 'magic_transit_route_missing';
   }
 }
 

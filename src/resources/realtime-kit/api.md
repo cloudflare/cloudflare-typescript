@@ -51,6 +51,7 @@ Types:
 - <code><a href="./src/resources/realtime-kit/presets.ts">PresetDeleteResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/presets.ts">PresetGetResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/presets.ts">PresetGetPresetByIDResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/presets.ts">PresetReplacePresetByIDResponse</a></code>
 
 Methods:
 
@@ -59,6 +60,7 @@ Methods:
 - <code title="delete /accounts/{account_id}/realtime/kit/{app_id}/presets/{preset_id}">client.realtimeKit.presets.<a href="./src/resources/realtime-kit/presets.ts">delete</a>(presetID, { ...params }) -> PresetDeleteResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/presets">client.realtimeKit.presets.<a href="./src/resources/realtime-kit/presets.ts">get</a>(appID, { ...params }) -> PresetGetResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/presets/{preset_id}">client.realtimeKit.presets.<a href="./src/resources/realtime-kit/presets.ts">getPresetByID</a>(presetID, { ...params }) -> PresetGetPresetByIDResponse</code>
+- <code title="put /accounts/{account_id}/realtime/kit/{app_id}/presets/{preset_id}">client.realtimeKit.presets.<a href="./src/resources/realtime-kit/presets.ts">replacePresetByID</a>(presetID, { ...params }) -> PresetReplacePresetByIDResponse</code>
 
 ## Sessions
 
@@ -146,7 +148,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamCreateIndependentLivestreamResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetActiveLivestreamsForLivestreamIDResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetAllLivestreamsResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetLivestreamAnalyticsCompleteResponse</a></code>
@@ -160,7 +161,6 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/livestreams">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">createIndependentLivestream</a>(appID, { ...params }) -> LivestreamCreateIndependentLivestreamResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams/{livestream_id}/active-livestream-session">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getActiveLivestreamsForLivestreamID</a>(livestreamID, { ...params }) -> LivestreamGetActiveLivestreamsForLivestreamIDResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getAllLivestreams</a>(appID, { ...params }) -> LivestreamGetAllLivestreamsResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/analytics/livestreams/overall">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getLivestreamAnalyticsComplete</a>(appID, { ...params }) -> LivestreamGetLivestreamAnalyticsCompleteResponse</code>

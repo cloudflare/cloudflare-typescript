@@ -10,14 +10,24 @@ TEST_PATHS=(
 	tests/api-resources/accounts/accounts.test.ts
 	tests/api-resources/accounts/members.test.ts
 	tests/api-resources/accounts/roles.test.ts
-	tests/api-resources/accounts/subscriptions.test.ts
+	tests/api-resources/accounts/subscriptions/subscriptions.test.ts
+	tests/api-resources/accounts/subscriptions/cancel-reason.test.ts
+	tests/api-resources/accounts/subscriptions/actions.test.ts
+	tests/api-resources/accounts/subscriptions/bulk.test.ts
 	tests/api-resources/accounts/tokens/tokens.test.ts
 	tests/api-resources/accounts/tokens/permission-groups.test.ts
 	tests/api-resources/accounts/tokens/value.test.ts
 	tests/api-resources/accounts/logs/logs.test.ts
 	tests/api-resources/accounts/logs/audit.test.ts
+	tests/api-resources/accounts/entitlements.test.ts
 	tests/api-resources/accounts/speed-settings/speed-settings.test.ts
 	tests/api-resources/accounts/speed-settings/transformations.test.ts
+	tests/api-resources/accounts/payment-methods.test.ts
+	tests/api-resources/accounts/pay-invoice.test.ts
+	tests/api-resources/accounts/pay-bad-debt.test.ts
+	tests/api-resources/accounts/receipts.test.ts
+	tests/api-resources/accounts/invoices.test.ts
+	tests/api-resources/accounts/client-secret.test.ts
 	tests/api-resources/organizations/organizations.test.ts
 	tests/api-resources/organizations/organization-profile.test.ts
 	tests/api-resources/organizations/logs/logs.test.ts
@@ -39,6 +49,9 @@ TEST_PATHS=(
 	tests/api-resources/user/billing/profile.test.ts
 	tests/api-resources/user/invites.test.ts
 	tests/api-resources/user/organizations.test.ts
+	tests/api-resources/user/spectrum-analytics/spectrum-analytics.test.ts
+	tests/api-resources/user/spectrum-analytics/zones/zones.test.ts
+	tests/api-resources/user/spectrum-analytics/zones/reports.test.ts
 	tests/api-resources/user/subscriptions.test.ts
 	tests/api-resources/user/tenants.test.ts
 	tests/api-resources/user/tokens/tokens.test.ts
@@ -46,15 +59,21 @@ TEST_PATHS=(
 	tests/api-resources/user/tokens/value.test.ts
 	tests/api-resources/zones/zones.test.ts
 	tests/api-resources/zones/activation-check.test.ts
+	tests/api-resources/zones/observability/observability.test.ts
+	tests/api-resources/zones/observability/tracing/tracing.test.ts
+	tests/api-resources/zones/observability/tracing/settings.test.ts
+	tests/api-resources/zones/observability/tracing/rules.test.ts
 	tests/api-resources/zones/settings.test.ts
 	tests/api-resources/zones/transformations-allowed-origins.test.ts
 	tests/api-resources/zones/transformations-c2pa.test.ts
+	tests/api-resources/zones/nel.test.ts
 	tests/api-resources/zones/environments.test.ts
 	tests/api-resources/zones/custom-nameservers.test.ts
 	tests/api-resources/zones/holds.test.ts
 	tests/api-resources/zones/subscriptions.test.ts
 	tests/api-resources/zones/plans.test.ts
 	tests/api-resources/zones/rate-plans.test.ts
+	tests/api-resources/zones/entitlements.test.ts
 	tests/api-resources/zones/ct/ct.test.ts
 	tests/api-resources/zones/ct/alerting.test.ts
 	tests/api-resources/load-balancers/load-balancers.test.ts
@@ -79,6 +98,7 @@ TEST_PATHS=(
 	tests/api-resources/ssl/analyze.test.ts
 	tests/api-resources/ssl/certificate-packs/certificate-packs.test.ts
 	tests/api-resources/ssl/certificate-packs/quota.test.ts
+	tests/api-resources/ssl/recommendations.test.ts
 	tests/api-resources/ssl/auto-origin-tls-kex.test.ts
 	tests/api-resources/ssl/universal/universal.test.ts
 	tests/api-resources/ssl/universal/settings.test.ts
@@ -150,6 +170,7 @@ TEST_PATHS=(
 	tests/api-resources/email-security/settings/settings.test.ts
 	tests/api-resources/email-security/settings/allow-policies.test.ts
 	tests/api-resources/email-security/settings/block-senders.test.ts
+	tests/api-resources/email-security/settings/content-policies.test.ts
 	tests/api-resources/email-security/settings/domains.test.ts
 	tests/api-resources/email-security/settings/impersonation-registry.test.ts
 	tests/api-resources/email-security/settings/sending-domain-restrictions.test.ts
@@ -167,6 +188,7 @@ TEST_PATHS=(
 	tests/api-resources/email-routing/account-rules.test.ts
 	tests/api-resources/email-routing/addresses.test.ts
 	tests/api-resources/email-sending/email-sending.test.ts
+	tests/api-resources/email-sending/suppressions.test.ts
 	tests/api-resources/email-sending/subdomains/subdomains.test.ts
 	tests/api-resources/email-sending/subdomains/dns.test.ts
 	tests/api-resources/filters.test.ts
@@ -190,6 +212,9 @@ TEST_PATHS=(
 	tests/api-resources/logpush/edge.test.ts
 	tests/api-resources/logpush/jobs.test.ts
 	tests/api-resources/logpush/ownership.test.ts
+	tests/api-resources/logpush/transformers/transformers.test.ts
+	tests/api-resources/logpush/transformers/content.test.ts
+	tests/api-resources/logpush/transformers/versions.test.ts
 	tests/api-resources/logpush/validate.test.ts
 	tests/api-resources/logs/logs.test.ts
 	tests/api-resources/logs/log-explorer/log-explorer.test.ts
@@ -304,6 +329,7 @@ TEST_PATHS=(
 	tests/api-resources/spectrum/analytics/events/bytimes.test.ts
 	tests/api-resources/spectrum/analytics/events/summaries.test.ts
 	tests/api-resources/spectrum/apps.test.ts
+	tests/api-resources/spectrum/protocols.test.ts
 	tests/api-resources/addressing/addressing.test.ts
 	tests/api-resources/addressing/regional-hostnames/regional-hostnames.test.ts
 	tests/api-resources/addressing/regional-hostnames/regions.test.ts
@@ -324,8 +350,14 @@ TEST_PATHS=(
 	tests/api-resources/dls/regional-services/prefix-bindings.test.ts
 	tests/api-resources/audit-logs.test.ts
 	tests/api-resources/billing/billing.test.ts
-	tests/api-resources/billing/profiles.test.ts
+	tests/api-resources/billing/profiles/profiles.test.ts
+	tests/api-resources/billing/profiles/payment-method.test.ts
 	tests/api-resources/billing/usage.test.ts
+	tests/api-resources/billing/credits.test.ts
+	tests/api-resources/billing/history.test.ts
+	tests/api-resources/billing/bad-debt.test.ts
+	tests/api-resources/billing/unpaid-invoice.test.ts
+	tests/api-resources/billing/rate-plans.test.ts
 	tests/api-resources/brand-protection/brand-protection.test.ts
 	tests/api-resources/brand-protection/queries.test.ts
 	tests/api-resources/brand-protection/matches.test.ts
@@ -372,6 +404,7 @@ TEST_PATHS=(
 	tests/api-resources/magic-transit/gre-tunnels.test.ts
 	tests/api-resources/magic-transit/ipsec-tunnels.test.ts
 	tests/api-resources/magic-transit/routes.test.ts
+	tests/api-resources/magic-transit/bgp-filter-profiles.test.ts
 	tests/api-resources/magic-transit/sites/sites.test.ts
 	tests/api-resources/magic-transit/sites/acls.test.ts
 	tests/api-resources/magic-transit/sites/lans.test.ts
@@ -439,6 +472,8 @@ TEST_PATHS=(
 	tests/api-resources/registrar/registration-status.test.ts
 	tests/api-resources/registrar/update-status.test.ts
 	tests/api-resources/registrar/extensions.test.ts
+	tests/api-resources/registrar/transfer-in.test.ts
+	tests/api-resources/registrar/transfer-in-status.test.ts
 	tests/api-resources/registrar-sandbox/registrar-sandbox.test.ts
 	tests/api-resources/registrar-sandbox/registrations.test.ts
 	tests/api-resources/registrar-sandbox/registration-status.test.ts
@@ -594,6 +629,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/casb/posture/content.test.ts
 	tests/api-resources/zero-trust/casb/posture/remediations/remediations.test.ts
 	tests/api-resources/zero-trust/casb/posture/remediations/jobs.test.ts
+	tests/api-resources/zero-trust/casb/posture/policies.test.ts
 	tests/api-resources/zero-trust/casb/posture/webhooks/webhooks.test.ts
 	tests/api-resources/zero-trust/casb/posture/webhooks/jobs.test.ts
 	tests/api-resources/zero-trust/dex/dex.test.ts
@@ -868,6 +904,11 @@ TEST_PATHS=(
 	tests/api-resources/moq/moq.test.ts
 	tests/api-resources/moq/relays/relays.test.ts
 	tests/api-resources/moq/relays/tokens.test.ts
+	tests/api-resources/managed-defense/managed-defense.test.ts
+	tests/api-resources/managed-defense/vulnerability-discovery/vulnerability-discovery.test.ts
+	tests/api-resources/managed-defense/vulnerability-discovery/repositories.test.ts
+	tests/api-resources/managed-defense/vulnerability-discovery/scans.test.ts
+	tests/api-resources/managed-defense/vulnerability-discovery/reports.test.ts
 	tests/api-resources/cloudforce-one/cloudforce-one.test.ts
 	tests/api-resources/cloudforce-one/scans/scans.test.ts
 	tests/api-resources/cloudforce-one/scans/results.test.ts
@@ -960,6 +1001,8 @@ TEST_PATHS=(
 	tests/api-resources/ai-security/custom-topics.test.ts
 	tests/api-resources/csam-scanner.test.ts
 	tests/api-resources/abuse-reports/abuse-reports.test.ts
+	tests/api-resources/abuse-reports/submitted/submitted.test.ts
+	tests/api-resources/abuse-reports/submitted/emails.test.ts
 	tests/api-resources/abuse-reports/mitigations.test.ts
 	tests/api-resources/ai/ai.test.ts
 	tests/api-resources/ai/finetunes/finetunes.test.ts
@@ -1002,6 +1045,7 @@ TEST_PATHS=(
 	tests/api-resources/browser-rendering/devtools/devtools.test.ts
 	tests/api-resources/browser-rendering/devtools/session.test.ts
 	tests/api-resources/browser-rendering/devtools/browser/browser.test.ts
+	tests/api-resources/browser-rendering/devtools/browser/live-view.test.ts
 	tests/api-resources/browser-rendering/devtools/browser/page.test.ts
 	tests/api-resources/browser-rendering/devtools/browser/targets.test.ts
 	tests/api-resources/custom-pages/custom-pages.test.ts
@@ -1021,6 +1065,7 @@ TEST_PATHS=(
 	tests/api-resources/token-validation/configuration/configuration.test.ts
 	tests/api-resources/token-validation/configuration/credentials.test.ts
 	tests/api-resources/token-validation/rules.test.ts
+	tests/api-resources/field-extractors.test.ts
 	tests/index.test.ts
 )
 

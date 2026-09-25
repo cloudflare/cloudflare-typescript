@@ -56,6 +56,7 @@ const runTests = (
         { key: 'X-Custom-Header', value: 'value' },
       ],
       signing_secret: 'my-secret-key',
+      status: 'enabled',
     });
   });
 

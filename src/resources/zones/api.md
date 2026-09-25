@@ -24,12 +24,43 @@ Methods:
 
 - <code title="put /zones/{zone_id}/activation_check">client.zones.activationCheck.<a href="./src/resources/zones/activation-check.ts">trigger</a>({ ...params }) -> ActivationCheckTriggerResponse</code>
 
+## Observability
+
+### Tracing
+
+#### Settings
+
+Types:
+
+- <code><a href="./src/resources/zones/observability/tracing/settings.ts">SettingUpdateResponse</a></code>
+- <code><a href="./src/resources/zones/observability/tracing/settings.ts">SettingDeleteResponse</a></code>
+- <code><a href="./src/resources/zones/observability/tracing/settings.ts">SettingGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/observability/tracing/settings">client.zones.observability.tracing.settings.<a href="./src/resources/zones/observability/tracing/settings.ts">update</a>({ ...params }) -> SettingUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/observability/tracing/settings">client.zones.observability.tracing.settings.<a href="./src/resources/zones/observability/tracing/settings.ts">delete</a>({ ...params }) -> SettingDeleteResponse</code>
+- <code title="get /zones/{zone_id}/observability/tracing/settings">client.zones.observability.tracing.settings.<a href="./src/resources/zones/observability/tracing/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
+
+#### Rules
+
+Types:
+
+- <code><a href="./src/resources/zones/observability/tracing/rules.ts">RuleUpdateResponse</a></code>
+- <code><a href="./src/resources/zones/observability/tracing/rules.ts">RuleDeleteResponse</a></code>
+- <code><a href="./src/resources/zones/observability/tracing/rules.ts">RuleGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/observability/tracing/rules">client.zones.observability.tracing.rules.<a href="./src/resources/zones/observability/tracing/rules.ts">update</a>({ ...params }) -> RuleUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/observability/tracing/rules">client.zones.observability.tracing.rules.<a href="./src/resources/zones/observability/tracing/rules.ts">delete</a>({ ...params }) -> RuleDeleteResponse</code>
+- <code title="get /zones/{zone_id}/observability/tracing/rules">client.zones.observability.tracing.rules.<a href="./src/resources/zones/observability/tracing/rules.ts">get</a>({ ...params }) -> RuleGetResponse</code>
+
 ## Settings
 
 Types:
 
 - <code><a href="./src/resources/zones/settings.ts">AdvancedDDoS</a></code>
-- <code><a href="./src/resources/zones/settings.ts">Aegis</a></code>
 - <code><a href="./src/resources/zones/settings.ts">AlwaysOnline</a></code>
 - <code><a href="./src/resources/zones/settings.ts">AlwaysUseHTTPS</a></code>
 - <code><a href="./src/resources/zones/settings.ts">AutomaticHTTPSRewrites</a></code>
@@ -107,6 +138,17 @@ Methods:
 
 - <code title="patch /zones/{zone_id}/settings/transformations_c2pa">client.zones.transformationsC2pa.<a href="./src/resources/zones/transformations-c2pa.ts">edit</a>({ ...params }) -> TransformationsC2pa</code>
 - <code title="get /zones/{zone_id}/settings/transformations_c2pa">client.zones.transformationsC2pa.<a href="./src/resources/zones/transformations-c2pa.ts">get</a>({ ...params }) -> TransformationsC2pa</code>
+
+## NEL
+
+Types:
+
+- <code><a href="./src/resources/zones/nel.ts">Setting</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/settings/nel">client.zones.nel.<a href="./src/resources/zones/nel.ts">edit</a>({ ...params }) -> Setting</code>
+- <code title="get /zones/{zone_id}/settings/nel">client.zones.nel.<a href="./src/resources/zones/nel.ts">get</a>({ ...params }) -> Setting</code>
 
 ## Environments
 
@@ -187,6 +229,16 @@ Types:
 Methods:
 
 - <code title="get /zones/{zone_id}/available_rate_plans">client.zones.ratePlans.<a href="./src/resources/zones/rate-plans.ts">get</a>({ ...params }) -> RatePlanGetResponsesSinglePage</code>
+
+## Entitlements
+
+Types:
+
+- <code><a href="./src/resources/zones/entitlements.ts">EntitlementListResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/entitlements">client.zones.entitlements.<a href="./src/resources/zones/entitlements.ts">list</a>({ ...params }) -> EntitlementListResponsesSinglePage</code>
 
 ## CT
 

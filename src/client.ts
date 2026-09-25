@@ -86,6 +86,7 @@ import { EmailAuth } from './resources/email-auth/email-auth';
 import { EmailRouting } from './resources/email-routing/email-routing';
 import { EmailSecurity } from './resources/email-security/email-security';
 import { EmailSending } from './resources/email-sending/email-sending';
+import { FieldExtractors } from './resources/field-extractors/field-extractors';
 import { Filters } from './resources/filters/filters';
 import { Firewall } from './resources/firewall/firewall';
 import { Flagship } from './resources/flagship/flagship';
@@ -107,6 +108,7 @@ import { Logs } from './resources/logs/logs';
 import { MagicCloudNetworking } from './resources/magic-cloud-networking/magic-cloud-networking';
 import { MagicNetworkMonitoring } from './resources/magic-network-monitoring/magic-network-monitoring';
 import { MagicTransit } from './resources/magic-transit/magic-transit';
+import { ManagedDefense } from './resources/managed-defense/managed-defense';
 import { ManagedTransforms } from './resources/managed-transforms/managed-transforms';
 import { Memberships } from './resources/memberships/memberships';
 import { MoQ } from './resources/moq/moq';
@@ -1311,6 +1313,7 @@ export class Cloudflare extends BaseCloudflare {
   realtimeKit: API.RealtimeKit = new API.RealtimeKit(this);
   calls: API.Calls = new API.Calls(this);
   moq: API.MoQ = new API.MoQ(this);
+  managedDefense: API.ManagedDefense = new API.ManagedDefense(this);
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
   aiGateway: API.AIGateway = new API.AIGateway(this);
   flagship: API.Flagship = new API.Flagship(this);
@@ -1336,6 +1339,7 @@ export class Cloudflare extends BaseCloudflare {
   pipelines: API.Pipelines = new API.Pipelines(this);
   schemaValidation: API.SchemaValidation = new API.SchemaValidation(this);
   tokenValidation: API.TokenValidation = new API.TokenValidation(this);
+  fieldExtractors: API.FieldExtractors = new API.FieldExtractors(this);
 }
 
 Cloudflare.Accounts = Accounts;
@@ -1434,6 +1438,7 @@ Cloudflare.Snippets = Snippets;
 Cloudflare.RealtimeKit = RealtimeKit;
 Cloudflare.Calls = Calls;
 Cloudflare.MoQ = MoQ;
+Cloudflare.ManagedDefense = ManagedDefense;
 Cloudflare.CloudforceOne = CloudforceOne;
 Cloudflare.AIGateway = AIGateway;
 Cloudflare.Flagship = Flagship;
@@ -1459,6 +1464,7 @@ Cloudflare.SecretsStore = SecretsStore;
 Cloudflare.Pipelines = Pipelines;
 Cloudflare.SchemaValidation = SchemaValidation;
 Cloudflare.TokenValidation = TokenValidation;
+Cloudflare.FieldExtractors = FieldExtractors;
 
 export declare namespace Cloudflare {
   export type RequestOptions = Opts.RequestOptions;
@@ -1697,6 +1703,8 @@ export declare namespace Cloudflare {
 
   export { MoQ as MoQ };
 
+  export { ManagedDefense as ManagedDefense };
+
   export { CloudforceOne as CloudforceOne };
 
   export { AIGateway as AIGateway };
@@ -1746,6 +1754,8 @@ export declare namespace Cloudflare {
   export { SchemaValidation as SchemaValidation };
 
   export { TokenValidation as TokenValidation };
+
+  export { FieldExtractors as FieldExtractors };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;

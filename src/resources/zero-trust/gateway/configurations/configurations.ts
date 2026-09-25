@@ -896,7 +896,7 @@ export interface ConfigurationGetResponse {
 
 export interface ConfigurationUpdateParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -908,7 +908,7 @@ export interface ConfigurationUpdateParams {
 
 export interface ConfigurationEditParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -919,6 +919,9 @@ export interface ConfigurationEditParams {
 }
 
 export interface ConfigurationGetParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 

@@ -111,7 +111,12 @@ export interface DMARCReportEditResponse {
    * at \_dmarc.{zone} that points to a valid DMARC record is therefore healthy; the
    * cname-on-dmarc-record value means the CNAME resolves to no DMARC record at all.
    */
-  status?: 'missing-dmarc-report' | 'multiple-dmarc-reports' | 'missing-dmarc-rua' | 'cname-on-dmarc-record';
+  status?:
+    | 'missing-dmarc-report'
+    | 'multiple-dmarc-reports'
+    | 'missing-dmarc-rua'
+    | 'cname-on-dmarc-record'
+    | 'unauthorized-reporting-domain';
 
   /**
    * @deprecated Use `zone_id` instead.
@@ -185,18 +190,23 @@ export namespace DMARCReportEditResponse {
     bimi_records?: Array<Records.BimiRecord>;
 
     /**
-     * CNAME records for DKIM
+     * CNAME records for DKIM selectors. Each selector is resolved independently; when
+     * a selector's CNAME resolves to a DKIM TXT record, the API returns that record's
+     * content in the `resolved` field of the corresponding entry.
      */
     cname_dkim_records?: Array<Records.CnamedkimRecord>;
 
     /**
      * CNAME records at \_dmarc. When such a CNAME resolves to a DMARC TXT record, the
-     * API returns that record in resolved_dmarc_records.
+     * API returns that record's content in the `resolved` field of the corresponding
+     * entry.
      */
     cname_dmarc_records?: Array<Records.CnamedmarcRecord>;
 
     /**
-     * CNAME records for SPF
+     * CNAME records at the zone apex. When such a CNAME resolves to an SPF TXT record,
+     * the API returns that record's content in the `resolved` field of the
+     * corresponding entry.
      */
     cname_spf_records?: Array<Records.CnamespfRecord>;
 
@@ -211,9 +221,8 @@ export namespace DMARCReportEditResponse {
     dmarc_records?: Array<Records.DMARCRecord>;
 
     /**
-     * DMARC records that a recursive lookup of \_dmarc.{zone} returned. The API
-     * populates this only when the zone lacks a DMARC TXT record of its own, which
-     * usually means a CNAME delegates DMARC to another zone.
+     * @deprecated Use the `resolved` field on the corresponding entry in
+     * cname_dmarc_records instead.
      */
     resolved_dmarc_records?: Array<Records.ResolvedDMARCRecord>;
 
@@ -242,6 +251,16 @@ export namespace DMARCReportEditResponse {
        * DNS record name
        */
       name?: string;
+
+      /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
 
       /**
        * Time to live in seconds
@@ -274,6 +293,16 @@ export namespace DMARCReportEditResponse {
       name?: string;
 
       /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
+
+      /**
        * Time to live in seconds
        */
       ttl?: number;
@@ -302,6 +331,16 @@ export namespace DMARCReportEditResponse {
        * DNS record name
        */
       name?: string;
+
+      /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
 
       /**
        * Time to live in seconds
@@ -334,6 +373,16 @@ export namespace DMARCReportEditResponse {
       name?: string;
 
       /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
+
+      /**
        * Time to live in seconds
        */
       ttl?: number;
@@ -362,6 +411,16 @@ export namespace DMARCReportEditResponse {
        * DNS record name
        */
       name?: string;
+
+      /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
 
       /**
        * Time to live in seconds
@@ -394,6 +453,16 @@ export namespace DMARCReportEditResponse {
       name?: string;
 
       /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
+
+      /**
        * Time to live in seconds
        */
       ttl?: number;
@@ -405,10 +474,10 @@ export namespace DMARCReportEditResponse {
     }
 
     /**
-     * A DMARC TXT record that a recursive lookup of \_dmarc.{zone} returned. Such a
-     * record usually lives in another zone outside this account's control, so this
-     * schema omits the DNS record ID. The API therefore treats such a record as
-     * read-only.
+     * @deprecated A DMARC TXT record that a recursive lookup of \_dmarc.{zone}
+     * returned. Such a record usually lives in another zone outside this account's
+     * control, so this schema omits the DNS record ID. The API therefore treats such a
+     * record as read-only.
      */
     export interface ResolvedDMARCRecord {
       /**
@@ -440,6 +509,16 @@ export namespace DMARCReportEditResponse {
        * DNS record name
        */
       name?: string;
+
+      /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
 
       /**
        * Time to live in seconds
@@ -510,7 +589,12 @@ export interface DMARCReportGetResponse {
    * at \_dmarc.{zone} that points to a valid DMARC record is therefore healthy; the
    * cname-on-dmarc-record value means the CNAME resolves to no DMARC record at all.
    */
-  status?: 'missing-dmarc-report' | 'multiple-dmarc-reports' | 'missing-dmarc-rua' | 'cname-on-dmarc-record';
+  status?:
+    | 'missing-dmarc-report'
+    | 'multiple-dmarc-reports'
+    | 'missing-dmarc-rua'
+    | 'cname-on-dmarc-record'
+    | 'unauthorized-reporting-domain';
 
   /**
    * @deprecated Use `zone_id` instead.
@@ -584,18 +668,23 @@ export namespace DMARCReportGetResponse {
     bimi_records?: Array<Records.BimiRecord>;
 
     /**
-     * CNAME records for DKIM
+     * CNAME records for DKIM selectors. Each selector is resolved independently; when
+     * a selector's CNAME resolves to a DKIM TXT record, the API returns that record's
+     * content in the `resolved` field of the corresponding entry.
      */
     cname_dkim_records?: Array<Records.CnamedkimRecord>;
 
     /**
      * CNAME records at \_dmarc. When such a CNAME resolves to a DMARC TXT record, the
-     * API returns that record in resolved_dmarc_records.
+     * API returns that record's content in the `resolved` field of the corresponding
+     * entry.
      */
     cname_dmarc_records?: Array<Records.CnamedmarcRecord>;
 
     /**
-     * CNAME records for SPF
+     * CNAME records at the zone apex. When such a CNAME resolves to an SPF TXT record,
+     * the API returns that record's content in the `resolved` field of the
+     * corresponding entry.
      */
     cname_spf_records?: Array<Records.CnamespfRecord>;
 
@@ -610,9 +699,8 @@ export namespace DMARCReportGetResponse {
     dmarc_records?: Array<Records.DMARCRecord>;
 
     /**
-     * DMARC records that a recursive lookup of \_dmarc.{zone} returned. The API
-     * populates this only when the zone lacks a DMARC TXT record of its own, which
-     * usually means a CNAME delegates DMARC to another zone.
+     * @deprecated Use the `resolved` field on the corresponding entry in
+     * cname_dmarc_records instead.
      */
     resolved_dmarc_records?: Array<Records.ResolvedDMARCRecord>;
 
@@ -641,6 +729,16 @@ export namespace DMARCReportGetResponse {
        * DNS record name
        */
       name?: string;
+
+      /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
 
       /**
        * Time to live in seconds
@@ -673,6 +771,16 @@ export namespace DMARCReportGetResponse {
       name?: string;
 
       /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
+
+      /**
        * Time to live in seconds
        */
       ttl?: number;
@@ -701,6 +809,16 @@ export namespace DMARCReportGetResponse {
        * DNS record name
        */
       name?: string;
+
+      /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
 
       /**
        * Time to live in seconds
@@ -733,6 +851,16 @@ export namespace DMARCReportGetResponse {
       name?: string;
 
       /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
+
+      /**
        * Time to live in seconds
        */
       ttl?: number;
@@ -761,6 +889,16 @@ export namespace DMARCReportGetResponse {
        * DNS record name
        */
       name?: string;
+
+      /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
 
       /**
        * Time to live in seconds
@@ -793,6 +931,16 @@ export namespace DMARCReportGetResponse {
       name?: string;
 
       /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
+
+      /**
        * Time to live in seconds
        */
       ttl?: number;
@@ -804,10 +952,10 @@ export namespace DMARCReportGetResponse {
     }
 
     /**
-     * A DMARC TXT record that a recursive lookup of \_dmarc.{zone} returned. Such a
-     * record usually lives in another zone outside this account's control, so this
-     * schema omits the DNS record ID. The API therefore treats such a record as
-     * read-only.
+     * @deprecated A DMARC TXT record that a recursive lookup of \_dmarc.{zone}
+     * returned. Such a record usually lives in another zone outside this account's
+     * control, so this schema omits the DNS record ID. The API therefore treats such a
+     * record as read-only.
      */
     export interface ResolvedDMARCRecord {
       /**
@@ -841,6 +989,16 @@ export namespace DMARCReportGetResponse {
       name?: string;
 
       /**
+       * For a CNAME record, the TXT content(s) found by following the CNAME chain to its
+       * target. An empty array means the chain was resolved but nothing usable was found
+       * there; omitted/null means resolution was not attempted for this record (always
+       * the case for non-CNAME entries). A CNAME chain that terminates in more than one
+       * TXT value at the target yields multiple entries. Populated on entries in
+       * cname_dmarc_records, cname_spf_records, and cname_dkim_records.
+       */
+      resolved?: Array<string> | null;
+
+      /**
        * Time to live in seconds
        */
       ttl?: number;
@@ -855,7 +1013,7 @@ export namespace DMARCReportGetResponse {
 
 export interface DMARCReportEditParams {
   /**
-   * Path param: Identifier.
+   * Path param: Zone identifier.
    */
   zone_id: string;
 
@@ -872,7 +1030,7 @@ export interface DMARCReportEditParams {
 
 export interface DMARCReportGetParams {
   /**
-   * Identifier.
+   * Zone identifier.
    */
   zone_id: string;
 }

@@ -10,7 +10,8 @@ export class BaseConfigurations extends APIResource {
     Object.freeze(['zeroTrust', 'tunnels', 'cloudflared', 'configurations'] as const);
 
   /**
-   * Adds or updates the configuration for a remotely-managed tunnel.
+   * Replaces the configuration for a remotely managed Cloudflare Tunnel, including
+   * its ingress rules and origin request settings.
    *
    * @example
    * ```ts
@@ -36,7 +37,7 @@ export class BaseConfigurations extends APIResource {
   }
 
   /**
-   * Gets the configuration for a remotely-managed tunnel
+   * Retrieves the configuration for a remotely managed Cloudflare Tunnel.
    *
    * @example
    * ```ts

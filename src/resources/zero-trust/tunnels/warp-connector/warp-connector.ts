@@ -267,6 +267,12 @@ export namespace WARPConnectorCreateResponse {
     colo_name?: string;
 
     /**
+     * @deprecated This functionality has been removed. The is_pending_reconnect field
+     * will now always report false.
+     */
+    is_pending_reconnect?: boolean;
+
+    /**
      * Timestamp of when the connection was established.
      */
     opened_at?: string;
@@ -372,6 +378,12 @@ export namespace WARPConnectorListResponse {
      * The Cloudflare data center used for this connection.
      */
     colo_name?: string;
+
+    /**
+     * @deprecated This functionality has been removed. The is_pending_reconnect field
+     * will now always report false.
+     */
+    is_pending_reconnect?: boolean;
 
     /**
      * Timestamp of when the connection was established.
@@ -481,6 +493,12 @@ export namespace WARPConnectorDeleteResponse {
     colo_name?: string;
 
     /**
+     * @deprecated This functionality has been removed. The is_pending_reconnect field
+     * will now always report false.
+     */
+    is_pending_reconnect?: boolean;
+
+    /**
      * Timestamp of when the connection was established.
      */
     opened_at?: string;
@@ -588,6 +606,12 @@ export namespace WARPConnectorEditResponse {
     colo_name?: string;
 
     /**
+     * @deprecated This functionality has been removed. The is_pending_reconnect field
+     * will now always report false.
+     */
+    is_pending_reconnect?: boolean;
+
+    /**
      * Timestamp of when the connection was established.
      */
     opened_at?: string;
@@ -693,6 +717,12 @@ export namespace WARPConnectorGetResponse {
      * The Cloudflare data center used for this connection.
      */
     colo_name?: string;
+
+    /**
+     * @deprecated This functionality has been removed. The is_pending_reconnect field
+     * will now always report false.
+     */
+    is_pending_reconnect?: boolean;
 
     /**
      * Timestamp of when the connection was established.

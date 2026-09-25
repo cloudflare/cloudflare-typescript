@@ -34,15 +34,15 @@ export class BaseManaged extends APIResource {
     params: ManagedUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ManagedUpdateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/r2/buckets/${bucketName}/domains/managed`, {
         body,
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -68,14 +68,14 @@ export class BaseManaged extends APIResource {
     params: ManagedListParams,
     options?: RequestOptions,
   ): APIPromise<ManagedListResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucketName}/domains/managed`, {
         ...options,
         headers: buildHeaders([
           {
-            ...(jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            ...(cfR2Jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
             : undefined),
           },
           options?.headers,
@@ -135,7 +135,7 @@ export interface ManagedUpdateParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export interface ManagedListParams {
@@ -148,7 +148,7 @@ export interface ManagedListParams {
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
    * stored.
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'us' | 'fedramp' | 'fedramp-high';
 }
 
 export declare namespace Managed {

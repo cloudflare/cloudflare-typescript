@@ -174,7 +174,8 @@ export namespace SharedQueryGetResponse {
     status: 'STARTED' | 'COMPLETED';
 
     /**
-     * Time range for the query execution
+     * Time range for the query execution. 'from' must be earlier than 'to'. No
+     * fractional milliseconds.
      */
     timeframe: Run.Timeframe;
 
@@ -213,7 +214,7 @@ export namespace SharedQueryGetResponse {
        */
       adhoc: boolean;
 
-      created: string;
+      created: string | (string & {});
 
       createdBy: string;
 
@@ -226,7 +227,7 @@ export namespace SharedQueryGetResponse {
 
       parameters: Query.Parameters;
 
-      updated: string;
+      updated: string | (string & {});
 
       updatedBy: string;
     }
@@ -462,16 +463,17 @@ export namespace SharedQueryGetResponse {
     }
 
     /**
-     * Time range for the query execution
+     * Time range for the query execution. 'from' must be earlier than 'to'. No
+     * fractional milliseconds.
      */
     export interface Timeframe {
       /**
-       * Start timestamp for the query timeframe (Unix timestamp in milliseconds)
+       * Start timestamp for the query timeframe. Unix timestamp in milliseconds
        */
       from: number;
 
       /**
-       * End timestamp for the query timeframe (Unix timestamp in milliseconds)
+       * End timestamp for the query timeframe. Unix timestamp in milliseconds
        */
       to: number;
     }
@@ -533,7 +535,7 @@ export namespace SharedQueryGetResponse {
 
   export interface Agent {
     /**
-     * Pagination cursor derived from the first agent invocation in the run.
+     * Stable pagination cursor for this agent run.
      */
     id: string;
 
@@ -1026,8 +1028,6 @@ export namespace SharedQueryGetResponse {
           | 'workflow'
           | 'unknown';
 
-        requestId: string;
-
         scriptName: string;
 
         durableObjectId?: string;
@@ -1041,6 +1041,8 @@ export namespace SharedQueryGetResponse {
         outcome?: string;
 
         preview?: UnionMember0.Preview;
+
+        requestId?: string;
 
         scriptVersion?: UnionMember0.ScriptVersion;
 
@@ -1088,8 +1090,6 @@ export namespace SharedQueryGetResponse {
 
         outcome: string;
 
-        requestId: string;
-
         scriptName: string;
 
         wallTimeMs: number;
@@ -1107,6 +1107,8 @@ export namespace SharedQueryGetResponse {
         executionModel?: 'durableObject' | 'stateless';
 
         preview?: UnionMember1.Preview;
+
+        requestId?: string;
 
         scriptVersion?: UnionMember1.ScriptVersion;
 
@@ -1431,8 +1433,6 @@ export namespace SharedQueryGetResponse {
         | 'workflow'
         | 'unknown';
 
-      requestId: string;
-
       scriptName: string;
 
       durableObjectId?: string;
@@ -1446,6 +1446,8 @@ export namespace SharedQueryGetResponse {
       outcome?: string;
 
       preview?: UnionMember0.Preview;
+
+      requestId?: string;
 
       scriptVersion?: UnionMember0.ScriptVersion;
 
@@ -1493,8 +1495,6 @@ export namespace SharedQueryGetResponse {
 
       outcome: string;
 
-      requestId: string;
-
       scriptName: string;
 
       wallTimeMs: number;
@@ -1512,6 +1512,8 @@ export namespace SharedQueryGetResponse {
       executionModel?: 'durableObject' | 'stateless';
 
       preview?: UnionMember1.Preview;
+
+      requestId?: string;
 
       scriptVersion?: UnionMember1.ScriptVersion;
 
@@ -1612,7 +1614,8 @@ export interface SharedQueryCreateParams {
 
   /**
    * Body param: Timeframe for the query using Unix timestamps in milliseconds.
-   * Narrower timeframes produce faster responses and more specific results.
+   * 'from' must be earlier than 'to'. Narrower timeframes produce faster responses
+   * and more specific results.
    */
   timeframe: SharedQueryCreateParams.Timeframe;
 
@@ -1636,6 +1639,14 @@ export interface SharedQueryCreateParams {
    * period of equal length.
    */
   compare?: boolean;
+
+  /**
+   * Body param: Value-axis bucketing for chartType 'distribution'. Omitted or 'log':
+   * geometric buckets, best for heavy-tailed latency. 'linear': fixed-width buckets,
+   * clearer for narrow or additive ranges. Ignored for other chartTypes. The
+   * response echoes the scheme used in distribution.bucketMode.
+   */
+  distributionScale?: 'log' | 'linear';
 
   /**
    * Body param: When true, executes the query without persisting the results. Useful
@@ -1700,17 +1711,18 @@ export interface SharedQueryCreateParams {
 
 export namespace SharedQueryCreateParams {
   /**
-   * Timeframe for the query using Unix timestamps in milliseconds. Narrower
-   * timeframes produce faster responses and more specific results.
+   * Timeframe for the query using Unix timestamps in milliseconds. 'from' must be
+   * earlier than 'to'. Narrower timeframes produce faster responses and more
+   * specific results.
    */
   export interface Timeframe {
     /**
-     * Start timestamp for the query timeframe (Unix timestamp in milliseconds)
+     * Start timestamp for the query timeframe. Unix timestamp in milliseconds
      */
     from: number;
 
     /**
-     * End timestamp for the query timeframe (Unix timestamp in milliseconds)
+     * End timestamp for the query timeframe. Unix timestamp in milliseconds
      */
     to: number;
   }
@@ -1792,7 +1804,7 @@ export namespace SharedQueryCreateParams {
       alias?: string;
 
       /**
-       * Field name to calculate over. Must exist in the data — verify with the keys
+       * Field name to calculate over. Must exist in the data. Verify with the keys
        * endpoint. Required for every operator except `count`, which aggregates whole
        * rows and may omit it.
        */
@@ -1807,7 +1819,7 @@ export namespace SharedQueryCreateParams {
 
     export interface KeyedCalculation {
       /**
-       * Field name to calculate over. Must exist in the data — verify with the keys
+       * Field name to calculate over. Must exist in the data. Verify with the keys
        * endpoint. Required for every operator except `count`, which aggregates whole
        * rows and may omit it.
        */

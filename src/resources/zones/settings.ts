@@ -87,47 +87,6 @@ export interface AdvancedDDoS {
 }
 
 /**
- * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your
- * layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your
- * account so that you can increase your origin security by only allowing traffic
- * from a small list of IP addresses.
- */
-export interface Aegis {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'aegis';
-
-  /**
-   * Last time this setting was modified.
-   */
-  modified_on?: string | null;
-
-  /**
-   * Value of the zone setting.
-   */
-  value?: Aegis.Value;
-}
-
-export namespace Aegis {
-  /**
-   * Value of the zone setting.
-   */
-  export interface Value {
-    /**
-     * Whether the feature is enabled or not.
-     */
-    enabled?: boolean;
-
-    /**
-     * Egress pool id which refers to a grouping of dedicated egress IPs through which
-     * Cloudflare will connect to origin.
-     */
-    pool_id?: string;
-  }
-}
-
-/**
  * When enabled, Cloudflare serves limited copies of web pages available from the
  * [Internet Archive's Wayback Machine](https://archive.org/web/) if your server is
  * offline. Refer to
@@ -929,8 +888,10 @@ export interface OpportunisticOnion {
 }
 
 /**
- * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also
- * on Cloudflare.
+ * @deprecated This setting is deprecated. Orange to Orange (O2O) is applied
+ * automatically for eligible zones and no longer requires configuration; this
+ * setting only controlled the legacy O2O v1 (Managed CNAME) path. More information
+ * at https://developers.cloudflare.com/fundamentals/api/reference/deprecations/
  */
 export interface OrangeToOrange {
   /**
@@ -939,7 +900,10 @@ export interface OrangeToOrange {
   id: 'orange_to_orange';
 
   /**
-   * Current value of the zone setting.
+   * @deprecated This setting is deprecated. Orange to Orange (O2O) is applied
+   * automatically for eligible zones and no longer requires configuration; this
+   * setting only controlled the legacy O2O v1 (Managed CNAME) path. More information
+   * at https://developers.cloudflare.com/fundamentals/api/reference/deprecations/
    */
   value: 'on' | 'off';
 
@@ -1592,6 +1556,7 @@ export type SettingEditResponse =
   | SettingEditResponse.ZonesCacheRulesOriginMaxHTTPVersion
   | SettingEditResponse.ZonesPolish2
   | PrefetchPreload
+  | SettingEditResponse.ZonesPreRender
   | SettingEditResponse.ZonesPrivacyPass
   | ProxyReadTimeout
   | PseudoIPV4
@@ -2024,7 +1989,15 @@ export namespace SettingEditResponse {
       | 450
       | 475
       | 500
-      | 1000;
+      | 1000
+      | 1500
+      | 2000
+      | 2500
+      | 3000
+      | 3500
+      | 4000
+      | 4500
+      | 5000;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2188,6 +2161,33 @@ export namespace SettingEditResponse {
      * Current value of the zone setting.
      */
     value: 'off' | 'lossless' | 'lossy';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * When enabled, Cloudflare serves pre-rendered HTML to eligible search and AI
+   * crawlers instead of the origin's unrendered response.
+   */
+  export interface ZonesPreRender {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'pre_render';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'off' | 'on';
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2783,6 +2783,7 @@ export type SettingGetResponse =
   | SettingGetResponse.ZonesCacheRulesOriginMaxHTTPVersion
   | SettingGetResponse.ZonesPolish2
   | PrefetchPreload
+  | SettingGetResponse.ZonesPreRender
   | SettingGetResponse.ZonesPrivacyPass
   | ProxyReadTimeout
   | PseudoIPV4
@@ -3215,7 +3216,15 @@ export namespace SettingGetResponse {
       | 450
       | 475
       | 500
-      | 1000;
+      | 1000
+      | 1500
+      | 2000
+      | 2500
+      | 3000
+      | 3500
+      | 4000
+      | 4500
+      | 5000;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3379,6 +3388,33 @@ export namespace SettingGetResponse {
      * Current value of the zone setting.
      */
     value: 'off' | 'lossless' | 'lossy';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * When enabled, Cloudflare serves pre-rendered HTML to eligible search and AI
+   * crawlers instead of the origin's unrendered response.
+   */
+  export interface ZonesPreRender {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'pre_render';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'off' | 'on';
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -4042,7 +4078,6 @@ export interface SettingGetParams {
 export declare namespace Settings {
   export {
     type AdvancedDDoS as AdvancedDDoS,
-    type Aegis as Aegis,
     type AlwaysOnline as AlwaysOnline,
     type AlwaysUseHTTPS as AlwaysUseHTTPS,
     type AutomaticHTTPSRewrites as AutomaticHTTPSRewrites,

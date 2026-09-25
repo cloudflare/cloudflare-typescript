@@ -176,7 +176,7 @@ export interface MoveBulkResponse {
 
 export interface MoveCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -191,7 +191,7 @@ export interface MoveCreateParams {
     | 'RecoverableItemsPurges';
 
   /**
-   * Body param
+   * @deprecated This field is nonfunctional.
    */
   expected_disposition?:
     | 'MALICIOUS'
@@ -203,12 +203,13 @@ export interface MoveCreateParams {
     | 'ENCRYPTED'
     | 'EXTERNAL'
     | 'UNKNOWN'
-    | 'NONE';
+    | 'NONE'
+    | null;
 }
 
 export interface MoveBulkParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -223,7 +224,7 @@ export interface MoveBulkParams {
     | 'RecoverableItemsPurges';
 
   /**
-   * Body param
+   * @deprecated This field is nonfunctional.
    */
   expected_disposition?:
     | 'MALICIOUS'
@@ -235,7 +236,8 @@ export interface MoveBulkParams {
     | 'ENCRYPTED'
     | 'EXTERNAL'
     | 'UNKNOWN'
-    | 'NONE';
+    | 'NONE'
+    | null;
 
   /**
    * Body param: List of message IDs to move.

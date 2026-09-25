@@ -203,7 +203,7 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Body param
      */
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    jurisdiction?: 'default' | 'eu' | 'us' | 'fedramp';
 
     /**
      * Body param
@@ -249,7 +249,7 @@ export interface ConnectivityPrecheckTargetParams {
   /**
    * Body param
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'us' | 'fedramp';
 }
 
 export namespace ConnectivityPrecheckTargetParams {

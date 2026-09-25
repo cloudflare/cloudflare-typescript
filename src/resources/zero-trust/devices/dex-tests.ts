@@ -271,7 +271,7 @@ export interface DEXTestDeleteResponse {
 
 export interface DEXTestCreateParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 
@@ -333,7 +333,7 @@ export namespace DEXTestCreateParams {
 
 export interface DEXTestUpdateParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 
@@ -395,7 +395,7 @@ export namespace DEXTestUpdateParams {
 
 export interface DEXTestListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 
@@ -412,14 +412,14 @@ export interface DEXTestListParams extends V4PagePaginationArrayParams {
 
 export interface DEXTestDeleteParams {
   /**
-   * Unique identifier linked to an account.
+   * Unique Cloudflare account ID.
    */
   account_id: string;
 }
 
 export interface DEXTestGetParams {
   /**
-   * Unique identifier linked to an account.
+   * Unique Cloudflare account ID.
    */
   account_id: string;
 }

@@ -21,17 +21,15 @@ export class BaseCacheReserveResource extends APIResource {
    * ```ts
    * const response = await client.cache.cacheReserve.clear({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   body: {},
    * });
    * ```
    */
   clear(params: CacheReserveClearParams, options?: RequestOptions): APIPromise<CacheReserveClearResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.post(path`/zones/${zone_id}/cache/cache_reserve_clear`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: CacheReserveClearResponse }>
+      this._client.post(path`/zones/${zone_id}/cache/cache_reserve_clear`, options) as APIPromise<{
+        result: CacheReserveClearResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -119,11 +117,6 @@ export type CacheReserve = 'cache_reserve';
 export type CacheReserveClear = 'cache_reserve_clear';
 
 /**
- * The current state of the Cache Reserve Clear operation.
- */
-export type State = 'In-progress' | 'Completed';
-
-/**
  * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
  * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
  * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
@@ -143,7 +136,7 @@ export interface CacheReserveClearResponse {
   /**
    * The current state of the Cache Reserve Clear operation.
    */
-  state: State;
+  state: 'In-progress' | 'Completed';
 
   /**
    * The time that the latest Cache Reserve Clear operation completed.
@@ -220,7 +213,7 @@ export interface CacheReserveStatusResponse {
   /**
    * The current state of the Cache Reserve Clear operation.
    */
-  state: State;
+  state: 'In-progress' | 'Completed';
 
   /**
    * The time that the latest Cache Reserve Clear operation completed.
@@ -235,14 +228,9 @@ export interface CacheReserveStatusResponse {
 
 export interface CacheReserveClearParams {
   /**
-   * Path param: Identifier.
+   * Identifier.
    */
   zone_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface CacheReserveEditParams {
@@ -275,7 +263,6 @@ export declare namespace CacheReserveResource {
   export {
     type CacheReserve as CacheReserve,
     type CacheReserveClear as CacheReserveClear,
-    type State as State,
     type CacheReserveClearResponse as CacheReserveClearResponse,
     type CacheReserveEditResponse as CacheReserveEditResponse,
     type CacheReserveGetResponse as CacheReserveGetResponse,

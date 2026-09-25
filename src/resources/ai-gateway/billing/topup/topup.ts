@@ -114,6 +114,12 @@ export interface TopupCreateParams {
    * Body param: Top-up amount in cents (min 1000).
    */
   amount: number;
+
+  /**
+   * Body param: Stripe PaymentMethod to charge instead of the customer's default
+   * payment method.
+   */
+  payment_method_id?: string;
 }
 
 export interface TopupStatusParams {

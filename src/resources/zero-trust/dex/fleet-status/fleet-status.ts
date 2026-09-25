@@ -148,7 +148,7 @@ export namespace FleetStatusOverTimeResponse {
 
 export interface FleetStatusLiveParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 
@@ -160,7 +160,7 @@ export interface FleetStatusLiveParams {
 
 export interface FleetStatusOverTimeParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 

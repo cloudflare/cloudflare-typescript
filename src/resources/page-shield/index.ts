@@ -3,10 +3,11 @@
 export {
   Connections,
   BaseConnections,
-  type Connection,
+  type ConnectionListResponse,
+  type ConnectionGetResponse,
   type ConnectionListParams,
   type ConnectionGetParams,
-  type ConnectionsSinglePage,
+  type ConnectionListResponsesSinglePage,
 } from './connections';
 export {
   Cookies,
@@ -21,7 +22,6 @@ export { PageShield, BasePageShield } from './page-shield';
 export {
   Policies,
   BasePolicies,
-  type Policy,
   type PolicyCreateResponse,
   type PolicyUpdateResponse,
   type PolicyListResponse,
@@ -36,9 +36,9 @@ export {
 export {
   Scripts,
   BaseScripts,
-  type Script,
+  type ScriptListResponse,
   type ScriptGetResponse,
   type ScriptListParams,
   type ScriptGetParams,
-  type ScriptsSinglePage,
+  type ScriptListResponsesSinglePage,
 } from './scripts';

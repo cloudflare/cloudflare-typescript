@@ -196,7 +196,7 @@ export interface Policy {
   /**
    * Administrators who can approve a temporary authentication request.
    */
-  approval_groups?: Array<Policy.ApprovalGroup>;
+  approval_groups?: Array<ApprovalGroup>;
 
   /**
    * Requires the user to request access from an administrator at the start of each
@@ -258,33 +258,16 @@ export interface Policy {
   updated_at?: string;
 }
 
-export namespace Policy {
-  /**
-   * A group of email addresses that can approve a temporary authentication request.
-   */
-  export interface ApprovalGroup {
-    /**
-     * The number of approvals needed to obtain access.
-     */
-    approvals_needed: number;
-
-    /**
-     * A list of emails that can approve the access request.
-     */
-    email_addresses?: Array<unknown>;
-
-    /**
-     * The UUID of an re-usable email list.
-     */
-    email_list_uuid?: string;
-  }
-}
-
 export interface PolicyCreateResponse {
   /**
    * The UUID of the policy
    */
   id?: string;
+
+  /**
+   * Identifier.
+   */
+  account_id?: string;
 
   /**
    * Number of access applications currently using this policy.
@@ -432,6 +415,11 @@ export interface PolicyUpdateResponse {
   id?: string;
 
   /**
+   * Identifier.
+   */
+  account_id?: string;
+
+  /**
    * Number of access applications currently using this policy.
    */
   app_count?: number;
@@ -575,6 +563,11 @@ export interface PolicyListResponse {
    * The UUID of the policy
    */
   id?: string;
+
+  /**
+   * Identifier.
+   */
+  account_id?: string;
 
   /**
    * Number of access applications currently using this policy.
@@ -727,6 +720,11 @@ export interface PolicyGetResponse {
    * The UUID of the policy
    */
   id?: string;
+
+  /**
+   * Identifier.
+   */
+  account_id?: string;
 
   /**
    * Number of access applications currently using this policy.

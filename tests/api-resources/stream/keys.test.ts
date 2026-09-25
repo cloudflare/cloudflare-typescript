@@ -28,10 +28,7 @@ const parentPartialClient = createClient({
 
 const runTests = (client: PartialCloudflare<{ stream: { keys: BaseKeys } }>) => {
   test('create: only required params', async () => {
-    const responsePromise = client.stream.keys.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
-    });
+    const responsePromise = client.stream.keys.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,10 +39,7 @@ const runTests = (client: PartialCloudflare<{ stream: { keys: BaseKeys } }>) => 
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.stream.keys.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
-    });
+    const response = await client.stream.keys.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('delete: only required params', async () => {

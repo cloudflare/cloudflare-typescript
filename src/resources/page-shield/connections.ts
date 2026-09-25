@@ -13,12 +13,12 @@ export class BaseConnections extends APIResource {
   ] as const);
 
   /**
-   * Lists all connections detected by Page Shield.
+   * Lists outbound connections made by webpages in the zone.
    *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const connection of client.pageShield.connections.list(
+   * for await (const connectionListResponse of client.pageShield.connections.list(
    *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
@@ -28,16 +28,17 @@ export class BaseConnections extends APIResource {
   list(
     params: ConnectionListParams,
     options?: RequestOptions,
-  ): PagePromise<ConnectionsSinglePage, Connection> {
+  ): PagePromise<ConnectionListResponsesSinglePage, ConnectionListResponse> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(path`/zones/${zone_id}/page_shield/connections`, SinglePage<Connection>, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      path`/zones/${zone_id}/page_shield/connections`,
+      SinglePage<ConnectionListResponse>,
+      { query, ...options },
+    );
   }
 
   /**
-   * Fetches a connection detected by Page Shield by connection ID.
+   * Returns a webpage connection detected on the zone by connection ID.
    *
    * @example
    * ```ts
@@ -51,21 +52,52 @@ export class BaseConnections extends APIResource {
     connectionID: string,
     params: ConnectionGetParams,
     options?: RequestOptions,
-  ): APIPromise<Connection | null> {
+  ): APIPromise<ConnectionGetResponse | null> {
     const { zone_id } = params;
     return (
       this._client.get(
         path`/zones/${zone_id}/page_shield/connections/${connectionID}`,
         options,
-      ) as APIPromise<{ result: Connection | null }>
+      ) as APIPromise<{ result: ConnectionGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 export class Connections extends BaseConnections {}
 
-export type ConnectionsSinglePage = SinglePage<Connection>;
+export type ConnectionListResponsesSinglePage = SinglePage<ConnectionListResponse>;
 
-export interface Connection {
+export interface ConnectionListResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  added_at: string;
+
+  first_seen_at: string;
+
+  host: string;
+
+  last_seen_at: string;
+
+  url: string;
+
+  url_contains_cdn_cgi_path: boolean;
+
+  domain_reported_malicious?: boolean;
+
+  first_page_url?: string;
+
+  malicious_domain_categories?: Array<string>;
+
+  malicious_url_categories?: Array<string>;
+
+  page_urls?: Array<string>;
+
+  url_reported_malicious?: boolean;
+}
+
+export interface ConnectionGetResponse {
   /**
    * Identifier
    */
@@ -193,8 +225,9 @@ export interface ConnectionGetParams {
 
 export declare namespace Connections {
   export {
-    type Connection as Connection,
-    type ConnectionsSinglePage as ConnectionsSinglePage,
+    type ConnectionListResponse as ConnectionListResponse,
+    type ConnectionGetResponse as ConnectionGetResponse,
+    type ConnectionListResponsesSinglePage as ConnectionListResponsesSinglePage,
     type ConnectionListParams as ConnectionListParams,
     type ConnectionGetParams as ConnectionGetParams,
   };

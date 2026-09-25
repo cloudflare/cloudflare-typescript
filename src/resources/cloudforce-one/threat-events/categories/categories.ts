@@ -59,16 +59,10 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Removes a threat event category from Cloudforce One.
+   * Deprecated; use DELETE /events/event-categories/by-id/{category_id}. Available
+   * through 2026-11-28.
    *
-   * @example
-   * ```ts
-   * const category =
-   *   await client.cloudforceOne.threatEvents.categories.delete(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
+   * @deprecated Use DELETE /events/event-categories/by-id/{category_id} before 2026-11-28.
    */
   delete(
     categoryID: string,
@@ -83,17 +77,10 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Partially updates a threat event category in Cloudforce One, modifying specific
-   * fields without replacing the entire category.
+   * Deprecated; use PATCH /events/event-categories/by-id/{category_id}. Available
+   * through 2026-11-28.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.cloudforceOne.threatEvents.categories.edit(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
+   * @deprecated Use PATCH /events/event-categories/by-id/{category_id} before 2026-11-28.
    */
   edit(
     categoryID: string,
@@ -108,16 +95,10 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Retrieves details for a specific threat event category.
+   * Deprecated; use GET /events/event-categories/by-id/{category_id}. Available
+   * through 2026-11-28.
    *
-   * @example
-   * ```ts
-   * const category =
-   *   await client.cloudforceOne.threatEvents.categories.get(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
+   * @deprecated Use GET /events/event-categories/by-id/{category_id} before 2026-11-28.
    */
   get(
     categoryID: string,

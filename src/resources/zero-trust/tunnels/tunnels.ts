@@ -74,18 +74,6 @@ export class Tunnels extends BaseTunnels {
 
 export type TunnelListResponsesV4PagePaginationArray = V4PagePaginationArray<TunnelListResponse>;
 
-export interface Connection {
-  /**
-   * The Cloudflare data center used for this connection.
-   */
-  colo_name?: string;
-
-  /**
-   * UUID of the Cloudflare Tunnel connection.
-   */
-  uuid?: string;
-}
-
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
@@ -183,6 +171,12 @@ export namespace TunnelListResponse {
       colo_name?: string;
 
       /**
+       * @deprecated This functionality has been removed. The is_pending_reconnect field
+       * will now always report false.
+       */
+      is_pending_reconnect?: boolean;
+
+      /**
        * Timestamp of when the connection was established.
        */
       opened_at?: string;
@@ -270,7 +264,6 @@ Tunnels.BaseWARPConnector = BaseWARPConnector;
 
 export declare namespace Tunnels {
   export {
-    type Connection as Connection,
     type TunnelListResponse as TunnelListResponse,
     type TunnelListResponsesV4PagePaginationArray as TunnelListResponsesV4PagePaginationArray,
     type TunnelListParams as TunnelListParams,

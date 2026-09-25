@@ -73,7 +73,7 @@ const runTests = (client: PartialCloudflare<{ workflows: { instances: BaseInstan
   });
 
   test('bulk: only required params', async () => {
-    const responsePromise = client.workflows.instances.bulk('x', { account_id: 'account_id' });
+    const responsePromise = client.workflows.instances.bulk('x', { account_id: 'account_id', body: [{}] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

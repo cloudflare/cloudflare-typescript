@@ -34,4 +34,6 @@ export {
   type RegistrationEditParams,
   type RegistrationGetParams,
 } from './registrations';
+export { TransferIn, BaseTransferIn, type TransferInCreateParams } from './transfer-in';
+export { TransferInStatus, BaseTransferInStatus, type TransferInStatusGetParams } from './transfer-in-status';
 export { UpdateStatus, BaseUpdateStatus, type UpdateStatusGetParams } from './update-status';

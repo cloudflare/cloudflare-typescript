@@ -25,7 +25,7 @@ export class BaseDatabase extends APIResource {
   static override readonly _key: readonly ['d1', 'database'] = Object.freeze(['d1', 'database'] as const);
 
   /**
-   * Returns the created D1 database.
+   * Create a new D1 database in your account.
    *
    * @example
    * ```ts
@@ -45,7 +45,7 @@ export class BaseDatabase extends APIResource {
   }
 
   /**
-   * Updates the specified D1 database.
+   * Update a D1 database's configuration.
    *
    * @example
    * ```ts
@@ -69,7 +69,7 @@ export class BaseDatabase extends APIResource {
   }
 
   /**
-   * Returns a list of D1 databases.
+   * List D1 databases in your account.
    *
    * @example
    * ```ts
@@ -94,7 +94,7 @@ export class BaseDatabase extends APIResource {
   }
 
   /**
-   * Deletes the specified D1 database.
+   * Delete a D1 database.
    *
    * @example
    * ```ts
@@ -118,7 +118,7 @@ export class BaseDatabase extends APIResource {
   }
 
   /**
-   * Updates partially the specified D1 database.
+   * Partially update a D1 database's configuration.
    *
    * @example
    * ```ts
@@ -139,10 +139,11 @@ export class BaseDatabase extends APIResource {
   }
 
   /**
-   * Returns a URL where the SQL contents of your D1 can be downloaded. Note: this
-   * process may take some time for larger DBs, during which your D1 will be
-   * unavailable to serve queries. To avoid blocking your DB unnecessarily, an
-   * in-progress export must be continually polled or will automatically cancel.
+   * Export the SQL contents of a D1 database and return a URL where they can be
+   * downloaded. Note: this process may take some time for larger DBs, during which
+   * your D1 will be unavailable to serve queries. To avoid blocking your DB
+   * unnecessarily, an in-progress export must be continually polled or will
+   * automatically cancel.
    *
    * @example
    * ```ts
@@ -170,7 +171,7 @@ export class BaseDatabase extends APIResource {
   }
 
   /**
-   * Returns the specified D1 database.
+   * Get details for a specific D1 database.
    *
    * @example
    * ```ts
@@ -191,8 +192,8 @@ export class BaseDatabase extends APIResource {
   }
 
   /**
-   * Generates a temporary URL for uploading an SQL file to, then instructing the D1
-   * to import it and polling it for status updates. Imports block the D1 for their
+   * Generate a temporary URL for uploading an SQL file to, then instruct the D1 to
+   * import it and poll it for status updates. Imports block the D1 for their
    * duration.
    *
    * @example
@@ -222,7 +223,7 @@ export class BaseDatabase extends APIResource {
   }
 
   /**
-   * Returns the query result as an object.
+   * Execute a SQL query against a D1 database and return results as objects.
    *
    * @example
    * ```ts
@@ -252,8 +253,9 @@ export class BaseDatabase extends APIResource {
   }
 
   /**
-   * Returns the query result rows as arrays rather than objects. This is a
-   * performance-optimized version of the /query endpoint.
+   * Execute a SQL query against a D1 database and return result rows as arrays
+   * rather than objects. This is a performance-optimized version of the /query
+   * endpoint.
    *
    * @example
    * ```ts

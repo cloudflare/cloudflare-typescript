@@ -154,6 +154,12 @@ export interface DefaultEditResponse {
   policy_id?: string;
 
   /**
+   * The client type to which the device settings profile applies. This field is set
+   * when the profile is created and cannot be changed.
+   */
+  profile_type?: 'warp' | 'browser_extension';
+
+  /**
    * Determines if the operating system will register WARP's local interface IP with
    * your on-premises DNS server.
    */
@@ -181,6 +187,12 @@ export interface DefaultEditResponse {
    * Determines which tunnel protocol to use.
    */
   tunnel_protocol?: string;
+
+  /**
+   * Determines whether uninstalling the WARP client requires an override code.
+   * (Windows only).
+   */
+  uninstall_protection?: boolean;
 
   /**
    * Virtual network access settings for the device.
@@ -229,6 +241,12 @@ export namespace DefaultEditResponse {
      * or masque_endpoints must be provided.
      */
     wireguard_endpoints: Array<string>;
+
+    /**
+     * Automatically switch Global Acceleration regions based on device location.
+     * Defaults to false when not provided.
+     */
+    autoswitch?: boolean;
   }
 
   export interface ServiceModeV2 {
@@ -340,6 +358,12 @@ export interface DefaultGetResponse {
   policy_id?: string;
 
   /**
+   * The client type to which the device settings profile applies. This field is set
+   * when the profile is created and cannot be changed.
+   */
+  profile_type?: 'warp' | 'browser_extension';
+
+  /**
    * Determines if the operating system will register WARP's local interface IP with
    * your on-premises DNS server.
    */
@@ -367,6 +391,12 @@ export interface DefaultGetResponse {
    * Determines which tunnel protocol to use.
    */
   tunnel_protocol?: string;
+
+  /**
+   * Determines whether uninstalling the WARP client requires an override code.
+   * (Windows only).
+   */
+  uninstall_protection?: boolean;
 
   /**
    * Virtual network access settings for the device.
@@ -415,6 +445,12 @@ export namespace DefaultGetResponse {
      * or masque_endpoints must be provided.
      */
     wireguard_endpoints: Array<string>;
+
+    /**
+     * Automatically switch Global Acceleration regions based on device location.
+     * Defaults to false when not provided.
+     */
+    autoswitch?: boolean;
   }
 
   export interface ServiceModeV2 {
@@ -566,6 +602,12 @@ export interface DefaultEditParams {
   tunnel_protocol?: string;
 
   /**
+   * Body param: Determines whether uninstalling the WARP client requires an override
+   * code. (Windows only).
+   */
+  uninstall_protection?: boolean;
+
+  /**
    * Body param: Virtual network access settings for the device.
    */
   virtual_networks?: DefaultEditParams.VirtualNetworks | null;
@@ -612,6 +654,12 @@ export namespace DefaultEditParams {
      * or masque_endpoints must be provided.
      */
     wireguard_endpoints: Array<string>;
+
+    /**
+     * Automatically switch Global Acceleration regions based on device location.
+     * Defaults to false when not provided.
+     */
+    autoswitch?: boolean;
   }
 
   export interface ServiceModeV2 {

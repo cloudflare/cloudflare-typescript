@@ -66,12 +66,6 @@ const runTests = (client: PartialCloudflare<{ pipelines: { streams: BaseStreams 
             sql_name: 'sql_name',
           },
         ],
-        format: {
-          type: 'json',
-          decimal_encoding: 'number',
-          timestamp_format: 'rfc3339',
-          unstructured: true,
-        },
         inferred: true,
       },
       worker_binding: { enabled: true },
@@ -140,7 +134,6 @@ const runTests = (client: PartialCloudflare<{ pipelines: { streams: BaseStreams 
   test('delete: required and optional params', async () => {
     const response = await client.pipelines.streams.delete('033e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
-      force: 'force',
     });
   });
 

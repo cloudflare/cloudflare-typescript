@@ -162,6 +162,10 @@ export class CertificatePacks extends BaseCertificatePacks {
 export type CertificatePackListResponsesV4PagePaginationArray =
   V4PagePaginationArray<CertificatePackListResponse>;
 
+export type Host = string;
+
+export type HostParam = string;
+
 /**
  * The number of days for which the certificate should be valid.
  */
@@ -171,6 +175,37 @@ export type RequestValidity = 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
  * The number of days for which the certificate should be valid.
  */
 export type RequestValidityParam = 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
+
+/**
+ * Status of certificate pack.
+ */
+export type Status =
+  | 'initializing'
+  | 'pending_validation'
+  | 'deleted'
+  | 'pending_issuance'
+  | 'pending_deployment'
+  | 'pending_deletion'
+  | 'pending_expiration'
+  | 'expired'
+  | 'active'
+  | 'initializing_timed_out'
+  | 'validation_timed_out'
+  | 'issuance_timed_out'
+  | 'deployment_timed_out'
+  | 'deletion_timed_out'
+  | 'pending_cleanup'
+  | 'staging_deployment'
+  | 'staging_active'
+  | 'deactivating'
+  | 'inactive'
+  | 'backup_issued'
+  | 'holding_deployment';
+
+/**
+ * Validation method in use for a certificate pack order.
+ */
+export type ValidationMethod = 'http' | 'cname' | 'txt';
 
 /**
  * A certificate pack with all its properties.
@@ -190,33 +225,12 @@ export interface CertificatePackCreateResponse {
    * Comma separated list of valid host names for the certificate packs. Must contain
    * the zone apex, may not contain more than 50 hosts, and may not be empty.
    */
-  hosts: Array<string>;
+  hosts: Array<Host>;
 
   /**
    * Status of certificate pack.
    */
-  status:
-    | 'initializing'
-    | 'pending_validation'
-    | 'deleted'
-    | 'pending_issuance'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'pending_expiration'
-    | 'expired'
-    | 'active'
-    | 'initializing_timed_out'
-    | 'validation_timed_out'
-    | 'issuance_timed_out'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out'
-    | 'pending_cleanup'
-    | 'staging_deployment'
-    | 'staging_active'
-    | 'deactivating'
-    | 'inactive'
-    | 'backup_issued'
-    | 'holding_deployment';
+  status: Status;
 
   /**
    * Type of certificate pack.
@@ -475,33 +489,12 @@ export interface CertificatePackListResponse {
    * Comma separated list of valid host names for the certificate packs. Must contain
    * the zone apex, may not contain more than 50 hosts, and may not be empty.
    */
-  hosts: Array<string>;
+  hosts: Array<Host>;
 
   /**
    * Status of certificate pack.
    */
-  status:
-    | 'initializing'
-    | 'pending_validation'
-    | 'deleted'
-    | 'pending_issuance'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'pending_expiration'
-    | 'expired'
-    | 'active'
-    | 'initializing_timed_out'
-    | 'validation_timed_out'
-    | 'issuance_timed_out'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out'
-    | 'pending_cleanup'
-    | 'staging_deployment'
-    | 'staging_active'
-    | 'deactivating'
-    | 'inactive'
-    | 'backup_issued'
-    | 'holding_deployment';
+  status: Status;
 
   /**
    * Type of certificate pack.
@@ -767,33 +760,12 @@ export interface CertificatePackEditResponse {
    * Comma separated list of valid host names for the certificate packs. Must contain
    * the zone apex, may not contain more than 50 hosts, and may not be empty.
    */
-  hosts: Array<string>;
+  hosts: Array<Host>;
 
   /**
    * Status of certificate pack.
    */
-  status:
-    | 'initializing'
-    | 'pending_validation'
-    | 'deleted'
-    | 'pending_issuance'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'pending_expiration'
-    | 'expired'
-    | 'active'
-    | 'initializing_timed_out'
-    | 'validation_timed_out'
-    | 'issuance_timed_out'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out'
-    | 'pending_cleanup'
-    | 'staging_deployment'
-    | 'staging_active'
-    | 'deactivating'
-    | 'inactive'
-    | 'backup_issued'
-    | 'holding_deployment';
+  status: Status;
 
   /**
    * Type of certificate pack.
@@ -1052,33 +1024,12 @@ export interface CertificatePackGetResponse {
    * Comma separated list of valid host names for the certificate packs. Must contain
    * the zone apex, may not contain more than 50 hosts, and may not be empty.
    */
-  hosts: Array<string>;
+  hosts: Array<Host>;
 
   /**
    * Status of certificate pack.
    */
-  status:
-    | 'initializing'
-    | 'pending_validation'
-    | 'deleted'
-    | 'pending_issuance'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'pending_expiration'
-    | 'expired'
-    | 'active'
-    | 'initializing_timed_out'
-    | 'validation_timed_out'
-    | 'issuance_timed_out'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out'
-    | 'pending_cleanup'
-    | 'staging_deployment'
-    | 'staging_active'
-    | 'deactivating'
-    | 'inactive'
-    | 'backup_issued'
-    | 'holding_deployment';
+  status: Status;
 
   /**
    * Type of certificate pack.
@@ -1337,7 +1288,7 @@ export interface CertificatePackCreateParams {
    * Must contain the zone apex, may not contain more than 50 hosts, and may not be
    * empty.
    */
-  hosts: Array<string>;
+  hosts: Array<HostParam>;
 
   /**
    * Body param: Type of certificate pack.
@@ -1410,7 +1361,10 @@ CertificatePacks.BaseQuota = BaseQuota;
 
 export declare namespace CertificatePacks {
   export {
+    type Host as Host,
     type RequestValidity as RequestValidity,
+    type Status as Status,
+    type ValidationMethod as ValidationMethod,
     type CertificatePackCreateResponse as CertificatePackCreateResponse,
     type CertificatePackListResponse as CertificatePackListResponse,
     type CertificatePackDeleteResponse as CertificatePackDeleteResponse,

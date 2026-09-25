@@ -89,6 +89,31 @@ export class BaseSubdomains extends APIResource {
   }
 
   /**
+   * Updates the activity-log preview preference for a sending subdomain.
+   *
+   * @example
+   * ```ts
+   * const response = await client.emailSending.subdomains.edit(
+   *   'aabbccdd11223344aabbccdd11223344',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  edit(
+    subdomainID: string,
+    params: SubdomainEditParams,
+    options?: RequestOptions,
+  ): APIPromise<SubdomainEditResponse> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.patch(path`/zones/${zone_id}/email/sending/subdomains/${subdomainID}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: SubdomainEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Gets information for a specific sending subdomain.
    *
    * @example
@@ -147,6 +172,13 @@ export interface SubdomainCreateResponse {
   dkim_selector?: string;
 
   /**
+   * Whether a send request that includes a recipient suppressed on this subdomain
+   * drops that recipient and still delivers to the rest, instead of failing the
+   * entire request.
+   */
+  drop_suppressed_recipients?: boolean;
+
+  /**
    * The date and time the destination address was last modified.
    */
   modified?: string;
@@ -189,6 +221,13 @@ export interface SubdomainListResponse {
    * sign with `d=<base>`.
    */
   dkim_selector?: string;
+
+  /**
+   * Whether a send request that includes a recipient suppressed on this subdomain
+   * drops that recipient and still delivers to the rest, instead of failing the
+   * entire request.
+   */
+  drop_suppressed_recipients?: boolean;
 
   /**
    * The date and time the destination address was last modified.
@@ -252,6 +291,57 @@ export namespace SubdomainDeleteResponse {
   }
 }
 
+export interface SubdomainEditResponse {
+  /**
+   * Whether Email Sending is enabled on this subdomain.
+   */
+  enabled: boolean;
+
+  /**
+   * The exact domain name or a leftmost wildcard such as `*.example.com`.
+   */
+  name: string;
+
+  /**
+   * Sending subdomain identifier.
+   */
+  tag: string;
+
+  /**
+   * The date and time the destination address has been created.
+   */
+  created?: string;
+
+  /**
+   * The DKIM selector used for email signing. Wildcard rows publish the selector and
+   * sign with `d=<base>`.
+   */
+  dkim_selector?: string;
+
+  /**
+   * Whether a send request that includes a recipient suppressed on this subdomain
+   * drops that recipient and still delivers to the rest, instead of failing the
+   * entire request.
+   */
+  drop_suppressed_recipients?: boolean;
+
+  /**
+   * The date and time the destination address was last modified.
+   */
+  modified?: string;
+
+  /**
+   * Whether sent messages from this subdomain can be previewed in the activity log.
+   */
+  preview_enabled?: boolean;
+
+  /**
+   * The return-path domain used for bounce handling. Wildcard rows use
+   * `cf-bounce.<base>`.
+   */
+  return_path_domain?: string;
+}
+
 export interface SubdomainGetResponse {
   /**
    * Whether Email Sending is enabled on this subdomain.
@@ -278,6 +368,13 @@ export interface SubdomainGetResponse {
    * sign with `d=<base>`.
    */
   dkim_selector?: string;
+
+  /**
+   * Whether a send request that includes a recipient suppressed on this subdomain
+   * drops that recipient and still delivers to the rest, instead of failing the
+   * entire request.
+   */
+  drop_suppressed_recipients?: boolean;
 
   /**
    * The date and time the destination address was last modified.
@@ -324,6 +421,26 @@ export interface SubdomainDeleteParams {
   zone_id: string;
 }
 
+export interface SubdomainEditParams {
+  /**
+   * Path param: Identifier.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Whether a send request that includes a recipient suppressed on this
+   * subdomain drops that recipient and still delivers to the rest, instead of
+   * failing the entire request.
+   */
+  drop_suppressed_recipients?: boolean;
+
+  /**
+   * Body param: Whether sent messages from this subdomain can be previewed in the
+   * activity log.
+   */
+  preview_enabled?: boolean;
+}
+
 export interface SubdomainGetParams {
   /**
    * Identifier.
@@ -339,11 +456,13 @@ export declare namespace Subdomains {
     type SubdomainCreateResponse as SubdomainCreateResponse,
     type SubdomainListResponse as SubdomainListResponse,
     type SubdomainDeleteResponse as SubdomainDeleteResponse,
+    type SubdomainEditResponse as SubdomainEditResponse,
     type SubdomainGetResponse as SubdomainGetResponse,
     type SubdomainListResponsesSinglePage as SubdomainListResponsesSinglePage,
     type SubdomainCreateParams as SubdomainCreateParams,
     type SubdomainListParams as SubdomainListParams,
     type SubdomainDeleteParams as SubdomainDeleteParams,
+    type SubdomainEditParams as SubdomainEditParams,
     type SubdomainGetParams as SubdomainGetParams,
   };
 

@@ -190,14 +190,14 @@ export interface ItemGetResponse {
 
 export interface ItemDeleteParams {
   /**
-   * Identifier.
+   * The ID of the account.
    */
   account_id: string;
 }
 
 export interface ItemEditParams {
   /**
-   * Path param: Identifier.
+   * Path param: The ID of the account.
    */
   account_id: string;
 
@@ -214,7 +214,7 @@ export interface ItemEditParams {
 
 export interface ItemGetParams {
   /**
-   * Identifier.
+   * The ID of the account.
    */
   account_id: string;
 }

@@ -94,10 +94,7 @@ export class BaseCertificates extends APIResource {
    * const response =
    *   await client.zeroTrust.gateway.certificates.activate(
    *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *     {
-   *       account_id: '699d98642c564d2e855e9661899b7252',
-   *       body: {},
-   *     },
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
    *   );
    * ```
    */
@@ -106,12 +103,12 @@ export class BaseCertificates extends APIResource {
     params: CertificateActivateParams,
     options?: RequestOptions,
   ): APIPromise<CertificateActivateResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.post(path`/accounts/${account_id}/gateway/certificates/${certificateID}/activate`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: CertificateActivateResponse }>
+      this._client.post(
+        path`/accounts/${account_id}/gateway/certificates/${certificateID}/activate`,
+        options,
+      ) as APIPromise<{ result: CertificateActivateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -123,10 +120,7 @@ export class BaseCertificates extends APIResource {
    * const response =
    *   await client.zeroTrust.gateway.certificates.deactivate(
    *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *     {
-   *       account_id: '699d98642c564d2e855e9661899b7252',
-   *       body: {},
-   *     },
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
    *   );
    * ```
    */
@@ -135,12 +129,12 @@ export class BaseCertificates extends APIResource {
     params: CertificateDeactivateParams,
     options?: RequestOptions,
   ): APIPromise<CertificateDeactivateResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.post(path`/accounts/${account_id}/gateway/certificates/${certificateID}/deactivate`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: CertificateDeactivateResponse }>
+      this._client.post(
+        path`/accounts/${account_id}/gateway/certificates/${certificateID}/deactivate`,
+        options,
+      ) as APIPromise<{ result: CertificateDeactivateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -500,7 +494,7 @@ export interface CertificateGetResponse {
 
 export interface CertificateCreateParams {
   /**
-   * Path param
+   * Path param: Specify the Cloudflare account identifier.
    */
   account_id: string;
 
@@ -515,38 +509,37 @@ export interface CertificateCreateParams {
 }
 
 export interface CertificateListParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
 export interface CertificateDeleteParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 
 export interface CertificateActivateParams {
   /**
-   * Path param
+   * Specify the Cloudflare account identifier.
    */
   account_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface CertificateDeactivateParams {
   /**
-   * Path param
+   * Specify the Cloudflare account identifier.
    */
   account_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface CertificateGetParams {
+  /**
+   * Specify the Cloudflare account identifier.
+   */
   account_id: string;
 }
 

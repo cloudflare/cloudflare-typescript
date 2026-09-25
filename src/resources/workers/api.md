@@ -166,7 +166,7 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/workers/scripts/{script_name}/deployments">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">create</a>(scriptName, { ...params }) -> Deployment</code>
-- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/deployments">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">list</a>(scriptName, { ...params }) -> DeploymentListResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/deployments">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">list</a>(scriptName, { ...params }) -> DeploymentListResponsesV4PagePagination</code>
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}/deployments/{deployment_id}">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">delete</a>(deploymentID, { ...params }) -> DeploymentDeleteResponse</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}/deployments/{deployment_id}">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">get</a>(deploymentID, { ...params }) -> Deployment</code>
 

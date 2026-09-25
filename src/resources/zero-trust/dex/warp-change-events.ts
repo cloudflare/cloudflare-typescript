@@ -189,7 +189,7 @@ export namespace WARPChangeEventGetResponse {
 
 export interface WARPChangeEventGetParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 

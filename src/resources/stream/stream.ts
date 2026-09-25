@@ -14,7 +14,7 @@ import {
   BaseAudioTracks,
 } from './audio-tracks';
 import * as ClipAPI from './clip';
-import { BaseClipResource, Clip, ClipCreateParams, ClipResource } from './clip';
+import { BaseClip, Clip, ClipCreateParams } from './clip';
 import * as CopyAPI from './copy';
 import { BaseCopy, Copy, CopyCreateParams } from './copy';
 import * as DirectUploadAPI from './direct-upload';
@@ -223,7 +223,7 @@ export class BaseStream extends APIResource {
 export class Stream extends BaseStream {
   audioTracks: AudioTracksAPI.AudioTracks = new AudioTracksAPI.AudioTracks(this._client);
   videos: VideosAPI.Videos = new VideosAPI.Videos(this._client);
-  clip: ClipAPI.ClipResource = new ClipAPI.ClipResource(this._client);
+  clip: ClipAPI.Clip = new ClipAPI.Clip(this._client);
   copy: CopyAPI.Copy = new CopyAPI.Copy(this._client);
   directUpload: DirectUploadAPI.DirectUpload = new DirectUploadAPI.DirectUpload(this._client);
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
@@ -702,8 +702,8 @@ Stream.AudioTracks = AudioTracks;
 Stream.BaseAudioTracks = BaseAudioTracks;
 Stream.Videos = Videos;
 Stream.BaseVideos = BaseVideos;
-Stream.ClipResource = ClipResource;
-Stream.BaseClipResource = BaseClipResource;
+Stream.Clip = Clip;
+Stream.BaseClip = BaseClip;
 Stream.Copy = Copy;
 Stream.BaseCopy = BaseCopy;
 Stream.DirectUpload = DirectUpload;
@@ -755,12 +755,7 @@ export declare namespace Stream {
     type VideoStorageUsageParams as VideoStorageUsageParams,
   };
 
-  export {
-    ClipResource as ClipResource,
-    BaseClipResource as BaseClipResource,
-    type Clip as Clip,
-    type ClipCreateParams as ClipCreateParams,
-  };
+  export { Clip as Clip, BaseClip as BaseClip, type ClipCreateParams as ClipCreateParams };
 
   export { Copy as Copy, BaseCopy as BaseCopy, type CopyCreateParams as CopyCreateParams };
 

@@ -108,6 +108,24 @@ Methods:
 - <code title="delete /accounts/{account_id}/magic/routes">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">empty</a>({ ...params }) -> RouteEmptyResponse</code>
 - <code title="get /accounts/{account_id}/magic/routes/{route_id}">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">get</a>(routeID, { ...params }) -> RouteGetResponse</code>
 
+## BGPFilterProfiles
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/bgp-filter-profiles.ts">BGPFilterProfileCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/bgp-filter-profiles.ts">BGPFilterProfileUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/bgp-filter-profiles.ts">BGPFilterProfileListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/bgp-filter-profiles.ts">BGPFilterProfileDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/bgp-filter-profiles.ts">BGPFilterProfileGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/bgp/filter_profiles">client.magicTransit.bgpFilterProfiles.<a href="./src/resources/magic-transit/bgp-filter-profiles.ts">create</a>({ ...params }) -> BGPFilterProfileCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/bgp/filter_profiles/{profile_id}">client.magicTransit.bgpFilterProfiles.<a href="./src/resources/magic-transit/bgp-filter-profiles.ts">update</a>(profileID, { ...params }) -> BGPFilterProfileUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/bgp/filter_profiles">client.magicTransit.bgpFilterProfiles.<a href="./src/resources/magic-transit/bgp-filter-profiles.ts">list</a>({ ...params }) -> BGPFilterProfileListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/bgp/filter_profiles/{profile_id}">client.magicTransit.bgpFilterProfiles.<a href="./src/resources/magic-transit/bgp-filter-profiles.ts">delete</a>(profileID, { ...params }) -> BGPFilterProfileDeleteResponse</code>
+- <code title="get /accounts/{account_id}/magic/bgp/filter_profiles/{profile_id}">client.magicTransit.bgpFilterProfiles.<a href="./src/resources/magic-transit/bgp-filter-profiles.ts">get</a>(profileID, { ...params }) -> BGPFilterProfileGetResponse</code>
+
 ## Sites
 
 Types:

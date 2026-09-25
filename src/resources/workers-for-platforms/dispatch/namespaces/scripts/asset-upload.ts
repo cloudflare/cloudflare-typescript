@@ -15,8 +15,8 @@ export class BaseAssetUpload extends APIResource {
   ] = Object.freeze(['workersForPlatforms', 'dispatch', 'namespaces', 'scripts', 'assetUpload'] as const);
 
   /**
-   * Start uploading a collection of assets for use in a Worker version. To learn
-   * more about the direct uploads of assets, see
+   * Start uploading a collection of assets for use in a Workers for Platforms script
+   * version. To learn more about the direct uploads of assets, see
    * https://developers.cloudflare.com/workers/static-assets/direct-upload/.
    *
    * @example

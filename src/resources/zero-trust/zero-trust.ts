@@ -73,6 +73,7 @@ import {
   Organization,
   OrganizationCreateParams,
   OrganizationListParams,
+  OrganizationListResponse,
   OrganizationRevokeUsersParams,
   OrganizationRevokeUsersResponse,
   OrganizationUpdateParams,
@@ -92,7 +93,6 @@ import {
 import * as TunnelsAPI from './tunnels/tunnels';
 import {
   BaseTunnels,
-  Connection,
   TunnelListParams,
   TunnelListResponse,
   TunnelListResponsesV4PagePaginationArray,
@@ -185,6 +185,7 @@ export declare namespace ZeroTrust {
     BaseOrganizations as BaseOrganizations,
     type LoginDesign as LoginDesign,
     type Organization as Organization,
+    type OrganizationListResponse as OrganizationListResponse,
     type OrganizationRevokeUsersResponse as OrganizationRevokeUsersResponse,
     type OrganizationCreateParams as OrganizationCreateParams,
     type OrganizationUpdateParams as OrganizationUpdateParams,
@@ -216,7 +217,6 @@ export declare namespace ZeroTrust {
   export {
     Tunnels as Tunnels,
     BaseTunnels as BaseTunnels,
-    type Connection as Connection,
     type TunnelListResponse as TunnelListResponse,
     type TunnelListResponsesV4PagePaginationArray as TunnelListResponsesV4PagePaginationArray,
     type TunnelListParams as TunnelListParams,

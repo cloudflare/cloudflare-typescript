@@ -258,7 +258,7 @@ export namespace RuleBulkDeleteResponse {
 
 export interface RuleCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: The ID of the account.
    */
   account_id: string;
 
@@ -301,7 +301,7 @@ export interface RuleCreateParams {
 
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: The ID of the account.
    */
   account_id: string;
 
@@ -318,7 +318,7 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
 
 export interface RuleBulkDeleteParams {
   /**
-   * Identifier.
+   * The ID of the account.
    */
   account_id: string;
 }

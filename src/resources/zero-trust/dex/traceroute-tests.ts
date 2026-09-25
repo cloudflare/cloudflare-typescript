@@ -290,7 +290,7 @@ export interface TracerouteTestPercentilesResponse {
 
 export interface TracerouteTestGetParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 
@@ -324,7 +324,7 @@ export interface TracerouteTestGetParams {
 
 export interface TracerouteTestNetworkPathParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 
@@ -351,7 +351,7 @@ export interface TracerouteTestNetworkPathParams {
 
 export interface TracerouteTestPercentilesParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 

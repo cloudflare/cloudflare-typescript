@@ -35,7 +35,7 @@ export class BaseAddresses extends APIResource {
   }
 
   /**
-   * Lists existing destination addresses.
+   * Lists destination addresses configured for Email Routing in an account.
    *
    * @example
    * ```ts

@@ -63,7 +63,12 @@ const runTests = (client: PartialCloudflare<{ hyperdrive: { configs: BaseConfigs
         scheme: 'postgres',
         user: 'postgres',
       },
-      caching: { disabled: true },
+      caching: {
+        disabled: true,
+        max_age: 0,
+        stale_while_revalidate: 0,
+      },
+      integration: {},
       mtls: {
         ca_certificate_id: '00000000-0000-0000-0000-0000000000',
         mtls_certificate_id: '00000000-0000-0000-0000-0000000000',
@@ -183,7 +188,7 @@ const runTests = (client: PartialCloudflare<{ hyperdrive: { configs: BaseConfigs
         mtls_certificate_id: '00000000-0000-0000-0000-0000000000',
         sslmode: 'verify-full',
       },
-      name: 'example-hyperdrive',
+      name: 'name',
       origin: {
         database: 'postgres',
         password: 'password',
@@ -209,6 +214,25 @@ const runTests = (client: PartialCloudflare<{ hyperdrive: { configs: BaseConfigs
 
   test('get: required and optional params', async () => {
     const response = await client.hyperdrive.configs.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('restart: only required params', async () => {
+    const responsePromise = client.hyperdrive.configs.restart('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('restart: required and optional params', async () => {
+    const response = await client.hyperdrive.configs.restart('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

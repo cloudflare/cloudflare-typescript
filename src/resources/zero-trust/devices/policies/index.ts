@@ -22,7 +22,6 @@ export {
   BasePolicies,
   type DevicePolicyCertificates,
   type FallbackDomain,
-  type FallbackDomainPolicy,
   type SettingsPolicy,
   type SplitTunnelExclude,
   type SplitTunnelInclude,

@@ -14,7 +14,8 @@ export class BaseConfig extends APIResource {
   ] as const);
 
   /**
-   * Configure auto top-up with a balance threshold and top-up amount.
+   * Configure auto top-up with a balance threshold and top-up amount. Dashboard
+   * sessions only: API token, OAuth, and service credentials are rejected with 403.
    *
    * @example
    * ```ts
@@ -37,7 +38,8 @@ export class BaseConfig extends APIResource {
   }
 
   /**
-   * Remove the auto top-up configuration for the account.
+   * Remove the auto top-up configuration for the account. Dashboard sessions only:
+   * API token, OAuth, and service credentials are rejected with 403.
    *
    * @example
    * ```ts
@@ -90,13 +92,13 @@ export type ConfigDeleteResponse = unknown;
 export interface ConfigGetResponse {
   amount: number | null;
 
-  disabledReason: string | null;
-
-  error: string | null;
-
-  lastFailedAt: number | null;
-
   threshold: number | null;
+
+  disabledReason?: string | null;
+
+  error?: string | null;
+
+  lastFailedAt?: number | null;
 }
 
 export interface ConfigCreateParams {

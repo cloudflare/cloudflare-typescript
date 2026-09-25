@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -15,7 +16,7 @@ export class BaseDeployments extends APIResource {
   /**
    * Deployments configure how
    * [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions)
-   * are deployed to traffic. A deployment can consist of one or two versions of a
+   * are deployed to traffic. A deployment can consist of multiple versions of a
    * Worker.
    *
    * @example
@@ -30,7 +31,7 @@ export class BaseDeployments extends APIResource {
    *         {
    *           percentage: 100,
    *           version_id:
-   *             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *             '023e105f-2a42-4f8b-a1c1-73f6a2a30c0f',
    *         },
    *       ],
    *     },
@@ -53,30 +54,31 @@ export class BaseDeployments extends APIResource {
   }
 
   /**
-   * List of Worker Deployments. The first deployment in the list is the latest
+   * List Worker deployments. The first deployment in the list is the latest
    * deployment actively serving traffic.
    *
    * @example
    * ```ts
-   * const deployments =
-   *   await client.workers.scripts.deployments.list(
-   *     'this-is_my_script-01',
-   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const deploymentListResponse of client.workers.scripts.deployments.list(
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   list(
     scriptName: string,
     params: DeploymentListParams,
     options?: RequestOptions,
-  ): APIPromise<DeploymentListResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        path`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`,
-        options,
-      ) as APIPromise<{ result: DeploymentListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+  ): PagePromise<DeploymentListResponsesV4PagePagination, DeploymentListResponse> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`,
+      V4PagePagination<DeploymentListResponse>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -134,6 +136,8 @@ export class BaseDeployments extends APIResource {
 }
 export class Deployments extends BaseDeployments {}
 
+export type DeploymentListResponsesV4PagePagination = V4PagePagination<DeploymentListResponse>;
+
 export interface Deployment {
   id: string;
 
@@ -143,6 +147,14 @@ export interface Deployment {
 
   strategy: 'percentage';
 
+  /**
+   * Worker versions included in this deployment. Each object must contain a
+   * `version_id` UUID and a `percentage`; percentages across all objects must
+   * total 100. In the `cf` CLI, pass the entire array as one JSON value to
+   * `--versions`, either inline, for example
+   * `--versions '[{"version_id":"023e105f-2a42-4f8b-a1c1-73f6a2a30c0f","percentage":100}]'`,
+   * or from a JSON file with `--versions @versions.json`.
+   */
   versions: Array<Deployment.Version>;
 
   annotations?: Deployment.Annotations;
@@ -152,8 +164,14 @@ export interface Deployment {
 
 export namespace Deployment {
   export interface Version {
+    /**
+     * Percentage of traffic served by this version.
+     */
     percentage: number;
 
+    /**
+     * Identifier of the Worker Version.
+     */
     version_id: string;
   }
 
@@ -231,7 +249,12 @@ export interface DeploymentCreateParams {
   strategy: 'percentage';
 
   /**
-   * Body param
+   * Body param: Worker versions included in this deployment. Each object must
+   * contain a `version_id` UUID and a `percentage`; percentages across all objects
+   * must total 100. In the `cf` CLI, pass the entire array as one JSON value to
+   * `--versions`, either inline, for example
+   * `--versions '[{"version_id":"023e105f-2a42-4f8b-a1c1-73f6a2a30c0f","percentage":100}]'`,
+   * or from a JSON file with `--versions @versions.json`.
    */
   versions: Array<DeploymentCreateParams.Version>;
 
@@ -250,8 +273,14 @@ export interface DeploymentCreateParams {
 
 export namespace DeploymentCreateParams {
   export interface Version {
+    /**
+     * Percentage of traffic served by this version.
+     */
     percentage: number;
 
+    /**
+     * Identifier of the Worker Version.
+     */
     version_id: string;
   }
 
@@ -263,11 +292,21 @@ export namespace DeploymentCreateParams {
   }
 }
 
-export interface DeploymentListParams {
+export interface DeploymentListParams extends V4PagePaginationParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: Start of the deployment creation time range, inclusive.
+   */
+  since?: string;
+
+  /**
+   * Query param: End of the deployment creation time range, inclusive.
+   */
+  until?: string;
 }
 
 export interface DeploymentDeleteParams {
@@ -299,6 +338,7 @@ export declare namespace Deployments {
     type Deployment as Deployment,
     type DeploymentListResponse as DeploymentListResponse,
     type DeploymentDeleteResponse as DeploymentDeleteResponse,
+    type DeploymentListResponsesV4PagePagination as DeploymentListResponsesV4PagePagination,
     type DeploymentCreateParams as DeploymentCreateParams,
     type DeploymentListParams as DeploymentListParams,
     type DeploymentDeleteParams as DeploymentDeleteParams,

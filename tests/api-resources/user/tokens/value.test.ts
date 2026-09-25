@@ -28,8 +28,8 @@ const parentPartialClient = createClient({
 
 const runTests = (client: PartialCloudflare<{ user: { tokens: { value: BaseValue } } }>) => {
   // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
-    const responsePromise = client.user.tokens.value.update('ed17574386854bf78a67040be0a770b0', { body: {} });
+  test.skip('update', async () => {
+    const responsePromise = client.user.tokens.value.update('ed17574386854bf78a67040be0a770b0');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -37,11 +37,6 @@ const runTests = (client: PartialCloudflare<{ user: { tokens: { value: BaseValue
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
-    const response = await client.user.tokens.value.update('ed17574386854bf78a67040be0a770b0', { body: {} });
   });
 };
 describe('resource value', () => runTests(client));

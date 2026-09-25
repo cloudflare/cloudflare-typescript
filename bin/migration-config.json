@@ -1417,6 +1417,80 @@
       ]
     },
     {
+      "base": "addressing.addressMaps.accounts",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "member_account_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "address_map_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "member_account_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "addressing.addressMaps.accounts",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "member_account_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "address_map_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "member_account_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "addressing.addressMaps.ips",
       "name": "update",
       "params": [
@@ -1553,6 +1627,43 @@
         {
           "type": "param",
           "key": "binding_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "addressing.prefixes.bgpPrefixes",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "bgp_prefix_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "prefix_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "bgp_prefix_id",
           "location": "path"
         },
         {
@@ -5725,6 +5836,43 @@
       ]
     },
     {
+      "base": "realtimeKit.presets",
+      "name": "replacePresetByID",
+      "params": [
+        {
+          "type": "param",
+          "key": "preset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "preset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "realtimeKit.sessions",
       "name": "generateSummaryOfTranscripts",
       "params": [
@@ -6680,6 +6828,43 @@
         {
           "type": "param",
           "key": "jti",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "managedDefense.vulnerabilityDiscovery.reports",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "scan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "repo_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "scan_id",
           "location": "path"
         },
         {

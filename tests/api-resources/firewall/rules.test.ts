@@ -160,7 +160,7 @@ const runTests = (client: PartialCloudflare<{ firewall: { rules: BaseRules } }>)
   test.skip('bulkEdit: only required params', async () => {
     const responsePromise = client.firewall.rules.bulkEdit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
+      id: 'id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -175,7 +175,7 @@ const runTests = (client: PartialCloudflare<{ firewall: { rules: BaseRules } }>)
   test.skip('bulkEdit: required and optional params', async () => {
     const response = await client.firewall.rules.bulkEdit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
+      id: 'id',
     });
   });
 
@@ -183,7 +183,7 @@ const runTests = (client: PartialCloudflare<{ firewall: { rules: BaseRules } }>)
   test.skip('bulkUpdate: only required params', async () => {
     const responsePromise = client.firewall.rules.bulkUpdate({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
+      id: 'id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -198,7 +198,7 @@ const runTests = (client: PartialCloudflare<{ firewall: { rules: BaseRules } }>)
   test.skip('bulkUpdate: required and optional params', async () => {
     const response = await client.firewall.rules.bulkUpdate({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
+      id: 'id',
     });
   });
 

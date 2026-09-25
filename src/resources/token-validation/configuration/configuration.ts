@@ -4,6 +4,8 @@ import { APIResource } from '../../../core/resource';
 import * as CredentialsAPI from './credentials';
 import {
   BaseCredentials,
+  CredentialEditParams,
+  CredentialEditResponse,
   CredentialUpdateParams,
   CredentialUpdateResponse,
   Credentials as CredentialsAPICredentials,
@@ -24,7 +26,7 @@ export class BaseConfiguration extends APIResource {
   ] as const);
 
   /**
-   * Create a new Token Validation configuration
+   * Creates a JWT validation configuration for the zone.
    *
    * @example
    * ```ts
@@ -63,7 +65,7 @@ export class BaseConfiguration extends APIResource {
   }
 
   /**
-   * Lists all token validation configurations for this zone
+   * Lists the JWT validation configurations defined for the zone.
    *
    * @example
    * ```ts
@@ -88,7 +90,7 @@ export class BaseConfiguration extends APIResource {
   }
 
   /**
-   * Delete Token Configuration
+   * Deletes a JWT validation configuration from the zone.
    *
    * @example
    * ```ts
@@ -114,7 +116,7 @@ export class BaseConfiguration extends APIResource {
   }
 
   /**
-   * Edit fields of an existing Token Configuration
+   * Updates only the supplied fields on a JWT validation configuration.
    *
    * @example
    * ```ts
@@ -140,7 +142,7 @@ export class BaseConfiguration extends APIResource {
   }
 
   /**
-   * Get a single Token Configuration
+   * Returns a JWT validation configuration by ID.
    *
    * @example
    * ```ts
@@ -580,6 +582,8 @@ export declare namespace Configuration {
     CredentialsAPICredentials as Credentials,
     BaseCredentials as BaseCredentials,
     type CredentialUpdateResponse as CredentialUpdateResponse,
+    type CredentialEditResponse as CredentialEditResponse,
     type CredentialUpdateParams as CredentialUpdateParams,
+    type CredentialEditParams as CredentialEditParams,
   };
 }

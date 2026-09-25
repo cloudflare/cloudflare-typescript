@@ -20,17 +20,15 @@ export class BaseForceAXFRResource extends APIResource {
    * const forceAXFR =
    *   await client.dns.zoneTransfers.forceAXFR.create({
    *     zone_id: '269d8f4853475ca241c4e730be286b20',
-   *     body: {},
    *   });
    * ```
    */
   create(params: ForceAXFRCreateParams, options?: RequestOptions): APIPromise<ForceAXFR> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.post(path`/zones/${zone_id}/secondary_dns/force_axfr`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: ForceAXFR }>
+      this._client.post(path`/zones/${zone_id}/secondary_dns/force_axfr`, options) as APIPromise<{
+        result: ForceAXFR;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -42,15 +40,7 @@ export class ForceAXFRResource extends BaseForceAXFRResource {}
 export type ForceAXFR = string;
 
 export interface ForceAXFRCreateParams {
-  /**
-   * Path param
-   */
   zone_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export declare namespace ForceAXFRResource {

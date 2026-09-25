@@ -49,8 +49,9 @@ export interface TypeListParams {
   account_id: string;
 
   /**
-   * Query param: Array of dataset IDs to query indicator types from. If not
-   * provided, queries all datasets for the account.
+   * Query param: Dataset UUIDs to query, or one standalone scope value: 'all'/'\*',
+   * 'analytics' for isAnalytics=true datasets, or 'operational' for
+   * isAnalytics=false datasets. If not provided, queries all accessible datasets.
    */
   datasetIds?: Array<string>;
 }

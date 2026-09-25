@@ -45,7 +45,7 @@ export interface ActivationCheckTriggerResponse {
 
 export interface ActivationCheckTriggerParams {
   /**
-   * Identifier.
+   * Zone ID
    */
   zone_id: string;
 }

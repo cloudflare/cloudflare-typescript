@@ -52,7 +52,7 @@ const runTests = (client: PartialCloudflare<{ abuseReports: { mitigations: BaseM
       per_page: 0,
       sort: 'type,asc',
       status: 'pending',
-      type: 'account_suspend',
+      type: 'type',
     });
   });
 

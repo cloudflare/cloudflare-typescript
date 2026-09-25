@@ -12,7 +12,7 @@ export class BaseTenantCustomNameservers extends APIResource {
   ] as const);
 
   /**
-   * Add Tenant Custom Nameserver
+   * Adds a custom nameserver for a tenant.
    *
    * @example
    * ```ts
@@ -36,7 +36,7 @@ export class BaseTenantCustomNameservers extends APIResource {
   }
 
   /**
-   * Delete Tenant Custom Nameserver
+   * Deletes a tenant's custom nameserver.
    *
    * @example
    * ```ts
@@ -63,7 +63,7 @@ export class BaseTenantCustomNameservers extends APIResource {
   }
 
   /**
-   * List a tenant's custom nameservers.
+   * Lists a tenant's custom nameservers.
    *
    * @example
    * ```ts
@@ -138,7 +138,7 @@ export namespace TenantCustomNameserverCreateResponse {
 }
 
 /**
- * Unused
+ * Unused.
  */
 export type TenantCustomNameserverDeleteResponse = string;
 

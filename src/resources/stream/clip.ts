@@ -6,7 +6,7 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class BaseClipResource extends APIResource {
+export class BaseClip extends APIResource {
   static override readonly _key: readonly ['stream', 'clip'] = Object.freeze(['stream', 'clip'] as const);
 
   /**
@@ -31,109 +31,7 @@ export class BaseClipResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-export class ClipResource extends BaseClipResource {}
-
-export interface Clip {
-  /**
-   * Lists the origins allowed to display the video. Enter allowed origin domains in
-   * an array and use `*` for wildcard subdomains. Empty arrays allow the video to be
-   * viewed on any origin.
-   */
-  allowedOrigins?: Array<StreamAPI.AllowedOrigins>;
-
-  /**
-   * The unique video identifier (UID).
-   */
-  clippedFromVideoUID?: string;
-
-  /**
-   * The date and time the clip was created.
-   */
-  created?: string;
-
-  /**
-   * A user-defined identifier for the media creator.
-   */
-  creator?: string;
-
-  /**
-   * Specifies the end time for the video clip in seconds.
-   */
-  endTimeSeconds?: number;
-
-  /**
-   * The maximum duration in seconds for a video upload. Can be set for a video that
-   * is not yet uploaded to limit its duration. Uploads that exceed the specified
-   * duration will fail during processing. A value of `-1` means the value is
-   * unknown.
-   */
-  maxDurationSeconds?: number;
-
-  /**
-   * A user modifiable key-value store used to reference other systems of record for
-   * managing videos.
-   */
-  meta?: unknown;
-
-  /**
-   * The date and time the live input was last modified.
-   */
-  modified?: string;
-
-  playback?: Clip.Playback;
-
-  /**
-   * The video's preview page URI. This field is omitted until encoding is complete.
-   */
-  preview?: string;
-
-  /**
-   * Indicates whether the video can be a accessed using the UID. When set to `true`,
-   * a signed token must be generated with a signing key to view the video.
-   */
-  requireSignedURLs?: boolean;
-
-  /**
-   * Specifies the start time for the video clip in seconds.
-   */
-  startTimeSeconds?: number;
-
-  /**
-   * Specifies the processing status for all quality levels for a video.
-   */
-  status?: 'pendingupload' | 'downloading' | 'queued' | 'inprogress' | 'ready' | 'error' | 'live-inprogress';
-
-  /**
-   * The timestamp for a thumbnail image calculated as a percentage value of the
-   * video's duration. To convert from a second-wise timestamp to a percentage,
-   * divide the desired timestamp by the total duration of the video. If this value
-   * is not set, the default thumbnail image is taken from 0s of the video.
-   */
-  thumbnailTimestampPct?: number;
-
-  watermark?: Clip.Watermark;
-}
-
-export namespace Clip {
-  export interface Playback {
-    /**
-     * DASH Media Presentation Description for the video.
-     */
-    dash?: string;
-
-    /**
-     * The HLS manifest for the video.
-     */
-    hls?: string;
-  }
-
-  export interface Watermark {
-    /**
-     * The unique identifier for the watermark profile.
-     */
-    uid?: string;
-  }
-}
+export class Clip extends BaseClip {}
 
 export interface ClipCreateParams {
   /**
@@ -228,6 +126,6 @@ export namespace ClipCreateParams {
   }
 }
 
-export declare namespace ClipResource {
-  export { type Clip as Clip, type ClipCreateParams as ClipCreateParams };
+export declare namespace Clip {
+  export { type ClipCreateParams as ClipCreateParams };
 }

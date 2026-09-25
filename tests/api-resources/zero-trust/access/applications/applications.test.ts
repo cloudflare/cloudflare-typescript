@@ -71,8 +71,16 @@ const runTests = (
       custom_non_identity_deny_url: 'custom_non_identity_deny_url',
       custom_pages: ['699d98642c564d2e855e9661899b7252'],
       destinations: [
-        { type: 'public', uri: 'test.example.com/admin' },
-        { type: 'public', uri: 'test.anotherexample.com/staff' },
+        {
+          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
+          type: 'public',
+          uri: 'test.example.com/admin',
+        },
+        {
+          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
+          type: 'public',
+          uri: 'test.anotherexample.com/staff',
+        },
         {
           cidr: '10.5.0.0/24',
           hostname: 'hostname',
@@ -98,10 +106,18 @@ const runTests = (
           vnet_id: 'vnet_id',
         },
         { mcp_server_id: 'mcp-server-1', type: 'via_mcp_server_portal' },
-        { type: 'worker', worker_id: '617f1d0431a98306ff61e336d79fce86' },
-        { type: 'preview_worker', worker_id: '617f1d0431a98306ff61e336d79fce86' },
-        { type: 'all_workers' },
-        { type: 'all_preview_workers' },
+        {
+          type: 'worker',
+          worker_id: '617f1d0431a98306ff61e336d79fce86',
+          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
+        },
+        {
+          type: 'preview_worker',
+          worker_id: '617f1d0431a98306ff61e336d79fce86',
+          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
+        },
+        { type: 'all_workers', overrides: [{ behavior: 'public', path_pattern: '/health/*' }] },
+        { type: 'all_preview_workers', overrides: [{ behavior: 'public', path_pattern: '/health/*' }] },
       ],
       eager_redirect_cookie_setting: true,
       enable_binding_cookie: true,
@@ -205,8 +221,16 @@ const runTests = (
       custom_non_identity_deny_url: 'custom_non_identity_deny_url',
       custom_pages: ['699d98642c564d2e855e9661899b7252'],
       destinations: [
-        { type: 'public', uri: 'test.example.com/admin' },
-        { type: 'public', uri: 'test.anotherexample.com/staff' },
+        {
+          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
+          type: 'public',
+          uri: 'test.example.com/admin',
+        },
+        {
+          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
+          type: 'public',
+          uri: 'test.anotherexample.com/staff',
+        },
         {
           cidr: '10.5.0.0/24',
           hostname: 'hostname',
@@ -232,10 +256,18 @@ const runTests = (
           vnet_id: 'vnet_id',
         },
         { mcp_server_id: 'mcp-server-1', type: 'via_mcp_server_portal' },
-        { type: 'worker', worker_id: '617f1d0431a98306ff61e336d79fce86' },
-        { type: 'preview_worker', worker_id: '617f1d0431a98306ff61e336d79fce86' },
-        { type: 'all_workers' },
-        { type: 'all_preview_workers' },
+        {
+          type: 'worker',
+          worker_id: '617f1d0431a98306ff61e336d79fce86',
+          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
+        },
+        {
+          type: 'preview_worker',
+          worker_id: '617f1d0431a98306ff61e336d79fce86',
+          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
+        },
+        { type: 'all_workers', overrides: [{ behavior: 'public', path_pattern: '/health/*' }] },
+        { type: 'all_preview_workers', overrides: [{ behavior: 'public', path_pattern: '/health/*' }] },
       ],
       eager_redirect_cookie_setting: true,
       enable_binding_cookie: true,

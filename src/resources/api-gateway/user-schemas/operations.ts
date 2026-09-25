@@ -18,7 +18,8 @@ export class BaseOperations extends APIResource {
 
   /**
    * Retrieves all operations from the schema. Operations that already exist in API
-   * Shield Endpoint Management will be returned as full operations.
+   * Shield Endpoint Management will be returned as full operations. Deprecated; use
+   * `/zones/{zone_id}/schema_validation/schemas/{schema_id}/operations` instead.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
@@ -284,11 +285,6 @@ export namespace OperationListResponse {
         active_schema?: SchemaInfo.ActiveSchema;
 
         /**
-         * Deprecated. Always false.
-         */
-        learned_available?: boolean;
-
-        /**
          * Action taken on requests failing validation.
          */
         mitigation_action?: 'none' | 'log' | 'block' | null;
@@ -305,11 +301,6 @@ export namespace OperationListResponse {
           id?: string;
 
           created_at?: string;
-
-          /**
-           * True if schema is Cloudflare-provided.
-           */
-          is_learned?: boolean;
 
           /**
            * Schema file name.
@@ -357,7 +348,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
    * corresponds to the resulting feature object. Have a look at the top-level object
    * description for more details on the specific meaning.
    */
-  feature?: Array<'thresholds' | 'parameter_schemas' | 'schema_info'>;
+  feature?: Array<'thresholds' | 'parameter_schemas' | 'schema_info' | 'confidence_intervals'>;
 
   /**
    * Query param: Filter results to only include the specified hosts.

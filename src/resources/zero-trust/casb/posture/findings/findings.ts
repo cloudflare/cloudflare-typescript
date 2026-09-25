@@ -278,9 +278,6 @@ export namespace FindingListResponse {
      */
     id: string;
 
-    /**
-     * Category information for a finding.
-     */
     category: Finding.Category;
 
     /**
@@ -289,7 +286,7 @@ export namespace FindingListResponse {
     name: string;
 
     /**
-     * The severity level of a finding.
+     * Default severity used when no integration-specific severity override exists.
      */
     severity: 'Critical' | 'High' | 'Medium' | 'Low';
 
@@ -306,13 +303,10 @@ export namespace FindingListResponse {
     /**
      * Remediation guide information for a finding.
      */
-    remediation?: Finding.Remediation;
+    remediation?: Finding.Remediation | null;
   }
 
   export namespace Finding {
-    /**
-     * Category information for a finding.
-     */
     export interface Category {
       /**
        * The type of the observation.
@@ -683,9 +677,6 @@ export namespace FindingGetResponse {
      */
     id: string;
 
-    /**
-     * Category information for a finding.
-     */
     category: Finding.Category;
 
     /**
@@ -694,7 +685,7 @@ export namespace FindingGetResponse {
     name: string;
 
     /**
-     * The severity level of a finding.
+     * Default severity used when no integration-specific severity override exists.
      */
     severity: 'Critical' | 'High' | 'Medium' | 'Low';
 
@@ -711,13 +702,10 @@ export namespace FindingGetResponse {
     /**
      * Remediation guide information for a finding.
      */
-    remediation?: Finding.Remediation;
+    remediation?: Finding.Remediation | null;
   }
 
   export namespace Finding {
-    /**
-     * Category information for a finding.
-     */
     export interface Category {
       /**
        * The type of the observation.
@@ -1042,9 +1030,6 @@ export namespace FindingIgnoreResponse {
      */
     id: string;
 
-    /**
-     * Category information for a finding.
-     */
     category: Finding.Category;
 
     /**
@@ -1053,7 +1038,7 @@ export namespace FindingIgnoreResponse {
     name: string;
 
     /**
-     * The severity level of a finding.
+     * Default severity used when no integration-specific severity override exists.
      */
     severity: 'Critical' | 'High' | 'Medium' | 'Low';
 
@@ -1070,13 +1055,10 @@ export namespace FindingIgnoreResponse {
     /**
      * Remediation guide information for a finding.
      */
-    remediation?: Finding.Remediation;
+    remediation?: Finding.Remediation | null;
   }
 
   export namespace Finding {
-    /**
-     * Category information for a finding.
-     */
     export interface Category {
       /**
        * The type of the observation.
@@ -1401,9 +1383,6 @@ export namespace FindingResetSeverityResponse {
      */
     id: string;
 
-    /**
-     * Category information for a finding.
-     */
     category: Finding.Category;
 
     /**
@@ -1412,7 +1391,7 @@ export namespace FindingResetSeverityResponse {
     name: string;
 
     /**
-     * The severity level of a finding.
+     * Default severity used when no integration-specific severity override exists.
      */
     severity: 'Critical' | 'High' | 'Medium' | 'Low';
 
@@ -1429,13 +1408,10 @@ export namespace FindingResetSeverityResponse {
     /**
      * Remediation guide information for a finding.
      */
-    remediation?: Finding.Remediation;
+    remediation?: Finding.Remediation | null;
   }
 
   export namespace Finding {
-    /**
-     * Category information for a finding.
-     */
     export interface Category {
       /**
        * The type of the observation.
@@ -1760,9 +1736,6 @@ export namespace FindingTuneSeverityResponse {
      */
     id: string;
 
-    /**
-     * Category information for a finding.
-     */
     category: Finding.Category;
 
     /**
@@ -1771,7 +1744,7 @@ export namespace FindingTuneSeverityResponse {
     name: string;
 
     /**
-     * The severity level of a finding.
+     * Default severity used when no integration-specific severity override exists.
      */
     severity: 'Critical' | 'High' | 'Medium' | 'Low';
 
@@ -1788,13 +1761,10 @@ export namespace FindingTuneSeverityResponse {
     /**
      * Remediation guide information for a finding.
      */
-    remediation?: Finding.Remediation;
+    remediation?: Finding.Remediation | null;
   }
 
   export namespace Finding {
-    /**
-     * Category information for a finding.
-     */
     export interface Category {
       /**
        * The type of the observation.
@@ -2119,9 +2089,6 @@ export namespace FindingUnignoreResponse {
      */
     id: string;
 
-    /**
-     * Category information for a finding.
-     */
     category: Finding.Category;
 
     /**
@@ -2130,7 +2097,7 @@ export namespace FindingUnignoreResponse {
     name: string;
 
     /**
-     * The severity level of a finding.
+     * Default severity used when no integration-specific severity override exists.
      */
     severity: 'Critical' | 'High' | 'Medium' | 'Low';
 
@@ -2147,13 +2114,10 @@ export namespace FindingUnignoreResponse {
     /**
      * Remediation guide information for a finding.
      */
-    remediation?: Finding.Remediation;
+    remediation?: Finding.Remediation | null;
   }
 
   export namespace Finding {
-    /**
-     * Category information for a finding.
-     */
     export interface Category {
       /**
        * The type of the observation.
@@ -2510,7 +2474,8 @@ export interface FindingListParams extends V4PagePaginationArrayParams {
     | 'OPENAI'
     | 'SALESFORCE'
     | 'SERVICENOW'
-    | 'SLACK';
+    | 'SLACK'
+    | 'ZOOM';
 }
 
 export interface FindingExportParams {
@@ -2582,6 +2547,7 @@ export interface FindingExportParams {
     | 'SALESFORCE'
     | 'SERVICENOW'
     | 'SLACK'
+    | 'ZOOM'
   >;
 }
 

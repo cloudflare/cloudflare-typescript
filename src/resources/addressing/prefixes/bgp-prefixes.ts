@@ -71,6 +71,34 @@ export class BaseBGPPrefixes extends APIResource {
   }
 
   /**
+   * Delete a BGP Prefix associated with the specified IP Prefix. A BGP Prefix must
+   * be withdrawn before it can be deleted.
+   *
+   * @example
+   * ```ts
+   * const bgpPrefix =
+   *   await client.addressing.prefixes.bgpPrefixes.delete(
+   *     '7009ba364c7a5760798ceb430e603b74',
+   *     {
+   *       account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *       prefix_id: '2af39739cc4e3b5910c918468bb89828',
+   *     },
+   *   );
+   * ```
+   */
+  delete(
+    bgpPrefixID: string,
+    params: BGPPrefixDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<BGPPrefixDeleteResponse> {
+    const { account_id, prefix_id } = params;
+    return this._client.delete(
+      path`/accounts/${account_id}/addressing/prefixes/${prefix_id}/bgp/prefixes/${bgpPrefixID}`,
+      options,
+    );
+  }
+
+  /**
    * Update the properties of a BGP Prefix, such as the on demand advertisement
    * status (advertised or withdrawn).
    *
@@ -205,6 +233,51 @@ export namespace BGPPrefix {
   }
 }
 
+export interface BGPPrefixDeleteResponse {
+  errors: Array<BGPPrefixDeleteResponse.Error>;
+
+  messages: Array<BGPPrefixDeleteResponse.Message>;
+
+  /**
+   * Whether the API call was successful.
+   */
+  success: true;
+}
+
+export namespace BGPPrefixDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
+
 export interface BGPPrefixCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
@@ -222,6 +295,18 @@ export interface BGPPrefixListParams {
    * Identifier of a Cloudflare account.
    */
   account_id: string;
+}
+
+export interface BGPPrefixDeleteParams {
+  /**
+   * Identifier of a Cloudflare account.
+   */
+  account_id: string;
+
+  /**
+   * Identifier of an IP Prefix.
+   */
+  prefix_id: string;
 }
 
 export interface BGPPrefixEditParams {
@@ -277,9 +362,11 @@ export interface BGPPrefixGetParams {
 export declare namespace BGPPrefixes {
   export {
     type BGPPrefix as BGPPrefix,
+    type BGPPrefixDeleteResponse as BGPPrefixDeleteResponse,
     type BGPPrefixesSinglePage as BGPPrefixesSinglePage,
     type BGPPrefixCreateParams as BGPPrefixCreateParams,
     type BGPPrefixListParams as BGPPrefixListParams,
+    type BGPPrefixDeleteParams as BGPPrefixDeleteParams,
     type BGPPrefixEditParams as BGPPrefixEditParams,
     type BGPPrefixGetParams as BGPPrefixGetParams,
   };

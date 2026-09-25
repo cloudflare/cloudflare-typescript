@@ -21,10 +21,7 @@ export class BaseValue extends APIResource {
    * const tokenValue =
    *   await client.accounts.tokens.value.update(
    *     'ed17574386854bf78a67040be0a770b0',
-   *     {
-   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       body: {},
-   *     },
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
@@ -33,12 +30,11 @@ export class BaseValue extends APIResource {
     params: ValueUpdateParams,
     options?: RequestOptions,
   ): APIPromise<Shared.TokenValue> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.put(path`/accounts/${account_id}/tokens/${tokenID}/value`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: Shared.TokenValue }>
+      this._client.put(path`/accounts/${account_id}/tokens/${tokenID}/value`, options) as APIPromise<{
+        result: Shared.TokenValue;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -46,14 +42,9 @@ export class Value extends BaseValue {}
 
 export interface ValueUpdateParams {
   /**
-   * Path param: Account identifier tag.
+   * Account identifier tag.
    */
   account_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export declare namespace Value {

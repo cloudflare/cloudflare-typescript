@@ -59,6 +59,7 @@ export {
   BaseOrganizations,
   type LoginDesign,
   type Organization,
+  type OrganizationListResponse,
   type OrganizationRevokeUsersResponse,
   type OrganizationCreateParams,
   type OrganizationUpdateParams,
@@ -78,7 +79,6 @@ export { Seats, BaseSeats, type Seat, type SeatEditParams, type SeatsSinglePage 
 export {
   Tunnels,
   BaseTunnels,
-  type Connection,
   type TunnelListResponse,
   type TunnelListParams,
   type TunnelListResponsesV4PagePaginationArray,

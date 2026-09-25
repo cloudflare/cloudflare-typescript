@@ -21,6 +21,22 @@ import {
   ExportListResponsesV4PagePaginationArray,
   Exports,
 } from './exports';
+import * as PoliciesAPI from './policies';
+import {
+  BasePolicies,
+  Policies,
+  PolicyCreateParams,
+  PolicyCreateResponse,
+  PolicyDeleteParams,
+  PolicyDeleteResponse,
+  PolicyGetParams,
+  PolicyGetResponse,
+  PolicyListParams,
+  PolicyListResponse,
+  PolicyListResponsesCursorPaginationAfter,
+  PolicyUpdateParams,
+  PolicyUpdateResponse,
+} from './policies';
 import * as FindingTypesAPI from './finding-types/finding-types';
 import {
   BaseFindingTypes,
@@ -87,6 +103,7 @@ export class Posture extends BasePosture {
   findingTypes: FindingTypesAPI.FindingTypes = new FindingTypesAPI.FindingTypes(this._client);
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
   remediations: RemediationsAPI.Remediations = new RemediationsAPI.Remediations(this._client);
+  policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
   webhooks: WebhooksAPI.Webhooks = new WebhooksAPI.Webhooks(this._client);
 }
 
@@ -100,6 +117,8 @@ Posture.Content = Content;
 Posture.BaseContent = BaseContent;
 Posture.Remediations = Remediations;
 Posture.BaseRemediations = BaseRemediations;
+Posture.Policies = Policies;
+Posture.BasePolicies = BasePolicies;
 Posture.Webhooks = Webhooks;
 Posture.BaseWebhooks = BaseWebhooks;
 
@@ -155,6 +174,22 @@ export declare namespace Posture {
   };
 
   export { Remediations as Remediations, BaseRemediations as BaseRemediations };
+
+  export {
+    Policies as Policies,
+    BasePolicies as BasePolicies,
+    type PolicyCreateResponse as PolicyCreateResponse,
+    type PolicyUpdateResponse as PolicyUpdateResponse,
+    type PolicyListResponse as PolicyListResponse,
+    type PolicyDeleteResponse as PolicyDeleteResponse,
+    type PolicyGetResponse as PolicyGetResponse,
+    type PolicyListResponsesCursorPaginationAfter as PolicyListResponsesCursorPaginationAfter,
+    type PolicyCreateParams as PolicyCreateParams,
+    type PolicyUpdateParams as PolicyUpdateParams,
+    type PolicyListParams as PolicyListParams,
+    type PolicyDeleteParams as PolicyDeleteParams,
+    type PolicyGetParams as PolicyGetParams,
+  };
 
   export {
     Webhooks as Webhooks,

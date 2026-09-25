@@ -60,7 +60,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { lifecycle: BaseLi
           ],
         },
       ],
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -82,7 +82,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { lifecycle: BaseLi
   test.skip('get: required and optional params', async () => {
     const response = await client.r2.buckets.lifecycle.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 };

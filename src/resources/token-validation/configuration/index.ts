@@ -17,5 +17,7 @@ export {
   Credentials,
   BaseCredentials,
   type CredentialUpdateResponse,
+  type CredentialEditResponse,
   type CredentialUpdateParams,
+  type CredentialEditParams,
 } from './credentials';

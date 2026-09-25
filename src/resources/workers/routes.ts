@@ -33,7 +33,7 @@ export class BaseRoutes extends APIResource {
   }
 
   /**
-   * Updates the URL pattern or Worker associated with a route.
+   * Replaces the URL pattern or Worker associated with a Worker route.
    *
    * @example
    * ```ts
@@ -61,7 +61,7 @@ export class BaseRoutes extends APIResource {
   }
 
   /**
-   * Returns routes for a zone.
+   * Returns Worker routes for a zone.
    *
    * @example
    * ```ts
@@ -86,7 +86,7 @@ export class BaseRoutes extends APIResource {
   }
 
   /**
-   * Deletes a route.
+   * Deletes a Worker route.
    *
    * @example
    * ```ts
@@ -110,7 +110,7 @@ export class BaseRoutes extends APIResource {
   }
 
   /**
-   * Returns information about a route, including URL pattern and Worker.
+   * Returns information about a Worker route, including URL pattern and Worker.
    *
    * @example
    * ```ts

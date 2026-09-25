@@ -12,7 +12,8 @@ export class BaseMessages extends APIResource {
   ] as const);
 
   /**
-   * Acknowledge + Retry messages from a Queue
+   * Acknowledges successfully processed Queue messages and retries messages that
+   * were not processed successfully.
    *
    * @example
    * ```ts
@@ -33,7 +34,7 @@ export class BaseMessages extends APIResource {
   }
 
   /**
-   * Push a batch of message to a Queue
+   * Pushes a batch of messages to a Queue.
    *
    * @example
    * ```ts
@@ -58,8 +59,9 @@ export class BaseMessages extends APIResource {
   }
 
   /**
-   * Peek messages from a Queue without leasing them. Messages remain available for
-   * subsequent peek or pull operations.
+   * Peek messages from a Queue without leasing them. Each message includes a ref
+   * that can be passed to the purge endpoint, and remains available for subsequent
+   * peek or pull operations until it is purged.
    *
    * @example
    * ```ts
@@ -84,7 +86,7 @@ export class BaseMessages extends APIResource {
   }
 
   /**
-   * Pull a batch of messages from a Queue
+   * Pulls a batch of messages from a Queue for an HTTP pull consumer.
    *
    * @example
    * ```ts
@@ -109,9 +111,8 @@ export class BaseMessages extends APIResource {
   }
 
   /**
-   * Delete peeked messages from a Queue by their ref. Purged messages aren't
-   * considered delivered, they are instantly deleted from this queue and do not
-   * affect metrics.
+   * Delete messages from a Queue by using refs returned by the peek endpoint.
+   * Purging messages does not count as delivery and does not affect metrics.
    *
    * @example
    * ```ts
@@ -143,7 +144,7 @@ export class BaseMessages extends APIResource {
   }
 
   /**
-   * Push a message to a Queue
+   * Pushes a message to a Queue.
    *
    * @example
    * ```ts

@@ -10,7 +10,7 @@ export class BaseTURN extends APIResource {
   static override readonly _key: readonly ['calls', 'turn'] = Object.freeze(['calls', 'turn'] as const);
 
   /**
-   * Creates a new Cloudflare Calls TURN key.
+   * Creates a new Realtime TURN key.
    *
    * @example
    * ```ts
@@ -29,7 +29,7 @@ export class BaseTURN extends APIResource {
   }
 
   /**
-   * Edit details for a single TURN key.
+   * Updates details for a single TURN key.
    *
    * @example
    * ```ts
@@ -50,7 +50,7 @@ export class BaseTURN extends APIResource {
   }
 
   /**
-   * Lists all TURN keys in the Cloudflare account
+   * Lists all TURN keys in the Cloudflare account.
    *
    * @example
    * ```ts
@@ -75,7 +75,7 @@ export class BaseTURN extends APIResource {
   }
 
   /**
-   * Deletes a TURN key from Cloudflare Calls
+   * Deletes a Realtime TURN key.
    *
    * @example
    * ```ts
@@ -122,115 +122,115 @@ export interface TURNCreateResponse {
   /**
    * The date and time the item was created.
    */
-  created?: string;
+  created: string;
 
   /**
    * Bearer token
    */
-  key?: string;
+  key: string;
 
   /**
    * The date and time the item was last modified.
    */
-  modified?: string;
+  modified: string;
 
   /**
    * A short description of a TURN key, not shown to end users.
    */
-  name?: string;
+  name: string;
 
   /**
    * A Cloudflare-generated unique identifier for a item.
    */
-  uid?: string;
+  uid: string;
 }
 
 export interface TURNUpdateResponse {
   /**
    * The date and time the item was created.
    */
-  created?: string;
+  created: string;
 
   /**
    * The date and time the item was last modified.
    */
-  modified?: string;
+  modified: string;
 
   /**
-   * A short description of Calls app, not shown to end users.
+   * A short description of a Realtime SFU app, not shown to end users.
    */
-  name?: string;
+  name: string;
 
   /**
    * A Cloudflare-generated unique identifier for a item.
    */
-  uid?: string;
+  uid: string;
 }
 
 export interface TURNListResponse {
   /**
    * The date and time the item was created.
    */
-  created?: string;
+  created: string;
 
   /**
    * The date and time the item was last modified.
    */
-  modified?: string;
+  modified: string;
 
   /**
-   * A short description of Calls app, not shown to end users.
+   * A short description of a Realtime SFU app, not shown to end users.
    */
-  name?: string;
+  name: string;
 
   /**
    * A Cloudflare-generated unique identifier for a item.
    */
-  uid?: string;
+  uid: string;
 }
 
 export interface TURNDeleteResponse {
   /**
    * The date and time the item was created.
    */
-  created?: string;
+  created: string;
 
   /**
    * The date and time the item was last modified.
    */
-  modified?: string;
+  modified: string;
 
   /**
-   * A short description of Calls app, not shown to end users.
+   * A short description of a Realtime SFU app, not shown to end users.
    */
-  name?: string;
+  name: string;
 
   /**
    * A Cloudflare-generated unique identifier for a item.
    */
-  uid?: string;
+  uid: string;
 }
 
 export interface TURNGetResponse {
   /**
    * The date and time the item was created.
    */
-  created?: string;
+  created: string;
 
   /**
    * The date and time the item was last modified.
    */
-  modified?: string;
+  modified: string;
 
   /**
-   * A short description of Calls app, not shown to end users.
+   * A short description of a Realtime SFU app, not shown to end users.
    */
-  name?: string;
+  name: string;
 
   /**
    * A Cloudflare-generated unique identifier for a item.
    */
-  uid?: string;
+  uid: string;
 }
 
 export interface TURNCreateParams {

@@ -57,6 +57,46 @@ Methods:
 - <code title="post /{accounts_or_zones}/{account_or_zone_id}/logpush/ownership">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">create</a>({ ...params }) -> OwnershipCreateResponse | null</code>
 - <code title="post /{accounts_or_zones}/{account_or_zone_id}/logpush/ownership/validate">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">validate</a>({ ...params }) -> OwnershipValidation | null</code>
 
+## Transformers
+
+Types:
+
+- <code><a href="./src/resources/logpush/transformers/transformers.ts">TransformerCreateResponse</a></code>
+- <code><a href="./src/resources/logpush/transformers/transformers.ts">TransformerUpdateResponse</a></code>
+- <code><a href="./src/resources/logpush/transformers/transformers.ts">TransformerListResponse</a></code>
+- <code><a href="./src/resources/logpush/transformers/transformers.ts">TransformerDeleteResponse</a></code>
+- <code><a href="./src/resources/logpush/transformers/transformers.ts">TransformerGetResponse</a></code>
+- <code><a href="./src/resources/logpush/transformers/transformers.ts">TransformerPreviewResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/logpush/transformers">client.logpush.transformers.<a href="./src/resources/logpush/transformers/transformers.ts">create</a>({ ...params }) -> TransformerCreateResponse</code>
+- <code title="put /accounts/{account_id}/logpush/transformers/{transformer_id}">client.logpush.transformers.<a href="./src/resources/logpush/transformers/transformers.ts">update</a>(transformerID, { ...params }) -> TransformerUpdateResponse</code>
+- <code title="get /accounts/{account_id}/logpush/transformers">client.logpush.transformers.<a href="./src/resources/logpush/transformers/transformers.ts">list</a>({ ...params }) -> TransformerListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/logpush/transformers/{transformer_id}">client.logpush.transformers.<a href="./src/resources/logpush/transformers/transformers.ts">delete</a>(transformerID, { ...params }) -> TransformerDeleteResponse</code>
+- <code title="get /accounts/{account_id}/logpush/transformers/{transformer_id}">client.logpush.transformers.<a href="./src/resources/logpush/transformers/transformers.ts">get</a>(transformerID, { ...params }) -> TransformerGetResponse</code>
+- <code title="post /accounts/{account_id}/logpush/transformers/preview">client.logpush.transformers.<a href="./src/resources/logpush/transformers/transformers.ts">preview</a>({ ...params }) -> TransformerPreviewResponsesSinglePage</code>
+
+### Content
+
+Types:
+
+- <code><a href="./src/resources/logpush/transformers/content.ts">ContentGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/logpush/transformers/{transformer_id}/content">client.logpush.transformers.content.<a href="./src/resources/logpush/transformers/content.ts">get</a>(transformerID, { ...params }) -> ContentGetResponse</code>
+
+### Versions
+
+Types:
+
+- <code><a href="./src/resources/logpush/transformers/versions.ts">VersionListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/logpush/transformers/{transformer_id}/versions">client.logpush.transformers.versions.<a href="./src/resources/logpush/transformers/versions.ts">list</a>(transformerID, { ...params }) -> VersionListResponsesSinglePage</code>
+
 ## Validate
 
 Types:

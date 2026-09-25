@@ -25,7 +25,7 @@ export class BaseNamespaces extends APIResource {
   ] as const);
 
   /**
-   * Create a new Workers for Platforms namespace.
+   * Create a new Workers for Platforms dispatch namespace.
    *
    * @example
    * ```ts
@@ -46,7 +46,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Fetch a list of Workers for Platforms namespaces.
+   * Fetch a list of Workers for Platforms dispatch namespaces.
    *
    * @example
    * ```ts
@@ -71,7 +71,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Delete a Workers for Platforms namespace.
+   * Delete a Workers for Platforms dispatch namespace.
    *
    * @example
    * ```ts
@@ -97,7 +97,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Get a Workers for Platforms namespace.
+   * Get a Workers for Platforms dispatch namespace.
    *
    * @example
    * ```ts

@@ -12,6 +12,7 @@ export {
   type OrganizationListParams,
   type OrganizationsV4PagePaginationArray,
 } from './organizations';
+export { SpectrumAnalytics, BaseSpectrumAnalytics } from './spectrum-analytics/index';
 export {
   Subscriptions,
   BaseSubscriptions,

@@ -12,5 +12,9 @@ export {
   type RuleListParams,
   type RuleDeleteParams,
   type RuleGetParams,
+  type RuleUpdateResponsesSinglePage,
+  type RuleListResponsesSinglePage,
+  type RuleDeleteResponsesSinglePage,
+  type RuleGetResponsesSinglePage,
 } from './rules';
 export { Snippets, BaseSnippets } from './snippets';

@@ -86,19 +86,17 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/firewall/waf/overrides.ts">Override</a></code>
 - <code><a href="./src/resources/firewall/waf/overrides.ts">OverrideURL</a></code>
 - <code><a href="./src/resources/firewall/waf/overrides.ts">RewriteAction</a></code>
 - <code><a href="./src/resources/firewall/waf/overrides.ts">WAFRule</a></code>
-- <code><a href="./src/resources/firewall/waf/overrides.ts">OverrideDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/firewall/waf/overrides">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">create</a>({ ...params }) -> Override</code>
-- <code title="put /zones/{zone_id}/firewall/waf/overrides/{overrides_id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">update</a>(overridesID, { ...params }) -> Override</code>
-- <code title="get /zones/{zone_id}/firewall/waf/overrides">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">list</a>({ ...params }) -> OverridesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_id}/firewall/waf/overrides/{overrides_id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">delete</a>(overridesID, { ...params }) -> OverrideDeleteResponse</code>
-- <code title="get /zones/{zone_id}/firewall/waf/overrides/{overrides_id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">get</a>(overridesID, { ...params }) -> Override</code>
+- <code title="post /zones/{zone_id}/firewall/waf/overrides">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">create</a>({ ...params }) -> void</code>
+- <code title="put /zones/{zone_id}/firewall/waf/overrides/{overrides_id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">update</a>(overridesID, { ...params }) -> void</code>
+- <code title="get /zones/{zone_id}/firewall/waf/overrides">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">list</a>({ ...params }) -> void</code>
+- <code title="delete /zones/{zone_id}/firewall/waf/overrides/{overrides_id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">delete</a>(overridesID, { ...params }) -> void</code>
+- <code title="get /zones/{zone_id}/firewall/waf/overrides/{overrides_id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">get</a>(overridesID, { ...params }) -> void</code>
 
 ### Packages
 

@@ -156,13 +156,13 @@ export namespace BillingCreditBalanceResponse {
   export interface TopupConfig {
     amount: number | null;
 
-    disabledReason: string | null;
-
-    error: string | null;
-
-    lastFailedAt: number | null;
-
     threshold: number | null;
+
+    disabledReason?: string | null;
+
+    error?: string | null;
+
+    lastFailedAt?: number | null;
   }
 }
 

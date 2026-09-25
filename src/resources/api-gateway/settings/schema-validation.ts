@@ -14,7 +14,8 @@ export class BaseSchemaValidation extends APIResource {
   ] as const);
 
   /**
-   * Updates zone level schema validation settings on the zone
+   * Updates zone level schema validation settings on the zone. Deprecated; use
+   * `/zones/{zone_id}/schema_validation/settings` instead.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
@@ -27,7 +28,8 @@ export class BaseSchemaValidation extends APIResource {
   }
 
   /**
-   * Updates zone level schema validation settings on the zone
+   * Updates zone level schema validation settings on the zone. Deprecated; use
+   * `/zones/{zone_id}/schema_validation/settings` instead.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
@@ -40,7 +42,8 @@ export class BaseSchemaValidation extends APIResource {
   }
 
   /**
-   * Retrieves zone level schema validation settings currently set on the zone
+   * Retrieves zone level schema validation settings currently set on the zone.
+   * Deprecated; use `/zones/{zone_id}/schema_validation/settings` instead.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */

@@ -64,3 +64,13 @@ Methods:
 - <code title="get /zones/{zone_id}/spectrum/apps">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">list</a>({ ...params }) -> AppListResponsesV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">delete</a>(appID, { ...params }) -> AppDeleteResponse | null</code>
 - <code title="get /zones/{zone_id}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">get</a>(appID, { ...params }) -> AppGetResponse</code>
+
+## Protocols
+
+Types:
+
+- <code><a href="./src/resources/spectrum/protocols.ts">ProtocolListResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/spectrum/protocols">client.spectrum.protocols.<a href="./src/resources/spectrum/protocols.ts">list</a>({ ...params }) -> ProtocolListResponsesSinglePage</code>

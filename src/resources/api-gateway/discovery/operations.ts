@@ -20,7 +20,7 @@ export class BaseOperations extends APIResource {
   ] as const);
 
   /**
-   * Retrieve the most up to date view of discovered operations
+   * Returns the latest web and API operations discovered from zone traffic.
    *
    * @example
    * ```ts
@@ -45,7 +45,7 @@ export class BaseOperations extends APIResource {
   }
 
   /**
-   * Update the `state` on one or more discovered operations
+   * Updates the state of one or more discovered web and API operations.
    *
    * @example
    * ```ts

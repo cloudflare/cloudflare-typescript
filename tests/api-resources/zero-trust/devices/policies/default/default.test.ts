@@ -59,6 +59,7 @@ const runTests = (
         enabled: true,
         masque_endpoints: ['198.51.100.1:443'],
         wireguard_endpoints: ['198.51.100.1:2408'],
+        autoswitch: true,
       },
       include: [{ address: '192.0.2.0/24', description: 'Include testing domains in the tunnel' }],
       lan_allow_minutes: 30,
@@ -69,6 +70,7 @@ const runTests = (
       support_url: 'https://1.1.1.1/help',
       switch_locked: true,
       tunnel_protocol: 'wireguard',
+      uninstall_protection: false,
       virtual_networks: {
         allowed: ['f174e90a-fafe-4643-bbbc-4a0ed4fc8415'],
         default: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',

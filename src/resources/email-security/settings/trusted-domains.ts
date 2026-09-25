@@ -104,6 +104,49 @@ export class BaseTrustedDomains extends APIResource {
   }
 
   /**
+   * Executes multiple operations atomically. All four operation arrays (deletes,
+   * patches, puts, posts) are required and executed in order. Send empty arrays for
+   * unused operations.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.emailSecurity.settings.trustedDomains.batch({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     deletes: [
+   *       { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415' },
+   *     ],
+   *     patches: [{}],
+   *     posts: [
+   *       {
+   *         is_recent: true,
+   *         is_regex: false,
+   *         is_similarity: false,
+   *         pattern: 'example.com',
+   *       },
+   *     ],
+   *     puts: [
+   *       {
+   *         is_recent: true,
+   *         is_regex: false,
+   *         is_similarity: false,
+   *         pattern: 'example.com',
+   *       },
+   *     ],
+   *   });
+   * ```
+   */
+  batch(params: TrustedDomainBatchParams, options?: RequestOptions): APIPromise<TrustedDomainBatchResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/email-security/settings/trusted_domains/batch`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: TrustedDomainBatchResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Updates an existing trusted domain pattern. Only provided fields will be
    * modified. Changes take effect for new emails matching the pattern.
    *
@@ -243,6 +286,136 @@ export interface TrustedDomainDeleteResponse {
   id: string;
 }
 
+export interface TrustedDomainBatchResponse {
+  deletes?: Array<TrustedDomainBatchResponse.Delete>;
+
+  patches?: Array<TrustedDomainBatchResponse.Patch>;
+
+  posts?: Array<TrustedDomainBatchResponse.Post>;
+
+  puts?: Array<TrustedDomainBatchResponse.Put>;
+}
+
+export namespace TrustedDomainBatchResponse {
+  export interface Delete {
+    /**
+     * Trusted domain identifier.
+     */
+    id: string;
+  }
+
+  /**
+   * A trusted email domain.
+   */
+  export interface Patch {
+    /**
+     * Trusted domain identifier.
+     */
+    id?: string;
+
+    comments?: string | null;
+
+    created_at?: string;
+
+    /**
+     * Select to prevent recently registered domains from triggering a Suspicious or
+     * Malicious disposition.
+     */
+    is_recent?: boolean;
+
+    is_regex?: boolean;
+
+    /**
+     * Select for partner or other approved domains that have similar spelling to your
+     * connected domains. Prevents listed domains from triggering a Spoof disposition.
+     */
+    is_similarity?: boolean;
+
+    /**
+     * @deprecated Use `modified_at` instead.
+     */
+    last_modified?: string;
+
+    modified_at?: string;
+
+    pattern?: string;
+  }
+
+  /**
+   * A trusted email domain.
+   */
+  export interface Post {
+    /**
+     * Trusted domain identifier.
+     */
+    id?: string;
+
+    comments?: string | null;
+
+    created_at?: string;
+
+    /**
+     * Select to prevent recently registered domains from triggering a Suspicious or
+     * Malicious disposition.
+     */
+    is_recent?: boolean;
+
+    is_regex?: boolean;
+
+    /**
+     * Select for partner or other approved domains that have similar spelling to your
+     * connected domains. Prevents listed domains from triggering a Spoof disposition.
+     */
+    is_similarity?: boolean;
+
+    /**
+     * @deprecated Use `modified_at` instead.
+     */
+    last_modified?: string;
+
+    modified_at?: string;
+
+    pattern?: string;
+  }
+
+  /**
+   * A trusted email domain.
+   */
+  export interface Put {
+    /**
+     * Trusted domain identifier.
+     */
+    id?: string;
+
+    comments?: string | null;
+
+    created_at?: string;
+
+    /**
+     * Select to prevent recently registered domains from triggering a Suspicious or
+     * Malicious disposition.
+     */
+    is_recent?: boolean;
+
+    is_regex?: boolean;
+
+    /**
+     * Select for partner or other approved domains that have similar spelling to your
+     * connected domains. Prevents listed domains from triggering a Spoof disposition.
+     */
+    is_similarity?: boolean;
+
+    /**
+     * @deprecated Use `modified_at` instead.
+     */
+    last_modified?: string;
+
+    modified_at?: string;
+
+    pattern?: string;
+  }
+}
+
 /**
  * A trusted email domain.
  */
@@ -319,7 +492,7 @@ export interface TrustedDomainGetResponse {
 
 export interface TrustedDomainCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -354,7 +527,7 @@ export interface TrustedDomainCreateParams {
 
 export interface TrustedDomainListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -393,14 +566,119 @@ export interface TrustedDomainListParams extends V4PagePaginationArrayParams {
 
 export interface TrustedDomainDeleteParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }
 
+export interface TrustedDomainBatchParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param
+   */
+  deletes: Array<TrustedDomainBatchParams.Delete>;
+
+  /**
+   * Body param
+   */
+  patches: Array<TrustedDomainBatchParams.Patch>;
+
+  /**
+   * Body param
+   */
+  posts: Array<TrustedDomainBatchParams.Post>;
+
+  /**
+   * Body param
+   */
+  puts: Array<TrustedDomainBatchParams.Put>;
+}
+
+export namespace TrustedDomainBatchParams {
+  export interface Delete {
+    /**
+     * Trusted domain identifier.
+     */
+    id: string;
+  }
+
+  /**
+   * A trusted email domain.
+   */
+  export interface Patch {
+    comments?: string | null;
+
+    /**
+     * Select to prevent recently registered domains from triggering a Suspicious or
+     * Malicious disposition.
+     */
+    is_recent?: boolean;
+
+    is_regex?: boolean;
+
+    /**
+     * Select for partner or other approved domains that have similar spelling to your
+     * connected domains. Prevents listed domains from triggering a Spoof disposition.
+     */
+    is_similarity?: boolean;
+
+    pattern?: string;
+  }
+
+  /**
+   * Create a trusted domain.
+   */
+  export interface Post {
+    /**
+     * Select to prevent recently registered domains from triggering a Suspicious or
+     * Malicious disposition.
+     */
+    is_recent: boolean;
+
+    is_regex: boolean;
+
+    /**
+     * Select for partner or other approved domains that have similar spelling to your
+     * connected domains. Prevents listed domains from triggering a Spoof disposition.
+     */
+    is_similarity: boolean;
+
+    pattern: string;
+
+    comments?: string | null;
+  }
+
+  /**
+   * A trusted email domain.
+   */
+  export interface Put {
+    /**
+     * Select to prevent recently registered domains from triggering a Suspicious or
+     * Malicious disposition.
+     */
+    is_recent: boolean;
+
+    is_regex: boolean;
+
+    /**
+     * Select for partner or other approved domains that have similar spelling to your
+     * connected domains. Prevents listed domains from triggering a Spoof disposition.
+     */
+    is_similarity: boolean;
+
+    pattern: string;
+
+    comments?: string | null;
+  }
+}
+
 export interface TrustedDomainEditParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -435,7 +713,7 @@ export interface TrustedDomainEditParams {
 
 export interface TrustedDomainGetParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }
@@ -445,12 +723,14 @@ export declare namespace TrustedDomains {
     type TrustedDomainCreateResponse as TrustedDomainCreateResponse,
     type TrustedDomainListResponse as TrustedDomainListResponse,
     type TrustedDomainDeleteResponse as TrustedDomainDeleteResponse,
+    type TrustedDomainBatchResponse as TrustedDomainBatchResponse,
     type TrustedDomainEditResponse as TrustedDomainEditResponse,
     type TrustedDomainGetResponse as TrustedDomainGetResponse,
     type TrustedDomainListResponsesV4PagePaginationArray as TrustedDomainListResponsesV4PagePaginationArray,
     type TrustedDomainCreateParams as TrustedDomainCreateParams,
     type TrustedDomainListParams as TrustedDomainListParams,
     type TrustedDomainDeleteParams as TrustedDomainDeleteParams,
+    type TrustedDomainBatchParams as TrustedDomainBatchParams,
     type TrustedDomainEditParams as TrustedDomainEditParams,
     type TrustedDomainGetParams as TrustedDomainGetParams,
   };

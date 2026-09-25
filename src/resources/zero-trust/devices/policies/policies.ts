@@ -84,8 +84,6 @@ export interface FallbackDomainParam {
   dns_server?: Array<string>;
 }
 
-export type FallbackDomainPolicy = Array<FallbackDomain>;
-
 export interface SettingsPolicy {
   /**
    * Whether to allow the user to switch WARP between modes.
@@ -109,12 +107,19 @@ export interface SettingsPolicy {
   auto_connect?: number;
 
   /**
+   * Browser extension proxy settings. Required when profile_type is
+   * browser_extension and invalid for WARP profiles.
+   */
+  browser_extension_config?: SettingsPolicy.BrowserExtensionConfig | null;
+
+  /**
    * Turn on the captive portal after the specified amount of time.
    */
   captive_portal?: number;
 
   /**
-   * Whether the policy is the default policy for an account.
+   * Whether the policy is the account default. WARP group profiles cannot set this
+   * field.
    */
   default?: boolean;
 
@@ -204,6 +209,12 @@ export interface SettingsPolicy {
   precedence?: number;
 
   /**
+   * The client type to which the device settings profile applies. This field is set
+   * when the profile is created and cannot be changed.
+   */
+  profile_type?: 'warp' | 'browser_extension';
+
+  /**
    * Determines if the operating system will register WARP's local interface IP with
    * your on-premises DNS server.
    */
@@ -235,12 +246,34 @@ export interface SettingsPolicy {
   tunnel_protocol?: string;
 
   /**
+   * Determines whether uninstalling the WARP client requires an override code.
+   * (Windows only).
+   */
+  uninstall_protection?: boolean;
+
+  /**
    * Virtual network access settings for the device.
    */
   virtual_networks?: SettingsPolicy.VirtualNetworks | null;
 }
 
 export namespace SettingsPolicy {
+  /**
+   * Browser extension proxy settings. Required when profile_type is
+   * browser_extension and invalid for WARP profiles.
+   */
+  export interface BrowserExtensionConfig {
+    /**
+     * Whether the user may disable the browser extension proxy.
+     */
+    proxy_control: 'unlocked' | 'locked';
+
+    /**
+     * Whether the browser extension proxy is active.
+     */
+    proxy_enabled: boolean;
+  }
+
   export interface DNSSearchSuffix {
     /**
      * The DNS search suffix to append when resolving short hostnames.
@@ -281,6 +314,12 @@ export namespace SettingsPolicy {
      * or masque_endpoints must be provided.
      */
     wireguard_endpoints: Array<string>;
+
+    /**
+     * Automatically switch Global Acceleration regions based on device location.
+     * Defaults to false when not provided.
+     */
+    autoswitch?: boolean;
   }
 
   export interface ServiceModeV2 {
@@ -461,7 +500,6 @@ export declare namespace Policies {
   export {
     type DevicePolicyCertificates as DevicePolicyCertificates,
     type FallbackDomain as FallbackDomain,
-    type FallbackDomainPolicy as FallbackDomainPolicy,
     type SettingsPolicy as SettingsPolicy,
     type SplitTunnelExclude as SplitTunnelExclude,
     type SplitTunnelInclude as SplitTunnelInclude,

@@ -13,7 +13,7 @@ export class BaseSubdomain extends APIResource {
   ] as const);
 
   /**
-   * Enable or disable the Worker on the workers.dev subdomain.
+   * Enable or disable a Worker script on the workers.dev subdomain.
    *
    * @example
    * ```ts
@@ -42,7 +42,7 @@ export class BaseSubdomain extends APIResource {
   }
 
   /**
-   * Disable all workers.dev subdomains for a Worker.
+   * Disable all workers.dev subdomains for a Worker script.
    *
    * @example
    * ```ts
@@ -68,7 +68,7 @@ export class BaseSubdomain extends APIResource {
   }
 
   /**
-   * Get if the Worker is available on the workers.dev subdomain.
+   * Get whether a Worker script is available on the workers.dev subdomain.
    *
    * @example
    * ```ts

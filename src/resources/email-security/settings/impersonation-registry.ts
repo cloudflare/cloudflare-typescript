@@ -195,7 +195,12 @@ export interface ImpersonationRegistryCreateResponse {
 
   name?: string;
 
-  provenance?: 'A1S_INTERNAL' | 'SNOOPY-CASB_OFFICE_365' | 'SNOOPY-OFFICE_365' | 'SNOOPY-GOOGLE_DIRECTORY';
+  provenance?:
+    | 'A1S_INTERNAL'
+    | 'SNOOPY-CASB_OFFICE_365'
+    | 'SNOOPY-OFFICE_365'
+    | 'SNOOPY-GOOGLE_DIRECTORY'
+    | null;
 }
 
 /**
@@ -233,7 +238,12 @@ export interface ImpersonationRegistryListResponse {
 
   name?: string;
 
-  provenance?: 'A1S_INTERNAL' | 'SNOOPY-CASB_OFFICE_365' | 'SNOOPY-OFFICE_365' | 'SNOOPY-GOOGLE_DIRECTORY';
+  provenance?:
+    | 'A1S_INTERNAL'
+    | 'SNOOPY-CASB_OFFICE_365'
+    | 'SNOOPY-OFFICE_365'
+    | 'SNOOPY-GOOGLE_DIRECTORY'
+    | null;
 }
 
 export interface ImpersonationRegistryDeleteResponse {
@@ -278,7 +288,12 @@ export interface ImpersonationRegistryEditResponse {
 
   name?: string;
 
-  provenance?: 'A1S_INTERNAL' | 'SNOOPY-CASB_OFFICE_365' | 'SNOOPY-OFFICE_365' | 'SNOOPY-GOOGLE_DIRECTORY';
+  provenance?:
+    | 'A1S_INTERNAL'
+    | 'SNOOPY-CASB_OFFICE_365'
+    | 'SNOOPY-OFFICE_365'
+    | 'SNOOPY-GOOGLE_DIRECTORY'
+    | null;
 }
 
 /**
@@ -316,12 +331,17 @@ export interface ImpersonationRegistryGetResponse {
 
   name?: string;
 
-  provenance?: 'A1S_INTERNAL' | 'SNOOPY-CASB_OFFICE_365' | 'SNOOPY-OFFICE_365' | 'SNOOPY-GOOGLE_DIRECTORY';
+  provenance?:
+    | 'A1S_INTERNAL'
+    | 'SNOOPY-CASB_OFFICE_365'
+    | 'SNOOPY-OFFICE_365'
+    | 'SNOOPY-GOOGLE_DIRECTORY'
+    | null;
 }
 
 export interface ImpersonationRegistryCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -363,12 +383,17 @@ export interface ImpersonationRegistryCreateParams {
   /**
    * Body param
    */
-  provenance?: 'A1S_INTERNAL' | 'SNOOPY-CASB_OFFICE_365' | 'SNOOPY-OFFICE_365' | 'SNOOPY-GOOGLE_DIRECTORY';
+  provenance?:
+    | 'A1S_INTERNAL'
+    | 'SNOOPY-CASB_OFFICE_365'
+    | 'SNOOPY-OFFICE_365'
+    | 'SNOOPY-GOOGLE_DIRECTORY'
+    | null;
 }
 
 export interface ImpersonationRegistryListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -395,14 +420,14 @@ export interface ImpersonationRegistryListParams extends V4PagePaginationArrayPa
 
 export interface ImpersonationRegistryDeleteParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }
 
 export interface ImpersonationRegistryEditParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -444,12 +469,17 @@ export interface ImpersonationRegistryEditParams {
   /**
    * Body param
    */
-  provenance?: 'A1S_INTERNAL' | 'SNOOPY-CASB_OFFICE_365' | 'SNOOPY-OFFICE_365' | 'SNOOPY-GOOGLE_DIRECTORY';
+  provenance?:
+    | 'A1S_INTERNAL'
+    | 'SNOOPY-CASB_OFFICE_365'
+    | 'SNOOPY-OFFICE_365'
+    | 'SNOOPY-GOOGLE_DIRECTORY'
+    | null;
 }
 
 export interface ImpersonationRegistryGetParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }

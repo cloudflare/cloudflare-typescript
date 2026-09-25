@@ -153,9 +153,12 @@ export class BaseThreatEvents extends APIResource {
   }
 
   /**
-   * Use `datasetId=all` or `datasetId=*` to query all event datasets for the account
-   * (limited to 50). When `datasetId` is unspecified, events are listed from the
-   * default Cloudforce One Threat Events dataset. To list existing datasets, use the
+   * Use `datasetId=all` or `datasetId=*` for the legacy all-datasets scope,
+   * `datasetId=analytics` for datasets with `isAnalytics=true`, or
+   * `datasetId=operational` for datasets with `isAnalytics=false` (limited to 50).
+   * Scope values must be used alone. When `datasetId` is unspecified, events are
+   * listed from the default Cloudforce One Threat Events dataset. To list existing
+   * datasets, use the
    * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
    * endpoint.
    *
@@ -719,6 +722,12 @@ export interface ThreatEventCreateParams {
   insight?: string;
 
   /**
+   * Body param: Controlled provenance for an event and its indicators derived from a
+   * Threat Signals article.
+   */
+  source?: ThreatEventCreateParams.Source;
+
+  /**
    * Body param
    */
   tags?: Array<string>;
@@ -754,6 +763,24 @@ export namespace ThreatEventCreateParams {
      */
     value: string;
   }
+
+  /**
+   * Controlled provenance for an event and its indicators derived from a Threat
+   * Signals article.
+   */
+  export interface Source {
+    resourceId: string;
+
+    resourceType: 'article';
+
+    system: 'threat-signals';
+
+    /**
+     * Threat Signals article title; null for historical provenance without a stored
+     * title.
+     */
+    title?: string | null;
+  }
 }
 
 export interface ThreatEventListParams {
@@ -778,9 +805,10 @@ export interface ThreatEventListParams {
   cursor?: string;
 
   /**
-   * Query param: Dataset IDs to query events from (array of UUIDs), or special value
-   * 'all' or '\*' to query all event datasets for the account. If not provided, uses
-   * the default dataset.
+   * Query param: Dataset UUIDs to query, or one standalone scope value: 'all'/'\*'
+   * for the legacy all-datasets behavior, 'analytics' for isAnalytics=true datasets,
+   * or 'operational' for isAnalytics=false datasets. If not provided, uses the
+   * default dataset.
    */
   datasetId?: Array<string>;
 
@@ -819,23 +847,36 @@ export interface ThreatEventListParams {
   /**
    * Query param
    */
-  search?: Array<ThreatEventListParams.Search>;
+  search?: Array<
+    | ThreatEventListParams.UnionMember0
+    | ThreatEventListParams.UnionMember1
+    | ThreatEventListParams.UnionMember2
+    | ThreatEventListParams.UnionMember3
+    | ThreatEventListParams.UnionMember4
+    | ThreatEventListParams.UnionMember5
+  >;
 }
 
 export namespace ThreatEventListParams {
-  export interface Search {
-    /**
-     * Event field to search on. Allowed: attacker, attackerCountry, category,
-     * createdAt, date, event, indicator, indicatorType, killChain, mitreAttack, tags,
-     * targetCountry, targetIndustry, tlp, uuid.
-     */
-    field?: string;
+  export interface UnionMember0 {
+    field:
+      | 'attacker'
+      | 'attackerCountry'
+      | 'category'
+      | 'createdAt'
+      | 'date'
+      | 'event'
+      | 'indicator'
+      | 'indicatorType'
+      | 'mitreAttack'
+      | 'mitreCapec'
+      | 'tags'
+      | 'targetCountry'
+      | 'targetIndustry'
+      | 'tlp'
+      | 'uuid';
 
-    /**
-     * Search operator. Use 'in' for bulk lookup of up to 100 values at once, e.g.
-     * {field:'tags', op:'in', value:['malware','apt']}.
-     */
-    op?:
+    op:
       | 'equals'
       | 'not'
       | 'gt'
@@ -846,14 +887,64 @@ export namespace ThreatEventListParams {
       | 'contains'
       | 'startsWith'
       | 'endsWith'
-      | 'in'
       | 'find';
 
-    /**
-     * Search value. String or number for most operators. Array for 'in' operator (max
-     * 100 items).
-     */
-    value?: string | number | Array<string | number>;
+    value: string;
+  }
+
+  export interface UnionMember1 {
+    field:
+      | 'attacker'
+      | 'attackerCountry'
+      | 'category'
+      | 'createdAt'
+      | 'date'
+      | 'event'
+      | 'indicator'
+      | 'indicatorType'
+      | 'mitreAttack'
+      | 'mitreCapec'
+      | 'tags'
+      | 'targetCountry'
+      | 'targetIndustry'
+      | 'tlp'
+      | 'uuid';
+
+    op: 'in';
+
+    value: Array<string>;
+  }
+
+  export interface UnionMember2 {
+    field: 'killChain';
+
+    op: 'equals' | 'not' | 'gt' | 'gte' | 'lt' | 'lte';
+
+    value: number | string;
+  }
+
+  export interface UnionMember3 {
+    field: 'killChain';
+
+    op: 'in';
+
+    value: Array<number | string>;
+  }
+
+  export interface UnionMember4 {
+    field: 'hasChildren';
+
+    op: 'equals' | 'not' | 'gt' | 'gte' | 'lt' | 'lte';
+
+    value: unknown | boolean;
+  }
+
+  export interface UnionMember5 {
+    field: 'hasChildren';
+
+    op: 'in';
+
+    value: Array<unknown | boolean>;
   }
 }
 

@@ -50,7 +50,12 @@ const runTests = (client: PartialCloudflare<{ workers: { scripts: { versions: Ba
         main_module: 'worker.js',
         annotations: {
           'workers/alias': 'staging',
+          'workers/commit_sha': '8b6aeb38455e2f92e170deb46313b90166ccc1e5',
           'workers/message': 'Fixed worker code.',
+          'workers/pull_request_number': '14966',
+          'workers/pull_request_title': 'Add a cool new feature',
+          'workers/pull_request_url': 'https://github.com/cloudflare/workers-sdk/pull/14966',
+          'workers/repository_url': 'https://github.com/cloudflare/workers-sdk',
           'workers/tag': 'any-identifier-from-external-system',
         },
         bindings: [
@@ -61,7 +66,7 @@ const runTests = (client: PartialCloudflare<{ workers: { scripts: { versions: Ba
           },
         ],
         cache_options: { enabled: true, cross_version_cache: true },
-        compatibility_date: '2021-01-01',
+        compatibility_date: '2021-01-01T00:00:00Z',
         compatibility_flags: ['nodejs_compat'],
         exports: {
           Admin: {

@@ -23,6 +23,8 @@ export class BasePrecursor extends APIResource {
    * - Rule `id` is read-only (assigned by Cloudflare) and ignored on input.
    * - Rule `mode` must be `min-friction` or `max-security` (`off` is not a valid
    *   rule mode; use `default_mode` to disable enforcement).
+   * - Rule `expression` is limited to 4000 characters. The limit applies to each
+   *   rule individually, not to the combined size of all rules.
    *
    * @example
    * ```ts
@@ -114,13 +116,13 @@ export interface EnforcementRuleParam {
 
 export interface PrecursorConfig {
   /**
-   * The zone-level Precursor enforcement mode applied to requests that do not match
-   * a more specific enforcement rule.
+   * @deprecated The zone-level Precursor enforcement mode applied to requests that
+   * do not match a more specific enforcement rule.
    */
   default_mode?: 'off' | 'min-friction' | 'max-security';
 
   /**
-   * The ordered list of enforcement rules for the zone.
+   * @deprecated The ordered list of enforcement rules for the zone.
    */
   enforcement_rules?: Array<EnforcementRule>;
 }
@@ -132,13 +134,13 @@ export interface PrecursorUpdateParams {
   zone_id: string;
 
   /**
-   * Body param: The zone-level Precursor enforcement mode applied to requests that
-   * do not match a more specific enforcement rule.
+   * @deprecated Body param: The zone-level Precursor enforcement mode applied to
+   * requests that do not match a more specific enforcement rule.
    */
   default_mode?: 'off' | 'min-friction' | 'max-security';
 
   /**
-   * Body param: The ordered list of enforcement rules for the zone.
+   * @deprecated Body param: The ordered list of enforcement rules for the zone.
    */
   enforcement_rules?: Array<EnforcementRuleParam>;
 }

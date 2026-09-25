@@ -33,9 +33,7 @@ const runTests = (
   test.skip('create: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.policies.custom.create({
       account_id: '699d98642c564d2e855e9661899b7252',
-      match: 'identity.email == "test@cloudflare.com"',
       name: 'Allow Developers',
-      precedence: 100,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,14 +48,14 @@ const runTests = (
   test.skip('create: required and optional params', async () => {
     const response = await client.zeroTrust.devices.policies.custom.create({
       account_id: '699d98642c564d2e855e9661899b7252',
-      match: 'identity.email == "test@cloudflare.com"',
       name: 'Allow Developers',
-      precedence: 100,
       allow_mode_switch: true,
       allow_updates: true,
       allowed_to_leave: true,
       auto_connect: 0,
+      browser_extension_config: { proxy_control: 'unlocked', proxy_enabled: true },
       captive_portal: 180,
+      default: false,
       description: 'Policy for test teams.',
       disable_auto_fallback: true,
       dns_search_suffixes: [{ suffix: 'internal.corp', description: 'Example internal domains' }],
@@ -69,16 +67,21 @@ const runTests = (
         enabled: true,
         masque_endpoints: ['198.51.100.1:443'],
         wireguard_endpoints: ['198.51.100.1:2408'],
+        autoswitch: true,
       },
       include: [{ address: '192.0.2.0/24', description: 'Include testing domains in the tunnel' }],
       lan_allow_minutes: 30,
       lan_allow_subnet_size: 24,
+      match: 'identity.email == "test@cloudflare.com"',
+      precedence: 100,
+      profile_type: 'warp',
       register_interface_ip_with_dns: true,
       sccm_vpn_boundary_support: false,
       service_mode_v2: { mode: 'proxy', port: 3000 },
       support_url: 'https://1.1.1.1/help',
       switch_locked: true,
       tunnel_protocol: 'wireguard',
+      uninstall_protection: false,
       virtual_networks: {
         allowed: ['f174e90a-fafe-4643-bbbc-4a0ed4fc8415'],
         default: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -102,6 +105,7 @@ const runTests = (
   test('list: required and optional params', async () => {
     const response = await client.zeroTrust.devices.policies.custom.list({
       account_id: '699d98642c564d2e855e9661899b7252',
+      profile_type: 'warp',
     });
   });
 
@@ -151,7 +155,9 @@ const runTests = (
         allow_updates: true,
         allowed_to_leave: true,
         auto_connect: 0,
+        browser_extension_config: { proxy_control: 'unlocked', proxy_enabled: true },
         captive_portal: 180,
+        default: false,
         description: 'Policy for test teams.',
         disable_auto_fallback: true,
         dns_search_suffixes: [{ suffix: 'internal.corp', description: 'Example internal domains' }],
@@ -163,6 +169,7 @@ const runTests = (
           enabled: true,
           masque_endpoints: ['198.51.100.1:443'],
           wireguard_endpoints: ['198.51.100.1:2408'],
+          autoswitch: true,
         },
         include: [{ address: '192.0.2.0/24', description: 'Include testing domains in the tunnel' }],
         lan_allow_minutes: 30,
@@ -176,6 +183,7 @@ const runTests = (
         support_url: 'https://1.1.1.1/help',
         switch_locked: true,
         tunnel_protocol: 'wireguard',
+        uninstall_protection: false,
         virtual_networks: {
           allowed: ['f174e90a-fafe-4643-bbbc-4a0ed4fc8415'],
           default: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',

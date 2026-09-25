@@ -12,7 +12,8 @@ export class BaseSettings extends APIResource {
   ] as const);
 
   /**
-   * Retrieve the current status of Content Scanning.
+   * Get the current Content Scanning status for the zone, together with the date the
+   * status was last modified.
    *
    * @example
    * ```ts

@@ -13,7 +13,7 @@ export class BaseSchedules extends APIResource {
   ] as const);
 
   /**
-   * Updates Cron Triggers for a Worker.
+   * Update the schedules (Cron Triggers) for a Worker script.
    *
    * @example
    * ```ts
@@ -42,7 +42,7 @@ export class BaseSchedules extends APIResource {
   }
 
   /**
-   * Fetches Cron Triggers for a Worker.
+   * Get the schedules (Cron Triggers) for a Worker script.
    *
    * @example
    * ```ts

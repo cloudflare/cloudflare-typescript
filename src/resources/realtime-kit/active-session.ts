@@ -21,7 +21,7 @@ export class BaseActiveSession extends APIResource {
    *     'meeting_id',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *       options: ['string'],
    *       question: 'question',
    *     },
@@ -50,7 +50,7 @@ export class BaseActiveSession extends APIResource {
    *     'meeting_id',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -77,7 +77,7 @@ export class BaseActiveSession extends APIResource {
    *     'meeting_id',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -105,9 +105,7 @@ export class BaseActiveSession extends APIResource {
    *     'meeting_id',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       app_id: 'app_id',
-   *       custom_participant_ids: ['string'],
-   *       participant_ids: ['string'],
+   *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
    *     },
    *   );
    * ```
@@ -393,12 +391,12 @@ export interface ActiveSessionKickParticipantsParams {
   /**
    * Body param
    */
-  custom_participant_ids: Array<string>;
+  custom_participant_ids?: Array<string>;
 
   /**
    * Body param
    */
-  participant_ids: Array<string>;
+  participant_ids?: Array<string>;
 }
 
 export declare namespace ActiveSession {

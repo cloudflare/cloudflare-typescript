@@ -40,13 +40,13 @@ export class BaseOriginCloudRegions extends APIResource {
     originIP: string,
     params: OriginCloudRegionUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<OriginCloudRegion> {
+  ): APIPromise<OriginCloudRegionUpdateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/origin/cloud_regions/${originIP}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: OriginCloudRegion }>
+      }) as APIPromise<{ result: OriginCloudRegionUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -60,7 +60,7 @@ export class BaseOriginCloudRegions extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const originCloudRegion of client.cache.originCloudRegions.list(
+   * for await (const originCloudRegionListResponse of client.cache.originCloudRegions.list(
    *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
@@ -70,11 +70,11 @@ export class BaseOriginCloudRegions extends APIResource {
   list(
     params: OriginCloudRegionListParams,
     options?: RequestOptions,
-  ): PagePromise<OriginCloudRegionsV4PagePaginationArray, OriginCloudRegion> {
+  ): PagePromise<OriginCloudRegionListResponsesV4PagePaginationArray, OriginCloudRegionListResponse> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/origin/cloud_regions`,
-      V4PagePaginationArray<OriginCloudRegion>,
+      V4PagePaginationArray<OriginCloudRegionListResponse>,
       { query, ...options },
     );
   }
@@ -192,11 +192,11 @@ export class BaseOriginCloudRegions extends APIResource {
     originIP: string,
     params: OriginCloudRegionGetParams,
     options?: RequestOptions,
-  ): APIPromise<OriginCloudRegion> {
+  ): APIPromise<OriginCloudRegionGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(path`/zones/${zone_id}/origin/cloud_regions/${originIP}`, options) as APIPromise<{
-        result: OriginCloudRegion;
+        result: OriginCloudRegionGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -230,12 +230,39 @@ export class BaseOriginCloudRegions extends APIResource {
 }
 export class OriginCloudRegions extends BaseOriginCloudRegions {}
 
-export type OriginCloudRegionsV4PagePaginationArray = V4PagePaginationArray<OriginCloudRegion>;
+export type OriginCloudRegionListResponsesV4PagePaginationArray =
+  V4PagePaginationArray<OriginCloudRegionListResponse>;
 
 /**
  * A single origin IP-to-cloud-region mapping.
  */
-export interface OriginCloudRegion {
+export interface OriginCloudRegionUpdateResponse {
+  /**
+   * The origin IP address (IPv4 or IPv6). Normalized to canonical form (RFC 5952 for
+   * IPv6).
+   */
+  origin_ip: string;
+
+  /**
+   * Cloud vendor region identifier.
+   */
+  region: string;
+
+  /**
+   * Cloud vendor hosting the origin.
+   */
+  vendor: 'aws' | 'azure' | 'gcp' | 'oci';
+
+  /**
+   * Time this mapping was last modified.
+   */
+  modified_on?: string;
+}
+
+/**
+ * A single origin IP-to-cloud-region mapping.
+ */
+export interface OriginCloudRegionListResponse {
   /**
    * The origin IP address (IPv4 or IPv6). Normalized to canonical form (RFC 5952 for
    * IPv6).
@@ -411,6 +438,32 @@ export namespace OriginCloudRegionBulkUpdateResponse {
 }
 
 /**
+ * A single origin IP-to-cloud-region mapping.
+ */
+export interface OriginCloudRegionGetResponse {
+  /**
+   * The origin IP address (IPv4 or IPv6). Normalized to canonical form (RFC 5952 for
+   * IPv6).
+   */
+  origin_ip: string;
+
+  /**
+   * Cloud vendor region identifier.
+   */
+  region: string;
+
+  /**
+   * Cloud vendor hosting the origin.
+   */
+  vendor: 'aws' | 'azure' | 'gcp' | 'oci';
+
+  /**
+   * Time this mapping was last modified.
+   */
+  modified_on?: string;
+}
+
+/**
  * Cloud vendors and their supported regions for origin cloud region mappings.
  */
 export interface OriginCloudRegionSupportedRegionsResponse {
@@ -549,12 +602,14 @@ export interface OriginCloudRegionSupportedRegionsParams {
 
 export declare namespace OriginCloudRegions {
   export {
-    type OriginCloudRegion as OriginCloudRegion,
+    type OriginCloudRegionUpdateResponse as OriginCloudRegionUpdateResponse,
+    type OriginCloudRegionListResponse as OriginCloudRegionListResponse,
     type OriginCloudRegionDeleteResponse as OriginCloudRegionDeleteResponse,
     type OriginCloudRegionBulkDeleteResponse as OriginCloudRegionBulkDeleteResponse,
     type OriginCloudRegionBulkUpdateResponse as OriginCloudRegionBulkUpdateResponse,
+    type OriginCloudRegionGetResponse as OriginCloudRegionGetResponse,
     type OriginCloudRegionSupportedRegionsResponse as OriginCloudRegionSupportedRegionsResponse,
-    type OriginCloudRegionsV4PagePaginationArray as OriginCloudRegionsV4PagePaginationArray,
+    type OriginCloudRegionListResponsesV4PagePaginationArray as OriginCloudRegionListResponsesV4PagePaginationArray,
     type OriginCloudRegionUpdateParams as OriginCloudRegionUpdateParams,
     type OriginCloudRegionListParams as OriginCloudRegionListParams,
     type OriginCloudRegionDeleteParams as OriginCloudRegionDeleteParams,

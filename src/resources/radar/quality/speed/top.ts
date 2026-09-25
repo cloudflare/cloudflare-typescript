@@ -148,7 +148,7 @@ export namespace TopAsesResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -183,20 +183,38 @@ export namespace TopAsesResponse {
   }
 
   export interface Top0 {
+    /**
+     * A numeric string.
+     */
     bandwidthDownload: string;
 
+    /**
+     * A numeric string.
+     */
     bandwidthUpload: string;
 
     clientASN: number;
 
     clientASName: string;
 
+    /**
+     * A numeric string.
+     */
     jitterIdle: string;
 
+    /**
+     * A numeric string.
+     */
     jitterLoaded: string;
 
+    /**
+     * A numeric string.
+     */
     latencyIdle: string;
 
+    /**
+     * A numeric string.
+     */
     latencyLoaded: string;
 
     numTests: number;
@@ -300,7 +318,7 @@ export namespace TopLocationsResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -335,20 +353,38 @@ export namespace TopLocationsResponse {
   }
 
   export interface Top0 {
+    /**
+     * A numeric string.
+     */
     bandwidthDownload: string;
 
+    /**
+     * A numeric string.
+     */
     bandwidthUpload: string;
 
     clientCountryAlpha2: string;
 
     clientCountryName: string;
 
+    /**
+     * A numeric string.
+     */
     jitterIdle: string;
 
+    /**
+     * A numeric string.
+     */
     jitterLoaded: string;
 
+    /**
+     * A numeric string.
+     */
     latencyIdle: string;
 
+    /**
+     * A numeric string.
+     */
     latencyLoaded: string;
 
     numTests: number;

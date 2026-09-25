@@ -161,7 +161,7 @@ export namespace CommandListResponse {
 
 export interface CommandCreateParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 
@@ -239,7 +239,7 @@ export namespace CommandCreateParams {
 
 export interface CommandListParams extends V4PagePaginationParams {
   /**
-   * Path param: Unique identifier linked to an account.
+   * Path param: Unique Cloudflare account ID.
    */
   account_id: string;
 

@@ -96,7 +96,7 @@ export namespace TraceGetResponse {
 
 export interface TraceGetParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }

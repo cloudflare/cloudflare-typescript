@@ -93,17 +93,15 @@ export class BaseOutgoingResource extends APIResource {
    * const disableTransfer =
    *   await client.dns.zoneTransfers.outgoing.disable({
    *     zone_id: '269d8f4853475ca241c4e730be286b20',
-   *     body: {},
    *   });
    * ```
    */
   disable(params: OutgoingDisableParams, options?: RequestOptions): APIPromise<DisableTransfer> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.post(path`/zones/${zone_id}/secondary_dns/outgoing/disable`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: DisableTransfer }>
+      this._client.post(path`/zones/${zone_id}/secondary_dns/outgoing/disable`, options) as APIPromise<{
+        result: DisableTransfer;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -115,17 +113,15 @@ export class BaseOutgoingResource extends APIResource {
    * const enableTransfer =
    *   await client.dns.zoneTransfers.outgoing.enable({
    *     zone_id: '269d8f4853475ca241c4e730be286b20',
-   *     body: {},
    *   });
    * ```
    */
   enable(params: OutgoingEnableParams, options?: RequestOptions): APIPromise<EnableTransfer> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.post(path`/zones/${zone_id}/secondary_dns/outgoing/enable`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: EnableTransfer }>
+      this._client.post(path`/zones/${zone_id}/secondary_dns/outgoing/enable`, options) as APIPromise<{
+        result: EnableTransfer;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -137,7 +133,6 @@ export class BaseOutgoingResource extends APIResource {
    * const response =
    *   await client.dns.zoneTransfers.outgoing.forceNotify({
    *     zone_id: '269d8f4853475ca241c4e730be286b20',
-   *     body: {},
    *   });
    * ```
    */
@@ -145,12 +140,11 @@ export class BaseOutgoingResource extends APIResource {
     params: OutgoingForceNotifyParams,
     options?: RequestOptions,
   ): APIPromise<OutgoingForceNotifyResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.post(path`/zones/${zone_id}/secondary_dns/outgoing/force_notify`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: OutgoingForceNotifyResponse }>
+      this._client.post(path`/zones/${zone_id}/secondary_dns/outgoing/force_notify`, options) as APIPromise<{
+        result: OutgoingForceNotifyResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -378,39 +372,15 @@ export interface OutgoingDeleteParams {
 }
 
 export interface OutgoingDisableParams {
-  /**
-   * Path param
-   */
   zone_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface OutgoingEnableParams {
-  /**
-   * Path param
-   */
   zone_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface OutgoingForceNotifyParams {
-  /**
-   * Path param
-   */
   zone_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface OutgoingGetParams {

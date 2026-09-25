@@ -72,7 +72,7 @@ export interface VersionListResponse {
   has_dag: boolean;
 
   /**
-   * The programming language of the workflow implementation
+   * The programming language of the workflow implementation.
    */
   language: 'javascript' | 'python';
 
@@ -80,12 +80,23 @@ export interface VersionListResponse {
 
   workflow_id: string;
 
+  concurrency?: VersionListResponse.Concurrency;
+
   default_retention?: VersionListResponse.DefaultRetention;
 
   limits?: VersionListResponse.Limits;
 }
 
 export namespace VersionListResponse {
+  export interface Concurrency {
+    /**
+     * Maximum number of instances of this workflow that can run concurrently.
+     * Additional instances are queued and started as running instances complete. Must
+     * not exceed the account concurrency limit.
+     */
+    limit?: number;
+  }
+
   export interface DefaultRetention {
     /**
      * Default error retention in milliseconds.
@@ -113,7 +124,7 @@ export interface VersionGetResponse {
   has_dag: boolean;
 
   /**
-   * The programming language of the workflow implementation
+   * The programming language of the workflow implementation.
    */
   language: 'javascript' | 'python';
 
@@ -121,12 +132,23 @@ export interface VersionGetResponse {
 
   workflow_id: string;
 
+  concurrency?: VersionGetResponse.Concurrency;
+
   default_retention?: VersionGetResponse.DefaultRetention;
 
   limits?: VersionGetResponse.Limits;
 }
 
 export namespace VersionGetResponse {
+  export interface Concurrency {
+    /**
+     * Maximum number of instances of this workflow that can run concurrently.
+     * Additional instances are queued and started as running instances complete. Must
+     * not exceed the account concurrency limit.
+     */
+    limit?: number;
+  }
+
   export interface DefaultRetention {
     /**
      * Default error retention in milliseconds.

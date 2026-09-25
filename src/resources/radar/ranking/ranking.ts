@@ -171,7 +171,7 @@ export namespace RankingTimeseriesGroupsResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -243,6 +243,8 @@ export namespace RankingTopResponse {
       | 'OVERLAPPED_PERCENTAGE'
       | 'RATIO';
 
+    top_0: Meta.Top0;
+
     /**
      * Measurement units for the results.
      */
@@ -301,7 +303,7 @@ export namespace RankingTopResponse {
         /**
          * Event type for annotations.
          */
-        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+        eventType: 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -326,6 +328,10 @@ export namespace RankingTopResponse {
        * Adjusted start of date range.
        */
       startTime: string;
+    }
+
+    export interface Top0 {
+      date: string;
     }
 
     export interface Unit {

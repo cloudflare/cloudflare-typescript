@@ -60,6 +60,7 @@ const runTests = (
             config: {
               _headers: '/dashboard/*\nX-Frame-Options: DENY\n\n/static/*\nAccess-Control-Allow-Origin: *',
               _redirects: '/foo /bar 301\n/news/* /blog/:splat',
+              base_path: '/docs/',
               html_handling: 'auto-trailing-slash',
               not_found_handling: '404-page',
               run_worker_first: true,
@@ -76,7 +77,7 @@ const runTests = (
           ],
           body_part: 'worker.js',
           cache_options: { enabled: true, cross_version_cache: true },
-          compatibility_date: '2021-01-01',
+          compatibility_date: '2021-01-01T00:00:00Z',
           compatibility_flags: ['nodejs_compat'],
           exports: {
             Admin: {
@@ -124,6 +125,7 @@ const runTests = (
           observability: {
             enabled: true,
             head_sampling_rate: 0.1,
+            issues: { enabled: true },
             logs: {
               enabled: true,
               invocation_logs: true,
@@ -131,6 +133,7 @@ const runTests = (
               head_sampling_rate: 0.1,
               persist: true,
             },
+            redact_query_string: false,
             traces: {
               destinations: ['cloudflare'],
               enabled: true,

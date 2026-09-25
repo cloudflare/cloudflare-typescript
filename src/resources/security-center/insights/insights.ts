@@ -312,6 +312,11 @@ export interface InsightListParams extends V4PagePaginationParams {
   /**
    * Query param
    */
+  source?: Array<'cloudflare' | 'riskrecon'>;
+
+  /**
+   * Query param
+   */
   subject?: Array<string>;
 
   /**

@@ -285,7 +285,7 @@ export interface URLIgnorePatternGetResponse {
 
 export interface URLIgnorePatternCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -302,21 +302,21 @@ export interface URLIgnorePatternCreateParams {
 
 export interface URLIgnorePatternListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 }
 
 export interface URLIgnorePatternDeleteParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }
 
 export interface URLIgnorePatternEditParams {
   /**
-   * Path param: Identifier.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 
@@ -333,7 +333,7 @@ export interface URLIgnorePatternEditParams {
 
 export interface URLIgnorePatternGetParams {
   /**
-   * Identifier.
+   * Account identifier tag.
    */
   account_id: string;
 }

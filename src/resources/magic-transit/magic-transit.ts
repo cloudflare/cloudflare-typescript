@@ -17,6 +17,22 @@ import {
   Apps,
   BaseApps,
 } from './apps';
+import * as BGPFilterProfilesAPI from './bgp-filter-profiles';
+import {
+  BGPFilterProfileCreateParams,
+  BGPFilterProfileCreateResponse,
+  BGPFilterProfileDeleteParams,
+  BGPFilterProfileDeleteResponse,
+  BGPFilterProfileGetParams,
+  BGPFilterProfileGetResponse,
+  BGPFilterProfileListParams,
+  BGPFilterProfileListResponse,
+  BGPFilterProfileListResponsesSinglePage,
+  BGPFilterProfileUpdateParams,
+  BGPFilterProfileUpdateResponse,
+  BGPFilterProfiles,
+  BaseBGPFilterProfiles,
+} from './bgp-filter-profiles';
 import * as CfInterconnectsAPI from './cf-interconnects';
 import {
   BaseCfInterconnects,
@@ -159,6 +175,9 @@ export class MagicTransit extends BaseMagicTransit {
   greTunnels: GRETunnelsAPI.GRETunnels = new GRETunnelsAPI.GRETunnels(this._client);
   ipsecTunnels: IPSECTunnelsAPI.IPSECTunnels = new IPSECTunnelsAPI.IPSECTunnels(this._client);
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
+  bgpFilterProfiles: BGPFilterProfilesAPI.BGPFilterProfiles = new BGPFilterProfilesAPI.BGPFilterProfiles(
+    this._client,
+  );
   sites: SitesAPI.Sites = new SitesAPI.Sites(this._client);
   connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
   cf1Sites: Cf1SitesAPI.Cf1Sites = new Cf1SitesAPI.Cf1Sites(this._client);
@@ -217,51 +236,6 @@ export namespace HealthCheck {
   }
 }
 
-export interface HealthCheckParam {
-  /**
-   * Determines whether to run healthchecks for a tunnel.
-   */
-  enabled?: boolean;
-
-  /**
-   * How frequent the health check is run. The default value is `mid`.
-   */
-  rate?: HealthCheckRateParam;
-
-  /**
-   * The destination address in a request type health check. After the healthcheck is
-   * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-   * to this address. This field defaults to `customer_gre_endpoint address`. This
-   * field is ignored for bidirectional healthchecks as the interface_address (not
-   * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
-   * object form if the x-magic-new-hc-target header is set to true and string form
-   * if x-magic-new-hc-target is absent or set to false.
-   */
-  target?: HealthCheckParam.MagicHealthCheckTarget | string;
-
-  /**
-   * The type of healthcheck to run, reply or request. The default value is `reply`.
-   */
-  type?: HealthCheckTypeParam;
-}
-
-export namespace HealthCheckParam {
-  /**
-   * The destination address in a request type health check. After the healthcheck is
-   * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-   * to this address. This field defaults to `customer_gre_endpoint address`. This
-   * field is ignored for bidirectional healthchecks as the interface_address (not
-   * assigned to the Cloudflare side of the tunnel) is used as the target.
-   */
-  export interface MagicHealthCheckTarget {
-    /**
-     * The saved health check target. Setting the value to the empty string indicates
-     * that the calculated default value will be used.
-     */
-    saved?: string;
-  }
-}
-
 /**
  * How frequent the health check is run. The default value is `mid`.
  */
@@ -292,6 +266,8 @@ MagicTransit.IPSECTunnels = IPSECTunnels;
 MagicTransit.BaseIPSECTunnels = BaseIPSECTunnels;
 MagicTransit.Routes = Routes;
 MagicTransit.BaseRoutes = BaseRoutes;
+MagicTransit.BGPFilterProfiles = BGPFilterProfiles;
+MagicTransit.BaseBGPFilterProfiles = BaseBGPFilterProfiles;
 MagicTransit.Sites = Sites;
 MagicTransit.BaseSites = BaseSites;
 MagicTransit.Connectors = Connectors;
@@ -394,6 +370,22 @@ export declare namespace MagicTransit {
     type RouteBulkUpdateParams as RouteBulkUpdateParams,
     type RouteEmptyParams as RouteEmptyParams,
     type RouteGetParams as RouteGetParams,
+  };
+
+  export {
+    BGPFilterProfiles as BGPFilterProfiles,
+    BaseBGPFilterProfiles as BaseBGPFilterProfiles,
+    type BGPFilterProfileCreateResponse as BGPFilterProfileCreateResponse,
+    type BGPFilterProfileUpdateResponse as BGPFilterProfileUpdateResponse,
+    type BGPFilterProfileListResponse as BGPFilterProfileListResponse,
+    type BGPFilterProfileDeleteResponse as BGPFilterProfileDeleteResponse,
+    type BGPFilterProfileGetResponse as BGPFilterProfileGetResponse,
+    type BGPFilterProfileListResponsesSinglePage as BGPFilterProfileListResponsesSinglePage,
+    type BGPFilterProfileCreateParams as BGPFilterProfileCreateParams,
+    type BGPFilterProfileUpdateParams as BGPFilterProfileUpdateParams,
+    type BGPFilterProfileListParams as BGPFilterProfileListParams,
+    type BGPFilterProfileDeleteParams as BGPFilterProfileDeleteParams,
+    type BGPFilterProfileGetParams as BGPFilterProfileGetParams,
   };
 
   export {

@@ -13,6 +13,7 @@ export {
   BaseOrganizations,
   type LoginDesign,
   type Organization,
+  type OrganizationListResponse,
   type OrganizationRevokeUsersResponse,
   type OrganizationCreateParams,
   type OrganizationUpdateParams,

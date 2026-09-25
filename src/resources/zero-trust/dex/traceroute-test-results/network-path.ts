@@ -116,7 +116,7 @@ export namespace NetworkPathGetResponse {
 
 export interface NetworkPathGetParams {
   /**
-   * Unique identifier linked to an account.
+   * Unique Cloudflare account ID.
    */
   account_id: string;
 }

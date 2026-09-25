@@ -57,7 +57,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { cors: BaseCORS } 
           maxAgeSeconds: 3600,
         },
       ],
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -79,7 +79,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { cors: BaseCORS } 
   test.skip('delete: required and optional params', async () => {
     const response = await client.r2.buckets.cors.delete('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -101,7 +101,7 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { cors: BaseCORS } 
   test.skip('get: required and optional params', async () => {
     const response = await client.r2.buckets.cors.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 };

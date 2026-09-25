@@ -461,7 +461,7 @@ export namespace Application {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: SelfHostedApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -554,49 +554,6 @@ export namespace Application {
   }
 
   export namespace SelfHostedApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<unknown>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<unknown>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -1200,7 +1157,7 @@ export namespace Application {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserSSHApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -1293,49 +1250,6 @@ export namespace Application {
   }
 
   export namespace BrowserSSHApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<unknown>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<unknown>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -1511,7 +1425,7 @@ export namespace Application {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserVNCApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -1604,49 +1518,6 @@ export namespace Application {
   }
 
   export namespace BrowserVNCApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<unknown>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<unknown>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -2362,7 +2233,7 @@ export namespace Application {
      */
     id?: string;
 
-    app_launcher_visible?: unknown;
+    app_launcher_visible?: boolean;
 
     /**
      * Audience tag.
@@ -3825,6 +3696,13 @@ export namespace ApplicationCreateResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -3833,6 +3711,23 @@ export namespace ApplicationCreateResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -3893,6 +3788,30 @@ export namespace ApplicationCreateResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -3909,6 +3828,30 @@ export namespace ApplicationCreateResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -3920,6 +3863,30 @@ export namespace ApplicationCreateResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -3931,6 +3898,30 @@ export namespace ApplicationCreateResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -4824,6 +4815,13 @@ export namespace ApplicationCreateResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -4832,6 +4830,23 @@ export namespace ApplicationCreateResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -4892,6 +4907,30 @@ export namespace ApplicationCreateResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -4908,6 +4947,30 @@ export namespace ApplicationCreateResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -4919,6 +4982,30 @@ export namespace ApplicationCreateResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -4930,6 +5017,30 @@ export namespace ApplicationCreateResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -5508,6 +5619,13 @@ export namespace ApplicationCreateResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -5516,6 +5634,23 @@ export namespace ApplicationCreateResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -5576,6 +5711,30 @@ export namespace ApplicationCreateResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -5592,6 +5751,30 @@ export namespace ApplicationCreateResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -5603,6 +5786,30 @@ export namespace ApplicationCreateResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -5614,6 +5821,30 @@ export namespace ApplicationCreateResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -7142,6 +7373,11 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace InfrastructureApplication {
+    /**
+     * Defines targets covered by the application. Use either the legacy top-level
+     * target_attributes format or the rule format, but not both. The rule format
+     * requires include; require and exclude are optional.
+     */
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -7155,9 +7391,110 @@ export namespace ApplicationCreateResponse {
       protocol: 'SSH';
 
       /**
-       * Contains a map of target attribute keys to target attribute values.
+       * Target is excluded when any selector in this rule matches.
        */
-      target_attributes: { [key: string]: Array<string> };
+      exclude?: TargetCriterion.Exclude;
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      include?: TargetCriterion.Include;
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      require?: TargetCriterion.Require;
+
+      /**
+       * @deprecated Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes?: { [key: string]: Array<string> };
+    }
+
+    export namespace TargetCriterion {
+      /**
+       * Target is excluded when any selector in this rule matches.
+       */
+      export interface Exclude {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Exclude.TargetAttributes;
+      }
+
+      export namespace Exclude {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      export interface Include {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Include.TargetAttributes;
+      }
+
+      export namespace Include {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      export interface Require {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Require.TargetAttributes;
+      }
+
+      export namespace Require {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
     }
 
     /**
@@ -7509,6 +7846,11 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace BrowserRDPApplication {
+    /**
+     * Defines targets covered by the application. Use either the legacy top-level
+     * target_attributes format or the rule format, but not both. The rule format
+     * requires include; require and exclude are optional.
+     */
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -7522,9 +7864,110 @@ export namespace ApplicationCreateResponse {
       protocol: 'RDP';
 
       /**
-       * Contains a map of target attribute keys to target attribute values.
+       * Target is excluded when any selector in this rule matches.
        */
-      target_attributes: { [key: string]: Array<string> };
+      exclude?: TargetCriterion.Exclude;
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      include?: TargetCriterion.Include;
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      require?: TargetCriterion.Require;
+
+      /**
+       * @deprecated Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes?: { [key: string]: Array<string> };
+    }
+
+    export namespace TargetCriterion {
+      /**
+       * Target is excluded when any selector in this rule matches.
+       */
+      export interface Exclude {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Exclude.TargetAttributes;
+      }
+
+      export namespace Exclude {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      export interface Include {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Include.TargetAttributes;
+      }
+
+      export namespace Include {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      export interface Require {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Require.TargetAttributes;
+      }
+
+      export namespace Require {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
     }
 
     /**
@@ -7532,6 +7975,13 @@ export namespace ApplicationCreateResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -7540,6 +7990,23 @@ export namespace ApplicationCreateResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -7600,6 +8067,30 @@ export namespace ApplicationCreateResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -7616,6 +8107,30 @@ export namespace ApplicationCreateResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -7627,6 +8142,30 @@ export namespace ApplicationCreateResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -7638,6 +8177,30 @@ export namespace ApplicationCreateResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -8122,6 +8685,13 @@ export namespace ApplicationCreateResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -8130,6 +8700,23 @@ export namespace ApplicationCreateResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -8190,6 +8777,30 @@ export namespace ApplicationCreateResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -8206,6 +8817,30 @@ export namespace ApplicationCreateResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -8217,6 +8852,30 @@ export namespace ApplicationCreateResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -8228,6 +8887,30 @@ export namespace ApplicationCreateResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -8696,6 +9379,13 @@ export namespace ApplicationCreateResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -8704,6 +9394,23 @@ export namespace ApplicationCreateResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -8764,6 +9471,30 @@ export namespace ApplicationCreateResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -8780,6 +9511,30 @@ export namespace ApplicationCreateResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -8791,6 +9546,30 @@ export namespace ApplicationCreateResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -8802,6 +9581,30 @@ export namespace ApplicationCreateResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -9361,6 +10164,13 @@ export namespace ApplicationUpdateResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -9369,6 +10179,23 @@ export namespace ApplicationUpdateResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -9429,6 +10256,30 @@ export namespace ApplicationUpdateResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -9445,6 +10296,30 @@ export namespace ApplicationUpdateResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -9456,6 +10331,30 @@ export namespace ApplicationUpdateResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -9467,6 +10366,30 @@ export namespace ApplicationUpdateResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -10360,6 +11283,13 @@ export namespace ApplicationUpdateResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -10368,6 +11298,23 @@ export namespace ApplicationUpdateResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -10428,6 +11375,30 @@ export namespace ApplicationUpdateResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -10444,6 +11415,30 @@ export namespace ApplicationUpdateResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -10455,6 +11450,30 @@ export namespace ApplicationUpdateResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -10466,6 +11485,30 @@ export namespace ApplicationUpdateResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -11044,6 +12087,13 @@ export namespace ApplicationUpdateResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -11052,6 +12102,23 @@ export namespace ApplicationUpdateResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -11112,6 +12179,30 @@ export namespace ApplicationUpdateResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -11128,6 +12219,30 @@ export namespace ApplicationUpdateResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -11139,6 +12254,30 @@ export namespace ApplicationUpdateResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -11150,6 +12289,30 @@ export namespace ApplicationUpdateResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -12678,6 +13841,11 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace InfrastructureApplication {
+    /**
+     * Defines targets covered by the application. Use either the legacy top-level
+     * target_attributes format or the rule format, but not both. The rule format
+     * requires include; require and exclude are optional.
+     */
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -12691,9 +13859,110 @@ export namespace ApplicationUpdateResponse {
       protocol: 'SSH';
 
       /**
-       * Contains a map of target attribute keys to target attribute values.
+       * Target is excluded when any selector in this rule matches.
        */
-      target_attributes: { [key: string]: Array<string> };
+      exclude?: TargetCriterion.Exclude;
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      include?: TargetCriterion.Include;
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      require?: TargetCriterion.Require;
+
+      /**
+       * @deprecated Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes?: { [key: string]: Array<string> };
+    }
+
+    export namespace TargetCriterion {
+      /**
+       * Target is excluded when any selector in this rule matches.
+       */
+      export interface Exclude {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Exclude.TargetAttributes;
+      }
+
+      export namespace Exclude {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      export interface Include {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Include.TargetAttributes;
+      }
+
+      export namespace Include {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      export interface Require {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Require.TargetAttributes;
+      }
+
+      export namespace Require {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
     }
 
     /**
@@ -13045,6 +14314,11 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace BrowserRDPApplication {
+    /**
+     * Defines targets covered by the application. Use either the legacy top-level
+     * target_attributes format or the rule format, but not both. The rule format
+     * requires include; require and exclude are optional.
+     */
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -13058,9 +14332,110 @@ export namespace ApplicationUpdateResponse {
       protocol: 'RDP';
 
       /**
-       * Contains a map of target attribute keys to target attribute values.
+       * Target is excluded when any selector in this rule matches.
        */
-      target_attributes: { [key: string]: Array<string> };
+      exclude?: TargetCriterion.Exclude;
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      include?: TargetCriterion.Include;
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      require?: TargetCriterion.Require;
+
+      /**
+       * @deprecated Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes?: { [key: string]: Array<string> };
+    }
+
+    export namespace TargetCriterion {
+      /**
+       * Target is excluded when any selector in this rule matches.
+       */
+      export interface Exclude {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Exclude.TargetAttributes;
+      }
+
+      export namespace Exclude {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      export interface Include {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Include.TargetAttributes;
+      }
+
+      export namespace Include {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      export interface Require {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Require.TargetAttributes;
+      }
+
+      export namespace Require {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
     }
 
     /**
@@ -13068,6 +14443,13 @@ export namespace ApplicationUpdateResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -13076,6 +14458,23 @@ export namespace ApplicationUpdateResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -13136,6 +14535,30 @@ export namespace ApplicationUpdateResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -13152,6 +14575,30 @@ export namespace ApplicationUpdateResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -13163,6 +14610,30 @@ export namespace ApplicationUpdateResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -13174,6 +14645,30 @@ export namespace ApplicationUpdateResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -13658,6 +15153,13 @@ export namespace ApplicationUpdateResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -13666,6 +15168,23 @@ export namespace ApplicationUpdateResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -13726,6 +15245,30 @@ export namespace ApplicationUpdateResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -13742,6 +15285,30 @@ export namespace ApplicationUpdateResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -13753,6 +15320,30 @@ export namespace ApplicationUpdateResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -13764,6 +15355,30 @@ export namespace ApplicationUpdateResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -14232,6 +15847,13 @@ export namespace ApplicationUpdateResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -14240,6 +15862,23 @@ export namespace ApplicationUpdateResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -14300,6 +15939,30 @@ export namespace ApplicationUpdateResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -14316,6 +15979,30 @@ export namespace ApplicationUpdateResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -14327,6 +16014,30 @@ export namespace ApplicationUpdateResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -14338,6 +16049,30 @@ export namespace ApplicationUpdateResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -14897,6 +16632,13 @@ export namespace ApplicationListResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -14905,6 +16647,23 @@ export namespace ApplicationListResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -14965,6 +16724,30 @@ export namespace ApplicationListResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -14981,6 +16764,30 @@ export namespace ApplicationListResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -14992,6 +16799,30 @@ export namespace ApplicationListResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -15003,6 +16834,30 @@ export namespace ApplicationListResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -15896,6 +17751,13 @@ export namespace ApplicationListResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -15904,6 +17766,23 @@ export namespace ApplicationListResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -15964,6 +17843,30 @@ export namespace ApplicationListResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -15980,6 +17883,30 @@ export namespace ApplicationListResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -15991,6 +17918,30 @@ export namespace ApplicationListResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -16002,6 +17953,30 @@ export namespace ApplicationListResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -16580,6 +18555,13 @@ export namespace ApplicationListResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -16588,6 +18570,23 @@ export namespace ApplicationListResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -16648,6 +18647,30 @@ export namespace ApplicationListResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -16664,6 +18687,30 @@ export namespace ApplicationListResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -16675,6 +18722,30 @@ export namespace ApplicationListResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -16686,6 +18757,30 @@ export namespace ApplicationListResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -18214,6 +20309,11 @@ export namespace ApplicationListResponse {
   }
 
   export namespace InfrastructureApplication {
+    /**
+     * Defines targets covered by the application. Use either the legacy top-level
+     * target_attributes format or the rule format, but not both. The rule format
+     * requires include; require and exclude are optional.
+     */
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -18227,9 +20327,110 @@ export namespace ApplicationListResponse {
       protocol: 'SSH';
 
       /**
-       * Contains a map of target attribute keys to target attribute values.
+       * Target is excluded when any selector in this rule matches.
        */
-      target_attributes: { [key: string]: Array<string> };
+      exclude?: TargetCriterion.Exclude;
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      include?: TargetCriterion.Include;
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      require?: TargetCriterion.Require;
+
+      /**
+       * @deprecated Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes?: { [key: string]: Array<string> };
+    }
+
+    export namespace TargetCriterion {
+      /**
+       * Target is excluded when any selector in this rule matches.
+       */
+      export interface Exclude {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Exclude.TargetAttributes;
+      }
+
+      export namespace Exclude {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      export interface Include {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Include.TargetAttributes;
+      }
+
+      export namespace Include {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      export interface Require {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Require.TargetAttributes;
+      }
+
+      export namespace Require {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
     }
 
     /**
@@ -18581,6 +20782,11 @@ export namespace ApplicationListResponse {
   }
 
   export namespace BrowserRDPApplication {
+    /**
+     * Defines targets covered by the application. Use either the legacy top-level
+     * target_attributes format or the rule format, but not both. The rule format
+     * requires include; require and exclude are optional.
+     */
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -18594,9 +20800,110 @@ export namespace ApplicationListResponse {
       protocol: 'RDP';
 
       /**
-       * Contains a map of target attribute keys to target attribute values.
+       * Target is excluded when any selector in this rule matches.
        */
-      target_attributes: { [key: string]: Array<string> };
+      exclude?: TargetCriterion.Exclude;
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      include?: TargetCriterion.Include;
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      require?: TargetCriterion.Require;
+
+      /**
+       * @deprecated Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes?: { [key: string]: Array<string> };
+    }
+
+    export namespace TargetCriterion {
+      /**
+       * Target is excluded when any selector in this rule matches.
+       */
+      export interface Exclude {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Exclude.TargetAttributes;
+      }
+
+      export namespace Exclude {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      export interface Include {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Include.TargetAttributes;
+      }
+
+      export namespace Include {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      export interface Require {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Require.TargetAttributes;
+      }
+
+      export namespace Require {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
     }
 
     /**
@@ -18604,6 +20911,13 @@ export namespace ApplicationListResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -18612,6 +20926,23 @@ export namespace ApplicationListResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -18672,6 +21003,30 @@ export namespace ApplicationListResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -18688,6 +21043,30 @@ export namespace ApplicationListResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -18699,6 +21078,30 @@ export namespace ApplicationListResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -18710,6 +21113,30 @@ export namespace ApplicationListResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -19194,6 +21621,13 @@ export namespace ApplicationListResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -19202,6 +21636,23 @@ export namespace ApplicationListResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -19262,6 +21713,30 @@ export namespace ApplicationListResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -19278,6 +21753,30 @@ export namespace ApplicationListResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -19289,6 +21788,30 @@ export namespace ApplicationListResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -19300,6 +21823,30 @@ export namespace ApplicationListResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -19768,6 +22315,13 @@ export namespace ApplicationListResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -19776,6 +22330,23 @@ export namespace ApplicationListResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -19836,6 +22407,30 @@ export namespace ApplicationListResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -19852,6 +22447,30 @@ export namespace ApplicationListResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -19863,6 +22482,30 @@ export namespace ApplicationListResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -19874,6 +22517,30 @@ export namespace ApplicationListResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -20440,6 +23107,13 @@ export namespace ApplicationGetResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -20448,6 +23122,23 @@ export namespace ApplicationGetResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -20508,6 +23199,30 @@ export namespace ApplicationGetResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -20524,6 +23239,30 @@ export namespace ApplicationGetResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -20535,6 +23274,30 @@ export namespace ApplicationGetResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -20546,6 +23309,30 @@ export namespace ApplicationGetResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -21439,6 +24226,13 @@ export namespace ApplicationGetResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -21447,6 +24241,23 @@ export namespace ApplicationGetResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -21507,6 +24318,30 @@ export namespace ApplicationGetResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -21523,6 +24358,30 @@ export namespace ApplicationGetResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -21534,6 +24393,30 @@ export namespace ApplicationGetResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -21545,6 +24428,30 @@ export namespace ApplicationGetResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -22123,6 +25030,13 @@ export namespace ApplicationGetResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -22131,6 +25045,23 @@ export namespace ApplicationGetResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -22191,6 +25122,30 @@ export namespace ApplicationGetResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -22207,6 +25162,30 @@ export namespace ApplicationGetResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -22218,6 +25197,30 @@ export namespace ApplicationGetResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -22229,6 +25232,30 @@ export namespace ApplicationGetResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -23757,6 +26784,11 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace InfrastructureApplication {
+    /**
+     * Defines targets covered by the application. Use either the legacy top-level
+     * target_attributes format or the rule format, but not both. The rule format
+     * requires include; require and exclude are optional.
+     */
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -23770,9 +26802,110 @@ export namespace ApplicationGetResponse {
       protocol: 'SSH';
 
       /**
-       * Contains a map of target attribute keys to target attribute values.
+       * Target is excluded when any selector in this rule matches.
        */
-      target_attributes: { [key: string]: Array<string> };
+      exclude?: TargetCriterion.Exclude;
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      include?: TargetCriterion.Include;
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      require?: TargetCriterion.Require;
+
+      /**
+       * @deprecated Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes?: { [key: string]: Array<string> };
+    }
+
+    export namespace TargetCriterion {
+      /**
+       * Target is excluded when any selector in this rule matches.
+       */
+      export interface Exclude {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Exclude.TargetAttributes;
+      }
+
+      export namespace Exclude {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      export interface Include {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Include.TargetAttributes;
+      }
+
+      export namespace Include {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      export interface Require {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Require.TargetAttributes;
+      }
+
+      export namespace Require {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
     }
 
     /**
@@ -24124,6 +27257,11 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace BrowserRDPApplication {
+    /**
+     * Defines targets covered by the application. Use either the legacy top-level
+     * target_attributes format or the rule format, but not both. The rule format
+     * requires include; require and exclude are optional.
+     */
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -24137,9 +27275,110 @@ export namespace ApplicationGetResponse {
       protocol: 'RDP';
 
       /**
-       * Contains a map of target attribute keys to target attribute values.
+       * Target is excluded when any selector in this rule matches.
        */
-      target_attributes: { [key: string]: Array<string> };
+      exclude?: TargetCriterion.Exclude;
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      include?: TargetCriterion.Include;
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      require?: TargetCriterion.Require;
+
+      /**
+       * @deprecated Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes?: { [key: string]: Array<string> };
+    }
+
+    export namespace TargetCriterion {
+      /**
+       * Target is excluded when any selector in this rule matches.
+       */
+      export interface Exclude {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Exclude.TargetAttributes;
+      }
+
+      export namespace Exclude {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      export interface Include {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Include.TargetAttributes;
+      }
+
+      export namespace Include {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      export interface Require {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Require.TargetAttributes;
+      }
+
+      export namespace Require {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
     }
 
     /**
@@ -24147,6 +27386,13 @@ export namespace ApplicationGetResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -24155,6 +27401,23 @@ export namespace ApplicationGetResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -24215,6 +27478,30 @@ export namespace ApplicationGetResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -24231,6 +27518,30 @@ export namespace ApplicationGetResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -24242,6 +27553,30 @@ export namespace ApplicationGetResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -24253,6 +27588,30 @@ export namespace ApplicationGetResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -24737,6 +28096,13 @@ export namespace ApplicationGetResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -24745,6 +28111,23 @@ export namespace ApplicationGetResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -24805,6 +28188,30 @@ export namespace ApplicationGetResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -24821,6 +28228,30 @@ export namespace ApplicationGetResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -24832,6 +28263,30 @@ export namespace ApplicationGetResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -24843,6 +28298,30 @@ export namespace ApplicationGetResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -25311,6 +28790,13 @@ export namespace ApplicationGetResponse {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -25319,6 +28805,23 @@ export namespace ApplicationGetResponse {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -25379,6 +28882,30 @@ export namespace ApplicationGetResponse {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -25395,6 +28922,30 @@ export namespace ApplicationGetResponse {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -25406,6 +28957,30 @@ export namespace ApplicationGetResponse {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -25417,6 +28992,30 @@ export namespace ApplicationGetResponse {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -25992,6 +29591,13 @@ export declare namespace ApplicationCreateParams {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -26000,6 +29606,23 @@ export declare namespace ApplicationCreateParams {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -26060,6 +29683,30 @@ export declare namespace ApplicationCreateParams {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -26076,6 +29723,30 @@ export declare namespace ApplicationCreateParams {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -26087,6 +29758,30 @@ export declare namespace ApplicationCreateParams {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -26098,6 +29793,30 @@ export declare namespace ApplicationCreateParams {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -26983,6 +30702,13 @@ export declare namespace ApplicationCreateParams {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -26991,6 +30717,23 @@ export declare namespace ApplicationCreateParams {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -27051,6 +30794,30 @@ export declare namespace ApplicationCreateParams {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -27067,6 +30834,30 @@ export declare namespace ApplicationCreateParams {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -27078,6 +30869,30 @@ export declare namespace ApplicationCreateParams {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -27089,6 +30904,30 @@ export declare namespace ApplicationCreateParams {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -27664,6 +31503,13 @@ export declare namespace ApplicationCreateParams {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -27672,6 +31518,23 @@ export declare namespace ApplicationCreateParams {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -27732,6 +31595,30 @@ export declare namespace ApplicationCreateParams {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -27748,6 +31635,30 @@ export declare namespace ApplicationCreateParams {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -27759,6 +31670,30 @@ export declare namespace ApplicationCreateParams {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -27770,6 +31705,30 @@ export declare namespace ApplicationCreateParams {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -29230,6 +33189,11 @@ export declare namespace ApplicationCreateParams {
   }
 
   export namespace InfrastructureApplication {
+    /**
+     * Defines targets covered by the application. Use either the legacy top-level
+     * target_attributes format or the rule format, but not both. The rule format
+     * requires include; require and exclude are optional.
+     */
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -29243,9 +33207,110 @@ export declare namespace ApplicationCreateParams {
       protocol: 'SSH';
 
       /**
-       * Contains a map of target attribute keys to target attribute values.
+       * Target is excluded when any selector in this rule matches.
        */
-      target_attributes: { [key: string]: Array<string> };
+      exclude?: TargetCriterion.Exclude;
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      include?: TargetCriterion.Include;
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      require?: TargetCriterion.Require;
+
+      /**
+       * @deprecated Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes?: { [key: string]: Array<string> };
+    }
+
+    export namespace TargetCriterion {
+      /**
+       * Target is excluded when any selector in this rule matches.
+       */
+      export interface Exclude {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Exclude.TargetAttributes;
+      }
+
+      export namespace Exclude {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      export interface Include {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Include.TargetAttributes;
+      }
+
+      export namespace Include {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      export interface Require {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Require.TargetAttributes;
+      }
+
+      export namespace Require {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
     }
 
     /**
@@ -29605,6 +33670,11 @@ export declare namespace ApplicationCreateParams {
   }
 
   export namespace BrowserRDPApplication {
+    /**
+     * Defines targets covered by the application. Use either the legacy top-level
+     * target_attributes format or the rule format, but not both. The rule format
+     * requires include; require and exclude are optional.
+     */
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -29618,9 +33688,110 @@ export declare namespace ApplicationCreateParams {
       protocol: 'RDP';
 
       /**
-       * Contains a map of target attribute keys to target attribute values.
+       * Target is excluded when any selector in this rule matches.
        */
-      target_attributes: { [key: string]: Array<string> };
+      exclude?: TargetCriterion.Exclude;
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      include?: TargetCriterion.Include;
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      require?: TargetCriterion.Require;
+
+      /**
+       * @deprecated Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes?: { [key: string]: Array<string> };
+    }
+
+    export namespace TargetCriterion {
+      /**
+       * Target is excluded when any selector in this rule matches.
+       */
+      export interface Exclude {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Exclude.TargetAttributes;
+      }
+
+      export namespace Exclude {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      export interface Include {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Include.TargetAttributes;
+      }
+
+      export namespace Include {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      export interface Require {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Require.TargetAttributes;
+      }
+
+      export namespace Require {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
     }
 
     /**
@@ -29628,6 +33799,13 @@ export declare namespace ApplicationCreateParams {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -29636,6 +33814,23 @@ export declare namespace ApplicationCreateParams {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -29696,6 +33891,30 @@ export declare namespace ApplicationCreateParams {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -29712,6 +33931,30 @@ export declare namespace ApplicationCreateParams {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -29723,6 +33966,30 @@ export declare namespace ApplicationCreateParams {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -29734,6 +34001,30 @@ export declare namespace ApplicationCreateParams {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -30211,6 +34502,13 @@ export declare namespace ApplicationCreateParams {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -30219,6 +34517,23 @@ export declare namespace ApplicationCreateParams {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -30279,6 +34594,30 @@ export declare namespace ApplicationCreateParams {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -30295,6 +34634,30 @@ export declare namespace ApplicationCreateParams {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -30306,6 +34669,30 @@ export declare namespace ApplicationCreateParams {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -30317,6 +34704,30 @@ export declare namespace ApplicationCreateParams {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -30780,6 +35191,13 @@ export declare namespace ApplicationCreateParams {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -30788,6 +35206,23 @@ export declare namespace ApplicationCreateParams {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -30848,6 +35283,30 @@ export declare namespace ApplicationCreateParams {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -30864,6 +35323,30 @@ export declare namespace ApplicationCreateParams {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -30875,6 +35358,30 @@ export declare namespace ApplicationCreateParams {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -30886,6 +35393,30 @@ export declare namespace ApplicationCreateParams {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -31442,6 +35973,13 @@ export declare namespace ApplicationUpdateParams {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -31450,6 +35988,23 @@ export declare namespace ApplicationUpdateParams {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -31510,6 +36065,30 @@ export declare namespace ApplicationUpdateParams {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -31526,6 +36105,30 @@ export declare namespace ApplicationUpdateParams {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -31537,6 +36140,30 @@ export declare namespace ApplicationUpdateParams {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -31548,6 +36175,30 @@ export declare namespace ApplicationUpdateParams {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -32433,6 +37084,13 @@ export declare namespace ApplicationUpdateParams {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -32441,6 +37099,23 @@ export declare namespace ApplicationUpdateParams {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -32501,6 +37176,30 @@ export declare namespace ApplicationUpdateParams {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -32517,6 +37216,30 @@ export declare namespace ApplicationUpdateParams {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -32528,6 +37251,30 @@ export declare namespace ApplicationUpdateParams {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -32539,6 +37286,30 @@ export declare namespace ApplicationUpdateParams {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -33114,6 +37885,13 @@ export declare namespace ApplicationUpdateParams {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -33122,6 +37900,23 @@ export declare namespace ApplicationUpdateParams {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -33182,6 +37977,30 @@ export declare namespace ApplicationUpdateParams {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -33198,6 +38017,30 @@ export declare namespace ApplicationUpdateParams {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -33209,6 +38052,30 @@ export declare namespace ApplicationUpdateParams {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -33220,6 +38087,30 @@ export declare namespace ApplicationUpdateParams {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -34680,6 +39571,11 @@ export declare namespace ApplicationUpdateParams {
   }
 
   export namespace InfrastructureApplication {
+    /**
+     * Defines targets covered by the application. Use either the legacy top-level
+     * target_attributes format or the rule format, but not both. The rule format
+     * requires include; require and exclude are optional.
+     */
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -34693,9 +39589,110 @@ export declare namespace ApplicationUpdateParams {
       protocol: 'SSH';
 
       /**
-       * Contains a map of target attribute keys to target attribute values.
+       * Target is excluded when any selector in this rule matches.
        */
-      target_attributes: { [key: string]: Array<string> };
+      exclude?: TargetCriterion.Exclude;
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      include?: TargetCriterion.Include;
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      require?: TargetCriterion.Require;
+
+      /**
+       * @deprecated Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes?: { [key: string]: Array<string> };
+    }
+
+    export namespace TargetCriterion {
+      /**
+       * Target is excluded when any selector in this rule matches.
+       */
+      export interface Exclude {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Exclude.TargetAttributes;
+      }
+
+      export namespace Exclude {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      export interface Include {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Include.TargetAttributes;
+      }
+
+      export namespace Include {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      export interface Require {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Require.TargetAttributes;
+      }
+
+      export namespace Require {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
     }
 
     /**
@@ -35055,6 +40052,11 @@ export declare namespace ApplicationUpdateParams {
   }
 
   export namespace BrowserRDPApplication {
+    /**
+     * Defines targets covered by the application. Use either the legacy top-level
+     * target_attributes format or the rule format, but not both. The rule format
+     * requires include; require and exclude are optional.
+     */
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -35068,9 +40070,110 @@ export declare namespace ApplicationUpdateParams {
       protocol: 'RDP';
 
       /**
-       * Contains a map of target attribute keys to target attribute values.
+       * Target is excluded when any selector in this rule matches.
        */
-      target_attributes: { [key: string]: Array<string> };
+      exclude?: TargetCriterion.Exclude;
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      include?: TargetCriterion.Include;
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      require?: TargetCriterion.Require;
+
+      /**
+       * @deprecated Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes?: { [key: string]: Array<string> };
+    }
+
+    export namespace TargetCriterion {
+      /**
+       * Target is excluded when any selector in this rule matches.
+       */
+      export interface Exclude {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Exclude.TargetAttributes;
+      }
+
+      export namespace Exclude {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches when any selector in this rule matches.
+       */
+      export interface Include {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Include.TargetAttributes;
+      }
+
+      export namespace Include {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
+
+      /**
+       * Target matches only when every selector in this rule matches.
+       */
+      export interface Require {
+        /**
+         * Map of target tag keys to values. Values within a key are OR'd.
+         */
+        tags?: { [key: string]: Array<string> };
+
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        target_attributes?: Require.TargetAttributes;
+      }
+
+      export namespace Require {
+        /**
+         * Hostname selector map for include, require, or exclude rules. This is distinct
+         * from the deprecated top-level target_attributes field and only supports the
+         * hostname key.
+         */
+        export interface TargetAttributes {
+          hostname?: Array<string>;
+        }
+      }
     }
 
     /**
@@ -35078,6 +40181,13 @@ export declare namespace ApplicationUpdateParams {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -35086,6 +40196,23 @@ export declare namespace ApplicationUpdateParams {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -35146,6 +40273,30 @@ export declare namespace ApplicationUpdateParams {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -35162,6 +40313,30 @@ export declare namespace ApplicationUpdateParams {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -35173,6 +40348,30 @@ export declare namespace ApplicationUpdateParams {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -35184,6 +40383,30 @@ export declare namespace ApplicationUpdateParams {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -35661,6 +40884,13 @@ export declare namespace ApplicationUpdateParams {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -35669,6 +40899,23 @@ export declare namespace ApplicationUpdateParams {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -35729,6 +40976,30 @@ export declare namespace ApplicationUpdateParams {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -35745,6 +41016,30 @@ export declare namespace ApplicationUpdateParams {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -35756,6 +41051,30 @@ export declare namespace ApplicationUpdateParams {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -35767,6 +41086,30 @@ export declare namespace ApplicationUpdateParams {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -36230,6 +41573,13 @@ export declare namespace ApplicationUpdateParams {
      * sub-domain and path. Wildcard '\*' can be used in the definition.
      */
     export interface PublicDestination {
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PublicDestination.Override>;
+
       type?: 'public';
 
       /**
@@ -36238,6 +41588,23 @@ export declare namespace ApplicationUpdateParams {
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
       uri?: string;
+    }
+
+    export namespace PublicDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     export interface PrivateDestination {
@@ -36298,6 +41665,30 @@ export declare namespace ApplicationUpdateParams {
        * The ID of the Cloudflare Worker to protect with Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<WorkerDestination.Override>;
+    }
+
+    export namespace WorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -36314,6 +41705,30 @@ export declare namespace ApplicationUpdateParams {
        * Access.
        */
       worker_id: string;
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<PreviewWorkerDestination.Override>;
+    }
+
+    export namespace PreviewWorkerDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -36325,6 +41740,30 @@ export declare namespace ApplicationUpdateParams {
      */
     export interface AllWorkersDestination {
       type: 'all_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllWorkersDestination.Override>;
+    }
+
+    export namespace AllWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**
@@ -36336,6 +41775,30 @@ export declare namespace ApplicationUpdateParams {
      */
     export interface AllPreviewWorkersDestination {
       type: 'all_preview_workers';
+
+      /**
+       * Rules that override how Access handles requests to this destination. Each rule
+       * can make a matching path public, bypassing Access authentication. Overrides are
+       * supported for public destinations and Worker destinations.
+       */
+      overrides?: Array<AllPreviewWorkersDestination.Override>;
+    }
+
+    export namespace AllPreviewWorkersDestination {
+      export interface Override {
+        /**
+         * The behavior to apply to matching requests.
+         */
+        behavior: 'public';
+
+        /**
+         * The request path pattern to match. Wildcards (`*`) are supported, but each path
+         * segment may have at most one wildcard. Unlike the `uri` in public destinations,
+         * override path patterns do not implicitly cover subpaths; to do that, use a
+         * wildcard.
+         */
+        path_pattern: string;
+      }
     }
 
     /**

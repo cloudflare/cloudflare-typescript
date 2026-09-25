@@ -13,16 +13,13 @@ export class BaseTail extends APIResource {
   ] as const);
 
   /**
-   * Starts a tail that receives logs and exception from a Worker.
+   * Starts a tail that receives logs and exceptions from a Worker.
    *
    * @example
    * ```ts
    * const tail = await client.workers.scripts.tail.create(
    *   'this-is_my_script-01',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: {},
-   *   },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
@@ -31,12 +28,12 @@ export class BaseTail extends APIResource {
     params: TailCreateParams,
     options?: RequestOptions,
   ): APIPromise<TailCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.post(path`/accounts/${account_id}/workers/scripts/${scriptName}/tails`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: TailCreateResponse }>
+      this._client.post(
+        path`/accounts/${account_id}/workers/scripts/${scriptName}/tails`,
+        options,
+      ) as APIPromise<{ result: TailCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -63,7 +60,7 @@ export class BaseTail extends APIResource {
   }
 
   /**
-   * Get list of tails currently deployed on a Worker.
+   * Get a list of tails currently deployed on a Worker.
    *
    * @example
    * ```ts
@@ -194,14 +191,9 @@ export interface TailGetResponse {
 
 export interface TailCreateParams {
   /**
-   * Path param: Identifier.
+   * Identifier.
    */
   account_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface TailDeleteParams {

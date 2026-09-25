@@ -13,8 +13,8 @@ export class BaseSchemas extends APIResource {
   ] as const);
 
   /**
-   * Uploads a new OpenAPI schema for API Shield schema validation. The schema
-   * defines expected request/response formats for API endpoints.
+   * Uploads an OpenAPI schema that defines expected request formats for API
+   * operations.
    *
    * @example
    * ```ts
@@ -39,7 +39,7 @@ export class BaseSchemas extends APIResource {
   }
 
   /**
-   * Lists all OpenAPI schemas uploaded to API Shield with pagination support.
+   * Lists all OpenAPI schemas uploaded to API Security.
    *
    * @example
    * ```ts
@@ -64,8 +64,8 @@ export class BaseSchemas extends APIResource {
   }
 
   /**
-   * Permanently removes an uploaded OpenAPI schema from API Shield. Operations using
-   * this schema will lose their validation rules.
+   * Permanently removes an uploaded OpenAPI schema from API Security. Operations
+   * using this schema will lose their validation rules.
    *
    * @example
    * ```ts
@@ -79,19 +79,19 @@ export class BaseSchemas extends APIResource {
     schemaID: string,
     params: SchemaDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<SchemaDeleteResponse> {
+  ): APIPromise<SchemaDeleteResponse | null> {
     const { zone_id } = params;
     return (
       this._client.delete(
         path`/zones/${zone_id}/schema_validation/schemas/${schemaID}`,
         options,
-      ) as APIPromise<{ result: SchemaDeleteResponse }>
+      ) as APIPromise<{ result: SchemaDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Modifies an existing OpenAPI schema in API Shield, updating the validation rules
-   * for associated API operations.
+   * Enables or disables validation for an uploaded OpenAPI schema without changing
+   * the schema document.
    *
    * @example
    * ```ts
@@ -114,7 +114,7 @@ export class BaseSchemas extends APIResource {
 
   /**
    * Gets the contents and metadata of a specific OpenAPI schema uploaded to API
-   * Shield.
+   * Security.
    *
    * @example
    * ```ts
@@ -171,12 +171,10 @@ export interface PublicSchema {
   validation_enabled?: boolean;
 }
 
-export interface SchemaDeleteResponse {
-  /**
-   * The ID of the schema that was just deleted
-   */
-  id: string;
-}
+/**
+ * Schema deletion returns no result body.
+ */
+export type SchemaDeleteResponse = unknown;
 
 export interface SchemaCreateParams {
   /**

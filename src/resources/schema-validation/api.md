@@ -11,7 +11,7 @@ Methods:
 
 - <code title="post /zones/{zone_id}/schema_validation/schemas">client.schemaValidation.schemas.<a href="./src/resources/schema-validation/schemas.ts">create</a>({ ...params }) -> PublicSchema</code>
 - <code title="get /zones/{zone_id}/schema_validation/schemas">client.schemaValidation.schemas.<a href="./src/resources/schema-validation/schemas.ts">list</a>({ ...params }) -> PublicSchemasV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_id}/schema_validation/schemas/{schema_id}">client.schemaValidation.schemas.<a href="./src/resources/schema-validation/schemas.ts">delete</a>(schemaID, { ...params }) -> SchemaDeleteResponse</code>
+- <code title="delete /zones/{zone_id}/schema_validation/schemas/{schema_id}">client.schemaValidation.schemas.<a href="./src/resources/schema-validation/schemas.ts">delete</a>(schemaID, { ...params }) -> SchemaDeleteResponse | null</code>
 - <code title="patch /zones/{zone_id}/schema_validation/schemas/{schema_id}">client.schemaValidation.schemas.<a href="./src/resources/schema-validation/schemas.ts">edit</a>(schemaID, { ...params }) -> PublicSchema</code>
 - <code title="get /zones/{zone_id}/schema_validation/schemas/{schema_id}">client.schemaValidation.schemas.<a href="./src/resources/schema-validation/schemas.ts">get</a>(schemaID, { ...params }) -> PublicSchema</code>
 

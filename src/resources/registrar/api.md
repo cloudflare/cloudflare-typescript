@@ -58,3 +58,15 @@ Methods:
 
 - <code title="get /accounts/{account_id}/registrar/extensions">client.registrar.extensions.<a href="./src/resources/registrar/extensions.ts">list</a>({ ...params }) -> ExtensionListResponsesCursorPagination</code>
 - <code title="get /accounts/{account_id}/registrar/extensions/{extension}">client.registrar.extensions.<a href="./src/resources/registrar/extensions.ts">get</a>(extension, { ...params }) -> ExtensionGetResponse</code>
+
+## TransferIn
+
+Methods:
+
+- <code title="post /accounts/{account_id}/registrar/registrations/{domain_name}/transfer-in">client.registrar.transferIn.<a href="./src/resources/registrar/transfer-in.ts">create</a>(domainName, { ...params }) -> WorkflowStatus</code>
+
+## TransferInStatus
+
+Methods:
+
+- <code title="get /accounts/{account_id}/registrar/registrations/{domain_name}/transfer-in-status">client.registrar.transferInStatus.<a href="./src/resources/registrar/transfer-in-status.ts">get</a>(domainName, { ...params }) -> WorkflowStatus</code>

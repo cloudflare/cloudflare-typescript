@@ -47,9 +47,8 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: { t
     const response = await client.cloudforceOne.threatEvents.tags.create({
       account_id: 'account_id',
       value: 'APT28',
-      activeDuration: 'activeDuration',
-      actorCategory: 'Nation State',
-      actorCategoryConfidence: 7,
+      activeDuration: 'string',
+      actorCategory: 'string',
       aliases: [
         {
           value: 'Fancy Bear',
@@ -59,12 +58,11 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: { t
       ],
       aliasGroupNames: ['string'],
       aliasGroupNamesInternal: ['string'],
-      analyticPriority: 0,
-      attributionConfidence: 'attributionConfidence',
-      attributionConfidenceScore: 7,
-      attributionOrganization: 'attributionOrganization',
+      attributionOrganization: 'string',
       categoryUuid: '12345678-1234-1234-1234-1234567890ab',
-      dateOfDiscovery: '2024-01-15',
+      confidence: 8,
+      dateOfDiscovery: '2024-01-15T00:00:00Z',
+      description: 'A suspected state-sponsored group.',
       externalReferenceLinks: ['string'],
       externalReferences: [{ url: 'https://example.com/report', description: 'Vendor threat report' }],
       internalAliases: [
@@ -75,14 +73,14 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: { t
         },
       ],
       internalDescription: 'internalDescription',
-      motive: 'Espionage',
-      motiveConfidence: 7,
-      opsecLevel: 'opsecLevel',
-      originCountryConfidence: 7,
-      originCountryISO: 'originCountryISO',
-      originCountryTlp: 'amber',
+      lastSeen: 'lastSeen',
+      motive: 'string',
+      opsecLevel: 'string',
+      originCountryISO: 'string',
       priority: 0,
-      sophisticationLevel: 'sophisticationLevel',
+      properties: { foo: 'bar' },
+      sophisticationLevel: 'string',
+      tlp: 'amber',
     });
   });
 
@@ -104,9 +102,9 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: { t
       categoryUuid: 'categoryUuid',
       filters: [
         {
-          field: 'originCountryISO',
+          field: 'value',
           op: 'in',
-          value: 'IR',
+          value: 'APT28',
         },
       ],
       page: 0,
@@ -150,9 +148,8 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: { t
   test('edit: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.tags.edit('tag_uuid', {
       account_id: 'account_id',
-      activeDuration: 'activeDuration',
-      actorCategory: 'Nation State',
-      actorCategoryConfidence: 7,
+      activeDuration: 'string',
+      actorCategory: 'string',
       aliases: [
         {
           value: 'Fancy Bear',
@@ -162,12 +159,11 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: { t
       ],
       aliasGroupNames: ['string'],
       aliasGroupNamesInternal: ['string'],
-      analyticPriority: 0,
-      attributionConfidence: 'attributionConfidence',
-      attributionConfidenceScore: 7,
-      attributionOrganization: 'attributionOrganization',
+      attributionOrganization: 'string',
       categoryUuid: '12345678-1234-1234-1234-1234567890ab',
-      dateOfDiscovery: '2024-01-15',
+      confidence: 8,
+      dateOfDiscovery: '2024-01-15T00:00:00Z',
+      description: 'description',
       externalReferenceLinks: ['string'],
       externalReferences: [{ url: 'https://example.com/report', description: 'Vendor threat report' }],
       internalAliases: [
@@ -178,14 +174,14 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: { t
         },
       ],
       internalDescription: 'internalDescription',
-      motive: 'Espionage',
-      motiveConfidence: 7,
-      opsecLevel: 'opsecLevel',
-      originCountryConfidence: 7,
-      originCountryISO: 'originCountryISO',
-      originCountryTlp: 'amber',
+      lastSeen: 'lastSeen',
+      motive: 'string',
+      opsecLevel: 'string',
+      originCountryISO: 'string',
       priority: 0,
-      sophisticationLevel: 'sophisticationLevel',
+      properties: { foo: 'bar' },
+      sophisticationLevel: 'string',
+      tlp: 'amber',
       value: 'APT28',
     });
   });

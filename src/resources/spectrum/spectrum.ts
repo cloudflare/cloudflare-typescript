@@ -17,6 +17,14 @@ import {
   Apps,
   BaseApps,
 } from './apps';
+import * as ProtocolsAPI from './protocols';
+import {
+  BaseProtocols,
+  ProtocolListParams,
+  ProtocolListResponse,
+  ProtocolListResponsesSinglePage,
+  Protocols,
+} from './protocols';
 import * as AnalyticsAPI from './analytics/analytics';
 import { Analytics, BaseAnalytics } from './analytics/analytics';
 
@@ -26,6 +34,7 @@ export class BaseSpectrum extends APIResource {
 export class Spectrum extends BaseSpectrum {
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   apps: AppsAPI.Apps = new AppsAPI.Apps(this._client);
+  protocols: ProtocolsAPI.Protocols = new ProtocolsAPI.Protocols(this._client);
 }
 
 /**
@@ -194,6 +203,8 @@ Spectrum.Analytics = Analytics;
 Spectrum.BaseAnalytics = BaseAnalytics;
 Spectrum.Apps = Apps;
 Spectrum.BaseApps = BaseApps;
+Spectrum.Protocols = Protocols;
+Spectrum.BaseProtocols = BaseProtocols;
 
 export declare namespace Spectrum {
   export {
@@ -219,5 +230,13 @@ export declare namespace Spectrum {
     type AppListParams as AppListParams,
     type AppDeleteParams as AppDeleteParams,
     type AppGetParams as AppGetParams,
+  };
+
+  export {
+    Protocols as Protocols,
+    BaseProtocols as BaseProtocols,
+    type ProtocolListResponse as ProtocolListResponse,
+    type ProtocolListResponsesSinglePage as ProtocolListResponsesSinglePage,
+    type ProtocolListParams as ProtocolListParams,
   };
 }

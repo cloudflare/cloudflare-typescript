@@ -86,16 +86,10 @@ export class BaseDevices extends APIResource {
   }
 
   /**
-   * Revokes all WARP registrations associated with the specified device.
+   * Revokes all WARP registrations associated with the specified device. Prefer
+   * "delete" operation instead, "revoke" does not release virtual IPs.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.zeroTrust.devices.devices.revoke(
-   *     'device_id',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
+   * @deprecated
    */
   revoke(
     deviceID: string,
@@ -144,6 +138,11 @@ export interface DeviceListResponse {
    * The name of the device.
    */
   name: string;
+
+  /**
+   * Tags assigned to the device. An empty object if the device has no tags.
+   */
+  tags: { [key: string]: string };
 
   /**
    * The RFC3339 timestamp when the device was last updated.
@@ -317,6 +316,11 @@ export interface DeviceGetResponse {
   name: string;
 
   /**
+   * Tags assigned to the device. An empty object if the device has no tags.
+   */
+  tags: { [key: string]: string };
+
+  /**
    * The RFC3339 timestamp when the device was last updated.
    */
   updated_at: string;
@@ -475,6 +479,12 @@ export interface DeviceListParams extends CursorPaginationParams {
   active_registrations?: 'include' | 'only' | 'exclude';
 
   /**
+   * Query param: Filter by the type of active registration associated with the
+   * device.
+   */
+  has_registration_type?: 'warp' | 'browser_extension';
+
+  /**
    * Query param: Comma-separated list of additional information that should be
    * included in the device response. Supported values are:
    * "last_seen_registration.policy".
@@ -524,6 +534,12 @@ export interface DeviceListParams extends CursorPaginationParams {
    * Query param: Sort direction.
    */
   sort_order?: 'asc' | 'desc';
+
+  /**
+   * Query param: Filter by one or more device tags in key:value format. Devices must
+   * match all provided tags.
+   */
+  tag?: Array<string>;
 }
 
 export namespace DeviceListParams {

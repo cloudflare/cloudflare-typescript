@@ -31,7 +31,7 @@ const runTests = (client: PartialCloudflare<{ workers: { scripts: { deployments:
     const responsePromise = client.workers.scripts.deployments.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       strategy: 'percentage',
-      versions: [{ percentage: 100, version_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }],
+      versions: [{ percentage: 100, version_id: '023e105f-2a42-4f8b-a1c1-73f6a2a30c0f' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +46,7 @@ const runTests = (client: PartialCloudflare<{ workers: { scripts: { deployments:
     const response = await client.workers.scripts.deployments.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       strategy: 'percentage',
-      versions: [{ percentage: 100, version_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }],
+      versions: [{ percentage: 100, version_id: '023e105f-2a42-4f8b-a1c1-73f6a2a30c0f' }],
       force: true,
       annotations: { 'workers/message': 'Deploy bug fix.' },
     });
@@ -68,6 +68,10 @@ const runTests = (client: PartialCloudflare<{ workers: { scripts: { deployments:
   test('list: required and optional params', async () => {
     const response = await client.workers.scripts.deployments.list('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      page: 1,
+      per_page: 1,
+      since: '2019-12-27T18:11:19.117Z',
+      until: '2019-12-27T18:11:19.117Z',
     });
   });
 

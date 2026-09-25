@@ -38,6 +38,10 @@ import {
   RegistrationListParams,
   Registrations,
 } from './registrations';
+import * as TransferInAPI from './transfer-in';
+import { BaseTransferIn, TransferIn, TransferInCreateParams } from './transfer-in';
+import * as TransferInStatusAPI from './transfer-in-status';
+import { BaseTransferInStatus, TransferInStatus, TransferInStatusGetParams } from './transfer-in-status';
 import * as UpdateStatusAPI from './update-status';
 import { BaseUpdateStatus, UpdateStatus, UpdateStatusGetParams } from './update-status';
 import { APIPromise } from '../../core/api-promise';
@@ -368,6 +372,10 @@ export class Registrar extends BaseRegistrar {
   );
   updateStatus: UpdateStatusAPI.UpdateStatus = new UpdateStatusAPI.UpdateStatus(this._client);
   extensions: ExtensionsAPI.Extensions = new ExtensionsAPI.Extensions(this._client);
+  transferIn: TransferInAPI.TransferIn = new TransferInAPI.TransferIn(this._client);
+  transferInStatus: TransferInStatusAPI.TransferInStatus = new TransferInStatusAPI.TransferInStatus(
+    this._client,
+  );
 }
 
 export type RegistrationsCursorPagination = CursorPagination<Registration>;
@@ -378,7 +386,7 @@ export type RegistrationsCursorPagination = CursorPagination<Registration>;
  */
 export interface Registration {
   /**
-   * Whether the domain will be automatically renewed before expiration.
+   * Whether automatic renewal occurs before expiration.
    */
   auto_renew: boolean;
 
@@ -388,16 +396,16 @@ export interface Registration {
   created_at: string;
 
   /**
-   * Fully qualified domain name (FQDN) including the extension (e.g., `example.com`,
-   * `mybrand.app`). The domain name uniquely identifies a registration — the same
-   * domain cannot be registered twice, making it a natural idempotency key for
-   * registration requests.
+   * Provides a fully qualified domain name (FQDN), including the extension (e.g.,
+   * `example.com`, `mybrand.app`). The domain name uniquely identifies a
+   * registration. Cloudflare permits only one registration per domain, making the
+   * domain name a natural idempotency key for registration requests.
    */
   domain_name: string;
 
   /**
-   * When the domain registration expires. Present when the registration is ready;
-   * may be null only while `status` is `registration_pending`.
+   * When the domain registration expires. Ready registrations include this value;
+   * only `registration_pending` and `transfer_pending` may return null.
    */
   expires_at: string | null;
 
@@ -409,21 +417,23 @@ export interface Registration {
   /**
    * Current WHOIS privacy mode for the registration.
    */
-  privacy_mode: 'redaction';
+  privacy_mode: 'off' | 'redaction';
 
   /**
    * Current registration status.
    *
-   * - `active`: Domain is registered and operational
-   * - `registration_pending`: Registration is in progress
-   * - `expired`: Domain has expired
-   * - `suspended`: Domain is suspended by the registry
-   * - `redemption_period`: Domain is in the redemption grace period
-   * - `pending_delete`: Domain is pending deletion by the registry
+   * - `active`: The domain operates with an active registration.
+   * - `registration_pending`: Registration remains in progress.
+   * - `transfer_pending`: Domain transfer is in progress.
+   * - `expired`: The domain registration expired.
+   * - `suspended`: The registry suspended the domain.
+   * - `redemption_period`: The domain entered the redemption grace period.
+   * - `pending_delete`: The registry scheduled the domain for deletion.
    */
   status:
     | 'active'
     | 'registration_pending'
+    | 'transfer_pending'
     | 'expired'
     | 'suspended'
     | 'redemption_period'
@@ -435,9 +445,9 @@ export interface Registration {
  */
 export interface WorkflowStatus {
   /**
-   * Whether the workflow has reached a terminal state. `true` when `state` is
-   * `succeeded` or `failed`. `false` for `pending`, `in_progress`,
-   * `action_required`, and `blocked`.
+   * Indicates whether the workflow reached a terminal state. A `succeeded` or
+   * `failed` state returns `true`; `pending`, `in_progress`, `action_required`, and
+   * `blocked` return `false`.
    */
   completed: boolean;
 
@@ -446,43 +456,42 @@ export interface WorkflowStatus {
   links: WorkflowStatus.Links;
 
   /**
-   * Workflow lifecycle state.
+   * Describes the workflow lifecycle state.
    *
-   * - `pending`: Workflow has been created but not yet started processing.
-   * - `in_progress`: Actively processing. Continue polling `links.self`. The
-   *   workflow has an internal deadline and will not remain in this state
-   *   indefinitely.
-   * - `action_required`: Paused — requires action by the user (not the system). See
-   *   `context.action` for what is needed. An automated polling loop must break on
-   *   this state; it will not resolve on its own without user intervention.
-   * - `blocked`: The workflow cannot make progress due to a third party such as the
-   *   domain extension's registry or a losing registrar. No user action will help.
-   *   Continue polling — the block may resolve when the third party responds.
-   * - `succeeded`: Terminal. The operation completed successfully. `completed` will
-   *   be `true`. For registrations, `context.registration` contains the resulting
-   *   registration resource.
-   * - `failed`: Terminal. The operation failed. `completed` will be `true`. See
-   *   `error.code` and `error.message` for the reason. Do not auto-retry without
-   *   user review.
+   * - `pending`: The workflow awaits processing.
+   * - `in_progress`: Processing started. Continue polling `links.self`. An internal
+   *   deadline limits the duration of this state.
+   * - `action_required`: The workflow pauses for user action. See `context.action`
+   *   for details. Stop automated polling until the user completes the required
+   *   action.
+   * - `blocked`: A third party, such as the domain extension's registry or a losing
+   *   registrar, prevents progress. Continue polling because the block may resolve
+   *   when the third party responds.
+   * - `succeeded`: Terminal state. The operation completed successfully. `completed`
+   *   equals `true`. For registrations, `context.registration` contains the
+   *   resulting registration resource.
+   * - `failed`: Terminal state. The operation failed. `completed` equals `true`. See
+   *   `error.code` and `error.message` for the reason. Require user review before
+   *   retrying.
    */
   state: 'pending' | 'in_progress' | 'action_required' | 'blocked' | 'succeeded' | 'failed';
 
   updated_at: string;
 
   /**
-   * Workflow-specific data for this workflow.
+   * Provides workflow-specific data.
    *
-   * The workflow subject is identified by `context.domain_name` for domain-centric
-   * workflows.
+   * For domain-centric workflows, `context.domain_name` identifies the workflow
+   * subject.
    */
   context?: { [key: string]: unknown };
 
   /**
-   * Error details when a workflow reaches the `failed` state. The specific error
-   * codes and messages depend on the workflow type (registration, update, etc.) and
-   * the underlying registry response. These workflow error codes are separate from
-   * immediate HTTP error `errors[].code` values returned by non-2xx responses.
-   * Surface `error.message` to the user for context.
+   * Provides error details when a workflow reaches the `failed` state. The workflow
+   * type (registration, update, etc.) and underlying registry response determine the
+   * specific codes and messages. Workflow error codes differ from immediate HTTP
+   * error `errors[].code` values in non-2xx responses. Surface `error.message` to
+   * the user for context.
    */
   error?: WorkflowStatus.Error | null;
 }
@@ -501,11 +510,11 @@ export namespace WorkflowStatus {
   }
 
   /**
-   * Error details when a workflow reaches the `failed` state. The specific error
-   * codes and messages depend on the workflow type (registration, update, etc.) and
-   * the underlying registry response. These workflow error codes are separate from
-   * immediate HTTP error `errors[].code` values returned by non-2xx responses.
-   * Surface `error.message` to the user for context.
+   * Provides error details when a workflow reaches the `failed` state. The workflow
+   * type (registration, update, etc.) and underlying registry response determine the
+   * specific codes and messages. Workflow error codes differ from immediate HTTP
+   * error `errors[].code` values in non-2xx responses. Surface `error.message` to
+   * the user for context.
    */
   export interface Error {
     /**
@@ -526,18 +535,18 @@ export namespace WorkflowStatus {
  */
 export interface RegistrarCheckResponse {
   /**
-   * Array of domain availability results. Domains on unsupported extensions are
-   * included with `registrable: false` and a `reason` field. Malformed domain names
-   * may be omitted.
+   * Array of domain availability results. Results for unsupported extensions contain
+   * `registrable: false` and a `reason` field. The response may omit malformed
+   * domain names.
    */
   domains: Array<RegistrarCheckResponse.Domain>;
 }
 
 export namespace RegistrarCheckResponse {
   /**
-   * Represents a single authoritative domain availability result returned by the
-   * Check endpoint. Check results reflect current registry status and should be used
-   * immediately before registration.
+   * Describes a single authoritative domain availability result from the Check
+   * endpoint. Check results reflect current registry status; use them immediately
+   * before registration.
    */
   export interface Domain {
     /**
@@ -547,48 +556,45 @@ export namespace RegistrarCheckResponse {
     name: string;
 
     /**
-     * Indicates whether this domain can be registered programmatically through this
-     * API based on a real-time registry check.
+     * Indicates programmatic registration eligibility according to a real-time
+     * registry check.
      *
-     * - `true`: Domain is available for registration. The `pricing` object will be
-     *   included.
-     * - `false`: Domain is not available. See the `reason` field for why. `tier` may
-     *   still be present on some non-registrable results, such as premium domains.
+     * - `true`: The domain is available for registration. The response includes the
+     *   `pricing` object.
+     * - `false`: A restriction prevents registration. See the `reason` field for
+     *   details. Some results, such as premium domains, may still include `tier`.
      */
     registrable: boolean;
 
     /**
-     * Annual pricing information for a registrable domain. This object is only present
-     * when `registrable` is `true`. All prices are per year and returned as strings to
-     * preserve decimal precision.
+     * Provides annual pricing information for a given domain. The API returns all
+     * per-year prices as strings to preserve decimal precision.
      *
-     * `registration_cost` and `renewal_cost` are frequently the same value, but may
-     * differ — especially for premium domains where registries set different rates for
-     * initial registration vs. renewal. For a multi-year registration (e.g., 4 years),
-     * the first year is charged at `registration_cost` and each subsequent year at
-     * `renewal_cost`. Registry pricing may change over time; the values returned here
-     * reflect the current registry rate. Premium pricing may be surfaced by Search and
-     * Check, but premium registration is not currently supported by this API.
+     * `renewal_cost` and `registration_cost` or `transfer_cost` are frequently the
+     * same value, but may differ due to premium rates for certain domains.
+     *
+     * For a multi-year operations, the operation's cost applies to the first year and
+     * `renewal_cost` applies to each subsequent year. The values reflect the current
+     * registry rate, which can change over time.
      */
     pricing?: Domain.Pricing;
 
     /**
-     * Present only when `registrable` is `false`. Explains why the domain cannot be
-     * registered via this API.
+     * Appears only when `registrable` is `false` and explains the result.
      *
      * - `extension_not_supported_via_api`: Cloudflare Registrar supports this
-     *   extension in the dashboard but it is not yet available for programmatic
-     *   registration via this API. The user can register via
+     *   extension in the dashboard but currently excludes it from programmatic
+     *   registration through this API. The user can register via
      *   `https://dash.cloudflare.com/{account_id}/domains/registrations`.
-     * - `extension_not_supported`: This extension is not supported by Cloudflare
-     *   Registrar at all.
-     * - `extension_disallows_registration`: The extension's registry has temporarily
-     *   or permanently frozen new registrations. No registrar can register domains on
-     *   this extension at this time.
-     * - `domain_premium`: The domain is premium priced. Premium registration is not
-     *   currently supported by this API.
-     * - `domain_unavailable`: The domain is already registered, reserved, or otherwise
-     *   not available on a supported extension.
+     * - `extension_not_supported`: Cloudflare Registrar excludes this extension
+     *   entirely.
+     * - `extension_disallows_registration`: The extension's registry temporarily or
+     *   permanently freezes new registrations. Registrars currently cannot register
+     *   domains on this extension.
+     * - `domain_premium`: The domain carries premium pricing. This API currently
+     *   supports standard registrations only.
+     * - `domain_unavailable`: An existing registration, reservation, or other registry
+     *   restriction makes the domain unavailable on a supported extension.
      */
     reason?:
       | 'extension_not_supported_via_api'
@@ -598,29 +604,27 @@ export namespace RegistrarCheckResponse {
       | 'domain_unavailable';
 
     /**
-     * The pricing tier for this domain. Always present when `registrable` is `true`;
-     * defaults to `standard` for most domains. May be absent when `registrable` is
-     * `false`.
+     * The pricing tier for this domain. A `registrable` value of `true` always
+     * includes this field, which defaults to `standard` for most domains. A
+     * `registrable` value of `false` may omit it.
      *
-     * - `standard`: Standard registry pricing
-     * - `premium`: Premium domain with higher pricing set by the registry
+     * - `standard`: Standard registry pricing.
+     * - `premium`: Premium domain with higher pricing from the registry.
      */
     tier?: 'standard' | 'premium';
   }
 
   export namespace Domain {
     /**
-     * Annual pricing information for a registrable domain. This object is only present
-     * when `registrable` is `true`. All prices are per year and returned as strings to
-     * preserve decimal precision.
+     * Provides annual pricing information for a given domain. The API returns all
+     * per-year prices as strings to preserve decimal precision.
      *
-     * `registration_cost` and `renewal_cost` are frequently the same value, but may
-     * differ — especially for premium domains where registries set different rates for
-     * initial registration vs. renewal. For a multi-year registration (e.g., 4 years),
-     * the first year is charged at `registration_cost` and each subsequent year at
-     * `renewal_cost`. Registry pricing may change over time; the values returned here
-     * reflect the current registry rate. Premium pricing may be surfaced by Search and
-     * Check, but premium registration is not currently supported by this API.
+     * `renewal_cost` and `registration_cost` or `transfer_cost` are frequently the
+     * same value, but may differ due to premium rates for certain domains.
+     *
+     * For a multi-year operations, the operation's cost applies to the first year and
+     * `renewal_cost` applies to each subsequent year. The values reflect the current
+     * registry rate, which can change over time.
      */
     export interface Pricing {
       /**
@@ -629,10 +633,7 @@ export namespace RegistrarCheckResponse {
       currency: string;
 
       /**
-       * The first-year cost to register this domain. For premium domains
-       * (`tier: premium`), this price is set by the registry and may be significantly
-       * higher than standard pricing. For multi-year registrations, this cost applies to
-       * the first year only; subsequent years are charged at `renewal_cost`.
+       * The first-year cost to register this domain.
        */
       registration_cost: string;
 
@@ -652,17 +653,17 @@ export namespace RegistrarCheckResponse {
  */
 export interface RegistrarSearchResponse {
   /**
-   * Array of domain suggestions sorted by relevance. May be empty if no domains
-   * match the search criteria.
+   * Lists domain suggestions in relevance order. An empty array indicates that the
+   * search criteria matched zero domains.
    */
   domains: Array<RegistrarSearchResponse.Domain>;
 }
 
 export namespace RegistrarSearchResponse {
   /**
-   * Represents a single domain suggestion returned by the Search endpoint. Search
-   * results are non-authoritative and may be based on cached data. Use POST
-   * /domain-check to confirm real-time availability and pricing before registration.
+   * Describes a single domain suggestion from the Search endpoint. Search results
+   * use non-authoritative data that may come from a cache. Use POST /domain-check to
+   * confirm real-time availability and pricing before registration.
    */
   export interface Domain {
     /**
@@ -672,43 +673,42 @@ export namespace RegistrarSearchResponse {
     name: string;
 
     /**
-     * Indicates whether this domain appears available based on search data. Search
-     * results are non-authoritative and may be stale. - `true`: The domain appears
-     * available. Use POST /domain-check to confirm before registration.
+     * Indicates domain availability according to potentially stale, non-authoritative
+     * search data.
      *
-     * - `false`: The domain does not appear available in search results.
+     * - `true`: The domain appears available. Use POST /domain-check to confirm before
+     *   registration.
+     * - `false`: Search results mark the domain ineligible for registration through
+     *   this API. See `reason` for details.
      */
     registrable: boolean;
 
     /**
-     * Annual pricing information for a registrable domain. This object is only present
-     * when `registrable` is `true`. All prices are per year and returned as strings to
-     * preserve decimal precision.
+     * Provides annual pricing information for a given domain. The API returns all
+     * per-year prices as strings to preserve decimal precision.
      *
-     * `registration_cost` and `renewal_cost` are frequently the same value, but may
-     * differ — especially for premium domains where registries set different rates for
-     * initial registration vs. renewal. For a multi-year registration (e.g., 4 years),
-     * the first year is charged at `registration_cost` and each subsequent year at
-     * `renewal_cost`. Registry pricing may change over time; the values returned here
-     * reflect the current registry rate. Premium pricing may be surfaced by Search and
-     * Check, but premium registration is not currently supported by this API.
+     * `renewal_cost` and `registration_cost` or `transfer_cost` are frequently the
+     * same value, but may differ due to premium rates for certain domains.
+     *
+     * For a multi-year operations, the operation's cost applies to the first year and
+     * `renewal_cost` applies to each subsequent year. The values reflect the current
+     * registry rate, which can change over time.
      */
     pricing?: Domain.Pricing;
 
     /**
-     * Present only when `registrable` is `false` on search results. Explains why the
-     * domain does not appear registrable through this API. These values are advisory;
-     * use POST /domain-check for authoritative status.
+     * Appears only when `registrable` is `false` and explains the advisory search
+     * result. Use POST /domain-check for authoritative status.
      *
      * - `extension_not_supported_via_api`: Cloudflare Registrar supports this
-     *   extension in the dashboard but it is not yet available for programmatic
-     *   registration via this API.
-     * - `extension_not_supported`: This extension is not supported by Cloudflare
-     *   Registrar at all.
-     * - `extension_disallows_registration`: The extension's registry has temporarily
-     *   or permanently frozen new registrations.
-     * - `domain_premium`: The domain is premium priced. Premium registration is not
-     *   currently supported by this API.
+     *   extension in the dashboard but currently excludes it from programmatic
+     *   registration through this API.
+     * - `extension_not_supported`: Cloudflare Registrar excludes this extension
+     *   entirely.
+     * - `extension_disallows_registration`: The extension's registry temporarily or
+     *   permanently freezes new registrations.
+     * - `domain_premium`: The domain carries premium pricing. This API currently
+     *   supports standard registrations only.
      * - `domain_unavailable`: The domain appears unavailable.
      */
     reason?:
@@ -719,29 +719,27 @@ export namespace RegistrarSearchResponse {
       | 'domain_unavailable';
 
     /**
-     * The pricing tier for this domain. Always present when `registrable` is `true`;
-     * defaults to `standard` for most domains. May be absent when `registrable` is
-     * `false`.
+     * The pricing tier for this domain. A `registrable` value of `true` always
+     * includes this field, which defaults to `standard` for most domains. A
+     * `registrable` value of `false` may omit it.
      *
-     * - `standard`: Standard registry pricing
-     * - `premium`: Premium domain with higher pricing set by the registry
+     * - `standard`: Standard registry pricing.
+     * - `premium`: Premium domain with higher pricing from the registry.
      */
     tier?: 'standard' | 'premium';
   }
 
   export namespace Domain {
     /**
-     * Annual pricing information for a registrable domain. This object is only present
-     * when `registrable` is `true`. All prices are per year and returned as strings to
-     * preserve decimal precision.
+     * Provides annual pricing information for a given domain. The API returns all
+     * per-year prices as strings to preserve decimal precision.
      *
-     * `registration_cost` and `renewal_cost` are frequently the same value, but may
-     * differ — especially for premium domains where registries set different rates for
-     * initial registration vs. renewal. For a multi-year registration (e.g., 4 years),
-     * the first year is charged at `registration_cost` and each subsequent year at
-     * `renewal_cost`. Registry pricing may change over time; the values returned here
-     * reflect the current registry rate. Premium pricing may be surfaced by Search and
-     * Check, but premium registration is not currently supported by this API.
+     * `renewal_cost` and `registration_cost` or `transfer_cost` are frequently the
+     * same value, but may differ due to premium rates for certain domains.
+     *
+     * For a multi-year operations, the operation's cost applies to the first year and
+     * `renewal_cost` applies to each subsequent year. The values reflect the current
+     * registry rate, which can change over time.
      */
     export interface Pricing {
       /**
@@ -750,10 +748,7 @@ export namespace RegistrarSearchResponse {
       currency: string;
 
       /**
-       * The first-year cost to register this domain. For premium domains
-       * (`tier: premium`), this price is set by the registry and may be significantly
-       * higher than standard pricing. For multi-year registrations, this cost applies to
-       * the first year only; subsequent years are charged at `renewal_cost`.
+       * The first-year cost to register this domain.
        */
       registration_cost: string;
 
@@ -770,7 +765,7 @@ export namespace RegistrarSearchResponse {
 
 export interface RegistrarCheckParams {
   /**
-   * Path param: Identifier
+   * Path param: Cloudflare account ID. Required for all Registrar API operations.
    */
   account_id: string;
 
@@ -778,19 +773,19 @@ export interface RegistrarCheckParams {
    * Body param: List of fully qualified domain names (FQDNs) to check for
    * availability. Each domain must include the extension.
    *
-   * - Minimum: 1 domain
-   * - Maximum: 20 domains per request
-   * - Domains on unsupported extensions are returned with `registrable: false` and a
-   *   `reason` field
-   * - Malformed domain names (e.g., missing extension) may be omitted from the
-   *   response
+   * - Minimum: 1 domain.
+   * - Maximum: 20 domains per request.
+   * - The response returns domains on unsupported extensions with
+   *   `registrable: false` and a `reason` field.
+   * - The response may omit malformed domain names (e.g., names missing an
+   *   extension).
    */
   domains: Array<string>;
 }
 
 export interface RegistrarSearchParams {
   /**
-   * Path param: Identifier
+   * Path param: Cloudflare account ID. Required for all Registrar API operations.
    */
   account_id: string;
 
@@ -828,6 +823,10 @@ Registrar.UpdateStatus = UpdateStatus;
 Registrar.BaseUpdateStatus = BaseUpdateStatus;
 Registrar.Extensions = Extensions;
 Registrar.BaseExtensions = BaseExtensions;
+Registrar.TransferIn = TransferIn;
+Registrar.BaseTransferIn = BaseTransferIn;
+Registrar.TransferInStatus = TransferInStatus;
+Registrar.BaseTransferInStatus = BaseTransferInStatus;
 
 export declare namespace Registrar {
   export {
@@ -880,5 +879,17 @@ export declare namespace Registrar {
     type ExtensionListResponsesCursorPagination as ExtensionListResponsesCursorPagination,
     type ExtensionListParams as ExtensionListParams,
     type ExtensionGetParams as ExtensionGetParams,
+  };
+
+  export {
+    TransferIn as TransferIn,
+    BaseTransferIn as BaseTransferIn,
+    type TransferInCreateParams as TransferInCreateParams,
+  };
+
+  export {
+    TransferInStatus as TransferInStatus,
+    BaseTransferInStatus as BaseTransferInStatus,
+    type TransferInStatusGetParams as TransferInStatusGetParams,
   };
 }

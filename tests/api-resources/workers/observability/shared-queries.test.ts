@@ -54,6 +54,7 @@ const runTests = (
       chart: true,
       chartType: 'timeseries_and_aggregate',
       compare: true,
+      distributionScale: 'log',
       dry: true,
       granularity: 0,
       ignoreSeries: true,

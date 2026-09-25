@@ -1,6 +1,24 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as SuppressionsAPI from './suppressions';
+import {
+  BaseSuppressions,
+  SuppressionCreateParams,
+  SuppressionCreateResponse,
+  SuppressionDeleteParams,
+  SuppressionDeleteResponse,
+  SuppressionEditParams,
+  SuppressionEditResponse,
+  SuppressionGetParams,
+  SuppressionGetResponse,
+  SuppressionImportParams,
+  SuppressionImportResponse,
+  SuppressionListParams,
+  SuppressionListResponse,
+  SuppressionListResponsesCursorPagination,
+  Suppressions,
+} from './suppressions';
 import * as SubdomainsAPI from './subdomains/subdomains';
 import {
   BaseSubdomains,
@@ -8,6 +26,8 @@ import {
   SubdomainCreateResponse,
   SubdomainDeleteParams,
   SubdomainDeleteResponse,
+  SubdomainEditParams,
+  SubdomainEditResponse,
   SubdomainGetParams,
   SubdomainGetResponse,
   SubdomainListParams,
@@ -75,6 +95,7 @@ export class BaseEmailSending extends APIResource {
   }
 }
 export class EmailSending extends BaseEmailSending {
+  suppressions: SuppressionsAPI.Suppressions = new SuppressionsAPI.Suppressions(this._client);
   subdomains: SubdomainsAPI.Subdomains = new SubdomainsAPI.Subdomains(this._client);
 }
 
@@ -98,6 +119,13 @@ export interface EmailSendingSendResponse {
    * Email addresses for which delivery was queued for later.
    */
   queued: Array<string>;
+
+  /**
+   * Email addresses dropped because they are on the suppression list. Returned when
+   * suppressed-recipient dropping is enabled for the sending subdomain; otherwise
+   * the request fails instead.
+   */
+  suppressed_recipients: Array<string>;
 }
 
 export interface EmailSendingSendRawResponse {
@@ -120,6 +148,13 @@ export interface EmailSendingSendRawResponse {
    * Email addresses for which delivery was queued for later.
    */
   queued: Array<string>;
+
+  /**
+   * Email addresses dropped because they are on the suppression list. Returned when
+   * suppressed-recipient dropping is enabled for the sending subdomain; otherwise
+   * the request fails instead.
+   */
+  suppressed_recipients: Array<string>;
 }
 
 export interface EmailSendingSendParams {
@@ -148,8 +183,8 @@ export interface EmailSendingSendParams {
   >;
 
   /**
-   * Body param: Recipient(s). Optional if cc or bcc is provided. A single email
-   * string, a named address object, or an array of either.
+   * Body param: Blind carbon copy recipient(s). Optional. A single email string, a
+   * named address object, or an array of either.
    */
   bcc?:
     | string
@@ -157,8 +192,8 @@ export interface EmailSendingSendParams {
     | Array<string | EmailSendingSendParams.EmailSendingEmailAddressObject>;
 
   /**
-   * Body param: Recipient(s). Optional if cc or bcc is provided. A single email
-   * string, a named address object, or an array of either.
+   * Body param: Carbon copy recipient(s). Optional. A single email string, a named
+   * address object, or an array of either.
    */
   cc?:
     | string
@@ -380,6 +415,8 @@ export interface EmailSendingSendRawParams {
   recipients: Array<string>;
 }
 
+EmailSending.Suppressions = Suppressions;
+EmailSending.BaseSuppressions = BaseSuppressions;
 EmailSending.Subdomains = Subdomains;
 EmailSending.BaseSubdomains = BaseSubdomains;
 
@@ -392,16 +429,36 @@ export declare namespace EmailSending {
   };
 
   export {
+    Suppressions as Suppressions,
+    BaseSuppressions as BaseSuppressions,
+    type SuppressionCreateResponse as SuppressionCreateResponse,
+    type SuppressionListResponse as SuppressionListResponse,
+    type SuppressionDeleteResponse as SuppressionDeleteResponse,
+    type SuppressionEditResponse as SuppressionEditResponse,
+    type SuppressionGetResponse as SuppressionGetResponse,
+    type SuppressionImportResponse as SuppressionImportResponse,
+    type SuppressionListResponsesCursorPagination as SuppressionListResponsesCursorPagination,
+    type SuppressionCreateParams as SuppressionCreateParams,
+    type SuppressionListParams as SuppressionListParams,
+    type SuppressionDeleteParams as SuppressionDeleteParams,
+    type SuppressionEditParams as SuppressionEditParams,
+    type SuppressionGetParams as SuppressionGetParams,
+    type SuppressionImportParams as SuppressionImportParams,
+  };
+
+  export {
     Subdomains as Subdomains,
     BaseSubdomains as BaseSubdomains,
     type SubdomainCreateResponse as SubdomainCreateResponse,
     type SubdomainListResponse as SubdomainListResponse,
     type SubdomainDeleteResponse as SubdomainDeleteResponse,
+    type SubdomainEditResponse as SubdomainEditResponse,
     type SubdomainGetResponse as SubdomainGetResponse,
     type SubdomainListResponsesSinglePage as SubdomainListResponsesSinglePage,
     type SubdomainCreateParams as SubdomainCreateParams,
     type SubdomainListParams as SubdomainListParams,
     type SubdomainDeleteParams as SubdomainDeleteParams,
+    type SubdomainEditParams as SubdomainEditParams,
     type SubdomainGetParams as SubdomainGetParams,
   };
 }
