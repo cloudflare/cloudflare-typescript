@@ -1,0 +1,19 @@
+CHANGELOG.md
+  s_2dd47d1cfb1ed7::t_75795d426628a2 62-63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "6cef4234741c902660dd6b88d657bcbd85a8a06d",
+  "prompts": {},
+  "sessions": {
+    "s_2dd47d1cfb1ed7": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f2bb53a71ffe0VzQFUUI7KuNUZ",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Sarah Sicard <ssicard@cloudflare.com>"
+    }
+  }
+}
