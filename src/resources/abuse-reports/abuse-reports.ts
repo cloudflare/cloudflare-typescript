@@ -35,8 +35,8 @@ export class BaseAbuseReports extends APIResource {
    *
    * Requires the abuse-reports entitlement on the account (Enterprise accounts have
    * it by default; other accounts must request access) and an API token with the
-   * `Account > Abuse Reports > Edit` permission. If the account is not entitled, the
-   * request is rejected with an HTTP `401` response (see below).
+   * `Trust and Safety Write` permission. If the account is not entitled, the request
+   * is rejected with an HTTP `401` response (see below).
    *
    * @example
    * ```ts
@@ -78,7 +78,9 @@ export class BaseAbuseReports extends APIResource {
   }
 
   /**
-   * List the abuse reports for a given account
+   * List abuse reports made against domains or other content associated with the
+   * account. To list reports that the account submitted, use the submitted abuse
+   * reports endpoint instead.
    *
    * @example
    * ```ts
@@ -103,7 +105,9 @@ export class BaseAbuseReports extends APIResource {
   }
 
   /**
-   * Retrieve the details of an abuse report.
+   * Retrieve the details of an abuse report made against a domain or other content
+   * associated with the account. To retrieve a report that the account submitted,
+   * use the submitted abuse report endpoint instead.
    *
    * @example
    * ```ts

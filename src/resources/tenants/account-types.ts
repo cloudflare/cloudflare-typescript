@@ -12,7 +12,7 @@ export class BaseAccountTypes extends APIResource {
   ] as const);
 
   /**
-   * List of account types available for the Tenant to provision accounts.
+   * Lists the account types this tenant is allowed to provision.
    */
   list(
     tenantID: string,

@@ -13,7 +13,9 @@ export class BaseSchema extends APIResource {
   ] as const);
 
   /**
-   * Retrieves the input and output JSON schema definition for a Workers AI model.
+   * Retrieves the input and output JSON Schema definitions for an AI model. Use
+   * these definitions to determine the model-specific request fields and response
+   * format.
    */
   get(params: SchemaGetParams, options?: RequestOptions): APIPromise<SchemaGetResponse> {
     const { account_id, ...query } = params;
@@ -52,12 +54,12 @@ export namespace SchemaGetResponse {
 
 export interface SchemaGetParams {
   /**
-   * Path param
+   * Path param: Cloudflare account ID used for this AI model request.
    */
   account_id: string;
 
   /**
-   * Query param: Model Name
+   * Query param: AI model identifier, including its namespace and model name.
    */
   model: string;
 }

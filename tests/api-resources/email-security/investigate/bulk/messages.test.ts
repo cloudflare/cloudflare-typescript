@@ -31,7 +31,7 @@ const runTests = (
 ) => {
   test('list: only required params', async () => {
     const responsePromise = client.emailSecurity.investigate.bulk.messages.list(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -45,7 +45,7 @@ const runTests = (
 
   test('list: required and optional params', async () => {
     const response = await client.emailSecurity.investigate.bulk.messages.list(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         page: 1,

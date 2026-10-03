@@ -31,7 +31,7 @@ const runTests = (
 ) => {
   test('create: only required params', async () => {
     const responsePromise = client.pages.projects.deployments.tails.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', project_name: 'this-is-my-project-01' },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -45,7 +45,7 @@ const runTests = (
 
   test('create: required and optional params', async () => {
     const response = await client.pages.projects.deployments.tails.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         project_name: 'this-is-my-project-01',
@@ -60,7 +60,7 @@ const runTests = (
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         project_name: 'this-is-my-project-01',
-        deployment_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        deployment_id: 'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -78,7 +78,7 @@ const runTests = (
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         project_name: 'this-is-my-project-01',
-        deployment_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        deployment_id: 'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
       },
     );
   });

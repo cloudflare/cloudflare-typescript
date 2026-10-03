@@ -21,13 +21,13 @@ export class BaseCertificates extends APIResource {
    * ```ts
    * const certificate =
    *   await client.customHostnames.certificatePack.certificates.update(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
    *     {
    *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       custom_hostname_id:
-   *         '023e105f4ecef8ad9ca31a8372d0c353',
+   *         '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
    *       certificate_pack_id:
-   *         '023e105f4ecef8ad9ca31a8372d0c353',
+   *         '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
    *       custom_certificate:
    *         '-----BEGIN CERTIFICATE-----\nMIIDdjCCAl6gAwIBAgIJAPnMg0Fs+/B0MA0GCSqGSIb3DQEBCwUAMFsx...\n-----END CERTIFICATE-----\n',
    *       custom_key:
@@ -60,13 +60,13 @@ export class BaseCertificates extends APIResource {
    * ```ts
    * const certificate =
    *   await client.customHostnames.certificatePack.certificates.delete(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
    *     {
    *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       custom_hostname_id:
-   *         '023e105f4ecef8ad9ca31a8372d0c353',
+   *         '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
    *       certificate_pack_id:
-   *         '023e105f4ecef8ad9ca31a8372d0c353',
+   *         '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
    *     },
    *   );
    * ```
@@ -87,7 +87,7 @@ export class Certificates extends BaseCertificates {}
 
 export interface CertificateUpdateResponse {
   /**
-   * Identifier.
+   * Custom hostname identifier tag.
    */
   id: string;
 
@@ -454,7 +454,7 @@ export namespace CertificateUpdateResponse {
 
 export interface CertificateDeleteResponse {
   /**
-   * Identifier.
+   * Custom hostname identifier tag.
    */
   id?: string;
 }
@@ -466,12 +466,12 @@ export interface CertificateUpdateParams {
   zone_id: string;
 
   /**
-   * Path param: Identifier.
+   * Path param: Custom hostname identifier tag.
    */
   custom_hostname_id: string;
 
   /**
-   * Path param: Identifier.
+   * Path param: Custom hostname identifier tag.
    */
   certificate_pack_id: string;
 
@@ -493,12 +493,12 @@ export interface CertificateDeleteParams {
   zone_id: string;
 
   /**
-   * Identifier.
+   * Custom hostname identifier tag.
    */
   custom_hostname_id: string;
 
   /**
-   * Identifier.
+   * Custom hostname identifier tag.
    */
   certificate_pack_id: string;
 }

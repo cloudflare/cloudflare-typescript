@@ -84,7 +84,7 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: { deployments: 
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.pages.projects.deployments.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.pages.projects.deployments.delete('f64788e9-fccd-4d4a-a28a-cb84f88f6e12', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
     });
@@ -98,7 +98,7 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: { deployments: 
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.pages.projects.deployments.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.pages.projects.deployments.delete('f64788e9-fccd-4d4a-a28a-cb84f88f6e12', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
       force: true,
@@ -106,7 +106,7 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: { deployments: 
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.pages.projects.deployments.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.pages.projects.deployments.get('f64788e9-fccd-4d4a-a28a-cb84f88f6e12', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
     });
@@ -120,14 +120,14 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: { deployments: 
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.pages.projects.deployments.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.pages.projects.deployments.get('f64788e9-fccd-4d4a-a28a-cb84f88f6e12', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
     });
   });
 
   test('retry: only required params', async () => {
-    const responsePromise = client.pages.projects.deployments.retry('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.pages.projects.deployments.retry('f64788e9-fccd-4d4a-a28a-cb84f88f6e12', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
     });
@@ -141,17 +141,17 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: { deployments: 
   });
 
   test('retry: required and optional params', async () => {
-    const response = await client.pages.projects.deployments.retry('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.pages.projects.deployments.retry('f64788e9-fccd-4d4a-a28a-cb84f88f6e12', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
     });
   });
 
   test('rollback: only required params', async () => {
-    const responsePromise = client.pages.projects.deployments.rollback('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      project_name: 'this-is-my-project-01',
-    });
+    const responsePromise = client.pages.projects.deployments.rollback(
+      'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', project_name: 'this-is-my-project-01' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -162,10 +162,10 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: { deployments: 
   });
 
   test('rollback: required and optional params', async () => {
-    const response = await client.pages.projects.deployments.rollback('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      project_name: 'this-is-my-project-01',
-    });
+    const response = await client.pages.projects.deployments.rollback(
+      'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', project_name: 'this-is-my-project-01' },
+    );
   });
 };
 describe('resource deployments', () => runTests(client));

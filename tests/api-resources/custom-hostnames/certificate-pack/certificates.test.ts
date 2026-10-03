@@ -31,11 +31,11 @@ const runTests = (
 ) => {
   test('update: only required params', async () => {
     const responsePromise = client.customHostnames.certificatePack.certificates.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
       {
         zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        custom_hostname_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        certificate_pack_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        custom_hostname_id: '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
+        certificate_pack_id: '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
         custom_certificate:
           '-----BEGIN CERTIFICATE-----\nMIIDdjCCAl6gAwIBAgIJAPnMg0Fs+/B0MA0GCSqGSIb3DQEBCwUAMFsx...\n-----END CERTIFICATE-----\n',
         custom_key:
@@ -53,11 +53,11 @@ const runTests = (
 
   test('update: required and optional params', async () => {
     const response = await client.customHostnames.certificatePack.certificates.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
       {
         zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        custom_hostname_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        certificate_pack_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        custom_hostname_id: '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
+        certificate_pack_id: '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
         custom_certificate:
           '-----BEGIN CERTIFICATE-----\nMIIDdjCCAl6gAwIBAgIJAPnMg0Fs+/B0MA0GCSqGSIb3DQEBCwUAMFsx...\n-----END CERTIFICATE-----\n',
         custom_key:
@@ -68,11 +68,11 @@ const runTests = (
 
   test('delete: only required params', async () => {
     const responsePromise = client.customHostnames.certificatePack.certificates.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
       {
         zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        custom_hostname_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        certificate_pack_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        custom_hostname_id: '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
+        certificate_pack_id: '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -86,11 +86,11 @@ const runTests = (
 
   test('delete: required and optional params', async () => {
     const response = await client.customHostnames.certificatePack.certificates.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
       {
         zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        custom_hostname_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        certificate_pack_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        custom_hostname_id: '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
+        certificate_pack_id: '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
       },
     );
   });

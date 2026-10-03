@@ -45,9 +45,10 @@ export class BaseMove extends APIResource {
   }
 
   /**
-   * Moves multiple messages to a specified mailbox folder (Inbox, JunkEmail,
+   * Moves one or more messages to a specified mailbox folder (Inbox, JunkEmail,
    * DeletedItems, RecoverableItemsDeletions, or RecoverableItemsPurges). Requires
-   * active integration.
+   * active integration. Operates on an explicit list of messages; to move all
+   * messages matching a search, create a bulk action job instead.
    *
    * @example
    * ```ts
@@ -56,6 +57,7 @@ export class BaseMove extends APIResource {
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     destination: 'Inbox',
+   *     ids: ['4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678'],
    *   },
    * )) {
    *   // ...
@@ -181,7 +183,7 @@ export interface MoveCreateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: The mailbox folder to move messages to.
    */
   destination:
     | 'Inbox'
@@ -214,7 +216,7 @@ export interface MoveBulkParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: The mailbox folder to move messages to.
    */
   destination:
     | 'Inbox'
@@ -222,6 +224,11 @@ export interface MoveBulkParams {
     | 'DeletedItems'
     | 'RecoverableItemsDeletions'
     | 'RecoverableItemsPurges';
+
+  /**
+   * Body param: List of message IDs to move.
+   */
+  ids: Array<string>;
 
   /**
    * @deprecated This field is nonfunctional.
@@ -238,11 +245,6 @@ export interface MoveBulkParams {
     | 'UNKNOWN'
     | 'NONE'
     | null;
-
-  /**
-   * Body param: List of message IDs to move.
-   */
-  ids?: Array<string>;
 
   /**
    * @deprecated Use `ids` instead.

@@ -6,5 +6,5 @@ export {
   BaseReports,
   type ReportListResponse,
   type ReportListParams,
-  type ReportListResponsesSinglePage,
+  type ReportListResponsesV4PagePaginationArray,
 } from './reports';

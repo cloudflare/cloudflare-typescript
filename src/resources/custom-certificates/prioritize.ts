@@ -60,7 +60,7 @@ export interface PrioritizeUpdateParams {
 export namespace PrioritizeUpdateParams {
   export interface Certificate {
     /**
-     * Identifier.
+     * Custom certificate identifier tag.
      */
     id?: string;
 

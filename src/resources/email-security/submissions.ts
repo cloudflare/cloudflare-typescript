@@ -52,16 +52,35 @@ export interface SubmissionListResponse {
 
   customer_status?: 'escalated' | 'reviewed' | 'unreviewed' | null;
 
+  /**
+   * The disposition a message is submitted to have.
+   */
   escalated_as?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE' | null;
 
+  /**
+   * When the submission was escalated to the security team.
+   */
   escalated_at?: string | null;
 
+  /**
+   * Email address of the user who escalated the submission.
+   */
   escalated_by?: string | null;
 
+  /**
+   * Submission ID of the escalated team submission, when this user submission was
+   * escalated.
+   */
   escalated_submission_id?: string | null;
 
+  /**
+   * The disposition a message is submitted to have.
+   */
   original_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE' | null;
 
+  /**
+   * EDF hash of the original message.
+   */
   original_edf_hash?: string | null;
 
   /**
@@ -69,12 +88,24 @@ export interface SubmissionListResponse {
    */
   original_postfix_id?: string | null;
 
+  /**
+   * Processing outcome of the submission.
+   */
   outcome?: string | null;
 
+  /**
+   * The disposition a message is submitted to have.
+   */
   outcome_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE' | null;
 
+  /**
+   * Email address of the user who requested the submission.
+   */
   requested_by?: string | null;
 
+  /**
+   * The disposition a message is submitted to have.
+   */
   requested_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE' | null;
 
   /**
@@ -82,8 +113,14 @@ export interface SubmissionListResponse {
    */
   requested_ts?: string;
 
+  /**
+   * Processing status of the submission.
+   */
   status?: string | null;
 
+  /**
+   * Subject line of the submitted message.
+   */
   subject?: string | null;
 
   /**
@@ -127,22 +164,22 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
     | 'requested_at';
 
   /**
-   * Query param
+   * Query param: The disposition a message is submitted to have.
    */
   original_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
 
   /**
-   * Query param
+   * Query param: The disposition a message is submitted to have.
    */
   outcome_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
 
   /**
-   * Query param
+   * Query param: Search term for filtering submissions.
    */
   query?: string | null;
 
   /**
-   * Query param
+   * Query param: The disposition a message is submitted to have.
    */
   requested_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
 
@@ -153,17 +190,18 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
   start?: string;
 
   /**
-   * Query param
+   * Query param: Filter by review status — `escalated`, `reviewed`, or `unreviewed`.
    */
   status?: string;
 
   /**
-   * Query param
+   * Query param: Filter by a specific submission ID.
    */
   submission_id?: string;
 
   /**
-   * Query param
+   * Query param: Filter by who created the submission — `TEAM` for security team
+   * members or `USER` for end users.
    */
   type?: 'TEAM' | 'USER';
 }

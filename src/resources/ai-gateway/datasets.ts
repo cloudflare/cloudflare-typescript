@@ -13,7 +13,9 @@ export class BaseDatasets extends APIResource {
   ] as const);
 
   /**
-   * Creates a new AI Gateway.
+   * Creates a dataset that selects gateway logs matching the specified filters for
+   * use in evaluations. Evaluations and datasets are deprecated and unavailable to
+   * new accounts.
    *
    * @example
    * ```ts
@@ -49,7 +51,8 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Updates an existing AI Gateway dataset.
+   * Replaces the name, log filters, and enabled state of a dataset. Evaluations and
+   * datasets are deprecated and unavailable to new accounts.
    *
    * @example
    * ```ts
@@ -86,7 +89,8 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Lists all AI Gateway evaluator types configured for the account.
+   * Lists the datasets defined for an AI Gateway. Evaluations and datasets are
+   * deprecated and unavailable to new accounts.
    *
    * @example
    * ```ts
@@ -113,7 +117,8 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Deletes an AI Gateway dataset.
+   * Deletes a dataset. Evaluations and datasets are deprecated and unavailable to
+   * new accounts.
    *
    * @example
    * ```ts
@@ -141,7 +146,8 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Retrieves details for a specific AI Gateway dataset.
+   * Retrieves a dataset and its log filters. Evaluations and datasets are deprecated
+   * and unavailable to new accounts.
    *
    * @example
    * ```ts
@@ -175,7 +181,7 @@ export interface DatasetCreateResponse {
   filters: Array<DatasetCreateResponse.Filter>;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -217,7 +223,7 @@ export interface DatasetUpdateResponse {
   filters: Array<DatasetUpdateResponse.Filter>;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -259,7 +265,7 @@ export interface DatasetListResponse {
   filters: Array<DatasetListResponse.Filter>;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -301,7 +307,7 @@ export interface DatasetDeleteResponse {
   filters: Array<DatasetDeleteResponse.Filter>;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -343,7 +349,7 @@ export interface DatasetGetResponse {
   filters: Array<DatasetGetResponse.Filter>;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -427,7 +433,7 @@ export interface DatasetUpdateParams {
   account_id: string;
 
   /**
-   * Path param: gateway id
+   * Path param: Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -496,7 +502,7 @@ export interface DatasetDeleteParams {
   account_id: string;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 }
@@ -505,7 +511,7 @@ export interface DatasetGetParams {
   account_id: string;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 }

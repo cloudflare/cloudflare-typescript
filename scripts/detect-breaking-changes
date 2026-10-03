@@ -282,6 +282,14 @@ TEST_PATHS=(
 	tests/api-resources/durable-objects/durable-objects.test.ts
 	tests/api-resources/durable-objects/namespaces/namespaces.test.ts
 	tests/api-resources/durable-objects/namespaces/objects.test.ts
+	tests/api-resources/containers/containers.test.ts
+	tests/api-resources/containers/applications/applications.test.ts
+	tests/api-resources/containers/applications/instances.test.ts
+	tests/api-resources/containers/applications/rollouts.test.ts
+	tests/api-resources/containers/applications/versions.test.ts
+	tests/api-resources/containers/images.test.ts
+	tests/api-resources/containers/registries/registries.test.ts
+	tests/api-resources/containers/registries/credentials.test.ts
 	tests/api-resources/queues/queues.test.ts
 	tests/api-resources/queues/messages.test.ts
 	tests/api-resources/queues/purge.test.ts
@@ -337,7 +345,6 @@ TEST_PATHS=(
 	tests/api-resources/addressing/address-maps/address-maps.test.ts
 	tests/api-resources/addressing/address-maps/accounts.test.ts
 	tests/api-resources/addressing/address-maps/ips.test.ts
-	tests/api-resources/addressing/address-maps/zones.test.ts
 	tests/api-resources/addressing/loa-documents.test.ts
 	tests/api-resources/addressing/prefixes/prefixes.test.ts
 	tests/api-resources/addressing/prefixes/service-bindings.test.ts
@@ -537,6 +544,12 @@ TEST_PATHS=(
 	tests/api-resources/r2-data-catalog/namespaces/namespaces.test.ts
 	tests/api-resources/r2-data-catalog/namespaces/tables/tables.test.ts
 	tests/api-resources/r2-data-catalog/namespaces/tables/maintenance-configs.test.ts
+	tests/api-resources/basin-catalog/basin-catalog.test.ts
+	tests/api-resources/basin-catalog/maintenance-configs.test.ts
+	tests/api-resources/basin-catalog/credentials.test.ts
+	tests/api-resources/basin-catalog/namespaces/namespaces.test.ts
+	tests/api-resources/basin-catalog/namespaces/tables/tables.test.ts
+	tests/api-resources/basin-catalog/namespaces/tables/maintenance-configs.test.ts
 	tests/api-resources/workers-for-platforms/workers-for-platforms.test.ts
 	tests/api-resources/workers-for-platforms/dispatch/dispatch.test.ts
 	tests/api-resources/workers-for-platforms/dispatch/namespaces/namespaces.test.ts
@@ -910,14 +923,14 @@ TEST_PATHS=(
 	tests/api-resources/managed-defense/vulnerability-discovery/scans.test.ts
 	tests/api-resources/managed-defense/vulnerability-discovery/reports.test.ts
 	tests/api-resources/cloudforce-one/cloudforce-one.test.ts
-	tests/api-resources/cloudforce-one/scans/scans.test.ts
-	tests/api-resources/cloudforce-one/scans/results.test.ts
-	tests/api-resources/cloudforce-one/scans/config.test.ts
 	tests/api-resources/cloudforce-one/binary-storage.test.ts
 	tests/api-resources/cloudforce-one/requests/requests.test.ts
 	tests/api-resources/cloudforce-one/requests/message.test.ts
 	tests/api-resources/cloudforce-one/requests/priority.test.ts
 	tests/api-resources/cloudforce-one/requests/assets.test.ts
+	tests/api-resources/cloudforce-one/scans/scans.test.ts
+	tests/api-resources/cloudforce-one/scans/results.test.ts
+	tests/api-resources/cloudforce-one/scans/config.test.ts
 	tests/api-resources/cloudforce-one/threat-events/threat-events.test.ts
 	tests/api-resources/cloudforce-one/threat-events/aggregate.test.ts
 	tests/api-resources/cloudforce-one/threat-events/graphql.test.ts
@@ -945,6 +958,19 @@ TEST_PATHS=(
 	tests/api-resources/cloudforce-one/threat-events/target-industries/target-industries.test.ts
 	tests/api-resources/cloudforce-one/threat-events/target-industries/by-dataset.test.ts
 	tests/api-resources/cloudforce-one/threat-events/target-industries/catalog.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/threat-signals.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/search.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/categories.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/feeds/feeds.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/feeds/raw.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/feeds/skills.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/articles/articles.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/articles/content.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/articles/tags.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/articles/skill-outputs.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/indicators.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/skills/skills.test.ts
+	tests/api-resources/cloudforce-one/threat-signals/skills/tag-categories.test.ts
 	tests/api-resources/ai-gateway/ai-gateway.test.ts
 	tests/api-resources/ai-gateway/evaluation-types.test.ts
 	tests/api-resources/ai-gateway/custom-providers.test.ts

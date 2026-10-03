@@ -20,7 +20,7 @@ const partialClient = createClient({
 
 const runTests = (client: PartialCloudflare<{ ai: BaseAI }>) => {
   test('run: only required params', async () => {
-    const responsePromise = client.ai.run('model_name', {
+    const responsePromise = client.ai.run('@cf/meta/llama-3.1-8b-instruct', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       text: 'x',
     });
@@ -34,7 +34,7 @@ const runTests = (client: PartialCloudflare<{ ai: BaseAI }>) => {
   });
 
   test('run: required and optional params', async () => {
-    const response = await client.ai.run('model_name', {
+    const response = await client.ai.run('@cf/meta/llama-3.1-8b-instruct', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       text: 'x',
     });

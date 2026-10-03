@@ -10,13 +10,13 @@ export class BaseLogs extends APIResource {
     Object.freeze(['pages', 'projects', 'deployments', 'history', 'logs'] as const);
 
   /**
-   * Fetch deployment logs for a project.
+   * Retrieve the build logs for a Cloudflare Pages deployment.
    *
    * @example
    * ```ts
    * const log =
    *   await client.pages.projects.deployments.history.logs.get(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       project_name: 'this-is-my-project-01',
@@ -59,7 +59,8 @@ export interface LogGetParams {
   account_id: string;
 
   /**
-   * Name of the project.
+   * Name of the Pages project. Must begin with a lowercase letter or digit and
+   * contain only lowercase letters, digits, and hyphens.
    */
   project_name: string;
 }

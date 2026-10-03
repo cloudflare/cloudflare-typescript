@@ -18,7 +18,7 @@ export class BaseAssociations extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const certificateAsssociation of client.mtlsCertificates.associations.get(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...

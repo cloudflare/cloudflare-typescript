@@ -71,7 +71,7 @@ export class BaseOriginCACertificates extends APIResource {
    * ```ts
    * const originCACertificate =
    *   await client.originCACertificates.delete(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '328578533902268680212849205732770752308931942346',
    *   );
    * ```
    */
@@ -92,7 +92,7 @@ export class BaseOriginCACertificates extends APIResource {
    * ```ts
    * const originCACertificate =
    *   await client.originCACertificates.get(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '328578533902268680212849205732770752308931942346',
    *   );
    * ```
    */
@@ -138,7 +138,7 @@ export interface OriginCACertificate {
   requested_validity: CertificatePacksAPI.RequestValidity;
 
   /**
-   * Identifier.
+   * The x509 serial number of the Origin CA certificate.
    */
   id?: string;
 
@@ -155,7 +155,7 @@ export interface OriginCACertificate {
 
 export interface OriginCACertificateDeleteResponse {
   /**
-   * Identifier.
+   * The x509 serial number of the Origin CA certificate.
    */
   id?: string;
 

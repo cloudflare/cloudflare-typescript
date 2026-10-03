@@ -68,7 +68,7 @@ export class BaseCustomTrustStore extends APIResource {
    * ```ts
    * const customTrustStore =
    *   await client.acm.customTrustStore.delete(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -95,7 +95,7 @@ export class BaseCustomTrustStore extends APIResource {
    * ```ts
    * const customTrustStore =
    *   await client.acm.customTrustStore.get(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -120,7 +120,7 @@ export type CustomTrustStoresV4PagePaginationArray = V4PagePaginationArray<Custo
 
 export interface CustomTrustStore {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id: string;
 
@@ -163,7 +163,7 @@ export interface CustomTrustStore {
 
 export interface CustomTrustStoreDeleteResponse {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 }

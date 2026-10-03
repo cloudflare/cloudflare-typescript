@@ -167,7 +167,7 @@ export namespace MetricListResponse {
 
 export interface MetricListParams {
   /**
-   * Account ID.
+   * Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 }

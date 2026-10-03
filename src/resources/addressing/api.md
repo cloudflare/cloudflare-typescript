@@ -82,16 +82,6 @@ Methods:
 
 ### Zones
 
-Types:
-
-- <code><a href="./src/resources/addressing/address-maps/zones.ts">ZoneUpdateResponse</a></code>
-- <code><a href="./src/resources/addressing/address-maps/zones.ts">ZoneDeleteResponse</a></code>
-
-Methods:
-
-- <code title="put /accounts/{account_id}/addressing/address_maps/{address_map_id}/zones/{zone_id}">client.addressing.addressMaps.zones.<a href="./src/resources/addressing/address-maps/zones.ts">update</a>(addressMapID, { ...params }) -> ZoneUpdateResponse</code>
-- <code title="delete /accounts/{account_id}/addressing/address_maps/{address_map_id}/zones/{zone_id}">client.addressing.addressMaps.zones.<a href="./src/resources/addressing/address-maps/zones.ts">delete</a>(addressMapID, { ...params }) -> ZoneDeleteResponse</code>
-
 ## LOADocuments
 
 Types:

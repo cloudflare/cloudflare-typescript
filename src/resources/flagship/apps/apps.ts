@@ -54,8 +54,8 @@ export class BaseApps extends APIResource {
   }
 
   /**
-   * Lists all apps in the account. Returns identity and audit fields only — flag
-   * definitions are not included.
+   * Lists all Flagship apps in the account. Returns identity and audit fields only;
+   * flag definitions are not included.
    */
   list(
     params: AppListParams,
@@ -167,45 +167,47 @@ export interface AppGetResponse {
 
 export interface AppCreateParams {
   /**
-   * Path param: Cloudflare account ID.
+   * Path param: Cloudflare account ID that owns the Flagship app.
    */
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Name of the Flagship app (1–64 letters, numbers, hyphens, or
+   * underscores).
    */
   name: string;
 }
 
 export interface AppUpdateParams {
   /**
-   * Path param: Cloudflare account ID.
+   * Path param: Cloudflare account ID that owns the Flagship app.
    */
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Name of the Flagship app (1–64 letters, numbers, hyphens, or
+   * underscores).
    */
   name?: string;
 }
 
 export interface AppListParams {
   /**
-   * Cloudflare account ID.
+   * Cloudflare account ID that owns the Flagship app.
    */
   account_id: string;
 }
 
 export interface AppDeleteParams {
   /**
-   * Cloudflare account ID.
+   * Cloudflare account ID that owns the Flagship app.
    */
   account_id: string;
 }
 
 export interface AppGetParams {
   /**
-   * Cloudflare account ID.
+   * Cloudflare account ID that owns the Flagship app.
    */
   account_id: string;
 }

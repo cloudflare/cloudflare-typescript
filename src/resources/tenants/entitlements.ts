@@ -12,7 +12,8 @@ export class BaseEntitlements extends APIResource {
   ] as const);
 
   /**
-   * List of innate entitlements available for the Tenant.
+   * Retrieves the innate and custom entitlement allocations available to this
+   * tenant.
    */
   get(tenantID: string, options?: RequestOptions): APIPromise<TenantEntitlements> {
     return (

@@ -28,7 +28,7 @@ const parentPartialClient = createClient({
 
 const runTests = (client: PartialCloudflare<{ mtlsCertificates: { associations: BaseAssociations } }>) => {
   test('get: only required params', async () => {
-    const responsePromise = client.mtlsCertificates.associations.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.mtlsCertificates.associations.get('2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -41,7 +41,7 @@ const runTests = (client: PartialCloudflare<{ mtlsCertificates: { associations: 
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.mtlsCertificates.associations.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.mtlsCertificates.associations.get('2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

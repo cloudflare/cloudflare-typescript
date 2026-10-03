@@ -3886,21 +3886,9 @@ export declare namespace ZoneTagUpdateParams {
     resource_id: string;
 
     /**
-     * Body param: Enum for base zone-level resource types (those with no extra
-     * required fields).
+     * Body param: Enum for access_application_policy resource type.
      */
-    resource_type:
-      | 'api_gateway_operation'
-      | 'custom_certificate'
-      | 'custom_hostname'
-      | 'dns_record'
-      | 'healthcheck'
-      | 'load_balancer'
-      | 'managed_client_certificate'
-      | 'worker_route'
-      | 'zone'
-      | 'zone_ruleset'
-      | 'access_application_policy';
+    resource_type: 'access_application_policy';
 
     /**
      * Body param: Contains key-value pairs of tags. Keys may contain at most 256

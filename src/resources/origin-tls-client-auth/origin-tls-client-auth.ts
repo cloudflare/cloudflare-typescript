@@ -152,7 +152,7 @@ export type OriginTLSClientAuthListResponsesSinglePage = SinglePage<OriginTLSCli
 
 export interface OriginTLSClientAuthCreateResponse extends ZoneCertificatesAPI.ZoneAuthenticatedOriginPull {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
@@ -174,7 +174,7 @@ export interface OriginTLSClientAuthCreateResponse extends ZoneCertificatesAPI.Z
 
 export interface OriginTLSClientAuthListResponse extends ZoneCertificatesAPI.ZoneAuthenticatedOriginPull {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
@@ -196,7 +196,7 @@ export interface OriginTLSClientAuthListResponse extends ZoneCertificatesAPI.Zon
 
 export interface OriginTLSClientAuthDeleteResponse extends ZoneCertificatesAPI.ZoneAuthenticatedOriginPull {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
@@ -218,7 +218,7 @@ export interface OriginTLSClientAuthDeleteResponse extends ZoneCertificatesAPI.Z
 
 export interface OriginTLSClientAuthGetResponse extends ZoneCertificatesAPI.ZoneAuthenticatedOriginPull {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 

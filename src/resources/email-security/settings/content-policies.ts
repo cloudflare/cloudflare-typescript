@@ -103,9 +103,10 @@ export class BaseContentPolicies extends APIResource {
   }
 
   /**
-   * Executes multiple operations atomically. All four operation arrays (deletes,
-   * patches, puts, posts) are required and executed in order. Send empty arrays for
-   * unused operations.
+   * Executes multiple content policy operations atomically: delete, partially
+   * update, replace, and create content policies in a single request. All four
+   * operation arrays (deletes, patches, puts, posts) are required and executed in
+   * order. Send empty arrays for unused operations.
    *
    * @example
    * ```ts
@@ -216,16 +217,31 @@ export interface ContentPolicyCreateResponse {
 
   created_at?: string;
 
+  /**
+   * Whether the policy is active.
+   */
   enabled?: boolean;
 
   modified_at?: string;
 
+  /**
+   * Human-readable name of the policy.
+   */
   name?: string;
 
+  /**
+   * Optional note describing the purpose of the policy.
+   */
   notes?: string | null;
 
+  /**
+   * Regular expression the policy matches against.
+   */
   pattern?: string;
 
+  /**
+   * Parts of the email the pattern is matched against.
+   */
   targets?: Array<'SUBJECT' | 'BODY'>;
 }
 
@@ -240,16 +256,31 @@ export interface ContentPolicyListResponse {
 
   created_at?: string;
 
+  /**
+   * Whether the policy is active.
+   */
   enabled?: boolean;
 
   modified_at?: string;
 
+  /**
+   * Human-readable name of the policy.
+   */
   name?: string;
 
+  /**
+   * Optional note describing the purpose of the policy.
+   */
   notes?: string | null;
 
+  /**
+   * Regular expression the policy matches against.
+   */
   pattern?: string;
 
+  /**
+   * Parts of the email the pattern is matched against.
+   */
   targets?: Array<'SUBJECT' | 'BODY'>;
 }
 
@@ -289,16 +320,31 @@ export namespace ContentPolicyBatchResponse {
 
     created_at?: string;
 
+    /**
+     * Whether the policy is active.
+     */
     enabled?: boolean;
 
     modified_at?: string;
 
+    /**
+     * Human-readable name of the policy.
+     */
     name?: string;
 
+    /**
+     * Optional note describing the purpose of the policy.
+     */
     notes?: string | null;
 
+    /**
+     * Regular expression the policy matches against.
+     */
     pattern?: string;
 
+    /**
+     * Parts of the email the pattern is matched against.
+     */
     targets?: Array<'SUBJECT' | 'BODY'>;
   }
 
@@ -313,16 +359,31 @@ export namespace ContentPolicyBatchResponse {
 
     created_at?: string;
 
+    /**
+     * Whether the policy is active.
+     */
     enabled?: boolean;
 
     modified_at?: string;
 
+    /**
+     * Human-readable name of the policy.
+     */
     name?: string;
 
+    /**
+     * Optional note describing the purpose of the policy.
+     */
     notes?: string | null;
 
+    /**
+     * Regular expression the policy matches against.
+     */
     pattern?: string;
 
+    /**
+     * Parts of the email the pattern is matched against.
+     */
     targets?: Array<'SUBJECT' | 'BODY'>;
   }
 
@@ -337,16 +398,31 @@ export namespace ContentPolicyBatchResponse {
 
     created_at?: string;
 
+    /**
+     * Whether the policy is active.
+     */
     enabled?: boolean;
 
     modified_at?: string;
 
+    /**
+     * Human-readable name of the policy.
+     */
     name?: string;
 
+    /**
+     * Optional note describing the purpose of the policy.
+     */
     notes?: string | null;
 
+    /**
+     * Regular expression the policy matches against.
+     */
     pattern?: string;
 
+    /**
+     * Parts of the email the pattern is matched against.
+     */
     targets?: Array<'SUBJECT' | 'BODY'>;
   }
 }
@@ -362,16 +438,31 @@ export interface ContentPolicyEditResponse {
 
   created_at?: string;
 
+  /**
+   * Whether the policy is active.
+   */
   enabled?: boolean;
 
   modified_at?: string;
 
+  /**
+   * Human-readable name of the policy.
+   */
   name?: string;
 
+  /**
+   * Optional note describing the purpose of the policy.
+   */
   notes?: string | null;
 
+  /**
+   * Regular expression the policy matches against.
+   */
   pattern?: string;
 
+  /**
+   * Parts of the email the pattern is matched against.
+   */
   targets?: Array<'SUBJECT' | 'BODY'>;
 }
 
@@ -386,16 +477,31 @@ export interface ContentPolicyGetResponse {
 
   created_at?: string;
 
+  /**
+   * Whether the policy is active.
+   */
   enabled?: boolean;
 
   modified_at?: string;
 
+  /**
+   * Human-readable name of the policy.
+   */
   name?: string;
 
+  /**
+   * Optional note describing the purpose of the policy.
+   */
   notes?: string | null;
 
+  /**
+   * Regular expression the policy matches against.
+   */
   pattern?: string;
 
+  /**
+   * Parts of the email the pattern is matched against.
+   */
   targets?: Array<'SUBJECT' | 'BODY'>;
 }
 
@@ -406,27 +512,27 @@ export interface ContentPolicyCreateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Whether the policy is active.
    */
   enabled: boolean;
 
   /**
-   * Body param
+   * Body param: Human-readable name of the policy.
    */
   name: string;
 
   /**
-   * Body param
+   * Body param: Regular expression the policy matches against.
    */
   pattern: string;
 
   /**
-   * Body param
+   * Body param: Parts of the email the pattern is matched against.
    */
   targets: Array<'SUBJECT' | 'BODY'>;
 
   /**
-   * Body param
+   * Body param: Optional note describing the purpose of the policy.
    */
   notes?: string | null;
 }
@@ -477,22 +583,24 @@ export interface ContentPolicyBatchParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: IDs of the content policies to delete.
    */
   deletes: Array<ContentPolicyBatchParams.Delete>;
 
   /**
-   * Body param
+   * Body param: Partial updates to apply — each entry carries the policy's ID and
+   * only the fields to change.
    */
   patches: Array<ContentPolicyBatchParams.Patch>;
 
   /**
-   * Body param
+   * Body param: Content policies to create.
    */
   posts: Array<ContentPolicyBatchParams.Post>;
 
   /**
-   * Body param
+   * Body param: Full replacements to apply — each entry carries the policy's ID and
+   * every field of its new value.
    */
   puts: Array<ContentPolicyBatchParams.Put>;
 }
@@ -509,14 +617,29 @@ export namespace ContentPolicyBatchParams {
    * A content policy pattern that matches against the subject or body of an email.
    */
   export interface Patch {
+    /**
+     * Whether the policy is active.
+     */
     enabled?: boolean;
 
+    /**
+     * Human-readable name of the policy.
+     */
     name?: string;
 
+    /**
+     * Optional note describing the purpose of the policy.
+     */
     notes?: string | null;
 
+    /**
+     * Regular expression the policy matches against.
+     */
     pattern?: string;
 
+    /**
+     * Parts of the email the pattern is matched against.
+     */
     targets?: Array<'SUBJECT' | 'BODY'>;
   }
 
@@ -524,14 +647,29 @@ export namespace ContentPolicyBatchParams {
    * Create a content policy.
    */
   export interface Post {
+    /**
+     * Whether the policy is active.
+     */
     enabled: boolean;
 
+    /**
+     * Human-readable name of the policy.
+     */
     name: string;
 
+    /**
+     * Regular expression the policy matches against.
+     */
     pattern: string;
 
+    /**
+     * Parts of the email the pattern is matched against.
+     */
     targets: Array<'SUBJECT' | 'BODY'>;
 
+    /**
+     * Optional note describing the purpose of the policy.
+     */
     notes?: string | null;
   }
 
@@ -539,14 +677,29 @@ export namespace ContentPolicyBatchParams {
    * A content policy pattern that matches against the subject or body of an email.
    */
   export interface Put {
+    /**
+     * Whether the policy is active.
+     */
     enabled: boolean;
 
+    /**
+     * Human-readable name of the policy.
+     */
     name: string;
 
+    /**
+     * Regular expression the policy matches against.
+     */
     pattern: string;
 
+    /**
+     * Parts of the email the pattern is matched against.
+     */
     targets: Array<'SUBJECT' | 'BODY'>;
 
+    /**
+     * Optional note describing the purpose of the policy.
+     */
     notes?: string | null;
   }
 }
@@ -558,27 +711,27 @@ export interface ContentPolicyEditParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Whether the policy is active.
    */
   enabled?: boolean;
 
   /**
-   * Body param
+   * Body param: Human-readable name of the policy.
    */
   name?: string;
 
   /**
-   * Body param
+   * Body param: Optional note describing the purpose of the policy.
    */
   notes?: string | null;
 
   /**
-   * Body param
+   * Body param: Regular expression the policy matches against.
    */
   pattern?: string;
 
   /**
-   * Body param
+   * Body param: Parts of the email the pattern is matched against.
    */
   targets?: Array<'SUBJECT' | 'BODY'>;
 }

@@ -70,7 +70,9 @@ const runTests = (client: PartialCloudflare<{ originCACertificates: BaseOriginCA
 
   // TODO: investigate auth errors on test suite
   test.skip('delete', async () => {
-    const responsePromise = client.originCACertificates.delete('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = client.originCACertificates.delete(
+      '328578533902268680212849205732770752308931942346',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -82,7 +84,9 @@ const runTests = (client: PartialCloudflare<{ originCACertificates: BaseOriginCA
 
   // TODO: investigate auth errors on test suite
   test.skip('get', async () => {
-    const responsePromise = client.originCACertificates.get('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = client.originCACertificates.get(
+      '328578533902268680212849205732770752308931942346',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

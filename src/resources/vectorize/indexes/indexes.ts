@@ -312,7 +312,7 @@ export class Indexes extends BaseIndexes {
 export type CreateIndicesSinglePage = SinglePage<CreateIndex>;
 
 export interface CreateIndex {
-  config?: IndexDimensionConfiguration;
+  config?: CreateIndex.Config;
 
   /**
    * Specifies the timestamp the resource was created as an ISO8601 string.
@@ -330,6 +330,30 @@ export interface CreateIndex {
   modified_on?: string;
 
   name?: string;
+}
+
+export namespace CreateIndex {
+  export interface Config {
+    /**
+     * Specifies the number of dimensions for the index
+     */
+    dimensions: number;
+
+    /**
+     * Specifies the type of metric to use calculating distance.
+     */
+    metric: 'cosine' | 'euclidean' | 'dot-product';
+
+    /**
+     * Specifies the preset to use for the index.
+     */
+    preset?:
+      | '@cf/baai/bge-small-en-v1.5'
+      | '@cf/baai/bge-base-en-v1.5'
+      | '@cf/baai/bge-large-en-v1.5'
+      | 'openai/text-embedding-ada-002'
+      | 'cohere/embed-multilingual-v2.0';
+  }
 }
 
 export interface IndexDeleteVectorsByID {

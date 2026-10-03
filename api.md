@@ -145,6 +145,8 @@ Methods:
 
 # [DurableObjects](src/resources/durable-objects/api.md)
 
+# [Containers](src/resources/containers/api.md)
+
 # [Queues](src/resources/queues/api.md)
 
 # [APIGateway](src/resources/api-gateway/api.md)
@@ -206,6 +208,8 @@ Methods:
 # [R2](src/resources/r2/api.md)
 
 # [R2DataCatalog](src/resources/r2-data-catalog/api.md)
+
+# [BasinCatalog](src/resources/basin-catalog/api.md)
 
 # [WorkersForPlatforms](src/resources/workers-for-platforms/api.md)
 

@@ -125,13 +125,15 @@ export namespace UsageGetResponse {
 
     /**
      * Public identifier of the Cloudflare account (account tag). Omitted when account
-     * is not part of the requested grouping.
+     * is not part of the requested grouping, and always omitted for usage measured at
+     * contract level, even when grouping by account: that usage is returned as its own
+     * record with no account.
      */
     BillingAccountId?: string;
 
     /**
      * Display name of the Cloudflare account. Omitted when account is not part of the
-     * requested grouping.
+     * requested grouping, and for usage measured at contract level.
      */
     BillingAccountName?: string;
 
@@ -255,12 +257,16 @@ export namespace UsageGetResponse {
     x_ProductFamilyName?: string;
 
     /**
-     * The identifier for the Cloudflare zone (zone tag). Cloudflare extension.
+     * The identifier for the Cloudflare zone (zone tag). Omitted when zone is not part
+     * of the requested grouping, and always omitted for usage measured at contract
+     * level, even when grouping by zone. Cloudflare extension.
      */
     x_ZoneId?: string | null;
 
     /**
-     * The display name of the Cloudflare zone. Cloudflare extension.
+     * The display name of the Cloudflare zone. Omitted when zone is not part of the
+     * requested grouping, and for usage measured at contract level. Cloudflare
+     * extension.
      */
     x_ZoneName?: string | null;
   }

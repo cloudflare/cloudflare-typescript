@@ -45,6 +45,8 @@ const runTests = (client: PartialCloudflare<{ emailSecurity: { phishguard: { rep
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       end: '2019-12-27T18:11:19.117Z',
       from_date: '2019-12-27',
+      page: 1,
+      per_page: 20,
       start: '2019-12-27T18:11:19.117Z',
       to_date: '2019-12-27',
     });

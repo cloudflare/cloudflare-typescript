@@ -21,7 +21,7 @@ export class BaseMessages extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const messageListResponse of client.emailSecurity.investigate.bulk.messages.list(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
@@ -58,7 +58,10 @@ export interface MessageListResponse {
 
   retry_count: number;
 
-  status: 'PENDING' | 'DISCOVERING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'SKIPPED';
+  /**
+   * Status of a message within a bulk action job.
+   */
+  status: 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'SKIPPED';
 
   alert_id?: string | null;
 
@@ -80,6 +83,9 @@ export namespace MessageListResponse {
   export interface Move {
     client_recipient: string;
 
+    /**
+     * The mailbox folder to move messages to.
+     */
     destination:
       | 'Inbox'
       | 'JunkEmail'
@@ -172,6 +178,9 @@ export namespace MessageListResponse {
 
     envelope_to?: Array<string> | null;
 
+    /**
+     * The verdict Email Security assigns to a message.
+     */
     final_disposition?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -335,6 +344,9 @@ export namespace MessageListResponse {
 
       detail?: string | null;
 
+      /**
+       * The verdict Email Security assigns to a message.
+       */
       detection?:
         | 'MALICIOUS'
         | 'MALICIOUS-BEC'
@@ -380,9 +392,9 @@ export interface MessageListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param
+   * Query param: Filter the job's messages by their processing status.
    */
-  status?: 'PENDING' | 'DISCOVERING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'SKIPPED';
+  status?: 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'SKIPPED';
 }
 
 export declare namespace Messages {

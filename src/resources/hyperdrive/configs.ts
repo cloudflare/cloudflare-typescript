@@ -394,14 +394,14 @@ export namespace ConfigCreateResponse {
     database_name: string;
 
     /**
-     * The database integration used by this operation.
-     */
-    integration: 'planetscale';
-
-    /**
      * The name of the PlanetScale organization.
      */
     organization_name: string;
+
+    /**
+     * The database integration provider used by this operation.
+     */
+    provider: 'planetscale';
 
     /**
      * Specifies the URL scheme used to connect to your origin database.
@@ -618,14 +618,14 @@ export namespace ConfigUpdateResponse {
     database_name: string;
 
     /**
-     * The database integration used by this operation.
-     */
-    integration: 'planetscale';
-
-    /**
      * The name of the PlanetScale organization.
      */
     organization_name: string;
+
+    /**
+     * The database integration provider used by this operation.
+     */
+    provider: 'planetscale';
 
     /**
      * Specifies the URL scheme used to connect to your origin database.
@@ -842,14 +842,14 @@ export namespace ConfigListResponse {
     database_name: string;
 
     /**
-     * The database integration used by this operation.
-     */
-    integration: 'planetscale';
-
-    /**
      * The name of the PlanetScale organization.
      */
     organization_name: string;
+
+    /**
+     * The database integration provider used by this operation.
+     */
+    provider: 'planetscale';
 
     /**
      * Specifies the URL scheme used to connect to your origin database.
@@ -1068,14 +1068,14 @@ export namespace ConfigEditResponse {
     database_name: string;
 
     /**
-     * The database integration used by this operation.
-     */
-    integration: 'planetscale';
-
-    /**
      * The name of the PlanetScale organization.
      */
     organization_name: string;
+
+    /**
+     * The database integration provider used by this operation.
+     */
+    provider: 'planetscale';
 
     /**
      * Specifies the URL scheme used to connect to your origin database.
@@ -1292,14 +1292,14 @@ export namespace ConfigGetResponse {
     database_name: string;
 
     /**
-     * The database integration used by this operation.
-     */
-    integration: 'planetscale';
-
-    /**
      * The name of the PlanetScale organization.
      */
     organization_name: string;
+
+    /**
+     * The database integration provider used by this operation.
+     */
+    provider: 'planetscale';
 
     /**
      * Specifies the URL scheme used to connect to your origin database.
@@ -1516,14 +1516,14 @@ export namespace ConfigRestartResponse {
     database_name: string;
 
     /**
-     * The database integration used by this operation.
-     */
-    integration: 'planetscale';
-
-    /**
      * The name of the PlanetScale organization.
      */
     organization_name: string;
+
+    /**
+     * The database integration provider used by this operation.
+     */
+    provider: 'planetscale';
 
     /**
      * Specifies the URL scheme used to connect to your origin database.
@@ -1837,14 +1837,14 @@ export declare namespace ConfigCreateParams {
       database_name: string;
 
       /**
-       * The database integration used by this operation.
-       */
-      integration: 'planetscale';
-
-      /**
        * The name of the PlanetScale organization.
        */
       organization_name: string;
+
+      /**
+       * The database integration provider used by this operation.
+       */
+      provider: 'planetscale';
 
       /**
        * Specifies the URL scheme used to connect to your origin database.

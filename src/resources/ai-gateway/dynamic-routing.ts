@@ -12,7 +12,8 @@ export class BaseDynamicRouting extends APIResource {
   ] as const);
 
   /**
-   * Create a new AI Gateway Dynamic Route.
+   * Creates a dynamic route on an AI Gateway from the specified routing elements.
+   * Clients call the route by using `dynamic/{name}` as the model name.
    *
    * @example
    * ```ts
@@ -45,7 +46,8 @@ export class BaseDynamicRouting extends APIResource {
   }
 
   /**
-   * Update an AI Gateway Dynamic Route.
+   * Updates the name of a dynamic route. To change routing behaviour, create and
+   * deploy a new version.
    *
    * @example
    * ```ts
@@ -70,7 +72,7 @@ export class BaseDynamicRouting extends APIResource {
   }
 
   /**
-   * List all AI Gateway Dynamic Routes.
+   * Lists the dynamic routes configured on an AI Gateway.
    *
    * @example
    * ```ts
@@ -93,7 +95,7 @@ export class BaseDynamicRouting extends APIResource {
   }
 
   /**
-   * Delete an AI Gateway Dynamic Route.
+   * Deletes a dynamic route from an AI Gateway.
    *
    * @example
    * ```ts
@@ -119,7 +121,8 @@ export class BaseDynamicRouting extends APIResource {
   }
 
   /**
-   * Create a new AI Gateway Dynamic Route Deployment.
+   * Deploys the specified version of a dynamic route so that it serves traffic.
+   * Deploy an earlier version to roll back.
    *
    * @example
    * ```ts
@@ -149,7 +152,8 @@ export class BaseDynamicRouting extends APIResource {
   }
 
   /**
-   * Create a new AI Gateway Dynamic Route Version.
+   * Creates a new version of a dynamic route from the specified routing elements.
+   * The version does not serve traffic until you deploy it.
    *
    * @example
    * ```ts
@@ -185,7 +189,8 @@ export class BaseDynamicRouting extends APIResource {
   }
 
   /**
-   * Get an AI Gateway Dynamic Route.
+   * Retrieves a dynamic route with its routing elements, active version, and current
+   * deployment.
    *
    * @example
    * ```ts
@@ -211,7 +216,7 @@ export class BaseDynamicRouting extends APIResource {
   }
 
   /**
-   * Get an AI Gateway Dynamic Route Version.
+   * Retrieves a saved version of a dynamic route, including its routing elements.
    *
    * @example
    * ```ts
@@ -241,7 +246,7 @@ export class BaseDynamicRouting extends APIResource {
   }
 
   /**
-   * List all AI Gateway Dynamic Route Deployments.
+   * Lists the deployment history of a dynamic route.
    *
    * @example
    * ```ts
@@ -268,7 +273,7 @@ export class BaseDynamicRouting extends APIResource {
   }
 
   /**
-   * List all AI Gateway Dynamic Route Versions.
+   * Lists the saved versions of a dynamic route.
    *
    * @example
    * ```ts

@@ -13,7 +13,9 @@ export class BaseProviderConfigs extends APIResource {
   ] as const);
 
   /**
-   * Creates a new AI Gateway.
+   * Stores an upstream AI provider API key for an AI Gateway in the Secrets Store
+   * configured on the gateway, with an optional rate limit. Pass `secret` to store a
+   * new key, or omit it to use an existing Secrets Store secret.
    *
    * @example
    * ```ts
@@ -44,7 +46,8 @@ export class BaseProviderConfigs extends APIResource {
   }
 
   /**
-   * Lists all AI Gateway evaluator types configured for the account.
+   * Lists the provider keys stored for an AI Gateway. Responses show a masked
+   * preview of each key, never the key itself.
    *
    * @example
    * ```ts
@@ -83,7 +86,7 @@ export interface ProviderConfigCreateResponse {
   default_config: boolean;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -108,7 +111,7 @@ export interface ProviderConfigListResponse {
   default_config: boolean;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -157,7 +160,8 @@ export interface ProviderConfigCreateParams {
   rate_limit_period?: number;
 
   /**
-   * Body param
+   * Body param: Provider API key to store in the Secrets Store configured on the
+   * gateway.
    */
   secret?: string;
 

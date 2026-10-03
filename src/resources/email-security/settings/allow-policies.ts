@@ -102,9 +102,10 @@ export class BaseAllowPolicies extends APIResource {
   }
 
   /**
-   * Executes multiple operations atomically. All four operation arrays (deletes,
-   * patches, puts, posts) are required and executed in order. Send empty arrays for
-   * unused operations.
+   * Executes multiple allow policy operations atomically: delete, partially update,
+   * replace, and create allow policies in a single request. All four operation
+   * arrays (deletes, patches, puts, posts) are required and executed in order. Send
+   * empty arrays for unused operations.
    *
    * @example
    * ```ts
@@ -935,22 +936,12 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
   order?: 'pattern' | 'created_at';
 
   /**
-   * Query param
+   * Query param: Filter by exact pattern value.
    */
   pattern?: string;
 
   /**
-   * Query param: Type of pattern matching.
-   *
-   * - EMAIL: matches a full email address (e.g. `user@example.com`)
-   * - DOMAIN: matches a domain name (e.g. `example.com`)
-   * - IP: matches a plain IPv4 or IPv6 address (e.g. `1.2.3.4` or
-   *   `2606:4700:4700::1111`) or CIDR block (e.g. `1.2.3.0/24` or
-   *   `2606:4700:4700::/48`). The API rejects private or unique-local, loopback,
-   *   link-local, unspecified, and IPv4 broadcast addresses, including their
-   *   IPv4-mapped IPv6 equivalents.
-   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
-   *   but it may appear on existing entries.
+   * Query param: Filter by pattern type.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -980,22 +971,24 @@ export interface AllowPolicyBatchParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: IDs of the allow policies to delete.
    */
   deletes: Array<AllowPolicyBatchParams.Delete>;
 
   /**
-   * Body param
+   * Body param: Partial updates to apply — each entry carries the policy's ID and
+   * only the fields to change.
    */
   patches: Array<AllowPolicyBatchParams.Patch>;
 
   /**
-   * Body param
+   * Body param: Allow policies to create.
    */
   posts: Array<AllowPolicyBatchParams.Post>;
 
   /**
-   * Body param
+   * Body param: Full replacements to apply — each entry carries the policy's ID and
+   * every field of its new value.
    */
   puts: Array<AllowPolicyBatchParams.Put>;
 }

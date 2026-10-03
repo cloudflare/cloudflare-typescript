@@ -13,9 +13,9 @@ export class BaseMetadata extends APIResource {
   ] as const);
 
   /**
-   * Returns the metadata associated with the given key in the given namespace. Use
-   * URL-encoding to use special characters (for example, `:`, `!`, `%`) in the key
-   * name.
+   * Returns the JSON metadata associated with the specified key in the Workers KV
+   * namespace, without retrieving its value. Use URL-encoding for special characters
+   * (for example, `:`, `!`, `%`) in the key name when constructing the request URL.
    *
    * @example
    * ```ts
@@ -47,12 +47,12 @@ export type MetadataGetResponse = unknown;
 
 export interface MetadataGetParams {
   /**
-   * Identifier.
+   * ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
   /**
-   * Namespace identifier tag.
+   * ID of the Workers KV namespace.
    */
   namespace_id: string;
 }

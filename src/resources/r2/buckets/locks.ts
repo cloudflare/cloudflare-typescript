@@ -14,7 +14,9 @@ export class BaseLocks extends APIResource {
   ] as const);
 
   /**
-   * Set lock rules for a bucket.
+   * Replaces the lock rules for an R2 bucket. Enabled rules prevent matching objects
+   * from being overwritten or deleted for a duration, until a date, or indefinitely.
+   * Rules apply to existing and newly uploaded objects.
    *
    * @example
    * ```ts
@@ -139,7 +141,7 @@ export namespace LockGetResponse {
 
 export interface LockUpdateParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -212,7 +214,7 @@ export namespace LockUpdateParams {
 
 export interface LockGetParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 

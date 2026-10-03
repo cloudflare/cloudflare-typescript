@@ -1,34 +1,5 @@
 # CloudforceOne
 
-## Scans
-
-### Results
-
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/scans/results.ts">ScanResult</a></code>
-- <code><a href="./src/resources/cloudforce-one/scans/results.ts">ResultGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/cloudforce-one/scans/results/{config_id}">client.cloudforceOne.scans.results.<a href="./src/resources/cloudforce-one/scans/results.ts">get</a>(configID, { ...params }) -> ResultGetResponse</code>
-
-### Config
-
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigCreateResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigListResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigDeleteResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigEditResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">create</a>({ ...params }) -> ConfigCreateResponse</code>
-- <code title="get /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">list</a>({ ...params }) -> ConfigListResponsesSinglePage</code>
-- <code title="delete /accounts/{account_id}/cloudforce-one/scans/config/{config_id}">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">delete</a>(configID, { ...params }) -> ConfigDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/cloudforce-one/scans/config/{config_id}">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">edit</a>(configID, { ...params }) -> ConfigEditResponse</code>
-
 ## BinaryStorage
 
 Types:
@@ -109,6 +80,35 @@ Methods:
 - <code title="put /accounts/{account_id}/cloudforce-one/requests/{request_id}/asset/{asset_id}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">update</a>(assetID, { ...params }) -> AssetUpdateResponse</code>
 - <code title="delete /accounts/{account_id}/cloudforce-one/requests/{request_id}/asset/{asset_id}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">delete</a>(assetID, { ...params }) -> AssetDeleteResponse</code>
 - <code title="get /accounts/{account_id}/cloudforce-one/requests/{request_id}/asset/{asset_id}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">get</a>(assetID, { ...params }) -> AssetGetResponsesSinglePage</code>
+
+## Scans
+
+### Results
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/scans/results.ts">ScanResult</a></code>
+- <code><a href="./src/resources/cloudforce-one/scans/results.ts">ResultGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/scans/results/{config_id}">client.cloudforceOne.scans.results.<a href="./src/resources/cloudforce-one/scans/results.ts">get</a>(configID, { ...params }) -> ResultGetResponse</code>
+
+### Config
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigListResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigEditResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">create</a>({ ...params }) -> ConfigCreateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">list</a>({ ...params }) -> ConfigListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/scans/config/{config_id}">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">delete</a>(configID, { ...params }) -> ConfigDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/cloudforce-one/scans/config/{config_id}">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">edit</a>(configID, { ...params }) -> ConfigEditResponse</code>
 
 ## ThreatEvents
 
@@ -438,3 +438,155 @@ Methods:
 - <code title="get /accounts/{account_id}/cloudforce-one/events/targetIndustries/catalog">client.cloudforceOne.threatEvents.targetIndustries.catalog.<a href="./src/resources/cloudforce-one/threat-events/target-industries/catalog.ts">list</a>({ ...params }) -> CatalogListResponse</code>
 
 ### Insights
+
+## ThreatSignals
+
+### Search
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-signals/search.ts">SearchSearchResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/search">client.cloudforceOne.threatSignals.search.<a href="./src/resources/cloudforce-one/threat-signals/search.ts">search</a>({ ...params }) -> SearchSearchResponse</code>
+
+### Categories
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-signals/categories.ts">CategoryListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/categories">client.cloudforceOne.threatSignals.categories.<a href="./src/resources/cloudforce-one/threat-signals/categories.ts">list</a>({ ...params }) -> CategoryListResponse</code>
+
+### Feeds
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-signals/feeds/feeds.ts">FeedCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/feeds/feeds.ts">FeedListResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/feeds/feeds.ts">FeedDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/feeds/feeds.ts">FeedEditResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/feeds/feeds.ts">FeedPollResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/v2/threat-signals/feeds">client.cloudforceOne.threatSignals.feeds.<a href="./src/resources/cloudforce-one/threat-signals/feeds/feeds.ts">create</a>({ ...params }) -> FeedCreateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/feeds">client.cloudforceOne.threatSignals.feeds.<a href="./src/resources/cloudforce-one/threat-signals/feeds/feeds.ts">list</a>({ ...params }) -> FeedListResponsesV4PagePagination</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/v2/threat-signals/feeds/{feed_id}">client.cloudforceOne.threatSignals.feeds.<a href="./src/resources/cloudforce-one/threat-signals/feeds/feeds.ts">delete</a>(feedID, { ...params }) -> FeedDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/cloudforce-one/v2/threat-signals/feeds/{feed_id}">client.cloudforceOne.threatSignals.feeds.<a href="./src/resources/cloudforce-one/threat-signals/feeds/feeds.ts">edit</a>(feedID, { ...params }) -> FeedEditResponse</code>
+- <code title="post /accounts/{account_id}/cloudforce-one/v2/threat-signals/feeds/poll">client.cloudforceOne.threatSignals.feeds.<a href="./src/resources/cloudforce-one/threat-signals/feeds/feeds.ts">poll</a>({ ...params }) -> FeedPollResponse</code>
+
+#### Raw
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-signals/feeds/raw.ts">RawGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/feeds/{feed_id}/raw">client.cloudforceOne.threatSignals.feeds.raw.<a href="./src/resources/cloudforce-one/threat-signals/feeds/raw.ts">get</a>(feedID, { ...params }) -> string</code>
+
+#### Skills
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-signals/feeds/skills.ts">SkillUpdateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/feeds/skills.ts">SkillGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/cloudforce-one/v2/threat-signals/feeds/{feed_id}/skills">client.cloudforceOne.threatSignals.feeds.skills.<a href="./src/resources/cloudforce-one/threat-signals/feeds/skills.ts">update</a>(feedID, { ...params }) -> SkillUpdateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/feeds/{feed_id}/skills">client.cloudforceOne.threatSignals.feeds.skills.<a href="./src/resources/cloudforce-one/threat-signals/feeds/skills.ts">get</a>(feedID, { ...params }) -> SkillGetResponse</code>
+
+### Articles
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-signals/articles/articles.ts">ArticleListResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/articles/articles.ts">ArticleBulkEditResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/articles/articles.ts">ArticleEditResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/articles/articles.ts">ArticleGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/articles">client.cloudforceOne.threatSignals.articles.<a href="./src/resources/cloudforce-one/threat-signals/articles/articles.ts">list</a>({ ...params }) -> ArticleListResponse</code>
+- <code title="patch /accounts/{account_id}/cloudforce-one/v2/threat-signals/articles">client.cloudforceOne.threatSignals.articles.<a href="./src/resources/cloudforce-one/threat-signals/articles/articles.ts">bulkEdit</a>({ ...params }) -> ArticleBulkEditResponse</code>
+- <code title="patch /accounts/{account_id}/cloudforce-one/v2/threat-signals/articles/{article_id}">client.cloudforceOne.threatSignals.articles.<a href="./src/resources/cloudforce-one/threat-signals/articles/articles.ts">edit</a>(articleID, { ...params }) -> ArticleEditResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/articles/{article_id}">client.cloudforceOne.threatSignals.articles.<a href="./src/resources/cloudforce-one/threat-signals/articles/articles.ts">get</a>(articleID, { ...params }) -> ArticleGetResponse</code>
+
+#### Content
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-signals/articles/content.ts">ContentGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/articles/{article_id}/content">client.cloudforceOne.threatSignals.articles.content.<a href="./src/resources/cloudforce-one/threat-signals/articles/content.ts">get</a>(articleID, { ...params }) -> string</code>
+
+#### Tags
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-signals/articles/tags.ts">TagCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/articles/tags.ts">TagDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/articles/tags.ts">TagGenerateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/v2/threat-signals/articles/{article_id}/tags">client.cloudforceOne.threatSignals.articles.tags.<a href="./src/resources/cloudforce-one/threat-signals/articles/tags.ts">create</a>(articleID, { ...params }) -> TagCreateResponse</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/v2/threat-signals/articles/{article_id}/tags/{tag_id}">client.cloudforceOne.threatSignals.articles.tags.<a href="./src/resources/cloudforce-one/threat-signals/articles/tags.ts">delete</a>(tagID, { ...params }) -> TagDeleteResponse</code>
+- <code title="post /accounts/{account_id}/cloudforce-one/v2/threat-signals/articles/{article_id}/tag">client.cloudforceOne.threatSignals.articles.tags.<a href="./src/resources/cloudforce-one/threat-signals/articles/tags.ts">generate</a>(articleID, { ...params }) -> TagGenerateResponse</code>
+
+#### SkillOutputs
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-signals/articles/skill-outputs.ts">SkillOutputGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/articles/{article_id}/skills/{skill_id}/output">client.cloudforceOne.threatSignals.articles.skillOutputs.<a href="./src/resources/cloudforce-one/threat-signals/articles/skill-outputs.ts">get</a>(skillID, { ...params }) -> SkillOutputGetResponse</code>
+
+### Indicators
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-signals/indicators.ts">IndicatorListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/indicators">client.cloudforceOne.threatSignals.indicators.<a href="./src/resources/cloudforce-one/threat-signals/indicators.ts">list</a>({ ...params }) -> IndicatorListResponse</code>
+
+### Skills
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-signals/skills/skills.ts">SkillCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/skills/skills.ts">SkillListResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/skills/skills.ts">SkillDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/skills/skills.ts">SkillEditResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/skills/skills.ts">SkillGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/v2/threat-signals/skills">client.cloudforceOne.threatSignals.skills.<a href="./src/resources/cloudforce-one/threat-signals/skills/skills.ts">create</a>({ ...params }) -> SkillCreateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/skills">client.cloudforceOne.threatSignals.skills.<a href="./src/resources/cloudforce-one/threat-signals/skills/skills.ts">list</a>({ ...params }) -> SkillListResponsesV4PagePagination</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/v2/threat-signals/skills/{skill_id}">client.cloudforceOne.threatSignals.skills.<a href="./src/resources/cloudforce-one/threat-signals/skills/skills.ts">delete</a>(skillID, { ...params }) -> SkillDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/cloudforce-one/v2/threat-signals/skills/{skill_id}">client.cloudforceOne.threatSignals.skills.<a href="./src/resources/cloudforce-one/threat-signals/skills/skills.ts">edit</a>(skillID, { ...params }) -> SkillEditResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/skills/{skill_id}">client.cloudforceOne.threatSignals.skills.<a href="./src/resources/cloudforce-one/threat-signals/skills/skills.ts">get</a>(skillID, { ...params }) -> SkillGetResponse</code>
+
+#### TagCategories
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-signals/skills/tag-categories.ts">TagCategoryUpdateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-signals/skills/tag-categories.ts">TagCategoryGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/cloudforce-one/v2/threat-signals/skills/{skill_id}/tag-categories">client.cloudforceOne.threatSignals.skills.tagCategories.<a href="./src/resources/cloudforce-one/threat-signals/skills/tag-categories.ts">update</a>(skillID, { ...params }) -> TagCategoryUpdateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/threat-signals/skills/{skill_id}/tag-categories">client.cloudforceOne.threatSignals.skills.tagCategories.<a href="./src/resources/cloudforce-one/threat-signals/skills/tag-categories.ts">get</a>(skillID, { ...params }) -> TagCategoryGetResponse</code>

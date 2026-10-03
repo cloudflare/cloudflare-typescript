@@ -2411,7 +2411,7 @@ export namespace ScriptSearchResponse {
     modified_on: string;
 
     /**
-     * Name of the script, used in URLs and route configuration.
+     * Name of the script.
      */
     script_name: string;
 
@@ -2489,6 +2489,7 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindAISearchNamespace
       | Metadata.WorkersBindingKindMessaging
       | Metadata.WorkersBindingKindAnalyticsEngine
+      | Metadata.WorkersBindingKindArtifacts
       | Metadata.WorkersBindingKindAssets
       | Metadata.WorkersBindingKindBrowser
       | Metadata.WorkersBindingKindD1
@@ -2810,6 +2811,26 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'analytics_engine';
+    }
+
+    export interface WorkersBindingKindArtifacts {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The Artifacts namespace exposed to the Worker in the Worker's account. Must be
+       * 2-63 characters, start with an ASCII alphanumeric character, contain only ASCII
+       * alphanumeric characters, dots, underscores, and hyphens, and must not end with a
+       * hyphen. The namespace does not need to be created before binding it.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'artifacts';
     }
 
     export interface WorkersBindingKindAssets {

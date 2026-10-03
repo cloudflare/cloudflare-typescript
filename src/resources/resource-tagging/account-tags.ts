@@ -13,7 +13,8 @@ export class BaseAccountTags extends APIResource {
   ] as const);
 
   /**
-   * Creates or updates tags for a specific account-level resource.
+   * Creates or updates tags for a specific account-level resource. Replaces all
+   * existing tags for the resource.
    *
    * @example
    * ```ts
@@ -21,7 +22,7 @@ export class BaseAccountTags extends APIResource {
    *   await client.resourceTagging.accountTags.update({
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     resource_type: 'worker',
+   *     resource_type: 'worker_version',
    *     worker_id: '3f72a691-44b3-4c11-8642-c18a88ddaa5e',
    *   });
    * ```
@@ -3837,40 +3838,9 @@ export declare namespace AccountTagUpdateParams {
     resource_id: string;
 
     /**
-     * Body param: Enum for base account-level resource types (those with no extra
-     * required fields).
+     * Body param: Enum for worker_version resource type.
      */
-    resource_type:
-      | 'access_application'
-      | 'access_group'
-      | 'account'
-      | 'account_ruleset'
-      | 'ai_gateway'
-      | 'alerting_policy'
-      | 'alerting_webhook'
-      | 'cloudflared_tunnel'
-      | 'cws_deployment'
-      | 'cws_policy'
-      | 'cws_policy_set'
-      | 'cws_workload'
-      | 'd1_database'
-      | 'durable_object_namespace'
-      | 'gateway_list'
-      | 'gateway_rule'
-      | 'image'
-      | 'infrastructure_target'
-      | 'kv_namespace'
-      | 'load_balancer_monitor'
-      | 'load_balancer_pool'
-      | 'pages_project'
-      | 'queue'
-      | 'r2_bucket'
-      | 'resource_share'
-      | 'stream_live_input'
-      | 'stream_video'
-      | 'vectorize_index'
-      | 'worker'
-      | 'worker_version';
+    resource_type: 'worker_version';
 
     /**
      * Body param: Worker ID is required only for worker_version resources

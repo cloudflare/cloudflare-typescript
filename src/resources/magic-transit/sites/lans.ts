@@ -516,6 +516,12 @@ export interface LANUpdateParams {
   bond_id?: number;
 
   /**
+   * Body param: mark true to use this LAN for HA probing. only works for site with
+   * HA turned on. only one LAN can be set as the ha_link.
+   */
+  ha_link?: boolean;
+
+  /**
    * Body param: mark true to use this LAN for source-based breakout traffic
    */
   is_breakout?: boolean;
@@ -593,6 +599,12 @@ export interface LANEditParams {
    * Body param
    */
   bond_id?: number;
+
+  /**
+   * Body param: mark true to use this LAN for HA probing. only works for site with
+   * HA turned on. only one LAN can be set as the ha_link.
+   */
+  ha_link?: boolean;
 
   /**
    * Body param: mark true to use this LAN for source-based breakout traffic

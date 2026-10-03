@@ -21,7 +21,7 @@ export class BaseCancel extends APIResource {
    * ```ts
    * const cancel =
    *   await client.emailSecurity.investigate.bulk.cancel.create(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -73,7 +73,10 @@ export interface CancelCreateResponse {
 
   search_params: CancelCreateResponse.SearchParams;
 
-  status: 'PENDING' | 'DISCOVERING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'SKIPPED';
+  /**
+   * Status of a bulk action job.
+   */
+  status: 'PENDING' | 'DISCOVERING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED';
 
   total_messages_discovered: number;
 
@@ -88,6 +91,9 @@ export interface CancelCreateResponse {
 
 export namespace CancelCreateResponse {
   export interface Move {
+    /**
+     * The mailbox folder to move messages to.
+     */
     destination:
       | 'Inbox'
       | 'JunkEmail'
@@ -124,10 +130,13 @@ export namespace CancelCreateResponse {
      */
     action_log?: boolean;
 
+    /**
+     * Alert ID of the detection to filter by.
+     */
     alert_id?: string | null;
 
     /**
-     * Delivery status of the message.
+     * Delivery status to filter by.
      */
     delivery_status?:
       | 'delivered'
@@ -140,8 +149,15 @@ export namespace CancelCreateResponse {
       | 'move_failed'
       | null;
 
+    /**
+     * Whether to include only detections in search results.
+     */
     detections_only?: boolean;
 
+    /**
+     * Match messages that mention this domain — sender domain, recipient domain, or a
+     * domain in a link.
+     */
     domain?: string | null;
 
     /**
@@ -149,8 +165,14 @@ export namespace CancelCreateResponse {
      */
     end?: string;
 
+    /**
+     * Match messages whose subject line equals this value exactly.
+     */
     exact_subject?: string | null;
 
+    /**
+     * Dispositions to filter by.
+     */
     final_disposition?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -164,16 +186,34 @@ export namespace CancelCreateResponse {
       | 'NONE'
       | null;
 
+    /**
+     * Message actions to filter by.
+     */
     message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | null;
 
+    /**
+     * Message-ID header value to filter by.
+     */
     message_id?: string | null;
 
+    /**
+     * Metric name to filter the search by.
+     */
     metric?: string | null;
 
+    /**
+     * Space-delimited search term. Case-insensitive.
+     */
     query?: string | null;
 
+    /**
+     * Match messages whose recipient is this email address or domain.
+     */
     recipient?: string | null;
 
+    /**
+     * Match messages whose sender is this email address or domain.
+     */
     sender?: string | null;
 
     /**
@@ -186,8 +226,14 @@ export namespace CancelCreateResponse {
      */
     start?: string;
 
+    /**
+     * Match messages whose subject contains these keywords, in any order.
+     */
     subject?: string | null;
 
+    /**
+     * Whether to search reclassification submissions instead of original messages.
+     */
     submissions?: boolean;
   }
 }

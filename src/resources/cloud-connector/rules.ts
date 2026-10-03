@@ -122,7 +122,7 @@ export interface RuleUpdateParams {
   /**
    * Body param
    */
-  rules?: Array<RuleUpdateParams.Rule>;
+  rules: Array<RuleUpdateParams.Rule>;
 }
 
 export namespace RuleUpdateParams {

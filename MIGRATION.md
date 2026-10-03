@@ -110,6 +110,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.loadBalancers.pools.references.get()`
 - `client.loadBalancers.previews.get()`
 - `client.loadBalancers.regions.get()`
+- `client.cache.invalidateEnvironment()`
 - `client.cache.purgeEnvironment()`
 - `client.cache.originCloudRegions.update()`
 - `client.cache.originCloudRegions.delete()`
@@ -379,6 +380,16 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.kv.namespaces.values.delete()`
 - `client.kv.namespaces.values.get()`
 - `client.durableObjects.namespaces.objects.list()`
+- `client.containers.applications.delete()`
+- `client.containers.applications.edit()`
+- `client.containers.applications.get()`
+- `client.containers.applications.instances.list()`
+- `client.containers.applications.instances.get()`
+- `client.containers.applications.instances.listV1()`
+- `client.containers.applications.rollouts.create()`
+- `client.containers.applications.versions.list()`
+- `client.containers.registries.delete()`
+- `client.containers.registries.credentials.generate()`
 - `client.queues.update()`
 - `client.queues.delete()`
 - `client.queues.edit()`
@@ -452,8 +463,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.addressing.addressMaps.accounts.delete()`
 - `client.addressing.addressMaps.ips.update()`
 - `client.addressing.addressMaps.ips.delete()`
-- `client.addressing.addressMaps.zones.update()`
-- `client.addressing.addressMaps.zones.delete()`
 - `client.addressing.loaDocuments.get()`
 - `client.addressing.prefixes.delete()`
 - `client.addressing.prefixes.edit()`
@@ -753,6 +762,17 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.r2DataCatalog.namespaces.tables.list()`
 - `client.r2DataCatalog.namespaces.tables.maintenanceConfigs.update()`
 - `client.r2DataCatalog.namespaces.tables.maintenanceConfigs.get()`
+- `client.basinCatalog.delete()`
+- `client.basinCatalog.disable()`
+- `client.basinCatalog.enable()`
+- `client.basinCatalog.get()`
+- `client.basinCatalog.maintenanceConfigs.update()`
+- `client.basinCatalog.maintenanceConfigs.get()`
+- `client.basinCatalog.credentials.create()`
+- `client.basinCatalog.namespaces.list()`
+- `client.basinCatalog.namespaces.tables.list()`
+- `client.basinCatalog.namespaces.tables.maintenanceConfigs.update()`
+- `client.basinCatalog.namespaces.tables.maintenanceConfigs.get()`
 - `client.workersForPlatforms.dispatch.namespaces.delete()`
 - `client.workersForPlatforms.dispatch.namespaces.get()`
 - `client.workersForPlatforms.dispatch.namespaces.scripts.update()`
@@ -1191,9 +1211,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.managedDefense.vulnerabilityDiscovery.scans.get()`
 - `client.managedDefense.vulnerabilityDiscovery.scans.getReport()`
 - `client.managedDefense.vulnerabilityDiscovery.reports.get()`
-- `client.cloudforceOne.scans.results.get()`
-- `client.cloudforceOne.scans.config.delete()`
-- `client.cloudforceOne.scans.config.edit()`
 - `client.cloudforceOne.binaryStorage.get()`
 - `client.cloudforceOne.requests.update()`
 - `client.cloudforceOne.requests.delete()`
@@ -1209,6 +1226,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.cloudforceOne.requests.assets.update()`
 - `client.cloudforceOne.requests.assets.delete()`
 - `client.cloudforceOne.requests.assets.get()`
+- `client.cloudforceOne.scans.results.get()`
+- `client.cloudforceOne.scans.config.delete()`
+- `client.cloudforceOne.scans.config.edit()`
 - `client.cloudforceOne.threatEvents.edit()`
 - `client.cloudforceOne.threatEvents.get()`
 - `client.cloudforceOne.threatEvents.queries.delete()`
@@ -1238,6 +1258,23 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.cloudforceOne.threatEvents.eventTags.create()`
 - `client.cloudforceOne.threatEvents.eventTags.delete()`
 - `client.cloudforceOne.threatEvents.targetIndustries.byDataset.list()`
+- `client.cloudforceOne.threatSignals.feeds.delete()`
+- `client.cloudforceOne.threatSignals.feeds.edit()`
+- `client.cloudforceOne.threatSignals.feeds.raw.get()`
+- `client.cloudforceOne.threatSignals.feeds.skills.update()`
+- `client.cloudforceOne.threatSignals.feeds.skills.get()`
+- `client.cloudforceOne.threatSignals.articles.edit()`
+- `client.cloudforceOne.threatSignals.articles.get()`
+- `client.cloudforceOne.threatSignals.articles.content.get()`
+- `client.cloudforceOne.threatSignals.articles.tags.create()`
+- `client.cloudforceOne.threatSignals.articles.tags.delete()`
+- `client.cloudforceOne.threatSignals.articles.tags.generate()`
+- `client.cloudforceOne.threatSignals.articles.skillOutputs.get()`
+- `client.cloudforceOne.threatSignals.skills.delete()`
+- `client.cloudforceOne.threatSignals.skills.edit()`
+- `client.cloudforceOne.threatSignals.skills.get()`
+- `client.cloudforceOne.threatSignals.skills.tagCategories.update()`
+- `client.cloudforceOne.threatSignals.skills.tagCategories.get()`
 - `client.aiGateway.update()`
 - `client.aiGateway.delete()`
 - `client.aiGateway.get()`
@@ -1488,8 +1525,6 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 <summary>This affects the following methods</summary>
 
 - `client.cache.originCloudRegions.bulkUpdate()`
-- `client.emailSecurity.investigate.release.bulk()`
-- `client.emailSending.send()`
 - `client.filters.create()`
 - `client.filters.bulkUpdate()`
 - `client.logs.logExplorer.query.sql()`

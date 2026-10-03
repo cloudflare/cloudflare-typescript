@@ -21,7 +21,8 @@ export class BaseOrganizations extends APIResource {
   static override readonly _key: readonly ['organizations'] = Object.freeze(['organizations'] as const);
 
   /**
-   * Create a new organization for a user. (Currently in Public Beta - see
+   * Create a new organization for a user. Sub-organization creation availability
+   * depends on the organization's capabilities. (Currently in Public Beta - see
    * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   create(body: OrganizationCreateParams, options?: RequestOptions): APIPromise<Organization> {
@@ -31,7 +32,7 @@ export class BaseOrganizations extends APIResource {
   }
 
   /**
-   * Modify organization. (Currently in Public Beta - see
+   * Update an organization's name. (Currently in Public Beta - see
    * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   update(
@@ -59,7 +60,8 @@ export class BaseOrganizations extends APIResource {
 
   /**
    * Delete an organization. The organization MUST be empty before deleting. It must
-   * not contain any sub-organizations, accounts, members or users. (Currently in
+   * not contain any sub-organizations, accounts, members or users. Sub-organization
+   * deletion availability depends on the organization's capabilities. (Currently in
    * Public Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
    *
    * **Access Control:** Restricted to enterprise organizations.

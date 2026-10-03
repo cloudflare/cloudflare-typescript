@@ -323,6 +323,12 @@ export interface SiteUpdateParams {
   description?: string;
 
   /**
+   * Body param: Site high availability mode. If set to true, the site can have two
+   * connectors and runs in high availability mode.
+   */
+  ha_mode?: boolean;
+
+  /**
    * Body param: Location of site in latitude and longitude.
    */
   location?: SiteLocationParam;
@@ -373,6 +379,12 @@ export interface SiteEditParams {
    * Body param
    */
   description?: string;
+
+  /**
+   * Body param: Site high availability mode. If set to true, the site can have two
+   * connectors and runs in high availability mode.
+   */
+  ha_mode?: boolean;
 
   /**
    * Body param: Location of site in latitude and longitude.

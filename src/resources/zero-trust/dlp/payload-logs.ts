@@ -16,13 +16,7 @@ export class BasePayloadLogs extends APIResource {
    * Enables or disables payload logging for DLP matches. When enabled, matched
    * content is stored for review.
    *
-   * @example
-   * ```ts
-   * const payloadLog =
-   *   await client.zeroTrust.dlp.payloadLogs.update({
-   *     account_id: 'account_id',
-   *   });
-   * ```
+   * @deprecated
    */
   update(params: PayloadLogUpdateParams, options?: RequestOptions): APIPromise<PayloadLogUpdateResponse> {
     const { account_id, ...body } = params;
@@ -37,13 +31,7 @@ export class BasePayloadLogs extends APIResource {
    * Gets the current payload logging configuration for DLP, showing whether matched
    * content is being logged.
    *
-   * @example
-   * ```ts
-   * const payloadLog =
-   *   await client.zeroTrust.dlp.payloadLogs.get({
-   *     account_id: 'account_id',
-   *   });
-   * ```
+   * @deprecated
    */
   get(params: PayloadLogGetParams, options?: RequestOptions): APIPromise<PayloadLogGetResponse> {
     const { account_id } = params;

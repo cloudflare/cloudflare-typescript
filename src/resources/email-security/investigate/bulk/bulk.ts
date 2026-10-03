@@ -29,7 +29,8 @@ export class BaseBulk extends APIResource {
 
   /**
    * Creates a new bulk action job to move or release messages that match the
-   * provided search parameters.
+   * provided search parameters. To move or release an explicit list of known
+   * messages instead of a search, use the move or release endpoints.
    *
    * @example
    * ```ts
@@ -78,15 +79,14 @@ export class BaseBulk extends APIResource {
 
   /**
    * Deletes the job, removing it from all list and detail endpoints. Only jobs in a
-   * terminal state (`COMPLETED`, `CANCELLED`, `FAILED`, or `SKIPPED`) can be
-   * deleted. To stop an in-progress job without removing it, use the cancel endpoint
-   * instead.
+   * terminal state (`COMPLETED`, `CANCELLED`, or `FAILED`) can be deleted. To stop
+   * an in-progress job without removing it, use the cancel endpoint instead.
    *
    * @example
    * ```ts
    * const bulk =
    *   await client.emailSecurity.investigate.bulk.delete(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -108,7 +108,7 @@ export class BaseBulk extends APIResource {
    * ```ts
    * const bulk =
    *   await client.emailSecurity.investigate.bulk.get(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -161,7 +161,10 @@ export interface BulkCreateResponse {
 
   search_params: BulkCreateResponse.SearchParams;
 
-  status: 'PENDING' | 'DISCOVERING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'SKIPPED';
+  /**
+   * Status of a bulk action job.
+   */
+  status: 'PENDING' | 'DISCOVERING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED';
 
   total_messages_discovered: number;
 
@@ -176,6 +179,9 @@ export interface BulkCreateResponse {
 
 export namespace BulkCreateResponse {
   export interface Move {
+    /**
+     * The mailbox folder to move messages to.
+     */
     destination:
       | 'Inbox'
       | 'JunkEmail'
@@ -212,10 +218,13 @@ export namespace BulkCreateResponse {
      */
     action_log?: boolean;
 
+    /**
+     * Alert ID of the detection to filter by.
+     */
     alert_id?: string | null;
 
     /**
-     * Delivery status of the message.
+     * Delivery status to filter by.
      */
     delivery_status?:
       | 'delivered'
@@ -228,8 +237,15 @@ export namespace BulkCreateResponse {
       | 'move_failed'
       | null;
 
+    /**
+     * Whether to include only detections in search results.
+     */
     detections_only?: boolean;
 
+    /**
+     * Match messages that mention this domain — sender domain, recipient domain, or a
+     * domain in a link.
+     */
     domain?: string | null;
 
     /**
@@ -237,8 +253,14 @@ export namespace BulkCreateResponse {
      */
     end?: string;
 
+    /**
+     * Match messages whose subject line equals this value exactly.
+     */
     exact_subject?: string | null;
 
+    /**
+     * Dispositions to filter by.
+     */
     final_disposition?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -252,16 +274,34 @@ export namespace BulkCreateResponse {
       | 'NONE'
       | null;
 
+    /**
+     * Message actions to filter by.
+     */
     message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | null;
 
+    /**
+     * Message-ID header value to filter by.
+     */
     message_id?: string | null;
 
+    /**
+     * Metric name to filter the search by.
+     */
     metric?: string | null;
 
+    /**
+     * Space-delimited search term. Case-insensitive.
+     */
     query?: string | null;
 
+    /**
+     * Match messages whose recipient is this email address or domain.
+     */
     recipient?: string | null;
 
+    /**
+     * Match messages whose sender is this email address or domain.
+     */
     sender?: string | null;
 
     /**
@@ -274,8 +314,14 @@ export namespace BulkCreateResponse {
      */
     start?: string;
 
+    /**
+     * Match messages whose subject contains these keywords, in any order.
+     */
     subject?: string | null;
 
+    /**
+     * Whether to search reclassification submissions instead of original messages.
+     */
     submissions?: boolean;
   }
 }
@@ -311,7 +357,10 @@ export interface BulkListResponse {
 
   search_params: BulkListResponse.SearchParams;
 
-  status: 'PENDING' | 'DISCOVERING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'SKIPPED';
+  /**
+   * Status of a bulk action job.
+   */
+  status: 'PENDING' | 'DISCOVERING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED';
 
   total_messages_discovered: number;
 
@@ -326,6 +375,9 @@ export interface BulkListResponse {
 
 export namespace BulkListResponse {
   export interface Move {
+    /**
+     * The mailbox folder to move messages to.
+     */
     destination:
       | 'Inbox'
       | 'JunkEmail'
@@ -362,10 +414,13 @@ export namespace BulkListResponse {
      */
     action_log?: boolean;
 
+    /**
+     * Alert ID of the detection to filter by.
+     */
     alert_id?: string | null;
 
     /**
-     * Delivery status of the message.
+     * Delivery status to filter by.
      */
     delivery_status?:
       | 'delivered'
@@ -378,8 +433,15 @@ export namespace BulkListResponse {
       | 'move_failed'
       | null;
 
+    /**
+     * Whether to include only detections in search results.
+     */
     detections_only?: boolean;
 
+    /**
+     * Match messages that mention this domain — sender domain, recipient domain, or a
+     * domain in a link.
+     */
     domain?: string | null;
 
     /**
@@ -387,8 +449,14 @@ export namespace BulkListResponse {
      */
     end?: string;
 
+    /**
+     * Match messages whose subject line equals this value exactly.
+     */
     exact_subject?: string | null;
 
+    /**
+     * Dispositions to filter by.
+     */
     final_disposition?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -402,16 +470,34 @@ export namespace BulkListResponse {
       | 'NONE'
       | null;
 
+    /**
+     * Message actions to filter by.
+     */
     message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | null;
 
+    /**
+     * Message-ID header value to filter by.
+     */
     message_id?: string | null;
 
+    /**
+     * Metric name to filter the search by.
+     */
     metric?: string | null;
 
+    /**
+     * Space-delimited search term. Case-insensitive.
+     */
     query?: string | null;
 
+    /**
+     * Match messages whose recipient is this email address or domain.
+     */
     recipient?: string | null;
 
+    /**
+     * Match messages whose sender is this email address or domain.
+     */
     sender?: string | null;
 
     /**
@@ -424,8 +510,14 @@ export namespace BulkListResponse {
      */
     start?: string;
 
+    /**
+     * Match messages whose subject contains these keywords, in any order.
+     */
     subject?: string | null;
 
+    /**
+     * Whether to search reclassification submissions instead of original messages.
+     */
     submissions?: boolean;
   }
 }
@@ -465,7 +557,10 @@ export interface BulkGetResponse {
 
   search_params: BulkGetResponse.SearchParams;
 
-  status: 'PENDING' | 'DISCOVERING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'SKIPPED';
+  /**
+   * Status of a bulk action job.
+   */
+  status: 'PENDING' | 'DISCOVERING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED';
 
   total_messages_discovered: number;
 
@@ -480,6 +575,9 @@ export interface BulkGetResponse {
 
 export namespace BulkGetResponse {
   export interface Move {
+    /**
+     * The mailbox folder to move messages to.
+     */
     destination:
       | 'Inbox'
       | 'JunkEmail'
@@ -516,10 +614,13 @@ export namespace BulkGetResponse {
      */
     action_log?: boolean;
 
+    /**
+     * Alert ID of the detection to filter by.
+     */
     alert_id?: string | null;
 
     /**
-     * Delivery status of the message.
+     * Delivery status to filter by.
      */
     delivery_status?:
       | 'delivered'
@@ -532,8 +633,15 @@ export namespace BulkGetResponse {
       | 'move_failed'
       | null;
 
+    /**
+     * Whether to include only detections in search results.
+     */
     detections_only?: boolean;
 
+    /**
+     * Match messages that mention this domain — sender domain, recipient domain, or a
+     * domain in a link.
+     */
     domain?: string | null;
 
     /**
@@ -541,8 +649,14 @@ export namespace BulkGetResponse {
      */
     end?: string;
 
+    /**
+     * Match messages whose subject line equals this value exactly.
+     */
     exact_subject?: string | null;
 
+    /**
+     * Dispositions to filter by.
+     */
     final_disposition?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -556,16 +670,34 @@ export namespace BulkGetResponse {
       | 'NONE'
       | null;
 
+    /**
+     * Message actions to filter by.
+     */
     message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | null;
 
+    /**
+     * Message-ID header value to filter by.
+     */
     message_id?: string | null;
 
+    /**
+     * Metric name to filter the search by.
+     */
     metric?: string | null;
 
+    /**
+     * Space-delimited search term. Case-insensitive.
+     */
     query?: string | null;
 
+    /**
+     * Match messages whose recipient is this email address or domain.
+     */
     recipient?: string | null;
 
+    /**
+     * Match messages whose sender is this email address or domain.
+     */
     sender?: string | null;
 
     /**
@@ -578,8 +710,14 @@ export namespace BulkGetResponse {
      */
     start?: string;
 
+    /**
+     * Match messages whose subject contains these keywords, in any order.
+     */
     subject?: string | null;
 
+    /**
+     * Whether to search reclassification submissions instead of original messages.
+     */
     submissions?: boolean;
   }
 }
@@ -591,7 +729,8 @@ export interface BulkCreateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: The action the job performs on every message matching the search
+   * parameters.
    */
   action: 'MOVE' | 'RELEASE';
 
@@ -601,7 +740,7 @@ export interface BulkCreateParams {
   search_params: BulkCreateParams.SearchParams;
 
   /**
-   * Body param
+   * Body param: Optional note describing the job.
    */
   comment?: string | null;
 
@@ -639,10 +778,13 @@ export namespace BulkCreateParams {
      */
     action_log?: boolean;
 
+    /**
+     * Alert ID of the detection to filter by.
+     */
     alert_id?: string | null;
 
     /**
-     * Delivery status of the message.
+     * Delivery status to filter by.
      */
     delivery_status?:
       | 'delivered'
@@ -655,8 +797,15 @@ export namespace BulkCreateParams {
       | 'move_failed'
       | null;
 
+    /**
+     * Whether to include only detections in search results.
+     */
     detections_only?: boolean;
 
+    /**
+     * Match messages that mention this domain — sender domain, recipient domain, or a
+     * domain in a link.
+     */
     domain?: string | null;
 
     /**
@@ -664,8 +813,14 @@ export namespace BulkCreateParams {
      */
     end?: string;
 
+    /**
+     * Match messages whose subject line equals this value exactly.
+     */
     exact_subject?: string | null;
 
+    /**
+     * Dispositions to filter by.
+     */
     final_disposition?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -679,16 +834,34 @@ export namespace BulkCreateParams {
       | 'NONE'
       | null;
 
+    /**
+     * Message actions to filter by.
+     */
     message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | null;
 
+    /**
+     * Message-ID header value to filter by.
+     */
     message_id?: string | null;
 
+    /**
+     * Metric name to filter the search by.
+     */
     metric?: string | null;
 
+    /**
+     * Space-delimited search term. Case-insensitive.
+     */
     query?: string | null;
 
+    /**
+     * Match messages whose recipient is this email address or domain.
+     */
     recipient?: string | null;
 
+    /**
+     * Match messages whose sender is this email address or domain.
+     */
     sender?: string | null;
 
     /**
@@ -701,8 +874,14 @@ export namespace BulkCreateParams {
      */
     start?: string;
 
+    /**
+     * Match messages whose subject contains these keywords, in any order.
+     */
     subject?: string | null;
 
+    /**
+     * Whether to search reclassification submissions instead of original messages.
+     */
     submissions?: boolean;
   }
 }
@@ -714,14 +893,14 @@ export interface BulkListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param
+   * Query param: Filter jobs by the action they perform.
    */
   action_type?: 'MOVE' | 'RELEASE';
 
   /**
-   * Query param
+   * Query param: Filter jobs by their processing status.
    */
-  status?: 'PENDING' | 'DISCOVERING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'SKIPPED';
+  status?: 'PENDING' | 'DISCOVERING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELLED';
 }
 
 export interface BulkDeleteParams {

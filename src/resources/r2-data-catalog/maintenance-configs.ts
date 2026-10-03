@@ -15,25 +15,7 @@ export class BaseMaintenanceConfigs extends APIResource {
    * Update the maintenance configuration for a catalog. This allows you to enable or
    * disable compaction and adjust target file sizes for optimization.
    *
-   * @example
-   * ```ts
-   * const maintenanceConfig =
-   *   await client.r2DataCatalog.maintenanceConfigs.update(
-   *     'my-data-bucket',
-   *     {
-   *       account_id: '0123456789abcdef0123456789abcdef',
-   *       compaction: {
-   *         state: 'enabled',
-   *         target_size_mb: '256',
-   *       },
-   *       snapshot_expiration: {
-   *         max_snapshot_age: '14d',
-   *         min_snapshots_to_keep: 5,
-   *         state: 'enabled',
-   *       },
-   *     },
-   *   );
-   * ```
+   * @deprecated Use `POST /accounts/{account_id}/basin-catalog/{bucket_name}/maintenance-configs` instead.
    */
   update(
     bucketName: string,
@@ -53,14 +35,7 @@ export class BaseMaintenanceConfigs extends APIResource {
    * Retrieve the maintenance configuration for a specific catalog, including
    * compaction settings and credential status.
    *
-   * @example
-   * ```ts
-   * const maintenanceConfig =
-   *   await client.r2DataCatalog.maintenanceConfigs.get(
-   *     'my-data-bucket',
-   *     { account_id: '0123456789abcdef0123456789abcdef' },
-   *   );
-   * ```
+   * @deprecated Use `GET /accounts/{account_id}/basin-catalog/{bucket_name}/maintenance-configs` instead.
    */
   get(
     bucketName: string,
@@ -238,12 +213,12 @@ export namespace MaintenanceConfigUpdateParams {
    */
   export interface Compaction {
     /**
-     * Updates the state optionally.
+     * Specifies the state of maintenance operations.
      */
     state?: 'enabled' | 'disabled';
 
     /**
-     * Updates the target file size optionally.
+     * Sets the target file size for compaction in megabytes. Defaults to "128".
      */
     target_size_mb?: '64' | '128' | '256' | '512';
   }
@@ -263,7 +238,7 @@ export namespace MaintenanceConfigUpdateParams {
     min_snapshots_to_keep?: number;
 
     /**
-     * Updates the state optionally.
+     * Specifies the state of maintenance operations.
      */
     state?: 'enabled' | 'disabled';
   }

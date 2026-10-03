@@ -13,7 +13,7 @@ export class BaseRaw extends APIResource {
   ] as const);
 
   /**
-   * Returns the raw eml of any non-benign message.
+   * Returns the raw EML content of any message with a detection.
    *
    * @example
    * ```ts

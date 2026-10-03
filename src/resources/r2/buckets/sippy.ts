@@ -15,7 +15,9 @@ export class BaseSippyResource extends APIResource {
   ] as const);
 
   /**
-   * Sets configuration for Sippy for an existing R2 bucket.
+   * Configures and enables Sippy on-demand migration for an R2 bucket. When a
+   * requested object is missing from R2, Sippy serves it from the configured source
+   * storage provider and copies it to R2.
    *
    * @example
    * ```ts
@@ -44,7 +46,9 @@ export class BaseSippyResource extends APIResource {
   }
 
   /**
-   * Disables Sippy on this bucket.
+   * Disables Sippy on-demand migration for an R2 bucket. Requests no longer fetch
+   * missing objects from the source storage provider. Objects already copied to R2
+   * remain in the bucket.
    *
    * @example
    * ```ts
@@ -187,7 +191,7 @@ export type SippyUpdateParams =
 export declare namespace SippyUpdateParams {
   export interface R2EnableSippyAws {
     /**
-     * Path param: Account ID.
+     * Path param: Cloudflare account ID that owns the R2 resource.
      */
     account_id: string;
 
@@ -253,7 +257,7 @@ export declare namespace SippyUpdateParams {
       provider?: 'aws';
 
       /**
-       * Name of the AWS availability zone.
+       * AWS region containing the source S3 bucket.
        */
       region?: string;
 
@@ -266,7 +270,7 @@ export declare namespace SippyUpdateParams {
 
   export interface R2EnableSippyGcs {
     /**
-     * Path param: Account ID.
+     * Path param: Cloudflare account ID that owns the R2 resource.
      */
     account_id: string;
 
@@ -340,7 +344,7 @@ export declare namespace SippyUpdateParams {
 
   export interface R2EnableSippyS3 {
     /**
-     * Path param: Account ID.
+     * Path param: Cloudflare account ID that owns the R2 resource.
      */
     account_id: string;
 
@@ -414,7 +418,7 @@ export declare namespace SippyUpdateParams {
 
   export interface R2EnableSippyAzure {
     /**
-     * Path param: Account ID.
+     * Path param: Cloudflare account ID that owns the R2 resource.
      */
     account_id: string;
 
@@ -495,7 +499,7 @@ export declare namespace SippyUpdateParams {
 
 export interface SippyDeleteParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -508,7 +512,7 @@ export interface SippyDeleteParams {
 
 export interface SippyGetParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 

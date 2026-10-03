@@ -18,7 +18,9 @@ export class BaseKeys extends APIResource {
   ] as const);
 
   /**
-   * Lists a namespace's keys.
+   * Lists key names in the specified Workers KV namespace, with expiration times and
+   * metadata when present. Use `prefix` to filter names and `cursor` to request the
+   * next page. Values are not included.
    *
    * @example
    * ```ts
@@ -45,8 +47,9 @@ export class BaseKeys extends APIResource {
   }
 
   /**
-   * Remove multiple KV pairs from the namespace. Body should be an array of up to
-   * 10,000 keys to be removed.
+   * Deletes up to 10,000 key-value pairs from the specified Workers KV namespace.
+   * Send a JSON array of the key names to delete. The result reports the number of
+   * successful deletions and any keys that failed and should be retried.
    *
    * @deprecated Please use kv.namespaces.bulk_delete instead
    */
@@ -65,9 +68,11 @@ export class BaseKeys extends APIResource {
   }
 
   /**
-   * Retrieve up to 100 KV pairs from the namespace. Keys must contain text-based
-   * values. JSON values can optionally be parsed instead of being returned as a
-   * string value. Metadata can be included if `withMetadata` is true.
+   * Retrieves the text-based values of up to 100 keys from the specified Workers KV
+   * namespace. The result maps each requested key to its value. Set `type` to `json`
+   * to parse JSON values instead of returning strings, and set `withMetadata` to
+   * `true` to include metadata with each value. Binary values are not supported by
+   * this operation.
    *
    * @deprecated Please use kv.namespaces.bulk_get instead
    */
@@ -86,12 +91,13 @@ export class BaseKeys extends APIResource {
   }
 
   /**
-   * Write multiple keys and values at once. Body should be an array of up to 10,000
-   * key-value pairs to be stored, along with optional expiration information.
-   * Existing values and expirations will be overwritten. If neither `expiration` nor
-   * `expiration_ttl` is specified, the key-value pair will never expire. If both are
-   * set, `expiration_ttl` is used and `expiration` is ignored. The entire request
-   * size must be 100 megabytes or less.
+   * Writes up to 10,000 key-value pairs to the specified Workers KV namespace from a
+   * JSON array, with optional metadata and expiration settings for each pair.
+   * Existing values and expirations are overwritten. If neither `expiration` nor
+   * `expiration_ttl` is specified, the key-value pair will not expire. If both are
+   * set, `expiration_ttl` takes precedence. The entire request must be 100 megabytes
+   * or less. The result reports the number of successful writes and any keys that
+   * failed and should be retried.
    *
    * @deprecated Please use kv.namespaces.bulk_update instead
    */
@@ -138,12 +144,13 @@ export interface Key {
 
 export interface KeyBulkDeleteResponse {
   /**
-   * Number of keys successfully updated.
+   * Number of keys successfully written or deleted by the bulk operation.
    */
   successful_key_count?: number;
 
   /**
-   * Name of the keys that failed to be fully updated. They should be retried.
+   * Names of keys that failed to be written or deleted. Retry the operation for
+   * these keys.
    */
   unsuccessful_keys?: Array<string>;
 }
@@ -190,19 +197,20 @@ export namespace KeyBulkGetResponse {
 
 export interface KeyBulkUpdateResponse {
   /**
-   * Number of keys successfully updated.
+   * Number of keys successfully written or deleted by the bulk operation.
    */
   successful_key_count?: number;
 
   /**
-   * Name of the keys that failed to be fully updated. They should be retried.
+   * Names of keys that failed to be written or deleted. Retry the operation for
+   * these keys.
    */
   unsuccessful_keys?: Array<string>;
 }
 
 export interface KeyListParams extends CursorLimitPaginationParams {
   /**
-   * Path param: Identifier.
+   * Path param: ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
@@ -215,7 +223,7 @@ export interface KeyListParams extends CursorLimitPaginationParams {
 
 export interface KeyBulkDeleteParams {
   /**
-   * Path param: Identifier.
+   * Path param: ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
@@ -227,7 +235,7 @@ export interface KeyBulkDeleteParams {
 
 export interface KeyBulkGetParams {
   /**
-   * Path param: Identifier.
+   * Path param: ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
@@ -237,7 +245,8 @@ export interface KeyBulkGetParams {
   keys: Array<string>;
 
   /**
-   * Body param: Whether to parse JSON values in the response.
+   * Body param: Return values as strings with `text`, or parse stored JSON values
+   * with `json`.
    */
   type?: 'text' | 'json';
 
@@ -249,7 +258,7 @@ export interface KeyBulkGetParams {
 
 export interface KeyBulkUpdateParams {
   /**
-   * Path param: Identifier.
+   * Path param: ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
@@ -286,7 +295,8 @@ export namespace KeyBulkUpdateParams {
     expiration?: number;
 
     /**
-     * Expires the key after a number of seconds. Must be at least 60.
+     * Number of seconds until the key expires. Must be at least 60. Takes precedence
+     * over `expiration` when both are specified.
      */
     expiration_ttl?: number;
 

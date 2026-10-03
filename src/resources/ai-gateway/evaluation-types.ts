@@ -12,7 +12,8 @@ export class BaseEvaluationTypes extends APIResource {
   ] as const);
 
   /**
-   * Lists all available evaluator types for scoring AI gateway responses.
+   * Lists the evaluator types that evaluations can use to score AI Gateway
+   * responses. Evaluations are deprecated and unavailable to new accounts.
    *
    * @example
    * ```ts

@@ -70,7 +70,7 @@ export class BaseKeylessCertificates extends APIResource {
    * ```ts
    * const keylessCertificate =
    *   await client.keylessCertificates.delete(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '4d2844d2ce78891c34d0b6c0535a291e',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -97,7 +97,7 @@ export class BaseKeylessCertificates extends APIResource {
    * ```ts
    * const keylessCertificate =
    *   await client.keylessCertificates.edit(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '4d2844d2ce78891c34d0b6c0535a291e',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -123,7 +123,7 @@ export class BaseKeylessCertificates extends APIResource {
    * ```ts
    * const keylessCertificate =
    *   await client.keylessCertificates.get(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '4d2844d2ce78891c34d0b6c0535a291e',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -232,7 +232,7 @@ export interface TunnelParam {
 
 export interface KeylessCertificateDeleteResponse {
   /**
-   * Identifier.
+   * Keyless certificate identifier tag.
    */
   id?: string;
 }

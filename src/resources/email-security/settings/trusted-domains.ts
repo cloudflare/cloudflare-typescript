@@ -104,9 +104,10 @@ export class BaseTrustedDomains extends APIResource {
   }
 
   /**
-   * Executes multiple operations atomically. All four operation arrays (deletes,
-   * patches, puts, posts) are required and executed in order. Send empty arrays for
-   * unused operations.
+   * Executes multiple trusted domain operations atomically: delete, partially
+   * update, replace, and create trusted domain patterns in a single request. All
+   * four operation arrays (deletes, patches, puts, posts) are required and executed
+   * in order. Send empty arrays for unused operations.
    *
    * @example
    * ```ts
@@ -224,6 +225,9 @@ export interface TrustedDomainCreateResponse {
    */
   is_recent?: boolean;
 
+  /**
+   * Whether `pattern` is a regular expression instead of a literal domain.
+   */
   is_regex?: boolean;
 
   /**
@@ -239,6 +243,9 @@ export interface TrustedDomainCreateResponse {
 
   modified_at?: string;
 
+  /**
+   * The domain pattern to trust, e.g. `example.com`.
+   */
   pattern?: string;
 }
 
@@ -261,6 +268,9 @@ export interface TrustedDomainListResponse {
    */
   is_recent?: boolean;
 
+  /**
+   * Whether `pattern` is a regular expression instead of a literal domain.
+   */
   is_regex?: boolean;
 
   /**
@@ -276,6 +286,9 @@ export interface TrustedDomainListResponse {
 
   modified_at?: string;
 
+  /**
+   * The domain pattern to trust, e.g. `example.com`.
+   */
   pattern?: string;
 }
 
@@ -323,6 +336,9 @@ export namespace TrustedDomainBatchResponse {
      */
     is_recent?: boolean;
 
+    /**
+     * Whether `pattern` is a regular expression instead of a literal domain.
+     */
     is_regex?: boolean;
 
     /**
@@ -338,6 +354,9 @@ export namespace TrustedDomainBatchResponse {
 
     modified_at?: string;
 
+    /**
+     * The domain pattern to trust, e.g. `example.com`.
+     */
     pattern?: string;
   }
 
@@ -360,6 +379,9 @@ export namespace TrustedDomainBatchResponse {
      */
     is_recent?: boolean;
 
+    /**
+     * Whether `pattern` is a regular expression instead of a literal domain.
+     */
     is_regex?: boolean;
 
     /**
@@ -375,6 +397,9 @@ export namespace TrustedDomainBatchResponse {
 
     modified_at?: string;
 
+    /**
+     * The domain pattern to trust, e.g. `example.com`.
+     */
     pattern?: string;
   }
 
@@ -397,6 +422,9 @@ export namespace TrustedDomainBatchResponse {
      */
     is_recent?: boolean;
 
+    /**
+     * Whether `pattern` is a regular expression instead of a literal domain.
+     */
     is_regex?: boolean;
 
     /**
@@ -412,6 +440,9 @@ export namespace TrustedDomainBatchResponse {
 
     modified_at?: string;
 
+    /**
+     * The domain pattern to trust, e.g. `example.com`.
+     */
     pattern?: string;
   }
 }
@@ -435,6 +466,9 @@ export interface TrustedDomainEditResponse {
    */
   is_recent?: boolean;
 
+  /**
+   * Whether `pattern` is a regular expression instead of a literal domain.
+   */
   is_regex?: boolean;
 
   /**
@@ -450,6 +484,9 @@ export interface TrustedDomainEditResponse {
 
   modified_at?: string;
 
+  /**
+   * The domain pattern to trust, e.g. `example.com`.
+   */
   pattern?: string;
 }
 
@@ -472,6 +509,9 @@ export interface TrustedDomainGetResponse {
    */
   is_recent?: boolean;
 
+  /**
+   * Whether `pattern` is a regular expression instead of a literal domain.
+   */
   is_regex?: boolean;
 
   /**
@@ -487,6 +527,9 @@ export interface TrustedDomainGetResponse {
 
   modified_at?: string;
 
+  /**
+   * The domain pattern to trust, e.g. `example.com`.
+   */
   pattern?: string;
 }
 
@@ -503,7 +546,8 @@ export interface TrustedDomainCreateParams {
   is_recent: boolean;
 
   /**
-   * Body param
+   * Body param: Whether `pattern` is a regular expression instead of a literal
+   * domain.
    */
   is_regex: boolean;
 
@@ -515,7 +559,7 @@ export interface TrustedDomainCreateParams {
   is_similarity: boolean;
 
   /**
-   * Body param
+   * Body param: The domain pattern to trust, e.g. `example.com`.
    */
   pattern: string;
 
@@ -578,22 +622,24 @@ export interface TrustedDomainBatchParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: IDs of the trusted domain patterns to delete.
    */
   deletes: Array<TrustedDomainBatchParams.Delete>;
 
   /**
-   * Body param
+   * Body param: Partial updates to apply — each entry carries the pattern's ID and
+   * only the fields to change.
    */
   patches: Array<TrustedDomainBatchParams.Patch>;
 
   /**
-   * Body param
+   * Body param: Trusted domain patterns to create.
    */
   posts: Array<TrustedDomainBatchParams.Post>;
 
   /**
-   * Body param
+   * Body param: Full replacements to apply — each entry carries the pattern's ID and
+   * every field of its new value.
    */
   puts: Array<TrustedDomainBatchParams.Put>;
 }
@@ -618,6 +664,9 @@ export namespace TrustedDomainBatchParams {
      */
     is_recent?: boolean;
 
+    /**
+     * Whether `pattern` is a regular expression instead of a literal domain.
+     */
     is_regex?: boolean;
 
     /**
@@ -626,6 +675,9 @@ export namespace TrustedDomainBatchParams {
      */
     is_similarity?: boolean;
 
+    /**
+     * The domain pattern to trust, e.g. `example.com`.
+     */
     pattern?: string;
   }
 
@@ -639,6 +691,9 @@ export namespace TrustedDomainBatchParams {
      */
     is_recent: boolean;
 
+    /**
+     * Whether `pattern` is a regular expression instead of a literal domain.
+     */
     is_regex: boolean;
 
     /**
@@ -647,6 +702,9 @@ export namespace TrustedDomainBatchParams {
      */
     is_similarity: boolean;
 
+    /**
+     * The domain pattern to trust, e.g. `example.com`.
+     */
     pattern: string;
 
     comments?: string | null;
@@ -662,6 +720,9 @@ export namespace TrustedDomainBatchParams {
      */
     is_recent: boolean;
 
+    /**
+     * Whether `pattern` is a regular expression instead of a literal domain.
+     */
     is_regex: boolean;
 
     /**
@@ -670,6 +731,9 @@ export namespace TrustedDomainBatchParams {
      */
     is_similarity: boolean;
 
+    /**
+     * The domain pattern to trust, e.g. `example.com`.
+     */
     pattern: string;
 
     comments?: string | null;
@@ -694,7 +758,8 @@ export interface TrustedDomainEditParams {
   is_recent?: boolean;
 
   /**
-   * Body param
+   * Body param: Whether `pattern` is a regular expression instead of a literal
+   * domain.
    */
   is_regex?: boolean;
 
@@ -706,7 +771,7 @@ export interface TrustedDomainEditParams {
   is_similarity?: boolean;
 
   /**
-   * Body param
+   * Body param: The domain pattern to trust, e.g. `example.com`.
    */
   pattern?: string;
 }

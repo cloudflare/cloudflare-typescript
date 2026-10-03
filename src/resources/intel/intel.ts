@@ -99,7 +99,6 @@ Intel.IPLists = IPLists;
 Intel.BaseIPLists = BaseIPLists;
 Intel.Miscategorizations = Miscategorizations;
 Intel.BaseMiscategorizations = BaseMiscategorizations;
-Intel.Whois = Whois;
 Intel.BaseWhois = BaseWhois;
 Intel.URLs = URLs;
 Intel.BaseURLs = BaseURLs;
@@ -153,7 +152,7 @@ export declare namespace Intel {
   };
 
   export {
-    Whois as Whois,
+    type Whois as Whois,
     BaseWhois as BaseWhois,
     type WhoisGetResponse as WhoisGetResponse,
     type WhoisGetParams as WhoisGetParams,

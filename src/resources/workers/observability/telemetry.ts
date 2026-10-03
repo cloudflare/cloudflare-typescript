@@ -717,12 +717,32 @@ export namespace TelemetryQueryResponse {
 
   export namespace Calculation {
     export interface Aggregate {
+      /**
+       * Estimated number of matching events: the sum of the sample intervals of the
+       * stored events. It equals the number of stored events when sampleInterval is 1.
+       */
       count: number;
 
+      /**
+       * @deprecated Deprecated alias of sampleInterval. Always has the same value; use
+       * sampleInterval instead.
+       */
       interval: number;
 
+      /**
+       * Average sample interval of the matched events. Each stored event has a sample
+       * interval of 1 / (the sampling rate applied when it was ingested): the Worker's
+       * head_sampling_rate multiplied by any platform sampling applied to the account or
+       * script. A value of 1 means none of the matched events were sampled. A value
+       * above 1 means count and value are estimated from sampled data, not exact. This
+       * is independent of statistics.abr_level.
+       */
       sampleInterval: number;
 
+      /**
+       * Result of the calculation. count, sum, avg, median, and percentiles are weighted
+       * by each event's sample interval
+       */
       value: number;
 
       groups?: Array<Aggregate.Group>;
@@ -744,12 +764,32 @@ export namespace TelemetryQueryResponse {
 
     export namespace Series {
       export interface Data {
+        /**
+         * Estimated number of matching events: the sum of the sample intervals of the
+         * stored events. It equals the number of stored events when sampleInterval is 1.
+         */
         count: number;
 
+        /**
+         * @deprecated Deprecated alias of sampleInterval. Always has the same value; use
+         * sampleInterval instead.
+         */
         interval: number;
 
+        /**
+         * Average sample interval of the matched events. Each stored event has a sample
+         * interval of 1 / (the sampling rate applied when it was ingested): the Worker's
+         * head_sampling_rate multiplied by any platform sampling applied to the account or
+         * script. A value of 1 means none of the matched events were sampled. A value
+         * above 1 means count and value are estimated from sampled data, not exact. This
+         * is independent of statistics.abr_level.
+         */
         sampleInterval: number;
 
+        /**
+         * Result of the calculation. count, sum, avg, median, and percentiles are weighted
+         * by each event's sample interval
+         */
         value: number;
 
         firstSeen?: string;
@@ -781,12 +821,32 @@ export namespace TelemetryQueryResponse {
 
   export namespace Compare {
     export interface Aggregate {
+      /**
+       * Estimated number of matching events: the sum of the sample intervals of the
+       * stored events. It equals the number of stored events when sampleInterval is 1.
+       */
       count: number;
 
+      /**
+       * @deprecated Deprecated alias of sampleInterval. Always has the same value; use
+       * sampleInterval instead.
+       */
       interval: number;
 
+      /**
+       * Average sample interval of the matched events. Each stored event has a sample
+       * interval of 1 / (the sampling rate applied when it was ingested): the Worker's
+       * head_sampling_rate multiplied by any platform sampling applied to the account or
+       * script. A value of 1 means none of the matched events were sampled. A value
+       * above 1 means count and value are estimated from sampled data, not exact. This
+       * is independent of statistics.abr_level.
+       */
       sampleInterval: number;
 
+      /**
+       * Result of the calculation. count, sum, avg, median, and percentiles are weighted
+       * by each event's sample interval
+       */
       value: number;
 
       groups?: Array<Aggregate.Group>;
@@ -808,12 +868,32 @@ export namespace TelemetryQueryResponse {
 
     export namespace Series {
       export interface Data {
+        /**
+         * Estimated number of matching events: the sum of the sample intervals of the
+         * stored events. It equals the number of stored events when sampleInterval is 1.
+         */
         count: number;
 
+        /**
+         * @deprecated Deprecated alias of sampleInterval. Always has the same value; use
+         * sampleInterval instead.
+         */
         interval: number;
 
+        /**
+         * Average sample interval of the matched events. Each stored event has a sample
+         * interval of 1 / (the sampling rate applied when it was ingested): the Worker's
+         * head_sampling_rate multiplied by any platform sampling applied to the account or
+         * script. A value of 1 means none of the matched events were sampled. A value
+         * above 1 means count and value are estimated from sampled data, not exact. This
+         * is independent of statistics.abr_level.
+         */
         sampleInterval: number;
 
+        /**
+         * Result of the calculation. count, sum, avg, median, and percentiles are weighted
+         * by each event's sample interval
+         */
         value: number;
 
         firstSeen?: string;
@@ -1256,10 +1336,26 @@ export namespace TelemetryQueryResponse {
       export interface Data {
         aggregates: Data.Aggregates;
 
+        /**
+         * Estimated number of matching events: the sum of the sample intervals of the
+         * stored events. It equals the number of stored events when sampleInterval is 1.
+         */
         count: number;
 
+        /**
+         * @deprecated Deprecated alias of sampleInterval. Always has the same value; use
+         * sampleInterval instead.
+         */
         interval: number;
 
+        /**
+         * Average sample interval of the matched events. Each stored event has a sample
+         * interval of 1 / (the sampling rate applied when it was ingested): the Worker's
+         * head_sampling_rate multiplied by any platform sampling applied to the account or
+         * script. A value of 1 means none of the matched events were sampled. A value
+         * above 1 means count and value are estimated from sampled data, not exact. This
+         * is independent of statistics.abr_level.
+         */
         sampleInterval: number;
 
         errors?: number;

@@ -178,7 +178,19 @@ export namespace IndicatorListResponse {
          */
         datasetId?: string;
 
+        /**
+         * Related events, capped by `relatedEventsLimit` (default 2). Check
+         * `relatedEventsHasMore` to detect a capped list; pass `relatedEventsLimit=-1` to
+         * retrieve all of them.
+         */
         relatedEvents?: Array<Items.RelatedEvent>;
+
+        /**
+         * True when this indicator appears in more events than `relatedEvents` contains
+         * because `relatedEventsLimit` capped the list. Pass `relatedEventsLimit=-1` to
+         * retrieve every related event.
+         */
+        relatedEventsHasMore?: boolean;
 
         tags?: Array<Items.Tag>;
 
@@ -392,7 +404,10 @@ export interface IndicatorListParams {
 
   /**
    * Query param: Limit the number of related events returned per indicator.
-   * Default: 2. Set to 0 for none, -1 for all events.
+   * Default: 2. Set to 0 for none, -1 for all events. For JSON responses, when the
+   * limit hides events, the indicator carries `relatedEventsHasMore: true` and the
+   * response includes an advisory message — the cap is never applied silently. STIX
+   * and TAXII representations do not include related-event data.
    */
   relatedEventsLimit?: number;
 

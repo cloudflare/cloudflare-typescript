@@ -31,7 +31,7 @@ const runTests = (
 ) => {
   test('get: only required params', async () => {
     const responsePromise = client.pages.projects.deployments.history.logs.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', project_name: 'this-is-my-project-01' },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -45,7 +45,7 @@ const runTests = (
 
   test('get: required and optional params', async () => {
     const response = await client.pages.projects.deployments.history.logs.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', project_name: 'this-is-my-project-01' },
     );
   });

@@ -1121,6 +1121,43 @@
       ]
     },
     {
+      "base": "containers.applications.instances",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "application_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "queues.consumers",
       "name": "update",
       "params": [
@@ -3663,6 +3700,127 @@
     },
     {
       "base": "r2DataCatalog.namespaces.tables.maintenanceConfigs",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "table_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "table_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "basinCatalog.namespaces.tables",
+      "name": "list",
+      "params": [
+        {
+          "type": "param",
+          "key": "namespace",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "namespace",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "basinCatalog.namespaces.tables.maintenanceConfigs",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "table_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "table_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "basinCatalog.namespaces.tables.maintenanceConfigs",
       "name": "get",
       "params": [
         {
@@ -7272,6 +7430,80 @@
         {
           "type": "param",
           "key": "tag_uuid",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.threatSignals.articles.tags",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "tag_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "article_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "tag_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.threatSignals.articles.skillOutputs",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "skill_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "article_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "skill_id",
           "location": "path"
         },
         {

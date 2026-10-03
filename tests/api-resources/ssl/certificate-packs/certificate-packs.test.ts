@@ -79,7 +79,7 @@ const runTests = (client: PartialCloudflare<{ ssl: { certificatePacks: BaseCerti
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.ssl.certificatePacks.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.ssl.certificatePacks.delete('3822ff90-ea29-44df-9e55-21300bb9419b', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -92,13 +92,13 @@ const runTests = (client: PartialCloudflare<{ ssl: { certificatePacks: BaseCerti
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.ssl.certificatePacks.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.ssl.certificatePacks.delete('3822ff90-ea29-44df-9e55-21300bb9419b', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.ssl.certificatePacks.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.ssl.certificatePacks.edit('3822ff90-ea29-44df-9e55-21300bb9419b', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -111,14 +111,14 @@ const runTests = (client: PartialCloudflare<{ ssl: { certificatePacks: BaseCerti
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.ssl.certificatePacks.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.ssl.certificatePacks.edit('3822ff90-ea29-44df-9e55-21300bb9419b', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       cloudflare_branding: false,
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.ssl.certificatePacks.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.ssl.certificatePacks.get('3822ff90-ea29-44df-9e55-21300bb9419b', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -131,7 +131,7 @@ const runTests = (client: PartialCloudflare<{ ssl: { certificatePacks: BaseCerti
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.ssl.certificatePacks.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.ssl.certificatePacks.get('3822ff90-ea29-44df-9e55-21300bb9419b', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

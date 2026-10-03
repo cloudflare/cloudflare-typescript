@@ -40,7 +40,7 @@ export interface URLGetParams {
   account_id: string;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 }

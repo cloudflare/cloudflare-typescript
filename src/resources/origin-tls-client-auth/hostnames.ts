@@ -77,7 +77,7 @@ export type HostnameUpdateResponsesSinglePage = SinglePage<HostnameUpdateRespons
 
 export interface AuthenticatedOriginPull {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   cert_id?: string;
 
@@ -165,12 +165,12 @@ export interface AuthenticatedOriginPull {
 
 export interface HostnameUpdateResponse extends AuthenticatedOriginPull {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   cert_id?: string;
 

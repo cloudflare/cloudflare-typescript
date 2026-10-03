@@ -14,8 +14,9 @@ export class BaseRelease extends APIResource {
 
   /**
    * Delivers one or more quarantined messages to their intended recipients, for
-   * cases where a message was incorrectly quarantined. The response includes
-   * delivery status for each recipient.
+   * cases where a message was incorrectly quarantined. Operates on an explicit list
+   * of messages; to release all messages matching a search, create a bulk action job
+   * instead. The response includes delivery status for each recipient.
    *
    * @example
    * ```ts
@@ -23,7 +24,7 @@ export class BaseRelease extends APIResource {
    * for await (const releaseBulkResponse of client.emailSecurity.investigate.release.bulk(
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: ['4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678'],
+   *     ids: ['4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678'],
    *   },
    * )) {
    *   // ...
@@ -34,11 +35,11 @@ export class BaseRelease extends APIResource {
     params: ReleaseBulkParams,
     options?: RequestOptions,
   ): PagePromise<ReleaseBulkResponsesSinglePage, ReleaseBulkResponse> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/email-security/investigate/release`,
       SinglePage<ReleaseBulkResponse>,
-      { body: body, method: 'post', ...options },
+      { body, method: 'post', ...options },
     );
   }
 }
@@ -71,9 +72,9 @@ export interface ReleaseBulkParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Investigate IDs of the messages to release.
    */
-  body: Array<string>;
+  ids: Array<string>;
 }
 
 export declare namespace Release {

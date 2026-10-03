@@ -269,6 +269,60 @@ export class BaseRegistrar extends APIResource {
       }) as APIPromise<{ result: RegistrarSearchResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Performs real-time, authoritative eligibility checks directly against needed
+   * requirements. Use this endpoint to verify a domain is available before
+   * attempting a transfer via `POST /registrations/:domain_name/transfer-in`.
+   *
+   * **Note:** This endpoint uses POST to accept a list of domains in the request
+   * body. It is a read-only operation — it does not create, modify, or reserve any
+   * domains.
+   *
+   * ### Behavior
+   *
+   * - Maximum 10 domains per request
+   * - Pricing is only returned for domains where `transferable: true`
+   * - Results are not cached; each request queries the registry & other needed
+   *   upstreams
+   *
+   * ## Extension Support
+   *
+   * All `.uk` extensions (`.uk`, `.co.uk`, etc) do not support auth codes. As such,
+   * Cloudflare will ignore the `auth_code` section of this request for `.uk`
+   * domains.
+   *
+   * This means that a `.uk` domain depends on public data to obtain domain
+   * information, so it might be a few minutes outdated.
+   *
+   * ### Workflow
+   *
+   * 1. Call this endpoint with domains the user wants to transfer.
+   * 2. For each domain where `transferable: true`, present pricing to the user.
+   * 3. For each domain where `transferable: false`, present reasons to the user
+   * 4. Proceed to `POST /registrations/:domain_name/transfer-in` only for the
+   *    `transferable: true` domains.
+   *
+   * @example
+   * ```ts
+   * const response = await client.registrar.transferCheck({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   domains: [{ domain_name: 'example.co.uk' }],
+   * });
+   * ```
+   */
+  transferCheck(
+    params: RegistrarTransferCheckParams,
+    options?: RequestOptions,
+  ): APIPromise<RegistrarTransferCheckResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/registrar/domain-transfer-check`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: RegistrarTransferCheckResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 /**
  * Registrar API for searching, checking, registering, and managing domains through Cloudflare Registrar.
@@ -763,6 +817,231 @@ export namespace RegistrarSearchResponse {
   }
 }
 
+/**
+ * Contains the transfer eligibility results.
+ */
+export interface RegistrarTransferCheckResponse {
+  /**
+   * Maps domain names to transfer eligibility results. Each value contains `name`,
+   * `transferable`, and `reasons`.
+   */
+  domains: {
+    [key: string]:
+      | RegistrarTransferCheckResponse.TransferableResult
+      | RegistrarTransferCheckResponse.NonTransferableResult;
+  };
+}
+
+export namespace RegistrarTransferCheckResponse {
+  export interface TransferableResult {
+    /**
+     * Provides annual pricing information for a given domain. The API returns all
+     * per-year prices as strings to preserve decimal precision.
+     *
+     * `renewal_cost` and `registration_cost` or `transfer_cost` are frequently the
+     * same value, but may differ due to premium rates for certain domains.
+     *
+     * For a multi-year operations, the operation's cost applies to the first year and
+     * `renewal_cost` applies to each subsequent year. The values reflect the current
+     * registry rate, which can change over time.
+     */
+    pricing: TransferableResult.Pricing;
+
+    transferable: true;
+
+    /**
+     * The check evaluates this domain name.
+     */
+    name?: string;
+
+    reasons?: Array<TransferableResult.Reason>;
+  }
+
+  export namespace TransferableResult {
+    /**
+     * Provides annual pricing information for a given domain. The API returns all
+     * per-year prices as strings to preserve decimal precision.
+     *
+     * `renewal_cost` and `registration_cost` or `transfer_cost` are frequently the
+     * same value, but may differ due to premium rates for certain domains.
+     *
+     * For a multi-year operations, the operation's cost applies to the first year and
+     * `renewal_cost` applies to each subsequent year. The values reflect the current
+     * registry rate, which can change over time.
+     */
+    export interface Pricing {
+      /**
+       * ISO-4217 currency code for the prices (e.g., "USD", "EUR", "GBP").
+       */
+      currency: string;
+
+      /**
+       * Per-year renewal cost for this domain. Applied to each year beyond the first
+       * year of a multi-year registration, and to each annual auto-renewal thereafter.
+       * May differ from `registration_cost`, especially for premium domains where
+       * initial registration often costs more than renewals.
+       */
+      renewal_cost: string;
+
+      /**
+       * The first-year cost to transfer this domain.
+       */
+      transfer_cost: string;
+    }
+
+    export interface Reason {
+      /**
+       * Transfer eligibility reason code.
+       *
+       * - `extension_not_supported_via_api`: This API excludes the extension; dashboard
+       *   flows support it.
+       * - `extension_not_supported`: Cloudflare Registrar excludes the extension.
+       * - `domain_premium`: This API currently excludes premium transfers.
+       * - `extension_disallows_transfer`: Extension currently blocks transfer
+       *   operations.
+       * - `domain_not_exists`: No registration record exists for the domain.
+       * - `domain_on_cloudflare`: Cloudflare already serves as the domain's registrar.
+       * - `domain_locked`: Losing registrar reports transfer-prohibited lock status.
+       * - `registry_status`: Registry status currently blocks transfer (for example,
+       *   pending transfer or deletion state).
+       * - `domain_outside_transfer_window`: Domain is within a transfer wait window (for
+       *   example, recently registered).
+       * - `domain_max_term`: Completing transfer would exceed the registry maximum term.
+       * - `invalid_auth_code`: The provided auth code is incorrect.
+       * - `invalid_auth_code_format`: Auth code fails Base64 validation.
+       * - `dnssec_enabled`: DNSSEC is enabled. It must be disabled before transfer.
+       * - `zone_not_found`: The target account lacks a Cloudflare zone for the domain.
+       * - `zone_status_invalid`: The Cloudflare zone cannot transfer in its current
+       *   state.
+       * - `invalid_zone_plan`: The zone plan fails transfer requirements.
+       * - `domain_unsupported`: This endpoint rejects the domain name format.
+       */
+      code:
+        | 'extension_not_supported_via_api'
+        | 'extension_not_supported'
+        | 'domain_premium'
+        | 'extension_disallows_transfer'
+        | 'domain_not_exists'
+        | 'domain_on_cloudflare'
+        | 'domain_locked'
+        | 'registry_status'
+        | 'domain_outside_transfer_window'
+        | 'domain_max_term'
+        | 'invalid_auth_code'
+        | 'invalid_auth_code_format'
+        | 'dnssec_enabled'
+        | 'zone_not_found'
+        | 'zone_status_invalid'
+        | 'invalid_zone_plan'
+        | 'domain_unsupported';
+    }
+  }
+
+  export interface NonTransferableResult {
+    transferable: false;
+
+    /**
+     * The check evaluates this domain name.
+     */
+    name?: string;
+
+    /**
+     * Provides annual pricing information for a given domain. The API returns all
+     * per-year prices as strings to preserve decimal precision.
+     *
+     * `renewal_cost` and `registration_cost` or `transfer_cost` are frequently the
+     * same value, but may differ due to premium rates for certain domains.
+     *
+     * For a multi-year operations, the operation's cost applies to the first year and
+     * `renewal_cost` applies to each subsequent year. The values reflect the current
+     * registry rate, which can change over time.
+     */
+    pricing?: NonTransferableResult.Pricing;
+
+    reasons?: Array<NonTransferableResult.Reason>;
+  }
+
+  export namespace NonTransferableResult {
+    /**
+     * Provides annual pricing information for a given domain. The API returns all
+     * per-year prices as strings to preserve decimal precision.
+     *
+     * `renewal_cost` and `registration_cost` or `transfer_cost` are frequently the
+     * same value, but may differ due to premium rates for certain domains.
+     *
+     * For a multi-year operations, the operation's cost applies to the first year and
+     * `renewal_cost` applies to each subsequent year. The values reflect the current
+     * registry rate, which can change over time.
+     */
+    export interface Pricing {
+      /**
+       * ISO-4217 currency code for the prices (e.g., "USD", "EUR", "GBP").
+       */
+      currency: string;
+
+      /**
+       * Per-year renewal cost for this domain. Applied to each year beyond the first
+       * year of a multi-year registration, and to each annual auto-renewal thereafter.
+       * May differ from `registration_cost`, especially for premium domains where
+       * initial registration often costs more than renewals.
+       */
+      renewal_cost: string;
+
+      /**
+       * The first-year cost to transfer this domain.
+       */
+      transfer_cost: string;
+    }
+
+    export interface Reason {
+      /**
+       * Transfer eligibility reason code.
+       *
+       * - `extension_not_supported_via_api`: This API excludes the extension; dashboard
+       *   flows support it.
+       * - `extension_not_supported`: Cloudflare Registrar excludes the extension.
+       * - `domain_premium`: This API currently excludes premium transfers.
+       * - `extension_disallows_transfer`: Extension currently blocks transfer
+       *   operations.
+       * - `domain_not_exists`: No registration record exists for the domain.
+       * - `domain_on_cloudflare`: Cloudflare already serves as the domain's registrar.
+       * - `domain_locked`: Losing registrar reports transfer-prohibited lock status.
+       * - `registry_status`: Registry status currently blocks transfer (for example,
+       *   pending transfer or deletion state).
+       * - `domain_outside_transfer_window`: Domain is within a transfer wait window (for
+       *   example, recently registered).
+       * - `domain_max_term`: Completing transfer would exceed the registry maximum term.
+       * - `invalid_auth_code`: The provided auth code is incorrect.
+       * - `invalid_auth_code_format`: Auth code fails Base64 validation.
+       * - `dnssec_enabled`: DNSSEC is enabled. It must be disabled before transfer.
+       * - `zone_not_found`: The target account lacks a Cloudflare zone for the domain.
+       * - `zone_status_invalid`: The Cloudflare zone cannot transfer in its current
+       *   state.
+       * - `invalid_zone_plan`: The zone plan fails transfer requirements.
+       * - `domain_unsupported`: This endpoint rejects the domain name format.
+       */
+      code:
+        | 'extension_not_supported_via_api'
+        | 'extension_not_supported'
+        | 'domain_premium'
+        | 'extension_disallows_transfer'
+        | 'domain_not_exists'
+        | 'domain_on_cloudflare'
+        | 'domain_locked'
+        | 'registry_status'
+        | 'domain_outside_transfer_window'
+        | 'domain_max_term'
+        | 'invalid_auth_code'
+        | 'invalid_auth_code_format'
+        | 'dnssec_enabled'
+        | 'zone_not_found'
+        | 'zone_status_invalid'
+        | 'invalid_zone_plan'
+        | 'domain_unsupported';
+    }
+  }
+}
+
 export interface RegistrarCheckParams {
   /**
    * Path param: Cloudflare account ID. Required for all Registrar API operations.
@@ -813,6 +1092,33 @@ export interface RegistrarSearchParams {
   limit?: number;
 }
 
+export interface RegistrarTransferCheckParams {
+  /**
+   * Path param: Cloudflare account ID. Required for all Registrar API operations.
+   */
+  account_id: string;
+
+  /**
+   * Body param: List of domain objects to evaluate for transfer eligibility.
+   */
+  domains: Array<RegistrarTransferCheckParams.Domain>;
+}
+
+export namespace RegistrarTransferCheckParams {
+  export interface Domain {
+    /**
+     * Fully qualified domain name (FQDN) to check for transfer eligibility.
+     */
+    domain_name: string;
+
+    /**
+     * Base64-encoded auth/EPP code from the current registrar. Required for most TLDs.
+     * `.uk` namespaces do not use auth codes.
+     */
+    auth_code?: string;
+  }
+}
+
 Registrar.Domains = Domains;
 Registrar.BaseDomains = BaseDomains;
 Registrar.Registrations = Registrations;
@@ -834,8 +1140,10 @@ export declare namespace Registrar {
     type WorkflowStatus as WorkflowStatus,
     type RegistrarCheckResponse as RegistrarCheckResponse,
     type RegistrarSearchResponse as RegistrarSearchResponse,
+    type RegistrarTransferCheckResponse as RegistrarTransferCheckResponse,
     type RegistrarCheckParams as RegistrarCheckParams,
     type RegistrarSearchParams as RegistrarSearchParams,
+    type RegistrarTransferCheckParams as RegistrarTransferCheckParams,
   };
 
   export {

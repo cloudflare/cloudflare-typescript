@@ -13,7 +13,7 @@ export class BaseWidgets extends APIResource {
   ] as const);
 
   /**
-   * Lists challenge widgets.
+   * Creates a Turnstile widget for an account.
    *
    * @example
    * ```ts
@@ -41,7 +41,7 @@ export class BaseWidgets extends APIResource {
   }
 
   /**
-   * Update the configuration of a widget.
+   * Updates the configuration of a Turnstile widget.
    *
    * @example
    * ```ts
@@ -71,7 +71,7 @@ export class BaseWidgets extends APIResource {
   }
 
   /**
-   * Lists all turnstile widgets of an account.
+   * Lists Turnstile widgets for an account.
    *
    * @example
    * ```ts
@@ -96,7 +96,7 @@ export class BaseWidgets extends APIResource {
   }
 
   /**
-   * Destroy a Turnstile Widget.
+   * Deletes a Turnstile widget from an account.
    *
    * @example
    * ```ts
@@ -117,7 +117,7 @@ export class BaseWidgets extends APIResource {
   }
 
   /**
-   * Show a single challenge widget configuration.
+   * Returns the configuration of a Turnstile widget.
    *
    * @example
    * ```ts
@@ -137,8 +137,8 @@ export class BaseWidgets extends APIResource {
   }
 
   /**
-   * Generate a new secret key for this widget. If `invalidate_immediately` is set to
-   * `false`, the previous secret remains valid for 2 hours.
+   * Generates a new secret key for this widget. If `invalidate_immediately` is set
+   * to `false`, the previous secret remains valid for 2 hours.
    *
    * Note that secrets cannot be rotated again during the grace period.
    *
@@ -229,7 +229,7 @@ export interface Widget {
   secret: string;
 
   /**
-   * Widget item identifier tag.
+   * Unique identifier for a Turnstile widget.
    */
   sitekey: string;
 
@@ -316,7 +316,7 @@ export interface WidgetListResponse {
   region: 'world' | 'china';
 
   /**
-   * Widget item identifier tag.
+   * Unique identifier for a Turnstile widget.
    */
   sitekey: string;
 
@@ -364,8 +364,8 @@ export interface WidgetCreateParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: Filter widgets by field using case-insensitive substring matching.
-   * Format: `field:value`
+   * Query param: Filter widgets by field. The `name` field uses case-insensitive
+   * substring matching; `sitekey` uses exact matching. Format: `field:value`
    *
    * Supported fields:
    *
@@ -487,8 +487,8 @@ export interface WidgetListParams extends V4PagePaginationArrayParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: Filter widgets by field using case-insensitive substring matching.
-   * Format: `field:value`
+   * Query param: Filter widgets by field. The `name` field uses case-insensitive
+   * substring matching; `sitekey` uses exact matching. Format: `field:value`
    *
    * Supported fields:
    *

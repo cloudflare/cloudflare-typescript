@@ -14,7 +14,9 @@ export class BaseCORS extends APIResource {
   ] as const);
 
   /**
-   * Set the CORS policy for a bucket.
+   * Replaces the Cross-Origin Resource Sharing (CORS) rules for an R2 bucket. Rules
+   * specify which origins, methods, and headers are allowed for browser requests to
+   * objects in the bucket.
    *
    * @example
    * ```ts
@@ -174,7 +176,7 @@ export namespace CORSGetResponse {
 
 export interface CORSUpdateParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -248,7 +250,7 @@ export namespace CORSUpdateParams {
 
 export interface CORSDeleteParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -261,7 +263,7 @@ export interface CORSDeleteParams {
 
 export interface CORSGetParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
