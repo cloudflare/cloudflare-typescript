@@ -48,7 +48,7 @@ const runTests = (
       account_id: 'account_id',
       app_id: 'app_id',
       cursor: 'cursor',
-      limit: 'limit',
+      limit: 1,
     });
   });
 };

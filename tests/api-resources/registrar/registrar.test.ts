@@ -74,6 +74,27 @@ const runTests = (client: PartialCloudflare<{ registrar: BaseRegistrar }>) => {
       limit: 1,
     });
   });
+
+  test('transferCheck: only required params', async () => {
+    const responsePromise = client.registrar.transferCheck({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      domains: [{ domain_name: 'example.co.uk' }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('transferCheck: required and optional params', async () => {
+    const response = await client.registrar.transferCheck({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      domains: [{ domain_name: 'example.co.uk', auth_code: 'YmFzZTY0LWF1dGgtY29kZQ==' }],
+    });
+  });
 };
 describe('resource registrar', () => runTests(client));
 describe('resource registrar (tree shakable, base)', () => runTests(partialClient));

@@ -98,9 +98,10 @@ export class BaseBlockSenders extends APIResource {
   }
 
   /**
-   * Executes multiple operations atomically. All four operation arrays (deletes,
-   * patches, puts, posts) are required and executed in order. Send empty arrays for
-   * unused operations.
+   * Executes multiple blocked sender operations atomically: delete, partially
+   * update, replace, and create blocked sender patterns in a single request. All
+   * four operation arrays (deletes, patches, puts, posts) are required and executed
+   * in order. Send empty arrays for unused operations.
    *
    * @example
    * ```ts
@@ -209,6 +210,9 @@ export interface BlockSenderCreateResponse {
 
   created_at?: string;
 
+  /**
+   * Whether `pattern` is a regular expression instead of a literal value.
+   */
   is_regex?: boolean;
 
   /**
@@ -257,6 +261,9 @@ export interface BlockSenderListResponse {
 
   created_at?: string;
 
+  /**
+   * Whether `pattern` is a regular expression instead of a literal value.
+   */
   is_regex?: boolean;
 
   /**
@@ -330,6 +337,9 @@ export namespace BlockSenderBatchResponse {
 
     created_at?: string;
 
+    /**
+     * Whether `pattern` is a regular expression instead of a literal value.
+     */
     is_regex?: boolean;
 
     /**
@@ -378,6 +388,9 @@ export namespace BlockSenderBatchResponse {
 
     created_at?: string;
 
+    /**
+     * Whether `pattern` is a regular expression instead of a literal value.
+     */
     is_regex?: boolean;
 
     /**
@@ -426,6 +439,9 @@ export namespace BlockSenderBatchResponse {
 
     created_at?: string;
 
+    /**
+     * Whether `pattern` is a regular expression instead of a literal value.
+     */
     is_regex?: boolean;
 
     /**
@@ -475,6 +491,9 @@ export interface BlockSenderEditResponse {
 
   created_at?: string;
 
+  /**
+   * Whether `pattern` is a regular expression instead of a literal value.
+   */
   is_regex?: boolean;
 
   /**
@@ -523,6 +542,9 @@ export interface BlockSenderGetResponse {
 
   created_at?: string;
 
+  /**
+   * Whether `pattern` is a regular expression instead of a literal value.
+   */
   is_regex?: boolean;
 
   /**
@@ -565,7 +587,8 @@ export interface BlockSenderCreateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Whether `pattern` is a regular expression instead of a literal
+   * value.
    */
   is_regex: boolean;
 
@@ -647,22 +670,24 @@ export interface BlockSenderBatchParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: IDs of the blocked sender patterns to delete.
    */
   deletes: Array<BlockSenderBatchParams.Delete>;
 
   /**
-   * Body param
+   * Body param: Partial updates to apply — each entry carries the pattern's ID and
+   * only the fields to change.
    */
   patches: Array<BlockSenderBatchParams.Patch>;
 
   /**
-   * Body param
+   * Body param: Blocked sender patterns to create.
    */
   posts: Array<BlockSenderBatchParams.Post>;
 
   /**
-   * Body param
+   * Body param: Full replacements to apply — each entry carries the pattern's ID and
+   * every field of its new value.
    */
   puts: Array<BlockSenderBatchParams.Put>;
 }
@@ -681,6 +706,9 @@ export namespace BlockSenderBatchParams {
   export interface Patch {
     comments?: string | null;
 
+    /**
+     * Whether `pattern` is a regular expression instead of a literal value.
+     */
     is_regex?: boolean;
 
     /**
@@ -713,6 +741,9 @@ export namespace BlockSenderBatchParams {
    * Create a blocked sender pattern.
    */
   export interface Post {
+    /**
+     * Whether `pattern` is a regular expression instead of a literal value.
+     */
     is_regex: boolean;
 
     /**
@@ -747,6 +778,9 @@ export namespace BlockSenderBatchParams {
    * A blocked sender pattern.
    */
   export interface Put {
+    /**
+     * Whether `pattern` is a regular expression instead of a literal value.
+     */
     is_regex: boolean;
 
     /**
@@ -790,7 +824,8 @@ export interface BlockSenderEditParams {
   comments?: string | null;
 
   /**
-   * Body param
+   * Body param: Whether `pattern` is a regular expression instead of a literal
+   * value.
    */
   is_regex?: boolean;
 

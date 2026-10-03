@@ -20,7 +20,7 @@ export class BaseTails extends APIResource {
    * ```ts
    * const tail =
    *   await client.pages.projects.deployments.tails.create(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       project_name: 'this-is-my-project-01',
@@ -53,7 +53,7 @@ export class BaseTails extends APIResource {
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       project_name: 'this-is-my-project-01',
-   *       deployment_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       deployment_id: 'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
    *     },
    *   );
    * ```
@@ -99,7 +99,8 @@ export interface TailCreateParams {
   account_id: string;
 
   /**
-   * Path param: Name of the project.
+   * Path param: Name of the Pages project. Must begin with a lowercase letter or
+   * digit and contain only lowercase letters, digits, and hyphens.
    */
   project_name: string;
 
@@ -116,12 +117,14 @@ export interface TailDeleteParams {
   account_id: string;
 
   /**
-   * Name of the project.
+   * Name of the Pages project. Must begin with a lowercase letter or digit and
+   * contain only lowercase letters, digits, and hyphens.
    */
   project_name: string;
 
   /**
-   * Identifier.
+   * UUID of the Pages deployment, as returned by deployment list or create
+   * operations.
    */
   deployment_id: string;
 }

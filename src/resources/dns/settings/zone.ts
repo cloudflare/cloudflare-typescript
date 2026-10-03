@@ -79,9 +79,12 @@ export interface ZoneEditResponse {
   multi_provider: boolean;
 
   /**
-   * Settings determining the nameservers through which the zone should be available.
+   * Controls the nameservers through which the zone is available.
    */
-  nameservers: ZoneEditResponse.Nameservers;
+  nameservers:
+    | ZoneEditResponse.DNSSettingsZoneNameserversCloudflare
+    | ZoneEditResponse.DNSSettingsZoneNameserversCustomExisting
+    | ZoneEditResponse.DNSSettingsZoneNameserversCustomSet;
 
   /**
    * The time to live (TTL) of the zone's nameserver (NS) records.
@@ -116,19 +119,35 @@ export namespace ZoneEditResponse {
     reference_zone_id?: string;
   }
 
-  /**
-   * Settings determining the nameservers through which the zone should be available.
-   */
-  export interface Nameservers {
+  export interface DNSSettingsZoneNameserversCloudflare {
     /**
-     * Nameserver type
+     * Nameserver type.
      */
-    type: 'cloudflare.standard' | 'cloudflare.advanced' | 'custom.account' | 'custom.tenant' | 'custom.zone';
+    type: 'cloudflare.standard' | 'cloudflare.advanced';
+  }
+
+  export interface DNSSettingsZoneNameserversCustomExisting {
+    /**
+     * Nameserver type.
+     */
+    type: 'custom.account' | 'custom.tenant' | 'custom.zone';
 
     /**
-     * Configured nameserver set to be used for this zone
+     * Configured nameserver set number to use for this zone.
      */
     ns_set?: number;
+  }
+
+  export interface DNSSettingsZoneNameserversCustomSet {
+    /**
+     * Identifier of the account-owned Custom Nameserver Set to use for this zone.
+     */
+    nameserver_set_id: string;
+
+    /**
+     * Nameserver type.
+     */
+    type: 'custom';
   }
 
   /**
@@ -204,9 +223,12 @@ export interface ZoneGetResponse {
   multi_provider: boolean;
 
   /**
-   * Settings determining the nameservers through which the zone should be available.
+   * Controls the nameservers through which the zone is available.
    */
-  nameservers: ZoneGetResponse.Nameservers;
+  nameservers:
+    | ZoneGetResponse.DNSSettingsZoneNameserversCloudflare
+    | ZoneGetResponse.DNSSettingsZoneNameserversCustomExisting
+    | ZoneGetResponse.DNSSettingsZoneNameserversCustomSet;
 
   /**
    * The time to live (TTL) of the zone's nameserver (NS) records.
@@ -241,19 +263,35 @@ export namespace ZoneGetResponse {
     reference_zone_id?: string;
   }
 
-  /**
-   * Settings determining the nameservers through which the zone should be available.
-   */
-  export interface Nameservers {
+  export interface DNSSettingsZoneNameserversCloudflare {
     /**
-     * Nameserver type
+     * Nameserver type.
      */
-    type: 'cloudflare.standard' | 'cloudflare.advanced' | 'custom.account' | 'custom.tenant' | 'custom.zone';
+    type: 'cloudflare.standard' | 'cloudflare.advanced';
+  }
+
+  export interface DNSSettingsZoneNameserversCustomExisting {
+    /**
+     * Nameserver type.
+     */
+    type: 'custom.account' | 'custom.tenant' | 'custom.zone';
 
     /**
-     * Configured nameserver set to be used for this zone
+     * Configured nameserver set number to use for this zone.
      */
     ns_set?: number;
+  }
+
+  export interface DNSSettingsZoneNameserversCustomSet {
+    /**
+     * Identifier of the account-owned Custom Nameserver Set to use for this zone.
+     */
+    nameserver_set_id: string;
+
+    /**
+     * Nameserver type.
+     */
+    type: 'custom';
   }
 
   /**
@@ -334,10 +372,12 @@ export interface ZoneEditParams {
   multi_provider?: boolean;
 
   /**
-   * Body param: Settings determining the nameservers through which the zone should
-   * be available.
+   * Body param: Controls the nameservers through which the zone is available.
    */
-  nameservers?: ZoneEditParams.Nameservers;
+  nameservers?:
+    | ZoneEditParams.DNSSettingsZoneNameserversCloudflare
+    | ZoneEditParams.DNSSettingsZoneNameserversCustomExisting
+    | ZoneEditParams.DNSSettingsZoneNameserversCustomSet;
 
   /**
    * Body param: The time to live (TTL) of the zone's nameserver (NS) records.
@@ -372,19 +412,35 @@ export namespace ZoneEditParams {
     reference_zone_id?: string;
   }
 
-  /**
-   * Settings determining the nameservers through which the zone should be available.
-   */
-  export interface Nameservers {
+  export interface DNSSettingsZoneNameserversCloudflare {
     /**
-     * Configured nameserver set to be used for this zone
+     * Nameserver type.
      */
-    ns_set?: number;
+    type: 'cloudflare.standard' | 'cloudflare.advanced';
+  }
+
+  export interface DNSSettingsZoneNameserversCustomExisting {
+    /**
+     * Nameserver type.
+     */
+    type: 'custom.account' | 'custom.tenant' | 'custom.zone';
 
     /**
-     * Nameserver type
+     * Configured nameserver set number to use for this zone.
      */
-    type?: 'cloudflare.standard' | 'cloudflare.advanced' | 'custom.account' | 'custom.tenant' | 'custom.zone';
+    ns_set?: number;
+  }
+
+  export interface DNSSettingsZoneNameserversCustomSet {
+    /**
+     * Identifier of the account-owned Custom Nameserver Set to use for this zone.
+     */
+    nameserver_set_id: string;
+
+    /**
+     * Nameserver type.
+     */
+    type: 'custom';
   }
 
   /**

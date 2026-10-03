@@ -316,7 +316,7 @@ export interface DeploymentDeleteParams {
   account_id: string;
 
   /**
-   * Name of the script, used in URLs and route configuration.
+   * Name of the script.
    */
   script_name: string;
 }
@@ -328,7 +328,7 @@ export interface DeploymentGetParams {
   account_id: string;
 
   /**
-   * Name of the script, used in URLs and route configuration.
+   * Name of the script.
    */
   script_name: string;
 }

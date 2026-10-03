@@ -96,6 +96,7 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersBindingKindAISearchNamespace
     | SettingEditResponse.WorkersBindingKindMessaging
     | SettingEditResponse.WorkersBindingKindAnalyticsEngine
+    | SettingEditResponse.WorkersBindingKindArtifacts
     | SettingEditResponse.WorkersBindingKindAssets
     | SettingEditResponse.WorkersBindingKindBrowser
     | SettingEditResponse.WorkersBindingKindD1
@@ -293,6 +294,26 @@ export namespace SettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'analytics_engine';
+  }
+
+  export interface WorkersBindingKindArtifacts {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The Artifacts namespace exposed to the Worker in the Worker's account. Must be
+     * 2-63 characters, start with an ASCII alphanumeric character, contain only ASCII
+     * alphanumeric characters, dots, underscores, and hyphens, and must not end with a
+     * hyphen. The namespace does not need to be created before binding it.
+     */
+    namespace: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'artifacts';
   }
 
   export interface WorkersBindingKindAssets {
@@ -1508,6 +1529,7 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersBindingKindAISearchNamespace
     | SettingGetResponse.WorkersBindingKindMessaging
     | SettingGetResponse.WorkersBindingKindAnalyticsEngine
+    | SettingGetResponse.WorkersBindingKindArtifacts
     | SettingGetResponse.WorkersBindingKindAssets
     | SettingGetResponse.WorkersBindingKindBrowser
     | SettingGetResponse.WorkersBindingKindD1
@@ -1705,6 +1727,26 @@ export namespace SettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'analytics_engine';
+  }
+
+  export interface WorkersBindingKindArtifacts {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The Artifacts namespace exposed to the Worker in the Worker's account. Must be
+     * 2-63 characters, start with an ASCII alphanumeric character, contain only ASCII
+     * alphanumeric characters, dots, underscores, and hyphens, and must not end with a
+     * hyphen. The namespace does not need to be created before binding it.
+     */
+    namespace: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'artifacts';
   }
 
   export interface WorkersBindingKindAssets {
@@ -2940,6 +2982,7 @@ export namespace SettingEditParams {
       | Settings.WorkersBindingKindAISearchNamespace
       | Settings.WorkersBindingKindMessaging
       | Settings.WorkersBindingKindAnalyticsEngine
+      | Settings.WorkersBindingKindArtifacts
       | Settings.WorkersBindingKindAssets
       | Settings.WorkersBindingKindBrowser
       | Settings.WorkersBindingKindD1
@@ -3148,6 +3191,26 @@ export namespace SettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'analytics_engine';
+    }
+
+    export interface WorkersBindingKindArtifacts {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The Artifacts namespace exposed to the Worker in the Worker's account. Must be
+       * 2-63 characters, start with an ASCII alphanumeric character, contain only ASCII
+       * alphanumeric characters, dots, underscores, and hyphens, and must not end with a
+       * hyphen. The namespace does not need to be created before binding it.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'artifacts';
     }
 
     export interface WorkersBindingKindAssets {

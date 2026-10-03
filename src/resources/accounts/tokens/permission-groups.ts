@@ -14,7 +14,9 @@ export class BasePermissionGroups extends APIResource {
   ] as const);
 
   /**
-   * Find all available permission groups for Account Owned API Tokens
+   * Find all available permission groups for Account Owned API Tokens. Each
+   * permission group indicates whether the caller can select it when creating a
+   * token. Token creation performs the authoritative permission check.
    *
    * @example
    * ```ts
@@ -39,7 +41,9 @@ export class BasePermissionGroups extends APIResource {
   }
 
   /**
-   * Find all available permission groups for Account Owned API Tokens
+   * Find all available permission groups for Account Owned API Tokens. Each
+   * permission group indicates whether the caller can select it when creating a
+   * token. Token creation performs the authoritative permission check.
    *
    * @example
    * ```ts
@@ -88,6 +92,11 @@ export interface PermissionGroupListResponse {
     | 'other';
 
   /**
+   * Whether the caller can select this permission group when creating a token.
+   */
+  is_selectable?: boolean;
+
+  /**
    * Permission Group Name
    */
   name?: string;
@@ -129,6 +138,11 @@ export namespace PermissionGroupGetResponse {
       | 'cache_and_performance'
       | 'account_and_billing'
       | 'other';
+
+    /**
+     * Whether the caller can select this permission group when creating a token.
+     */
+    is_selectable?: boolean;
 
     /**
      * Permission Group Name

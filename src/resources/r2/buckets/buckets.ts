@@ -80,7 +80,8 @@ export class BaseBuckets extends APIResource {
   static override readonly _key: readonly ['r2', 'buckets'] = Object.freeze(['r2', 'buckets'] as const);
 
   /**
-   * Creates a new R2 bucket.
+   * Creates an R2 bucket in the account and selected jurisdiction, with an optional
+   * location hint and default storage class.
    *
    * @example
    * ```ts
@@ -109,7 +110,8 @@ export class BaseBuckets extends APIResource {
   }
 
   /**
-   * Lists all R2 buckets on your account.
+   * Lists a page of R2 buckets in the account and selected jurisdiction. Use the
+   * returned cursor to retrieve the next page.
    *
    * @example
    * ```ts
@@ -137,7 +139,9 @@ export class BaseBuckets extends APIResource {
   }
 
   /**
-   * Deletes an existing R2 bucket.
+   * Deletes an empty R2 bucket and its configuration. The bucket must have no
+   * objects, no in-progress multipart uploads, and no event notification rules;
+   * otherwise the request fails.
    *
    * @example
    * ```ts
@@ -169,7 +173,9 @@ export class BaseBuckets extends APIResource {
   }
 
   /**
-   * Updates properties of an existing R2 bucket.
+   * Changes the default storage class for newly uploaded objects in an existing R2
+   * bucket. Existing objects retain their storage class, and individual uploads can
+   * override the bucket default.
    *
    * @example
    * ```ts
@@ -279,7 +285,7 @@ export type BucketDeleteResponse = unknown;
 
 export interface BucketCreateParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -308,7 +314,7 @@ export interface BucketCreateParams {
 
 export interface BucketListParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -354,7 +360,7 @@ export interface BucketListParams {
 
 export interface BucketDeleteParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -367,7 +373,7 @@ export interface BucketDeleteParams {
 
 export interface BucketEditParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -386,7 +392,7 @@ export interface BucketEditParams {
 
 export interface BucketGetParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 

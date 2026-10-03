@@ -2,11 +2,15 @@
 
 Types:
 
+- <code><a href="./src/resources/cache/cache.ts">CacheInvalidateResponse</a></code>
+- <code><a href="./src/resources/cache/cache.ts">CacheInvalidateEnvironmentResponse</a></code>
 - <code><a href="./src/resources/cache/cache.ts">CachePurgeResponse</a></code>
 - <code><a href="./src/resources/cache/cache.ts">CachePurgeEnvironmentResponse</a></code>
 
 Methods:
 
+- <code title="post /zones/{zone_id}/invalidate_cache">client.cache.<a href="./src/resources/cache/cache.ts">invalidate</a>({ ...params }) -> CacheInvalidateResponse | null</code>
+- <code title="post /zones/{zone_id}/environments/{environment_id}/invalidate_cache">client.cache.<a href="./src/resources/cache/cache.ts">invalidateEnvironment</a>(environmentID, { ...params }) -> CacheInvalidateEnvironmentResponse | null</code>
 - <code title="post /zones/{zone_id}/purge_cache">client.cache.<a href="./src/resources/cache/cache.ts">purge</a>({ ...params }) -> CachePurgeResponse | null</code>
 - <code title="post /zones/{zone_id}/environments/{environment_id}/purge_cache">client.cache.<a href="./src/resources/cache/cache.ts">purgeEnvironment</a>(environmentID, { ...params }) -> CachePurgeEnvironmentResponse | null</code>
 

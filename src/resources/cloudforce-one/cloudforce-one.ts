@@ -50,29 +50,32 @@ import {
   ThreatEventListResponse,
   ThreatEvents,
 } from './threat-events/threat-events';
+import * as ThreatSignalsAPI from './threat-signals/threat-signals';
+import { BaseThreatSignals, ThreatSignals } from './threat-signals/threat-signals';
 
 export class BaseCloudforceOne extends APIResource {
   static override readonly _key: readonly ['cloudforceOne'] = Object.freeze(['cloudforceOne'] as const);
 }
 export class CloudforceOne extends BaseCloudforceOne {
-  scans: ScansAPI.Scans = new ScansAPI.Scans(this._client);
   binaryStorage: BinaryStorageAPI.BinaryStorage = new BinaryStorageAPI.BinaryStorage(this._client);
   requests: RequestsAPI.Requests = new RequestsAPI.Requests(this._client);
+  scans: ScansAPI.Scans = new ScansAPI.Scans(this._client);
   threatEvents: ThreatEventsAPI.ThreatEvents = new ThreatEventsAPI.ThreatEvents(this._client);
+  threatSignals: ThreatSignalsAPI.ThreatSignals = new ThreatSignalsAPI.ThreatSignals(this._client);
 }
 
-CloudforceOne.Scans = Scans;
-CloudforceOne.BaseScans = BaseScans;
 CloudforceOne.BinaryStorage = BinaryStorage;
 CloudforceOne.BaseBinaryStorage = BaseBinaryStorage;
 CloudforceOne.Requests = Requests;
 CloudforceOne.BaseRequests = BaseRequests;
+CloudforceOne.Scans = Scans;
+CloudforceOne.BaseScans = BaseScans;
 CloudforceOne.ThreatEvents = ThreatEvents;
 CloudforceOne.BaseThreatEvents = BaseThreatEvents;
+CloudforceOne.ThreatSignals = ThreatSignals;
+CloudforceOne.BaseThreatSignals = BaseThreatSignals;
 
 export declare namespace CloudforceOne {
-  export { Scans as Scans, BaseScans as BaseScans };
-
   export {
     BinaryStorage as BinaryStorage,
     BaseBinaryStorage as BaseBinaryStorage,
@@ -103,6 +106,8 @@ export declare namespace CloudforceOne {
     type RequestTypesParams as RequestTypesParams,
   };
 
+  export { Scans as Scans, BaseScans as BaseScans };
+
   export {
     ThreatEvents as ThreatEvents,
     BaseThreatEvents as BaseThreatEvents,
@@ -119,4 +124,6 @@ export declare namespace CloudforceOne {
     type ThreatEventEditParams as ThreatEventEditParams,
     type ThreatEventGetParams as ThreatEventGetParams,
   };
+
+  export { ThreatSignals as ThreatSignals, BaseThreatSignals as BaseThreatSignals };
 }

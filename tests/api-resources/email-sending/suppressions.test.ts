@@ -47,6 +47,7 @@ const runTests = (client: PartialCloudflare<{ emailSending: { suppressions: Base
       email: 'user@example.com',
       expires_at: '2027-01-01T00:00:00Z',
       note: 'Imported from CRM',
+      scope: { type: 'sending_domain', value: 'mail.example.com' },
     });
   });
 
@@ -64,10 +65,12 @@ const runTests = (client: PartialCloudflare<{ emailSending: { suppressions: Base
   test('list: required and optional params', async () => {
     const response = await client.emailSending.suppressions.list({
       account_id: '12345678',
-      cursor: 'eyJ0IjozLCJwIjoxMjMsImMiOiJjM2RjNWYwYjM0YTE0ZmY4ZTFiM2VjMDQ4OTVlMWIyMiJ9',
+      cursor: 'eyJ0Ijo0LCJwaCI6ImRvbWFpbiIsInAiOjEyMywiYyI6ImMzZGM1ZjBiMzRhMTRmZjhlMWIzZWMwNDg5NWUxYjIyIn0',
       email: 'user@example.com',
       per_page: 100,
       reason: 'hard_bounce',
+      scope_type: 'sending_domain',
+      scope_value: 'mail.example.com',
       search: 'billing@',
     });
   });
@@ -109,6 +112,7 @@ const runTests = (client: PartialCloudflare<{ emailSending: { suppressions: Base
       account_id: '12345678',
       expires_at: '2027-01-01T00:00:00Z',
       note: 'Customer re-confirmed opt-in',
+      scope: {},
     });
   });
 
@@ -153,11 +157,13 @@ const runTests = (client: PartialCloudflare<{ emailSending: { suppressions: Base
           email: 'user@example.com',
           expires_at: '2027-01-01T00:00:00Z',
           note: 'Imported from CRM',
+          scope: { type: 'sending_domain', value: 'mail.example.com' },
         },
         {
           email: 'other@example.com',
           expires_at: '2027-01-01T00:00:00Z',
           note: 'Imported from CRM',
+          scope: { type: 'sending_domain', value: 'mail.example.com' },
         },
       ],
     });

@@ -407,6 +407,134 @@ export class CursorLimitPagination<Item>
   }
 }
 
+export interface ContainersInstancesV1PaginationResponse<Item> {
+  result: ContainersInstancesV1PaginationResponse.Result<Item>;
+
+  result_info: ContainersInstancesV1PaginationResponse.ResultInfo;
+}
+
+export namespace ContainersInstancesV1PaginationResponse {
+  export interface Result<Item> {
+    instances?: Array<Item>;
+  }
+
+  export interface ResultInfo {
+    next_page_token?: string;
+
+    page_token?: string;
+
+    per_page?: number;
+  }
+}
+
+export interface ContainersInstancesV1PaginationParams {
+  per_page?: number;
+
+  page_token?: string;
+}
+
+export class ContainersInstancesV1Pagination<Item>
+  extends AbstractPage<Item>
+  implements ContainersInstancesV1PaginationResponse<Item>
+{
+  result: ContainersInstancesV1PaginationResponse.Result<Item>;
+
+  result_info: ContainersInstancesV1PaginationResponse.ResultInfo;
+
+  constructor(
+    client: BaseCloudflare,
+    response: Response,
+    body: ContainersInstancesV1PaginationResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
+    super(client, response, body, options);
+
+    this.result = body.result || {};
+    this.result_info = body.result_info || {};
+  }
+
+  getPaginatedItems(): Item[] {
+    return this.result?.instances ?? [];
+  }
+
+  nextPageRequestOptions(): PageRequestOptions | null {
+    const cursor = this.result_info?.next_page_token;
+    if (!cursor) {
+      return null;
+    }
+
+    return {
+      ...this.options,
+      query: {
+        ...maybeObj(this.options.query),
+        page_token: cursor,
+      },
+    };
+  }
+}
+
+export interface PageTokenPaginationResponse<Item> {
+  result: Array<Item>;
+
+  result_info: PageTokenPaginationResponse.ResultInfo;
+}
+
+export namespace PageTokenPaginationResponse {
+  export interface ResultInfo {
+    next_page_token?: string;
+
+    page_token?: string;
+
+    per_page?: number;
+  }
+}
+
+export interface PageTokenPaginationParams {
+  per_page?: number;
+
+  page_token?: string;
+}
+
+export class PageTokenPagination<Item>
+  extends AbstractPage<Item>
+  implements PageTokenPaginationResponse<Item>
+{
+  result: Array<Item>;
+
+  result_info: PageTokenPaginationResponse.ResultInfo;
+
+  constructor(
+    client: BaseCloudflare,
+    response: Response,
+    body: PageTokenPaginationResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
+    super(client, response, body, options);
+
+    this.result = body.result || [];
+    this.result_info = body.result_info || {};
+  }
+
+  getPaginatedItems(): Item[] {
+    return this.result ?? [];
+  }
+
+  nextPageRequestOptions(): PageRequestOptions | null {
+    const cursor = this.result_info?.next_page_token;
+    if (!cursor) {
+      return null;
+    }
+
+    return {
+      ...this.options,
+      query: {
+        ...maybeObj(this.options.query),
+        page_token: cursor,
+      },
+    };
+  }
+}
+
 export interface SinglePageResponse<Item> {
   result: Array<Item>;
 }

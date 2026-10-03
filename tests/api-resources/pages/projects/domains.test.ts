@@ -30,7 +30,7 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: { domains: Base
   test('create: only required params', async () => {
     const responsePromise = client.pages.projects.domains.create('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'this-is-my-domain-01.com',
+      name: 'example.com',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -44,7 +44,7 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: { domains: Base
   test('create: required and optional params', async () => {
     const response = await client.pages.projects.domains.create('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'this-is-my-domain-01.com',
+      name: 'example.com',
     });
   });
 
@@ -68,7 +68,7 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: { domains: Base
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.pages.projects.domains.delete('this-is-my-domain-01.com', {
+    const responsePromise = client.pages.projects.domains.delete('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
     });
@@ -82,14 +82,14 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: { domains: Base
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.pages.projects.domains.delete('this-is-my-domain-01.com', {
+    const response = await client.pages.projects.domains.delete('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.pages.projects.domains.edit('this-is-my-domain-01.com', {
+    const responsePromise = client.pages.projects.domains.edit('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
     });
@@ -103,14 +103,14 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: { domains: Base
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.pages.projects.domains.edit('this-is-my-domain-01.com', {
+    const response = await client.pages.projects.domains.edit('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.pages.projects.domains.get('this-is-my-domain-01.com', {
+    const responsePromise = client.pages.projects.domains.get('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
     });
@@ -124,7 +124,7 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: { domains: Base
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.pages.projects.domains.get('this-is-my-domain-01.com', {
+    const response = await client.pages.projects.domains.get('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
     });

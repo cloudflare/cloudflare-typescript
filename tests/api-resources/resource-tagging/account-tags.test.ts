@@ -31,7 +31,7 @@ const runTests = (client: PartialCloudflare<{ resourceTagging: { accountTags: Ba
     const responsePromise = client.resourceTagging.accountTags.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      resource_type: 'worker',
+      resource_type: 'worker_version',
       worker_id: '3f72a691-44b3-4c11-8642-c18a88ddaa5e',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -47,7 +47,7 @@ const runTests = (client: PartialCloudflare<{ resourceTagging: { accountTags: Ba
     const response = await client.resourceTagging.accountTags.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      resource_type: 'worker',
+      resource_type: 'worker_version',
       worker_id: '3f72a691-44b3-4c11-8642-c18a88ddaa5e',
       tags: { environment: 'production', team: 'engineering' },
       'If-Match': '"v1:RBNvo1WzZ4oRRq0W9-hkng"',

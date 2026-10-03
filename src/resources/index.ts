@@ -25,6 +25,7 @@ export {
 } from './analytics-query/analytics-query';
 export { Argo, BaseArgo } from './argo/argo';
 export { AuditLogs, BaseAuditLogs } from './audit-logs';
+export { BasinCatalog, BaseBasinCatalog } from './basin-catalog/basin-catalog';
 export { Billing, BaseBilling } from './billing/billing';
 export { BotManagement, BaseBotManagement } from './bot-management';
 export { BotnetFeed, BaseBotnetFeed } from './botnet-feed/botnet-feed';
@@ -40,6 +41,7 @@ export { ClientCertificates, BaseClientCertificates } from './client-certificate
 export { CloudConnector, BaseCloudConnector } from './cloud-connector/cloud-connector';
 export { CloudforceOne, BaseCloudforceOne } from './cloudforce-one/cloudforce-one';
 export { Connectivity, BaseConnectivity } from './connectivity/connectivity';
+export { Containers, BaseContainers } from './containers/containers';
 export { ContentScanning, BaseContentScanning } from './content-scanning/content-scanning';
 export { CsamScanner, BaseCsamScanner } from './csam-scanner';
 export { CustomCertificates, BaseCustomCertificates } from './custom-certificates/custom-certificates';

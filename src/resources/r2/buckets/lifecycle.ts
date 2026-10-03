@@ -14,7 +14,9 @@ export class BaseLifecycle extends APIResource {
   ] as const);
 
   /**
-   * Set the object lifecycle rules for a bucket.
+   * Replaces the object lifecycle rules for an R2 bucket. Rules match object-key
+   * prefixes and can expire objects, abort incomplete multipart uploads, or
+   * transition objects to Infrequent Access storage.
    *
    * @example
    * ```ts
@@ -226,7 +228,7 @@ export namespace LifecycleGetResponse {
 
 export interface LifecycleUpdateParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -382,7 +384,7 @@ export namespace LifecycleUpdateParams {
 
 export interface LifecycleGetParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 

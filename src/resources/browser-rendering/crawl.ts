@@ -278,6 +278,12 @@ export declare namespace CrawlCreateParams {
     bestAttempt?: boolean;
 
     /**
+     * Body param: Rendering backend for this crawl. Set to `kitesurf` to render pages
+     * with Kitesurf (beta). Only valid when `render` is `true`.
+     */
+    browser?: 'kitesurf';
+
+    /**
      * Body param: Intended content use level to respect the `use` Content-Signal
      * directive in robots.txt. Levels (least to most permissive): 'reference', 'full'.
      * A URL is disallowed when the publisher's declared `use` level is lower than this

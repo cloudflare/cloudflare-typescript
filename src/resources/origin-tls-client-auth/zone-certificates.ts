@@ -76,7 +76,7 @@ export class BaseZoneCertificates extends APIResource {
    * ```ts
    * const zoneCertificate =
    *   await client.originTLSClientAuth.zoneCertificates.delete(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -103,7 +103,7 @@ export class BaseZoneCertificates extends APIResource {
    * ```ts
    * const zoneCertificate =
    *   await client.originTLSClientAuth.zoneCertificates.get(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -128,7 +128,7 @@ export type ZoneCertificateListResponsesSinglePage = SinglePage<ZoneCertificateL
 
 export interface ZoneAuthenticatedOriginPull {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
@@ -172,7 +172,7 @@ export interface ZoneAuthenticatedOriginPull {
 
 export interface ZoneCertificateCreateResponse extends ZoneAuthenticatedOriginPull {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
@@ -194,7 +194,7 @@ export interface ZoneCertificateCreateResponse extends ZoneAuthenticatedOriginPu
 
 export interface ZoneCertificateListResponse extends ZoneAuthenticatedOriginPull {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
@@ -216,7 +216,7 @@ export interface ZoneCertificateListResponse extends ZoneAuthenticatedOriginPull
 
 export interface ZoneCertificateDeleteResponse extends ZoneAuthenticatedOriginPull {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
@@ -238,7 +238,7 @@ export interface ZoneCertificateDeleteResponse extends ZoneAuthenticatedOriginPu
 
 export interface ZoneCertificateGetResponse extends ZoneAuthenticatedOriginPull {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 

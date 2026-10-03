@@ -15,14 +15,7 @@ import {
 import * as AddressMapsIPsAPI from './ips';
 import { BaseIPs, IPDeleteParams, IPDeleteResponse, IPUpdateParams, IPUpdateResponse, IPs } from './ips';
 import * as ZonesAPI from './zones';
-import {
-  BaseZones,
-  ZoneDeleteParams,
-  ZoneDeleteResponse,
-  ZoneUpdateParams,
-  ZoneUpdateResponse,
-  Zones,
-} from './zones';
+import { BaseZones, Zones } from './zones';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -572,12 +565,5 @@ export declare namespace AddressMaps {
     type IPDeleteParams as IPDeleteParams,
   };
 
-  export {
-    Zones as Zones,
-    BaseZones as BaseZones,
-    type ZoneUpdateResponse as ZoneUpdateResponse,
-    type ZoneDeleteResponse as ZoneDeleteResponse,
-    type ZoneUpdateParams as ZoneUpdateParams,
-    type ZoneDeleteParams as ZoneDeleteParams,
-  };
+  export { Zones as Zones, BaseZones as BaseZones };
 }

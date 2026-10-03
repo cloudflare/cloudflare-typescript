@@ -90,7 +90,7 @@ export class BaseCustomHostnames extends APIResource {
    * @example
    * ```ts
    * const customHostname = await client.customHostnames.delete(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
    *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
@@ -116,7 +116,7 @@ export class BaseCustomHostnames extends APIResource {
    * @example
    * ```ts
    * const response = await client.customHostnames.edit(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
    *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
@@ -142,7 +142,7 @@ export class BaseCustomHostnames extends APIResource {
    * @example
    * ```ts
    * const customHostname = await client.customHostnames.get(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
    *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
@@ -187,7 +187,7 @@ export type BundleMethodParam = 'ubiquitous' | 'optimal' | 'force';
 
 export interface CustomHostname {
   /**
-   * Identifier.
+   * Custom hostname identifier tag.
    */
   id: string;
 
@@ -576,7 +576,7 @@ export type DomainValidationTypeParam = 'dv';
 
 export interface CustomHostnameCreateResponse {
   /**
-   * Identifier.
+   * Custom hostname identifier tag.
    */
   id: string;
 
@@ -943,7 +943,7 @@ export namespace CustomHostnameCreateResponse {
 
 export interface CustomHostnameListResponse {
   /**
-   * Identifier.
+   * Custom hostname identifier tag.
    */
   id: string;
 
@@ -1310,14 +1310,14 @@ export namespace CustomHostnameListResponse {
 
 export interface CustomHostnameDeleteResponse {
   /**
-   * Identifier.
+   * Custom hostname identifier tag.
    */
   id?: string;
 }
 
 export interface CustomHostnameEditResponse {
   /**
-   * Identifier.
+   * Custom hostname identifier tag.
    */
   id: string;
 
@@ -1684,7 +1684,7 @@ export namespace CustomHostnameEditResponse {
 
 export interface CustomHostnameGetResponse {
   /**
-   * Identifier.
+   * Custom hostname identifier tag.
    */
   id: string;
 

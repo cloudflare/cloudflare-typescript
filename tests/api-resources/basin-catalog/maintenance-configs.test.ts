@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { AddressMaps } from 'cloudflare/resources/addressing/address-maps/address-maps';
-import { BaseZones } from 'cloudflare/resources/addressing/address-maps/zones';
+import { BasinCatalog } from 'cloudflare/resources/basin-catalog/basin-catalog';
+import { BaseMaintenanceConfigs } from 'cloudflare/resources/basin-catalog/maintenance-configs';
 
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
@@ -16,21 +16,22 @@ const partialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [BaseZones],
+  resources: [BaseMaintenanceConfigs],
 });
 
 const parentPartialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [AddressMaps],
+  resources: [BasinCatalog],
 });
 
-const runTests = (client: PartialCloudflare<{ addressing: { addressMaps: { zones: BaseZones } } }>) => {
+const runTests = (
+  client: PartialCloudflare<{ basinCatalog: { maintenanceConfigs: BaseMaintenanceConfigs } }>,
+) => {
   test('update: only required params', async () => {
-    const responsePromise = client.addressing.addressMaps.zones.update('055817b111884e0227e1be16a0be6ee0', {
-      zone_id: '8ac8489932db6327334c9b6d58544cfe',
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+    const responsePromise = client.basinCatalog.maintenanceConfigs.update('my-data-bucket', {
+      account_id: '0123456789abcdef0123456789abcdef',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -42,16 +43,20 @@ const runTests = (client: PartialCloudflare<{ addressing: { addressMaps: { zones
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.addressing.addressMaps.zones.update('055817b111884e0227e1be16a0be6ee0', {
-      zone_id: '8ac8489932db6327334c9b6d58544cfe',
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+    const response = await client.basinCatalog.maintenanceConfigs.update('my-data-bucket', {
+      account_id: '0123456789abcdef0123456789abcdef',
+      compaction: { state: 'enabled', target_size_mb: '256' },
+      snapshot_expiration: {
+        max_snapshot_age: '14d',
+        min_snapshots_to_keep: 5,
+        state: 'enabled',
+      },
     });
   });
 
-  test('delete: only required params', async () => {
-    const responsePromise = client.addressing.addressMaps.zones.delete('055817b111884e0227e1be16a0be6ee0', {
-      zone_id: '8ac8489932db6327334c9b6d58544cfe',
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+  test('get: only required params', async () => {
+    const responsePromise = client.basinCatalog.maintenanceConfigs.get('my-data-bucket', {
+      account_id: '0123456789abcdef0123456789abcdef',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -62,13 +67,12 @@ const runTests = (client: PartialCloudflare<{ addressing: { addressMaps: { zones
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
-    const response = await client.addressing.addressMaps.zones.delete('055817b111884e0227e1be16a0be6ee0', {
-      zone_id: '8ac8489932db6327334c9b6d58544cfe',
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+  test('get: required and optional params', async () => {
+    const response = await client.basinCatalog.maintenanceConfigs.get('my-data-bucket', {
+      account_id: '0123456789abcdef0123456789abcdef',
     });
   });
 };
-describe('resource zones', () => runTests(client));
-describe('resource zones (tree shakable, base)', () => runTests(partialClient));
-describe('resource zones (tree shakable, subresource)', () => runTests(parentPartialClient));
+describe('resource maintenanceConfigs', () => runTests(client));
+describe('resource maintenanceConfigs (tree shakable, base)', () => runTests(partialClient));
+describe('resource maintenanceConfigs (tree shakable, subresource)', () => runTests(parentPartialClient));

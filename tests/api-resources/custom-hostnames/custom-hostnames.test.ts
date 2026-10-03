@@ -105,7 +105,7 @@ const runTests = (client: PartialCloudflare<{ customHostnames: BaseCustomHostnam
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.customHostnames.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.customHostnames.delete('0d89c70d-ad9f-4843-b99f-6cc0252067e9', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -118,13 +118,13 @@ const runTests = (client: PartialCloudflare<{ customHostnames: BaseCustomHostnam
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.customHostnames.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.customHostnames.delete('0d89c70d-ad9f-4843-b99f-6cc0252067e9', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.customHostnames.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.customHostnames.edit('0d89c70d-ad9f-4843-b99f-6cc0252067e9', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -137,7 +137,7 @@ const runTests = (client: PartialCloudflare<{ customHostnames: BaseCustomHostnam
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.customHostnames.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.customHostnames.edit('0d89c70d-ad9f-4843-b99f-6cc0252067e9', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       custom_metadata: { foo: 'string' },
       custom_origin_server: 'origin2.example.com',
@@ -174,7 +174,7 @@ const runTests = (client: PartialCloudflare<{ customHostnames: BaseCustomHostnam
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.customHostnames.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.customHostnames.get('0d89c70d-ad9f-4843-b99f-6cc0252067e9', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -187,7 +187,7 @@ const runTests = (client: PartialCloudflare<{ customHostnames: BaseCustomHostnam
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.customHostnames.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.customHostnames.get('0d89c70d-ad9f-4843-b99f-6cc0252067e9', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

@@ -45,7 +45,10 @@ export class BaseTokens extends APIResource {
    *         { id: 'c8fed203ed3043cba015a93ad1616f1f' },
    *         { id: '82e64a83756745bbbb1c9c2701bf816b' },
    *       ],
-   *       resources: { foo: 'string' },
+   *       resources: {
+   *         'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43':
+   *           '*',
+   *       },
    *     },
    *   ],
    * });
@@ -77,7 +80,10 @@ export class BaseTokens extends APIResource {
    *           { id: 'c8fed203ed3043cba015a93ad1616f1f' },
    *           { id: '82e64a83756745bbbb1c9c2701bf816b' },
    *         ],
-   *         resources: { foo: 'string' },
+   *         resources: {
+   *           'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43':
+   *             '*',
+   *         },
    *       },
    *     ],
    *   },
@@ -94,9 +100,10 @@ export class BaseTokens extends APIResource {
   }
 
   /**
-   * List all Account Owned API tokens created for this account. Results include
-   * active, disabled, and recently-expired tokens when include_expired is set to
-   * true.
+   * List Account Owned API tokens created for this account. Callers with
+   * `com.cloudflare.api.account.token.list_self` permission only receive tokens they
+   * created. Results include active, disabled, and recently-expired tokens when
+   * `include_expired` is set to true.
    *
    * @example
    * ```ts
@@ -199,6 +206,12 @@ export interface TokenCreateResponse {
   condition?: TokenCreateResponse.Condition;
 
   /**
+   * The email address of the user who created the token at the time of creation.
+   * Only present for Account Owned API Tokens when a creator email was available.
+   */
+  creator_email_at_creation?: string;
+
+  /**
    * The expiration time on or after which the JWT MUST NOT be accepted for
    * processing.
    */
@@ -233,6 +246,19 @@ export interface TokenCreateResponse {
    * List of access policies assigned to the token.
    */
   policies?: Array<Shared.TokenPolicy>;
+
+  /**
+   * The identifier of the service that provisioned the token. For an
+   * OAuth-provisioned token, this is the OAuth client identifier. Present when
+   * `provisioner_type` is present and null when the identifier is unavailable.
+   */
+  provisioner_id?: string | null;
+
+  /**
+   * The type of service that provisioned the token. Only present for provisioned
+   * Account Owned API Tokens.
+   */
+  provisioner_type?: string;
 
   /**
    * Status of the token.

@@ -74,7 +74,7 @@ const runTests = (client: PartialCloudflare<{ customCertificates: BaseCustomCert
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.customCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.customCertificates.delete('2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -87,13 +87,13 @@ const runTests = (client: PartialCloudflare<{ customCertificates: BaseCustomCert
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.customCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.customCertificates.delete('2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.customCertificates.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.customCertificates.edit('2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -106,7 +106,7 @@ const runTests = (client: PartialCloudflare<{ customCertificates: BaseCustomCert
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.customCertificates.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.customCertificates.edit('2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bundle_method: 'ubiquitous',
       certificate:
@@ -121,7 +121,7 @@ const runTests = (client: PartialCloudflare<{ customCertificates: BaseCustomCert
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.customCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.customCertificates.get('2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -134,7 +134,7 @@ const runTests = (client: PartialCloudflare<{ customCertificates: BaseCustomCert
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.customCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.customCertificates.get('2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

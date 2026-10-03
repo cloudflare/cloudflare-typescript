@@ -122,7 +122,7 @@ export interface SinkCreateResponse {
   /**
    * Specifies the type of sink.
    */
-  type: 'r2' | 'r2_data_catalog';
+  type: 'r2' | 'r2_data_catalog' | 'basin_catalog';
 
   /**
    * R2 Data Catalog Sink
@@ -356,7 +356,7 @@ export interface SinkListResponse {
   /**
    * Specifies the type of sink.
    */
-  type: 'r2' | 'r2_data_catalog';
+  type: 'r2' | 'r2_data_catalog' | 'basin_catalog';
 
   /**
    * Defines the configuration of the R2 Sink.
@@ -576,7 +576,7 @@ export interface SinkGetResponse {
   /**
    * Specifies the type of sink.
    */
-  type: 'r2' | 'r2_data_catalog';
+  type: 'r2' | 'r2_data_catalog' | 'basin_catalog';
 
   /**
    * Defines the configuration of the R2 Sink.
@@ -790,7 +790,7 @@ export interface SinkCreateParams {
   /**
    * Body param: Specifies the type of sink.
    */
-  type: 'r2' | 'r2_data_catalog';
+  type: 'r2' | 'r2_data_catalog' | 'basin_catalog';
 
   /**
    * Body param: Defines the configuration of the R2 Sink.

@@ -14,7 +14,10 @@ export class BaseEventNotifications extends APIResource {
   ] as const);
 
   /**
-   * Create event notification rule.
+   * Creates rules that send notifications for matching R2 object events to the
+   * specified Cloudflare Queue. Rules can filter objects by key prefix and suffix.
+   * New rules are added to any existing rules for the queue; a rule that overlaps an
+   * existing rule is rejected.
    *
    * @example
    * ```ts
@@ -55,7 +58,8 @@ export class BaseEventNotifications extends APIResource {
   }
 
   /**
-   * List all event notification rules for a bucket.
+   * Lists event notification rules for an R2 bucket, grouped by the Cloudflare Queue
+   * that receives matching object events.
    *
    * @example
    * ```ts
@@ -88,8 +92,9 @@ export class BaseEventNotifications extends APIResource {
   }
 
   /**
-   * Delete an event notification rule. **If no body is provided, all rules for
-   * specified queue will be deleted**.
+   * Deletes the specified event notification rules for an R2 bucket and Cloudflare
+   * Queue. Provide ruleIds in the request body to select rules. If no body is
+   * provided, all rules for that bucket and queue are deleted.
    *
    * @example
    * ```ts
@@ -128,7 +133,8 @@ export class BaseEventNotifications extends APIResource {
   }
 
   /**
-   * Get a single event notification rule.
+   * Gets the event notification rules for the specified R2 bucket and Cloudflare
+   * Queue. The response includes the queue's configuration and its array of rules.
    *
    * @example
    * ```ts
@@ -290,7 +296,7 @@ export namespace EventNotificationGetResponse {
 
 export interface EventNotificationUpdateParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -340,7 +346,7 @@ export namespace EventNotificationUpdateParams {
 
 export interface EventNotificationListParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -353,7 +359,7 @@ export interface EventNotificationListParams {
 
 export interface EventNotificationDeleteParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -371,7 +377,7 @@ export interface EventNotificationDeleteParams {
 
 export interface EventNotificationGetParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 

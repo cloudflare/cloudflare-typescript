@@ -13,16 +13,18 @@ export class BasePreview extends APIResource {
   ] as const);
 
   /**
-   * Generates a preview image for a message that was not flagged as a detection.
-   * Useful for investigating benign messages. Returns a base64-encoded PNG
-   * screenshot of the email body.
+   * Generates a preview image for a message that was not flagged as a detection. The
+   * message is rendered from the copy in the recipient's mailbox, so this requires
+   * an active integration and only works while the message is still in the
+   * recipient's inbox. Returns a base64-encoded PNG screenshot of the email body.
+   * For messages with a detection, use the detection preview endpoint instead.
    *
    * @example
    * ```ts
    * const preview =
    *   await client.emailSecurity.investigate.preview.create({
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     postfix_id: '4Njp3P0STMz2c02Q',
+   *     id: '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
    *   });
    * ```
    */
@@ -37,8 +39,9 @@ export class BasePreview extends APIResource {
   }
 
   /**
-   * Returns a preview of the message body as a base64 encoded PNG image for
-   * non-benign messages.
+   * Returns a preview of the message body as a base64-encoded PNG image for any
+   * message with a detection. For messages without a detection, use the
+   * non-detection preview endpoint instead.
    *
    * @example
    * ```ts
@@ -86,9 +89,9 @@ export interface PreviewCreateParams {
   account_id: string;
 
   /**
-   * Body param: The identifier of the message.
+   * Body param: Unique identifier for a message retrieved from investigation.
    */
-  postfix_id: string;
+  id: string;
 }
 
 export interface PreviewGetParams {

@@ -80,7 +80,7 @@ export class BaseHostnameCertificates extends APIResource {
    * ```ts
    * const hostnameCertificate =
    *   await client.originTLSClientAuth.hostnameCertificates.delete(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -106,7 +106,7 @@ export class BaseHostnameCertificates extends APIResource {
    * ```ts
    * const hostnameCertificate =
    *   await client.originTLSClientAuth.hostnameCertificates.get(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -131,7 +131,7 @@ export type HostnameCertificateListResponsesSinglePage = SinglePage<HostnameCert
 
 export interface Certificate {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
@@ -180,7 +180,7 @@ export interface Certificate {
 
 export interface HostnameCertificateCreateResponse {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
@@ -229,7 +229,7 @@ export interface HostnameCertificateCreateResponse {
 
 export interface HostnameCertificateListResponse {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
@@ -278,7 +278,7 @@ export interface HostnameCertificateListResponse {
 
 export interface HostnameCertificateDeleteResponse {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
@@ -327,7 +327,7 @@ export interface HostnameCertificateDeleteResponse {
 
 export interface HostnameCertificateGetResponse {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 

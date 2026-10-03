@@ -59,7 +59,19 @@ export namespace ByDatasetListResponse {
      */
     datasetId?: string;
 
+    /**
+     * Related events, capped by `relatedEventsLimit` (default 2). Check
+     * `relatedEventsHasMore` to detect a capped list; pass `relatedEventsLimit=-1` to
+     * retrieve all of them.
+     */
     relatedEvents?: Array<Indicator.RelatedEvent>;
+
+    /**
+     * True when this indicator appears in more events than `relatedEvents` contains
+     * because `relatedEventsLimit` capped the list. Pass `relatedEventsLimit=-1` to
+     * retrieve every related event.
+     */
+    relatedEventsHasMore?: boolean;
 
     tags?: Array<Indicator.Tag>;
 

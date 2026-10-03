@@ -156,7 +156,7 @@ const runTests = (client: PartialCloudflare<{ flagship: { apps: { flags: BaseFla
     const response = await client.flagship.apps.flags.list('app_id', {
       account_id: 'account_id',
       cursor: 'cursor',
-      limit: 'limit',
+      limit: 1,
     });
   });
 

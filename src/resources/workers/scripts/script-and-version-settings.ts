@@ -88,6 +88,7 @@ export interface ScriptAndVersionSettingEditResponse {
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindAISearchNamespace
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindMessaging
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindAnalyticsEngine
+    | ScriptAndVersionSettingEditResponse.WorkersBindingKindArtifacts
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindAssets
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindBrowser
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindD1
@@ -308,6 +309,26 @@ export namespace ScriptAndVersionSettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'analytics_engine';
+  }
+
+  export interface WorkersBindingKindArtifacts {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The Artifacts namespace exposed to the Worker in the Worker's account. Must be
+     * 2-63 characters, start with an ASCII alphanumeric character, contain only ASCII
+     * alphanumeric characters, dots, underscores, and hyphens, and must not end with a
+     * hyphen. The namespace does not need to be created before binding it.
+     */
+    namespace: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'artifacts';
   }
 
   export interface WorkersBindingKindAssets {
@@ -1525,6 +1546,7 @@ export interface ScriptAndVersionSettingGetResponse {
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindAISearchNamespace
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindMessaging
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindAnalyticsEngine
+    | ScriptAndVersionSettingGetResponse.WorkersBindingKindArtifacts
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindAssets
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindBrowser
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindD1
@@ -1745,6 +1767,26 @@ export namespace ScriptAndVersionSettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'analytics_engine';
+  }
+
+  export interface WorkersBindingKindArtifacts {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The Artifacts namespace exposed to the Worker in the Worker's account. Must be
+     * 2-63 characters, start with an ASCII alphanumeric character, contain only ASCII
+     * alphanumeric characters, dots, underscores, and hyphens, and must not end with a
+     * hyphen. The namespace does not need to be created before binding it.
+     */
+    namespace: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'artifacts';
   }
 
   export interface WorkersBindingKindAssets {
@@ -2975,6 +3017,7 @@ export namespace ScriptAndVersionSettingEditParams {
       | Settings.WorkersBindingKindAISearchNamespace
       | Settings.WorkersBindingKindMessaging
       | Settings.WorkersBindingKindAnalyticsEngine
+      | Settings.WorkersBindingKindArtifacts
       | Settings.WorkersBindingKindAssets
       | Settings.WorkersBindingKindBrowser
       | Settings.WorkersBindingKindD1
@@ -3200,6 +3243,26 @@ export namespace ScriptAndVersionSettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'analytics_engine';
+    }
+
+    export interface WorkersBindingKindArtifacts {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The Artifacts namespace exposed to the Worker in the Worker's account. Must be
+       * 2-63 characters, start with an ASCII alphanumeric character, contain only ASCII
+       * alphanumeric characters, dots, underscores, and hyphens, and must not end with a
+       * hyphen. The namespace does not need to be created before binding it.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'artifacts';
     }
 
     export interface WorkersBindingKindAssets {

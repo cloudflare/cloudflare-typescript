@@ -12,7 +12,7 @@ export class BaseMemberships extends APIResource {
   ] as const);
 
   /**
-   * List of active members (Cloudflare users) for the Tenant.
+   * Lists active Cloudflare users with memberships in this tenant.
    */
   list(
     tenantID: string,

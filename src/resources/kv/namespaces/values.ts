@@ -16,14 +16,14 @@ export class BaseValues extends APIResource {
   ] as const);
 
   /**
-   * Write a value identified by a key. Use URL-encoding to use special characters
-   * (for example, `:`, `!`, `%`) in the key name. Body should be the value to be
-   * stored. If JSON metadata to be associated with the key/value pair is needed, use
-   * `multipart/form-data` content type for your PUT request (see dropdown below in
-   * `REQUEST BODY SCHEMA`). Existing values, expirations, and metadata will be
-   * overwritten. If neither `expiration` nor `expiration_ttl` is specified, the
-   * key-value pair will never expire. If both are set, `expiration_ttl` is used and
-   * `expiration` is ignored.
+   * Writes a value under the specified key in the Workers KV namespace, creating the
+   * key-value pair or replacing its existing value, expiration, and metadata. Send
+   * the value as an `application/octet-stream` request body, or use
+   * `multipart/form-data` with a `value` part and an optional JSON `metadata` part.
+   * Use URL-encoding for special characters (for example, `:`, `!`, `%`) in the key
+   * name when constructing the request URL. If neither `expiration` nor
+   * `expiration_ttl` is specified, the key-value pair will not expire. If both are
+   * set, `expiration_ttl` takes precedence.
    *
    * @example
    * ```ts
@@ -55,8 +55,9 @@ export class BaseValues extends APIResource {
   }
 
   /**
-   * Remove a KV pair from the namespace. Use URL-encoding to use special characters
-   * (for example, `:`, `!`, `%`) in the key name.
+   * Deletes the specified key and its value from the Workers KV namespace. Use
+   * URL-encoding for special characters (for example, `:`, `!`, `%`) in the key name
+   * when constructing the request URL.
    *
    * @example
    * ```ts
@@ -84,11 +85,11 @@ export class BaseValues extends APIResource {
   }
 
   /**
-   * Returns the value associated with the given key in the given namespace. Use
-   * URL-encoding to use special characters (for example, `:`, `!`, `%`) in the key
-   * name. If the KV-pair is set to expire at some point, the expiration time as
-   * measured in seconds since the UNIX epoch will be returned in the `expiration`
-   * response header.
+   * Returns the value stored under the specified key in the Workers KV namespace as
+   * raw bytes. Use URL-encoding for special characters (for example, `:`, `!`, `%`)
+   * in the key name when constructing the request URL. If the key-value pair
+   * expires, the `expiration` response header contains its expiration time in
+   * seconds since the UNIX epoch.
    *
    * @example
    * ```ts
@@ -124,12 +125,12 @@ export interface ValueDeleteResponse {}
 
 export interface ValueUpdateParams {
   /**
-   * Path param: Identifier.
+   * Path param: ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
   /**
-   * Path param: Namespace identifier tag.
+   * Path param: ID of the Workers KV namespace.
    */
   namespace_id: string;
 
@@ -145,7 +146,8 @@ export interface ValueUpdateParams {
   expiration?: number;
 
   /**
-   * Query param: Expires the key after a number of seconds. Must be at least 60.
+   * Query param: Number of seconds until the key expires. Must be at least 60. Takes
+   * precedence over `expiration` when both are specified.
    */
   expiration_ttl?: number;
 
@@ -157,24 +159,24 @@ export interface ValueUpdateParams {
 
 export interface ValueDeleteParams {
   /**
-   * Identifier.
+   * ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
   /**
-   * Namespace identifier tag.
+   * ID of the Workers KV namespace.
    */
   namespace_id: string;
 }
 
 export interface ValueGetParams {
   /**
-   * Identifier.
+   * ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
   /**
-   * Namespace identifier tag.
+   * ID of the Workers KV namespace.
    */
   namespace_id: string;
 }

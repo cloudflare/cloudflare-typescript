@@ -123,7 +123,9 @@ export class BaseCustom extends APIResource {
   }
 
   /**
-   * Remove custom domain registration from an existing R2 bucket.
+   * Disconnects a custom domain from an R2 bucket and removes its configuration.
+   * Access through other enabled custom domains or the bucket's r2.dev domain is
+   * unaffected.
    *
    * @example
    * ```ts
@@ -359,7 +361,7 @@ export namespace CustomGetResponse {
 
 export interface CustomCreateParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -400,7 +402,7 @@ export interface CustomCreateParams {
 
 export interface CustomUpdateParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -436,7 +438,7 @@ export interface CustomUpdateParams {
 
 export interface CustomListParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -449,7 +451,7 @@ export interface CustomListParams {
 
 export interface CustomDeleteParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -467,7 +469,7 @@ export interface CustomDeleteParams {
 
 export interface CustomGetParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 

@@ -31,11 +31,4 @@ export {
   type IPUpdateParams,
   type IPDeleteParams,
 } from './ips';
-export {
-  Zones,
-  BaseZones,
-  type ZoneUpdateResponse,
-  type ZoneDeleteResponse,
-  type ZoneUpdateParams,
-  type ZoneDeleteParams,
-} from './zones';
+export { Zones, BaseZones } from './zones';

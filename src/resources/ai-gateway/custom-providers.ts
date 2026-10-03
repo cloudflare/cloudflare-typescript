@@ -13,7 +13,9 @@ export class BaseCustomProviders extends APIResource {
   ] as const);
 
   /**
-   * Creates a new AI Gateway.
+   * Creates an account-level custom provider that forwards AI Gateway requests to
+   * the HTTPS base URL you supply. Requests reference the provider as
+   * `custom-{slug}`, so the slug must be unique within the account.
    *
    * @example
    * ```ts
@@ -40,7 +42,8 @@ export class BaseCustomProviders extends APIResource {
   }
 
   /**
-   * Lists all AI Gateway evaluator types configured for the account.
+   * Lists the custom providers configured for the account, ordered by position and
+   * then name.
    *
    * @example
    * ```ts
@@ -65,7 +68,7 @@ export class BaseCustomProviders extends APIResource {
   }
 
   /**
-   * Deletes an AI Gateway dataset.
+   * Deletes a custom provider and every pricing rule that belongs to it.
    *
    * @example
    * ```ts
@@ -91,7 +94,7 @@ export class BaseCustomProviders extends APIResource {
   }
 
   /**
-   * Retrieves details for a specific AI Gateway dataset.
+   * Retrieves a custom provider, including its slug, base URL, and custom headers.
    *
    * @example
    * ```ts
@@ -142,6 +145,10 @@ export interface CustomProviderCreateResponse {
 
   enable?: boolean;
 
+  /**
+   * JSON object of extra HTTP headers that AI Gateway sends to the provider. Values
+   * can contain credentials.
+   */
   headers?: string;
 
   js_example?: string;
@@ -174,6 +181,10 @@ export interface CustomProviderListResponse {
 
   enable?: boolean;
 
+  /**
+   * JSON object of extra HTTP headers that AI Gateway sends to the provider. Values
+   * can contain credentials.
+   */
   headers?: string;
 
   js_example?: string;
@@ -206,6 +217,10 @@ export interface CustomProviderDeleteResponse {
 
   enable?: boolean;
 
+  /**
+   * JSON object of extra HTTP headers that AI Gateway sends to the provider. Values
+   * can contain credentials.
+   */
   headers?: string;
 
   js_example?: string;
@@ -238,6 +253,10 @@ export interface CustomProviderGetResponse {
 
   enable?: boolean;
 
+  /**
+   * JSON object of extra HTTP headers that AI Gateway sends to the provider. Values
+   * can contain credentials.
+   */
   headers?: string;
 
   js_example?: string;
@@ -291,7 +310,8 @@ export interface CustomProviderCreateParams {
   enable?: boolean;
 
   /**
-   * Body param
+   * Body param: JSON object of extra HTTP headers that AI Gateway sends to the
+   * provider. Values can contain credentials.
    */
   headers?: string;
 

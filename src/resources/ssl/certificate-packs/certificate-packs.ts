@@ -83,7 +83,7 @@ export class BaseCertificatePacks extends APIResource {
    * ```ts
    * const certificatePack =
    *   await client.ssl.certificatePacks.delete(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '3822ff90-ea29-44df-9e55-21300bb9419b',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -110,7 +110,7 @@ export class BaseCertificatePacks extends APIResource {
    * @example
    * ```ts
    * const response = await client.ssl.certificatePacks.edit(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '3822ff90-ea29-44df-9e55-21300bb9419b',
    *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
@@ -136,7 +136,7 @@ export class BaseCertificatePacks extends APIResource {
    * ```ts
    * const certificatePack =
    *   await client.ssl.certificatePacks.get(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '3822ff90-ea29-44df-9e55-21300bb9419b',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -212,7 +212,7 @@ export type ValidationMethod = 'http' | 'cname' | 'txt';
  */
 export interface CertificatePackCreateResponse {
   /**
-   * Identifier.
+   * The unique identifier for a certificate_pack.
    */
   id: string;
 
@@ -476,7 +476,7 @@ export namespace CertificatePackCreateResponse {
  */
 export interface CertificatePackListResponse {
   /**
-   * Identifier.
+   * The unique identifier for a certificate_pack.
    */
   id: string;
 
@@ -737,7 +737,7 @@ export namespace CertificatePackListResponse {
 
 export interface CertificatePackDeleteResponse {
   /**
-   * Identifier.
+   * The unique identifier for a certificate_pack.
    */
   id?: string;
 }
@@ -747,7 +747,7 @@ export interface CertificatePackDeleteResponse {
  */
 export interface CertificatePackEditResponse {
   /**
-   * Identifier.
+   * The unique identifier for a certificate_pack.
    */
   id: string;
 
@@ -1011,7 +1011,7 @@ export namespace CertificatePackEditResponse {
  */
 export interface CertificatePackGetResponse {
   /**
-   * Identifier.
+   * The unique identifier for a certificate_pack.
    */
   id: string;
 

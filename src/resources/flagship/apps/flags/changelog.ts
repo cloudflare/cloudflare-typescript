@@ -91,6 +91,9 @@ export namespace ChangelogListResponse {
         [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
       };
 
+      /**
+       * Optional operator-facing description. It does not affect flag evaluation.
+       */
       description?: string | null;
 
       updated_at?: string;
@@ -135,7 +138,9 @@ export namespace ChangelogListResponse {
             | 'starts_with'
             | 'ends_with'
             | 'in'
-            | 'not_in';
+            | 'not_in'
+            | 'has'
+            | 'not_has';
 
           value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
@@ -161,7 +166,9 @@ export namespace ChangelogListResponse {
               | 'starts_with'
               | 'ends_with'
               | 'in'
-              | 'not_in';
+              | 'not_in'
+              | 'has'
+              | 'not_has';
 
             value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
@@ -187,7 +194,9 @@ export namespace ChangelogListResponse {
                 | 'starts_with'
                 | 'ends_with'
                 | 'in'
-                | 'not_in';
+                | 'not_in'
+                | 'has'
+                | 'not_has';
 
               value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
@@ -213,7 +222,9 @@ export namespace ChangelogListResponse {
                   | 'starts_with'
                   | 'ends_with'
                   | 'in'
-                  | 'not_in';
+                  | 'not_in'
+                  | 'has'
+                  | 'not_has';
 
                 value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
@@ -239,7 +250,9 @@ export namespace ChangelogListResponse {
                     | 'starts_with'
                     | 'ends_with'
                     | 'in'
-                    | 'not_in';
+                    | 'not_in'
+                    | 'has'
+                    | 'not_has';
 
                   value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                 }
@@ -265,7 +278,9 @@ export namespace ChangelogListResponse {
                       | 'starts_with'
                       | 'ends_with'
                       | 'in'
-                      | 'not_in';
+                      | 'not_in'
+                      | 'has'
+                      | 'not_has';
 
                     value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                   }
@@ -285,8 +300,9 @@ export namespace ChangelogListResponse {
 
         export interface Rollout {
           /**
-           * Percentage of matching traffic (0–100) served this variation. For multi-way
-           * splits, use cumulative upper bounds across rules (e.g. 30, 70, 100).
+           * Percentage of matching traffic (0–100, up to 2 decimal places) served this
+           * variation. For multi-way splits, use cumulative upper bounds across rules (e.g.
+           * 30, 70, 100).
            */
           percentage: number;
 
@@ -346,6 +362,9 @@ export namespace ChangelogListResponse {
         [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
       };
 
+      /**
+       * Optional operator-facing description. It does not affect flag evaluation.
+       */
       description?: string | null;
 
       updated_at?: string;
@@ -390,7 +409,9 @@ export namespace ChangelogListResponse {
             | 'starts_with'
             | 'ends_with'
             | 'in'
-            | 'not_in';
+            | 'not_in'
+            | 'has'
+            | 'not_has';
 
           value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
@@ -416,7 +437,9 @@ export namespace ChangelogListResponse {
               | 'starts_with'
               | 'ends_with'
               | 'in'
-              | 'not_in';
+              | 'not_in'
+              | 'has'
+              | 'not_has';
 
             value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
@@ -442,7 +465,9 @@ export namespace ChangelogListResponse {
                 | 'starts_with'
                 | 'ends_with'
                 | 'in'
-                | 'not_in';
+                | 'not_in'
+                | 'has'
+                | 'not_has';
 
               value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
@@ -468,7 +493,9 @@ export namespace ChangelogListResponse {
                   | 'starts_with'
                   | 'ends_with'
                   | 'in'
-                  | 'not_in';
+                  | 'not_in'
+                  | 'has'
+                  | 'not_has';
 
                 value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
@@ -494,7 +521,9 @@ export namespace ChangelogListResponse {
                     | 'starts_with'
                     | 'ends_with'
                     | 'in'
-                    | 'not_in';
+                    | 'not_in'
+                    | 'has'
+                    | 'not_has';
 
                   value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                 }
@@ -520,7 +549,9 @@ export namespace ChangelogListResponse {
                       | 'starts_with'
                       | 'ends_with'
                       | 'in'
-                      | 'not_in';
+                      | 'not_in'
+                      | 'has'
+                      | 'not_has';
 
                     value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                   }
@@ -540,8 +571,9 @@ export namespace ChangelogListResponse {
 
         export interface Rollout {
           /**
-           * Percentage of matching traffic (0–100) served this variation. For multi-way
-           * splits, use cumulative upper bounds across rules (e.g. 30, 70, 100).
+           * Percentage of matching traffic (0–100, up to 2 decimal places) served this
+           * variation. For multi-way splits, use cumulative upper bounds across rules (e.g.
+           * 30, 70, 100).
            */
           percentage: number;
 
@@ -603,6 +635,9 @@ export namespace ChangelogListResponse {
         [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
       };
 
+      /**
+       * Optional operator-facing description. It does not affect flag evaluation.
+       */
       description?: string | null;
 
       updated_at?: string;
@@ -647,7 +682,9 @@ export namespace ChangelogListResponse {
             | 'starts_with'
             | 'ends_with'
             | 'in'
-            | 'not_in';
+            | 'not_in'
+            | 'has'
+            | 'not_has';
 
           value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
@@ -673,7 +710,9 @@ export namespace ChangelogListResponse {
               | 'starts_with'
               | 'ends_with'
               | 'in'
-              | 'not_in';
+              | 'not_in'
+              | 'has'
+              | 'not_has';
 
             value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
@@ -699,7 +738,9 @@ export namespace ChangelogListResponse {
                 | 'starts_with'
                 | 'ends_with'
                 | 'in'
-                | 'not_in';
+                | 'not_in'
+                | 'has'
+                | 'not_has';
 
               value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
@@ -725,7 +766,9 @@ export namespace ChangelogListResponse {
                   | 'starts_with'
                   | 'ends_with'
                   | 'in'
-                  | 'not_in';
+                  | 'not_in'
+                  | 'has'
+                  | 'not_has';
 
                 value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
@@ -751,7 +794,9 @@ export namespace ChangelogListResponse {
                     | 'starts_with'
                     | 'ends_with'
                     | 'in'
-                    | 'not_in';
+                    | 'not_in'
+                    | 'has'
+                    | 'not_has';
 
                   value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                 }
@@ -777,7 +822,9 @@ export namespace ChangelogListResponse {
                       | 'starts_with'
                       | 'ends_with'
                       | 'in'
-                      | 'not_in';
+                      | 'not_in'
+                      | 'has'
+                      | 'not_has';
 
                     value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                   }
@@ -797,8 +844,9 @@ export namespace ChangelogListResponse {
 
         export interface Rollout {
           /**
-           * Percentage of matching traffic (0–100) served this variation. For multi-way
-           * splits, use cumulative upper bounds across rules (e.g. 30, 70, 100).
+           * Percentage of matching traffic (0–100, up to 2 decimal places) served this
+           * variation. For multi-way splits, use cumulative upper bounds across rules (e.g.
+           * 30, 70, 100).
            */
           percentage: number;
 
@@ -821,19 +869,19 @@ export namespace ChangelogListResponse {
 
 export interface ChangelogListParams extends CursorPaginationAfterParams {
   /**
-   * Path param: Cloudflare account ID.
+   * Path param: Cloudflare account ID that owns the Flagship app.
    */
   account_id: string;
 
   /**
-   * Path param: App identifier.
+   * Path param: Flagship app ID returned when the app was created.
    */
   app_id: string;
 
   /**
    * Query param: Max items to return (1–200).
    */
-  limit?: string;
+  limit?: number;
 }
 
 export declare namespace Changelog {

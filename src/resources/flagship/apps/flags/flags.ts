@@ -41,7 +41,8 @@ export class BaseFlags extends APIResource {
 
   /**
    * Replaces the entire flag definition. Omitted fields are dropped, not preserved —
-   * read before writing. Each update appends a changelog entry.
+   * read before writing. The path key identifies the flag and cannot be renamed by
+   * changing the body `key`. Each update appends a changelog entry.
    */
   update(
     flagKey: string,
@@ -75,8 +76,9 @@ export class BaseFlags extends APIResource {
   }
 
   /**
-   * Deletes a flag permanently. Subsequent evaluations fall back to the
-   * caller-supplied default. Cannot be undone.
+   * Deletes a flag permanently. After deletion propagates, direct evaluations return
+   * not found; typed binding accessors may return the caller-supplied default.
+   * Cannot be undone.
    */
   delete(
     flagKey: string,
@@ -148,6 +150,9 @@ export interface FlagCreateResponse {
     [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
   };
 
+  /**
+   * Optional operator-facing description. It does not affect flag evaluation.
+   */
   description?: string | null;
 
   updated_at?: string;
@@ -192,7 +197,9 @@ export namespace FlagCreateResponse {
         | 'starts_with'
         | 'ends_with'
         | 'in'
-        | 'not_in';
+        | 'not_in'
+        | 'has'
+        | 'not_has';
 
       value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
     }
@@ -218,7 +225,9 @@ export namespace FlagCreateResponse {
           | 'starts_with'
           | 'ends_with'
           | 'in'
-          | 'not_in';
+          | 'not_in'
+          | 'has'
+          | 'not_has';
 
         value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
       }
@@ -244,7 +253,9 @@ export namespace FlagCreateResponse {
             | 'starts_with'
             | 'ends_with'
             | 'in'
-            | 'not_in';
+            | 'not_in'
+            | 'has'
+            | 'not_has';
 
           value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
@@ -270,7 +281,9 @@ export namespace FlagCreateResponse {
               | 'starts_with'
               | 'ends_with'
               | 'in'
-              | 'not_in';
+              | 'not_in'
+              | 'has'
+              | 'not_has';
 
             value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
@@ -296,7 +309,9 @@ export namespace FlagCreateResponse {
                 | 'starts_with'
                 | 'ends_with'
                 | 'in'
-                | 'not_in';
+                | 'not_in'
+                | 'has'
+                | 'not_has';
 
               value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
@@ -322,7 +337,9 @@ export namespace FlagCreateResponse {
                   | 'starts_with'
                   | 'ends_with'
                   | 'in'
-                  | 'not_in';
+                  | 'not_in'
+                  | 'has'
+                  | 'not_has';
 
                 value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
@@ -342,8 +359,9 @@ export namespace FlagCreateResponse {
 
     export interface Rollout {
       /**
-       * Percentage of matching traffic (0–100) served this variation. For multi-way
-       * splits, use cumulative upper bounds across rules (e.g. 30, 70, 100).
+       * Percentage of matching traffic (0–100, up to 2 decimal places) served this
+       * variation. For multi-way splits, use cumulative upper bounds across rules (e.g.
+       * 30, 70, 100).
        */
       percentage: number;
 
@@ -393,6 +411,9 @@ export interface FlagUpdateResponse {
     [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
   };
 
+  /**
+   * Optional operator-facing description. It does not affect flag evaluation.
+   */
   description?: string | null;
 
   updated_at?: string;
@@ -437,7 +458,9 @@ export namespace FlagUpdateResponse {
         | 'starts_with'
         | 'ends_with'
         | 'in'
-        | 'not_in';
+        | 'not_in'
+        | 'has'
+        | 'not_has';
 
       value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
     }
@@ -463,7 +486,9 @@ export namespace FlagUpdateResponse {
           | 'starts_with'
           | 'ends_with'
           | 'in'
-          | 'not_in';
+          | 'not_in'
+          | 'has'
+          | 'not_has';
 
         value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
       }
@@ -489,7 +514,9 @@ export namespace FlagUpdateResponse {
             | 'starts_with'
             | 'ends_with'
             | 'in'
-            | 'not_in';
+            | 'not_in'
+            | 'has'
+            | 'not_has';
 
           value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
@@ -515,7 +542,9 @@ export namespace FlagUpdateResponse {
               | 'starts_with'
               | 'ends_with'
               | 'in'
-              | 'not_in';
+              | 'not_in'
+              | 'has'
+              | 'not_has';
 
             value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
@@ -541,7 +570,9 @@ export namespace FlagUpdateResponse {
                 | 'starts_with'
                 | 'ends_with'
                 | 'in'
-                | 'not_in';
+                | 'not_in'
+                | 'has'
+                | 'not_has';
 
               value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
@@ -567,7 +598,9 @@ export namespace FlagUpdateResponse {
                   | 'starts_with'
                   | 'ends_with'
                   | 'in'
-                  | 'not_in';
+                  | 'not_in'
+                  | 'has'
+                  | 'not_has';
 
                 value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
@@ -587,8 +620,9 @@ export namespace FlagUpdateResponse {
 
     export interface Rollout {
       /**
-       * Percentage of matching traffic (0–100) served this variation. For multi-way
-       * splits, use cumulative upper bounds across rules (e.g. 30, 70, 100).
+       * Percentage of matching traffic (0–100, up to 2 decimal places) served this
+       * variation. For multi-way splits, use cumulative upper bounds across rules (e.g.
+       * 30, 70, 100).
        */
       percentage: number;
 
@@ -638,6 +672,9 @@ export interface FlagListResponse {
     [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
   };
 
+  /**
+   * Optional operator-facing description. It does not affect flag evaluation.
+   */
   description?: string | null;
 
   updated_at?: string;
@@ -682,7 +719,9 @@ export namespace FlagListResponse {
         | 'starts_with'
         | 'ends_with'
         | 'in'
-        | 'not_in';
+        | 'not_in'
+        | 'has'
+        | 'not_has';
 
       value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
     }
@@ -708,7 +747,9 @@ export namespace FlagListResponse {
           | 'starts_with'
           | 'ends_with'
           | 'in'
-          | 'not_in';
+          | 'not_in'
+          | 'has'
+          | 'not_has';
 
         value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
       }
@@ -734,7 +775,9 @@ export namespace FlagListResponse {
             | 'starts_with'
             | 'ends_with'
             | 'in'
-            | 'not_in';
+            | 'not_in'
+            | 'has'
+            | 'not_has';
 
           value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
@@ -760,7 +803,9 @@ export namespace FlagListResponse {
               | 'starts_with'
               | 'ends_with'
               | 'in'
-              | 'not_in';
+              | 'not_in'
+              | 'has'
+              | 'not_has';
 
             value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
@@ -786,7 +831,9 @@ export namespace FlagListResponse {
                 | 'starts_with'
                 | 'ends_with'
                 | 'in'
-                | 'not_in';
+                | 'not_in'
+                | 'has'
+                | 'not_has';
 
               value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
@@ -812,7 +859,9 @@ export namespace FlagListResponse {
                   | 'starts_with'
                   | 'ends_with'
                   | 'in'
-                  | 'not_in';
+                  | 'not_in'
+                  | 'has'
+                  | 'not_has';
 
                 value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
@@ -832,8 +881,9 @@ export namespace FlagListResponse {
 
     export interface Rollout {
       /**
-       * Percentage of matching traffic (0–100) served this variation. For multi-way
-       * splits, use cumulative upper bounds across rules (e.g. 30, 70, 100).
+       * Percentage of matching traffic (0–100, up to 2 decimal places) served this
+       * variation. For multi-way splits, use cumulative upper bounds across rules (e.g.
+       * 30, 70, 100).
        */
       percentage: number;
 
@@ -887,6 +937,9 @@ export interface FlagGetResponse {
     [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
   };
 
+  /**
+   * Optional operator-facing description. It does not affect flag evaluation.
+   */
   description?: string | null;
 
   updated_at?: string;
@@ -931,7 +984,9 @@ export namespace FlagGetResponse {
         | 'starts_with'
         | 'ends_with'
         | 'in'
-        | 'not_in';
+        | 'not_in'
+        | 'has'
+        | 'not_has';
 
       value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
     }
@@ -957,7 +1012,9 @@ export namespace FlagGetResponse {
           | 'starts_with'
           | 'ends_with'
           | 'in'
-          | 'not_in';
+          | 'not_in'
+          | 'has'
+          | 'not_has';
 
         value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
       }
@@ -983,7 +1040,9 @@ export namespace FlagGetResponse {
             | 'starts_with'
             | 'ends_with'
             | 'in'
-            | 'not_in';
+            | 'not_in'
+            | 'has'
+            | 'not_has';
 
           value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
@@ -1009,7 +1068,9 @@ export namespace FlagGetResponse {
               | 'starts_with'
               | 'ends_with'
               | 'in'
-              | 'not_in';
+              | 'not_in'
+              | 'has'
+              | 'not_has';
 
             value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
@@ -1035,7 +1096,9 @@ export namespace FlagGetResponse {
                 | 'starts_with'
                 | 'ends_with'
                 | 'in'
-                | 'not_in';
+                | 'not_in'
+                | 'has'
+                | 'not_has';
 
               value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
@@ -1061,7 +1124,9 @@ export namespace FlagGetResponse {
                   | 'starts_with'
                   | 'ends_with'
                   | 'in'
-                  | 'not_in';
+                  | 'not_in'
+                  | 'has'
+                  | 'not_has';
 
                 value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
@@ -1081,8 +1146,9 @@ export namespace FlagGetResponse {
 
     export interface Rollout {
       /**
-       * Percentage of matching traffic (0–100) served this variation. For multi-way
-       * splits, use cumulative upper bounds across rules (e.g. 30, 70, 100).
+       * Percentage of matching traffic (0–100, up to 2 decimal places) served this
+       * variation. For multi-way splits, use cumulative upper bounds across rules (e.g.
+       * 30, 70, 100).
        */
       percentage: number;
 
@@ -1097,7 +1163,7 @@ export namespace FlagGetResponse {
 
 export interface FlagCreateParams {
   /**
-   * Path param: Cloudflare account ID.
+   * Path param: Cloudflare account ID that owns the Flagship app.
    */
   account_id: string;
 
@@ -1136,7 +1202,8 @@ export interface FlagCreateParams {
   };
 
   /**
-   * Body param
+   * Body param: Optional operator-facing description. It does not affect flag
+   * evaluation.
    */
   description?: string | null;
 
@@ -1184,7 +1251,9 @@ export namespace FlagCreateParams {
         | 'starts_with'
         | 'ends_with'
         | 'in'
-        | 'not_in';
+        | 'not_in'
+        | 'has'
+        | 'not_has';
 
       value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
     }
@@ -1210,7 +1279,9 @@ export namespace FlagCreateParams {
           | 'starts_with'
           | 'ends_with'
           | 'in'
-          | 'not_in';
+          | 'not_in'
+          | 'has'
+          | 'not_has';
 
         value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
       }
@@ -1236,7 +1307,9 @@ export namespace FlagCreateParams {
             | 'starts_with'
             | 'ends_with'
             | 'in'
-            | 'not_in';
+            | 'not_in'
+            | 'has'
+            | 'not_has';
 
           value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
@@ -1262,7 +1335,9 @@ export namespace FlagCreateParams {
               | 'starts_with'
               | 'ends_with'
               | 'in'
-              | 'not_in';
+              | 'not_in'
+              | 'has'
+              | 'not_has';
 
             value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
@@ -1288,7 +1363,9 @@ export namespace FlagCreateParams {
                 | 'starts_with'
                 | 'ends_with'
                 | 'in'
-                | 'not_in';
+                | 'not_in'
+                | 'has'
+                | 'not_has';
 
               value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
@@ -1314,7 +1391,9 @@ export namespace FlagCreateParams {
                   | 'starts_with'
                   | 'ends_with'
                   | 'in'
-                  | 'not_in';
+                  | 'not_in'
+                  | 'has'
+                  | 'not_has';
 
                 value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
@@ -1334,8 +1413,9 @@ export namespace FlagCreateParams {
 
     export interface Rollout {
       /**
-       * Percentage of matching traffic (0–100) served this variation. For multi-way
-       * splits, use cumulative upper bounds across rules (e.g. 30, 70, 100).
+       * Percentage of matching traffic (0–100, up to 2 decimal places) served this
+       * variation. For multi-way splits, use cumulative upper bounds across rules (e.g.
+       * 30, 70, 100).
        */
       percentage: number;
 
@@ -1350,12 +1430,12 @@ export namespace FlagCreateParams {
 
 export interface FlagUpdateParams {
   /**
-   * Path param: Cloudflare account ID.
+   * Path param: Cloudflare account ID that owns the Flagship app.
    */
   account_id: string;
 
   /**
-   * Path param: App identifier.
+   * Path param: Flagship app ID returned when the app was created.
    */
   app_id: string;
 
@@ -1394,7 +1474,8 @@ export interface FlagUpdateParams {
   };
 
   /**
-   * Body param
+   * Body param: Optional operator-facing description. It does not affect flag
+   * evaluation.
    */
   description?: string | null;
 
@@ -1442,7 +1523,9 @@ export namespace FlagUpdateParams {
         | 'starts_with'
         | 'ends_with'
         | 'in'
-        | 'not_in';
+        | 'not_in'
+        | 'has'
+        | 'not_has';
 
       value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
     }
@@ -1468,7 +1551,9 @@ export namespace FlagUpdateParams {
           | 'starts_with'
           | 'ends_with'
           | 'in'
-          | 'not_in';
+          | 'not_in'
+          | 'has'
+          | 'not_has';
 
         value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
       }
@@ -1494,7 +1579,9 @@ export namespace FlagUpdateParams {
             | 'starts_with'
             | 'ends_with'
             | 'in'
-            | 'not_in';
+            | 'not_in'
+            | 'has'
+            | 'not_has';
 
           value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
@@ -1520,7 +1607,9 @@ export namespace FlagUpdateParams {
               | 'starts_with'
               | 'ends_with'
               | 'in'
-              | 'not_in';
+              | 'not_in'
+              | 'has'
+              | 'not_has';
 
             value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
@@ -1546,7 +1635,9 @@ export namespace FlagUpdateParams {
                 | 'starts_with'
                 | 'ends_with'
                 | 'in'
-                | 'not_in';
+                | 'not_in'
+                | 'has'
+                | 'not_has';
 
               value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
@@ -1572,7 +1663,9 @@ export namespace FlagUpdateParams {
                   | 'starts_with'
                   | 'ends_with'
                   | 'in'
-                  | 'not_in';
+                  | 'not_in'
+                  | 'has'
+                  | 'not_has';
 
                 value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
@@ -1592,8 +1685,9 @@ export namespace FlagUpdateParams {
 
     export interface Rollout {
       /**
-       * Percentage of matching traffic (0–100) served this variation. For multi-way
-       * splits, use cumulative upper bounds across rules (e.g. 30, 70, 100).
+       * Percentage of matching traffic (0–100, up to 2 decimal places) served this
+       * variation. For multi-way splits, use cumulative upper bounds across rules (e.g.
+       * 30, 70, 100).
        */
       percentage: number;
 
@@ -1608,36 +1702,36 @@ export namespace FlagUpdateParams {
 
 export interface FlagListParams extends CursorPaginationAfterParams {
   /**
-   * Path param: Cloudflare account ID.
+   * Path param: Cloudflare account ID that owns the Flagship app.
    */
   account_id: string;
 
   /**
    * Query param: Max items to return (1–200).
    */
-  limit?: string;
+  limit?: number;
 }
 
 export interface FlagDeleteParams {
   /**
-   * Cloudflare account ID.
+   * Cloudflare account ID that owns the Flagship app.
    */
   account_id: string;
 
   /**
-   * App identifier.
+   * Flagship app ID returned when the app was created.
    */
   app_id: string;
 }
 
 export interface FlagGetParams {
   /**
-   * Cloudflare account ID.
+   * Cloudflare account ID that owns the Flagship app.
    */
   account_id: string;
 
   /**
-   * App identifier.
+   * Flagship app ID returned when the app was created.
    */
   app_id: string;
 }

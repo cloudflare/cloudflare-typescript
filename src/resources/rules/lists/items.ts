@@ -21,7 +21,7 @@ export class BaseItems extends APIResource {
   /**
    * Appends new items to the list.
    *
-   * This operation is asynchronous. To get current the operation status, invoke the
+   * This operation is asynchronous. To get the current operation status, invoke the
    * `Get bulk operation status` endpoint with the returned `operation_id`.
    *
    * There is a limit of 1 pending bulk operation per account. If an outstanding bulk
@@ -52,7 +52,7 @@ export class BaseItems extends APIResource {
    * Removes all existing items from the list and adds the provided items to the
    * list.
    *
-   * This operation is asynchronous. To get current the operation status, invoke the
+   * This operation is asynchronous. To get the current operation status, invoke the
    * `Get bulk operation status` endpoint with the returned `operation_id`.
    *
    * There is a limit of 1 pending bulk operation per account. If an outstanding bulk
@@ -109,7 +109,7 @@ export class BaseItems extends APIResource {
   /**
    * Removes one or more items from a list.
    *
-   * This operation is asynchronous. To get current the operation status, invoke the
+   * This operation is asynchronous. To get the current operation status, invoke the
    * `Get bulk operation status` endpoint with the returned `operation_id`.
    *
    * There is a limit of 1 pending bulk operation per account. If an outstanding bulk
@@ -598,7 +598,7 @@ export interface ItemDeleteParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: The list items to delete, identified by their unique IDs.
    */
   items?: Array<ItemDeleteParams.Item>;
 }

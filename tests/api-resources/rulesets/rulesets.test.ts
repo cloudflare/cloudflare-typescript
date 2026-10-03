@@ -20,13 +20,8 @@ const partialClient = createClient({
 
 const runTests = (client: PartialCloudflare<{ rulesets: BaseRulesets }>) => {
   // TODO: investigate broken test
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.rulesets.create({
-      kind: 'root',
-      name: 'My ruleset',
-      phase: 'http_request_firewall_custom',
-      account_id: 'account_id',
-    });
+  test.skip('create', async () => {
+    const responsePromise = client.rulesets.create({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -34,50 +29,6 @@ const runTests = (client: PartialCloudflare<{ rulesets: BaseRulesets }>) => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('create: required and optional params', async () => {
-    const response = await client.rulesets.create({
-      kind: 'root',
-      name: 'My ruleset',
-      phase: 'http_request_firewall_custom',
-      account_id: 'account_id',
-      dry_run: true,
-      description: 'A description for my ruleset.',
-      rules: [
-        {
-          id: '3a03d665bac047339bb530ecb439a90d',
-          action: 'block',
-          action_parameters: {
-            response: {
-              content: '{\n  "success": false,\n  "error": "you have been blocked"\n}',
-              content_type: 'application/json',
-              status_code: 400,
-            },
-          },
-          description: 'Block the request.',
-          enabled: true,
-          exposed_credential_check: {
-            password_expression: 'url_decode(http.request.body.form[\\"password\\"][0])',
-            username_expression: 'url_decode(http.request.body.form[\\"username\\"][0])',
-          },
-          expression: 'ip.src eq 1.1.1.1',
-          logging: { enabled: true },
-          ratelimit: {
-            characteristics: ['cf.colo.id'],
-            period: 60,
-            counting_expression: 'http.request.body.raw eq "abcd"',
-            mitigation_timeout: 600,
-            requests_per_period: 1000,
-            requests_to_origin: true,
-            score_per_period: 400,
-            score_response_header_name: 'my-score',
-          },
-          ref: 'my_ref',
-        },
-      ],
-    });
   });
 
   // TODO: investigate broken test

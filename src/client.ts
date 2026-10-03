@@ -17,12 +17,16 @@ import * as Errors from './core/error';
 import * as Pagination from './core/pagination';
 import {
   AbstractPage,
+  type ContainersInstancesV1PaginationParams,
+  ContainersInstancesV1PaginationResponse,
   type CursorLimitPaginationParams,
   CursorLimitPaginationResponse,
   type CursorPaginationAfterParams,
   CursorPaginationAfterResponse,
   type CursorPaginationParams,
   CursorPaginationResponse,
+  type PageTokenPaginationParams,
+  PageTokenPaginationResponse,
   SinglePageResponse,
   type V4PagePaginationArrayParams,
   V4PagePaginationArrayResponse,
@@ -55,6 +59,7 @@ import {
 import { APIGateway } from './resources/api-gateway/api-gateway';
 import { Argo } from './resources/argo/argo';
 import { AuditLogs } from './resources/audit-logs/audit-logs';
+import { BasinCatalog } from './resources/basin-catalog/basin-catalog';
 import { Billing } from './resources/billing/billing';
 import { BotManagement } from './resources/bot-management/bot-management';
 import { BotnetFeed } from './resources/botnet-feed/botnet-feed';
@@ -67,6 +72,7 @@ import { ClientCertificates } from './resources/client-certificates/client-certi
 import { CloudConnector } from './resources/cloud-connector/cloud-connector';
 import { CloudforceOne } from './resources/cloudforce-one/cloudforce-one';
 import { Connectivity } from './resources/connectivity/connectivity';
+import { Containers } from './resources/containers/containers';
 import { ContentScanning } from './resources/content-scanning/content-scanning';
 import { CsamScanner } from './resources/csam-scanner/csam-scanner';
 import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
@@ -1058,6 +1064,7 @@ export class Cloudflare extends BaseCloudflare {
   workers: API.Workers = new API.Workers(this);
   kv: API.KV = new API.KV(this);
   durableObjects: API.DurableObjects = new API.DurableObjects(this);
+  containers: API.Containers = new API.Containers(this);
   queues: API.Queues = new API.Queues(this);
   apiGateway: API.APIGateway = new API.APIGateway(this);
   managedTransforms: API.ManagedTransforms = new API.ManagedTransforms(this);
@@ -1289,6 +1296,7 @@ export class Cloudflare extends BaseCloudflare {
   d1: API.D1Resource = new API.D1Resource(this);
   r2: API.R2 = new API.R2(this);
   r2DataCatalog: API.R2DataCatalog = new API.R2DataCatalog(this);
+  basinCatalog: API.BasinCatalog = new API.BasinCatalog(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
   turnstile: API.Turnstile = new API.Turnstile(this);
@@ -1383,6 +1391,7 @@ Cloudflare.Web3 = Web3;
 Cloudflare.Workers = Workers;
 Cloudflare.KV = KV;
 Cloudflare.DurableObjects = DurableObjects;
+Cloudflare.Containers = Containers;
 Cloudflare.Queues = Queues;
 Cloudflare.APIGateway = APIGateway;
 Cloudflare.ManagedTransforms = ManagedTransforms;
@@ -1414,6 +1423,7 @@ Cloudflare.Alerting = Alerting;
 Cloudflare.D1Resource = D1Resource;
 Cloudflare.R2 = R2;
 Cloudflare.R2DataCatalog = R2DataCatalog;
+Cloudflare.BasinCatalog = BasinCatalog;
 Cloudflare.WorkersForPlatforms = WorkersForPlatforms;
 Cloudflare.ZeroTrust = ZeroTrust;
 Cloudflare.Turnstile = Turnstile;
@@ -1497,6 +1507,18 @@ export declare namespace Cloudflare {
   export {
     type CursorLimitPaginationParams as CursorLimitPaginationParams,
     type CursorLimitPaginationResponse as CursorLimitPaginationResponse,
+  };
+
+  export import ContainersInstancesV1Pagination = Pagination.ContainersInstancesV1Pagination;
+  export {
+    type ContainersInstancesV1PaginationParams as ContainersInstancesV1PaginationParams,
+    type ContainersInstancesV1PaginationResponse as ContainersInstancesV1PaginationResponse,
+  };
+
+  export import PageTokenPagination = Pagination.PageTokenPagination;
+  export {
+    type PageTokenPaginationParams as PageTokenPaginationParams,
+    type PageTokenPaginationResponse as PageTokenPaginationResponse,
   };
 
   export import SinglePage = Pagination.SinglePage;
@@ -1593,6 +1615,8 @@ export declare namespace Cloudflare {
 
   export { DurableObjects as DurableObjects };
 
+  export { Containers as Containers };
+
   export { Queues as Queues };
 
   export { APIGateway as APIGateway };
@@ -1654,6 +1678,8 @@ export declare namespace Cloudflare {
   export { R2 as R2 };
 
   export { R2DataCatalog as R2DataCatalog };
+
+  export { BasinCatalog as BasinCatalog };
 
   export { WorkersForPlatforms as WorkersForPlatforms };
 

@@ -30,7 +30,7 @@ const runTests = (client: PartialCloudflare<{ ai: { models: { schema: BaseSchema
   test('get: only required params', async () => {
     const responsePromise = client.ai.models.schema.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      model: 'model',
+      model: '@cf/meta/llama-3.1-8b-instruct',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -44,7 +44,7 @@ const runTests = (client: PartialCloudflare<{ ai: { models: { schema: BaseSchema
   test('get: required and optional params', async () => {
     const response = await client.ai.models.schema.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      model: 'model',
+      model: '@cf/meta/llama-3.1-8b-instruct',
     });
   });
 };

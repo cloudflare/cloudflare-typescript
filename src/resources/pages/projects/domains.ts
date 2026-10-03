@@ -14,7 +14,7 @@ export class BaseDomains extends APIResource {
   ] as const);
 
   /**
-   * Add a new domain for the Pages project.
+   * Attach a custom domain to a Cloudflare Pages project.
    *
    * @example
    * ```ts
@@ -22,7 +22,7 @@ export class BaseDomains extends APIResource {
    *   'this-is-my-project-01',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     name: 'this-is-my-domain-01.com',
+   *     name: 'example.com',
    *   },
    * );
    * ```
@@ -42,7 +42,7 @@ export class BaseDomains extends APIResource {
   }
 
   /**
-   * Fetch a list of all domains associated with a Pages project.
+   * List the custom domains associated with a Cloudflare Pages project.
    *
    * @example
    * ```ts
@@ -69,12 +69,12 @@ export class BaseDomains extends APIResource {
   }
 
   /**
-   * Delete a Pages project's domain.
+   * Remove a custom domain from a Cloudflare Pages project.
    *
    * @example
    * ```ts
    * const domain = await client.pages.projects.domains.delete(
-   *   'this-is-my-domain-01.com',
+   *   'example.com',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     project_name: 'this-is-my-project-01',
@@ -97,12 +97,12 @@ export class BaseDomains extends APIResource {
   }
 
   /**
-   * Retry the validation status of a single domain.
+   * Retry validation for a custom domain attached to a Cloudflare Pages project.
    *
    * @example
    * ```ts
    * const response = await client.pages.projects.domains.edit(
-   *   'this-is-my-domain-01.com',
+   *   'example.com',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     project_name: 'this-is-my-project-01',
@@ -125,12 +125,13 @@ export class BaseDomains extends APIResource {
   }
 
   /**
-   * Fetch a single domain.
+   * Retrieve the configuration and validation status of a custom domain attached to
+   * a Cloudflare Pages project.
    *
    * @example
    * ```ts
    * const domain = await client.pages.projects.domains.get(
-   *   'this-is-my-domain-01.com',
+   *   'example.com',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     project_name: 'this-is-my-project-01',
@@ -162,7 +163,7 @@ export interface DomainCreateResponse {
   domain_id: string;
 
   /**
-   * The domain name.
+   * Fully qualified domain name for the Pages project, such as `example.com`.
    */
   name: string;
 
@@ -205,7 +206,7 @@ export interface DomainListResponse {
   domain_id: string;
 
   /**
-   * The domain name.
+   * Fully qualified domain name for the Pages project, such as `example.com`.
    */
   name: string;
 
@@ -250,7 +251,7 @@ export interface DomainEditResponse {
   domain_id: string;
 
   /**
-   * The domain name.
+   * Fully qualified domain name for the Pages project, such as `example.com`.
    */
   name: string;
 
@@ -293,7 +294,7 @@ export interface DomainGetResponse {
   domain_id: string;
 
   /**
-   * The domain name.
+   * Fully qualified domain name for the Pages project, such as `example.com`.
    */
   name: string;
 
@@ -333,7 +334,8 @@ export interface DomainCreateParams {
   account_id: string;
 
   /**
-   * Body param: The domain name.
+   * Body param: Fully qualified domain name for the Pages project, such as
+   * `example.com`.
    */
   name: string;
 }
@@ -352,7 +354,8 @@ export interface DomainDeleteParams {
   account_id: string;
 
   /**
-   * Name of the project.
+   * Name of the Pages project. Must begin with a lowercase letter or digit and
+   * contain only lowercase letters, digits, and hyphens.
    */
   project_name: string;
 }
@@ -364,7 +367,8 @@ export interface DomainEditParams {
   account_id: string;
 
   /**
-   * Name of the project.
+   * Name of the Pages project. Must begin with a lowercase letter or digit and
+   * contain only lowercase letters, digits, and hyphens.
    */
   project_name: string;
 }
@@ -376,7 +380,8 @@ export interface DomainGetParams {
   account_id: string;
 
   /**
-   * Name of the project.
+   * Name of the Pages project. Must begin with a lowercase letter or digit and
+   * contain only lowercase letters, digits, and hyphens.
    */
   project_name: string;
 }

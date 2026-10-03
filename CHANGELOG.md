@@ -1,5 +1,70 @@
 # Changelog
 
+## 7.3.0 (2026-10-02)
+
+Full Changelog: [v7.2.0...v7.3.0](https://github.com/cloudflare/cloudflare-typescript/compare/v7.2.0...v7.3.0)
+
+---
+
+### Breaking Changes
+
+#### Removed Methods
+
+- `addressing.addressMaps.zones.update()` -- removed along with the `ZoneUpdateResponse` type
+- `addressing.addressMaps.zones.delete()` -- removed along with the `ZoneDeleteResponse` type
+
+#### Pagination changes
+
+- `emailSecurity.phishguard.reports.list()` now returns a `V4PagePaginationArray` instead of a `SinglePage`. Auto-pagination
+  (`for await (const report of ...)`) is unchanged; code that reads page-level fields may need updating.
+
+---
+
+### Features
+
+#### Containers
+
+Added a new top-level `containers` resource for managing container applications, instances, rollouts, versions, images,
+and registries.
+
+- `containers.applications.create()`, `.list()`, `.get()`, `.edit()`, `.delete()`
+- `containers.applications.instances.list()`, `.get()`, `.listV1()`
+- `containers.applications.rollouts.create()`
+- `containers.applications.versions.list()`
+- `containers.images.prepare()`
+- `containers.registries.create()`, `.list()`, `.delete()`, `.credentials.generate()`
+
+#### R2 Data Catalog
+
+Added a new top-level `basinCatalog` resource.
+
+- `basinCatalog.list()`, `.get()`, `.enable()`, `.disable()`, `.delete()`
+- `basinCatalog.credentials.create()`
+- `basinCatalog.namespaces.list()`, `basinCatalog.namespaces.tables.list()`
+- `basinCatalog.maintenanceConfigs.get()`, `.update()`
+- `basinCatalog.namespaces.tables.maintenanceConfigs.get()`, `.update()`
+
+#### Cloudforce One threat signals
+
+Added a new `cloudforceOne.threatSignals` resource.
+
+- `threatSignals.search.search()`
+- `threatSignals.articles.list()`, `.get()`, `.edit()`, `.bulkEdit()`, `.content.get()`, `.skillOutputs.get()`,
+  `.tags.create()`, `.tags.delete()`, `.tags.generate()`
+- `threatSignals.categories.list()`
+- `threatSignals.feeds.create()`, `.list()`, `.edit()`, `.delete()`, `.poll()`, `.raw.get()`, `.skills.get()`,
+  `.skills.update()`
+- `threatSignals.indicators.list()`
+- `threatSignals.skills.create()`, `.list()`, `.get()`, `.edit()`, `.delete()`, `.tagCategories.get()`,
+  `.tagCategories.update()`
+
+#### Other new methods
+
+- `cache.invalidate()` and `cache.invalidateEnvironment()`
+- `registrar.transferCheck()`
+
+---
+
 ## 7.2.0 (2026-09-25)
 
 Full Changelog: [v7.1.0...v7.2.0](https://github.com/cloudflare/cloudflare-typescript/compare/v7.1.0...v7.2.0)

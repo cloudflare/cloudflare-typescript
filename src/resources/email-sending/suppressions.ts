@@ -13,8 +13,10 @@ export class BaseSuppressions extends APIResource {
   ] as const);
 
   /**
-   * Creates an account-wide suppression. If a mutable legacy zone-linked row already
-   * exists, it is promoted without changing its identifier.
+   * Creates a suppression for every sending domain of the account (default) or for
+   * one sending domain (`scope.type = sending_domain`). Creating an existing active
+   * suppression returns its identifier. If a mutable legacy zone-linked account row
+   * already exists, it is promoted without changing its identifier.
    *
    * @example
    * ```ts
@@ -36,8 +38,9 @@ export class BaseSuppressions extends APIResource {
   }
 
   /**
-   * Lists every active Email Sending suppression owned by the account, including
-   * legacy rows with internal zone memberships.
+   * Lists every active Email Sending suppression owned by the account:
+   * sending-domain suppressions first, then account-wide suppressions (including
+   * legacy rows with internal zone memberships). Each group is newest first.
    *
    * @example
    * ```ts
@@ -90,7 +93,7 @@ export class BaseSuppressions extends APIResource {
 
   /**
    * Updates expiry or advisory note fields without changing legacy internal zone
-   * memberships.
+   * memberships. Scope cannot be changed.
    *
    * @example
    * ```ts
@@ -142,7 +145,8 @@ export class BaseSuppressions extends APIResource {
   }
 
   /**
-   * Imports up to 1,000 account-level Email Sending suppressions in one request.
+   * Imports up to 1,000 Email Sending suppressions in one request. Each item applies
+   * to every sending domain of the account (default) or to one sending domain.
    *
    * @example
    * ```ts
@@ -175,6 +179,34 @@ export interface SuppressionCreateResponse {
    * The suppression's identifier.
    */
   id: string;
+
+  /**
+   * Where the suppression applies: `account` for every sending domain of the
+   * account, or `sending_domain` for one envelope MAIL FROM domain.
+   */
+  scope?: SuppressionCreateResponse.Type | SuppressionCreateResponse.UnionMember1;
+}
+
+export namespace SuppressionCreateResponse {
+  export interface Type {
+    /**
+     * Blocks the recipient for every sending domain of the account.
+     */
+    type: 'account';
+  }
+
+  export interface UnionMember1 {
+    /**
+     * Blocks the recipient only for mail whose envelope MAIL FROM uses `value`.
+     */
+    type: 'sending_domain';
+
+    /**
+     * The sending domain: the domain part of the envelope MAIL FROM, lowercase,
+     * without a trailing dot.
+     */
+    value: string;
+  }
 }
 
 export interface SuppressionListResponse {
@@ -214,6 +246,34 @@ export interface SuppressionListResponse {
    * Advisory note for this suppression, if any.
    */
   note?: string | null;
+
+  /**
+   * Where the suppression applies: `account` for every sending domain of the
+   * account, or `sending_domain` for one envelope MAIL FROM domain.
+   */
+  scope?: SuppressionListResponse.Type | SuppressionListResponse.UnionMember1;
+}
+
+export namespace SuppressionListResponse {
+  export interface Type {
+    /**
+     * Blocks the recipient for every sending domain of the account.
+     */
+    type: 'account';
+  }
+
+  export interface UnionMember1 {
+    /**
+     * Blocks the recipient only for mail whose envelope MAIL FROM uses `value`.
+     */
+    type: 'sending_domain';
+
+    /**
+     * The sending domain: the domain part of the envelope MAIL FROM, lowercase,
+     * without a trailing dot.
+     */
+    value: string;
+  }
 }
 
 export interface SuppressionDeleteResponse {
@@ -221,6 +281,34 @@ export interface SuppressionDeleteResponse {
    * The suppression's identifier.
    */
   id: string;
+
+  /**
+   * Where the suppression applies: `account` for every sending domain of the
+   * account, or `sending_domain` for one envelope MAIL FROM domain.
+   */
+  scope?: SuppressionDeleteResponse.Type | SuppressionDeleteResponse.UnionMember1;
+}
+
+export namespace SuppressionDeleteResponse {
+  export interface Type {
+    /**
+     * Blocks the recipient for every sending domain of the account.
+     */
+    type: 'account';
+  }
+
+  export interface UnionMember1 {
+    /**
+     * Blocks the recipient only for mail whose envelope MAIL FROM uses `value`.
+     */
+    type: 'sending_domain';
+
+    /**
+     * The sending domain: the domain part of the envelope MAIL FROM, lowercase,
+     * without a trailing dot.
+     */
+    value: string;
+  }
 }
 
 export interface SuppressionEditResponse {
@@ -260,6 +348,34 @@ export interface SuppressionEditResponse {
    * Advisory note for this suppression, if any.
    */
   note?: string | null;
+
+  /**
+   * Where the suppression applies: `account` for every sending domain of the
+   * account, or `sending_domain` for one envelope MAIL FROM domain.
+   */
+  scope?: SuppressionEditResponse.Type | SuppressionEditResponse.UnionMember1;
+}
+
+export namespace SuppressionEditResponse {
+  export interface Type {
+    /**
+     * Blocks the recipient for every sending domain of the account.
+     */
+    type: 'account';
+  }
+
+  export interface UnionMember1 {
+    /**
+     * Blocks the recipient only for mail whose envelope MAIL FROM uses `value`.
+     */
+    type: 'sending_domain';
+
+    /**
+     * The sending domain: the domain part of the envelope MAIL FROM, lowercase,
+     * without a trailing dot.
+     */
+    value: string;
+  }
 }
 
 export interface SuppressionGetResponse {
@@ -299,12 +415,40 @@ export interface SuppressionGetResponse {
    * Advisory note for this suppression, if any.
    */
   note?: string | null;
+
+  /**
+   * Where the suppression applies: `account` for every sending domain of the
+   * account, or `sending_domain` for one envelope MAIL FROM domain.
+   */
+  scope?: SuppressionGetResponse.Type | SuppressionGetResponse.UnionMember1;
+}
+
+export namespace SuppressionGetResponse {
+  export interface Type {
+    /**
+     * Blocks the recipient for every sending domain of the account.
+     */
+    type: 'account';
+  }
+
+  export interface UnionMember1 {
+    /**
+     * Blocks the recipient only for mail whose envelope MAIL FROM uses `value`.
+     */
+    type: 'sending_domain';
+
+    /**
+     * The sending domain: the domain part of the envelope MAIL FROM, lowercase,
+     * without a trailing dot.
+     */
+    value: string;
+  }
 }
 
 export interface SuppressionImportResponse {
   /**
-   * Number of items dropped because their email address repeated an earlier item in
-   * this request. Counted once and excluded from `items`.
+   * Number of items dropped because their email address and scope repeated an
+   * earlier item in this request. Counted once and excluded from `items`.
    */
   deduplicated: number;
 
@@ -314,7 +458,7 @@ export interface SuppressionImportResponse {
   errors: number;
 
   /**
-   * Number of items with an invalid email address.
+   * Number of items with an invalid email address or sending domain.
    */
   invalid: number;
 
@@ -368,6 +512,34 @@ export namespace SuppressionImportResponse {
      * `skipped`.
      */
     error?: string;
+
+    /**
+     * Where the suppression applies: `account` for every sending domain of the
+     * account, or `sending_domain` for one envelope MAIL FROM domain.
+     */
+    scope?: Item.Type | Item.UnionMember1;
+  }
+
+  export namespace Item {
+    export interface Type {
+      /**
+       * Blocks the recipient for every sending domain of the account.
+       */
+      type: 'account';
+    }
+
+    export interface UnionMember1 {
+      /**
+       * Blocks the recipient only for mail whose envelope MAIL FROM uses `value`.
+       */
+      type: 'sending_domain';
+
+      /**
+       * The sending domain: the domain part of the envelope MAIL FROM, lowercase,
+       * without a trailing dot.
+       */
+      value: string;
+    }
   }
 }
 
@@ -393,6 +565,36 @@ export interface SuppressionCreateParams {
    * length.
    */
   note?: string;
+
+  /**
+   * Body param: Where the suppression applies. Omit for `{ "type": "account" }`,
+   * which blocks the recipient for every sending domain of the account.
+   */
+  scope?: SuppressionCreateParams.Type | SuppressionCreateParams.UnionMember1;
+}
+
+export namespace SuppressionCreateParams {
+  export interface Type {
+    /**
+     * Blocks the recipient for every sending domain of the account.
+     */
+    type: 'account';
+  }
+
+  export interface UnionMember1 {
+    /**
+     * Blocks the recipient only for mail whose envelope MAIL FROM uses `value`.
+     */
+    type: 'sending_domain';
+
+    /**
+     * The sending domain to suppress for: the domain part of the envelope MAIL FROM.
+     * It is lowercased and trailing dots are removed. Internationalized domains must
+     * use the ASCII (punycode) form. Ownership is not checked; a domain the account
+     * does not send from never matches.
+     */
+    value: string;
+  }
 }
 
 export interface SuppressionListParams extends CursorPaginationParams {
@@ -410,6 +612,18 @@ export interface SuppressionListParams extends CursorPaginationParams {
    * Query param: Filter to suppressions with this reason.
    */
   reason?: 'manual' | 'complaint' | 'hard_bounce' | 'soft_bounce' | 'policy';
+
+  /**
+   * Query param: Filter by scope: `account` returns only account-wide suppressions,
+   * `sending_domain` only sending-domain suppressions. Omit to list both,
+   * sending-domain suppressions first.
+   */
+  scope_type?: 'account' | 'sending_domain';
+
+  /**
+   * Query param: Exact sending-domain filter. Requires `scope_type=sending_domain`.
+   */
+  scope_value?: string;
 
   /**
    * Query param: A complete address is an exact match; a value ending in `@` matches
@@ -443,6 +657,13 @@ export interface SuppressionEditParams {
    * leave it unchanged.
    */
   note?: string;
+
+  /**
+   * Body param: Not editable. Scope is fixed when the suppression is created; any
+   * value returns 400 with code `scope_immutable`. Delete and recreate the
+   * suppression to change it.
+   */
+  scope?: unknown;
 }
 
 export interface SuppressionGetParams {
@@ -459,8 +680,8 @@ export interface SuppressionImportParams {
   account_id: string;
 
   /**
-   * Body param: Suppressions to import. Items with a duplicate email address are
-   * deduplicated before processing.
+   * Body param: Suppressions to import. Items with the same email address and scope
+   * are deduplicated before processing.
    */
   items: Array<SuppressionImportParams.Item>;
 }
@@ -482,6 +703,36 @@ export namespace SuppressionImportParams {
      * Advisory note for this suppression. Not enforced or validated beyond length.
      */
     note?: string;
+
+    /**
+     * Where the suppression applies. Omit for `{ "type": "account" }`, which blocks
+     * the recipient for every sending domain of the account.
+     */
+    scope?: Item.Type | Item.UnionMember1;
+  }
+
+  export namespace Item {
+    export interface Type {
+      /**
+       * Blocks the recipient for every sending domain of the account.
+       */
+      type: 'account';
+    }
+
+    export interface UnionMember1 {
+      /**
+       * Blocks the recipient only for mail whose envelope MAIL FROM uses `value`.
+       */
+      type: 'sending_domain';
+
+      /**
+       * The sending domain to suppress for: the domain part of the envelope MAIL FROM.
+       * It is lowercased and trailing dots are removed. Internationalized domains must
+       * use the ASCII (punycode) form. Ownership is not checked; a domain the account
+       * does not send from never matches.
+       */
+      value: string;
+    }
   }
 }
 

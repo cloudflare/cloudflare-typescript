@@ -508,7 +508,7 @@ export interface LogEditParams {
   account_id: string;
 
   /**
-   * Path param: gateway id
+   * Path param: Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -532,7 +532,7 @@ export interface LogGetParams {
   account_id: string;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 }
@@ -541,7 +541,7 @@ export interface LogRequestParams {
   account_id: string;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 }
@@ -550,7 +550,7 @@ export interface LogResponseParams {
   account_id: string;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 }

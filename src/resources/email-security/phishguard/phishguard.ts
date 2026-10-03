@@ -6,7 +6,7 @@ import {
   BaseReports,
   ReportListParams,
   ReportListResponse,
-  ReportListResponsesSinglePage,
+  ReportListResponsesV4PagePaginationArray,
   Reports,
 } from './reports';
 
@@ -28,7 +28,7 @@ export declare namespace Phishguard {
     Reports as Reports,
     BaseReports as BaseReports,
     type ReportListResponse as ReportListResponse,
-    type ReportListResponsesSinglePage as ReportListResponsesSinglePage,
+    type ReportListResponsesV4PagePaginationArray as ReportListResponsesV4PagePaginationArray,
     type ReportListParams as ReportListParams,
   };
 }

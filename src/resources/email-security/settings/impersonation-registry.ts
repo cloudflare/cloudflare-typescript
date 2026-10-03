@@ -169,14 +169,27 @@ export interface ImpersonationRegistryCreateResponse {
    */
   id?: string;
 
+  /**
+   * Optional note describing the entry.
+   */
   comments?: string | null;
 
   created_at?: string;
 
+  /**
+   * Identifier of the directory the entry was synced from, when directory-synced.
+   */
   directory_id?: number | null;
 
+  /**
+   * Identifier of the directory node the entry was synced from, when
+   * directory-synced.
+   */
   directory_node_id?: number | null;
 
+  /**
+   * Email address (or pattern) of the protected identity.
+   */
   email?: string;
 
   /**
@@ -184,6 +197,9 @@ export interface ImpersonationRegistryCreateResponse {
    */
   external_directory_node_id?: string | null;
 
+  /**
+   * Whether `email` is a regular expression instead of a literal address.
+   */
   is_email_regex?: boolean;
 
   /**
@@ -193,8 +209,14 @@ export interface ImpersonationRegistryCreateResponse {
 
   modified_at?: string;
 
+  /**
+   * Display name of the protected identity.
+   */
   name?: string;
 
+  /**
+   * Source the entry was created from.
+   */
   provenance?:
     | 'A1S_INTERNAL'
     | 'SNOOPY-CASB_OFFICE_365'
@@ -212,14 +234,27 @@ export interface ImpersonationRegistryListResponse {
    */
   id?: string;
 
+  /**
+   * Optional note describing the entry.
+   */
   comments?: string | null;
 
   created_at?: string;
 
+  /**
+   * Identifier of the directory the entry was synced from, when directory-synced.
+   */
   directory_id?: number | null;
 
+  /**
+   * Identifier of the directory node the entry was synced from, when
+   * directory-synced.
+   */
   directory_node_id?: number | null;
 
+  /**
+   * Email address (or pattern) of the protected identity.
+   */
   email?: string;
 
   /**
@@ -227,6 +262,9 @@ export interface ImpersonationRegistryListResponse {
    */
   external_directory_node_id?: string | null;
 
+  /**
+   * Whether `email` is a regular expression instead of a literal address.
+   */
   is_email_regex?: boolean;
 
   /**
@@ -236,8 +274,14 @@ export interface ImpersonationRegistryListResponse {
 
   modified_at?: string;
 
+  /**
+   * Display name of the protected identity.
+   */
   name?: string;
 
+  /**
+   * Source the entry was created from.
+   */
   provenance?:
     | 'A1S_INTERNAL'
     | 'SNOOPY-CASB_OFFICE_365'
@@ -262,14 +306,27 @@ export interface ImpersonationRegistryEditResponse {
    */
   id?: string;
 
+  /**
+   * Optional note describing the entry.
+   */
   comments?: string | null;
 
   created_at?: string;
 
+  /**
+   * Identifier of the directory the entry was synced from, when directory-synced.
+   */
   directory_id?: number | null;
 
+  /**
+   * Identifier of the directory node the entry was synced from, when
+   * directory-synced.
+   */
   directory_node_id?: number | null;
 
+  /**
+   * Email address (or pattern) of the protected identity.
+   */
   email?: string;
 
   /**
@@ -277,6 +334,9 @@ export interface ImpersonationRegistryEditResponse {
    */
   external_directory_node_id?: string | null;
 
+  /**
+   * Whether `email` is a regular expression instead of a literal address.
+   */
   is_email_regex?: boolean;
 
   /**
@@ -286,8 +346,14 @@ export interface ImpersonationRegistryEditResponse {
 
   modified_at?: string;
 
+  /**
+   * Display name of the protected identity.
+   */
   name?: string;
 
+  /**
+   * Source the entry was created from.
+   */
   provenance?:
     | 'A1S_INTERNAL'
     | 'SNOOPY-CASB_OFFICE_365'
@@ -305,14 +371,27 @@ export interface ImpersonationRegistryGetResponse {
    */
   id?: string;
 
+  /**
+   * Optional note describing the entry.
+   */
   comments?: string | null;
 
   created_at?: string;
 
+  /**
+   * Identifier of the directory the entry was synced from, when directory-synced.
+   */
   directory_id?: number | null;
 
+  /**
+   * Identifier of the directory node the entry was synced from, when
+   * directory-synced.
+   */
   directory_node_id?: number | null;
 
+  /**
+   * Email address (or pattern) of the protected identity.
+   */
   email?: string;
 
   /**
@@ -320,6 +399,9 @@ export interface ImpersonationRegistryGetResponse {
    */
   external_directory_node_id?: string | null;
 
+  /**
+   * Whether `email` is a regular expression instead of a literal address.
+   */
   is_email_regex?: boolean;
 
   /**
@@ -329,8 +411,14 @@ export interface ImpersonationRegistryGetResponse {
 
   modified_at?: string;
 
+  /**
+   * Display name of the protected identity.
+   */
   name?: string;
 
+  /**
+   * Source the entry was created from.
+   */
   provenance?:
     | 'A1S_INTERNAL'
     | 'SNOOPY-CASB_OFFICE_365'
@@ -346,32 +434,35 @@ export interface ImpersonationRegistryCreateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Email address (or pattern) of the protected identity.
    */
   email: string;
 
   /**
-   * Body param
+   * Body param: Whether `email` is a regular expression instead of a literal
+   * address.
    */
   is_email_regex: boolean;
 
   /**
-   * Body param
+   * Body param: Display name of the protected identity.
    */
   name: string;
 
   /**
-   * Body param
+   * Body param: Optional note describing the entry.
    */
   comments?: string | null;
 
   /**
-   * Body param
+   * Body param: Identifier of the directory the entry was synced from, when
+   * directory-synced.
    */
   directory_id?: number | null;
 
   /**
-   * Body param
+   * Body param: Identifier of the directory node the entry was synced from, when
+   * directory-synced.
    */
   directory_node_id?: number | null;
 
@@ -381,7 +472,7 @@ export interface ImpersonationRegistryCreateParams {
   external_directory_node_id?: string | null;
 
   /**
-   * Body param
+   * Body param: Source the entry was created from.
    */
   provenance?:
     | 'A1S_INTERNAL'
@@ -432,22 +523,24 @@ export interface ImpersonationRegistryEditParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Optional note describing the entry.
    */
   comments?: string | null;
 
   /**
-   * Body param
+   * Body param: Identifier of the directory the entry was synced from, when
+   * directory-synced.
    */
   directory_id?: number | null;
 
   /**
-   * Body param
+   * Body param: Identifier of the directory node the entry was synced from, when
+   * directory-synced.
    */
   directory_node_id?: number | null;
 
   /**
-   * Body param
+   * Body param: Email address (or pattern) of the protected identity.
    */
   email?: string;
 
@@ -457,17 +550,18 @@ export interface ImpersonationRegistryEditParams {
   external_directory_node_id?: string | null;
 
   /**
-   * Body param
+   * Body param: Whether `email` is a regular expression instead of a literal
+   * address.
    */
   is_email_regex?: boolean;
 
   /**
-   * Body param
+   * Body param: Display name of the protected identity.
    */
   name?: string;
 
   /**
-   * Body param
+   * Body param: Source the entry was created from.
    */
   provenance?:
     | 'A1S_INTERNAL'

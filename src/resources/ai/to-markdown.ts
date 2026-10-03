@@ -11,7 +11,9 @@ export class BaseToMarkdown extends APIResource {
   static override readonly _key: readonly ['ai', 'toMarkdown'] = Object.freeze(['ai', 'toMarkdown'] as const);
 
   /**
-   * Lists all file formats supported for conversion to Markdown.
+   * Lists the file extensions and MIME types accepted by Workers AI's Markdown
+   * conversion endpoint. Use this list to check whether a file can be converted
+   * before uploading it.
    */
   supported(
     params: ToMarkdownSupportedParams,
@@ -26,7 +28,9 @@ export class BaseToMarkdown extends APIResource {
   }
 
   /**
-   * Converts uploaded files into Markdown format using Workers AI.
+   * Converts files uploaded as multipart form data into Markdown using Workers AI.
+   * Returns a conversion result for each file. Use the supported-formats endpoint to
+   * check accepted file types.
    */
   transform(
     params: ToMarkdownTransformParams,
@@ -65,12 +69,15 @@ export interface ToMarkdownTransformResponse {
 }
 
 export interface ToMarkdownSupportedParams {
+  /**
+   * Cloudflare account ID used for this AI model request.
+   */
   account_id: string;
 }
 
 export interface ToMarkdownTransformParams {
   /**
-   * Path param
+   * Path param: Cloudflare account ID used for this AI model request.
    */
   account_id: string;
 
@@ -82,6 +89,9 @@ export interface ToMarkdownTransformParams {
 
 export namespace ToMarkdownTransformParams {
   export interface File {
+    /**
+     * Files to convert, supplied as multipart file uploads.
+     */
     files: Array<Uploadable>;
   }
 }

@@ -40,9 +40,11 @@ export class BaseNamespaces extends APIResource {
   static override readonly _key: readonly ['kv', 'namespaces'] = Object.freeze(['kv', 'namespaces'] as const);
 
   /**
-   * Creates a namespace under the given title. A `400` is returned if the account
-   * already owns a namespace with this title. A namespace must be explicitly deleted
-   * to be replaced.
+   * Creates a Workers KV namespace in the specified account with the given title.
+   * Returns `400` if the account already owns a namespace with that title; an
+   * existing namespace must be explicitly deleted before it can be replaced. An
+   * optional jurisdiction restricts where data is durably stored and can only be set
+   * at creation time.
    *
    * @example
    * ```ts
@@ -63,7 +65,8 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Modifies a namespace's title.
+   * Changes the title of the specified Workers KV namespace and returns the updated
+   * namespace. The namespace ID and stored key-value pairs are unchanged.
    *
    * @example
    * ```ts
@@ -91,7 +94,9 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Returns the namespaces owned by an account.
+   * Lists Workers KV namespaces owned by the specified account. Use `page` and
+   * `per_page` to select a page of results, and `order` and `direction` to control
+   * sorting.
    *
    * @example
    * ```ts
@@ -116,7 +121,8 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Deletes the namespace corresponding to the given ID.
+   * Deletes the specified Workers KV namespace and its stored key-value pairs from
+   * the account.
    *
    * @example
    * ```ts
@@ -141,8 +147,9 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Remove multiple KV pairs from the namespace. Body should be an array of up to
-   * 10,000 keys to be removed.
+   * Deletes up to 10,000 key-value pairs from the specified Workers KV namespace.
+   * Send a JSON array of the key names to delete. The result reports the number of
+   * successful deletions and any keys that failed and should be retried.
    *
    * @example
    * ```ts
@@ -170,9 +177,11 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Retrieve up to 100 KV pairs from the namespace. Keys must contain text-based
-   * values. JSON values can optionally be parsed instead of being returned as a
-   * string value. Metadata can be included if `withMetadata` is true.
+   * Retrieves the text-based values of up to 100 keys from the specified Workers KV
+   * namespace. The result maps each requested key to its value. Set `type` to `json`
+   * to parse JSON values instead of returning strings, and set `withMetadata` to
+   * `true` to include metadata with each value. Binary values are not supported by
+   * this operation.
    *
    * @example
    * ```ts
@@ -200,12 +209,13 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Write multiple keys and values at once. Body should be an array of up to 10,000
-   * key-value pairs to be stored, along with optional expiration information.
-   * Existing values and expirations will be overwritten. If neither `expiration` nor
-   * `expiration_ttl` is specified, the key-value pair will never expire. If both are
-   * set, `expiration_ttl` is used and `expiration` is ignored. The entire request
-   * size must be 100 megabytes or less.
+   * Writes up to 10,000 key-value pairs to the specified Workers KV namespace from a
+   * JSON array, with optional metadata and expiration settings for each pair.
+   * Existing values and expirations are overwritten. If neither `expiration` nor
+   * `expiration_ttl` is specified, the key-value pair will not expire. If both are
+   * set, `expiration_ttl` takes precedence. The entire request must be 100 megabytes
+   * or less. The result reports the number of successful writes and any keys that
+   * failed and should be retried.
    *
    * @example
    * ```ts
@@ -233,7 +243,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Get the namespace corresponding to the given ID.
+   * Returns the Workers KV namespace for the specified account and namespace ID.
    *
    * @example
    * ```ts
@@ -263,12 +273,12 @@ export type NamespacesV4PagePaginationArray = V4PagePaginationArray<Namespace>;
 
 export interface Namespace {
   /**
-   * Namespace identifier tag.
+   * ID of the Workers KV namespace.
    */
   id: string;
 
   /**
-   * A human-readable string name for a Namespace.
+   * Human-readable string name for a Workers KV namespace.
    */
   title: string;
 
@@ -289,12 +299,13 @@ export interface NamespaceDeleteResponse {}
 
 export interface NamespaceBulkDeleteResponse {
   /**
-   * Number of keys successfully updated.
+   * Number of keys successfully written or deleted by the bulk operation.
    */
   successful_key_count?: number;
 
   /**
-   * Name of the keys that failed to be fully updated. They should be retried.
+   * Names of keys that failed to be written or deleted. Retry the operation for
+   * these keys.
    */
   unsuccessful_keys?: Array<string>;
 }
@@ -341,24 +352,25 @@ export namespace NamespaceBulkGetResponse {
 
 export interface NamespaceBulkUpdateResponse {
   /**
-   * Number of keys successfully updated.
+   * Number of keys successfully written or deleted by the bulk operation.
    */
   successful_key_count?: number;
 
   /**
-   * Name of the keys that failed to be fully updated. They should be retried.
+   * Names of keys that failed to be written or deleted. Retry the operation for
+   * these keys.
    */
   unsuccessful_keys?: Array<string>;
 }
 
 export interface NamespaceCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
   /**
-   * Body param: A human-readable string name for a Namespace.
+   * Body param: Human-readable string name for a Workers KV namespace.
    */
   title: string;
 
@@ -371,43 +383,43 @@ export interface NamespaceCreateParams {
 
 export interface NamespaceUpdateParams {
   /**
-   * Path param: Identifier.
+   * Path param: ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
   /**
-   * Body param: A human-readable string name for a Namespace.
+   * Body param: Human-readable string name for a Workers KV namespace.
    */
   title: string;
 }
 
 export interface NamespaceListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier.
+   * Path param: ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
   /**
-   * Query param: Direction to order namespaces.
+   * Query param: Sort namespaces in ascending (`asc`) or descending (`desc`) order.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: Field to order results by.
+   * Query param: Namespace field to sort by (`id` or `title`).
    */
   order?: 'id' | 'title';
 }
 
 export interface NamespaceDeleteParams {
   /**
-   * Identifier.
+   * ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 }
 
 export interface NamespaceBulkDeleteParams {
   /**
-   * Path param: Identifier.
+   * Path param: ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
@@ -419,7 +431,7 @@ export interface NamespaceBulkDeleteParams {
 
 export interface NamespaceBulkGetParams {
   /**
-   * Path param: Identifier.
+   * Path param: ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
@@ -429,7 +441,8 @@ export interface NamespaceBulkGetParams {
   keys: Array<string>;
 
   /**
-   * Body param: Whether to parse JSON values in the response.
+   * Body param: Return values as strings with `text`, or parse stored JSON values
+   * with `json`.
    */
   type?: 'text' | 'json';
 
@@ -441,7 +454,7 @@ export interface NamespaceBulkGetParams {
 
 export interface NamespaceBulkUpdateParams {
   /**
-   * Path param: Identifier.
+   * Path param: ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 
@@ -478,7 +491,8 @@ export namespace NamespaceBulkUpdateParams {
     expiration?: number;
 
     /**
-     * Expires the key after a number of seconds. Must be at least 60.
+     * Number of seconds until the key expires. Must be at least 60. Takes precedence
+     * over `expiration` when both are specified.
      */
     expiration_ttl?: number;
 
@@ -491,7 +505,7 @@ export namespace NamespaceBulkUpdateParams {
 
 export interface NamespaceGetParams {
   /**
-   * Identifier.
+   * ID of the Cloudflare account that owns the Workers KV namespaces.
    */
   account_id: string;
 }

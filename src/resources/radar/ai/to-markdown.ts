@@ -15,7 +15,9 @@ export class BaseToMarkdown extends APIResource {
   ] as const);
 
   /**
-   * Converts uploaded files into Markdown format using Workers AI.
+   * Converts files uploaded as multipart form data into Markdown using Workers AI.
+   * Returns a conversion result for each file. Use the supported-formats endpoint to
+   * check accepted file types.
    *
    * @deprecated Use [AI > To Markdown](https://developers.cloudflare.com/api/resources/ai/subresources/to_markdown/) instead.
    */
@@ -49,12 +51,12 @@ export interface ToMarkdownCreateResponse {
 
 export interface ToMarkdownCreateParams {
   /**
-   * Path param
+   * Path param: Cloudflare account ID used for this AI model request.
    */
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Files to convert, supplied as multipart file uploads.
    */
   files: Array<Uploadable>;
 }

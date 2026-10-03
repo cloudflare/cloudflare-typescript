@@ -37,12 +37,7 @@ export class BaseR2DataCatalog extends APIResource {
    * for the specified account. Each catalog represents an R2 bucket configured to
    * store Iceberg metadata and data files.
    *
-   * @example
-   * ```ts
-   * const r2DataCatalogs = await client.r2DataCatalog.list({
-   *   account_id: '0123456789abcdef0123456789abcdef',
-   * });
-   * ```
+   * @deprecated Use `GET /accounts/{account_id}/basin-catalog` instead.
    */
   list(params: R2DataCatalogListParams, options?: RequestOptions): APIPromise<R2DataCatalogListResponse> {
     const { account_id } = params;
@@ -58,12 +53,7 @@ export class BaseR2DataCatalog extends APIResource {
    * Set force=true to remove catalog namespaces, tables, views, and maintenance
    * metadata. Force deletion is limited to a configured catalog object count.
    *
-   * @example
-   * ```ts
-   * await client.r2DataCatalog.delete('my-data-bucket', {
-   *   account_id: '0123456789abcdef0123456789abcdef',
-   * });
-   * ```
+   * @deprecated Use `POST /accounts/{account_id}/basin-catalog/{bucket_name}/delete` instead.
    */
   delete(bucketName: string, params: R2DataCatalogDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { account_id, force } = params;
@@ -78,12 +68,7 @@ export class BaseR2DataCatalog extends APIResource {
    * Disable an R2 bucket as a catalog. This operation deactivates the catalog but
    * preserves existing metadata and data files. The catalog can be re-enabled later.
    *
-   * @example
-   * ```ts
-   * await client.r2DataCatalog.disable('my-data-bucket', {
-   *   account_id: '0123456789abcdef0123456789abcdef',
-   * });
-   * ```
+   * @deprecated Use `POST /accounts/{account_id}/basin-catalog/{bucket_name}/disable` instead.
    */
   disable(
     bucketName: string,
@@ -102,13 +87,7 @@ export class BaseR2DataCatalog extends APIResource {
    * necessary catalog infrastructure and activates the bucket for storing Iceberg
    * metadata and data files.
    *
-   * @example
-   * ```ts
-   * const response = await client.r2DataCatalog.enable(
-   *   'my-data-bucket',
-   *   { account_id: '0123456789abcdef0123456789abcdef' },
-   * );
-   * ```
+   * @deprecated Use `POST /accounts/{account_id}/basin-catalog/{bucket_name}/enable` instead.
    */
   enable(
     bucketName: string,
@@ -128,13 +107,7 @@ export class BaseR2DataCatalog extends APIResource {
    * Retrieve detailed information about a specific R2 catalog by bucket name.
    * Returns catalog status, maintenance configuration, and credential status.
    *
-   * @example
-   * ```ts
-   * const r2DataCatalog = await client.r2DataCatalog.get(
-   *   'my-data-bucket',
-   *   { account_id: '0123456789abcdef0123456789abcdef' },
-   * );
-   * ```
+   * @deprecated Use `GET /accounts/{account_id}/basin-catalog/{bucket_name}` instead.
    */
   get(
     bucketName: string,

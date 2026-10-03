@@ -67,7 +67,7 @@ export class BaseInvestigate extends APIResource {
   ] as const);
 
   /**
-   * Returns information for each email that matches the search parameter(s).
+   * Returns information for each email that matches the provided search parameters.
    *
    * @example
    * ```ts
@@ -192,6 +192,9 @@ export interface InvestigateListResponse {
 
   envelope_to?: Array<string> | null;
 
+  /**
+   * The verdict Email Security assigns to a message.
+   */
   final_disposition?:
     | 'MALICIOUS'
     | 'MALICIOUS-BEC'
@@ -355,6 +358,9 @@ export namespace InvestigateListResponse {
 
     detail?: string | null;
 
+    /**
+     * The verdict Email Security assigns to a message.
+     */
     detection?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -452,6 +458,9 @@ export interface InvestigateGetResponse {
 
   envelope_to?: Array<string> | null;
 
+  /**
+   * The verdict Email Security assigns to a message.
+   */
   final_disposition?:
     | 'MALICIOUS'
     | 'MALICIOUS-BEC'
@@ -615,6 +624,9 @@ export namespace InvestigateGetResponse {
 
     detail?: string | null;
 
+    /**
+     * The verdict Email Security assigns to a message.
+     */
     detection?:
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -659,12 +671,12 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param
+   * Query param: Filter by alert ID.
    */
   alert_id?: string;
 
   /**
-   * Query param
+   * Query param: Pagination cursor from the previous response's `result_info`.
    */
   cursor?: string;
 
@@ -687,7 +699,8 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   detections_only?: boolean;
 
   /**
-   * Query param: Sender domains to filter by.
+   * Query param: Filter by a domain found in the email — sender domain, recipient
+   * domain, or a domain in a link.
    */
   domain?: string;
 
@@ -707,27 +720,29 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED';
 
   /**
-   * Query param
+   * Query param: Filter by the RFC 5322 Message-ID header.
    */
   message_id?: string;
 
   /**
-   * Query param
+   * Query param: Metric to aggregate the results by.
    */
   metric?: string;
 
   /**
-   * Query param: Space-delimited search term. Case-insensitive.
+   * Query param: Space-delimited term matched case-insensitively against message
+   * metadata — sender, recipient, subject, attachment names and hashes, and message
+   * ID.
    */
   query?: string;
 
   /**
-   * Query param
+   * Query param: Filter by recipient. Matches an email address or a domain.
    */
   recipient?: string;
 
   /**
-   * Query param
+   * Query param: Filter by sender. Matches an email address or a domain.
    */
   sender?: string;
 
@@ -744,7 +759,8 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   start?: string;
 
   /**
-   * Query param
+   * Query param: Search for messages containing individual keywords in any order
+   * within the subject.
    */
   subject?: string;
 }

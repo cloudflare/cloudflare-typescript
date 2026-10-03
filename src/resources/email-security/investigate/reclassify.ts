@@ -15,19 +15,10 @@ export class BaseReclassify extends APIResource {
   /**
    * Submits a request to reclassify an email's disposition. Use for reporting false
    * positives or false negatives. Optionally provide the raw EML content for
-   * reanalysis. The reclassification is processed asynchronously.
+   * reanalysis. The reclassification is processed asynchronously. Deprecated; use
+   * the create submissions endpoint instead.
    *
-   * @example
-   * ```ts
-   * const reclassify =
-   *   await client.emailSecurity.investigate.reclassify.create(
-   *     '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
-   *     {
-   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       expected_disposition: 'NONE',
-   *     },
-   *   );
-   * ```
+   * @deprecated
    */
   create(
     investigateID: string,
@@ -54,7 +45,7 @@ export interface ReclassifyCreateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: The disposition the message should have.
    */
   expected_disposition: 'NONE' | 'BULK' | 'MALICIOUS' | 'SPAM' | 'SPOOF' | 'SUSPICIOUS';
 
@@ -64,7 +55,8 @@ export interface ReclassifyCreateParams {
   eml_content?: string;
 
   /**
-   * Body param
+   * Body param: Submission ID of the original user submission, when reclassifying an
+   * escalated user report.
    */
   escalated_submission_id?: string;
 }

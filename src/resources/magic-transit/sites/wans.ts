@@ -178,6 +178,8 @@ export interface WAN {
    */
   health_check_rate?: 'low' | 'mid' | 'high';
 
+  load_balance_inner_flows?: boolean;
+
   name?: string;
 
   physport?: number;
@@ -258,6 +260,17 @@ export interface WANCreateParams {
   physport: number;
 
   /**
+   * Body param: Magic WAN health check rate for tunnels created on this link. The
+   * default value is `mid`.
+   */
+  health_check_rate?: 'low' | 'mid' | 'high';
+
+  /**
+   * Body param
+   */
+  load_balance_inner_flows?: boolean;
+
+  /**
    * Body param
    */
   name?: string;
@@ -289,6 +302,16 @@ export interface WANUpdateParams {
    * Path param: Identifier
    */
   site_id: string;
+
+  /**
+   * Body param: Magic WAN health check rate for tunnels created on this link.
+   */
+  health_check_rate?: 'low' | 'mid' | 'high';
+
+  /**
+   * Body param
+   */
+  load_balance_inner_flows?: boolean | null;
 
   /**
    * Body param
@@ -346,6 +369,16 @@ export interface WANEditParams {
    * Path param: Identifier
    */
   site_id: string;
+
+  /**
+   * Body param: Magic WAN health check rate for tunnels created on this link.
+   */
+  health_check_rate?: 'low' | 'mid' | 'high';
+
+  /**
+   * Body param
+   */
+  load_balance_inner_flows?: boolean | null;
 
   /**
    * Body param

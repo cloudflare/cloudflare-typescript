@@ -1,7 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import { PagePromise, SinglePage } from '../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -30,24 +34,27 @@ export class BaseReports extends APIResource {
   list(
     params: ReportListParams,
     options?: RequestOptions,
-  ): PagePromise<ReportListResponsesSinglePage, ReportListResponse> {
+  ): PagePromise<ReportListResponsesV4PagePaginationArray, ReportListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/email-security/phishguard/reports`,
-      SinglePage<ReportListResponse>,
+      V4PagePaginationArray<ReportListResponse>,
       { query, ...options },
     );
   }
 }
 export class Reports extends BaseReports {}
 
-export type ReportListResponsesSinglePage = SinglePage<ReportListResponse>;
+export type ReportListResponsesV4PagePaginationArray = V4PagePaginationArray<ReportListResponse>;
 
 export interface ReportListResponse {
   id: number;
 
   content: string;
 
+  /**
+   * The verdict Email Security assigns to a message.
+   */
   disposition:
     | 'MALICIOUS'
     | 'MALICIOUS-BEC'
@@ -101,7 +108,7 @@ export namespace ReportListResponse {
   }
 }
 
-export interface ReportListParams {
+export interface ReportListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
@@ -131,7 +138,7 @@ export interface ReportListParams {
 export declare namespace Reports {
   export {
     type ReportListResponse as ReportListResponse,
-    type ReportListResponsesSinglePage as ReportListResponsesSinglePage,
+    type ReportListResponsesV4PagePaginationArray as ReportListResponsesV4PagePaginationArray,
     type ReportListParams as ReportListParams,
   };
 }

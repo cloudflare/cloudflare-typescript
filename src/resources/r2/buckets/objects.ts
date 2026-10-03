@@ -335,7 +335,7 @@ export interface ObjectUploadResponse {
 
 export interface ObjectListParams extends CursorPaginationParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -367,7 +367,7 @@ export interface ObjectListParams extends CursorPaginationParams {
 
 export interface ObjectDeleteParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -385,7 +385,7 @@ export interface ObjectDeleteParams {
 
 export interface ObjectGetParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 
@@ -416,7 +416,7 @@ export interface ObjectGetParams {
 
 export interface ObjectUploadParams {
   /**
-   * Path param: Account ID.
+   * Path param: Cloudflare account ID that owns the R2 resource.
    */
   account_id: string;
 

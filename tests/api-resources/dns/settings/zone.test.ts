@@ -47,7 +47,7 @@ const runTests = (client: PartialCloudflare<{ dns: { settings: { zone: BaseZone 
       foundation_dns: false,
       internal_dns: { reference_zone_id: 'reference_zone_id' },
       multi_provider: false,
-      nameservers: { ns_set: 1, type: 'cloudflare.standard' },
+      nameservers: { type: 'cloudflare.standard' },
       ns_ttl: 86400,
       secondary_overrides: false,
       soa: {

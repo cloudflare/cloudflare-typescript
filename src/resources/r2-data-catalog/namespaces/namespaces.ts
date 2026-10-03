@@ -17,14 +17,7 @@ export class BaseNamespaces extends APIResource {
    * Returns a list of namespaces in the specified R2 catalog. Supports hierarchical
    * filtering and pagination for efficient traversal of large namespace hierarchies.
    *
-   * @example
-   * ```ts
-   * const namespaces =
-   *   await client.r2DataCatalog.namespaces.list(
-   *     'my-data-bucket',
-   *     { account_id: '0123456789abcdef0123456789abcdef' },
-   *   );
-   * ```
+   * @deprecated Use `GET /accounts/{account_id}/basin-catalog/{bucket_name}/namespaces` instead.
    */
   list(
     bucketName: string,

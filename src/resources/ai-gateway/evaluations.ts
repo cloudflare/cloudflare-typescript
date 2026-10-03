@@ -13,7 +13,9 @@ export class BaseEvaluations extends APIResource {
   ] as const);
 
   /**
-   * Creates a new AI Gateway.
+   * Creates an evaluation that scores the logs in a dataset with the specified
+   * evaluator types. Evaluations and datasets are deprecated and unavailable to new
+   * accounts.
    *
    * @example
    * ```ts
@@ -41,7 +43,8 @@ export class BaseEvaluations extends APIResource {
   }
 
   /**
-   * Lists all AI Gateway evaluator types configured for the account.
+   * Lists the evaluations run on an AI Gateway. Evaluations and datasets are
+   * deprecated and unavailable to new accounts.
    *
    * @example
    * ```ts
@@ -68,7 +71,8 @@ export class BaseEvaluations extends APIResource {
   }
 
   /**
-   * Deletes an AI Gateway dataset.
+   * Deletes an evaluation and its results. Evaluations and datasets are deprecated
+   * and unavailable to new accounts.
    *
    * @example
    * ```ts
@@ -94,7 +98,8 @@ export class BaseEvaluations extends APIResource {
   }
 
   /**
-   * Retrieves details for a specific AI Gateway dataset.
+   * Retrieves an evaluation and its results. Evaluations and datasets are deprecated
+   * and unavailable to new accounts.
    *
    * @example
    * ```ts
@@ -129,7 +134,7 @@ export interface EvaluationCreateResponse {
   datasets: Array<EvaluationCreateResponse.Dataset>;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -159,7 +164,7 @@ export namespace EvaluationCreateResponse {
     filters: Array<Dataset.Filter>;
 
     /**
-     * gateway id
+     * Unique identifier of the AI Gateway within the account.
      */
     gateway_id: string;
 
@@ -220,7 +225,7 @@ export interface EvaluationListResponse {
   datasets: Array<EvaluationListResponse.Dataset>;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -250,7 +255,7 @@ export namespace EvaluationListResponse {
     filters: Array<Dataset.Filter>;
 
     /**
-     * gateway id
+     * Unique identifier of the AI Gateway within the account.
      */
     gateway_id: string;
 
@@ -311,7 +316,7 @@ export interface EvaluationDeleteResponse {
   datasets: Array<EvaluationDeleteResponse.Dataset>;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -341,7 +346,7 @@ export namespace EvaluationDeleteResponse {
     filters: Array<Dataset.Filter>;
 
     /**
-     * gateway id
+     * Unique identifier of the AI Gateway within the account.
      */
     gateway_id: string;
 
@@ -402,7 +407,7 @@ export interface EvaluationGetResponse {
   datasets: Array<EvaluationGetResponse.Dataset>;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 
@@ -432,7 +437,7 @@ export namespace EvaluationGetResponse {
     filters: Array<Dataset.Filter>;
 
     /**
-     * gateway id
+     * Unique identifier of the AI Gateway within the account.
      */
     gateway_id: string;
 
@@ -533,7 +538,7 @@ export interface EvaluationDeleteParams {
   account_id: string;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 }
@@ -542,7 +547,7 @@ export interface EvaluationGetParams {
   account_id: string;
 
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   gateway_id: string;
 }

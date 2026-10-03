@@ -14,7 +14,7 @@ export class BaseDetections extends APIResource {
 
   /**
    * Returns detection details such as threat categories and sender information for
-   * non-benign messages.
+   * messages with a detection.
    *
    * @example
    * ```ts
@@ -58,6 +58,9 @@ export interface DetectionGetResponse {
 
   validation: DetectionGetResponse.Validation;
 
+  /**
+   * The verdict Email Security assigns to a message.
+   */
   final_disposition?:
     | 'MALICIOUS'
     | 'MALICIOUS-BEC'

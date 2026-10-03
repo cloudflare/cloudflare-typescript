@@ -283,6 +283,9 @@ export interface DomainCreateResponse {
 
   emails_processed?: DomainCreateResponse.EmailsProcessed | null;
 
+  /**
+   * The mailbox folder to scan, for API-scanning domains.
+   */
   folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -364,6 +367,9 @@ export interface DomainUpdateResponse {
 
   emails_processed?: DomainUpdateResponse.EmailsProcessed | null;
 
+  /**
+   * The mailbox folder to scan, for API-scanning domains.
+   */
   folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -445,6 +451,9 @@ export interface DomainListResponse {
 
   emails_processed?: DomainListResponse.EmailsProcessed | null;
 
+  /**
+   * The mailbox folder to scan, for API-scanning domains.
+   */
   folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -551,6 +560,9 @@ export namespace DomainBatchResponse {
 
     emails_processed?: Patch.EmailsProcessed | null;
 
+    /**
+     * The mailbox folder to scan, for API-scanning domains.
+     */
     folder?: 'AllItems' | 'Inbox' | null;
 
     inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -632,6 +644,9 @@ export namespace DomainBatchResponse {
 
     emails_processed?: Post.EmailsProcessed | null;
 
+    /**
+     * The mailbox folder to scan, for API-scanning domains.
+     */
     folder?: 'AllItems' | 'Inbox' | null;
 
     inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -713,6 +728,9 @@ export namespace DomainBatchResponse {
 
     emails_processed?: Put.EmailsProcessed | null;
 
+    /**
+     * The mailbox folder to scan, for API-scanning domains.
+     */
     folder?: 'AllItems' | 'Inbox' | null;
 
     inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -802,6 +820,9 @@ export interface DomainEditResponse {
 
   emails_processed?: DomainEditResponse.EmailsProcessed | null;
 
+  /**
+   * The mailbox folder to scan, for API-scanning domains.
+   */
   folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -883,6 +904,9 @@ export interface DomainGetResponse {
 
   emails_processed?: DomainGetResponse.EmailsProcessed | null;
 
+  /**
+   * The mailbox folder to scan, for API-scanning domains.
+   */
   folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -940,17 +964,18 @@ export interface DomainCreateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Delivery modes to onboard the domain through.
    */
   allowed_delivery_modes: Array<'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN'>;
 
   /**
-   * Body param
+   * Body param: The email domain to protect.
    */
   domain: string;
 
   /**
-   * Body param
+   * Body param: Dispositions to drop instead of delivering, e.g.
+   * `["MALICIOUS", "SPAM"]`.
    */
   drop_dispositions: Array<
     | 'MALICIOUS'
@@ -966,42 +991,48 @@ export interface DomainCreateParams {
   >;
 
   /**
-   * Body param
+   * Body param: Source IP ranges mail is accepted from. Any other source is
+   * rejected.
    */
   ip_restrictions: Array<string>;
 
   /**
-   * Body param
+   * Body param: Regions that process messages for this domain, e.g. `["GLOBAL"]` or
+   * `["US"]`.
    */
   regions: Array<'GLOBAL' | 'AU' | 'DE' | 'IN' | 'US'>;
 
   /**
-   * Body param
+   * Body param: The mailbox folder to scan, for API-scanning domains.
    */
   folder?: 'AllItems' | 'Inbox' | null;
 
   /**
-   * Body param
+   * Body param: Identifier of the CASB integration that authorizes this domain. The
+   * integration also enables API scanning, post-delivery actions, and directory
+   * sync.
    */
   integration_id?: string | null;
 
   /**
-   * Body param
+   * Body param: Number of hops to trace back through received headers when
+   * reconstructing the original message (1-20).
    */
   lookback_hops?: number | null;
 
   /**
-   * Body param
+   * Body param: Require TLS on inbound connections.
    */
   require_tls_inbound?: boolean | null;
 
   /**
-   * Body param
+   * Body param: Require TLS on outbound connections.
    */
   require_tls_outbound?: boolean | null;
 
   /**
-   * Body param
+   * Body param: The mail transport hostname for MX/Inline delivery — the MX record
+   * Cloudflare delivers email to (e.g. `mx.example.com`).
    */
   transport?: string | null;
 }
@@ -1013,12 +1044,13 @@ export interface DomainUpdateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Delivery modes to onboard the domain through.
    */
   allowed_delivery_modes: Array<'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN'>;
 
   /**
-   * Body param
+   * Body param: Dispositions to drop instead of delivering, e.g.
+   * `["MALICIOUS", "SPAM"]`.
    */
   drop_dispositions: Array<
     | 'MALICIOUS'
@@ -1034,42 +1066,48 @@ export interface DomainUpdateParams {
   >;
 
   /**
-   * Body param
+   * Body param: Source IP ranges mail is accepted from. Any other source is
+   * rejected.
    */
   ip_restrictions: Array<string>;
 
   /**
-   * Body param
+   * Body param: Regions that process messages for this domain, e.g. `["GLOBAL"]` or
+   * `["US"]`.
    */
   regions: Array<'GLOBAL' | 'AU' | 'DE' | 'IN' | 'US'>;
 
   /**
-   * Body param
+   * Body param: The mailbox folder to scan, for API-scanning domains.
    */
   folder?: 'AllItems' | 'Inbox' | null;
 
   /**
-   * Body param
+   * Body param: Identifier of the CASB integration that authorizes this domain. The
+   * integration also enables API scanning, post-delivery actions, and directory
+   * sync.
    */
   integration_id?: string | null;
 
   /**
-   * Body param
+   * Body param: Number of hops to trace back through received headers when
+   * reconstructing the original message (1-20).
    */
   lookback_hops?: number | null;
 
   /**
-   * Body param
+   * Body param: Require TLS on inbound connections.
    */
   require_tls_inbound?: boolean | null;
 
   /**
-   * Body param
+   * Body param: Require TLS on outbound connections.
    */
   require_tls_outbound?: boolean | null;
 
   /**
-   * Body param
+   * Body param: The mail transport hostname for MX/Inline delivery — the MX record
+   * Cloudflare delivers email to (e.g. `mx.example.com`).
    */
   transport?: string | null;
 }
@@ -1135,22 +1173,24 @@ export interface DomainBatchParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: IDs of the domains to remove protection from.
    */
   deletes: Array<DomainBatchParams.Delete>;
 
   /**
-   * Body param
+   * Body param: Partial updates to apply — each entry carries the domain's ID and
+   * only the fields to change.
    */
   patches: Array<DomainBatchParams.Patch>;
 
   /**
-   * Body param
+   * Body param: Domains to add protection for.
    */
   posts: Array<DomainBatchParams.Post>;
 
   /**
-   * Body param
+   * Body param: Full replacements to apply — each entry carries the domain's ID and
+   * every field of its new value.
    */
   puts: Array<DomainBatchParams.Put>;
 }
@@ -1169,8 +1209,14 @@ export namespace DomainBatchParams {
      */
     id: string;
 
+    /**
+     * Delivery modes to onboard the domain through.
+     */
     allowed_delivery_modes?: Array<'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN'>;
 
+    /**
+     * Dispositions to drop instead of delivering, e.g. `["MALICIOUS", "SPAM"]`.
+     */
     drop_dispositions?: Array<
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -1184,28 +1230,64 @@ export namespace DomainBatchParams {
       | 'NONE'
     >;
 
+    /**
+     * The mailbox folder to scan, for API-scanning domains.
+     */
     folder?: 'AllItems' | 'Inbox' | null;
 
+    /**
+     * Identifier of the CASB integration that authorizes this domain. The integration
+     * also enables API scanning, post-delivery actions, and directory sync.
+     */
     integration_id?: string | null;
 
+    /**
+     * Source IP ranges mail is accepted from. Any other source is rejected.
+     */
     ip_restrictions?: Array<string>;
 
+    /**
+     * Number of hops to trace back through received headers when reconstructing the
+     * original message (1-20).
+     */
     lookback_hops?: number;
 
+    /**
+     * Regions that process messages for this domain, e.g. `["GLOBAL"]` or `["US"]`.
+     */
     regions?: Array<'GLOBAL' | 'AU' | 'DE' | 'IN' | 'US'>;
 
+    /**
+     * Require TLS on inbound connections.
+     */
     require_tls_inbound?: boolean;
 
+    /**
+     * Require TLS on outbound connections.
+     */
     require_tls_outbound?: boolean;
 
+    /**
+     * The mail transport hostname for MX/Inline delivery — the MX record Cloudflare
+     * delivers email to (e.g. `mx.example.com`).
+     */
     transport?: string;
   }
 
   export interface Post {
+    /**
+     * Delivery modes to onboard the domain through.
+     */
     allowed_delivery_modes: Array<'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN'>;
 
+    /**
+     * The email domain to protect.
+     */
     domain: string;
 
+    /**
+     * Dispositions to drop instead of delivering, e.g. `["MALICIOUS", "SPAM"]`.
+     */
     drop_dispositions: Array<
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -1219,20 +1301,47 @@ export namespace DomainBatchParams {
       | 'NONE'
     >;
 
+    /**
+     * Source IP ranges mail is accepted from. Any other source is rejected.
+     */
     ip_restrictions: Array<string>;
 
+    /**
+     * Regions that process messages for this domain, e.g. `["GLOBAL"]` or `["US"]`.
+     */
     regions: Array<'GLOBAL' | 'AU' | 'DE' | 'IN' | 'US'>;
 
+    /**
+     * The mailbox folder to scan, for API-scanning domains.
+     */
     folder?: 'AllItems' | 'Inbox' | null;
 
+    /**
+     * Identifier of the CASB integration that authorizes this domain. The integration
+     * also enables API scanning, post-delivery actions, and directory sync.
+     */
     integration_id?: string | null;
 
+    /**
+     * Number of hops to trace back through received headers when reconstructing the
+     * original message (1-20).
+     */
     lookback_hops?: number | null;
 
+    /**
+     * Require TLS on inbound connections.
+     */
     require_tls_inbound?: boolean | null;
 
+    /**
+     * Require TLS on outbound connections.
+     */
     require_tls_outbound?: boolean | null;
 
+    /**
+     * The mail transport hostname for MX/Inline delivery — the MX record Cloudflare
+     * delivers email to (e.g. `mx.example.com`).
+     */
     transport?: string | null;
   }
 
@@ -1246,8 +1355,14 @@ export namespace DomainBatchParams {
      */
     id: string;
 
+    /**
+     * Delivery modes to onboard the domain through.
+     */
     allowed_delivery_modes: Array<'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN'>;
 
+    /**
+     * Dispositions to drop instead of delivering, e.g. `["MALICIOUS", "SPAM"]`.
+     */
     drop_dispositions: Array<
       | 'MALICIOUS'
       | 'MALICIOUS-BEC'
@@ -1261,20 +1376,47 @@ export namespace DomainBatchParams {
       | 'NONE'
     >;
 
+    /**
+     * Source IP ranges mail is accepted from. Any other source is rejected.
+     */
     ip_restrictions: Array<string>;
 
+    /**
+     * Regions that process messages for this domain, e.g. `["GLOBAL"]` or `["US"]`.
+     */
     regions: Array<'GLOBAL' | 'AU' | 'DE' | 'IN' | 'US'>;
 
+    /**
+     * The mailbox folder to scan, for API-scanning domains.
+     */
     folder?: 'AllItems' | 'Inbox' | null;
 
+    /**
+     * Identifier of the CASB integration that authorizes this domain. The integration
+     * also enables API scanning, post-delivery actions, and directory sync.
+     */
     integration_id?: string | null;
 
+    /**
+     * Number of hops to trace back through received headers when reconstructing the
+     * original message (1-20).
+     */
     lookback_hops?: number | null;
 
+    /**
+     * Require TLS on inbound connections.
+     */
     require_tls_inbound?: boolean | null;
 
+    /**
+     * Require TLS on outbound connections.
+     */
     require_tls_outbound?: boolean | null;
 
+    /**
+     * The mail transport hostname for MX/Inline delivery — the MX record Cloudflare
+     * delivers email to (e.g. `mx.example.com`).
+     */
     transport?: string | null;
   }
 }
@@ -1293,12 +1435,13 @@ export interface DomainEditParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Delivery modes to onboard the domain through.
    */
   allowed_delivery_modes?: Array<'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN'>;
 
   /**
-   * Body param
+   * Body param: Dispositions to drop instead of delivering, e.g.
+   * `["MALICIOUS", "SPAM"]`.
    */
   drop_dispositions?: Array<
     | 'MALICIOUS'
@@ -1314,42 +1457,48 @@ export interface DomainEditParams {
   >;
 
   /**
-   * Body param
+   * Body param: The mailbox folder to scan, for API-scanning domains.
    */
   folder?: 'AllItems' | 'Inbox' | null;
 
   /**
-   * Body param
+   * Body param: Identifier of the CASB integration that authorizes this domain. The
+   * integration also enables API scanning, post-delivery actions, and directory
+   * sync.
    */
   integration_id?: string | null;
 
   /**
-   * Body param
+   * Body param: Source IP ranges mail is accepted from. Any other source is
+   * rejected.
    */
   ip_restrictions?: Array<string>;
 
   /**
-   * Body param
+   * Body param: Number of hops to trace back through received headers when
+   * reconstructing the original message (1-20).
    */
   lookback_hops?: number;
 
   /**
-   * Body param
+   * Body param: Regions that process messages for this domain, e.g. `["GLOBAL"]` or
+   * `["US"]`.
    */
   regions?: Array<'GLOBAL' | 'AU' | 'DE' | 'IN' | 'US'>;
 
   /**
-   * Body param
+   * Body param: Require TLS on inbound connections.
    */
   require_tls_inbound?: boolean;
 
   /**
-   * Body param
+   * Body param: Require TLS on outbound connections.
    */
   require_tls_outbound?: boolean;
 
   /**
-   * Body param
+   * Body param: The mail transport hostname for MX/Inline delivery — the MX record
+   * Cloudflare delivers email to (e.g. `mx.example.com`).
    */
   transport?: string;
 }

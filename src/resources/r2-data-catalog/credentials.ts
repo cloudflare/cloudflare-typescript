@@ -15,17 +15,7 @@ export class BaseCredentials extends APIResource {
    * Store authentication credentials for a catalog. These credentials are used to
    * authenticate with R2 storage when performing catalog operations.
    *
-   * @example
-   * ```ts
-   * const credential =
-   *   await client.r2DataCatalog.credentials.create(
-   *     'my-data-bucket',
-   *     {
-   *       account_id: '0123456789abcdef0123456789abcdef',
-   *       token: 'your-cloudflare-api-token-here',
-   *     },
-   *   );
-   * ```
+   * @deprecated Use `POST /accounts/{account_id}/basin-catalog/{bucket_name}/credential` instead.
    */
   create(
     bucketName: string,

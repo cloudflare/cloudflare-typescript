@@ -130,7 +130,9 @@ export class BaseAIGateway extends APIResource {
   static override readonly _key: readonly ['aiGateway'] = Object.freeze(['aiGateway'] as const);
 
   /**
-   * Creates a new AI Gateway.
+   * Creates an AI Gateway in the account with the specified caching, rate limiting,
+   * logging, and authentication settings. The gateway ID appears in request URLs and
+   * must be unique within the account.
    *
    * @example
    * ```ts
@@ -156,7 +158,8 @@ export class BaseAIGateway extends APIResource {
   }
 
   /**
-   * Updates an existing AI Gateway dataset.
+   * Updates the configuration of an AI Gateway, such as its caching, rate limiting,
+   * logging, and authentication settings.
    *
    * @example
    * ```ts
@@ -188,7 +191,7 @@ export class BaseAIGateway extends APIResource {
   }
 
   /**
-   * Lists all AI Gateway evaluator types configured for the account.
+   * Lists the AI Gateways in the account. Use `search` to filter by gateway ID.
    *
    * @example
    * ```ts
@@ -213,7 +216,7 @@ export class BaseAIGateway extends APIResource {
   }
 
   /**
-   * Deletes an AI Gateway dataset.
+   * Permanently deletes an AI Gateway, its configuration, and its stored logs.
    *
    * @example
    * ```ts
@@ -237,7 +240,7 @@ export class BaseAIGateway extends APIResource {
   }
 
   /**
-   * Retrieves details for a specific AI Gateway dataset.
+   * Retrieves the configuration of an AI Gateway.
    *
    * @example
    * ```ts
@@ -271,7 +274,7 @@ export type AIGatewayListResponsesV4PagePaginationArray = V4PagePaginationArray<
 
 export interface AIGatewayCreateResponse {
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   id: string;
 
@@ -523,7 +526,7 @@ export namespace AIGatewayCreateResponse {
 
 export interface AIGatewayUpdateResponse {
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   id: string;
 
@@ -775,7 +778,7 @@ export namespace AIGatewayUpdateResponse {
 
 export interface AIGatewayListResponse {
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   id: string;
 
@@ -1027,7 +1030,7 @@ export namespace AIGatewayListResponse {
 
 export interface AIGatewayDeleteResponse {
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   id: string;
 
@@ -1279,7 +1282,7 @@ export namespace AIGatewayDeleteResponse {
 
 export interface AIGatewayGetResponse {
   /**
-   * gateway id
+   * Unique identifier of the AI Gateway within the account.
    */
   id: string;
 
@@ -1536,7 +1539,7 @@ export interface AIGatewayCreateParams {
   account_id: string;
 
   /**
-   * Body param: gateway id
+   * Body param: Unique identifier of the AI Gateway within the account.
    */
   id: string;
 
@@ -1579,6 +1582,21 @@ export interface AIGatewayCreateParams {
   /**
    * Body param
    */
+  dlp?: AIGatewayCreateParams.UnionMember0 | AIGatewayCreateParams.UnionMember1;
+
+  /**
+   * Body param
+   */
+  guardrails?: AIGatewayCreateParams.Guardrails | null;
+
+  /**
+   * Body param
+   */
+  log_classification?: boolean;
+
+  /**
+   * Body param
+   */
   log_management?: number | null;
 
   /**
@@ -1595,6 +1613,11 @@ export interface AIGatewayCreateParams {
    * Body param
    */
   logpush_public_key?: string | null;
+
+  /**
+   * Body param
+   */
+  otel?: Array<AIGatewayCreateParams.Otel> | null;
 
   /**
    * Body param
@@ -1619,7 +1642,17 @@ export interface AIGatewayCreateParams {
   /**
    * Body param
    */
+  spend_limits?: AIGatewayCreateParams.SpendLimits | null;
+
+  /**
+   * Body param
+   */
   store_id?: string | null;
+
+  /**
+   * Body param
+   */
+  stripe?: AIGatewayCreateParams.Stripe | null;
 
   /**
    * Body param: Controls how Workers AI inference calls routed through this gateway
@@ -1633,6 +1666,178 @@ export interface AIGatewayCreateParams {
    * Body param
    */
   zdr?: boolean;
+}
+
+export namespace AIGatewayCreateParams {
+  export interface UnionMember0 {
+    action: 'BLOCK' | 'FLAG';
+
+    enabled: boolean;
+
+    profiles: Array<string>;
+  }
+
+  export interface UnionMember1 {
+    enabled: boolean;
+
+    policies: Array<UnionMember1.Policy>;
+  }
+
+  export namespace UnionMember1 {
+    export interface Policy {
+      id: string;
+
+      action: 'FLAG' | 'BLOCK';
+
+      check: Array<'REQUEST' | 'RESPONSE'>;
+
+      enabled: boolean;
+
+      profiles: Array<string>;
+    }
+  }
+
+  export interface Guardrails {
+    prompt: Guardrails.Prompt;
+
+    response: Guardrails.Response;
+  }
+
+  export namespace Guardrails {
+    export interface Prompt {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+
+    export interface Response {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+  }
+
+  export interface Otel {
+    headers: { [key: string]: string };
+
+    url: string;
+
+    authorization?: string;
+
+    content_type?: 'json' | 'protobuf';
+  }
+
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      id?: string;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: Rule.Model;
+
+      provider?: Rule.Provider;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+    }
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
+    }
+  }
 }
 
 export interface AIGatewayUpdateParams {

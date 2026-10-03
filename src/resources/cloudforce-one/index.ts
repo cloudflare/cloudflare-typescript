@@ -46,3 +46,4 @@ export {
   type ThreatEventEditParams,
   type ThreatEventGetParams,
 } from './threat-events/index';
+export { ThreatSignals, BaseThreatSignals } from './threat-signals/index';

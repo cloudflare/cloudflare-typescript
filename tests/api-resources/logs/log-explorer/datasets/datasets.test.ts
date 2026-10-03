@@ -49,6 +49,7 @@ const runTests = (client: PartialCloudflare<{ logs: { logExplorer: { datasets: B
       account_id: 'account_id',
       fields: [{ enabled: true, name: 'name' }],
       filter: 'filter',
+      filter_attack_traffic: true,
     });
   });
 
@@ -75,6 +76,7 @@ const runTests = (client: PartialCloudflare<{ logs: { logExplorer: { datasets: B
       deletion_protection: true,
       fields: [{ enabled: true, name: 'name' }],
       filter: 'filter',
+      filter_attack_traffic: true,
     });
   });
 

@@ -82,7 +82,7 @@ export class BaseMTLSCertificates extends APIResource {
    * ```ts
    * const mtlsCertificate =
    *   await client.mtlsCertificates.delete(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -109,7 +109,7 @@ export class BaseMTLSCertificates extends APIResource {
    * @example
    * ```ts
    * const mtlsCertificate = await client.mtlsCertificates.get(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
@@ -136,7 +136,7 @@ export type MTLSCertificatesSinglePage = SinglePage<MTLSCertificate>;
 
 export interface MTLSCertificate {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 
@@ -188,7 +188,7 @@ export interface MTLSCertificate {
 
 export interface MTLSCertificateCreateResponse {
   /**
-   * Identifier.
+   * Certificate identifier tag.
    */
   id?: string;
 

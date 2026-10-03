@@ -257,12 +257,18 @@ export interface CreateRequest {
   fields?: Array<CreateRequest.Field>;
 
   /**
-   * Optional Logpush filter predicate to restrict which events are ingested. If
-   * provided, replaces the dataset's default filter entirely. See
+   * Optional Logpush filter predicate to restrict which events are ingested. See
    * [Logpush filters](https://developers.cloudflare.com/logs/reference/filters/) for
    * syntax and examples.
    */
   filter?: string;
+
+  /**
+   * Whether to filter attack traffic from the Logpush job. Defaults to `true` for
+   * supported datasets when omitted. Supported datasets are `http_requests`,
+   * `firewall_events`, and `network_analytics_logs`.
+   */
+  filter_attack_traffic?: boolean;
 }
 
 export namespace CreateRequest {
@@ -334,6 +340,12 @@ export interface Dataset {
    * set.
    */
   filter?: string;
+
+  /**
+   * Whether the Logpush job filters attack traffic. Omitted for datasets that do not
+   * support this option.
+   */
+  filter_attack_traffic?: boolean;
 }
 
 export namespace Dataset {
@@ -421,6 +433,13 @@ export interface UpdateRequest {
    * syntax and examples.
    */
   filter?: string | null;
+
+  /**
+   * Whether to filter attack traffic from the Logpush job. If omitted, the existing
+   * setting is left unchanged. Supported datasets are `http_requests`,
+   * `firewall_events`, and `network_analytics_logs`.
+   */
+  filter_attack_traffic?: boolean;
 }
 
 export namespace UpdateRequest {
@@ -463,11 +482,18 @@ export interface DatasetCreateParams {
 
   /**
    * Body param: Optional Logpush filter predicate to restrict which events are
-   * ingested. If provided, replaces the dataset's default filter entirely. See
+   * ingested. See
    * [Logpush filters](https://developers.cloudflare.com/logs/reference/filters/) for
    * syntax and examples.
    */
   filter?: string;
+
+  /**
+   * Body param: Whether to filter attack traffic from the Logpush job. Defaults to
+   * `true` for supported datasets when omitted. Supported datasets are
+   * `http_requests`, `firewall_events`, and `network_analytics_logs`.
+   */
+  filter_attack_traffic?: boolean;
 }
 
 export namespace DatasetCreateParams {
@@ -522,6 +548,13 @@ export interface DatasetUpdateParams {
    * syntax and examples.
    */
   filter?: string | null;
+
+  /**
+   * Body param: Whether to filter attack traffic from the Logpush job. If omitted,
+   * the existing setting is left unchanged. Supported datasets are `http_requests`,
+   * `firewall_events`, and `network_analytics_logs`.
+   */
+  filter_attack_traffic?: boolean;
 }
 
 export namespace DatasetUpdateParams {

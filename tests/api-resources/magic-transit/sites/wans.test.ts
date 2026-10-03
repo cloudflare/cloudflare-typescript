@@ -45,6 +45,8 @@ const runTests = (client: PartialCloudflare<{ magicTransit: { sites: { wans: Bas
     const response = await client.magicTransit.sites.wans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       physport: 1,
+      health_check_rate: 'low',
+      load_balance_inner_flows: true,
       name: 'name',
       priority: 0,
       static_addressing: {
@@ -74,6 +76,8 @@ const runTests = (client: PartialCloudflare<{ magicTransit: { sites: { wans: Bas
     const response = await client.magicTransit.sites.wans.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       site_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      health_check_rate: 'low',
+      load_balance_inner_flows: true,
       name: 'name',
       physport: 1,
       priority: 0,
@@ -144,6 +148,8 @@ const runTests = (client: PartialCloudflare<{ magicTransit: { sites: { wans: Bas
     const response = await client.magicTransit.sites.wans.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       site_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      health_check_rate: 'low',
+      load_balance_inner_flows: true,
       name: 'name',
       physport: 1,
       priority: 0,

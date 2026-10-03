@@ -242,9 +242,45 @@ export namespace UserGroupCreateResponse {
        * Attributes associated to the permission group.
        */
       export interface Meta {
-        key?: string;
+        /**
+         * A category used to group permission groups.
+         */
+        category?: string;
 
-        value?: string;
+        /**
+         * Indicates whether the permission group is deprecated.
+         */
+        deprecated?: string;
+
+        /**
+         * Additional information about the permission group.
+         */
+        description?: string;
+
+        /**
+         * Indicates whether the permission group can be edited.
+         */
+        editable?: string;
+
+        /**
+         * The planned end-of-life date and time, when provided.
+         */
+        eol_at?: string;
+
+        /**
+         * A label identifying the permission group.
+         */
+        label?: string;
+
+        /**
+         * The scope associated with the permission group.
+         */
+        scopes?: string;
+
+        /**
+         * Indicates the permission group's availability or visibility.
+         */
+        visibility?: string;
       }
     }
 
@@ -399,9 +435,45 @@ export namespace UserGroupUpdateResponse {
        * Attributes associated to the permission group.
        */
       export interface Meta {
-        key?: string;
+        /**
+         * A category used to group permission groups.
+         */
+        category?: string;
 
-        value?: string;
+        /**
+         * Indicates whether the permission group is deprecated.
+         */
+        deprecated?: string;
+
+        /**
+         * Additional information about the permission group.
+         */
+        description?: string;
+
+        /**
+         * Indicates whether the permission group can be edited.
+         */
+        editable?: string;
+
+        /**
+         * The planned end-of-life date and time, when provided.
+         */
+        eol_at?: string;
+
+        /**
+         * A label identifying the permission group.
+         */
+        label?: string;
+
+        /**
+         * The scope associated with the permission group.
+         */
+        scopes?: string;
+
+        /**
+         * Indicates the permission group's availability or visibility.
+         */
+        visibility?: string;
       }
     }
 
@@ -556,9 +628,45 @@ export namespace UserGroupListResponse {
        * Attributes associated to the permission group.
        */
       export interface Meta {
-        key?: string;
+        /**
+         * A category used to group permission groups.
+         */
+        category?: string;
 
-        value?: string;
+        /**
+         * Indicates whether the permission group is deprecated.
+         */
+        deprecated?: string;
+
+        /**
+         * Additional information about the permission group.
+         */
+        description?: string;
+
+        /**
+         * Indicates whether the permission group can be edited.
+         */
+        editable?: string;
+
+        /**
+         * The planned end-of-life date and time, when provided.
+         */
+        eol_at?: string;
+
+        /**
+         * A label identifying the permission group.
+         */
+        label?: string;
+
+        /**
+         * The scope associated with the permission group.
+         */
+        scopes?: string;
+
+        /**
+         * Indicates the permission group's availability or visibility.
+         */
+        visibility?: string;
       }
     }
 
@@ -720,9 +828,45 @@ export namespace UserGroupGetResponse {
        * Attributes associated to the permission group.
        */
       export interface Meta {
-        key?: string;
+        /**
+         * A category used to group permission groups.
+         */
+        category?: string;
 
-        value?: string;
+        /**
+         * Indicates whether the permission group is deprecated.
+         */
+        deprecated?: string;
+
+        /**
+         * Additional information about the permission group.
+         */
+        description?: string;
+
+        /**
+         * Indicates whether the permission group can be edited.
+         */
+        editable?: string;
+
+        /**
+         * The planned end-of-life date and time, when provided.
+         */
+        eol_at?: string;
+
+        /**
+         * A label identifying the permission group.
+         */
+        label?: string;
+
+        /**
+         * The scope associated with the permission group.
+         */
+        scopes?: string;
+
+        /**
+         * Indicates the permission group's availability or visibility.
+         */
+        visibility?: string;
       }
     }
 

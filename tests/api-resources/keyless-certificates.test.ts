@@ -65,7 +65,7 @@ const runTests = (client: PartialCloudflare<{ keylessCertificates: BaseKeylessCe
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.keylessCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.keylessCertificates.delete('4d2844d2ce78891c34d0b6c0535a291e', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -78,13 +78,13 @@ const runTests = (client: PartialCloudflare<{ keylessCertificates: BaseKeylessCe
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.keylessCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.keylessCertificates.delete('4d2844d2ce78891c34d0b6c0535a291e', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.keylessCertificates.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.keylessCertificates.edit('4d2844d2ce78891c34d0b6c0535a291e', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -97,7 +97,7 @@ const runTests = (client: PartialCloudflare<{ keylessCertificates: BaseKeylessCe
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.keylessCertificates.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.keylessCertificates.edit('4d2844d2ce78891c34d0b6c0535a291e', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       enabled: false,
       host: 'example.com',
@@ -108,7 +108,7 @@ const runTests = (client: PartialCloudflare<{ keylessCertificates: BaseKeylessCe
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.keylessCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.keylessCertificates.get('4d2844d2ce78891c34d0b6c0535a291e', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -121,7 +121,7 @@ const runTests = (client: PartialCloudflare<{ keylessCertificates: BaseKeylessCe
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.keylessCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.keylessCertificates.get('4d2844d2ce78891c34d0b6c0535a291e', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

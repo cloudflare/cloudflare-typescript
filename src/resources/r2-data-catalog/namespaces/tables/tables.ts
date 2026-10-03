@@ -25,17 +25,7 @@ export class BaseTables extends APIResource {
    * Returns a list of tables in the specified namespace within an R2 catalog.
    * Supports pagination for efficient traversal of large table collections.
    *
-   * @example
-   * ```ts
-   * const tables =
-   *   await client.r2DataCatalog.namespaces.tables.list(
-   *     'bronze',
-   *     {
-   *       account_id: '0123456789abcdef0123456789abcdef',
-   *       bucket_name: 'my-data-bucket',
-   *     },
-   *   );
-   * ```
+   * @deprecated Use `GET /accounts/{account_id}/basin-catalog/{bucket_name}/namespaces/{namespace}/tables` instead.
    */
   list(namespace: string, params: TableListParams, options?: RequestOptions): APIPromise<TableListResponse> {
     const { account_id, bucket_name, ...query } = params;

@@ -72,7 +72,7 @@ const runTests = (client: PartialCloudflare<{ acm: { customTrustStore: BaseCusto
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.acm.customTrustStore.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.acm.customTrustStore.delete('2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -85,13 +85,13 @@ const runTests = (client: PartialCloudflare<{ acm: { customTrustStore: BaseCusto
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.acm.customTrustStore.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.acm.customTrustStore.delete('2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.acm.customTrustStore.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.acm.customTrustStore.get('2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -104,7 +104,7 @@ const runTests = (client: PartialCloudflare<{ acm: { customTrustStore: BaseCusto
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.acm.customTrustStore.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.acm.customTrustStore.get('2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

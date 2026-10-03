@@ -67,9 +67,6 @@ export class BaseRulesets extends APIResource {
    * @example
    * ```ts
    * const ruleset = await client.rulesets.create({
-   *   kind: 'root',
-   *   name: 'My ruleset',
-   *   phase: 'http_request_firewall_custom',
    *   account_id: 'account_id',
    * });
    * ```
@@ -5026,21 +5023,6 @@ export namespace RulesetGetResponse {
 
 export interface RulesetCreateParams {
   /**
-   * Body param: The kind of the ruleset.
-   */
-  kind: KindParam;
-
-  /**
-   * Body param: The human-readable name of the ruleset.
-   */
-  name: string;
-
-  /**
-   * Body param: The phase of the ruleset.
-   */
-  phase: PhaseParam;
-
-  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
@@ -5063,6 +5045,21 @@ export interface RulesetCreateParams {
    * Body param: An informative description of the ruleset.
    */
   description?: string;
+
+  /**
+   * Body param: The kind of the ruleset.
+   */
+  kind?: KindParam;
+
+  /**
+   * Body param: The human-readable name of the ruleset.
+   */
+  name?: string;
+
+  /**
+   * Body param: The phase of the ruleset.
+   */
+  phase?: PhaseParam;
 
   /**
    * Body param: The list of rules in the ruleset.

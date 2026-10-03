@@ -33,7 +33,8 @@ export class BaseTags extends APIResource {
   ] as const);
 
   /**
-   * Creates a new tag to be used accross threat events.
+   * Creates an account-owned tag for threat events and returns its complete owner
+   * projection.
    *
    * @example
    * ```ts
@@ -56,8 +57,10 @@ export class BaseTags extends APIResource {
    * Returns all Source-of-Truth tags for an account. Supports legacy free-text
    * `search` on tag value and `categoryUuid` exact match, plus a structured
    * `filters` JSON array for filtering by metadata fields (originCountryISO,
-   * actorCategory, motive, priority, etc.). Country values may be passed as alpha-2,
-   * alpha-3, name, or common alias.
+   * actorCategory, motive, priority, etc.). The authenticated account owns these
+   * account-scoped tags and receives their complete owner projection. Country values
+   * may be passed as alpha-2, alpha-3, name, or common alias. Purple TLP remains
+   * CFONE-only.
    *
    * @example
    * ```ts
@@ -90,7 +93,8 @@ export class BaseTags extends APIResource {
   }
 
   /**
-   * Updates a Source-of-Truth tag by UUID.
+   * Updates an account-owned Source-of-Truth tag by UUID and returns its complete
+   * owner projection.
    *
    * @example
    * ```ts
@@ -168,8 +172,8 @@ export interface TagCreateResponse {
   externalReferences_annotated?: Array<TagCreateResponse.ExternalReferencesAnnotated> | null;
 
   /**
-   * Internal structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: never
-   * returned to non-CFONE accounts.
+   * Owner-private structured aliases ({ value, confidence 1-10, tlp }). Returned to
+   * the owning account and omitted from shared-catalog non-owner responses.
    */
   internalAliases?: Array<TagCreateResponse.InternalAlias>;
 
@@ -377,8 +381,8 @@ export namespace TagListResponse {
     externalReferences_annotated?: Array<Tag.ExternalReferencesAnnotated> | null;
 
     /**
-     * Internal structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: never
-     * returned to non-CFONE accounts.
+     * Owner-private structured aliases ({ value, confidence 1-10, tlp }). Returned to
+     * the owning account and omitted from shared-catalog non-owner responses.
      */
     internalAliases?: Array<Tag.InternalAlias>;
 
@@ -574,8 +578,8 @@ export interface TagEditResponse {
   externalReferences_annotated?: Array<TagEditResponse.ExternalReferencesAnnotated> | null;
 
   /**
-   * Internal structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: never
-   * returned to non-CFONE accounts.
+   * Owner-private structured aliases ({ value, confidence 1-10, tlp }). Returned to
+   * the owning account and omitted from shared-catalog non-owner responses.
    */
   internalAliases?: Array<TagEditResponse.InternalAlias>;
 
@@ -789,8 +793,9 @@ export interface TagCreateParams {
   externalReferences?: Array<TagCreateParams.ExternalReference>;
 
   /**
-   * Body param: Internal structured aliases ({ value, confidence 1-10, tlp }).
-   * CFONE-only: never returned to non-CFONE accounts.
+   * Body param: Owner-private structured aliases ({ value, confidence 1-10, tlp }).
+   * Returned to the owning account and omitted from shared-catalog non-owner
+   * responses.
    */
   internalAliases?: Array<TagCreateParams.InternalAlias>;
 
@@ -1111,8 +1116,9 @@ export interface TagEditParams {
   externalReferences?: Array<TagEditParams.ExternalReference>;
 
   /**
-   * Body param: Internal structured aliases ({ value, confidence 1-10, tlp }).
-   * CFONE-only: never returned to non-CFONE accounts.
+   * Body param: Owner-private structured aliases ({ value, confidence 1-10, tlp }).
+   * Returned to the owning account and omitted from shared-catalog non-owner
+   * responses.
    */
   internalAliases?: Array<TagEditParams.InternalAlias>;
 

@@ -13,27 +13,7 @@ export class BaseMaintenanceConfigs extends APIResource {
    * Update the maintenance configuration for a specific table. This allows you to
    * enable or disable compaction and adjust target file sizes for optimization.
    *
-   * @example
-   * ```ts
-   * const maintenanceConfig =
-   *   await client.r2DataCatalog.namespaces.tables.maintenanceConfigs.update(
-   *     'my_table',
-   *     {
-   *       account_id: '0123456789abcdef0123456789abcdef',
-   *       bucket_name: 'my-data-bucket',
-   *       namespace: 'my_namespace%1Fsub_namespace',
-   *       compaction: {
-   *         state: 'enabled',
-   *         target_size_mb: '256',
-   *       },
-   *       snapshot_expiration: {
-   *         max_snapshot_age: '14d',
-   *         min_snapshots_to_keep: 5,
-   *         state: 'enabled',
-   *       },
-   *     },
-   *   );
-   * ```
+   * @deprecated Use `POST /accounts/{account_id}/basin-catalog/{bucket_name}/namespaces/{namespace}/tables/{table_name}/maintenance-configs` instead.
    */
   update(
     tableName: string,
@@ -53,18 +33,7 @@ export class BaseMaintenanceConfigs extends APIResource {
    * Retrieve the maintenance configuration for a specific table, including
    * compaction settings.
    *
-   * @example
-   * ```ts
-   * const maintenanceConfig =
-   *   await client.r2DataCatalog.namespaces.tables.maintenanceConfigs.get(
-   *     'my_table',
-   *     {
-   *       account_id: '0123456789abcdef0123456789abcdef',
-   *       bucket_name: 'my-data-bucket',
-   *       namespace: 'my_namespace%1Fsub_namespace',
-   *     },
-   *   );
-   * ```
+   * @deprecated Use `GET /accounts/{account_id}/basin-catalog/{bucket_name}/namespaces/{namespace}/tables/{table_name}/maintenance-configs` instead.
    */
   get(
     tableName: string,
@@ -275,7 +244,7 @@ export namespace MaintenanceConfigUpdateParams {
     min_snapshots_to_keep?: number;
 
     /**
-     * Updates the state optionally.
+     * Specifies the state of maintenance operations.
      */
     state?: 'enabled' | 'disabled';
   }

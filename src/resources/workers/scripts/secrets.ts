@@ -476,7 +476,7 @@ export interface SecretDeleteParams {
   account_id: string;
 
   /**
-   * Path param: Name of the script, used in URLs and route configuration.
+   * Path param: Name of the script.
    */
   script_name: string;
 
@@ -582,7 +582,7 @@ export interface SecretGetParams {
   account_id: string;
 
   /**
-   * Path param: Name of the script, used in URLs and route configuration.
+   * Path param: Name of the script.
    */
   script_name: string;
 

@@ -88,6 +88,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/intel/whois.ts">Whois</a></code>
 - <code><a href="./src/resources/intel/whois.ts">WhoisGetResponse</a></code>
 
 Methods:

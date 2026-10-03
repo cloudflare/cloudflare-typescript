@@ -84,7 +84,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/email-security/investigate/release">client.emailSecurity.investigate.release.<a href="./src/resources/email-security/investigate/release.ts">bulk</a>([ ...body ]) -> ReleaseBulkResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/email-security/investigate/release">client.emailSecurity.investigate.release.<a href="./src/resources/email-security/investigate/release.ts">bulk</a>({ ...params }) -> ReleaseBulkResponsesSinglePage</code>
 
 ### Bulk
 
@@ -132,7 +132,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/email-security/phishguard/reports">client.emailSecurity.phishguard.reports.<a href="./src/resources/email-security/phishguard/reports.ts">list</a>({ ...params }) -> ReportListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/email-security/phishguard/reports">client.emailSecurity.phishguard.reports.<a href="./src/resources/email-security/phishguard/reports.ts">list</a>({ ...params }) -> ReportListResponsesV4PagePaginationArray</code>
 
 ## Settings
 

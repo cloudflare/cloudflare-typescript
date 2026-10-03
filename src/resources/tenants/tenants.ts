@@ -22,7 +22,8 @@ export class BaseTenants extends APIResource {
   static override readonly _key: readonly ['tenants'] = Object.freeze(['tenants'] as const);
 
   /**
-   * Retrieves a Tenant by Tenant ID.
+   * Retrieves a tenant's identity, status, metadata, contacts, and organizational
+   * units.
    */
   get(tenantID: string, options?: RequestOptions): APIPromise<Tenant> {
     return (

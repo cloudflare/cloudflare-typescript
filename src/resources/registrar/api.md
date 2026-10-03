@@ -6,11 +6,13 @@ Types:
 - <code><a href="./src/resources/registrar/registrar.ts">WorkflowStatus</a></code>
 - <code><a href="./src/resources/registrar/registrar.ts">RegistrarCheckResponse</a></code>
 - <code><a href="./src/resources/registrar/registrar.ts">RegistrarSearchResponse</a></code>
+- <code><a href="./src/resources/registrar/registrar.ts">RegistrarTransferCheckResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/registrar/domain-check">client.registrar.<a href="./src/resources/registrar/registrar.ts">check</a>({ ...params }) -> RegistrarCheckResponse</code>
 - <code title="get /accounts/{account_id}/registrar/domain-search">client.registrar.<a href="./src/resources/registrar/registrar.ts">search</a>({ ...params }) -> RegistrarSearchResponse</code>
+- <code title="post /accounts/{account_id}/registrar/domain-transfer-check">client.registrar.<a href="./src/resources/registrar/registrar.ts">transferCheck</a>({ ...params }) -> RegistrarTransferCheckResponse</code>
 
 ## Domains
 

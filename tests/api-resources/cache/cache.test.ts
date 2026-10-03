@@ -19,6 +19,46 @@ const partialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ cache: BaseCache }>) => {
+  test('invalidate: only required params', async () => {
+    const responsePromise = client.cache.invalidate({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('invalidate: required and optional params', async () => {
+    const response = await client.cache.invalidate({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      tags: ['product-1234', 'homepage'],
+    });
+  });
+
+  // HTTP 404 error from prism
+  test.skip('invalidateEnvironment: only required params', async () => {
+    const responsePromise = client.cache.invalidateEnvironment('023e105f4ecef8ad9ca31a8372d0c353', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // HTTP 404 error from prism
+  test.skip('invalidateEnvironment: required and optional params', async () => {
+    const response = await client.cache.invalidateEnvironment('023e105f4ecef8ad9ca31a8372d0c353', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      tags: ['product-1234', 'homepage'],
+    });
+  });
+
   test('purge: only required params', async () => {
     const responsePromise = client.cache.purge({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
@@ -33,7 +73,7 @@ const runTests = (client: PartialCloudflare<{ cache: BaseCache }>) => {
   test('purge: required and optional params', async () => {
     const response = await client.cache.purge({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      tags: ['a-cache-tag', 'another-cache-tag'],
+      tags: ['product-1234', 'homepage'],
     });
   });
 
@@ -55,7 +95,7 @@ const runTests = (client: PartialCloudflare<{ cache: BaseCache }>) => {
   test.skip('purgeEnvironment: required and optional params', async () => {
     const response = await client.cache.purgeEnvironment('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      tags: ['a-cache-tag', 'another-cache-tag'],
+      tags: ['product-1234', 'homepage'],
     });
   });
 };

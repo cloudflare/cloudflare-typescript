@@ -45,7 +45,8 @@ export class BaseProjects extends APIResource {
   ] as const);
 
   /**
-   * Create a new project.
+   * Create a Cloudflare Pages project for configuring and deploying a site or
+   * application.
    *
    * @example
    * ```ts
@@ -66,7 +67,7 @@ export class BaseProjects extends APIResource {
   }
 
   /**
-   * Fetch a list of all user projects.
+   * List the Cloudflare Pages projects in an account.
    *
    * @example
    * ```ts
@@ -91,7 +92,7 @@ export class BaseProjects extends APIResource {
   }
 
   /**
-   * Delete a project by name.
+   * Permanently delete a Cloudflare Pages project and its deployments.
    *
    * @example
    * ```ts
@@ -116,8 +117,8 @@ export class BaseProjects extends APIResource {
   }
 
   /**
-   * Set new attributes for an existing project. Modify environment variables. To
-   * delete an environment variable, set the key to null.
+   * Update the build, deployment, source, or environment settings for a Cloudflare
+   * Pages project. To delete an environment variable, set its key to `null`.
    *
    * @example
    * ```ts
@@ -138,7 +139,8 @@ export class BaseProjects extends APIResource {
   }
 
   /**
-   * Fetch a project by name.
+   * Retrieve the configuration and deployment settings for a Cloudflare Pages
+   * project.
    *
    * @example
    * ```ts
@@ -183,7 +185,8 @@ export class BaseProjects extends APIResource {
   }
 
   /**
-   * Purge all cached build artifacts for a Pages project
+   * Remove cached build artifacts so subsequent builds run without the project's
+   * existing build cache.
    *
    * @example
    * ```ts
@@ -256,7 +259,7 @@ export interface Deployment {
   environment: 'preview' | 'production';
 
   /**
-   * If the deployment has been skipped.
+   * Whether the deployment was skipped.
    */
   is_skipped: boolean;
 
@@ -276,7 +279,8 @@ export interface Deployment {
   project_id: string;
 
   /**
-   * Name of the project.
+   * Name of the Pages project. Must begin with a lowercase letter or digit and
+   * contain only lowercase letters, digits, and hyphens.
    */
   project_name: string;
 
@@ -310,6 +314,7 @@ export interface Deployment {
     | 'path_config'
     | 'branch_config'
     | 'pages_to_workers_conversion'
+    | 'superseded_queued_build'
     | null;
 
   /**
@@ -546,7 +551,8 @@ export interface Project {
   latest_deployment: Deployment | null;
 
   /**
-   * Name of the project.
+   * Name of the Pages project. Must begin with a lowercase letter or digit and
+   * contain only lowercase letters, digits, and hyphens.
    */
   name: string;
 
@@ -1317,7 +1323,7 @@ export interface Stage {
   /**
    * State of the current stage.
    */
-  status: 'success' | 'idle' | 'active' | 'failure' | 'canceled';
+  status: 'success' | 'idle' | 'active' | 'failure' | 'canceled' | 'skipped';
 }
 
 export type ProjectDeleteResponse = unknown;
@@ -1338,7 +1344,8 @@ export interface ProjectCreateParams {
   account_id: string;
 
   /**
-   * Body param: Name of the project.
+   * Body param: Name for the Pages project. Must begin with a lowercase letter or
+   * digit and contain only lowercase letters, digits, and hyphens.
    */
   name: string;
 
@@ -2099,7 +2106,8 @@ export interface ProjectEditParams {
   deployment_configs?: ProjectEditParams.DeploymentConfigs;
 
   /**
-   * Body param: Name of the project.
+   * Body param: Name for the Pages project. Must begin with a lowercase letter or
+   * digit and contain only lowercase letters, digits, and hyphens.
    */
   name?: string;
 

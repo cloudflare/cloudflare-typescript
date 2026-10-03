@@ -12,7 +12,7 @@ export class BaseAccounts extends APIResource {
   ] as const);
 
   /**
-   * List of accounts for the Tenant.
+   * Lists the Cloudflare accounts associated with this tenant.
    */
   list(tenantID: string, options?: RequestOptions): PagePromise<TenantAccountsSinglePage, TenantAccount> {
     return this._client.getAPIList(path`/tenants/${tenantID}/accounts`, SinglePage<TenantAccount>, options);

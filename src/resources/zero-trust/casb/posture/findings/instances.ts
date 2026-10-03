@@ -76,9 +76,9 @@ export class BaseInstances extends APIResource {
    * Creates a CSV export for Finding instances and accepts optional filters in the
    * payload.
    *
-   * The `storage_namespace_id` path parameter is derived from the finding ID by
-   * base64-decoding it (which yields `integration_id:finding_type_id`) and replacing
-   * the colon with a hyphen.
+   * Identify the finding as `<integration_id>-<finding_type_id>`: join the
+   * `integration.id` and `finding.id` of the finding (from the List posture findings
+   * response) with a hyphen.
    *
    * @example
    * ```ts
@@ -1408,7 +1408,8 @@ export interface InstanceGetParams {
   account_id: string;
 
   /**
-   * A base64-encoded ID identifying this Finding.
+   * The `id` of a finding, as returned in each item of the List posture findings
+   * response. It is a base64-encoded identifier.
    */
   finding_id: string;
 }

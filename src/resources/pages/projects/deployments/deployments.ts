@@ -33,8 +33,8 @@ export class BaseDeployments extends APIResource {
   ] as const);
 
   /**
-   * Start a new deployment from production. The repository and account must have
-   * already been authorized on the Cloudflare Pages dashboard.
+   * Create a Cloudflare Pages deployment from a Git branch or Direct Upload
+   * manifest. Git repositories must already be authorized in Cloudflare Pages.
    *
    * @example
    * ```ts
@@ -60,7 +60,7 @@ export class BaseDeployments extends APIResource {
   }
 
   /**
-   * Fetch a list of project deployments.
+   * List the production or preview deployments for a Cloudflare Pages project.
    *
    * @example
    * ```ts
@@ -87,13 +87,13 @@ export class BaseDeployments extends APIResource {
   }
 
   /**
-   * Delete a deployment.
+   * Remove a deployment from a Cloudflare Pages project.
    *
    * @example
    * ```ts
    * const deployment =
    *   await client.pages.projects.deployments.delete(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       project_name: 'this-is-my-project-01',
@@ -116,13 +116,13 @@ export class BaseDeployments extends APIResource {
   }
 
   /**
-   * Fetch information about a deployment.
+   * Retrieve the status and details of a Cloudflare Pages deployment.
    *
    * @example
    * ```ts
    * const deployment =
    *   await client.pages.projects.deployments.get(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       project_name: 'this-is-my-project-01',
@@ -145,13 +145,13 @@ export class BaseDeployments extends APIResource {
   }
 
   /**
-   * Retry a previous deployment.
+   * Retry a previous Cloudflare Pages deployment.
    *
    * @example
    * ```ts
    * const deployment =
    *   await client.pages.projects.deployments.retry(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       project_name: 'this-is-my-project-01',
@@ -174,14 +174,13 @@ export class BaseDeployments extends APIResource {
   }
 
   /**
-   * Rollback the production deployment to a previous deployment. You can only
-   * rollback to succesful builds on production.
+   * Roll back production to a previous successful Cloudflare Pages deployment.
    *
    * @example
    * ```ts
    * const deployment =
    *   await client.pages.projects.deployments.rollback(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     'f64788e9-fccd-4d4a-a28a-cb84f88f6e12',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       project_name: 'this-is-my-project-01',
@@ -245,24 +244,24 @@ export interface DeploymentCreateParams {
   '_worker.js'?: Uploadable;
 
   /**
-   * Body param: The branch to build the new deployment from. The `HEAD` of the
-   * branch will be used. If omitted, the production branch will be used by default.
+   * Body param: Git branch to deploy. Uses the branch's `HEAD`; defaults to the
+   * project's production branch.
    */
   branch?: string;
 
   /**
-   * Body param: Boolean string indicating if the working directory has uncommitted
-   * changes.
+   * Body param: Whether the associated Git working tree has uncommitted changes.
+   * Provide `true` or `false`.
    */
   commit_dirty?: 'true' | 'false';
 
   /**
-   * Body param: Git commit SHA associated with this deployment.
+   * Body param: Git commit SHA associated with the deployment.
    */
   commit_hash?: string;
 
   /**
-   * Body param: Git commit message associated with this deployment.
+   * Body param: Git commit message associated with the deployment.
    */
   commit_message?: string;
 
@@ -272,9 +271,8 @@ export interface DeploymentCreateParams {
   'functions-filepath-routing-config.json'?: Uploadable;
 
   /**
-   * Body param: JSON string containing a manifest of files to deploy. Maps file
-   * paths to their content hashes. Required for direct upload deployments. Maximum
-   * 20,000 entries.
+   * Body param: JSON-encoded object mapping deployment file paths to their uploaded
+   * content hashes. Required for Direct Upload deployments. Maximum 20,000 entries.
    */
   manifest?: string;
 
@@ -296,7 +294,8 @@ export interface DeploymentListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: What type of deployments to fetch.
+   * Query param: Deployment environment to return. Valid values are `production` and
+   * `preview`.
    */
   env?: 'production' | 'preview';
 }
@@ -308,13 +307,14 @@ export interface DeploymentDeleteParams {
   account_id: string;
 
   /**
-   * Path param: Name of the project.
+   * Path param: Name of the Pages project. Must begin with a lowercase letter or
+   * digit and contain only lowercase letters, digits, and hyphens.
    */
   project_name: string;
 
   /**
-   * Query param: Allow deletion of aliased non-production deployments when a normal
-   * delete would be rejected.
+   * Query param: Allow deletion when a non-production deployment has an active
+   * alias.
    */
   force?: boolean;
 }
@@ -326,7 +326,8 @@ export interface DeploymentGetParams {
   account_id: string;
 
   /**
-   * Name of the project.
+   * Name of the Pages project. Must begin with a lowercase letter or digit and
+   * contain only lowercase letters, digits, and hyphens.
    */
   project_name: string;
 }
@@ -338,7 +339,8 @@ export interface DeploymentRetryParams {
   account_id: string;
 
   /**
-   * Name of the project.
+   * Name of the Pages project. Must begin with a lowercase letter or digit and
+   * contain only lowercase letters, digits, and hyphens.
    */
   project_name: string;
 }
@@ -350,7 +352,8 @@ export interface DeploymentRollbackParams {
   account_id: string;
 
   /**
-   * Name of the project.
+   * Name of the Pages project. Must begin with a lowercase letter or digit and
+   * contain only lowercase letters, digits, and hyphens.
    */
   project_name: string;
 }
