@@ -82,11 +82,14 @@ const runTests = (
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.tags.delete('my-tag', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      dispatch_namespace: 'my-dispatch-namespace',
-      script_name: 'this-is_my_script-01',
-    });
+    const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.tags.delete(
+      'environment',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        dispatch_namespace: 'my-dispatch-namespace',
+        script_name: 'this-is_my_script-01',
+      },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -97,10 +100,11 @@ const runTests = (
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.workersForPlatforms.dispatch.namespaces.scripts.tags.delete('my-tag', {
+    const response = await client.workersForPlatforms.dispatch.namespaces.scripts.tags.delete('environment', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dispatch_namespace: 'my-dispatch-namespace',
       script_name: 'this-is_my_script-01',
+      'api-version': '2026-10-01.epoch',
     });
   });
 };

@@ -11,7 +11,10 @@ export class BaseContent extends APIResource {
     Object.freeze(['cloudforceOne', 'threatSignals', 'articles', 'content'] as const);
 
   /**
-   * Retrieves the stored body of a Threat Signals article as plain text or HTML.
+   * Retrieves the stored content of a Threat Signals article, unchanged. Depending
+   * on how the article was captured from its source, the content is HTML, Markdown,
+   * or plain text. The format parameter sets only the response Content-Type; it does
+   * not convert the content.
    *
    * @example
    * ```ts
@@ -41,7 +44,8 @@ export interface ContentGetParams {
   account_id: string;
 
   /**
-   * Query param
+   * Query param: Response Content-Type: text (the default) for text/plain or html
+   * for text/html. Neither value converts the content. html is deprecated; use text.
    */
   format?: 'text' | 'html';
 }

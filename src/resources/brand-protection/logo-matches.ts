@@ -12,7 +12,7 @@ export class BaseLogoMatches extends APIResource {
   ] as const);
 
   /**
-   * Return matches as CSV for logo queries based on ID
+   * Return matches as CSV for logo queries based on ID.
    */
   download(params: LogoMatchDownloadParams, options?: RequestOptions): APIPromise<LogoMatchDownloadResponse> {
     const { account_id, ...query } = params;
@@ -23,7 +23,7 @@ export class BaseLogoMatches extends APIResource {
   }
 
   /**
-   * Return matches for logo queries based on ID
+   * Return matches for logo queries based on ID.
    */
   get(params: LogoMatchGetParams, options?: RequestOptions): APIPromise<LogoMatchGetResponse> {
     const { account_id, ...query } = params;

@@ -15,6 +15,7 @@ export {
   type EndpointHealthcheckListParams,
   type EndpointHealthcheckDeleteParams,
   type EndpointHealthcheckGetParams,
+  type EndpointHealthcheckListResponsesSinglePage,
 } from './endpoint-healthchecks';
 export {
   Traceroutes,

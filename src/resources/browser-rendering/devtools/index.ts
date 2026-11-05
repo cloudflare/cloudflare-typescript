@@ -9,8 +9,6 @@ export {
   type BrowserVersionResponse,
   type BrowserCreateParams,
   type BrowserDeleteParams,
-  type BrowserConnectParams,
-  type BrowserLaunchParams,
   type BrowserProtocolParams,
   type BrowserVersionParams,
 } from './browser/index';

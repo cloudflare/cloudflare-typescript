@@ -49,7 +49,7 @@ const runTests = (client: PartialCloudflare<{ brandProtection: { queries: BaseQu
       max_time: '2019-12-27T18:11:19.117Z',
       min_time: '2019-12-27T18:11:19.117Z',
       body_scan: true,
-      string_matches: {},
+      string_matches: [{ pattern: 'pattern', max_edit_distance: 0 }],
       body_tag: 'tag',
     });
   });
@@ -90,10 +90,7 @@ const runTests = (client: PartialCloudflare<{ brandProtection: { queries: BaseQu
 
   // TODO: investigate broken test, 401 Unauthorized
   test.skip('bulk: required and optional params', async () => {
-    const response = await client.brandProtection.queries.bulk({
-      account_id: 'x',
-      queries: [{ foo: 'bar' }],
-    });
+    const response = await client.brandProtection.queries.bulk({ account_id: 'x', queries: [{ foo: {} }] });
   });
 };
 describe('resource queries', () => runTests(client));

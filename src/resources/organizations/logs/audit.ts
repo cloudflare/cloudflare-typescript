@@ -19,6 +19,17 @@ export class BaseAudit extends APIResource {
 
   /**
    * Gets a list of audit logs for an organization.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const auditListResponse of client.organizations.logs.audit.list(
+   *   'a67e14daa5f8dceeb91fe5449ba496ef',
+   *   { before: '2024-10-31', since: '2024-10-30' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     organizationID: string,
@@ -48,6 +59,20 @@ export class BaseAudit extends APIResource {
    * - `approximate`: Resource was identified without the resource URI.
    * - `unavailable`: The source audit log entry did not contain enough information
    *   to identify the resource; an empty result is returned.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.organizations.logs.audit.history(
+   *     'f174be97-19b1-40d6-954d-70cd5fbd52db',
+   *     {
+   *       organization_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
+   *       action_time: '2024-10-30T15:00:00Z',
+   *       before: '2024-10-31',
+   *       since: '2024-10-30',
+   *     },
+   *   );
+   * ```
    */
   history(
     id: string,

@@ -19,6 +19,7 @@ export {
   type DatabaseImportParams,
   type DatabaseQueryParams,
   type DatabaseRawParams,
+  type DatabaseUndeleteParams,
   type DatabaseListResponsesV4PagePaginationArray,
   type QueryResultsSinglePage,
   type DatabaseRawResponsesSinglePage,

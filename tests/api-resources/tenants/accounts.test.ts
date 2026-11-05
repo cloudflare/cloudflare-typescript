@@ -37,6 +37,36 @@ const runTests = (client: PartialCloudflare<{ tenants: { accounts: BaseAccounts 
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
+
+  test('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.tenants.accounts.list(
+        'tenant_id',
+        {
+          account_pubname: {
+            contains: 'contains',
+            endsWith: 'endsWith',
+            startsWith: 'startsWith',
+          },
+          direction: 'asc',
+          include_total: true,
+          name: {
+            contains: 'contains',
+            endsWith: 'endsWith',
+            startsWith: 'startsWith',
+          },
+          order_by: 'account_name',
+          page: 0,
+          page_size: 0,
+          page_token: 'page_token',
+          per_page: 0,
+          status: 'active',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
 };
 describe('resource accounts', () => runTests(client));
 describe('resource accounts (tree shakable, base)', () => runTests(partialClient));

@@ -10,7 +10,9 @@ export class BaseCatalog extends APIResource {
     Object.freeze(['cloudforceOne', 'threatEvents', 'categories', 'catalog'] as const);
 
   /**
-   * Lists categories
+   * Lists every event category in the catalog, whether or not an event uses it. To
+   * list only the categories used in specific datasets, use
+   * `threat-intel events categories list`.
    *
    * @example
    * ```ts

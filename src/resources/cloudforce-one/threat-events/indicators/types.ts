@@ -10,7 +10,9 @@ export class BaseTypes extends APIResource {
     Object.freeze(['cloudforceOne', 'threatEvents', 'indicators', 'types'] as const);
 
   /**
-   * Lists indicator types across multiple datasets
+   * Lists the indicator types used in the datasets given by `datasetIds`, which
+   * accepts dataset UUIDs or one scope value used alone. Without `datasetIds`, every
+   * dataset you can read is included, analytics datasets too.
    *
    * @example
    * ```ts
@@ -49,9 +51,11 @@ export interface TypeListParams {
   account_id: string;
 
   /**
-   * Query param: Dataset UUIDs to query, or one standalone scope value: 'all'/'\*',
-   * 'analytics' for isAnalytics=true datasets, or 'operational' for
-   * isAnalytics=false datasets. If not provided, queries all accessible datasets.
+   * Query param: Dataset UUIDs to query, or one standalone scope value:
+   * 'operational' for readable intelligence datasets (isAnalytics=false),
+   * 'analytics' for readable analytics datasets (isAnalytics=true), or 'all'/'\*'
+   * for every readable dataset including analytics datasets. If not provided,
+   * queries all accessible datasets, including analytics datasets.
    */
   datasetIds?: Array<string>;
 }

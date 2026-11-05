@@ -10,7 +10,8 @@ export class BaseSkills extends APIResource {
     Object.freeze(['cloudforceOne', 'threatSignals', 'feeds', 'skills'] as const);
 
   /**
-   * Replaces the ordered custom skills assigned to a Threat Signals feed.
+   * Replaces the ordered custom skills assigned to a Threat Signals feed. Requires a
+   * paid Threat Signals subscription.
    *
    * @example
    * ```ts
@@ -39,7 +40,9 @@ export class BaseSkills extends APIResource {
   }
 
   /**
-   * Retrieves the effective skill pipeline for a Threat Signals feed.
+   * Retrieves active non-IOC-context Managed Default Skills followed by active
+   * Custom Skills assigned to the feed, with each entry's source. Free Threat
+   * Signals accounts receive only those Managed Default Skills.
    *
    * @example
    * ```ts
@@ -129,7 +132,9 @@ export interface SkillUpdateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Ordered array of Custom Skill UUIDs (max 20). Replaces the feed's
+   * custom skill assignments. Free accounts cannot assign custom skills. Managed
+   * default skills are unaffected.
    */
   skill_ids: Array<string>;
 }

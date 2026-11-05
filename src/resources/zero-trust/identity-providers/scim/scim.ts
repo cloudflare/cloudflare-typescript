@@ -2,9 +2,16 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as GroupsAPI from './groups';
-import { BaseGroups, GroupListParams, Groups } from './groups';
+import {
+  BaseGroups,
+  GroupDeleteParams,
+  GroupGetParams,
+  GroupGetResponse,
+  GroupListParams,
+  Groups,
+} from './groups';
 import * as UsersAPI from './users';
-import { BaseUsers, UserListParams, Users } from './users';
+import { BaseUsers, UserDeleteParams, UserGetParams, UserListParams, Users } from './users';
 
 export class BaseSCIM extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'identityProviders', 'scim'] = Object.freeze([
@@ -24,7 +31,20 @@ SCIM.Users = Users;
 SCIM.BaseUsers = BaseUsers;
 
 export declare namespace SCIM {
-  export { Groups as Groups, BaseGroups as BaseGroups, type GroupListParams as GroupListParams };
+  export {
+    Groups as Groups,
+    BaseGroups as BaseGroups,
+    type GroupGetResponse as GroupGetResponse,
+    type GroupListParams as GroupListParams,
+    type GroupDeleteParams as GroupDeleteParams,
+    type GroupGetParams as GroupGetParams,
+  };
 
-  export { Users as Users, BaseUsers as BaseUsers, type UserListParams as UserListParams };
+  export {
+    Users as Users,
+    BaseUsers as BaseUsers,
+    type UserListParams as UserListParams,
+    type UserDeleteParams as UserDeleteParams,
+    type UserGetParams as UserGetParams,
+  };
 }

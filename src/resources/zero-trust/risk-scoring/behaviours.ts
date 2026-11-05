@@ -22,7 +22,7 @@ export class BaseBehaviours extends APIResource {
    *   await client.zeroTrust.riskScoring.behaviours.update({
    *     account_id: 'account_id',
    *     behaviors: {
-   *       foo: { enabled: true, risk_level: 'low' },
+   *       foo: { enabled: true, risk_level: 'info' },
    *     },
    *   });
    * ```
@@ -68,7 +68,7 @@ export namespace BehaviourUpdateResponse {
   export interface Behaviors {
     enabled: boolean;
 
-    risk_level: 'low' | 'medium' | 'high';
+    risk_level: 'info' | 'low' | 'medium' | 'high';
   }
 }
 
@@ -84,7 +84,7 @@ export namespace BehaviourGetResponse {
 
     name: string;
 
-    risk_level: 'low' | 'medium' | 'high';
+    risk_level: 'info' | 'low' | 'medium' | 'high';
   }
 }
 
@@ -104,7 +104,7 @@ export namespace BehaviourUpdateParams {
   export interface Behaviors {
     enabled: boolean;
 
-    risk_level: 'low' | 'medium' | 'high';
+    risk_level: 'info' | 'low' | 'medium' | 'high';
   }
 }
 

@@ -29,6 +29,7 @@ export {
   type IndexQueryParams,
   type IndexUpsertParams,
   type CreateIndicesSinglePage,
+  type IndexGetByIDsResponsesSinglePage,
 } from './indexes';
 export {
   MetadataIndex,

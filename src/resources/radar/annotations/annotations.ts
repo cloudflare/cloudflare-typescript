@@ -103,6 +103,12 @@ export namespace AnnotationListResponse {
     }
 
     export interface Entity {
+      /**
+       * Alpha-2 code of the country the entity belongs to (GEOLOCATION and AS entities
+       * only).
+       */
+      entityLocation: string | null;
+
       entityName: string | null;
 
       entityType: string;

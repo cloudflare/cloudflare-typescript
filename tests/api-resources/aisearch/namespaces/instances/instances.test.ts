@@ -60,7 +60,11 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
       index_method: { keyword: true, vector: true },
       indexing_options: { keyword_tokenizer: 'porter', use_ocr: true },
       max_num_results: 1,
-      metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
+      metadata: {
+        created_from_aisearch_wizard: true,
+        created_from_emdash_plugin: { type: 'native', version: 'version' },
+        worker_domain: 'worker_domain',
+      },
       public_endpoint_params: {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
@@ -118,7 +122,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
   test('update: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.update('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -132,7 +136,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
   test('update: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.update('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       ai_gateway_id: 'ai_gateway_id',
       ai_search_model: 'ai_search_model',
       cache: true,
@@ -147,7 +151,11 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
       index_method: { keyword: true, vector: true },
       indexing_options: { keyword_tokenizer: 'porter', use_ocr: true },
       max_num_results: 1,
-      metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
+      metadata: {
+        created_from_aisearch_wizard: true,
+        created_from_emdash_plugin: { type: 'native', version: 'version' },
+        worker_domain: 'worker_domain',
+      },
       paused: true,
       public_endpoint_params: {
         authorized_hosts: ['string'],
@@ -224,7 +232,6 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
     const response = await client.aiSearch.namespaces.instances.list('my-namespace', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       hostname: 'x',
-      namespace: 'namespace',
       order_by: 'created_at',
       order_by_direction: 'asc',
       page: 1,
@@ -236,7 +243,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
   test('delete: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.delete('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -250,14 +257,14 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
   test('delete: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.delete('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
     });
   });
 
   test('chatCompletions: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.chatCompletions('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       messages: [{ content: 'string', role: 'system' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -272,7 +279,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
   test('chatCompletions: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.chatCompletions('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       messages: [{ content: 'string', role: 'system' }],
       ai_search_options: {
         cache: { cache_threshold: 'super_strict_match', enabled: true },
@@ -304,10 +311,33 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
     });
   });
 
+  test('move: only required params', async () => {
+    const responsePromise = client.aiSearch.namespaces.instances.move('my-blog', {
+      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      namespace: 'production',
+      new_namespace: 'staging',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('move: required and optional params', async () => {
+    const response = await client.aiSearch.namespaces.instances.move('my-blog', {
+      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      namespace: 'production',
+      new_namespace: 'staging',
+    });
+  });
+
   test('read: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.read('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -321,14 +351,14 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
   test('read: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.read('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
     });
   });
 
   test('search: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.search('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -342,7 +372,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
   test('search: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.search('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       ai_search_options: {
         cache: { cache_threshold: 'super_strict_match', enabled: true },
         custom_metadata: { test: true, user_id: 'user-123' },
@@ -376,7 +406,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
   test('stats: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.stats('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -390,7 +420,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
   test('stats: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.stats('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
     });
   });
 };

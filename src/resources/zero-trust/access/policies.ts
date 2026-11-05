@@ -329,6 +329,13 @@ export interface PolicyCreateResponse {
   name?: string;
 
   /**
+   * The account ID used to resolve policy resources and identity for cross-account
+   * WARP authentication. The account must be trusted by the account that owns this
+   * policy.
+   */
+  policy_resolution_account_id?: string;
+
+  /**
    * A custom message that will appear on the purpose justification screen.
    */
   purpose_justification_prompt?: string;
@@ -479,6 +486,13 @@ export interface PolicyUpdateResponse {
   name?: string;
 
   /**
+   * The account ID used to resolve policy resources and identity for cross-account
+   * WARP authentication. The account must be trusted by the account that owns this
+   * policy.
+   */
+  policy_resolution_account_id?: string;
+
+  /**
    * A custom message that will appear on the purpose justification screen.
    */
   purpose_justification_prompt?: string;
@@ -627,6 +641,13 @@ export interface PolicyListResponse {
    * The name of the Access policy.
    */
   name?: string;
+
+  /**
+   * The account ID used to resolve policy resources and identity for cross-account
+   * WARP authentication. The account must be trusted by the account that owns this
+   * policy.
+   */
+  policy_resolution_account_id?: string;
 
   /**
    * A custom message that will appear on the purpose justification screen.
@@ -786,6 +807,13 @@ export interface PolicyGetResponse {
   name?: string;
 
   /**
+   * The account ID used to resolve policy resources and identity for cross-account
+   * WARP authentication. The account must be trusted by the account that owns this
+   * policy.
+   */
+  policy_resolution_account_id?: string;
+
+  /**
    * A custom message that will appear on the purpose justification screen.
    */
   purpose_justification_prompt?: string;
@@ -924,6 +952,13 @@ export interface PolicyCreateParams {
   mfa_config?: PolicyCreateParams.MfaConfig;
 
   /**
+   * Body param: The account ID used to resolve policy resources and identity for
+   * cross-account WARP authentication. The account must be trusted by the account
+   * that owns this policy.
+   */
+  policy_resolution_account_id?: string;
+
+  /**
    * Body param: A custom message that will appear on the purpose justification
    * screen.
    */
@@ -1058,6 +1093,13 @@ export interface PolicyUpdateParams {
    * Body param: Configures multi-factor authentication (MFA) settings.
    */
   mfa_config?: PolicyUpdateParams.MfaConfig;
+
+  /**
+   * Body param: The account ID used to resolve policy resources and identity for
+   * cross-account WARP authentication. The account must be trusted by the account
+   * that owns this policy.
+   */
+  policy_resolution_account_id?: string;
 
   /**
    * Body param: A custom message that will appear on the purpose justification

@@ -73,58 +73,6 @@ const runTests = (
     );
   });
 
-  // HTTP 101 error from prism
-  test.skip('connect: only required params', async () => {
-    const responsePromise = client.browserRendering.devtools.browser.connect(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // HTTP 101 error from prism
-  test.skip('connect: required and optional params', async () => {
-    const response = await client.browserRendering.devtools.browser.connect(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        account_id: 'account_id',
-        keep_alive: 10000,
-        lab: true,
-        recording: true,
-        'cf-brapi-guardrails': 'eyJtb2RlIjoicmVhZG9ubHkifQ',
-      },
-    );
-  });
-
-  // HTTP 101 error from prism
-  test.skip('launch: only required params', async () => {
-    const responsePromise = client.browserRendering.devtools.browser.launch({ account_id: 'account_id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // HTTP 101 error from prism
-  test.skip('launch: required and optional params', async () => {
-    const response = await client.browserRendering.devtools.browser.launch({
-      account_id: 'account_id',
-      keep_alive: 10000,
-      lab: true,
-      recording: true,
-      'cf-brapi-guardrails': 'eyJhbGxvd2VkRG9tYWlucyI6WyIqLmV4YW1wbGUuY29tIl19',
-    });
-  });
-
   test('protocol: only required params', async () => {
     const responsePromise = client.browserRendering.devtools.browser.protocol(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

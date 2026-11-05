@@ -10,6 +10,7 @@ import {
   VersionDeleteResponse,
   VersionGetParams,
   VersionListParams,
+  VersionProfileParams,
   Versions,
   VersionsV4PagePaginationArray,
 } from './versions';
@@ -2455,5 +2456,6 @@ export declare namespace Workers {
     type VersionListParams as VersionListParams,
     type VersionDeleteParams as VersionDeleteParams,
     type VersionGetParams as VersionGetParams,
+    type VersionProfileParams as VersionProfileParams,
   };
 }

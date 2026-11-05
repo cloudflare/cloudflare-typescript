@@ -25,7 +25,17 @@ import {
   Identity,
   LastSeenIdentity,
   LastSeenIdentityGetParams,
+  LastSeenIdentityGetResponse,
 } from './last-seen-identity';
+import * as MfaAuthenticatorsAPI from './mfa-authenticators';
+import {
+  BaseMfaAuthenticators,
+  MfaAuthenticatorDeleteParams,
+  MfaAuthenticatorDeleteResponse,
+  MfaAuthenticators,
+} from './mfa-authenticators';
+import * as PasskeysAPI from './passkeys';
+import { BasePasskeys, PasskeyDeleteParams, PasskeyDeleteResponse, Passkeys } from './passkeys';
 import { APIPromise } from '../../../../core/api-promise';
 import {
   PagePromise,
@@ -164,6 +174,10 @@ export class Users extends BaseUsers {
     this._client,
   );
   failedLogins: FailedLoginsAPI.FailedLogins = new FailedLoginsAPI.FailedLogins(this._client);
+  mfaAuthenticators: MfaAuthenticatorsAPI.MfaAuthenticators = new MfaAuthenticatorsAPI.MfaAuthenticators(
+    this._client,
+  );
+  passkeys: PasskeysAPI.Passkeys = new PasskeysAPI.Passkeys(this._client);
 }
 
 export type UserListResponsesV4PagePaginationArray = V4PagePaginationArray<UserListResponse>;
@@ -521,6 +535,10 @@ Users.LastSeenIdentity = LastSeenIdentity;
 Users.BaseLastSeenIdentity = BaseLastSeenIdentity;
 Users.FailedLogins = FailedLogins;
 Users.BaseFailedLogins = BaseFailedLogins;
+Users.MfaAuthenticators = MfaAuthenticators;
+Users.BaseMfaAuthenticators = BaseMfaAuthenticators;
+Users.Passkeys = Passkeys;
+Users.BasePasskeys = BasePasskeys;
 
 export declare namespace Users {
   export {
@@ -552,6 +570,7 @@ export declare namespace Users {
     LastSeenIdentity as LastSeenIdentity,
     BaseLastSeenIdentity as BaseLastSeenIdentity,
     type Identity as Identity,
+    type LastSeenIdentityGetResponse as LastSeenIdentityGetResponse,
     type LastSeenIdentityGetParams as LastSeenIdentityGetParams,
   };
 
@@ -561,5 +580,19 @@ export declare namespace Users {
     type FailedLoginListResponse as FailedLoginListResponse,
     type FailedLoginListResponsesSinglePage as FailedLoginListResponsesSinglePage,
     type FailedLoginListParams as FailedLoginListParams,
+  };
+
+  export {
+    MfaAuthenticators as MfaAuthenticators,
+    BaseMfaAuthenticators as BaseMfaAuthenticators,
+    type MfaAuthenticatorDeleteResponse as MfaAuthenticatorDeleteResponse,
+    type MfaAuthenticatorDeleteParams as MfaAuthenticatorDeleteParams,
+  };
+
+  export {
+    Passkeys as Passkeys,
+    BasePasskeys as BasePasskeys,
+    type PasskeyDeleteResponse as PasskeyDeleteResponse,
+    type PasskeyDeleteParams as PasskeyDeleteParams,
   };
 }

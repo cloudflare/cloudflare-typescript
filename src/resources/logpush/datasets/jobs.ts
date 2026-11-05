@@ -33,6 +33,7 @@ export class BaseJobs extends APIResource {
     datasetID:
       | 'access_requests'
       | 'account_abuse_protection_events'
+      | 'ai_gateway_events'
       | 'audit_logs'
       | 'audit_logs_v2'
       | 'biso_user_actions'

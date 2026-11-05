@@ -132,6 +132,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
         app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
         custom_participant_id: 'custom_participant_id',
         preset_name: 'preset_name',
+        token: { expires_on: '2026-10-01T11:00:00Z', not_before: '2026-10-01T09:00:00Z' },
         name: 'Mary Sue',
         picture: 'https://i.imgur.com/test.jpg',
       },
@@ -320,6 +321,8 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeeti
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
       meeting_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      expires_on: '2026-10-01T11:00:00Z',
+      not_before: '2026-10-01T09:00:00Z',
     });
   });
 

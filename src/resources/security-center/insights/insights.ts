@@ -179,6 +179,12 @@ export namespace InsightListResponse {
     since?: string;
 
     /**
+     * Who generated the insight. `cloudflare` for Cloudflare-generated insights,
+     * otherwise the partner.
+     */
+    source?: 'cloudflare' | 'riskrecon';
+
+    /**
      * The current status of the insight.
      */
     status?: 'active' | 'resolved';

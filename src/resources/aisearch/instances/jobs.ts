@@ -20,8 +20,9 @@ export class BaseJobs extends APIResource {
   /**
    * Creates a new indexing job for an AI Search instance.
    *
-   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
-   * (and descendant paths) instead.
+   * Deprecated: use
+   * /accounts/{account_id}/ai-search/namespaces/{namespace}/instances (and
+   * descendant paths) instead.
    *
    * @deprecated
    */
@@ -38,8 +39,9 @@ export class BaseJobs extends APIResource {
   /**
    * Lists indexing jobs for an AI Search instance.
    *
-   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
-   * (and descendant paths) instead.
+   * Deprecated: use
+   * /accounts/{account_id}/ai-search/namespaces/{namespace}/instances (and
+   * descendant paths) instead.
    *
    * @deprecated
    */
@@ -59,8 +61,9 @@ export class BaseJobs extends APIResource {
   /**
    * Retrieves details for a specific AI Search indexing job.
    *
-   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
-   * (and descendant paths) instead.
+   * Deprecated: use
+   * /accounts/{account_id}/ai-search/namespaces/{namespace}/instances (and
+   * descendant paths) instead.
    *
    * @deprecated
    */
@@ -77,8 +80,9 @@ export class BaseJobs extends APIResource {
   /**
    * Lists log entries for an AI Search indexing job.
    *
-   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
-   * (and descendant paths) instead.
+   * Deprecated: use
+   * /accounts/{account_id}/ai-search/namespaces/{namespace}/instances (and
+   * descendant paths) instead.
    *
    * @deprecated
    */

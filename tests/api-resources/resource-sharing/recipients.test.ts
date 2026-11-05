@@ -44,7 +44,6 @@ const runTests = (client: PartialCloudflare<{ resourceSharing: { recipients: Bas
     const response = await client.resourceSharing.recipients.create('3fd85f74b32742f1bff64a85009dda07', {
       path_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      organization_id: '023e105f4ecef8ad9ca31a8372d0c353',
       recipient_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

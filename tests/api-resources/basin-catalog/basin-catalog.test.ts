@@ -89,6 +89,7 @@ const runTests = (client: PartialCloudflare<{ basinCatalog: BaseBasinCatalog }>)
   test('enable: required and optional params', async () => {
     const response = await client.basinCatalog.enable('my-data-bucket', {
       account_id: '0123456789abcdef0123456789abcdef',
+      credential: { token: 'your-cloudflare-api-token-here' },
     });
   });
 

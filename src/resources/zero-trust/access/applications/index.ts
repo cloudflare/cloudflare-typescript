@@ -13,6 +13,7 @@ export {
   type ApplicationType,
   type CORSHeaders,
   type Decision,
+  type DestinationOverride,
   type OIDCSaaSApp,
   type SaaSAppNameIDFormat,
   type SAMLSaaSApp,

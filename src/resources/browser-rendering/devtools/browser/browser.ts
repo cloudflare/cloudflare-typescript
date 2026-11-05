@@ -4,7 +4,7 @@ import { APIResource } from '../../../../core/resource';
 import * as LiveViewAPI from './live-view';
 import { BaseLiveView, LiveView, LiveViewCreateParams, LiveViewCreateResponse } from './live-view';
 import * as PageAPI from './page';
-import { BasePage, Page, PageGetParams } from './page';
+import { BasePage, Page } from './page';
 import * as TargetsAPI from './targets';
 import {
   BaseTargets,
@@ -21,7 +21,6 @@ import {
   Targets,
 } from './targets';
 import { APIPromise } from '../../../../core/api-promise';
-import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -75,60 +74,6 @@ export class BaseBrowser extends APIResource {
       path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}`,
       options,
     );
-  }
-
-  /**
-   * Establishes a WebSocket connection to an existing browser session.
-   *
-   * @example
-   * ```ts
-   * await client.browserRendering.devtools.browser.connect(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   { account_id: 'account_id' },
-   * );
-   * ```
-   */
-  connect(sessionID: string, params: BrowserConnectParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id, 'cf-brapi-guardrails': cfBrapiGuardrails, ...query } = params;
-    return this._client.get(path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}`, {
-      query,
-      ...options,
-      headers: buildHeaders([
-        {
-          Accept: '*/*',
-          ...(cfBrapiGuardrails != null ? { 'cf-brapi-guardrails': cfBrapiGuardrails } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
-   * Acquires and establishes a WebSocket connection to a browser session. Session
-   * guardrails may be supplied in the `cf-brapi-guardrails` header as
-   * base64url-encoded JSON of the same `guardrails` object the POST body accepts
-   * (for example `{"allowedDomains":["*.example.com"]}`).
-   *
-   * @example
-   * ```ts
-   * await client.browserRendering.devtools.browser.launch({
-   *   account_id: 'account_id',
-   * });
-   * ```
-   */
-  launch(params: BrowserLaunchParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id, 'cf-brapi-guardrails': cfBrapiGuardrails, ...query } = params;
-    return this._client.get(path`/accounts/${account_id}/browser-rendering/devtools/browser`, {
-      query,
-      ...options,
-      headers: buildHeaders([
-        {
-          Accept: '*/*',
-          ...(cfBrapiGuardrails != null ? { 'cf-brapi-guardrails': cfBrapiGuardrails } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
   }
 
   /**
@@ -357,61 +302,6 @@ export interface BrowserDeleteParams {
   account_id: string;
 }
 
-export interface BrowserConnectParams {
-  /**
-   * Path param: Account ID.
-   */
-  account_id: string;
-
-  /**
-   * Query param: Keep-alive time in ms (only valid when acquiring new session).
-   */
-  keep_alive?: number;
-
-  /**
-   * Query param: Use experimental browser.
-   */
-  lab?: boolean;
-
-  /**
-   * Query param
-   */
-  recording?: boolean;
-
-  /**
-   * Header param: Optional base64url-encoded JSON connection guardrails (mode)
-   */
-  'cf-brapi-guardrails'?: string;
-}
-
-export interface BrowserLaunchParams {
-  /**
-   * Path param: Account ID.
-   */
-  account_id: string;
-
-  /**
-   * Query param: Keep-alive time in ms (only valid when acquiring new session).
-   */
-  keep_alive?: number;
-
-  /**
-   * Query param: Use experimental browser.
-   */
-  lab?: boolean;
-
-  /**
-   * Query param
-   */
-  recording?: boolean;
-
-  /**
-   * Header param: Optional base64url-encoded JSON session guardrails (allowedDomains
-   * and allowedDomainSets)
-   */
-  'cf-brapi-guardrails'?: string;
-}
-
 export interface BrowserProtocolParams {
   /**
    * Account ID.
@@ -441,8 +331,6 @@ export declare namespace Browser {
     type BrowserVersionResponse as BrowserVersionResponse,
     type BrowserCreateParams as BrowserCreateParams,
     type BrowserDeleteParams as BrowserDeleteParams,
-    type BrowserConnectParams as BrowserConnectParams,
-    type BrowserLaunchParams as BrowserLaunchParams,
     type BrowserProtocolParams as BrowserProtocolParams,
     type BrowserVersionParams as BrowserVersionParams,
   };
@@ -454,7 +342,7 @@ export declare namespace Browser {
     type LiveViewCreateParams as LiveViewCreateParams,
   };
 
-  export { Page as Page, BasePage as BasePage, type PageGetParams as PageGetParams };
+  export { Page as Page, BasePage as BasePage };
 
   export {
     Targets as Targets,

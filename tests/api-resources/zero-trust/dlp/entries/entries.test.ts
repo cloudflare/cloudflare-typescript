@@ -51,6 +51,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { dlp: { entries: BaseE
       pattern: { regex: 'regex', validation: 'luhn' },
       description: 'description',
       profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      validator_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
     });
   });
 
@@ -80,6 +81,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { dlp: { entries: BaseE
       type: 'custom',
       description: 'description',
       enabled: true,
+      validator_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
     });
   });
 

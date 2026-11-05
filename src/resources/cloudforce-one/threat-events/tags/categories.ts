@@ -10,7 +10,8 @@ export class BaseCategories extends APIResource {
     Object.freeze(['cloudforceOne', 'threatEvents', 'tags', 'categories'] as const);
 
   /**
-   * Creates a new Source-of-Truth tag category for an account.
+   * Creates a tag category. Use `schema` to define the custom fields its tags can
+   * have.
    *
    * @example
    * ```ts
@@ -29,7 +30,7 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Returns all Source-of-Truth tag categories for an account.
+   * Lists the account's tag categories. Use `search` to filter them.
    *
    * @example
    * ```ts
@@ -48,7 +49,8 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Deprecated; use DELETE /events/tag-categories/{category_uuid}. Available through
+   * Legacy. Use `threat-intel tags categories delete`
+   * (`DELETE /events/tag-categories/{category_uuid}`) instead. Available through
    * 2026-11-28.
    *
    * @deprecated Use DELETE /events/tag-categories/{category_uuid} before 2026-11-28.
@@ -66,7 +68,8 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Deprecated; use PATCH /events/tag-categories/{category_uuid}. Available through
+   * Legacy. Use `threat-intel tags categories update`
+   * (`PATCH /events/tag-categories/{category_uuid}`) instead. Available through
    * 2026-11-28.
    *
    * @deprecated Use PATCH /events/tag-categories/{category_uuid} before 2026-11-28.

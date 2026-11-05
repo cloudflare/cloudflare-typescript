@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
+import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -11,18 +12,19 @@ export class BasePrecursor extends APIResource {
   /**
    * Updates the Precursor configuration for a zone.
    *
-   * `default_mode` sets the zone-level enforcement mode. `enforcement_rules` is the
-   * ordered list of rules that override enforcement for matching requests.
+   * `mode` controls whether Precursor detection is off, monitoring, or armed.
+   * `show_interstitial` controls the zone-level response when armed. `rules` is the
+   * ordered list of overrides for matching requests.
    *
    * This is a partial update: only the fields present in the request body are
    * changed.
    *
-   * - Sending an empty array (`[]`) clears all enforcement rules.
-   * - At least one of `default_mode` or `enforcement_rules` must be present; an
+   * - Sending an empty array (`[]`) clears all rules.
+   * - At least one of `mode`, `show_interstitial`, or `rules` must be present; an
    *   empty body (`{}`) is rejected with `400`.
    * - Rule `id` is read-only (assigned by Cloudflare) and ignored on input.
-   * - Rule `mode` must be `min-friction` or `max-security` (`off` is not a valid
-   *   rule mode; use `default_mode` to disable enforcement).
+   * - Rule `show_interstitial` is required and controls the response for requests
+   *   that match that rule.
    * - Rule `expression` is limited to 4000 characters. The limit applies to each
    *   rule individually, not to the combined size of all rules.
    *
@@ -30,22 +32,27 @@ export class BasePrecursor extends APIResource {
    * ```ts
    * const precursorConfig = await client.precursor.update({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   default_mode: 'min-friction',
+   *   mode: 'monitor',
    * });
    * ```
    */
   update(params: PrecursorUpdateParams, options?: RequestOptions): APIPromise<PrecursorConfig> {
-    const { zone_id, ...body } = params;
+    const { zone_id, 'Cloudflare-Version': cloudflareVersion = '1.0', ...body } = params;
     return (
-      this._client.put(path`/zones/${zone_id}/precursor`, { body, ...options }) as APIPromise<{
-        result: PrecursorConfig;
-      }>
+      this._client.put(path`/zones/${zone_id}/precursor`, {
+        body,
+        ...options,
+        headers: buildHeaders([
+          { 'Cloudflare-Version': cloudflareVersion != null ? cloudflareVersion.toString() : '1.0' },
+          options?.headers,
+        ]),
+      }) as APIPromise<{ result: PrecursorConfig }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Retrieve a zone's Precursor configuration: the zone-level `default_mode` and the
-   * ordered list of `enforcement_rules`.
+   * Retrieve a zone's Precursor configuration: the detection `mode`, whether to
+   * `show_interstitial`, and the ordered list of `rules`.
    *
    * @example
    * ```ts
@@ -55,76 +62,66 @@ export class BasePrecursor extends APIResource {
    * ```
    */
   get(params: PrecursorGetParams, options?: RequestOptions): APIPromise<PrecursorConfig> {
-    const { zone_id } = params;
+    const { zone_id, 'Cloudflare-Version': cloudflareVersion = '1.0' } = params;
     return (
-      this._client.get(path`/zones/${zone_id}/precursor`, options) as APIPromise<{ result: PrecursorConfig }>
+      this._client.get(path`/zones/${zone_id}/precursor`, {
+        ...options,
+        headers: buildHeaders([
+          { 'Cloudflare-Version': cloudflareVersion != null ? cloudflareVersion.toString() : '1.0' },
+          options?.headers,
+        ]),
+      }) as APIPromise<{ result: PrecursorConfig }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 export class Precursor extends BasePrecursor {}
 
-export interface EnforcementRule {
-  /**
-   * The filter expression that determines which requests the rule matches.
-   */
-  expression: string;
-
-  /**
-   * The override mode Precursor applies to requests matching an enforcement rule.
-   * Unlike `default_mode`, this cannot be `off`.
-   */
-  mode: 'min-friction' | 'max-security';
-
-  /**
-   * The read-only identifier that Cloudflare assigns to the rule.
-   */
-  id?: string;
-
-  /**
-   * An informative description of the rule.
-   */
-  description?: string;
-
-  /**
-   * Whether the rule is active.
-   */
-  enabled?: boolean;
-}
-
-export interface EnforcementRuleParam {
-  /**
-   * The filter expression that determines which requests the rule matches.
-   */
-  expression: string;
-
-  /**
-   * The override mode Precursor applies to requests matching an enforcement rule.
-   * Unlike `default_mode`, this cannot be `off`.
-   */
-  mode: 'min-friction' | 'max-security';
-
-  /**
-   * An informative description of the rule.
-   */
-  description?: string;
-
-  /**
-   * Whether the rule is active.
-   */
-  enabled?: boolean;
-}
-
 export interface PrecursorConfig {
   /**
-   * @deprecated The zone-level Precursor enforcement mode applied to requests that
-   * do not match a more specific enforcement rule.
+   * Controls Precursor detection for the zone. `off` disables detection, `monitor`
+   * records detections without affecting bot scores, and `arm` allows detections to
+   * affect bot scores.
    */
-  default_mode?: 'off' | 'min-friction' | 'max-security';
+  mode?: 'off' | 'monitor' | 'arm';
 
   /**
-   * @deprecated The ordered list of enforcement rules for the zone.
+   * The ordered list of Precursor rules for the zone.
    */
-  enforcement_rules?: Array<EnforcementRule>;
+  rules?: Array<PrecursorConfig.Rule>;
+
+  /**
+   * Whether Precursor shows an interstitial when it takes action on a request.
+   */
+  show_interstitial?: boolean;
+}
+
+export namespace PrecursorConfig {
+  export interface Rule {
+    /**
+     * The filter expression that determines which requests the rule matches.
+     */
+    expression: string;
+
+    /**
+     * Whether Precursor shows an interstitial when it takes action on a request.
+     */
+    show_interstitial: boolean;
+
+    /**
+     * The read-only identifier that Cloudflare assigns to the rule.
+     */
+    id?: string;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule is active.
+     */
+    enabled?: boolean;
+  }
 }
 
 export interface PrecursorUpdateParams {
@@ -134,27 +131,67 @@ export interface PrecursorUpdateParams {
   zone_id: string;
 
   /**
-   * @deprecated Body param: The zone-level Precursor enforcement mode applied to
-   * requests that do not match a more specific enforcement rule.
+   * Header param: Selects the split Precursor API schema.
    */
-  default_mode?: 'off' | 'min-friction' | 'max-security';
+  'Cloudflare-Version'?: '1.0';
 
   /**
-   * @deprecated Body param: The ordered list of enforcement rules for the zone.
+   * Body param: Controls Precursor detection for the zone. `off` disables detection,
+   * `monitor` records detections without affecting bot scores, and `arm` allows
+   * detections to affect bot scores.
    */
-  enforcement_rules?: Array<EnforcementRuleParam>;
+  mode?: 'off' | 'monitor' | 'arm';
+
+  /**
+   * Body param: The ordered list of Precursor rules for the zone.
+   */
+  rules?: Array<PrecursorUpdateParams.Rule>;
+
+  /**
+   * Body param: Whether Precursor shows an interstitial when it takes action on a
+   * request.
+   */
+  show_interstitial?: boolean;
+}
+
+export namespace PrecursorUpdateParams {
+  export interface Rule {
+    /**
+     * The filter expression that determines which requests the rule matches.
+     */
+    expression: string;
+
+    /**
+     * Whether Precursor shows an interstitial when it takes action on a request.
+     */
+    show_interstitial: boolean;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule is active.
+     */
+    enabled?: boolean;
+  }
 }
 
 export interface PrecursorGetParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   zone_id: string;
+
+  /**
+   * Header param: Selects the split Precursor API schema.
+   */
+  'Cloudflare-Version'?: '1.0';
 }
 
 export declare namespace Precursor {
   export {
-    type EnforcementRule as EnforcementRule,
     type PrecursorConfig as PrecursorConfig,
     type PrecursorUpdateParams as PrecursorUpdateParams,
     type PrecursorGetParams as PrecursorGetParams,

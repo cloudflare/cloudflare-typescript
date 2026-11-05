@@ -29,16 +29,10 @@ const parentPartialClient = createClient({
 const runTests = (
   client: PartialCloudflare<{ organizations: { organizationProfile: BaseOrganizationProfileResource } }>,
 ) => {
-  test('update: only required params', async () => {
+  test('update', async () => {
     const responsePromise = client.organizations.organizationProfile.update(
       'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8',
-      {
-        business_address: 'business_address',
-        business_email: 'business_email',
-        business_name: 'business_name',
-        business_phone: 'business_phone',
-        external_metadata: 'external_metadata',
-      },
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -47,19 +41,6 @@ const runTests = (
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('update: required and optional params', async () => {
-    const response = await client.organizations.organizationProfile.update(
-      'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8',
-      {
-        business_address: 'business_address',
-        business_email: 'business_email',
-        business_name: 'business_name',
-        business_phone: 'business_phone',
-        external_metadata: 'external_metadata',
-      },
-    );
   });
 
   test('get', async () => {

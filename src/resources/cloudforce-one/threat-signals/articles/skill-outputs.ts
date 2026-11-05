@@ -10,7 +10,9 @@ export class BaseSkillOutputs extends APIResource {
     Object.freeze(['cloudforceOne', 'threatSignals', 'articles', 'skillOutputs'] as const);
 
   /**
-   * Retrieves the stored output of a skill for a Threat Signals article.
+   * Retrieves the stored output of a skill for a Threat Signals article. The
+   * custom_output field is parsed JSON when the stored output is valid JSON,
+   * otherwise the raw string.
    *
    * @example
    * ```ts
@@ -41,27 +43,56 @@ export class BaseSkillOutputs extends APIResource {
 export class SkillOutputs extends BaseSkillOutputs {}
 
 export interface SkillOutputGetResponse {
+  /**
+   * Article UUID that received the skill output.
+   */
   article_id: string;
 
+  /**
+   * Untrusted model output: parsed JSON when the stored completion text is valid
+   * JSON, otherwise raw text. Consumers must safely render or escape it.
+   */
+  custom_output:
+    | string
+    | number
+    | boolean
+    | { [key: string]: unknown }
+    | Array<string | number | boolean | { [key: string]: unknown }>;
+
+  /**
+   * Whether custom_output was parsed from the stored completion text.
+   */
+  custom_output_parse_status: 'parsed' | 'invalid_json';
+
+  /**
+   * Non-blocking validation classification for untrusted model output. `unknown` is
+   * retained only for historical rows.
+   */
+  custom_output_validation_status: 'valid' | 'invalid_json' | 'schema_invalid' | 'unknown';
+
+  /**
+   * Custom Skill version that produced the output. Null when historical metadata is
+   * unavailable.
+   */
   custom_skill_version: string | null;
 
   /**
-   * JSON-encoded output schema of the skill. Null when the skill no longer exists.
+   * JSON-encoded output schema. Null when historical skill metadata is unavailable.
    */
   output_schema: string | null;
 
-  skill_id: string;
-
   /**
-   * Skill output. Parsed JSON when the stored output is valid JSON, otherwise the
-   * raw string.
+   * Custom Skill UUID that produced the output.
    */
-  custom_output?: unknown;
+  skill_id: string;
 }
 
 export interface SkillOutputGetParams {
   account_id: string;
 
+  /**
+   * Threat Signals article UUID
+   */
   article_id: string;
 }
 

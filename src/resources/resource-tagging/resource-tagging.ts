@@ -79,20 +79,24 @@ export type ResourceTaggingListResponse =
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectAccessApplication
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectAccessApplicationPolicy
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectAccessGroup
+  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectAccessServiceToken
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectAccount
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectAccountRuleset
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectAIGateway
+  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectAISearchInstance
+  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectAISearchNamespace
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectAlertingPolicy
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectAlertingWebhook
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectAPIGatewayOperation
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectCloudflaredTunnel
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectCustomCertificate
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectCustomHostname
-  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectCwsDeployment
-  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectCwsPolicy
-  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectCwsPolicySet
-  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectCwsWorkload
+  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectCWSDeployment
+  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectCWSPolicy
+  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectCWSPolicySet
+  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectCWSWorkload
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectD1Database
+  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectDevice
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectDNSRecord
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectDurableObjectNamespace
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectGatewayList
@@ -105,6 +109,7 @@ export type ResourceTaggingListResponse =
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectLoadBalancerMonitor
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectLoadBalancerPool
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectManagedClientCertificate
+  | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectNamespaceWorker
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectPagesProject
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectQueue
   | ResourceTaggingListResponse.ResourceTaggingTaggedResourceObjectR2Bucket
@@ -259,6 +264,49 @@ export namespace ResourceTaggingListResponse {
   }
 
   /**
+   * Response for access_service_token resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectAccessServiceToken {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'access_service_token';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  /**
    * Response for account resources
    */
   export interface ResourceTaggingTaggedResourceObjectAccount {
@@ -374,6 +422,92 @@ export namespace ResourceTaggingListResponse {
     tags: { [key: string]: string };
 
     type: 'ai_gateway';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  /**
+   * Response for ai_search_instance resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectAISearchInstance {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'ai_search_instance';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  /**
+   * Response for ai_search_namespace resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectAISearchNamespace {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'ai_search_namespace';
 
     /**
      * Monotonic version of the resource's tags: the timestamp assigned when the tags
@@ -663,7 +797,7 @@ export namespace ResourceTaggingListResponse {
   /**
    * Response for cws_deployment resources
    */
-  export interface ResourceTaggingTaggedResourceObjectCwsDeployment {
+  export interface ResourceTaggingTaggedResourceObjectCWSDeployment {
     /**
      * Identifies the unique resource.
      */
@@ -706,7 +840,7 @@ export namespace ResourceTaggingListResponse {
   /**
    * Response for cws_policy resources
    */
-  export interface ResourceTaggingTaggedResourceObjectCwsPolicy {
+  export interface ResourceTaggingTaggedResourceObjectCWSPolicy {
     /**
      * Identifies the unique resource.
      */
@@ -749,7 +883,7 @@ export namespace ResourceTaggingListResponse {
   /**
    * Response for cws_policy_set resources
    */
-  export interface ResourceTaggingTaggedResourceObjectCwsPolicySet {
+  export interface ResourceTaggingTaggedResourceObjectCWSPolicySet {
     /**
      * Identifies the unique resource.
      */
@@ -792,7 +926,7 @@ export namespace ResourceTaggingListResponse {
   /**
    * Response for cws_workload resources
    */
-  export interface ResourceTaggingTaggedResourceObjectCwsWorkload {
+  export interface ResourceTaggingTaggedResourceObjectCWSWorkload {
     /**
      * Identifies the unique resource.
      */
@@ -862,6 +996,49 @@ export namespace ResourceTaggingListResponse {
     tags: { [key: string]: string };
 
     type: 'd1_database';
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  /**
+   * Response for device resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectDevice {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'device';
 
     /**
      * Monotonic version of the resource's tags: the timestamp assigned when the tags
@@ -1409,6 +1586,73 @@ export namespace ResourceTaggingListResponse {
      * version.
      */
     tags_updated_at?: string;
+  }
+
+  /**
+   * Response for namespace_worker resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectNamespaceWorker {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'namespace_worker';
+
+    /**
+     * Read-only routing metadata resolved from EWC using the account and immutable
+     * namespace Worker ID. Returned only by tagged-resource lists requested with
+     * include_navigation=true. Omitted when lookup is unavailable or the child has
+     * been deleted. Never supplied on tag writes or stored as extra_data.
+     */
+    navigation?: ResourceTaggingTaggedResourceObjectNamespaceWorker.Navigation;
+
+    /**
+     * Monotonic version of the resource's tags: the timestamp assigned when the tags
+     * were last written. Returned by read endpoints, by 2PC prepare (the version that
+     * will be assigned on commit, unless a concurrent write lands first, in which case
+     * a newer version is assigned), and by 2PC commit (the authoritative committed
+     * version). Omitted for untagged resources and delete commits: a deleted resource
+     * has no current version, and deletions are ordered by event order rather than by
+     * version.
+     */
+    tags_updated_at?: string;
+  }
+
+  export namespace ResourceTaggingTaggedResourceObjectNamespaceWorker {
+    /**
+     * Read-only routing metadata resolved from EWC using the account and immutable
+     * namespace Worker ID. Returned only by tagged-resource lists requested with
+     * include_navigation=true. Omitted when lookup is unavailable or the child has
+     * been deleted. Never supplied on tag writes or stored as extra_data.
+     */
+    export interface Navigation {
+      namespace_id: string;
+
+      namespace_name: string;
+
+      script_name: string;
+    }
   }
 
   /**
@@ -1967,6 +2211,15 @@ export interface ResourceTaggingListParams extends CursorPaginationAfterParams {
   case_insensitive?: boolean;
 
   /**
+   * Query param: Resolve current namespace Worker navigation by immutable child tag.
+   * Optional read-only navigation is omitted for deleted or unresolved children.
+   * Lookups are limited to this page, at most five concurrently, with a shared
+   * two-second budget. Tag identity, ETag, filters and pagination are unchanged;
+   * name filtering still uses the stored resource name. Defaults to false.
+   */
+  include_navigation?: boolean;
+
+  /**
    * Query param: Filter by resource name. Performs a case-insensitive substring
    * match. Example: ?name=my-zone
    */
@@ -2001,9 +2254,12 @@ export interface ResourceTaggingListParams extends CursorPaginationAfterParams {
     | 'access_application'
     | 'access_application_policy'
     | 'access_group'
+    | 'access_service_token'
     | 'account'
     | 'account_ruleset'
     | 'ai_gateway'
+    | 'ai_search_instance'
+    | 'ai_search_namespace'
     | 'alerting_policy'
     | 'alerting_webhook'
     | 'api_gateway_operation'
@@ -2015,6 +2271,7 @@ export interface ResourceTaggingListParams extends CursorPaginationAfterParams {
     | 'cws_policy_set'
     | 'cws_workload'
     | 'd1_database'
+    | 'device'
     | 'dns_record'
     | 'durable_object_namespace'
     | 'gateway_list'
@@ -2027,6 +2284,7 @@ export interface ResourceTaggingListParams extends CursorPaginationAfterParams {
     | 'load_balancer_monitor'
     | 'load_balancer_pool'
     | 'managed_client_certificate'
+    | 'namespace_worker'
     | 'pages_project'
     | 'queue'
     | 'r2_bucket'

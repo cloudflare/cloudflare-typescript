@@ -150,14 +150,10 @@ export interface CNICreateResponse {
   bgp?: CNICreateResponse.BGP;
 
   /**
-   * The BGP mode for a CNI.
+   * The BGP mode for a CNI. One of the following:
    *
-   * Controls the customer-facing data path:
-   *
-   * - `DynamicRouteExchange` — Full BGP: routes flow through to conduit via CRE /
-   *   bgp-bridge / bgp-bridge-receiver.
-   * - `AdvertiseOnly` — static advertisement via taserver, no routes exchanged with
-   *   Conduit
+   * - `dynamic_route_exchange`
+   * - `advertise_only`
    */
   bgp_mode?: 'dynamic_route_exchange' | 'advertise_only';
 }
@@ -179,6 +175,8 @@ export namespace CNICreateResponse {
 
     /**
      * Extra set of static prefixes to advertise to the customer's end of the session
+     * Prefixes containing host bits will be normalized to contain network bits only.
+     * Duplicates are not allowed.
      */
     extra_prefixes: Array<string>;
 
@@ -236,14 +234,10 @@ export interface CNIUpdateResponse {
   bgp?: CNIUpdateResponse.BGP;
 
   /**
-   * The BGP mode for a CNI.
+   * The BGP mode for a CNI. One of the following:
    *
-   * Controls the customer-facing data path:
-   *
-   * - `DynamicRouteExchange` — Full BGP: routes flow through to conduit via CRE /
-   *   bgp-bridge / bgp-bridge-receiver.
-   * - `AdvertiseOnly` — static advertisement via taserver, no routes exchanged with
-   *   Conduit
+   * - `dynamic_route_exchange`
+   * - `advertise_only`
    */
   bgp_mode?: 'dynamic_route_exchange' | 'advertise_only';
 }
@@ -265,6 +259,8 @@ export namespace CNIUpdateResponse {
 
     /**
      * Extra set of static prefixes to advertise to the customer's end of the session
+     * Prefixes containing host bits will be normalized to contain network bits only.
+     * Duplicates are not allowed.
      */
     extra_prefixes: Array<string>;
 
@@ -329,14 +325,10 @@ export namespace CNIListResponse {
     bgp?: Item.BGP;
 
     /**
-     * The BGP mode for a CNI.
+     * The BGP mode for a CNI. One of the following:
      *
-     * Controls the customer-facing data path:
-     *
-     * - `DynamicRouteExchange` — Full BGP: routes flow through to conduit via CRE /
-     *   bgp-bridge / bgp-bridge-receiver.
-     * - `AdvertiseOnly` — static advertisement via taserver, no routes exchanged with
-     *   Conduit
+     * - `dynamic_route_exchange`
+     * - `advertise_only`
      */
     bgp_mode?: 'dynamic_route_exchange' | 'advertise_only';
   }
@@ -358,6 +350,8 @@ export namespace CNIListResponse {
 
       /**
        * Extra set of static prefixes to advertise to the customer's end of the session
+       * Prefixes containing host bits will be normalized to contain network bits only.
+       * Duplicates are not allowed.
        */
       extra_prefixes: Array<string>;
 
@@ -416,14 +410,10 @@ export interface CNIGetResponse {
   bgp?: CNIGetResponse.BGP;
 
   /**
-   * The BGP mode for a CNI.
+   * The BGP mode for a CNI. One of the following:
    *
-   * Controls the customer-facing data path:
-   *
-   * - `DynamicRouteExchange` — Full BGP: routes flow through to conduit via CRE /
-   *   bgp-bridge / bgp-bridge-receiver.
-   * - `AdvertiseOnly` — static advertisement via taserver, no routes exchanged with
-   *   Conduit
+   * - `dynamic_route_exchange`
+   * - `advertise_only`
    */
   bgp_mode?: 'dynamic_route_exchange' | 'advertise_only';
 }
@@ -445,6 +435,8 @@ export namespace CNIGetResponse {
 
     /**
      * Extra set of static prefixes to advertise to the customer's end of the session
+     * Prefixes containing host bits will be normalized to contain network bits only.
+     * Duplicates are not allowed.
      */
     extra_prefixes: Array<string>;
 
@@ -516,6 +508,8 @@ export namespace CNICreateParams {
 
     /**
      * Extra set of static prefixes to advertise to the customer's end of the session
+     * Prefixes containing host bits will be normalized to contain network bits only.
+     * Duplicates are not allowed.
      */
     extra_prefixes: Array<string>;
 
@@ -587,14 +581,10 @@ export interface CNIUpdateParams {
   bgp?: CNIUpdateParams.BGP;
 
   /**
-   * Body param: The BGP mode for a CNI.
+   * Body param: The BGP mode for a CNI. One of the following:
    *
-   * Controls the customer-facing data path:
-   *
-   * - `DynamicRouteExchange` — Full BGP: routes flow through to conduit via CRE /
-   *   bgp-bridge / bgp-bridge-receiver.
-   * - `AdvertiseOnly` — static advertisement via taserver, no routes exchanged with
-   *   Conduit
+   * - `dynamic_route_exchange`
+   * - `advertise_only`
    */
   bgp_mode?: 'dynamic_route_exchange' | 'advertise_only';
 }
@@ -616,6 +606,8 @@ export namespace CNIUpdateParams {
 
     /**
      * Extra set of static prefixes to advertise to the customer's end of the session
+     * Prefixes containing host bits will be normalized to contain network bits only.
+     * Duplicates are not allowed.
      */
     extra_prefixes: Array<string>;
 

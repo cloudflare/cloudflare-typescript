@@ -105,18 +105,19 @@ import { IAM } from './resources/iam/iam';
 import { Images } from './resources/images/images';
 import { Intel } from './resources/intel/intel';
 import { IPs } from './resources/ips/ips';
+import { K2 } from './resources/k2/k2';
 import { KeylessCertificates } from './resources/keyless-certificates/keyless-certificates';
 import { KV } from './resources/kv/kv';
 import { LeakedCredentialChecks } from './resources/leaked-credential-checks/leaked-credential-checks';
 import { LoadBalancers } from './resources/load-balancers/load-balancers';
 import { Logpush } from './resources/logpush/logpush';
 import { Logs } from './resources/logs/logs';
-import { MagicCloudNetworking } from './resources/magic-cloud-networking/magic-cloud-networking';
 import { MagicNetworkMonitoring } from './resources/magic-network-monitoring/magic-network-monitoring';
 import { MagicTransit } from './resources/magic-transit/magic-transit';
 import { ManagedDefense } from './resources/managed-defense/managed-defense';
 import { ManagedTransforms } from './resources/managed-transforms/managed-transforms';
 import { Memberships } from './resources/memberships/memberships';
+import { Monetization } from './resources/monetization/monetization';
 import { MoQ } from './resources/moq/moq';
 import { MTLSCertificates } from './resources/mtls-certificates/mtls-certificates';
 import { NetworkInterconnects } from './resources/network-interconnects/network-interconnects';
@@ -1024,6 +1025,11 @@ export class Cloudflare extends BaseCloudflare {
   static toFile = Uploads.toFile;
 
   accounts: API.Accounts = new API.Accounts(this);
+  /**
+   * User API tokens can list and create Organizations, but reading, updating, or deleting an Organization requires a Global API key and your registered email address. The `cloudflare_organization` Terraform resource therefore requires a Global API key for its full lifecycle.
+   *
+   * See [Organizations authentication limitations](https://developers.cloudflare.com/fundamentals/organizations/limitations/#api-authentication) for credential compatibility by operation. Each endpoint’s **Security** section lists its supported authentication methods, with **Accepted Permissions** where applicable.
+   */
   organizations: API.Organizations = new API.Organizations(this);
   tenants: API.Tenants = new API.Tenants(this);
   originCACertificates: API.OriginCACertificates = new API.OriginCACertificates(this);
@@ -1083,7 +1089,7 @@ export class Cloudflare extends BaseCloudflare {
   magicTransit: API.MagicTransit = new API.MagicTransit(this);
   DDoSProtection: API.DDoSProtection = new API.DDoSProtection(this);
   magicNetworkMonitoring: API.MagicNetworkMonitoring = new API.MagicNetworkMonitoring(this);
-  magicCloudNetworking: API.MagicCloudNetworking = new API.MagicCloudNetworking(this);
+  monetization: API.Monetization = new API.Monetization(this);
   networkInterconnects: API.NetworkInterconnects = new API.NetworkInterconnects(this);
   mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
   pages: API.Pages = new API.Pages(this);
@@ -1345,6 +1351,7 @@ export class Cloudflare extends BaseCloudflare {
   customPages: API.CustomPages = new API.CustomPages(this);
   secretsStore: API.SecretsStore = new API.SecretsStore(this);
   pipelines: API.Pipelines = new API.Pipelines(this);
+  k2: API.K2 = new API.K2(this);
   schemaValidation: API.SchemaValidation = new API.SchemaValidation(this);
   tokenValidation: API.TokenValidation = new API.TokenValidation(this);
   fieldExtractors: API.FieldExtractors = new API.FieldExtractors(this);
@@ -1410,7 +1417,7 @@ Cloudflare.Intel = Intel;
 Cloudflare.MagicTransit = MagicTransit;
 Cloudflare.DDoSProtection = DDoSProtection;
 Cloudflare.MagicNetworkMonitoring = MagicNetworkMonitoring;
-Cloudflare.MagicCloudNetworking = MagicCloudNetworking;
+Cloudflare.Monetization = Monetization;
 Cloudflare.NetworkInterconnects = NetworkInterconnects;
 Cloudflare.MTLSCertificates = MTLSCertificates;
 Cloudflare.Pages = Pages;
@@ -1472,6 +1479,7 @@ Cloudflare.BrowserRendering = BrowserRendering;
 Cloudflare.CustomPages = CustomPages;
 Cloudflare.SecretsStore = SecretsStore;
 Cloudflare.Pipelines = Pipelines;
+Cloudflare.K2 = K2;
 Cloudflare.SchemaValidation = SchemaValidation;
 Cloudflare.TokenValidation = TokenValidation;
 Cloudflare.FieldExtractors = FieldExtractors;
@@ -1653,7 +1661,7 @@ export declare namespace Cloudflare {
 
   export { MagicNetworkMonitoring as MagicNetworkMonitoring };
 
-  export { MagicCloudNetworking as MagicCloudNetworking };
+  export { Monetization as Monetization };
 
   export { NetworkInterconnects as NetworkInterconnects };
 
@@ -1777,6 +1785,8 @@ export declare namespace Cloudflare {
 
   export { Pipelines as Pipelines };
 
+  export { K2 as K2 };
+
   export { SchemaValidation as SchemaValidation };
 
   export { TokenValidation as TokenValidation };
@@ -1790,7 +1800,6 @@ export declare namespace Cloudflare {
   export type CloudflareTunnel = API.CloudflareTunnel;
   export type ErrorData = API.ErrorData;
   export type Identifier = API.Identifier;
-  export type LoadBalancerPreview = API.LoadBalancerPreview;
   export type Member = API.Member;
   export type PaginationInfo = API.PaginationInfo;
   export type Permission = API.Permission;

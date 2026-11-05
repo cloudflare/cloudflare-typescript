@@ -145,6 +145,10 @@ export interface Deployment {
 
   source: string;
 
+  /**
+   * Strategy for routing traffic across the listed versions. `percentage` splits
+   * traffic according to each version's `percentage`.
+   */
   strategy: 'percentage';
 
   /**
@@ -157,6 +161,9 @@ export interface Deployment {
    */
   versions: Array<Deployment.Version>;
 
+  /**
+   * Metadata attached to the deployment.
+   */
   annotations?: Deployment.Annotations;
 
   author_email?: string;
@@ -175,6 +182,9 @@ export namespace Deployment {
     version_id: string;
   }
 
+  /**
+   * Metadata attached to the deployment.
+   */
   export interface Annotations {
     /**
      * Human-readable message about the deployment. Truncated to 1000 bytes if longer.
@@ -244,7 +254,8 @@ export interface DeploymentCreateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Strategy for routing traffic across the listed versions.
+   * `percentage` splits traffic according to each version's `percentage`.
    */
   strategy: 'percentage';
 
@@ -266,9 +277,15 @@ export interface DeploymentCreateParams {
   force?: boolean;
 
   /**
-   * Body param
+   * Body param: Metadata attached to the deployment.
    */
   annotations?: DeploymentCreateParams.Annotations;
+
+  /**
+   * Body param: Choose whether to apply Durable Object code updates immediately or
+   * defer them. When omitted, the default strategy applies.
+   */
+  code_update_strategy?: DeploymentCreateParams.Mode | DeploymentCreateParams.UnionMember1 | unknown;
 }
 
 export namespace DeploymentCreateParams {
@@ -284,11 +301,34 @@ export namespace DeploymentCreateParams {
     version_id: string;
   }
 
+  /**
+   * Metadata attached to the deployment.
+   */
   export interface Annotations {
     /**
      * Human-readable message about the deployment. Truncated to 1000 bytes if longer.
      */
     'workers/message'?: string;
+  }
+
+  export interface Mode {
+    /**
+     * Apply Durable Object code updates immediately.
+     */
+    mode: 'immediate';
+  }
+
+  export interface UnionMember1 {
+    /**
+     * Allow active Durable Objects to hibernate before updating their code.
+     */
+    mode: 'deferred';
+
+    /**
+     * Set the maximum number of seconds to wait before forcing the update. When
+     * omitted, the default maximum delay applies.
+     */
+    max_delay?: number | null;
   }
 }
 

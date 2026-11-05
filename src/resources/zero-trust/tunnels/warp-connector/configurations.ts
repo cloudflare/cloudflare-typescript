@@ -10,7 +10,7 @@ export class BaseConfigurations extends APIResource {
     Object.freeze(['zeroTrust', 'tunnels', 'warpConnector', 'configurations'] as const);
 
   /**
-   * Adds or updates the high-availability configuration for a WARP Connector tunnel.
+   * Adds or updates the high-availability configuration for a Mesh node.
    *
    * @example
    * ```ts
@@ -39,7 +39,7 @@ export class BaseConfigurations extends APIResource {
   }
 
   /**
-   * Gets the high-availability configuration for a WARP Connector tunnel.
+   * Gets the high-availability configuration for a Mesh node.
    *
    * @example
    * ```ts
@@ -78,10 +78,10 @@ export interface ConfigurationUpdateResponse {
   created_at: string;
 
   /**
-   * High-availability mode for the WARP Connector tunnel. `none` means HA is enabled
-   * but no provider is configured yet (newly created tunnels default to this).
-   * `disabled` means HA is explicitly turned off. `aws` uses AWS ENI move for
-   * failover. `local` uses virtual IPs (VIPs) on the local interface.
+   * High-availability mode for the Mesh node. `none` means HA is enabled but no
+   * provider is configured yet (newly created nodes default to this). `disabled`
+   * means HA is explicitly turned off. `aws` uses AWS ENI move for failover. `local`
+   * uses virtual IPs (VIPs) on the local interface.
    */
   ha_mode: 'none' | 'disabled' | 'aws' | 'local';
 
@@ -154,10 +154,10 @@ export interface ConfigurationGetResponse {
   created_at: string;
 
   /**
-   * High-availability mode for the WARP Connector tunnel. `none` means HA is enabled
-   * but no provider is configured yet (newly created tunnels default to this).
-   * `disabled` means HA is explicitly turned off. `aws` uses AWS ENI move for
-   * failover. `local` uses virtual IPs (VIPs) on the local interface.
+   * High-availability mode for the Mesh node. `none` means HA is enabled but no
+   * provider is configured yet (newly created nodes default to this). `disabled`
+   * means HA is explicitly turned off. `aws` uses AWS ENI move for failover. `local`
+   * uses virtual IPs (VIPs) on the local interface.
    */
   ha_mode: 'none' | 'disabled' | 'aws' | 'local';
 
@@ -225,10 +225,10 @@ export interface ConfigurationUpdateParams {
   account_id: string;
 
   /**
-   * Body param: High-availability mode for the WARP Connector tunnel. `none` means
-   * HA is enabled but no provider is configured yet (newly created tunnels default
-   * to this). `disabled` means HA is explicitly turned off. `aws` uses AWS ENI move
-   * for failover. `local` uses virtual IPs (VIPs) on the local interface.
+   * Body param: High-availability mode for the Mesh node. `none` means HA is enabled
+   * but no provider is configured yet (newly created nodes default to this).
+   * `disabled` means HA is explicitly turned off. `aws` uses AWS ENI move for
+   * failover. `local` uses virtual IPs (VIPs) on the local interface.
    */
   ha_mode: 'none' | 'disabled' | 'aws' | 'local';
 

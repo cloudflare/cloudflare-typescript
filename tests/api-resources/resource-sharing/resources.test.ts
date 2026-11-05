@@ -32,7 +32,7 @@ const runTests = (client: PartialCloudflare<{ resourceSharing: { resources: Base
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       meta: {},
       resource_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      resource_id: '0a679032-bbb2-4b7e-9acc-dd5c5cb27a17',
       resource_type: 'custom-ruleset',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -49,7 +49,7 @@ const runTests = (client: PartialCloudflare<{ resourceSharing: { resources: Base
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       meta: {},
       resource_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      resource_id: '0a679032-bbb2-4b7e-9acc-dd5c5cb27a17',
       resource_type: 'custom-ruleset',
     });
   });

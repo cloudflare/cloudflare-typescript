@@ -15,8 +15,7 @@ export class BaseTags extends APIResource {
   ] = Object.freeze(['cloudforceOne', 'threatEvents', 'indicators', 'byDataset', 'tags'] as const);
 
   /**
-   * Returns all mirrored tags from the indicator dataset (DO mirror table). No
-   * pagination.
+   * Lists the tags applied to indicators in a dataset. Results are not paginated.
    *
    * @example
    * ```ts

@@ -126,10 +126,9 @@ export class BaseThreatEvents extends APIResource {
   ] as const);
 
   /**
-   * To create a dataset, see the
-   * [`Create Dataset`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/create/)
-   * endpoint. When `datasetId` parameter is unspecified, it will be created in a
-   * default dataset named `Cloudforce One Threat Events`.
+   * Creates an event. Without `datasetId`, the event is created in the default
+   * Cloudforce One Threat Events dataset. To create a dataset, use
+   * `threat-intel datasets create`.
    *
    * @example
    * ```ts
@@ -153,14 +152,12 @@ export class BaseThreatEvents extends APIResource {
   }
 
   /**
-   * Use `datasetId=all` or `datasetId=*` for the legacy all-datasets scope,
-   * `datasetId=analytics` for datasets with `isAnalytics=true`, or
-   * `datasetId=operational` for datasets with `isAnalytics=false` (limited to 50).
-   * Scope values must be used alone. When `datasetId` is unspecified, events are
-   * listed from the default Cloudforce One Threat Events dataset. To list existing
-   * datasets, use the
-   * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
-   * endpoint.
+   * Lists events, with filters passed as query parameters. `datasetId` accepts
+   * dataset UUIDs or one scope value used alone: `all` (or `*`) and `operational`
+   * select the intelligence datasets you can read, and `analytics` selects the
+   * analytics datasets you can read. A scope value covers at most 50 datasets.
+   * Without `datasetId`, the default Cloudforce One Threat Events dataset is used.
+   * To send filters in a JSON body instead, use `threat-intel events search`.
    *
    * @example
    * ```ts
@@ -176,10 +173,9 @@ export class BaseThreatEvents extends APIResource {
   }
 
   /**
-   * The `datasetId` parameter must be defined. To list existing datasets (and their
-   * IDs) in your account, use the
-   * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
-   * endpoint.
+   * Creates multiple events in one dataset. `datasetId` is required; to find dataset
+   * IDs, use `threat-intel datasets list`. Set `includeCreatedEvents` to return the
+   * UUIDs of the created events.
    *
    * @example
    * ```ts
@@ -212,7 +208,9 @@ export class BaseThreatEvents extends APIResource {
   }
 
   /**
-   * This method is deprecated. Please use `event_create_bulk` instead
+   * Legacy. Use `threat-intel events bulk-create` (`POST /events/create/bulk`) and
+   * `threat-intel events relationships create` (`POST /events/relationships/create`)
+   * instead.
    *
    * @deprecated This endpoint is deprecated and will be removed in a future version.
    */
@@ -228,8 +226,8 @@ export class BaseThreatEvents extends APIResource {
   }
 
   /**
-   * Partially updates a threat event in Cloudforce One, modifying specific fields
-   * without replacing the entire event.
+   * Updates the given fields of an event and leaves the other fields unchanged.
+   * `datasetId` is required.
    *
    * @example
    * ```ts
@@ -253,8 +251,8 @@ export class BaseThreatEvents extends APIResource {
   }
 
   /**
-   * This Method is deprecated. Please use
-   * /events/dataset/:dataset_id/events/:event_id instead.
+   * Legacy. Use `threat-intel events get`
+   * (`GET /events/dataset/{dataset_id}/events/{event_id}`) instead.
    *
    * @deprecated Use datasets.events.get instead (GET /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/events/{event_id}).
    */
@@ -806,9 +804,9 @@ export interface ThreatEventListParams {
 
   /**
    * Query param: Dataset UUIDs to query, or one standalone scope value: 'all'/'\*'
-   * for the legacy all-datasets behavior, 'analytics' for isAnalytics=true datasets,
-   * or 'operational' for isAnalytics=false datasets. If not provided, uses the
-   * default dataset.
+   * or 'operational' for readable intelligence datasets (isAnalytics=false), or
+   * 'analytics' for readable analytics datasets (isAnalytics=true). Scope values
+   * query at most 50 datasets. If not provided, uses the default dataset.
    */
   datasetId?: Array<string>;
 
@@ -855,9 +853,117 @@ export interface ThreatEventListParams {
     | ThreatEventListParams.UnionMember4
     | ThreatEventListParams.UnionMember5
   >;
+
+  /**
+   * Query param: JSON-encoded. OR branches of structured search filters. Filters
+   * within a branch are AND'd, branches are OR'd, and the result is AND'd with
+   * `search`: `AND(search) AND OR(AND(branch 1), ...)`. Max 8 branches of 1-10
+   * conditions each. Not supported for analytics datasets, and `indicator` filters
+   * are not yet supported inside branches. Cursor pages carry the original branches,
+   * so do not resend them with `cursor`.
+   */
+  searchBranches?: Array<
+    Array<
+      | ThreatEventListParams.UnionMember0
+      | ThreatEventListParams.UnionMember1
+      | ThreatEventListParams.UnionMember2
+      | ThreatEventListParams.UnionMember3
+      | ThreatEventListParams.UnionMember4
+      | ThreatEventListParams.UnionMember5
+    >
+  >;
 }
 
 export namespace ThreatEventListParams {
+  export interface UnionMember0 {
+    field:
+      | 'attacker'
+      | 'attackerCountry'
+      | 'category'
+      | 'createdAt'
+      | 'date'
+      | 'event'
+      | 'indicator'
+      | 'indicatorType'
+      | 'mitreAttack'
+      | 'mitreCapec'
+      | 'tags'
+      | 'targetCountry'
+      | 'targetIndustry'
+      | 'tlp'
+      | 'uuid';
+
+    op:
+      | 'equals'
+      | 'not'
+      | 'gt'
+      | 'gte'
+      | 'lt'
+      | 'lte'
+      | 'like'
+      | 'contains'
+      | 'startsWith'
+      | 'endsWith'
+      | 'find';
+
+    value: string;
+  }
+
+  export interface UnionMember1 {
+    field:
+      | 'attacker'
+      | 'attackerCountry'
+      | 'category'
+      | 'createdAt'
+      | 'date'
+      | 'event'
+      | 'indicator'
+      | 'indicatorType'
+      | 'mitreAttack'
+      | 'mitreCapec'
+      | 'tags'
+      | 'targetCountry'
+      | 'targetIndustry'
+      | 'tlp'
+      | 'uuid';
+
+    op: 'in';
+
+    value: Array<string>;
+  }
+
+  export interface UnionMember2 {
+    field: 'killChain';
+
+    op: 'equals' | 'not' | 'gt' | 'gte' | 'lt' | 'lte';
+
+    value: number | string;
+  }
+
+  export interface UnionMember3 {
+    field: 'killChain';
+
+    op: 'in';
+
+    value: Array<number | string>;
+  }
+
+  export interface UnionMember4 {
+    field: 'hasChildren';
+
+    op: 'equals' | 'not' | 'gt' | 'gte' | 'lt' | 'lte';
+
+    value: unknown | boolean;
+  }
+
+  export interface UnionMember5 {
+    field: 'hasChildren';
+
+    op: 'in';
+
+    value: Array<unknown | boolean>;
+  }
+
   export interface UnionMember0 {
     field:
       | 'attacker'

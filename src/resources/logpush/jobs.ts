@@ -221,6 +221,7 @@ export interface LogpushJob {
   dataset?:
     | 'access_requests'
     | 'account_abuse_protection_events'
+    | 'ai_gateway_events'
     | 'audit_logs'
     | 'audit_logs_v2'
     | 'biso_user_actions'
@@ -396,8 +397,7 @@ export interface OutputOptions {
 
   /**
    * If set to true, subrequests will be merged into the parent request. Only
-   * supported for the `http_requests` dataset. Not supported for account-scoped
-   * jobs.
+   * supported for the `http_requests` dataset.
    */
   merge_subrequests?: boolean | null;
 
@@ -480,8 +480,7 @@ export interface OutputOptionsParam {
 
   /**
    * If set to true, subrequests will be merged into the parent request. Only
-   * supported for the `http_requests` dataset. Not supported for account-scoped
-   * jobs.
+   * supported for the `http_requests` dataset.
    */
   merge_subrequests?: boolean | null;
 
@@ -564,6 +563,7 @@ export interface JobCreateParams {
   dataset?:
     | 'access_requests'
     | 'account_abuse_protection_events'
+    | 'ai_gateway_events'
     | 'audit_logs'
     | 'audit_logs_v2'
     | 'biso_user_actions'

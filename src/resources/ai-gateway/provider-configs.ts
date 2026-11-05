@@ -98,6 +98,14 @@ export interface ProviderConfigCreateResponse {
 
   secret_preview: string;
 
+  /**
+   * UTC date (YYYY-MM-DD) the gateway last selected this key to authenticate a
+   * request to the provider, whether or not the request succeeded. Updated at most
+   * once a day. Null if the gateway has not used the key since this field was
+   * introduced.
+   */
+  last_used_at?: string | null;
+
   rate_limit?: number;
 
   rate_limit_period?: number;
@@ -122,6 +130,14 @@ export interface ProviderConfigListResponse {
   secret_id: string;
 
   secret_preview: string;
+
+  /**
+   * UTC date (YYYY-MM-DD) the gateway last selected this key to authenticate a
+   * request to the provider, whether or not the request succeeded. Updated at most
+   * once a day. Null if the gateway has not used the key since this field was
+   * introduced.
+   */
+  last_used_at?: string | null;
 
   rate_limit?: number;
 

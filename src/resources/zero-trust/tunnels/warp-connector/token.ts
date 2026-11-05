@@ -14,8 +14,7 @@ export class BaseToken extends APIResource {
   ] as const);
 
   /**
-   * Gets the token used to associate warp device with a specific Warp Connector
-   * tunnel.
+   * Gets the token used to associate a WARP device with a specific Mesh node.
    *
    * @example
    * ```ts

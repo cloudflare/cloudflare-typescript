@@ -393,7 +393,10 @@ export namespace IPSECTunnelCreateResponse {
 
     /**
      * Prefixes in this list will be advertised to the customer device, in addition to
-     * the routes in the Magic routing table.
+     * the routes in the Magic routing table. Each entry must be a network address in
+     * CIDR notation with no host bits set (for example `192.0.2.0/24`, not
+     * `192.0.2.1/24`) and must not repeat another entry. IPv6 prefixes are accepted
+     * only when the tunnel has an `interface_address6`.
      */
     extra_prefixes?: Array<string>;
 
@@ -624,7 +627,10 @@ export namespace IPSECTunnelUpdateResponse {
 
       /**
        * Prefixes in this list will be advertised to the customer device, in addition to
-       * the routes in the Magic routing table.
+       * the routes in the Magic routing table. Each entry must be a network address in
+       * CIDR notation with no host bits set (for example `192.0.2.0/24`, not
+       * `192.0.2.1/24`) and must not repeat another entry. IPv6 prefixes are accepted
+       * only when the tunnel has an `interface_address6`.
        */
       extra_prefixes?: Array<string>;
 
@@ -854,7 +860,10 @@ export namespace IPSECTunnelListResponse {
 
       /**
        * Prefixes in this list will be advertised to the customer device, in addition to
-       * the routes in the Magic routing table.
+       * the routes in the Magic routing table. Each entry must be a network address in
+       * CIDR notation with no host bits set (for example `192.0.2.0/24`, not
+       * `192.0.2.1/24`) and must not repeat another entry. IPv6 prefixes are accepted
+       * only when the tunnel has an `interface_address6`.
        */
       extra_prefixes?: Array<string>;
 
@@ -1086,7 +1095,10 @@ export namespace IPSECTunnelDeleteResponse {
 
       /**
        * Prefixes in this list will be advertised to the customer device, in addition to
-       * the routes in the Magic routing table.
+       * the routes in the Magic routing table. Each entry must be a network address in
+       * CIDR notation with no host bits set (for example `192.0.2.0/24`, not
+       * `192.0.2.1/24`) and must not repeat another entry. IPv6 prefixes are accepted
+       * only when the tunnel has an `interface_address6`.
        */
       extra_prefixes?: Array<string>;
 
@@ -1318,7 +1330,10 @@ export namespace IPSECTunnelBulkUpdateResponse {
 
       /**
        * Prefixes in this list will be advertised to the customer device, in addition to
-       * the routes in the Magic routing table.
+       * the routes in the Magic routing table. Each entry must be a network address in
+       * CIDR notation with no host bits set (for example `192.0.2.0/24`, not
+       * `192.0.2.1/24`) and must not repeat another entry. IPv6 prefixes are accepted
+       * only when the tunnel has an `interface_address6`.
        */
       extra_prefixes?: Array<string>;
 
@@ -1548,7 +1563,10 @@ export namespace IPSECTunnelGetResponse {
 
       /**
        * Prefixes in this list will be advertised to the customer device, in addition to
-       * the routes in the Magic routing table.
+       * the routes in the Magic routing table. Each entry must be a network address in
+       * CIDR notation with no host bits set (for example `192.0.2.0/24`, not
+       * `192.0.2.1/24`) and must not repeat another entry. IPv6 prefixes are accepted
+       * only when the tunnel has an `interface_address6`.
        */
       extra_prefixes?: Array<string>;
 
@@ -1827,7 +1845,10 @@ export namespace IPSECTunnelCreateParams {
 
     /**
      * Prefixes in this list will be advertised to the customer device, in addition to
-     * the routes in the Magic routing table.
+     * the routes in the Magic routing table. Each entry must be a network address in
+     * CIDR notation with no host bits set (for example `192.0.2.0/24`, not
+     * `192.0.2.1/24`) and must not repeat another entry. IPv6 prefixes are accepted
+     * only when the tunnel has an `interface_address6`.
      */
     extra_prefixes?: Array<string>;
 
@@ -2024,7 +2045,10 @@ export namespace IPSECTunnelUpdateParams {
 
     /**
      * Prefixes in this list will be advertised to the customer device, in addition to
-     * the routes in the Magic routing table.
+     * the routes in the Magic routing table. Each entry must be a network address in
+     * CIDR notation with no host bits set (for example `192.0.2.0/24`, not
+     * `192.0.2.1/24`) and must not repeat another entry. IPv6 prefixes are accepted
+     * only when the tunnel has an `interface_address6`.
      */
     extra_prefixes?: Array<string>;
 

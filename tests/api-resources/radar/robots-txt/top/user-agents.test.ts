@@ -47,7 +47,7 @@ const runTests = (
         {
           date: ['2019-12-27'],
           directive: 'ALLOW',
-          domainCategory: ['string'],
+          domainCategory: ['News & Media'],
           format: 'JSON',
           limit: 1,
           name: ['main_series'],

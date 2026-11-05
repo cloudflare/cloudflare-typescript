@@ -887,6 +887,8 @@ export namespace ScanGetResponse {
               evidence?: Array<ContentSignals.Evidence>;
 
               message?: string;
+
+              messageRef?: ContentSignals.MessageRef;
             }
 
             export namespace ContentSignals {
@@ -931,6 +933,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface RobotsTXTAIRules {
@@ -943,6 +954,8 @@ export namespace ScanGetResponse {
               evidence?: Array<RobotsTXTAIRules.Evidence>;
 
               message?: string;
+
+              messageRef?: RobotsTXTAIRules.MessageRef;
             }
 
             export namespace RobotsTXTAIRules {
@@ -987,6 +1000,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface WebBotAuth {
@@ -999,6 +1021,8 @@ export namespace ScanGetResponse {
               evidence?: Array<WebBotAuth.Evidence>;
 
               message?: string;
+
+              messageRef?: WebBotAuth.MessageRef;
             }
 
             export namespace WebBotAuth {
@@ -1043,6 +1067,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
           }
 
@@ -1069,6 +1102,8 @@ export namespace ScanGetResponse {
               evidence?: Array<Acp.Evidence>;
 
               message?: string;
+
+              messageRef?: Acp.MessageRef;
             }
 
             export namespace Acp {
@@ -1113,6 +1148,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface Ap2 {
@@ -1125,6 +1169,8 @@ export namespace ScanGetResponse {
               evidence?: Array<Ap2.Evidence>;
 
               message?: string;
+
+              messageRef?: Ap2.MessageRef;
             }
 
             export namespace Ap2 {
@@ -1169,6 +1215,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface Mpp {
@@ -1181,6 +1236,8 @@ export namespace ScanGetResponse {
               evidence?: Array<Mpp.Evidence>;
 
               message?: string;
+
+              messageRef?: Mpp.MessageRef;
             }
 
             export namespace Mpp {
@@ -1225,6 +1282,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface Ucp {
@@ -1237,6 +1303,8 @@ export namespace ScanGetResponse {
               evidence?: Array<Ucp.Evidence>;
 
               message?: string;
+
+              messageRef?: Ucp.MessageRef;
             }
 
             export namespace Ucp {
@@ -1281,6 +1349,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface X402 {
@@ -1293,6 +1370,8 @@ export namespace ScanGetResponse {
               evidence?: Array<X402.Evidence>;
 
               message?: string;
+
+              messageRef?: X402.MessageRef;
             }
 
             export namespace X402 {
@@ -1337,6 +1416,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
           }
 
@@ -1355,6 +1443,8 @@ export namespace ScanGetResponse {
               evidence?: Array<MarkdownNegotiation.Evidence>;
 
               message?: string;
+
+              messageRef?: MarkdownNegotiation.MessageRef;
             }
 
             export namespace MarkdownNegotiation {
@@ -1399,6 +1489,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
           }
 
@@ -1423,6 +1522,8 @@ export namespace ScanGetResponse {
               evidence?: Array<DNSAid.Evidence>;
 
               message?: string;
+
+              messageRef?: DNSAid.MessageRef;
             }
 
             export namespace DNSAid {
@@ -1467,6 +1568,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface LinkHeaders {
@@ -1479,6 +1589,8 @@ export namespace ScanGetResponse {
               evidence?: Array<LinkHeaders.Evidence>;
 
               message?: string;
+
+              messageRef?: LinkHeaders.MessageRef;
             }
 
             export namespace LinkHeaders {
@@ -1523,6 +1635,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface RobotsTXT {
@@ -1535,6 +1656,8 @@ export namespace ScanGetResponse {
               evidence?: Array<RobotsTXT.Evidence>;
 
               message?: string;
+
+              messageRef?: RobotsTXT.MessageRef;
             }
 
             export namespace RobotsTXT {
@@ -1579,6 +1702,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface Sitemap {
@@ -1591,6 +1723,8 @@ export namespace ScanGetResponse {
               evidence?: Array<Sitemap.Evidence>;
 
               message?: string;
+
+              messageRef?: Sitemap.MessageRef;
             }
 
             export namespace Sitemap {
@@ -1635,6 +1769,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
           }
 
@@ -1655,6 +1798,8 @@ export namespace ScanGetResponse {
 
             oauthProtectedResource: Discovery.OAuthProtectedResource;
 
+            personalAgentProtocol: Discovery.PersonalAgentProtocol;
+
             webMcp: Discovery.WebMcp;
           }
 
@@ -1669,6 +1814,8 @@ export namespace ScanGetResponse {
               evidence?: Array<A2aAgentCard.Evidence>;
 
               message?: string;
+
+              messageRef?: A2aAgentCard.MessageRef;
             }
 
             export namespace A2aAgentCard {
@@ -1713,6 +1860,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface AgentSkills {
@@ -1725,6 +1881,8 @@ export namespace ScanGetResponse {
               evidence?: Array<AgentSkills.Evidence>;
 
               message?: string;
+
+              messageRef?: AgentSkills.MessageRef;
             }
 
             export namespace AgentSkills {
@@ -1769,6 +1927,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface APICatalog {
@@ -1781,6 +1948,8 @@ export namespace ScanGetResponse {
               evidence?: Array<APICatalog.Evidence>;
 
               message?: string;
+
+              messageRef?: APICatalog.MessageRef;
             }
 
             export namespace APICatalog {
@@ -1825,6 +1994,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface Ard {
@@ -1837,6 +2015,8 @@ export namespace ScanGetResponse {
               evidence?: Array<Ard.Evidence>;
 
               message?: string;
+
+              messageRef?: Ard.MessageRef;
             }
 
             export namespace Ard {
@@ -1881,6 +2061,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface AuthMd {
@@ -1893,6 +2082,8 @@ export namespace ScanGetResponse {
               evidence?: Array<AuthMd.Evidence>;
 
               message?: string;
+
+              messageRef?: AuthMd.MessageRef;
             }
 
             export namespace AuthMd {
@@ -1937,6 +2128,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface McpServerCard {
@@ -1949,6 +2149,8 @@ export namespace ScanGetResponse {
               evidence?: Array<McpServerCard.Evidence>;
 
               message?: string;
+
+              messageRef?: McpServerCard.MessageRef;
             }
 
             export namespace McpServerCard {
@@ -1993,6 +2195,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface OAuthDiscovery {
@@ -2005,6 +2216,8 @@ export namespace ScanGetResponse {
               evidence?: Array<OAuthDiscovery.Evidence>;
 
               message?: string;
+
+              messageRef?: OAuthDiscovery.MessageRef;
             }
 
             export namespace OAuthDiscovery {
@@ -2049,6 +2262,15 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface OAuthProtectedResource {
@@ -2061,6 +2283,8 @@ export namespace ScanGetResponse {
               evidence?: Array<OAuthProtectedResource.Evidence>;
 
               message?: string;
+
+              messageRef?: OAuthProtectedResource.MessageRef;
             }
 
             export namespace OAuthProtectedResource {
@@ -2105,6 +2329,82 @@ export namespace ScanGetResponse {
                   redirectedTo?: string;
                 }
               }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
+            }
+
+            export interface PersonalAgentProtocol {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<PersonalAgentProtocol.Evidence>;
+
+              message?: string;
+
+              messageRef?: PersonalAgentProtocol.MessageRef;
+            }
+
+            export namespace PersonalAgentProtocol {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
+              }
             }
 
             export interface WebMcp {
@@ -2117,6 +2417,8 @@ export namespace ScanGetResponse {
               evidence?: Array<WebMcp.Evidence>;
 
               message?: string;
+
+              messageRef?: WebMcp.MessageRef;
             }
 
             export namespace WebMcp {
@@ -2160,6 +2462,15 @@ export namespace ScanGetResponse {
 
                   redirectedTo?: string;
                 }
+              }
+
+              export interface MessageRef {
+                /**
+                 * Stable, translatable message code.
+                 */
+                code: string;
+
+                params?: unknown;
               }
             }
           }
@@ -2726,199 +3037,144 @@ export interface ScanCreateParams {
    * Body param: Country to geo egress from
    */
   country?:
-    | 'AF'
+    | 'AE'
     | 'AL'
-    | 'DZ'
-    | 'AD'
-    | 'AO'
-    | 'AG'
-    | 'AR'
     | 'AM'
-    | 'AU'
+    | 'AO'
+    | 'AR'
     | 'AT'
+    | 'AU'
     | 'AZ'
-    | 'BH'
-    | 'BD'
     | 'BB'
-    | 'BY'
+    | 'BD'
     | 'BE'
-    | 'BZ'
-    | 'BJ'
-    | 'BM'
-    | 'BT'
-    | 'BO'
-    | 'BA'
-    | 'BW'
-    | 'BR'
-    | 'BN'
-    | 'BG'
     | 'BF'
-    | 'BI'
-    | 'KH'
-    | 'CM'
+    | 'BG'
+    | 'BH'
+    | 'BN'
+    | 'BO'
+    | 'BR'
+    | 'BT'
+    | 'BW'
+    | 'BY'
     | 'CA'
-    | 'CV'
-    | 'KY'
-    | 'CF'
-    | 'TD'
-    | 'CL'
-    | 'CN'
-    | 'CO'
-    | 'KM'
-    | 'CG'
-    | 'CR'
+    | 'CD'
+    | 'CH'
     | 'CI'
-    | 'HR'
-    | 'CU'
+    | 'CL'
+    | 'CM'
+    | 'CO'
+    | 'CR'
+    | 'CW'
     | 'CY'
     | 'CZ'
-    | 'CD'
-    | 'DK'
-    | 'DJ'
-    | 'DM'
-    | 'DO'
-    | 'EC'
-    | 'EG'
-    | 'SV'
-    | 'GQ'
-    | 'ER'
-    | 'EE'
-    | 'SZ'
-    | 'ET'
-    | 'FJ'
-    | 'FI'
-    | 'FR'
-    | 'GA'
-    | 'GE'
     | 'DE'
+    | 'DJ'
+    | 'DK'
+    | 'DO'
+    | 'DZ'
+    | 'EC'
+    | 'EE'
+    | 'EG'
+    | 'ES'
+    | 'ET'
+    | 'FI'
+    | 'FJ'
+    | 'FR'
+    | 'GB'
+    | 'GD'
+    | 'GE'
     | 'GH'
     | 'GR'
-    | 'GL'
-    | 'GD'
     | 'GT'
-    | 'GN'
-    | 'GW'
+    | 'GU'
     | 'GY'
-    | 'HT'
+    | 'HK'
     | 'HN'
+    | 'HR'
+    | 'HT'
     | 'HU'
-    | 'IS'
-    | 'IN'
     | 'ID'
-    | 'IR'
-    | 'IQ'
     | 'IE'
     | 'IL'
+    | 'IN'
+    | 'IQ'
+    | 'IS'
     | 'IT'
     | 'JM'
-    | 'JP'
     | 'JO'
-    | 'KZ'
+    | 'JP'
     | 'KE'
-    | 'KI'
-    | 'KW'
     | 'KG'
+    | 'KH'
+    | 'KR'
+    | 'KW'
+    | 'KZ'
     | 'LA'
-    | 'LV'
     | 'LB'
-    | 'LS'
+    | 'LK'
     | 'LR'
-    | 'LY'
-    | 'LI'
     | 'LT'
     | 'LU'
-    | 'MO'
-    | 'MG'
-    | 'MW'
-    | 'MY'
-    | 'MV'
-    | 'ML'
-    | 'MR'
-    | 'MU'
-    | 'MX'
-    | 'FM'
-    | 'MD'
-    | 'MC'
-    | 'MN'
-    | 'MS'
+    | 'LV'
     | 'MA'
-    | 'MZ'
-    | 'MM'
-    | 'NA'
-    | 'NR'
-    | 'NP'
-    | 'NL'
-    | 'NZ'
-    | 'NI'
-    | 'NE'
-    | 'NG'
-    | 'KP'
+    | 'MD'
+    | 'MG'
     | 'MK'
+    | 'MM'
+    | 'MN'
+    | 'MO'
+    | 'MT'
+    | 'MU'
+    | 'MV'
+    | 'MW'
+    | 'MX'
+    | 'MY'
+    | 'MZ'
+    | 'NA'
+    | 'NC'
+    | 'NG'
+    | 'NL'
     | 'NO'
+    | 'NP'
+    | 'NZ'
     | 'OM'
-    | 'PK'
-    | 'PS'
     | 'PA'
-    | 'PG'
-    | 'PY'
     | 'PE'
+    | 'PF'
     | 'PH'
+    | 'PK'
     | 'PL'
+    | 'PR'
+    | 'PS'
     | 'PT'
+    | 'PY'
     | 'QA'
+    | 'RE'
     | 'RO'
+    | 'RS'
     | 'RU'
     | 'RW'
-    | 'SH'
-    | 'KN'
-    | 'LC'
-    | 'VC'
-    | 'WS'
-    | 'SM'
-    | 'ST'
     | 'SA'
-    | 'SN'
-    | 'RS'
-    | 'SC'
-    | 'SL'
-    | 'SK'
-    | 'SI'
-    | 'SB'
-    | 'SO'
-    | 'ZA'
-    | 'KR'
-    | 'SS'
-    | 'ES'
-    | 'LK'
-    | 'SD'
-    | 'SR'
     | 'SE'
-    | 'CH'
-    | 'SY'
-    | 'TW'
-    | 'TJ'
-    | 'TZ'
+    | 'SG'
+    | 'SI'
+    | 'SK'
+    | 'SN'
+    | 'SR'
     | 'TH'
-    | 'BS'
-    | 'GM'
-    | 'TL'
-    | 'TG'
-    | 'TO'
-    | 'TT'
+    | 'TJ'
     | 'TN'
     | 'TR'
-    | 'TM'
-    | 'UG'
+    | 'TT'
+    | 'TW'
+    | 'TZ'
     | 'UA'
-    | 'AE'
-    | 'GB'
+    | 'UG'
     | 'US'
-    | 'UY'
     | 'UZ'
-    | 'VU'
-    | 'VE'
     | 'VN'
-    | 'YE'
+    | 'ZA'
     | 'ZM'
     | 'ZW';
 

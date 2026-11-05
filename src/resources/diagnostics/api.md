@@ -25,6 +25,6 @@ Methods:
 
 - <code title="post /accounts/{account_id}/diagnostics/endpoint-healthchecks">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">create</a>({ ...params }) -> EndpointHealthcheckCreateResponse</code>
 - <code title="put /accounts/{account_id}/diagnostics/endpoint-healthchecks/{id}">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">update</a>(id, { ...params }) -> EndpointHealthcheckUpdateResponse</code>
-- <code title="get /accounts/{account_id}/diagnostics/endpoint-healthchecks">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">list</a>({ ...params }) -> EndpointHealthcheckListResponse</code>
+- <code title="get /accounts/{account_id}/diagnostics/endpoint-healthchecks">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">list</a>({ ...params }) -> EndpointHealthcheckListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/diagnostics/endpoint-healthchecks/{id}">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">delete</a>(id, { ...params }) -> EndpointHealthcheckDeleteResponse</code>
 - <code title="get /accounts/{account_id}/diagnostics/endpoint-healthchecks/{id}">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">get</a>(id, { ...params }) -> EndpointHealthcheckGetResponse</code>

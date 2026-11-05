@@ -38,6 +38,16 @@ export class BaseAbuseReports extends APIResource {
    * `Trust and Safety Write` permission. If the account is not entitled, the request
    * is rejected with an HTTP `401` response (see below).
    *
+   * Delegated reports: In limited circumstances, Cloudflare works with select
+   * customers who have established abuse-handling programs. For these customers,
+   * Cloudflare may forward abuse reports directly and in full—including reporter
+   * contact information, comments, and supporting evidence—without redaction or
+   * preprocessing by Cloudflare. This allows the customer to investigate and respond
+   * using their own policies and processes. For delegated reports, the
+   * report—including contact information and comments—will be forwarded to the
+   * customer in full regardless of the `host_notification` and `owner_notification`
+   * values.
+   *
    * @example
    * ```ts
    * const abuseReport = await client.abuseReports.create(
@@ -180,6 +190,12 @@ export namespace AbuseReportListResponse {
     type: 'PHISH' | 'GEN' | 'THREAT' | 'DMCA' | 'EMER' | 'TM' | 'REG_WHO' | 'NCSEI' | 'NETWORK';
 
     /**
+     * Whether the report is in an open Notice and Takedown notice period: no
+     * mitigation is placed yet, but one will take effect when the period ends.
+     */
+    has_pending_notice?: boolean;
+
+    /**
      * Justification for the report.
      */
     justification?: string;
@@ -274,6 +290,12 @@ export interface AbuseReportGetResponse {
    * The abuse report type
    */
   type: 'PHISH' | 'GEN' | 'THREAT' | 'DMCA' | 'EMER' | 'TM' | 'REG_WHO' | 'NCSEI' | 'NETWORK';
+
+  /**
+   * Whether the report is in an open Notice and Takedown notice period: no
+   * mitigation is placed yet, but one will take effect when the period ends.
+   */
+  has_pending_notice?: boolean;
 
   /**
    * Justification for the report.
@@ -407,8 +429,10 @@ export declare namespace AbuseReportCreateParams {
     email2: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     host_notification: 'send';
 
@@ -427,8 +451,10 @@ export declare namespace AbuseReportCreateParams {
     original_work: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     owner_notification: 'send';
 
@@ -456,7 +482,9 @@ export declare namespace AbuseReportCreateParams {
 
     /**
      * Body param: Any additional comments about the infringement not exceeding 2000
-     * characters
+     * characters. Comments are kept internal to Cloudflare and not shared with the
+     * host or customer as part of regular processing. For delegated reports, comments
+     * may be shared in full.
      */
     comments?: string;
 
@@ -514,8 +542,10 @@ export declare namespace AbuseReportCreateParams {
     email2: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     host_notification: 'send';
 
@@ -534,8 +564,10 @@ export declare namespace AbuseReportCreateParams {
     name: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     owner_notification: 'send';
 
@@ -564,7 +596,9 @@ export declare namespace AbuseReportCreateParams {
 
     /**
      * Body param: Any additional comments about the infringement not exceeding 2000
-     * characters
+     * characters. Comments are kept internal to Cloudflare and not shared with the
+     * host or customer as part of regular processing. For delegated reports, comments
+     * may be shared in full.
      */
     comments?: string;
 
@@ -622,8 +656,10 @@ export declare namespace AbuseReportCreateParams {
     email2: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     host_notification: 'send' | 'send-anon';
 
@@ -642,8 +678,10 @@ export declare namespace AbuseReportCreateParams {
     name: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     owner_notification: 'send' | 'send-anon';
 
@@ -657,7 +695,9 @@ export declare namespace AbuseReportCreateParams {
 
     /**
      * Body param: Any additional comments about the infringement not exceeding 2000
-     * characters
+     * characters. Comments are kept internal to Cloudflare and not shared with the
+     * host or customer as part of regular processing. For delegated reports, comments
+     * may be shared in full.
      */
     comments?: string;
 
@@ -737,8 +777,10 @@ export declare namespace AbuseReportCreateParams {
     email2: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     host_notification: 'send' | 'send-anon';
 
@@ -757,8 +799,10 @@ export declare namespace AbuseReportCreateParams {
     name: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     owner_notification: 'send' | 'send-anon';
 
@@ -772,7 +816,9 @@ export declare namespace AbuseReportCreateParams {
 
     /**
      * Body param: Any additional comments about the infringement not exceeding 2000
-     * characters
+     * characters. Comments are kept internal to Cloudflare and not shared with the
+     * host or customer as part of regular processing. For delegated reports, comments
+     * may be shared in full.
      */
     comments?: string;
 
@@ -837,8 +883,10 @@ export declare namespace AbuseReportCreateParams {
     email2: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     host_notification: 'send' | 'send-anon';
 
@@ -863,8 +911,10 @@ export declare namespace AbuseReportCreateParams {
     ncmec_notification: 'send' | 'send-anon';
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     owner_notification: 'send' | 'send-anon' | 'none';
 
@@ -878,7 +928,9 @@ export declare namespace AbuseReportCreateParams {
 
     /**
      * Body param: Any additional comments about the infringement not exceeding 2000
-     * characters
+     * characters. Comments are kept internal to Cloudflare and not shared with the
+     * host or customer as part of regular processing. For delegated reports, comments
+     * may be shared in full.
      */
     comments?: string;
 
@@ -943,8 +995,10 @@ export declare namespace AbuseReportCreateParams {
     email2: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     host_notification: 'send' | 'send-anon';
 
@@ -963,8 +1017,10 @@ export declare namespace AbuseReportCreateParams {
     name: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     owner_notification: 'send' | 'send-anon';
 
@@ -978,7 +1034,9 @@ export declare namespace AbuseReportCreateParams {
 
     /**
      * Body param: Any additional comments about the infringement not exceeding 2000
-     * characters
+     * characters. Comments are kept internal to Cloudflare and not shared with the
+     * host or customer as part of regular processing. For delegated reports, comments
+     * may be shared in full.
      */
     comments?: string;
 
@@ -1043,8 +1101,10 @@ export declare namespace AbuseReportCreateParams {
     name: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     owner_notification: 'send' | 'send-anon' | 'none';
 
@@ -1058,7 +1118,9 @@ export declare namespace AbuseReportCreateParams {
 
     /**
      * Body param: Any additional comments about the infringement not exceeding 2000
-     * characters
+     * characters. Comments are kept internal to Cloudflare and not shared with the
+     * host or customer as part of regular processing. For delegated reports, comments
+     * may be shared in full.
      */
     comments?: string;
 
@@ -1183,8 +1245,10 @@ export declare namespace AbuseReportCreateParams {
     email2: string;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     host_notification: 'send' | 'send-anon';
 
@@ -1202,8 +1266,10 @@ export declare namespace AbuseReportCreateParams {
     ncsei_subject_representation: boolean;
 
     /**
-     * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
-     * and Trademark reports cannot be anonymous.
+     * Body param: Notification type based on the abuse type. For delegated reports,
+     * the report—including contact information and comments—will be forwarded to the
+     * customer in full regardless of this value. NOTE: Copyright (DMCA) and Trademark
+     * reports cannot be anonymous.
      */
     owner_notification: 'send' | 'send-anon' | 'none';
 
@@ -1217,7 +1283,9 @@ export declare namespace AbuseReportCreateParams {
 
     /**
      * Body param: Any additional comments about the infringement not exceeding 2000
-     * characters
+     * characters. Comments are kept internal to Cloudflare and not shared with the
+     * host or customer as part of regular processing. For delegated reports, comments
+     * may be shared in full.
      */
     comments?: string;
 
@@ -1284,6 +1352,21 @@ export interface AbuseReportListParams extends V4PagePaginationParams {
    * Query param: Filter reports that have any mitigations in the given status.
    */
   mitigation_status?: 'pending' | 'active' | 'in_review' | 'cancelled' | 'removed';
+
+  /**
+   * Query param: Also include reports in an open Notice and Takedown notice period.
+   * Combined with mitigation_status using OR, e.g.
+   * ?mitigation_status=active&pending_notice=true.
+   */
+  pending_notice?: boolean;
+
+  /**
+   * Query param: Free-text search. Returns reports whose report ID starts with the
+   * term or whose domain contains the term, both case-insensitively. Surrounding
+   * whitespace is ignored, and an empty value is treated as absent. Combined with
+   * the other filters using AND.
+   */
+  search?: string;
 
   /**
    * Query param: A property to sort by, followed by the order (id, cdate, domain,

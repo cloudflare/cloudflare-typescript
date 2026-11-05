@@ -10,7 +10,9 @@ export class BaseCatalog extends APIResource {
     Object.freeze(['cloudforceOne', 'threatEvents', 'targetIndustries', 'catalog'] as const);
 
   /**
-   * Lists all target industries from industry map catalog
+   * Lists every predefined target industry, whether or not an event uses it. To list
+   * only the industries used in specific datasets, use
+   * `threat-intel events target-industries list`.
    *
    * @example
    * ```ts

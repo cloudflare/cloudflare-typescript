@@ -47,7 +47,9 @@ export class BaseConfigs extends APIResource {
    * Replaces and returns the specified Hyperdrive configuration. The request must
    * include the name and complete origin connection details. Omitted caching
    * settings are reset to their defaults, while omitted mTLS settings and origin
-   * connection limits are preserved. Use the update operation to modify only
+   * connection limits are preserved. The integration association is set only during
+   * creation and cannot be changed; omit the integration field even when replacing
+   * an integration-backed configuration. Use the update operation to modify only
    * selected fields.
    *
    * @example
@@ -135,7 +137,9 @@ export class BaseConfigs extends APIResource {
 
   /**
    * Updates and returns the specified fields of the Hyperdrive configuration. Custom
-   * caching settings are not kept if caching is disabled.
+   * caching settings are not kept if caching is disabled. For an integration-backed
+   * configuration, the integration association is preserved but cannot be changed;
+   * omit the integration field.
    *
    * @example
    * ```ts
@@ -243,9 +247,10 @@ export interface ConfigCreateResponse {
   created_on?: string;
 
   /**
-   * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-   * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-   * dashboard.
+   * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+   * when creating a Hyperdrive configuration. The Cloudflare account must already be
+   * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+   * read-only metadata and cannot be changed with replace or update operations.
    */
   integration?: ConfigCreateResponse.Integration;
 
@@ -378,9 +383,10 @@ export namespace ConfigCreateResponse {
   }
 
   /**
-   * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-   * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-   * dashboard.
+   * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+   * when creating a Hyperdrive configuration. The Cloudflare account must already be
+   * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+   * read-only metadata and cannot be changed with replace or update operations.
    */
   export interface Integration {
     /**
@@ -467,9 +473,10 @@ export interface ConfigUpdateResponse {
   created_on?: string;
 
   /**
-   * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-   * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-   * dashboard.
+   * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+   * when creating a Hyperdrive configuration. The Cloudflare account must already be
+   * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+   * read-only metadata and cannot be changed with replace or update operations.
    */
   integration?: ConfigUpdateResponse.Integration;
 
@@ -602,9 +609,10 @@ export namespace ConfigUpdateResponse {
   }
 
   /**
-   * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-   * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-   * dashboard.
+   * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+   * when creating a Hyperdrive configuration. The Cloudflare account must already be
+   * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+   * read-only metadata and cannot be changed with replace or update operations.
    */
   export interface Integration {
     /**
@@ -691,9 +699,10 @@ export interface ConfigListResponse {
   created_on?: string;
 
   /**
-   * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-   * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-   * dashboard.
+   * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+   * when creating a Hyperdrive configuration. The Cloudflare account must already be
+   * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+   * read-only metadata and cannot be changed with replace or update operations.
    */
   integration?: ConfigListResponse.Integration;
 
@@ -826,9 +835,10 @@ export namespace ConfigListResponse {
   }
 
   /**
-   * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-   * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-   * dashboard.
+   * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+   * when creating a Hyperdrive configuration. The Cloudflare account must already be
+   * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+   * read-only metadata and cannot be changed with replace or update operations.
    */
   export interface Integration {
     /**
@@ -917,9 +927,10 @@ export interface ConfigEditResponse {
   created_on?: string;
 
   /**
-   * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-   * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-   * dashboard.
+   * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+   * when creating a Hyperdrive configuration. The Cloudflare account must already be
+   * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+   * read-only metadata and cannot be changed with replace or update operations.
    */
   integration?: ConfigEditResponse.Integration;
 
@@ -1052,9 +1063,10 @@ export namespace ConfigEditResponse {
   }
 
   /**
-   * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-   * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-   * dashboard.
+   * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+   * when creating a Hyperdrive configuration. The Cloudflare account must already be
+   * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+   * read-only metadata and cannot be changed with replace or update operations.
    */
   export interface Integration {
     /**
@@ -1141,9 +1153,10 @@ export interface ConfigGetResponse {
   created_on?: string;
 
   /**
-   * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-   * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-   * dashboard.
+   * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+   * when creating a Hyperdrive configuration. The Cloudflare account must already be
+   * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+   * read-only metadata and cannot be changed with replace or update operations.
    */
   integration?: ConfigGetResponse.Integration;
 
@@ -1276,9 +1289,10 @@ export namespace ConfigGetResponse {
   }
 
   /**
-   * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-   * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-   * dashboard.
+   * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+   * when creating a Hyperdrive configuration. The Cloudflare account must already be
+   * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+   * read-only metadata and cannot be changed with replace or update operations.
    */
   export interface Integration {
     /**
@@ -1365,9 +1379,10 @@ export interface ConfigRestartResponse {
   created_on?: string;
 
   /**
-   * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-   * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-   * dashboard.
+   * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+   * when creating a Hyperdrive configuration. The Cloudflare account must already be
+   * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+   * read-only metadata and cannot be changed with replace or update operations.
    */
   integration?: ConfigRestartResponse.Integration;
 
@@ -1500,9 +1515,10 @@ export namespace ConfigRestartResponse {
   }
 
   /**
-   * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-   * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-   * dashboard.
+   * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+   * when creating a Hyperdrive configuration. The Cloudflare account must already be
+   * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+   * read-only metadata and cannot be changed with replace or update operations.
    */
   export interface Integration {
     /**
@@ -1777,9 +1793,11 @@ export declare namespace ConfigCreateParams {
     account_id: string;
 
     /**
-     * Body param: Connects to a PlanetScale database using credentials managed by
-     * Cloudflare. The Cloudflare account must already be linked to PlanetScale in the
-     * Hyperdrive dashboard.
+     * Body param: Selects a PlanetScale database and provisions credentials managed by
+     * Cloudflare when creating a Hyperdrive configuration. The Cloudflare account must
+     * already be linked to PlanetScale in the Hyperdrive dashboard. The selection is
+     * returned as read-only metadata and cannot be changed with replace or update
+     * operations.
      */
     integration: HyperdriveHyperdriveConfigCreateWithIntegration.Integration;
 
@@ -1821,9 +1839,10 @@ export declare namespace ConfigCreateParams {
 
   export namespace HyperdriveHyperdriveConfigCreateWithIntegration {
     /**
-     * Connects to a PlanetScale database using credentials managed by Cloudflare. The
-     * Cloudflare account must already be linked to PlanetScale in the Hyperdrive
-     * dashboard.
+     * Selects a PlanetScale database and provisions credentials managed by Cloudflare
+     * when creating a Hyperdrive configuration. The Cloudflare account must already be
+     * linked to PlanetScale in the Hyperdrive dashboard. The selection is returned as
+     * read-only metadata and cannot be changed with replace or update operations.
      */
     export interface Integration {
       /**

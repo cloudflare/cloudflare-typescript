@@ -14,18 +14,16 @@ export class BaseQueries extends APIResource {
   ] as const);
 
   /**
-   * Create a new saved event query for the account
+   * Saves an event query under a unique `name`. `query_json` holds the query
+   * parameters as a JSON string.
    *
    * @example
    * ```ts
    * const query =
    *   await client.cloudforceOne.threatEvents.queries.create({
    *     account_id: 'account_id',
-   *     alert_enabled: true,
-   *     alert_rollup_enabled: true,
    *     name: 'name',
    *     query_json: 'query_json',
-   *     rule_enabled: true,
    *   });
    * ```
    */
@@ -38,7 +36,7 @@ export class BaseQueries extends APIResource {
   }
 
   /**
-   * Retrieve all saved event queries for the account
+   * Lists the account's saved event queries.
    *
    * @example
    * ```ts
@@ -54,7 +52,7 @@ export class BaseQueries extends APIResource {
   }
 
   /**
-   * Delete a saved event query by its ID
+   * Deletes a saved event query by its ID.
    *
    * @example
    * ```ts
@@ -72,7 +70,7 @@ export class BaseQueries extends APIResource {
   }
 
   /**
-   * Update an existing saved event query by its ID
+   * Updates the given fields of a saved event query.
    *
    * @example
    * ```ts
@@ -91,7 +89,7 @@ export class BaseQueries extends APIResource {
   }
 
   /**
-   * Retrieve a saved event query by its ID
+   * Returns a saved event query by its ID.
    *
    * @example
    * ```ts
@@ -120,12 +118,14 @@ export interface QueryCreateResponse {
   account_id: number;
 
   /**
-   * Whether alerts are enabled
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * false.
    */
   alert_enabled: boolean;
 
   /**
-   * Whether alert rollup is enabled
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * false.
    */
   alert_rollup_enabled: boolean;
 
@@ -145,7 +145,8 @@ export interface QueryCreateResponse {
   query_json: string;
 
   /**
-   * Whether rule is enabled
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * false.
    */
   rule_enabled: boolean;
 
@@ -160,17 +161,20 @@ export interface QueryCreateResponse {
   user_email: string;
 
   /**
-   * Intel Indicator Feed ID (numeric)
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * null.
    */
   custom_threat_feed_id?: number | null;
 
   /**
-   * WAF rules list ID for blocking
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * null.
    */
   rule_list_id?: string;
 
   /**
-   * Scope for the rule
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * null.
    */
   rule_scope?: string;
 }
@@ -190,12 +194,14 @@ export namespace QueryListResponse {
     account_id: number;
 
     /**
-     * Whether alerts are enabled
+     * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+     * false.
      */
     alert_enabled: boolean;
 
     /**
-     * Whether alert rollup is enabled
+     * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+     * false.
      */
     alert_rollup_enabled: boolean;
 
@@ -215,7 +221,8 @@ export namespace QueryListResponse {
     query_json: string;
 
     /**
-     * Whether rule is enabled
+     * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+     * false.
      */
     rule_enabled: boolean;
 
@@ -230,17 +237,20 @@ export namespace QueryListResponse {
     user_email: string;
 
     /**
-     * Intel Indicator Feed ID (numeric)
+     * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+     * null.
      */
     custom_threat_feed_id?: number | null;
 
     /**
-     * WAF rules list ID for blocking
+     * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+     * null.
      */
     rule_list_id?: string;
 
     /**
-     * Scope for the rule
+     * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+     * null.
      */
     rule_scope?: string;
   }
@@ -258,12 +268,14 @@ export interface QueryEditResponse {
   account_id: number;
 
   /**
-   * Whether alerts are enabled
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * false.
    */
   alert_enabled: boolean;
 
   /**
-   * Whether alert rollup is enabled
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * false.
    */
   alert_rollup_enabled: boolean;
 
@@ -283,7 +295,8 @@ export interface QueryEditResponse {
   query_json: string;
 
   /**
-   * Whether rule is enabled
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * false.
    */
   rule_enabled: boolean;
 
@@ -298,17 +311,20 @@ export interface QueryEditResponse {
   user_email: string;
 
   /**
-   * Intel Indicator Feed ID (numeric)
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * null.
    */
   custom_threat_feed_id?: number | null;
 
   /**
-   * WAF rules list ID for blocking
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * null.
    */
   rule_list_id?: string;
 
   /**
-   * Scope for the rule
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * null.
    */
   rule_scope?: string;
 }
@@ -325,12 +341,14 @@ export interface QueryGetResponse {
   account_id: number;
 
   /**
-   * Whether alerts are enabled
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * false.
    */
   alert_enabled: boolean;
 
   /**
-   * Whether alert rollup is enabled
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * false.
    */
   alert_rollup_enabled: boolean;
 
@@ -350,7 +368,8 @@ export interface QueryGetResponse {
   query_json: string;
 
   /**
-   * Whether rule is enabled
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * false.
    */
   rule_enabled: boolean;
 
@@ -365,17 +384,20 @@ export interface QueryGetResponse {
   user_email: string;
 
   /**
-   * Intel Indicator Feed ID (numeric)
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * null.
    */
   custom_threat_feed_id?: number | null;
 
   /**
-   * WAF rules list ID for blocking
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * null.
    */
   rule_list_id?: string;
 
   /**
-   * Scope for the rule
+   * @deprecated Deprecated: saved-query alerting and rules were removed. Always
+   * null.
    */
   rule_scope?: string;
 }
@@ -385,16 +407,6 @@ export interface QueryCreateParams {
    * Path param: Account ID.
    */
   account_id: string;
-
-  /**
-   * Body param: Enable alerts for this query
-   */
-  alert_enabled: boolean;
-
-  /**
-   * Body param: Enable alert rollup for this query
-   */
-  alert_rollup_enabled: boolean;
 
   /**
    * Body param: Unique name for the saved query
@@ -407,12 +419,26 @@ export interface QueryCreateParams {
   query_json: string;
 
   /**
-   * Body param: Enable rule for this query
+   * @deprecated Body param: Deprecated and ignored: saved-query alerting and rules
+   * were removed.
    */
-  rule_enabled: boolean;
+  alert_enabled?: boolean;
 
   /**
-   * Body param: Scope for the rule
+   * @deprecated Body param: Deprecated and ignored: saved-query alerting and rules
+   * were removed.
+   */
+  alert_rollup_enabled?: boolean;
+
+  /**
+   * @deprecated Body param: Deprecated and ignored: saved-query alerting and rules
+   * were removed.
+   */
+  rule_enabled?: boolean;
+
+  /**
+   * @deprecated Body param: Deprecated and ignored: saved-query alerting and rules
+   * were removed.
    */
   rule_scope?: string;
 }
@@ -438,12 +464,14 @@ export interface QueryEditParams {
   account_id: string;
 
   /**
-   * Body param: Enable alerts for this query
+   * @deprecated Body param: Deprecated and ignored: saved-query alerting and rules
+   * were removed.
    */
   alert_enabled?: boolean;
 
   /**
-   * Body param: Enable alert rollup for this query
+   * @deprecated Body param: Deprecated and ignored: saved-query alerting and rules
+   * were removed.
    */
   alert_rollup_enabled?: boolean;
 
@@ -458,12 +486,14 @@ export interface QueryEditParams {
   query_json?: string;
 
   /**
-   * Body param: Enable rule for this query
+   * @deprecated Body param: Deprecated and ignored: saved-query alerting and rules
+   * were removed.
    */
   rule_enabled?: boolean;
 
   /**
-   * Body param: Scope for the rule
+   * @deprecated Body param: Deprecated and ignored: saved-query alerting and rules
+   * were removed.
    */
   rule_scope?: string;
 }

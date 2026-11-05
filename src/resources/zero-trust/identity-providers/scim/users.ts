@@ -3,11 +3,13 @@
 import { APIResource } from '../../../../core/resource';
 import * as UsersAPI from '../../access/users/users';
 import { AccessUsersV4PagePaginationArray } from '../../access/users/users';
+import { APIPromise } from '../../../../core/api-promise';
 import {
   PagePromise,
   V4PagePaginationArray,
   type V4PagePaginationArrayParams,
 } from '../../../../core/pagination';
+import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -42,6 +44,56 @@ export class BaseUsers extends APIResource {
       V4PagePaginationArray<UsersAPI.AccessUser>,
       { query, ...options },
     );
+  }
+
+  /**
+   * Deletes a SCIM User resource from the identity provider's SCIM population.
+   *
+   * @example
+   * ```ts
+   * await client.zeroTrust.identityProviders.scim.users.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     identity_provider_id:
+   *       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   },
+   * );
+   * ```
+   */
+  delete(userID: string, params: UserDeleteParams, options?: RequestOptions): APIPromise<void> {
+    const { account_id, identity_provider_id } = params;
+    return this._client.delete(
+      path`/accounts/${account_id}/access/identity_providers/${identity_provider_id}/scim/users/${userID}`,
+      { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
+    );
+  }
+
+  /**
+   * Returns a SCIM User resource synced to Cloudflare via the System for
+   * Cross-domain Identity Management (SCIM).
+   *
+   * @example
+   * ```ts
+   * const accessUser =
+   *   await client.zeroTrust.identityProviders.scim.users.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       identity_provider_id:
+   *         'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     },
+   *   );
+   * ```
+   */
+  get(userID: string, params: UserGetParams, options?: RequestOptions): APIPromise<UsersAPI.AccessUser> {
+    const { account_id, identity_provider_id } = params;
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/access/identity_providers/${identity_provider_id}/scim/users/${userID}`,
+        options,
+      ) as APIPromise<{ result: UsersAPI.AccessUser }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 export class Users extends BaseUsers {}
@@ -86,8 +138,36 @@ export interface UserListParams extends V4PagePaginationArrayParams {
   username?: string;
 }
 
+export interface UserDeleteParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+
+  /**
+   * UUID.
+   */
+  identity_provider_id: string;
+}
+
+export interface UserGetParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+
+  /**
+   * UUID.
+   */
+  identity_provider_id: string;
+}
+
 export declare namespace Users {
-  export { type UserListParams as UserListParams };
+  export {
+    type UserListParams as UserListParams,
+    type UserDeleteParams as UserDeleteParams,
+    type UserGetParams as UserGetParams,
+  };
 }
 
 export { type AccessUsersV4PagePaginationArray };

@@ -27,6 +27,7 @@ Methods:
 - <code title="post /accounts/{account_id}/d1/database/{database_id}/import">client.d1.database.<a href="./src/resources/d1/database/database.ts">import</a>(databaseID, { ...params }) -> DatabaseImportResponse</code>
 - <code title="post /accounts/{account_id}/d1/database/{database_id}/query">client.d1.database.<a href="./src/resources/d1/database/database.ts">query</a>(databaseID, { ...params }) -> QueryResultsSinglePage</code>
 - <code title="post /accounts/{account_id}/d1/database/{database_id}/raw">client.d1.database.<a href="./src/resources/d1/database/database.ts">raw</a>(databaseID, { ...params }) -> DatabaseRawResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/d1/database/{database_id}/undelete">client.d1.database.<a href="./src/resources/d1/database/database.ts">undelete</a>(databaseID, { ...params }) -> D1</code>
 
 ### TimeTravel
 

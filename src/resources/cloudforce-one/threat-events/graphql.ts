@@ -13,8 +13,8 @@ export class BaseGraphql extends APIResource {
   ] as const);
 
   /**
-   * Execute GraphQL aggregations over threat events. Supports multi-dimensional
-   * group-bys, optional date range filtering, and multi-dataset aggregation.
+   * Runs a GraphQL aggregation query over events. Supports grouping by multiple
+   * fields, date range filters, and aggregation across datasets.
    *
    * @example
    * ```ts

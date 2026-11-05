@@ -49,6 +49,7 @@ const runTests = (client: PartialCloudflare<{ workers: { scripts: { deployments:
       versions: [{ percentage: 100, version_id: '023e105f-2a42-4f8b-a1c1-73f6a2a30c0f' }],
       force: true,
       annotations: { 'workers/message': 'Deploy bug fix.' },
+      code_update_strategy: { mode: 'immediate' },
     });
   });
 

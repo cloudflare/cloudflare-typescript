@@ -1,6 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as NameserverSetsAPI from './nameserver-sets';
+import {
+  BaseNameserverSets,
+  NameserverSetCreateParams,
+  NameserverSetCreateResponse,
+  NameserverSetDeleteParams,
+  NameserverSetDeleteResponse,
+  NameserverSetGetParams,
+  NameserverSetGetResponse,
+  NameserverSetListParams,
+  NameserverSetListResponse,
+  NameserverSetListResponsesV4PagePaginationArray,
+  NameserverSets,
+} from './nameserver-sets';
 import * as ViewsAPI from './views';
 import {
   BaseViews,
@@ -67,6 +81,7 @@ export class BaseAccount extends APIResource {
   }
 }
 export class Account extends BaseAccount {
+  nameserverSets: NameserverSetsAPI.NameserverSets = new NameserverSetsAPI.NameserverSets(this._client);
   views: ViewsAPI.Views = new ViewsAPI.Views(this._client);
 }
 
@@ -520,6 +535,8 @@ export interface AccountGetParams {
   account_id: string;
 }
 
+Account.NameserverSets = NameserverSets;
+Account.BaseNameserverSets = BaseNameserverSets;
 Account.Views = Views;
 Account.BaseViews = BaseViews;
 
@@ -529,6 +546,20 @@ export declare namespace Account {
     type AccountGetResponse as AccountGetResponse,
     type AccountEditParams as AccountEditParams,
     type AccountGetParams as AccountGetParams,
+  };
+
+  export {
+    NameserverSets as NameserverSets,
+    BaseNameserverSets as BaseNameserverSets,
+    type NameserverSetCreateResponse as NameserverSetCreateResponse,
+    type NameserverSetListResponse as NameserverSetListResponse,
+    type NameserverSetDeleteResponse as NameserverSetDeleteResponse,
+    type NameserverSetGetResponse as NameserverSetGetResponse,
+    type NameserverSetListResponsesV4PagePaginationArray as NameserverSetListResponsesV4PagePaginationArray,
+    type NameserverSetCreateParams as NameserverSetCreateParams,
+    type NameserverSetListParams as NameserverSetListParams,
+    type NameserverSetDeleteParams as NameserverSetDeleteParams,
+    type NameserverSetGetParams as NameserverSetGetParams,
   };
 
   export {

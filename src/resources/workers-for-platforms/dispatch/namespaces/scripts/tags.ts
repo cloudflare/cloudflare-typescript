@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../../core/resource';
 import { APIPromise } from '../../../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../../../core/pagination';
+import { buildHeaders } from '../../../../../internal/headers';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
@@ -81,11 +82,15 @@ export class BaseTags extends APIResource {
    * Delete a tag from a script uploaded to a Workers for Platforms dispatch
    * namespace.
    *
+   * On `api-version` dates on or after `2026-10-01`, `tag` identifies a key and the
+   * operation returns the complete updated tag map. Deleting a missing key succeeds.
+   * Earlier versions retain the legacy string-tag behavior and return a null result.
+   *
    * @example
    * ```ts
    * const tag =
    *   await client.workersForPlatforms.dispatch.namespaces.scripts.tags.delete(
-   *     'my-tag',
+   *     'environment',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       dispatch_namespace: 'my-dispatch-namespace',
@@ -94,18 +99,18 @@ export class BaseTags extends APIResource {
    *   );
    * ```
    */
-  delete(
-    tag: string,
-    params: TagDeleteParams,
-    options?: RequestOptions,
-  ): APIPromise<TagDeleteResponse | null> {
-    const { account_id, dispatch_namespace, script_name } = params;
-    return (
-      this._client.delete(
-        path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${script_name}/tags/${tag}`,
-        options,
-      ) as APIPromise<{ result: TagDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+  delete(tag: string, params: TagDeleteParams, options?: RequestOptions): APIPromise<TagDeleteResponse> {
+    const { account_id, dispatch_namespace, script_name, 'api-version': apiVersion } = params;
+    return this._client.delete(
+      path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${script_name}/tags/${tag}`,
+      {
+        ...options,
+        headers: buildHeaders([
+          { ...(apiVersion != null ? { 'api-version': apiVersion } : undefined) },
+          options?.headers,
+        ]),
+      },
+    );
   }
 }
 export class Tags extends BaseTags {}
@@ -118,7 +123,110 @@ export type TagUpdateResponse = string;
 
 export type TagListResponse = string;
 
-export type TagDeleteResponse = unknown;
+export type TagDeleteResponse =
+  | TagDeleteResponse.WorkersTagsKVResponse
+  | TagDeleteResponse.WorkersAPIResponseNullResult;
+
+export namespace TagDeleteResponse {
+  export interface WorkersTagsKVResponse {
+    errors: Array<WorkersTagsKVResponse.Error>;
+
+    messages: Array<WorkersTagsKVResponse.Message>;
+
+    /**
+     * Tags associated with the Worker, as a key/value object. Each complete UTF-8
+     * encoded tag (the key plus `=` and the value when the value is non-empty) must
+     * not exceed 1024 bytes.
+     */
+    result: { [key: string]: string };
+
+    /**
+     * Whether the API call was successful.
+     */
+    success: true;
+  }
+
+  export namespace WorkersTagsKVResponse {
+    export interface Error {
+      code: number;
+
+      message: string;
+
+      documentation_url?: string;
+
+      source?: Error.Source;
+    }
+
+    export namespace Error {
+      export interface Source {
+        pointer?: string;
+      }
+    }
+
+    export interface Message {
+      code: number;
+
+      message: string;
+
+      documentation_url?: string;
+
+      source?: Message.Source;
+    }
+
+    export namespace Message {
+      export interface Source {
+        pointer?: string;
+      }
+    }
+  }
+
+  export interface WorkersAPIResponseNullResult {
+    errors: Array<WorkersAPIResponseNullResult.Error>;
+
+    messages: Array<WorkersAPIResponseNullResult.Message>;
+
+    /**
+     * Whether the API call was successful.
+     */
+    success: true;
+
+    result?: unknown | null;
+  }
+
+  export namespace WorkersAPIResponseNullResult {
+    export interface Error {
+      code: number;
+
+      message: string;
+
+      documentation_url?: string;
+
+      source?: Error.Source;
+    }
+
+    export namespace Error {
+      export interface Source {
+        pointer?: string;
+      }
+    }
+
+    export interface Message {
+      code: number;
+
+      message: string;
+
+      documentation_url?: string;
+
+      source?: Message.Source;
+    }
+
+    export namespace Message {
+      export interface Source {
+        pointer?: string;
+      }
+    }
+  }
+}
 
 export interface TagUpdateParams {
   /**
@@ -151,19 +259,28 @@ export interface TagListParams {
 
 export interface TagDeleteParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Name of the Workers for Platforms dispatch namespace.
+   * Path param: Name of the Workers for Platforms dispatch namespace.
    */
   dispatch_namespace: string;
 
   /**
-   * Name of the script.
+   * Path param: Name of the script.
    */
   script_name: string;
+
+  /**
+   * Header param: Requested API compatibility date in `YYYY-MM-DD[.release]` format
+   * (UTC). The optional release suffix contains lowercase letters; for example,
+   * `2026-10-01.epoch`.
+   *
+   * Typed Worker tag operations require a date on or after `2026-10-01`.
+   */
+  'api-version'?: string;
 }
 
 export declare namespace Tags {

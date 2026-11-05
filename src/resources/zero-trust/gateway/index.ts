@@ -62,6 +62,14 @@ export {
   type ConfigurationGetParams,
 } from './configurations/index';
 export {
+  DNSDestinationIPs,
+  BaseDNSDestinationIPs,
+  type DNSDestinationIPsID,
+  type DNSDestinationIPListResponse,
+  type DNSDestinationIPListParams,
+  type DNSDestinationIPListResponsesSinglePage,
+} from './dns-destination-ips';
+export {
   Gateway,
   BaseGateway,
   type GatewayCreateResponse,

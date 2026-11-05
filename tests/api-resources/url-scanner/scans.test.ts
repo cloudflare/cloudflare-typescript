@@ -46,7 +46,7 @@ const runTests = (client: PartialCloudflare<{ urlScanner: { scans: BaseScans } }
       account_id: 'account_id',
       url: 'https://www.example.com',
       agentReadiness: true,
-      country: 'AF',
+      country: 'AE',
       customagent: 'customagent',
       customHeaders: { foo: 'string' },
       referer: 'referer',

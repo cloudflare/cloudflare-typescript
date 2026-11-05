@@ -22,14 +22,22 @@ export class BaseUsage extends APIResource {
    * allowances and may result in zero cost. The response includes usage for every
    * account belonging to the specified organization.
    *
-   * **Note:** Cost and pricing fields are not yet populated and will be absent from
-   * responses until billing integration is complete.
+   * **Note:** This endpoint serves `usage` records only; cost and pricing fields are
+   * absent from responses. Rated costs are available per account via
+   * `POST /accounts/{account_id}/billable/usage` with `Metric: cost`.
    *
    * When `from` and `to` are omitted, defaults to the start of the current month
    * through today. The maximum date range is 31 days.
    *
    * An organization with no accounts, or an organization ID that does not exist,
    * returns a successful response with an empty result set rather than an error.
+   *
+   * @example
+   * ```ts
+   * const usages = await client.organizations.billing.usage.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   * );
+   * ```
    */
   get(
     organizationID: string,
@@ -82,12 +90,6 @@ export namespace UsageGetResponse {
      * Inclusive start of the time interval during which the usage was consumed.
      */
     ChargePeriodStart: string;
-
-    /**
-     * Measured usage amount within the charge period. Reflects raw metered consumption
-     * before pricing transformations.
-     */
-    ConsumedQuantity: number;
 
     /**
      * Unit of measure for the consumed quantity (e.g., "GB", "Requests",
@@ -157,6 +159,12 @@ export namespace UsageGetResponse {
      * invoiced in a previous billing period.
      */
     ChargeClass?: 'Correction' | null;
+
+    /**
+     * Measured usage amount within the charge period. Reflects raw metered consumption
+     * before pricing transformations.
+     */
+    ConsumedQuantity?: number;
 
     /**
      * Cost calculated by multiplying ContractedUnitPrice and the corresponding

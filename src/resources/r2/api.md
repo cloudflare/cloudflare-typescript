@@ -141,6 +141,20 @@ Methods:
 - <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/objects/{object_key}">client.r2.buckets.objects.<a href="./src/resources/r2/buckets/objects.ts">get</a>(objectKey, { ...params }) -> Response</code>
 - <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/objects/{object_key}">client.r2.buckets.objects.<a href="./src/resources/r2/buckets/objects.ts">upload</a>(objectKey, body, { ...params }) -> ObjectUploadResponse</code>
 
+### Jobs
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/jobs.ts">JobCreateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/jobs.ts">JobListResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/jobs.ts">JobGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/r2/buckets/{bucket_name}/jobs">client.r2.buckets.jobs.<a href="./src/resources/r2/buckets/jobs.ts">create</a>(bucketName, { ...params }) -> JobCreateResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/jobs">client.r2.buckets.jobs.<a href="./src/resources/r2/buckets/jobs.ts">list</a>(bucketName, { ...params }) -> JobListResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/jobs/{job_id}">client.r2.buckets.jobs.<a href="./src/resources/r2/buckets/jobs.ts">get</a>(jobID, { ...params }) -> JobGetResponse</code>
+
 ## TemporaryCredentials
 
 Types:

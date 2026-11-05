@@ -42,6 +42,7 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { links: BaseLin
     const response = await client.browserRendering.links.create({
       account_id: 'account_id',
       url: 'url',
+      browser: 'kitesurf',
       cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [
