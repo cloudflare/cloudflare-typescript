@@ -141,7 +141,7 @@ export interface TagCreateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: UUID of a tag from the account's catalog to apply to the article.
    */
   tag_id: string;
 }
@@ -149,6 +149,9 @@ export interface TagCreateParams {
 export interface TagDeleteParams {
   account_id: string;
 
+  /**
+   * Threat Signals article UUID
+   */
   article_id: string;
 }
 

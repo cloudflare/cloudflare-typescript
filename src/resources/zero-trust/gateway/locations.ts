@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as DNSDestinationIPsAPI from './dns-destination-ips';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -306,7 +307,7 @@ export interface Location {
   /**
    * Indicate the identifier of the pair of IPv4 addresses assigned to this location.
    */
-  dns_destination_ips_id?: string;
+  dns_destination_ips_id?: DNSDestinationIPsAPI.DNSDestinationIPsID;
 
   /**
    * Specify the UUID of the IPv6 block brought to the gateway so that this
@@ -314,6 +315,12 @@ export interface Location {
    * block rather than the standard Cloudflare IPv6 block.
    */
   dns_destination_ipv6_block_id?: string | null;
+
+  /**
+   * Enable DNS64 synthesis for DNS queries matched to this location. When updating a
+   * location, omitting this field resets it to false.
+   */
+  dns64_enabled?: boolean;
 
   /**
    * Specify the DNS over HTTPS domain that receives DNS requests. Gateway
@@ -428,6 +435,12 @@ export interface LocationCreateParams {
   dns_destination_ips_id?: string;
 
   /**
+   * Body param: Enable DNS64 synthesis for DNS queries matched to this location.
+   * When updating a location, omitting this field resets it to false.
+   */
+  dns64_enabled?: boolean;
+
+  /**
    * Body param: Indicate whether the location must resolve EDNS queries.
    */
   ecs_support?: boolean;
@@ -504,6 +517,12 @@ export interface LocationUpdateParams {
    * the pre-assigned pair remains unchanged.
    */
   dns_destination_ips_id?: string;
+
+  /**
+   * Body param: Enable DNS64 synthesis for DNS queries matched to this location.
+   * When updating a location, omitting this field resets it to false.
+   */
+  dns64_enabled?: boolean;
 
   /**
    * Body param: Indicate whether the location must resolve EDNS queries.

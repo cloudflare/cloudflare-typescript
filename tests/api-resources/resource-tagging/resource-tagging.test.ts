@@ -36,6 +36,7 @@ const runTests = (client: PartialCloudflare<{ resourceTagging: BaseResourceTaggi
       id: ['023e105f4ecef8ad9ca31a8372d0c353'],
       case_insensitive: true,
       cursor: 'eyJhY2NvdW50X2lkIjoxMjM0NTY3ODkwfQ',
+      include_navigation: true,
       name: 'name',
       tag: ['production', 'env=prod', 'env=prod,staging', '!archived', 'region!=us-west-1'],
       type: ['zone'],

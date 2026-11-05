@@ -21,8 +21,6 @@ export class BaseOrganizations extends APIResource {
    * ```ts
    * const organization =
    *   await client.zeroTrust.organizations.create({
-   *     auth_domain: 'test.cloudflareaccess.com',
-   *     name: 'Widget Corps Internal Applications',
    *     account_id: 'account_id',
    *   });
    * ```
@@ -238,7 +236,9 @@ export interface Organization {
   allow_authenticate_via_warp?: boolean;
 
   /**
-   * The unique subdomain assigned to your Zero Trust organization.
+   * The unique subdomain assigned to your Zero Trust organization. If omitted on
+   * creation, a unique subdomain is auto-generated in the format
+   * `adjective-noun-hex4` (e.g. `frosty-moon-7a3b.cloudflareaccess.com`).
    */
   auth_domain?: string;
 
@@ -268,6 +268,11 @@ export interface Organization {
   deny_unmatched_requests_exempted_zone_names?: Array<string>;
 
   /**
+   * Whether creation of end user applications is disabled for this organization.
+   */
+  disable_end_user_app_creation?: boolean;
+
+  /**
    * Lock all settings as Read-Only in the Dashboard, regardless of user permission.
    * Updates may only be made via the API or Terraform for this account when enabled.
    */
@@ -295,7 +300,9 @@ export interface Organization {
   mfa_required_for_all_apps?: boolean;
 
   /**
-   * The name of your Zero Trust organization.
+   * The name of your Zero Trust organization. When omitted on creation, defaults to
+   * the provided auth_domain; when both are omitted, defaults to the auto-generated
+   * subdomain slug (e.g. frosty-moon-7a3b).
    */
   name?: string;
 
@@ -465,7 +472,9 @@ export interface OrganizationListResponse {
   allow_authenticate_via_warp?: boolean;
 
   /**
-   * The unique subdomain assigned to your Zero Trust organization.
+   * The unique subdomain assigned to your Zero Trust organization. If omitted on
+   * creation, a unique subdomain is auto-generated in the format
+   * `adjective-noun-hex4` (e.g. `frosty-moon-7a3b.cloudflareaccess.com`).
    */
   auth_domain?: string;
 
@@ -495,6 +504,11 @@ export interface OrganizationListResponse {
   deny_unmatched_requests_exempted_zone_names?: Array<string>;
 
   /**
+   * Whether creation of end user applications is disabled for this organization.
+   */
+  disable_end_user_app_creation?: boolean;
+
+  /**
    * Lock all settings as Read-Only in the Dashboard, regardless of user permission.
    * Updates may only be made via the API or Terraform for this account when enabled.
    */
@@ -522,7 +536,9 @@ export interface OrganizationListResponse {
   mfa_required_for_all_apps?: boolean;
 
   /**
-   * The name of your Zero Trust organization.
+   * The name of your Zero Trust organization. When omitted on creation, defaults to
+   * the provided auth_domain; when both are omitted, defaults to the auto-generated
+   * subdomain slug (e.g. frosty-moon-7a3b).
    */
   name?: string;
 
@@ -694,16 +710,6 @@ export type OrganizationRevokeUsersResponse = true | false;
 
 export interface OrganizationCreateParams {
   /**
-   * Body param: The unique subdomain assigned to your Zero Trust organization.
-   */
-  auth_domain: string;
-
-  /**
-   * Body param: The name of your Zero Trust organization.
-   */
-  name: string;
-
-  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
@@ -721,6 +727,13 @@ export interface OrganizationCreateParams {
    * this value.
    */
   allow_authenticate_via_warp?: boolean;
+
+  /**
+   * Body param: The unique subdomain assigned to your Zero Trust organization. If
+   * omitted on creation, a unique subdomain is auto-generated in the format
+   * `adjective-noun-hex4` (e.g. `frosty-moon-7a3b.cloudflareaccess.com`).
+   */
+  auth_domain?: string;
 
   /**
    * Body param: When set to `true`, users skip the identity provider selection step
@@ -745,6 +758,12 @@ export interface OrganizationCreateParams {
    * matches the request.
    */
   deny_unmatched_requests_exempted_zone_names?: Array<string>;
+
+  /**
+   * Body param: Whether creation of end user applications is disabled for this
+   * organization.
+   */
+  disable_end_user_app_creation?: boolean;
 
   /**
    * Body param: Lock all settings as Read-Only in the Dashboard, regardless of user
@@ -778,6 +797,13 @@ export interface OrganizationCreateParams {
    * 'ssh_fido2_key') if the organization has any non-infrastructure applications.
    */
   mfa_required_for_all_apps?: boolean;
+
+  /**
+   * Body param: The name of your Zero Trust organization. When omitted on creation,
+   * defaults to the provided auth_domain; when both are omitted, defaults to the
+   * auto-generated subdomain slug (e.g. frosty-moon-7a3b).
+   */
+  name?: string;
 
   /**
    * Body param: Configures automatic enforcement for inactive service tokens. A
@@ -948,7 +974,9 @@ export interface OrganizationUpdateParams {
   allow_authenticate_via_warp?: boolean;
 
   /**
-   * Body param: The unique subdomain assigned to your Zero Trust organization.
+   * Body param: The unique subdomain assigned to your Zero Trust organization. If
+   * omitted on creation, a unique subdomain is auto-generated in the format
+   * `adjective-noun-hex4` (e.g. `frosty-moon-7a3b.cloudflareaccess.com`).
    */
   auth_domain?: string;
 
@@ -980,6 +1008,12 @@ export interface OrganizationUpdateParams {
    * matches the request.
    */
   deny_unmatched_requests_exempted_zone_names?: Array<string>;
+
+  /**
+   * Body param: Whether creation of end user applications is disabled for this
+   * organization.
+   */
+  disable_end_user_app_creation?: boolean;
 
   /**
    * Body param: Lock all settings as Read-Only in the Dashboard, regardless of user
@@ -1015,7 +1049,9 @@ export interface OrganizationUpdateParams {
   mfa_required_for_all_apps?: boolean;
 
   /**
-   * Body param: The name of your Zero Trust organization.
+   * Body param: The name of your Zero Trust organization. When omitted on creation,
+   * defaults to the provided auth_domain; when both are omitted, defaults to the
+   * auto-generated subdomain slug (e.g. frosty-moon-7a3b).
    */
   name?: string;
 

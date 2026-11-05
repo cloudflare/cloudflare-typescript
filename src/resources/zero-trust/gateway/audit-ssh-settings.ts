@@ -13,8 +13,7 @@ export class BaseAuditSSHSettings extends APIResource {
   ] as const);
 
   /**
-   * Update Zero Trust Audit SSH and SSH with Access for Infrastructure settings for
-   * an account.
+   * Update SSH with Access for Infrastructure settings for an account.
    *
    * @example
    * ```ts
@@ -37,8 +36,7 @@ export class BaseAuditSSHSettings extends APIResource {
   }
 
   /**
-   * Retrieve all Zero Trust Audit SSH and SSH with Access for Infrastructure
-   * settings for an account.
+   * Retrieve SSH with Access for Infrastructure settings for an account.
    *
    * @example
    * ```ts

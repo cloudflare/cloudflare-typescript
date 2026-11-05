@@ -47,7 +47,7 @@ export namespace SummaryGetResponse {
 
     last_event: string;
 
-    max_risk_level: 'low' | 'medium' | 'high';
+    max_risk_level: 'info' | 'low' | 'medium' | 'high';
 
     name: string;
 

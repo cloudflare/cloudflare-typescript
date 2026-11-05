@@ -6143,8 +6143,7 @@ export namespace SetConfigRule {
     /**
      * Bundled WebMCP tool packs to activate for matching requests. An empty array
      * disables all packs. Omitting this parameter leaves the pack selection unchanged.
-     * Does not enable the WebMCP bridge itself. Non-empty selections require the
-     * WebMCP Configuration Rules entitlement.
+     * Does not enable the WebMCP bridge itself.
      */
     webmcp_packs?: Array<string>;
   }
@@ -6413,8 +6412,7 @@ export namespace SetConfigRuleParam {
     /**
      * Bundled WebMCP tool packs to activate for matching requests. An empty array
      * disables all packs. Omitting this parameter leaves the pack selection unchanged.
-     * Does not enable the WebMCP bridge itself. Non-empty selections require the
-     * WebMCP Configuration Rules entitlement.
+     * Does not enable the WebMCP bridge itself.
      */
     webmcp_packs?: Array<string>;
   }
@@ -6840,7 +6838,14 @@ export namespace SkipRuleParam {
 /**
  * A result.
  */
-export type RuleCreateResponse = RuleCreateResponse.Ruleset | unknown;
+export type RuleCreateResponse =
+  | unknown
+  | Array<unknown>
+  | string
+  | number
+  | boolean
+  | RuleCreateResponse.Ruleset
+  | unknown;
 
 export namespace RuleCreateResponse {
   /**
@@ -8380,7 +8385,14 @@ export namespace RuleCreateResponse {
 /**
  * A result.
  */
-export type RuleDeleteResponse = RuleDeleteResponse.Ruleset | unknown;
+export type RuleDeleteResponse =
+  | unknown
+  | Array<unknown>
+  | string
+  | number
+  | boolean
+  | RuleDeleteResponse.Ruleset
+  | unknown;
 
 export namespace RuleDeleteResponse {
   /**
@@ -9920,7 +9932,14 @@ export namespace RuleDeleteResponse {
 /**
  * A result.
  */
-export type RuleEditResponse = RuleEditResponse.Ruleset | unknown;
+export type RuleEditResponse =
+  | unknown
+  | Array<unknown>
+  | string
+  | number
+  | boolean
+  | RuleEditResponse.Ruleset
+  | unknown;
 
 export namespace RuleEditResponse {
   /**
@@ -16522,8 +16541,7 @@ export declare namespace RuleCreateParams {
       /**
        * Bundled WebMCP tool packs to activate for matching requests. An empty array
        * disables all packs. Omitting this parameter leaves the pack selection unchanged.
-       * Does not enable the WebMCP bridge itself. Non-empty selections require the
-       * WebMCP Configuration Rules entitlement.
+       * Does not enable the WebMCP bridge itself.
        */
       webmcp_packs?: Array<string>;
     }
@@ -22241,8 +22259,7 @@ export declare namespace RuleEditParams {
       /**
        * Bundled WebMCP tool packs to activate for matching requests. An empty array
        * disables all packs. Omitting this parameter leaves the pack selection unchanged.
-       * Does not enable the WebMCP bridge itself. Non-empty selections require the
-       * WebMCP Configuration Rules entitlement.
+       * Does not enable the WebMCP bridge itself.
        */
       webmcp_packs?: Array<string>;
     }

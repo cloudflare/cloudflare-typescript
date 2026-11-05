@@ -42,6 +42,7 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { scrape: BaseSc
     const response = await client.browserRendering.scrape.create({
       account_id: 'account_id',
       url: 'url',
+      browser: 'kitesurf',
       cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [

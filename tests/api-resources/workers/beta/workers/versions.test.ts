@@ -190,6 +190,17 @@ const runTests = (
       include: 'modules',
     });
   });
+
+  test('profile: required and optional params', async () => {
+    const response = await client.workers.beta.workers.versions.profile('version_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      worker_id: 'worker_id',
+      duration_ms: 1000,
+      actor_id: 'actor_id',
+      namespace_id: 'namespace_id',
+      profile_type: 'cpu',
+    });
+  });
 };
 describe('resource versions', () => runTests(client));
 describe('resource versions (tree shakable, base)', () => runTests(partialClient));

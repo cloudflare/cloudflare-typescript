@@ -32,6 +32,15 @@ import {
   CertificateListResponsesSinglePage,
   Certificates,
 } from './certificates';
+import * as DNSDestinationIPsAPI from './dns-destination-ips';
+import {
+  BaseDNSDestinationIPs,
+  DNSDestinationIPListParams,
+  DNSDestinationIPListResponse,
+  DNSDestinationIPListResponsesSinglePage,
+  DNSDestinationIPs,
+  DNSDestinationIPsID,
+} from './dns-destination-ips';
 import * as LocationsAPI from './locations';
 import {
   BaseLocations,
@@ -205,6 +214,9 @@ export class Gateway extends BaseGateway {
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
   certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
   pacfiles: PacfilesAPI.Pacfiles = new PacfilesAPI.Pacfiles(this._client);
+  dnsDestinationIPs: DNSDestinationIPsAPI.DNSDestinationIPs = new DNSDestinationIPsAPI.DNSDestinationIPs(
+    this._client,
+  );
 }
 
 export interface GatewayCreateResponse {
@@ -277,6 +289,8 @@ Gateway.Certificates = Certificates;
 Gateway.BaseCertificates = BaseCertificates;
 Gateway.Pacfiles = Pacfiles;
 Gateway.BasePacfiles = BasePacfiles;
+Gateway.DNSDestinationIPs = DNSDestinationIPs;
+Gateway.BaseDNSDestinationIPs = BaseDNSDestinationIPs;
 
 export declare namespace Gateway {
   export {
@@ -444,5 +458,14 @@ export declare namespace Gateway {
     type PacfileListParams as PacfileListParams,
     type PacfileDeleteParams as PacfileDeleteParams,
     type PacfileGetParams as PacfileGetParams,
+  };
+
+  export {
+    DNSDestinationIPs as DNSDestinationIPs,
+    BaseDNSDestinationIPs as BaseDNSDestinationIPs,
+    type DNSDestinationIPsID as DNSDestinationIPsID,
+    type DNSDestinationIPListResponse as DNSDestinationIPListResponse,
+    type DNSDestinationIPListResponsesSinglePage as DNSDestinationIPListResponsesSinglePage,
+    type DNSDestinationIPListParams as DNSDestinationIPListParams,
   };
 }

@@ -50,15 +50,7 @@ export class BaseDestinations extends APIResource {
    * const destination =
    *   await client.workers.observability.destinations.update(
    *     'slug',
-   *     {
-   *       account_id: 'account_id',
-   *       configuration: {
-   *         headers: { foo: 'string' },
-   *         type: 'logpush',
-   *         url: 'url',
-   *       },
-   *       enabled: true,
-   *     },
+   *     { account_id: 'account_id', enabled: true },
    *   );
    * ```
    */
@@ -145,15 +137,25 @@ export interface DestinationCreateResponse {
 
 export namespace DestinationCreateResponse {
   export interface Configuration {
-    destination_conf: string;
+    headers: { [key: string]: string | null };
+
+    jobStatus: Configuration.JobStatus;
 
     logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs' | 'opentelemetry-metrics';
-
-    logpushJob: number;
 
     type: 'logpush';
 
     url: string;
+  }
+
+  export namespace Configuration {
+    export interface JobStatus {
+      error_message: string;
+
+      last_complete: string;
+
+      last_error: string;
+    }
   }
 }
 
@@ -171,15 +173,25 @@ export interface DestinationUpdateResponse {
 
 export namespace DestinationUpdateResponse {
   export interface Configuration {
-    destination_conf: string;
+    headers: { [key: string]: string | null };
+
+    jobStatus: Configuration.JobStatus;
 
     logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs' | 'opentelemetry-metrics';
-
-    logpushJob: number;
 
     type: 'logpush';
 
     url: string;
+  }
+
+  export namespace Configuration {
+    export interface JobStatus {
+      error_message: string;
+
+      last_complete: string;
+
+      last_error: string;
+    }
   }
 }
 
@@ -197,9 +209,7 @@ export interface DestinationListResponse {
 
 export namespace DestinationListResponse {
   export interface Configuration {
-    destination_conf: string;
-
-    headers: { [key: string]: string };
+    headers: { [key: string]: string | null };
 
     jobStatus: Configuration.JobStatus;
 
@@ -235,15 +245,25 @@ export interface DestinationDeleteResponse {
 
 export namespace DestinationDeleteResponse {
   export interface Configuration {
-    destination_conf: string;
+    headers: { [key: string]: string | null };
+
+    jobStatus: Configuration.JobStatus;
 
     logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs' | 'opentelemetry-metrics';
-
-    logpushJob: number;
 
     type: 'logpush';
 
     url: string;
+  }
+
+  export namespace Configuration {
+    export interface JobStatus {
+      error_message: string;
+
+      last_complete: string;
+
+      last_error: string;
+    }
   }
 }
 
@@ -295,21 +315,23 @@ export interface DestinationUpdateParams {
   /**
    * Body param
    */
-  configuration: DestinationUpdateParams.Configuration;
+  enabled: boolean;
 
   /**
    * Body param
    */
-  enabled: boolean;
+  configuration?: DestinationUpdateParams.Configuration;
 }
 
 export namespace DestinationUpdateParams {
   export interface Configuration {
-    headers: { [key: string]: string };
+    headers: { [key: string]: string | null };
 
     type: 'logpush';
 
     url: string;
+
+    replaceHeaders?: boolean;
   }
 }
 

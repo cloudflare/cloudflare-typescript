@@ -105,9 +105,19 @@ export class BaseScripts extends APIResource {
   ] as const);
 
   /**
-   * Upload a worker module. You can find more about the multipart metadata on our
-   * docs:
-   * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.
+   * Upload Worker code and configuration. For ES module and other module-based
+   * Workers, use `multipart/form-data` with a JSON `metadata` part whose
+   * `main_module` field names the entrypoint file. Upload each module as a separate
+   * file part; JavaScript ES module parts use the `application/javascript+module`
+   * content type.
+   *
+   * Raw `application/javascript` and `text/javascript` request bodies accept only
+   * legacy service-worker syntax using `addEventListener`. They do not accept ES
+   * module syntax such as `export default`. To upload a module Worker, use the
+   * multipart request format instead.
+   *
+   * Learn more about multipart metadata in the
+   * [documentation](https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/).
    *
    * @example
    * ```ts
@@ -2445,9 +2455,10 @@ export interface ScriptUpdateParams {
   metadata: ScriptUpdateParams.Metadata;
 
   /**
-   * Query param: When set to "strict", the upload will fail if any `inherit` type
-   * bindings cannot be resolved against the previous version of the Worker. Without
-   * this, unresolvable inherit bindings are silently dropped.
+   * Query param: When set to "strict", the upload will fail with error 10057 if any
+   * `inherit` type bindings cannot be resolved against the latest uploaded version
+   * of the Worker, which may not be the deployed version. Without this, unresolvable
+   * inherit bindings are silently dropped.
    */
   bindings_inherit?: 'strict';
 
@@ -2536,6 +2547,12 @@ export namespace ScriptUpdateParams {
      * `exports` map can override this value for a single entrypoint.
      */
     cache_options?: Metadata.CacheOptions;
+
+    /**
+     * Choose whether to apply Durable Object code updates immediately or defer them.
+     * When omitted, the default strategy applies.
+     */
+    code_update_strategy?: Metadata.Mode | Metadata.UnionMember1 | unknown;
 
     /**
      * Date indicating targeted support in the Workers runtime. Backwards incompatible
@@ -3040,9 +3057,13 @@ export namespace ScriptUpdateParams {
       old_name?: string;
 
       /**
-       * Identifier for the version to inherit the binding from, which can be the version
-       * ID or the literal "latest" to inherit from the latest version. Defaults to
-       * inheriting the binding from the latest version.
+       * Identifier for the version to inherit the binding from. This can be a version
+       * ID, or the literal "latest" to inherit from the most recently uploaded version,
+       * which may not be the deployed version. Defaults to "latest". Only the Workers
+       * API version endpoints under
+       * `/accounts/{account_id}/workers/workers/{worker_id}/versions` accept a version
+       * ID. Other endpoints, including script upload and script version upload, accept
+       * only "latest" and reject a version ID with error 10057.
        */
       version_id?: string;
     }
@@ -3541,13 +3562,15 @@ export namespace ScriptUpdateParams {
 
       /**
        * Enables Gateway identity for the binding. Requires network_id to be
-       * "cf1:network" and cannot be combined with tunnel_id.
+       * "cf1:network" and cannot be combined with tunnel_id or an explicit
+       * "cf1:vnet:<UUID>" network_id.
        */
       identity?: 'runtime-email-alpha';
 
       /**
-       * Identifier of the network to bind to. Only "cf1:network" is currently supported.
-       * Mutually exclusive with tunnel_id.
+       * Identifier of the network to bind to. Use "cf1:network" to select the account's
+       * default virtual network at runtime, or "cf1:vnet:<UUID>" to select an explicit
+       * virtual network in the Worker's account. Mutually exclusive with tunnel_id.
        */
       network_id?: string;
 
@@ -3574,6 +3597,26 @@ export namespace ScriptUpdateParams {
        * preference survives turning caching off and back on.
        */
       cross_version_cache?: boolean;
+    }
+
+    export interface Mode {
+      /**
+       * Apply Durable Object code updates immediately.
+       */
+      mode: 'immediate';
+    }
+
+    export interface UnionMember1 {
+      /**
+       * Allow active Durable Objects to hibernate before updating their code.
+       */
+      mode: 'deferred';
+
+      /**
+       * Set the maximum number of seconds to wait before forcing the update. When
+       * omitted, the default maximum delay applies.
+       */
+      max_delay?: number | null;
     }
 
     /**

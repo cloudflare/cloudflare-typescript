@@ -91,6 +91,7 @@ const runTests = (client: PartialCloudflare<{ abuseReports: { mitigations: BaseM
         company: 'company',
         counter_notice_response: 'counter_notice_response',
       },
+      explanation: 'explanation',
       type: 'counter_notice',
     });
   });

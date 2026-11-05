@@ -180,8 +180,6 @@ export namespace ServiceCreateResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     tls_settings?: InfraHTTPServiceConfig.TLSSettings | null;
 
@@ -243,8 +241,6 @@ export namespace ServiceCreateResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     export interface TLSSettings {
       /**
@@ -253,8 +249,21 @@ export namespace ServiceCreateResponse {
        * - `"verify_full"` — verify certificate chain and hostname (default)
        * - `"verify_ca"` — verify certificate chain only, skip hostname check
        * - `"disabled"` — do not verify the server certificate at all
+       *
+       * `disabled` cannot be combined with `certificate_authority`: a custom CA is only
+       * used to verify the server certificate.
        */
       cert_verification_mode: string;
+
+      /**
+       * UUID of the custom CA certificate or chain.
+       */
+      certificate_authority?: string | null;
+
+      /**
+       * UUID of the mTLS client certificate and private key.
+       */
+      client_certificate?: string | null;
     }
   }
 
@@ -279,8 +288,6 @@ export namespace ServiceCreateResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     tls_settings?: InfraTCPServiceConfig.TLSSettings | null;
 
@@ -342,8 +349,6 @@ export namespace ServiceCreateResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     export interface TLSSettings {
       /**
@@ -352,8 +357,21 @@ export namespace ServiceCreateResponse {
        * - `"verify_full"` — verify certificate chain and hostname (default)
        * - `"verify_ca"` — verify certificate chain only, skip hostname check
        * - `"disabled"` — do not verify the server certificate at all
+       *
+       * `disabled` cannot be combined with `certificate_authority`: a custom CA is only
+       * used to verify the server certificate.
        */
       cert_verification_mode: string;
+
+      /**
+       * UUID of the custom CA certificate or chain.
+       */
+      certificate_authority?: string | null;
+
+      /**
+       * UUID of the mTLS client certificate and private key.
+       */
+      client_certificate?: string | null;
     }
   }
 }
@@ -384,8 +402,6 @@ export namespace ServiceUpdateResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     tls_settings?: InfraHTTPServiceConfig.TLSSettings | null;
 
@@ -447,8 +463,6 @@ export namespace ServiceUpdateResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     export interface TLSSettings {
       /**
@@ -457,8 +471,21 @@ export namespace ServiceUpdateResponse {
        * - `"verify_full"` — verify certificate chain and hostname (default)
        * - `"verify_ca"` — verify certificate chain only, skip hostname check
        * - `"disabled"` — do not verify the server certificate at all
+       *
+       * `disabled` cannot be combined with `certificate_authority`: a custom CA is only
+       * used to verify the server certificate.
        */
       cert_verification_mode: string;
+
+      /**
+       * UUID of the custom CA certificate or chain.
+       */
+      certificate_authority?: string | null;
+
+      /**
+       * UUID of the mTLS client certificate and private key.
+       */
+      client_certificate?: string | null;
     }
   }
 
@@ -483,8 +510,6 @@ export namespace ServiceUpdateResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     tls_settings?: InfraTCPServiceConfig.TLSSettings | null;
 
@@ -546,8 +571,6 @@ export namespace ServiceUpdateResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     export interface TLSSettings {
       /**
@@ -556,8 +579,21 @@ export namespace ServiceUpdateResponse {
        * - `"verify_full"` — verify certificate chain and hostname (default)
        * - `"verify_ca"` — verify certificate chain only, skip hostname check
        * - `"disabled"` — do not verify the server certificate at all
+       *
+       * `disabled` cannot be combined with `certificate_authority`: a custom CA is only
+       * used to verify the server certificate.
        */
       cert_verification_mode: string;
+
+      /**
+       * UUID of the custom CA certificate or chain.
+       */
+      certificate_authority?: string | null;
+
+      /**
+       * UUID of the mTLS client certificate and private key.
+       */
+      client_certificate?: string | null;
     }
   }
 }
@@ -588,8 +624,6 @@ export namespace ServiceListResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     tls_settings?: InfraHTTPServiceConfig.TLSSettings | null;
 
@@ -651,8 +685,6 @@ export namespace ServiceListResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     export interface TLSSettings {
       /**
@@ -661,8 +693,21 @@ export namespace ServiceListResponse {
        * - `"verify_full"` — verify certificate chain and hostname (default)
        * - `"verify_ca"` — verify certificate chain only, skip hostname check
        * - `"disabled"` — do not verify the server certificate at all
+       *
+       * `disabled` cannot be combined with `certificate_authority`: a custom CA is only
+       * used to verify the server certificate.
        */
       cert_verification_mode: string;
+
+      /**
+       * UUID of the custom CA certificate or chain.
+       */
+      certificate_authority?: string | null;
+
+      /**
+       * UUID of the mTLS client certificate and private key.
+       */
+      client_certificate?: string | null;
     }
   }
 
@@ -687,8 +732,6 @@ export namespace ServiceListResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     tls_settings?: InfraTCPServiceConfig.TLSSettings | null;
 
@@ -750,8 +793,6 @@ export namespace ServiceListResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     export interface TLSSettings {
       /**
@@ -760,8 +801,21 @@ export namespace ServiceListResponse {
        * - `"verify_full"` — verify certificate chain and hostname (default)
        * - `"verify_ca"` — verify certificate chain only, skip hostname check
        * - `"disabled"` — do not verify the server certificate at all
+       *
+       * `disabled` cannot be combined with `certificate_authority`: a custom CA is only
+       * used to verify the server certificate.
        */
       cert_verification_mode: string;
+
+      /**
+       * UUID of the custom CA certificate or chain.
+       */
+      certificate_authority?: string | null;
+
+      /**
+       * UUID of the mTLS client certificate and private key.
+       */
+      client_certificate?: string | null;
     }
   }
 }
@@ -792,8 +846,6 @@ export namespace ServiceGetResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     tls_settings?: InfraHTTPServiceConfig.TLSSettings | null;
 
@@ -855,8 +907,6 @@ export namespace ServiceGetResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     export interface TLSSettings {
       /**
@@ -865,8 +915,21 @@ export namespace ServiceGetResponse {
        * - `"verify_full"` — verify certificate chain and hostname (default)
        * - `"verify_ca"` — verify certificate chain only, skip hostname check
        * - `"disabled"` — do not verify the server certificate at all
+       *
+       * `disabled` cannot be combined with `certificate_authority`: a custom CA is only
+       * used to verify the server certificate.
        */
       cert_verification_mode: string;
+
+      /**
+       * UUID of the custom CA certificate or chain.
+       */
+      certificate_authority?: string | null;
+
+      /**
+       * UUID of the mTLS client certificate and private key.
+       */
+      client_certificate?: string | null;
     }
   }
 
@@ -891,8 +954,6 @@ export namespace ServiceGetResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     tls_settings?: InfraTCPServiceConfig.TLSSettings | null;
 
@@ -954,8 +1015,6 @@ export namespace ServiceGetResponse {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     export interface TLSSettings {
       /**
@@ -964,8 +1023,21 @@ export namespace ServiceGetResponse {
        * - `"verify_full"` — verify certificate chain and hostname (default)
        * - `"verify_ca"` — verify certificate chain only, skip hostname check
        * - `"disabled"` — do not verify the server certificate at all
+       *
+       * `disabled` cannot be combined with `certificate_authority`: a custom CA is only
+       * used to verify the server certificate.
        */
       cert_verification_mode: string;
+
+      /**
+       * UUID of the custom CA certificate or chain.
+       */
+      certificate_authority?: string | null;
+
+      /**
+       * UUID of the mTLS client certificate and private key.
+       */
+      client_certificate?: string | null;
     }
   }
 }
@@ -1012,8 +1084,6 @@ export declare namespace ServiceCreateParams {
 
     /**
      * Body param: TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     tls_settings?: InfraHTTPServiceConfig.TLSSettings | null;
   }
@@ -1073,8 +1143,6 @@ export declare namespace ServiceCreateParams {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     export interface TLSSettings {
       /**
@@ -1083,8 +1151,21 @@ export declare namespace ServiceCreateParams {
        * - `"verify_full"` — verify certificate chain and hostname (default)
        * - `"verify_ca"` — verify certificate chain only, skip hostname check
        * - `"disabled"` — do not verify the server certificate at all
+       *
+       * `disabled` cannot be combined with `certificate_authority`: a custom CA is only
+       * used to verify the server certificate.
        */
       cert_verification_mode: string;
+
+      /**
+       * UUID of the custom CA certificate or chain.
+       */
+      certificate_authority?: string | null;
+
+      /**
+       * UUID of the mTLS client certificate and private key.
+       */
+      client_certificate?: string | null;
     }
   }
 
@@ -1125,8 +1206,6 @@ export declare namespace ServiceCreateParams {
 
     /**
      * Body param: TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     tls_settings?: InfraTCPServiceConfig.TLSSettings | null;
   }
@@ -1186,8 +1265,6 @@ export declare namespace ServiceCreateParams {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     export interface TLSSettings {
       /**
@@ -1196,8 +1273,21 @@ export declare namespace ServiceCreateParams {
        * - `"verify_full"` — verify certificate chain and hostname (default)
        * - `"verify_ca"` — verify certificate chain only, skip hostname check
        * - `"disabled"` — do not verify the server certificate at all
+       *
+       * `disabled` cannot be combined with `certificate_authority`: a custom CA is only
+       * used to verify the server certificate.
        */
       cert_verification_mode: string;
+
+      /**
+       * UUID of the custom CA certificate or chain.
+       */
+      certificate_authority?: string | null;
+
+      /**
+       * UUID of the mTLS client certificate and private key.
+       */
+      client_certificate?: string | null;
     }
   }
 }
@@ -1244,8 +1334,6 @@ export declare namespace ServiceUpdateParams {
 
     /**
      * Body param: TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     tls_settings?: InfraHTTPServiceConfig.TLSSettings | null;
   }
@@ -1305,8 +1393,6 @@ export declare namespace ServiceUpdateParams {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     export interface TLSSettings {
       /**
@@ -1315,8 +1401,21 @@ export declare namespace ServiceUpdateParams {
        * - `"verify_full"` — verify certificate chain and hostname (default)
        * - `"verify_ca"` — verify certificate chain only, skip hostname check
        * - `"disabled"` — do not verify the server certificate at all
+       *
+       * `disabled` cannot be combined with `certificate_authority`: a custom CA is only
+       * used to verify the server certificate.
        */
       cert_verification_mode: string;
+
+      /**
+       * UUID of the custom CA certificate or chain.
+       */
+      certificate_authority?: string | null;
+
+      /**
+       * UUID of the mTLS client certificate and private key.
+       */
+      client_certificate?: string | null;
     }
   }
 
@@ -1357,8 +1456,6 @@ export declare namespace ServiceUpdateParams {
 
     /**
      * Body param: TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     tls_settings?: InfraTCPServiceConfig.TLSSettings | null;
   }
@@ -1418,8 +1515,6 @@ export declare namespace ServiceUpdateParams {
 
     /**
      * TLS settings for a connectivity service.
-     *
-     * If omitted, the default mode (`verify_full`) is used.
      */
     export interface TLSSettings {
       /**
@@ -1428,8 +1523,21 @@ export declare namespace ServiceUpdateParams {
        * - `"verify_full"` — verify certificate chain and hostname (default)
        * - `"verify_ca"` — verify certificate chain only, skip hostname check
        * - `"disabled"` — do not verify the server certificate at all
+       *
+       * `disabled` cannot be combined with `certificate_authority`: a custom CA is only
+       * used to verify the server certificate.
        */
       cert_verification_mode: string;
+
+      /**
+       * UUID of the custom CA certificate or chain.
+       */
+      certificate_authority?: string | null;
+
+      /**
+       * UUID of the mTLS client certificate and private key.
+       */
+      client_certificate?: string | null;
     }
   }
 }

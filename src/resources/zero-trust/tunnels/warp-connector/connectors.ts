@@ -10,7 +10,7 @@ export class BaseConnectors extends APIResource {
     Object.freeze(['zeroTrust', 'tunnels', 'warpConnector', 'connectors'] as const);
 
   /**
-   * Fetches connector and connection details for a WARP Connector Tunnel.
+   * Fetches connector and connection details for a Mesh node.
    *
    * @example
    * ```ts
@@ -41,7 +41,7 @@ export class BaseConnectors extends APIResource {
 export class Connectors extends BaseConnectors {}
 
 /**
- * A WARP Connector client that maintains a connection to a Cloudflare data center.
+ * A Mesh node connector that maintains a connection to a Cloudflare data center.
  */
 export interface ConnectorGetResponse {
   /**
@@ -55,7 +55,7 @@ export interface ConnectorGetResponse {
   arch?: string;
 
   /**
-   * The WARP Connector Tunnel connections between your origin and Cloudflare's edge.
+   * The Mesh node connections between your origin and Cloudflare's edge.
    */
   conns?: Array<ConnectorGetResponse.Conn>;
 
@@ -65,7 +65,7 @@ export interface ConnectorGetResponse {
   features?: Array<string>;
 
   /**
-   * The HA status of a WARP Connector client.
+   * The HA status of a Mesh node connector.
    */
   ha_status?: 'offline' | 'passive' | 'active';
 
@@ -108,7 +108,7 @@ export namespace ConnectorGetResponse {
     opened_at?: string;
 
     /**
-     * The public IP address of the host running WARP Connector.
+     * The public IP address of the host running the Mesh node connector.
      */
     origin_ip?: string;
   }

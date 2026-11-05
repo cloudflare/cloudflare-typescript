@@ -35,7 +35,6 @@ const runTests = (
       name: 'x',
       output_schema: 'x',
       prompt: 'x',
-      type: 'summary',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

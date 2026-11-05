@@ -112,6 +112,15 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: Bas
           value: 'x',
         },
       ],
+      searchBranches: [
+        [
+          {
+            field: 'attacker',
+            op: 'equals',
+            value: 'x',
+          },
+        ],
+      ],
     });
   });
 

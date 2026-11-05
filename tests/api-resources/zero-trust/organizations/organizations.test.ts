@@ -28,12 +28,8 @@ const parentPartialClient = createClient({
 
 const runTests = (client: PartialCloudflare<{ zeroTrust: { organizations: BaseOrganizations } }>) => {
   // TODO: investigate broken test
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.zeroTrust.organizations.create({
-      auth_domain: 'test.cloudflareaccess.com',
-      name: 'Widget Corps Internal Applications',
-      account_id: 'account_id',
-    });
+  test.skip('create', async () => {
+    const responsePromise = client.zeroTrust.organizations.create({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -41,52 +37,6 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { organizations: BaseOr
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('create: required and optional params', async () => {
-    const response = await client.zeroTrust.organizations.create({
-      auth_domain: 'test.cloudflareaccess.com',
-      name: 'Widget Corps Internal Applications',
-      account_id: 'account_id',
-      allow_authenticate_via_warp: true,
-      auto_redirect_to_identity: true,
-      deny_unmatched_requests: true,
-      deny_unmatched_requests_exempted_zone_names: ['example.com'],
-      is_ui_read_only: true,
-      login_design: {
-        background_color: '#c5ed1b',
-        footer_text: 'This is an example description.',
-        header_text: 'This is an example description.',
-        logo_path: 'https://example.com/logo.png',
-        text_color: '#c5ed1b',
-      },
-      mfa_config: {
-        allowed_authenticators: ['totp', 'biometrics', 'security_key'],
-        amr_matching_session_duration: '12h',
-        required_aaguids: '2fc0579f-8113-47ea-b116-bb5a8db9202a',
-        session_duration: '24h',
-      },
-      mfa_piv_key_requirements: {
-        pin_policy: 'always',
-        require_fips_device: true,
-        ssh_key_size: [256, 2048],
-        ssh_key_type: ['ecdsa', 'rsa'],
-        touch_policy: 'always',
-      },
-      mfa_required_for_all_apps: false,
-      service_token_inactivity: {
-        action: 'disable',
-        enabled: true,
-        inactivity_threshold_days: 30,
-      },
-      session_duration: '24h',
-      strict_service_token_auth: true,
-      ui_read_only_toggle_reason: 'Temporarily turn off the UI read only lock to make a change via the UI',
-      user_seat_expiration_inactive_time: '730h',
-      warp_auth_non_browser_401: false,
-      warp_auth_session_duration: '24h',
-    });
   });
 
   // TODO: investigate broken test

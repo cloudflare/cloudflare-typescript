@@ -25,7 +25,8 @@ export class BaseTopup extends APIResource {
 
   /**
    * Create a credit top-up for the given account, charged to the account's default
-   * payment method.
+   * payment method. Requires a dashboard session; API token, OAuth, and service
+   * credentials receive 403.
    *
    * @example
    * ```ts
@@ -46,7 +47,7 @@ export class BaseTopup extends APIResource {
   }
 
   /**
-   * Get the payment processing status of a top-up by its invoice ID.
+   * Get the payment processing status of a top-up by its top-up identifier.
    *
    * @example
    * ```ts
@@ -73,7 +74,7 @@ export class Topup extends BaseTopup {
 
 export interface TopupCreateResponse {
   /**
-   * Stripe PaymentIntent client secret.
+   * Client secret used to complete payment authentication.
    */
   client_secret: string | null;
 
@@ -83,7 +84,7 @@ export interface TopupCreateResponse {
   onboarding: boolean;
 
   /**
-   * Stripe invoice ID.
+   * Top-up payment identifier.
    */
   payment_intent_id: string;
 
@@ -116,8 +117,8 @@ export interface TopupCreateParams {
   amount: number;
 
   /**
-   * Body param: Stripe PaymentMethod to charge instead of the customer's default
-   * payment method.
+   * Body param: Payment method to charge instead of the customer's default payment
+   * method.
    */
   payment_method_id?: string;
 }
@@ -129,7 +130,7 @@ export interface TopupStatusParams {
   account_id: string;
 
   /**
-   * Body param: Stripe invoice ID to check status for.
+   * Body param: Top-up identifier to check status for.
    */
   payment_intent_id: string;
 }

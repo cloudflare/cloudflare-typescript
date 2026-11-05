@@ -146,6 +146,33 @@ export class BaseCustomPages extends APIResource {
       ) as APIPromise<{ result: CustomPage }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Validate a Liquid template and return its errors and warnings without persisting
+   * it.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.access.customPages.validate({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     template: 'template',
+   *     type: 'identity_denied',
+   *   });
+   * ```
+   */
+  validate(
+    params: CustomPageValidateParams,
+    options?: RequestOptions,
+  ): APIPromise<CustomPageValidateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/access/custom_pages/validate`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: CustomPageValidateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class CustomPages extends BaseCustomPages {}
 
@@ -237,6 +264,73 @@ export interface CustomPageDeleteResponse {
   id?: string;
 }
 
+/**
+ * The result of validating a template's content.
+ */
+export interface CustomPageValidateResponse {
+  /**
+   * Blocking findings; a non-empty list means the template cannot be published.
+   */
+  errors: Array<CustomPageValidateResponse.Error>;
+
+  /**
+   * Custom page type.
+   */
+  page_type: 'identity_denied' | 'forbidden' | 'login' | 'interstitial';
+
+  /**
+   * The contract version the template was validated against.
+   */
+  version: number;
+
+  /**
+   * Advisory findings that do not block publishing.
+   */
+  warnings: Array<CustomPageValidateResponse.Warning>;
+}
+
+export namespace CustomPageValidateResponse {
+  /**
+   * A single validation finding for a template.
+   */
+  export interface Error {
+    /**
+     * Human-readable description of the finding.
+     */
+    message: string;
+
+    /**
+     * The validation tier that produced the finding (e.g. html, liquid).
+     */
+    tier: string;
+
+    /**
+     * Optional pointer to the part of the template the finding refers to.
+     */
+    ref?: string;
+  }
+
+  /**
+   * A single validation finding for a template.
+   */
+  export interface Warning {
+    /**
+     * Human-readable description of the finding.
+     */
+    message: string;
+
+    /**
+     * The validation tier that produced the finding (e.g. html, liquid).
+     */
+    tier: string;
+
+    /**
+     * Optional pointer to the part of the template the finding refers to.
+     */
+    ref?: string;
+  }
+}
+
 export interface CustomPageCreateParams {
   /**
    * Path param: Identifier.
@@ -314,16 +408,40 @@ export interface CustomPageGetParams {
   account_id: string;
 }
 
+export interface CustomPageValidateParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: The Liquid template to validate.
+   */
+  template: string;
+
+  /**
+   * Body param: Custom page type.
+   */
+  type: 'identity_denied' | 'forbidden' | 'login' | 'interstitial';
+
+  /**
+   * Body param: Contract version to validate against; omit for the latest.
+   */
+  version?: number;
+}
+
 export declare namespace CustomPages {
   export {
     type CustomPage as CustomPage,
     type CustomPageWithoutHTML as CustomPageWithoutHTML,
     type CustomPageDeleteResponse as CustomPageDeleteResponse,
+    type CustomPageValidateResponse as CustomPageValidateResponse,
     type CustomPageWithoutHTMLsV4PagePaginationArray as CustomPageWithoutHTMLsV4PagePaginationArray,
     type CustomPageCreateParams as CustomPageCreateParams,
     type CustomPageUpdateParams as CustomPageUpdateParams,
     type CustomPageListParams as CustomPageListParams,
     type CustomPageDeleteParams as CustomPageDeleteParams,
     type CustomPageGetParams as CustomPageGetParams,
+    type CustomPageValidateParams as CustomPageValidateParams,
   };
 }

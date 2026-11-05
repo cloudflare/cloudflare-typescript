@@ -284,176 +284,212 @@ export class BaseLivestreams extends APIResource {
 export class Livestreams extends BaseLivestreams {}
 
 export interface LivestreamGetActiveLivestreamsForLivestreamIDResponse {
-  data?: LivestreamGetActiveLivestreamsForLivestreamIDResponse.Data;
+  data: LivestreamGetActiveLivestreamsForLivestreamIDResponse.Data;
 
-  success?: boolean;
+  success: boolean;
 }
 
 export namespace LivestreamGetActiveLivestreamsForLivestreamIDResponse {
   export interface Data {
-    livestream?: Data.Livestream;
+    livestream: Data.Livestream;
 
-    session?: Data.Session;
+    session: Data.Session;
   }
 
   export namespace Data {
     export interface Livestream {
-      id?: string;
+      /**
+       * ID of the livestream.
+       */
+      id: string;
 
       /**
-       * Timestamp the object was created at. The time is returned in ISO format.
+       * Timestamp the livestream was created at, in ISO format.
        */
-      created_at?: string;
+      created_at: string;
 
       /**
-       * Specifies if the livestream was disabled.
+       * Specifies if the livestream is disabled.
        */
-      disabled?: string;
+      disabled: boolean;
+
+      /**
+       * ID of the underlying Cloudflare Stream live input.
+       */
+      external_id: string;
 
       /**
        * The server URL to which the RTMP encoder sends the video and audio data.
        */
-      ingest_server?: string;
+      ingest_server: string;
 
       /**
-       * ID of the meeting.
+       * Specifies if the livestream is ingested manually by an RTMP encoder.
        */
-      meeting_id?: string;
+      manual_ingest: boolean;
+
+      /**
+       * ID of the meeting being livestreamed, if any.
+       */
+      meeting_id: string | null;
 
       /**
        * Name of the livestream.
        */
-      name?: string;
+      name: string | null;
 
       /**
        * The web address that viewers can use to watch the livestream.
        */
-      playback_url?: string;
-
-      status?: 'LIVE' | 'IDLE' | 'ERRORED' | 'INVOKED';
+      playback_url: string;
 
       /**
-       * Unique key for accessing each livestream.
+       * Status of the livestream.
        */
-      stream_key?: string;
+      status: 'LIVE' | 'IDLE' | 'ERRORED' | 'INVOKED' | 'METRICS_READY';
 
       /**
-       * Timestamp the object was updated at. The time is returned in ISO format.
+       * Unique key for accessing each livestream. Empty if the livestream is disabled.
        */
-      updated_at?: string;
+      stream_key: string;
+
+      /**
+       * Timestamp the livestream was last updated at, in ISO format.
+       */
+      updated_at: string;
     }
 
     export interface Session {
-      id?: string;
+      /**
+       * ID of the livestream session.
+       */
+      id: string;
 
       /**
-       * Timestamp the object was created at. The time is returned in ISO format.
+       * Timestamp the livestream session was created at, in ISO format.
        */
-      created_at?: string;
+      created_at: string;
 
-      err_message?: string;
+      /**
+       * Error message, if the livestream session failed.
+       */
+      err_message: string | null;
 
       /**
        * The time duration for which the input was given or the meeting was streamed.
        */
-      ingest_seconds?: string;
+      ingest_seconds: number;
 
       /**
-       * Timestamp the object was invoked. The time is returned in ISO format.
+       * Timestamp the livestream session was invoked at, in ISO format.
        */
-      invoked_time?: string;
-
-      livestream_id?: string;
+      invoked_time: string | null;
 
       /**
-       * Timestamp the object was started. The time is returned in ISO format.
+       * ID of the livestream.
        */
-      started_time?: string;
+      livestream_id: string;
 
       /**
-       * Timestamp the object was stopped. The time is returned in ISO format.
+       * Timestamp the livestream session started at, in ISO format.
        */
-      stopped_time?: string;
+      started_time: string | null;
 
       /**
-       * Timestamp the object was updated at. The time is returned in ISO format.
+       * Timestamp the livestream session stopped at, in ISO format.
        */
-      updated_at?: string;
+      stopped_time: string | null;
+
+      /**
+       * Timestamp the livestream session was last updated at, in ISO format.
+       */
+      updated_at: string;
 
       /**
        * The total view time for which the viewers watched the stream.
        */
-      viewer_seconds?: string;
+      viewer_seconds: number;
     }
   }
 }
 
 export interface LivestreamGetAllLivestreamsResponse {
-  data?: LivestreamGetAllLivestreamsResponse.Data;
+  data: Array<LivestreamGetAllLivestreamsResponse.Data>;
 
-  success?: boolean;
+  paging: LivestreamGetAllLivestreamsResponse.Paging;
+
+  success: boolean;
 }
 
 export namespace LivestreamGetAllLivestreamsResponse {
   export interface Data {
     /**
-     * The ID of the livestream.
+     * ID of the livestream.
      */
-    id?: string;
+    id: string;
 
     /**
-     * Timestamp the object was created at. The time is returned in ISO format.
+     * Timestamp the livestream was created at, in ISO format.
      */
-    created_at?: string;
+    created_at: string;
 
     /**
-     * Specifies if the livestream was disabled.
+     * Specifies if the livestream is disabled.
      */
-    disabled?: string;
+    disabled: boolean;
+
+    /**
+     * ID of the underlying Cloudflare Stream live input.
+     */
+    external_id: string;
 
     /**
      * The server URL to which the RTMP encoder sends the video and audio data.
      */
-    ingest_server?: string;
+    ingest_server: string;
 
     /**
-     * ID of the meeting.
+     * Specifies if the livestream is ingested manually by an RTMP encoder.
      */
-    meeting_id?: string;
+    manual_ingest: boolean;
+
+    /**
+     * ID of the meeting being livestreamed, if any.
+     */
+    meeting_id: string | null;
 
     /**
      * Name of the livestream.
      */
-    name?: string;
-
-    paging?: Data.Paging;
+    name: string | null;
 
     /**
      * The web address that viewers can use to watch the livestream.
      */
-    playback_url?: string;
-
-    status?: 'LIVE' | 'IDLE' | 'ERRORED' | 'INVOKED';
+    playback_url: string;
 
     /**
-     * Unique key for accessing each livestream.
+     * Status of the livestream.
      */
-    stream_key?: string;
+    status: 'LIVE' | 'IDLE' | 'ERRORED' | 'INVOKED' | 'METRICS_READY';
 
     /**
-     * Timestamp the object was updated at. The time is returned in ISO format.
+     * Unique key for accessing each livestream. Empty if the livestream is disabled.
      */
-    updated_at?: string;
+    stream_key: string;
+
+    /**
+     * Timestamp the livestream was last updated at, in ISO format.
+     */
+    updated_at: string;
   }
 
-  export namespace Data {
-    export interface Paging {
-      end_offset?: number;
+  export interface Paging {
+    end_offset: number;
 
-      start_offset?: number;
+    start_offset: number;
 
-      total_count?: number;
-    }
+    total_count: number;
   }
 }
 
@@ -513,70 +549,78 @@ export namespace LivestreamGetLivestreamAnalyticsDaywiseResponse {
 }
 
 export interface LivestreamGetLivestreamSessionDetailsForSessionIDResponse {
-  data?: LivestreamGetLivestreamSessionDetailsForSessionIDResponse.Data;
+  data: LivestreamGetLivestreamSessionDetailsForSessionIDResponse.Data;
 
-  success?: boolean;
+  success: boolean;
 }
 
 export namespace LivestreamGetLivestreamSessionDetailsForSessionIDResponse {
   export interface Data {
     /**
-     * The livestream ID.
+     * ID of the livestream session.
      */
-    id?: string;
+    id: string;
 
     /**
-     * Timestamp the object was created at. The time is returned in ISO format.
+     * Timestamp the livestream session was created at, in ISO format.
      */
-    created_at?: string;
+    created_at: string;
 
     /**
-     * The server URL to which the RTMP encoder sends the video and audio data.
+     * Error message, if the livestream session failed.
      */
-    err_message?: string;
+    err_message: string | null;
 
     /**
-     * Name of the livestream.
+     * The time duration for which the input was given or the meeting was streamed.
      */
-    ingest_seconds?: number;
-
-    livestream_id?: string;
+    ingest_seconds: number;
 
     /**
-     * Unique key for accessing each livestream.
+     * Timestamp the livestream session was invoked at, in ISO format.
      */
-    started_time?: string;
+    invoked_time: string | null;
 
     /**
-     * The web address that viewers can use to watch the livestream.
+     * ID of the livestream.
      */
-    stopped_time?: string;
+    livestream_id: string;
 
     /**
-     * Timestamp the object was updated at. The time is returned in ISO format.
+     * Timestamp the livestream session started at, in ISO format.
      */
-    updated_at?: string;
+    started_time: string | null;
 
     /**
-     * Specifies if the livestream was disabled.
+     * Timestamp the livestream session stopped at, in ISO format.
      */
-    viewer_seconds?: number;
+    stopped_time: string | null;
+
+    /**
+     * Timestamp the livestream session was last updated at, in ISO format.
+     */
+    updated_at: string;
+
+    /**
+     * The total view time for which the viewers watched the stream.
+     */
+    viewer_seconds: number;
   }
 }
 
 export interface LivestreamGetLivestreamSessionForLivestreamIDResponse {
-  data?: LivestreamGetLivestreamSessionForLivestreamIDResponse.Data;
+  data: LivestreamGetLivestreamSessionForLivestreamIDResponse.Data;
 
-  success?: boolean;
+  paging: LivestreamGetLivestreamSessionForLivestreamIDResponse.Paging;
+
+  success: boolean;
 }
 
 export namespace LivestreamGetLivestreamSessionForLivestreamIDResponse {
   export interface Data {
-    livestream?: Data.Livestream;
+    livestream: Data.Livestream;
 
-    paging?: Data.Paging;
-
-    session?: Data.Session;
+    sessions: Array<Data.Session>;
   }
 
   export namespace Data {
@@ -584,158 +628,193 @@ export namespace LivestreamGetLivestreamSessionForLivestreamIDResponse {
       /**
        * ID of the livestream.
        */
-      id?: string;
+      id: string;
 
       /**
-       * Timestamp the object was created at. The time is returned in ISO format.
+       * Timestamp the livestream was created at, in ISO format.
        */
-      created_at?: string;
+      created_at: string;
 
       /**
-       * Specifies if the livestream was disabled.
+       * Specifies if the livestream is disabled.
        */
-      disabled?: string;
+      disabled: boolean;
+
+      /**
+       * ID of the underlying Cloudflare Stream live input.
+       */
+      external_id: string;
 
       /**
        * The server URL to which the RTMP encoder sends the video and audio data.
        */
-      ingest_server?: string;
+      ingest_server: string;
 
       /**
-       * The ID of the meeting.
+       * Specifies if the livestream is ingested manually by an RTMP encoder.
        */
-      meeting_id?: string;
+      manual_ingest: boolean;
+
+      /**
+       * ID of the meeting being livestreamed, if any.
+       */
+      meeting_id: string | null;
 
       /**
        * Name of the livestream.
        */
-      name?: string;
+      name: string | null;
 
       /**
        * The web address that viewers can use to watch the livestream.
        */
-      playback_url?: string;
-
-      status?: 'LIVE' | 'IDLE' | 'ERRORED' | 'INVOKED';
+      playback_url: string;
 
       /**
-       * Unique key for accessing each livestream.
+       * Status of the livestream.
        */
-      stream_key?: string;
+      status: 'LIVE' | 'IDLE' | 'ERRORED' | 'INVOKED' | 'METRICS_READY';
 
       /**
-       * Timestamp the object was updated at. The time is returned in ISO format.
+       * Unique key for accessing each livestream. Empty if the livestream is disabled.
        */
-      updated_at?: string;
-    }
+      stream_key: string;
 
-    export interface Paging {
-      end_offset?: number;
-
-      start_offset?: number;
-
-      total_count?: number;
+      /**
+       * Timestamp the livestream was last updated at, in ISO format.
+       */
+      updated_at: string;
     }
 
     export interface Session {
       /**
-       * ID of the session.
+       * ID of the livestream session.
        */
-      id?: string;
+      id: string;
 
       /**
-       * Timestamp the object was created at. The time is returned in ISO format.
+       * Timestamp the livestream session was created at, in ISO format.
        */
-      created_at?: string;
+      created_at: string;
 
-      err_message?: string;
+      /**
+       * Error message, if the livestream session failed.
+       */
+      err_message: string | null;
 
       /**
        * The time duration for which the input was given or the meeting was streamed.
        */
-      ingest_seconds?: number;
+      ingest_seconds: number;
 
       /**
-       * Timestamp the object was invoked. The time is returned in ISO format.
+       * Timestamp the livestream session was invoked at, in ISO format.
        */
-      invoked_time?: string;
-
-      livestream_id?: string;
+      invoked_time: string | null;
 
       /**
-       * Timestamp the object was started. The time is returned in ISO format.
+       * ID of the livestream.
        */
-      started_time?: string;
+      livestream_id: string;
 
       /**
-       * Timestamp the object was stopped. The time is returned in ISO format.
+       * Timestamp the livestream session started at, in ISO format.
        */
-      stopped_time?: string;
+      started_time: string | null;
 
       /**
-       * Timestamp the object was updated at. The time is returned in ISO format.
+       * Timestamp the livestream session stopped at, in ISO format.
        */
-      updated_at?: string;
+      stopped_time: string | null;
+
+      /**
+       * Timestamp the livestream session was last updated at, in ISO format.
+       */
+      updated_at: string;
 
       /**
        * The total view time for which the viewers watched the stream.
        */
-      viewer_seconds?: number;
+      viewer_seconds: number;
     }
+  }
+
+  export interface Paging {
+    end_offset: number;
+
+    start_offset: number;
+
+    total_count: number;
   }
 }
 
 export interface LivestreamGetMeetingActiveLivestreamsResponse {
-  data?: LivestreamGetMeetingActiveLivestreamsResponse.Data;
+  data: LivestreamGetMeetingActiveLivestreamsResponse.Data;
 
-  success?: boolean;
+  success: boolean;
 }
 
 export namespace LivestreamGetMeetingActiveLivestreamsResponse {
   export interface Data {
     /**
-     * The livestream ID.
+     * ID of the livestream.
      */
-    id?: string;
+    id: string;
 
     /**
-     * Timestamp the object was created at. The time is returned in ISO format.
+     * Timestamp the livestream was created at, in ISO format.
      */
-    created_at?: string;
+    created_at: string;
 
     /**
-     * Specifies if the livestream was disabled.
+     * Specifies if the livestream is disabled.
      */
-    disabled?: string;
+    disabled: boolean;
+
+    /**
+     * ID of the underlying Cloudflare Stream live input.
+     */
+    external_id: string;
 
     /**
      * The server URL to which the RTMP encoder sends the video and audio data.
      */
-    ingest_server?: string;
+    ingest_server: string;
 
-    meeting_id?: string;
+    /**
+     * Specifies if the livestream is ingested manually by an RTMP encoder.
+     */
+    manual_ingest: boolean;
+
+    /**
+     * ID of the meeting being livestreamed, if any.
+     */
+    meeting_id: string | null;
 
     /**
      * Name of the livestream.
      */
-    name?: string | null;
+    name: string | null;
 
     /**
      * The web address that viewers can use to watch the livestream.
      */
-    playback_url?: string;
-
-    status?: 'LIVE' | 'IDLE' | 'ERRORED' | 'INVOKED';
+    playback_url: string;
 
     /**
-     * Unique key for accessing each livestream.
+     * Status of the livestream.
      */
-    stream_key?: string;
+    status: 'LIVE' | 'IDLE' | 'ERRORED' | 'INVOKED' | 'METRICS_READY';
 
     /**
-     * Timestamp the object was updated at. The time is returned in ISO format.
+     * Unique key for accessing each livestream. Empty if the livestream is disabled.
      */
-    updated_at?: string;
+    stream_key: string;
+
+    /**
+     * Timestamp the livestream was last updated at, in ISO format.
+     */
+    updated_at: string;
   }
 }
 
@@ -834,34 +913,47 @@ export namespace LivestreamGetOrgAnalyticsResponse {
 }
 
 export interface LivestreamStartLivestreamingAMeetingResponse {
-  data?: LivestreamStartLivestreamingAMeetingResponse.Data;
+  data: LivestreamStartLivestreamingAMeetingResponse.Data;
 
-  success?: boolean;
+  success: boolean;
 }
 
 export namespace LivestreamStartLivestreamingAMeetingResponse {
   export interface Data {
     /**
-     * The livestream ID.
+     * ID of the livestream.
      */
-    id?: string;
+    id: string;
 
     /**
      * The server URL to which the RTMP encoder sends the video and audio data.
      */
-    ingest_server?: string;
+    ingest_server: string;
+
+    /**
+     * ID of the meeting being livestreamed, if any.
+     */
+    meeting_id: string | null;
+
+    /**
+     * Name of the livestream.
+     */
+    name: string | null;
 
     /**
      * The web address that viewers can use to watch the livestream.
      */
-    playback_url?: string;
-
-    status?: 'LIVE' | 'IDLE' | 'ERRORED' | 'INVOKED';
+    playback_url: string;
 
     /**
-     * Unique key for accessing each livestream.
+     * Status of the livestream.
      */
-    stream_key?: string;
+    status: 'LIVE' | 'IDLE' | 'ERRORED' | 'INVOKED' | 'METRICS_READY';
+
+    /**
+     * Unique key for accessing each livestream. Empty if the livestream is disabled.
+     */
+    stream_key: string;
   }
 }
 

@@ -53,6 +53,7 @@ const runTests = (
       name: 'Block phishing keywords',
       pattern: 'urgent.*verify.*account',
       targets: ['SUBJECT'],
+      expires_at: '2027-01-01T00:00:00Z',
       notes: 'Blocks common phishing subject lines',
     });
   });
@@ -75,6 +76,7 @@ const runTests = (
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
       enabled: true,
+      expired: true,
       name: 'name',
       order: 'name',
       page: 1,
@@ -142,6 +144,7 @@ const runTests = (
       patches: [
         {
           enabled: true,
+          expires_at: '2027-01-01T00:00:00Z',
           name: 'Block phishing keywords',
           notes: 'Blocks common phishing subject lines',
           pattern: 'urgent.*verify.*account',
@@ -154,6 +157,7 @@ const runTests = (
           name: 'Block phishing keywords',
           pattern: 'urgent.*verify.*account',
           targets: ['SUBJECT'],
+          expires_at: '2027-01-01T00:00:00Z',
           notes: 'Blocks common phishing subject lines',
         },
       ],
@@ -163,6 +167,7 @@ const runTests = (
           name: 'Block phishing keywords',
           pattern: 'urgent.*verify.*account',
           targets: ['SUBJECT'],
+          expires_at: '2027-01-01T00:00:00Z',
           notes: 'Blocks common phishing subject lines',
         },
       ],
@@ -189,6 +194,7 @@ const runTests = (
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         enabled: true,
+        expires_at: '2027-01-01T00:00:00Z',
         name: 'Block phishing keywords',
         notes: 'Blocks common phishing subject lines',
         pattern: 'urgent.*verify.*account',

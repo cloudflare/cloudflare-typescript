@@ -15,5 +15,4 @@ export {
   type VersionGetResponse,
   type VersionListParams,
   type VersionGetParams,
-  type VersionListResponsesSinglePage,
 } from './versions';

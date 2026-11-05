@@ -28,12 +28,12 @@ export class BaseIntegrations extends APIResource {
    *     application: 'GOOGLE_WORKSPACE',
    *     credentials: { admin_email: 'admin@corp.com' },
    *     name: 'My Google Workspace',
+   *     use_cases: ['casb', 'ces'],
    *     auth_method: 'service_account',
    *     dlp_profiles: ['e91a2360-da51-4fdf-9711-bcdecd462614'],
    *     permissions: [
    *       'https://www.googleapis.com/auth/drive.readonly',
    *     ],
-   *     use_cases: ['casb', 'ces'],
    *   });
    * ```
    */
@@ -373,6 +373,11 @@ export interface IntegrationListResponse {
   application: { [key: string]: string | null };
 
   /**
+   * The integration's authentication method.
+   */
+  auth_method: IntegrationListResponse.AuthMethod | null;
+
+  /**
    * When the integration was created.
    */
   created: string;
@@ -396,6 +401,22 @@ export interface IntegrationListResponse {
    * When the integration was last updated.
    */
   updated: string;
+
+  /**
+   * Use cases enabled for the integration.
+   */
+  use_cases: Array<string>;
+}
+
+export namespace IntegrationListResponse {
+  /**
+   * The integration's authentication method.
+   */
+  export interface AuthMethod {
+    id: string;
+
+    display_name: string;
+  }
 }
 
 /**
@@ -671,6 +692,7 @@ export interface IntegrationCreateParams {
    * - `SALESFORCE` - SALESFORCE
    * - `SERVICENOW` - SERVICENOW
    * - `SLACK` - SLACK
+   * - `ZOOM` - ZOOM
    */
   application:
     | 'ANTHROPIC'
@@ -687,7 +709,8 @@ export interface IntegrationCreateParams {
     | 'OPENAI'
     | 'SALESFORCE'
     | 'SERVICENOW'
-    | 'SLACK';
+    | 'SLACK'
+    | 'ZOOM';
 
   /**
    * Body param: Credentials for the integration.
@@ -698,6 +721,13 @@ export interface IntegrationCreateParams {
    * Body param: Name of the integration.
    */
   name: string;
+
+  /**
+   * Body param: List of use case or feature slugs to enroll. At least one use case
+   * (casb, ces) is required; auto_remediation may be added alongside casb (e.g.,
+   * ['casb', 'ces', 'auto_remediation']).
+   */
+  use_cases: Array<'casb' | 'ces' | 'auto_remediation'>;
 
   /**
    * Body param: Authentication method slug (uses default if omitted).
@@ -713,12 +743,6 @@ export interface IntegrationCreateParams {
    * Body param: List of permission scopes (uses policy defaults if empty).
    */
   permissions?: Array<string>;
-
-  /**
-   * Body param: List of use case or feature slugs to enroll (e.g., ['casb', 'ces',
-   * 'auto_remediation']).
-   */
-  use_cases?: Array<'casb' | 'ces' | 'auto_remediation'>;
 }
 
 export interface IntegrationUpdateParams {

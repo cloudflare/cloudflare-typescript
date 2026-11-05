@@ -40,8 +40,8 @@ export class BaseResourceSharing extends APIResource {
   static override readonly _key: readonly ['resourceSharing'] = Object.freeze(['resourceSharing'] as const);
 
   /**
-   * Creates a new resource share for sharing Cloudflare resources with other
-   * accounts or organizations.
+   * Creates a share that makes a resource available to specific accounts in the
+   * caller's organization, or to the whole organization.
    *
    * @example
    * ```ts
@@ -49,16 +49,6 @@ export class BaseResourceSharing extends APIResource {
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     name: 'My Shared WAF Managed Rule',
-   *     recipients: [{}],
-   *     resources: [
-   *       {
-   *         meta: {},
-   *         resource_account_id:
-   *           '023e105f4ecef8ad9ca31a8372d0c353',
-   *         resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *         resource_type: 'custom-ruleset',
-   *       },
-   *     ],
    *   },
    * );
    * ```
@@ -76,19 +66,9 @@ export class BaseResourceSharing extends APIResource {
   }
 
   /**
-   * Updates the share's display name and tags. This endpoint does **not** modify
-   * recipients or resources — those are managed via dedicated subresource endpoints:
-   *
-   * - **Recipients**: Use `POST /accounts/{account_id}/shares/{share_id}/recipients`
-   *   to add a single recipient,
-   *   `PUT /accounts/{account_id}/shares/{share_id}/recipients` to replace the full
-   *   recipient list, or
-   *   `DELETE /accounts/{account_id}/shares/{share_id}/recipients/{recipient_id}` to
-   *   remove a recipient.
-   * - **Resources**: Use the share's resource subresource endpoints.
-   *
-   * Updating is not immediate; an updated share object with a new status will be
-   * returned.
+   * Updates the share's display name and tags. Omitting `tags` leaves the existing
+   * tags unchanged. Recipients and resources are managed via their subresource
+   * endpoints.
    *
    * @example
    * ```ts
@@ -213,12 +193,12 @@ export interface ResourceSharingCreateResponse {
   account_name: string;
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -267,6 +247,13 @@ export interface ResourceSharingCreateResponse {
    * requested via the 'include_resources' parameter.
    */
   resources?: Array<ResourceSharingCreateResponse.Resource>;
+
+  /**
+   * Tags associated with the share. Included in create and update responses when
+   * tags are supplied, and in read responses when the `include_tags_from` parameter
+   * is set.
+   */
+  tags?: { [key: string]: string };
 }
 
 export namespace ResourceSharingCreateResponse {
@@ -277,7 +264,7 @@ export namespace ResourceSharingCreateResponse {
     id: string;
 
     /**
-     * When the share was created.
+     * When the object was created.
      */
     created: string;
 
@@ -287,7 +274,7 @@ export namespace ResourceSharingCreateResponse {
     meta: unknown;
 
     /**
-     * When the share was modified.
+     * When the object was last modified.
      */
     modified: string;
 
@@ -297,7 +284,7 @@ export namespace ResourceSharingCreateResponse {
     resource_account_id: string;
 
     /**
-     * Share Resource identifier.
+     * Identifier assigned by the service that owns the shared resource.
      */
     resource_id: string;
 
@@ -342,12 +329,12 @@ export interface ResourceSharingUpdateResponse {
   account_name: string;
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -396,6 +383,13 @@ export interface ResourceSharingUpdateResponse {
    * requested via the 'include_resources' parameter.
    */
   resources?: Array<ResourceSharingUpdateResponse.Resource>;
+
+  /**
+   * Tags associated with the share. Included in create and update responses when
+   * tags are supplied, and in read responses when the `include_tags_from` parameter
+   * is set.
+   */
+  tags?: { [key: string]: string };
 }
 
 export namespace ResourceSharingUpdateResponse {
@@ -406,7 +400,7 @@ export namespace ResourceSharingUpdateResponse {
     id: string;
 
     /**
-     * When the share was created.
+     * When the object was created.
      */
     created: string;
 
@@ -416,7 +410,7 @@ export namespace ResourceSharingUpdateResponse {
     meta: unknown;
 
     /**
-     * When the share was modified.
+     * When the object was last modified.
      */
     modified: string;
 
@@ -426,7 +420,7 @@ export namespace ResourceSharingUpdateResponse {
     resource_account_id: string;
 
     /**
-     * Share Resource identifier.
+     * Identifier assigned by the service that owns the shared resource.
      */
     resource_id: string;
 
@@ -471,12 +465,12 @@ export interface ResourceSharingListResponse {
   account_name: string;
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -525,6 +519,13 @@ export interface ResourceSharingListResponse {
    * requested via the 'include_resources' parameter.
    */
   resources?: Array<ResourceSharingListResponse.Resource>;
+
+  /**
+   * Tags associated with the share. Included in create and update responses when
+   * tags are supplied, and in read responses when the `include_tags_from` parameter
+   * is set.
+   */
+  tags?: { [key: string]: string };
 }
 
 export namespace ResourceSharingListResponse {
@@ -535,7 +536,7 @@ export namespace ResourceSharingListResponse {
     id: string;
 
     /**
-     * When the share was created.
+     * When the object was created.
      */
     created: string;
 
@@ -545,7 +546,7 @@ export namespace ResourceSharingListResponse {
     meta: unknown;
 
     /**
-     * When the share was modified.
+     * When the object was last modified.
      */
     modified: string;
 
@@ -555,7 +556,7 @@ export namespace ResourceSharingListResponse {
     resource_account_id: string;
 
     /**
-     * Share Resource identifier.
+     * Identifier assigned by the service that owns the shared resource.
      */
     resource_id: string;
 
@@ -600,12 +601,12 @@ export interface ResourceSharingDeleteResponse {
   account_name: string;
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -654,6 +655,13 @@ export interface ResourceSharingDeleteResponse {
    * requested via the 'include_resources' parameter.
    */
   resources?: Array<ResourceSharingDeleteResponse.Resource>;
+
+  /**
+   * Tags associated with the share. Included in create and update responses when
+   * tags are supplied, and in read responses when the `include_tags_from` parameter
+   * is set.
+   */
+  tags?: { [key: string]: string };
 }
 
 export namespace ResourceSharingDeleteResponse {
@@ -664,7 +672,7 @@ export namespace ResourceSharingDeleteResponse {
     id: string;
 
     /**
-     * When the share was created.
+     * When the object was created.
      */
     created: string;
 
@@ -674,7 +682,7 @@ export namespace ResourceSharingDeleteResponse {
     meta: unknown;
 
     /**
-     * When the share was modified.
+     * When the object was last modified.
      */
     modified: string;
 
@@ -684,7 +692,7 @@ export namespace ResourceSharingDeleteResponse {
     resource_account_id: string;
 
     /**
-     * Share Resource identifier.
+     * Identifier assigned by the service that owns the shared resource.
      */
     resource_id: string;
 
@@ -729,12 +737,12 @@ export interface ResourceSharingGetResponse {
   account_name: string;
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -783,6 +791,13 @@ export interface ResourceSharingGetResponse {
    * requested via the 'include_resources' parameter.
    */
   resources?: Array<ResourceSharingGetResponse.Resource>;
+
+  /**
+   * Tags associated with the share. Included in create and update responses when
+   * tags are supplied, and in read responses when the `include_tags_from` parameter
+   * is set.
+   */
+  tags?: { [key: string]: string };
 }
 
 export namespace ResourceSharingGetResponse {
@@ -793,7 +808,7 @@ export namespace ResourceSharingGetResponse {
     id: string;
 
     /**
-     * When the share was created.
+     * When the object was created.
      */
     created: string;
 
@@ -803,7 +818,7 @@ export namespace ResourceSharingGetResponse {
     meta: unknown;
 
     /**
-     * When the share was modified.
+     * When the object was last modified.
      */
     modified: string;
 
@@ -813,7 +828,7 @@ export namespace ResourceSharingGetResponse {
     resource_account_id: string;
 
     /**
-     * Share Resource identifier.
+     * Identifier assigned by the service that owns the shared resource.
      */
     resource_id: string;
 
@@ -853,17 +868,36 @@ export interface ResourceSharingCreateParams {
   name: string;
 
   /**
-   * Body param
+   * Body param: Accounts to exclude from an organization-targeted share. Only
+   * allowed when `recipients` contains no account entries. The share owner cannot be
+   * excluded. Duplicate entries are ignored.
    */
-  recipients: Array<ResourceSharingCreateParams.Recipient>;
+  excluded_recipients?: Array<ResourceSharingCreateParams.ExcludedRecipient>;
 
   /**
    * Body param
    */
-  resources: Array<ResourceSharingCreateParams.Resource>;
+  recipients?: Array<ResourceSharingCreateParams.Recipient>;
+
+  /**
+   * Body param
+   */
+  resources?: Array<ResourceSharingCreateParams.Resource>;
+
+  /**
+   * Body param: Tags associated with the share.
+   */
+  tags?: { [key: string]: string };
 }
 
 export namespace ResourceSharingCreateParams {
+  export interface ExcludedRecipient {
+    /**
+     * The account to exclude from the organization-targeted share.
+     */
+    account_id: string;
+  }
+
   /**
    * Optionally specify `recipient_account_id` to target a specific account, or
    * `organization_id` to target the caller's whole organization. If neither is
@@ -896,12 +930,12 @@ export namespace ResourceSharingCreateParams {
     meta: unknown;
 
     /**
-     * Account identifier.
+     * The account that owns the resource. Must match the `account_id` in the path.
      */
     resource_account_id: string;
 
     /**
-     * Share Resource identifier.
+     * Identifier assigned by the service that owns the shared resource.
      */
     resource_id: string;
 
@@ -929,6 +963,11 @@ export interface ResourceSharingUpdateParams {
    * Body param: The name of the share.
    */
   name: string;
+
+  /**
+   * Body param: Tags associated with the share.
+   */
+  tags?: { [key: string]: string };
 }
 
 export interface ResourceSharingListParams extends V4PagePaginationArrayParams {
@@ -951,6 +990,13 @@ export interface ResourceSharingListParams extends V4PagePaginationArrayParams {
    * Query param: Include resources in the response.
    */
   include_resources?: boolean;
+
+  /**
+   * Query param: Include share tags in the response. `api` reads tags from the tag
+   * service; `mirror` reads a local, eventually consistent replica. If the tag
+   * lookup fails, the response omits `tags`.
+   */
+  include_tags_from?: 'api' | 'mirror';
 
   /**
    * Query param: Filter shares by kind.
@@ -1016,6 +1062,13 @@ export interface ResourceSharingGetParams {
    * Query param: Include resources in the response.
    */
   include_resources?: boolean;
+
+  /**
+   * Query param: Include share tags in the response. `api` reads tags from the tag
+   * service; `mirror` reads a local, eventually consistent replica. If the tag
+   * lookup fails, the response omits `tags`.
+   */
+  include_tags_from?: 'api' | 'mirror';
 }
 
 ResourceSharing.Recipients = Recipients;

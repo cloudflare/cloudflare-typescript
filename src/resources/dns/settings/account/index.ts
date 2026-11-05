@@ -9,6 +9,19 @@ export {
   type AccountGetParams,
 } from './account';
 export {
+  NameserverSets,
+  BaseNameserverSets,
+  type NameserverSetCreateResponse,
+  type NameserverSetListResponse,
+  type NameserverSetDeleteResponse,
+  type NameserverSetGetResponse,
+  type NameserverSetCreateParams,
+  type NameserverSetListParams,
+  type NameserverSetDeleteParams,
+  type NameserverSetGetParams,
+  type NameserverSetListResponsesV4PagePaginationArray,
+} from './nameserver-sets';
+export {
   Views,
   BaseViews,
   type ViewCreateResponse,

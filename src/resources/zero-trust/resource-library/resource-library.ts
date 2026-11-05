@@ -11,7 +11,7 @@ import {
   ApplicationGetResponse,
   ApplicationListParams,
   ApplicationListResponse,
-  ApplicationListResponsesSinglePage,
+  ApplicationListResponsesCursorPaginationAfter,
   ApplicationUpdateParams,
   ApplicationUpdateResponse,
   Applications,
@@ -25,7 +25,7 @@ import {
   CategoryGetResponse,
   CategoryListParams,
   CategoryListResponse,
-  CategoryListResponsesSinglePage,
+  CategoryListResponsesCursorPaginationAfter,
 } from './categories';
 
 export class BaseResourceLibrary extends APIResource {
@@ -53,7 +53,7 @@ export declare namespace ResourceLibrary {
     type ApplicationListResponse as ApplicationListResponse,
     type ApplicationDeleteResponse as ApplicationDeleteResponse,
     type ApplicationGetResponse as ApplicationGetResponse,
-    type ApplicationListResponsesSinglePage as ApplicationListResponsesSinglePage,
+    type ApplicationListResponsesCursorPaginationAfter as ApplicationListResponsesCursorPaginationAfter,
     type ApplicationCreateParams as ApplicationCreateParams,
     type ApplicationUpdateParams as ApplicationUpdateParams,
     type ApplicationListParams as ApplicationListParams,
@@ -66,7 +66,7 @@ export declare namespace ResourceLibrary {
     BaseCategories as BaseCategories,
     type CategoryListResponse as CategoryListResponse,
     type CategoryGetResponse as CategoryGetResponse,
-    type CategoryListResponsesSinglePage as CategoryListResponsesSinglePage,
+    type CategoryListResponsesCursorPaginationAfter as CategoryListResponsesCursorPaginationAfter,
     type CategoryListParams as CategoryListParams,
     type CategoryGetParams as CategoryGetParams,
   };

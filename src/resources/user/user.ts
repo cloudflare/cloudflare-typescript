@@ -24,7 +24,7 @@ import {
   Subscriptions,
 } from './subscriptions';
 import * as TenantsAPI from './tenants';
-import { BaseTenants, Tenants } from './tenants';
+import { BaseTenants, TenantListResponse, TenantListResponsesSinglePage, Tenants } from './tenants';
 import * as BillingAPI from './billing/billing';
 import { BaseBilling, Billing } from './billing/billing';
 import * as SpectrumAnalyticsAPI from './spectrum-analytics/spectrum-analytics';
@@ -327,7 +327,12 @@ export declare namespace User {
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
   };
 
-  export { Tenants as Tenants, BaseTenants as BaseTenants };
+  export {
+    Tenants as Tenants,
+    BaseTenants as BaseTenants,
+    type TenantListResponse as TenantListResponse,
+    type TenantListResponsesSinglePage as TenantListResponsesSinglePage,
+  };
 
   export {
     Tokens as Tokens,

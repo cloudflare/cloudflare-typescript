@@ -59,7 +59,7 @@ const runTests = (client: PartialCloudflare<{ networkInterconnects: { cnis: Base
       },
       bgp: {
         customer_asn: 0,
-        extra_prefixes: ['string'],
+        extra_prefixes: ['192.168.3.4/31'],
         md5_key: 'md5_key',
       },
     });
@@ -103,7 +103,7 @@ const runTests = (client: PartialCloudflare<{ networkInterconnects: { cnis: Base
       p2p_ip: '192.168.3.4/31',
       bgp: {
         customer_asn: 0,
-        extra_prefixes: ['string'],
+        extra_prefixes: ['192.168.3.4/31'],
         md5_key: 'md5_key',
       },
       bgp_mode: 'dynamic_route_exchange',

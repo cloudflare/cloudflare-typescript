@@ -15,6 +15,7 @@ export {
   type ApplicationType,
   type CORSHeaders,
   type Decision,
+  type DestinationOverride,
   type OIDCSaaSApp,
   type SaaSAppNameIDFormat,
   type SAMLSaaSApp,
@@ -68,11 +69,13 @@ export {
   type CustomPage,
   type CustomPageWithoutHTML,
   type CustomPageDeleteResponse,
+  type CustomPageValidateResponse,
   type CustomPageCreateParams,
   type CustomPageUpdateParams,
   type CustomPageListParams,
   type CustomPageDeleteParams,
   type CustomPageGetParams,
+  type CustomPageValidateParams,
   type CustomPageWithoutHTMLsV4PagePaginationArray,
 } from './custom-pages';
 export {
@@ -126,6 +129,7 @@ export {
   type KeyRotateParams,
 } from './keys';
 export { Logs, BaseLogs } from './logs/index';
+export { Mfa, BaseMfa } from './mfa/index';
 export {
   Policies,
   BasePolicies,
@@ -182,6 +186,21 @@ export {
   type TagGetParams,
   type TagsV4PagePaginationArray,
 } from './tags';
+export {
+  UserPopulations,
+  BaseUserPopulations,
+  type UserPopulationCreateResponse,
+  type UserPopulationUpdateResponse,
+  type UserPopulationListResponse,
+  type UserPopulationDeleteResponse,
+  type UserPopulationGetResponse,
+  type UserPopulationCreateParams,
+  type UserPopulationUpdateParams,
+  type UserPopulationListParams,
+  type UserPopulationDeleteParams,
+  type UserPopulationGetParams,
+  type UserPopulationListResponsesV4PagePaginationArray,
+} from './user-populations/index';
 export {
   Users,
   BaseUsers,

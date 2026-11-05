@@ -128,6 +128,18 @@ import {
   SensitivityGroupUpdateResponse,
   SensitivityGroups,
 } from './sensitivity-groups/sensitivity-groups';
+import * as ValidatorsAPI from './validators/validators';
+import {
+  BaseValidators,
+  References,
+  Validator,
+  ValidatorArray,
+  ValidatorGetParams,
+  ValidatorListParams,
+  Validators,
+  ValidatorsSinglePage,
+  WorkerValidator,
+} from './validators/validators';
 
 export class BaseDLP extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'dlp'] = Object.freeze(['zeroTrust', 'dlp'] as const);
@@ -144,6 +156,7 @@ export class DLP extends BaseDLP {
   profiles: ProfilesAPI.Profiles = new ProfilesAPI.Profiles(this._client);
   limits: LimitsAPI.Limits = new LimitsAPI.Limits(this._client);
   entries: EntriesAPI.Entries = new EntriesAPI.Entries(this._client);
+  validators: ValidatorsAPI.Validators = new ValidatorsAPI.Validators(this._client);
   sensitivityGroups: SensitivityGroupsAPI.SensitivityGroups = new SensitivityGroupsAPI.SensitivityGroups(
     this._client,
   );
@@ -171,6 +184,8 @@ DLP.Limits = Limits;
 DLP.BaseLimits = BaseLimits;
 DLP.Entries = Entries;
 DLP.BaseEntries = BaseEntries;
+DLP.Validators = Validators;
+DLP.BaseValidators = BaseValidators;
 DLP.SensitivityGroups = SensitivityGroups;
 DLP.BaseSensitivityGroups = BaseSensitivityGroups;
 DLP.DataTagCategories = DataTagCategories;
@@ -266,6 +281,18 @@ export declare namespace DLP {
     type EntryListParams as EntryListParams,
     type EntryDeleteParams as EntryDeleteParams,
     type EntryGetParams as EntryGetParams,
+  };
+
+  export {
+    Validators as Validators,
+    BaseValidators as BaseValidators,
+    type References as References,
+    type Validator as Validator,
+    type ValidatorArray as ValidatorArray,
+    type WorkerValidator as WorkerValidator,
+    type ValidatorsSinglePage as ValidatorsSinglePage,
+    type ValidatorListParams as ValidatorListParams,
+    type ValidatorGetParams as ValidatorGetParams,
   };
 
   export {

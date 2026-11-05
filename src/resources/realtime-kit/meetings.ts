@@ -242,10 +242,10 @@ export class BaseMeetings extends APIResource {
     params: MeetingRefreshParticipantTokenParams,
     options?: RequestOptions,
   ): APIPromise<MeetingRefreshParticipantTokenResponse> {
-    const { account_id, app_id, meeting_id } = params;
+    const { account_id, app_id, meeting_id, ...body } = params;
     return this._client.post(
       path`/accounts/${account_id}/realtime/kit/${app_id}/meetings/${meeting_id}/participants/${participantID}/token`,
-      options,
+      { body, ...options },
     );
   }
 
@@ -452,7 +452,8 @@ export namespace MeetingCreateResponse {
         keywords?: Array<string>;
 
         /**
-         * Specifies the language code for transcription to ensure accurate results.
+         * Specifies the language code for transcription to ensure accurate results. If
+         * omitted, the language is auto-detected for post-meeting (Whisper) transcription.
          */
         language?: 'en-US' | 'en-IN' | 'de' | 'hi' | 'sv' | 'ru' | 'pl' | 'el' | 'fr' | 'nl';
 
@@ -811,9 +812,20 @@ export namespace MeetingAddParticipantResponse {
     updated_at: string;
 
     /**
+     * Time at which the token stops being valid, in UTC. Returned when adding a
+     * participant.
+     */
+    expires_on?: string;
+
+    /**
      * Name of the participant.
      */
     name?: string | null;
+
+    /**
+     * Time from which the token is valid, in UTC. Returned when adding a participant.
+     */
+    not_before?: string;
 
     /**
      * URL to a picture of the participant.
@@ -910,9 +922,20 @@ export namespace MeetingEditParticipantResponse {
     updated_at: string;
 
     /**
+     * Time at which the token stops being valid, in UTC. Returned when adding a
+     * participant.
+     */
+    expires_on?: string;
+
+    /**
      * Name of the participant.
      */
     name?: string | null;
+
+    /**
+     * Time from which the token is valid, in UTC. Returned when adding a participant.
+     */
+    not_before?: string;
 
     /**
      * URL to a picture of the participant.
@@ -1453,7 +1476,8 @@ export namespace MeetingGetMeetingByIDResponse {
         keywords?: Array<string>;
 
         /**
-         * Specifies the language code for transcription to ensure accurate results.
+         * Specifies the language code for transcription to ensure accurate results. If
+         * omitted, the language is auto-detected for post-meeting (Whisper) transcription.
          */
         language?: 'en-US' | 'en-IN' | 'de' | 'hi' | 'sv' | 'ru' | 'pl' | 'el' | 'fr' | 'nl';
 
@@ -1896,6 +1920,16 @@ export namespace MeetingRefreshParticipantTokenResponse {
      * Regenerated participant's authentication token.
      */
     token: string;
+
+    /**
+     * Time at which the token stops being valid, in UTC.
+     */
+    expires_on: string;
+
+    /**
+     * Time from which the token is valid, in UTC.
+     */
+    not_before: string;
   }
 }
 
@@ -2046,7 +2080,8 @@ export namespace MeetingReplaceMeetingByIDResponse {
         keywords?: Array<string>;
 
         /**
-         * Specifies the language code for transcription to ensure accurate results.
+         * Specifies the language code for transcription to ensure accurate results. If
+         * omitted, the language is auto-detected for post-meeting (Whisper) transcription.
          */
         language?: 'en-US' | 'en-IN' | 'de' | 'hi' | 'sv' | 'ru' | 'pl' | 'el' | 'fr' | 'nl';
 
@@ -2503,7 +2538,8 @@ export namespace MeetingUpdateMeetingByIDResponse {
         keywords?: Array<string>;
 
         /**
-         * Specifies the language code for transcription to ensure accurate results.
+         * Specifies the language code for transcription to ensure accurate results. If
+         * omitted, the language is auto-detected for post-meeting (Whisper) transcription.
          */
         language?: 'en-US' | 'en-IN' | 'de' | 'hi' | 'sv' | 'ru' | 'pl' | 'el' | 'fr' | 'nl';
 
@@ -2930,7 +2966,8 @@ export namespace MeetingCreateParams {
       keywords?: Array<string>;
 
       /**
-       * Specifies the language code for transcription to ensure accurate results.
+       * Specifies the language code for transcription to ensure accurate results. If
+       * omitted, the language is auto-detected for post-meeting (Whisper) transcription.
        */
       language?: 'en-US' | 'en-IN' | 'de' | 'hi' | 'sv' | 'ru' | 'pl' | 'el' | 'fr' | 'nl';
 
@@ -3362,6 +3399,13 @@ export interface MeetingAddParticipantParams {
   preset_name: string;
 
   /**
+   * Body param: Validity window of the participant authentication token. The window
+   * is [not_before, expires_on) and cannot be longer than 100 days. Defaults to a
+   * token valid from now for 100 days.
+   */
+  token?: MeetingAddParticipantParams.Token;
+
+  /**
    * Body param: (Optional) Name of the participant.
    */
   name?: string | null;
@@ -3370,6 +3414,27 @@ export interface MeetingAddParticipantParams {
    * Body param: (Optional) A URL to a picture to be used for the participant.
    */
   picture?: string | null;
+}
+
+export namespace MeetingAddParticipantParams {
+  /**
+   * Validity window of the participant authentication token. The window is
+   * [not_before, expires_on) and cannot be longer than 100 days. Defaults to a token
+   * valid from now for 100 days.
+   */
+  export interface Token {
+    /**
+     * RFC 3339 timestamp with a timezone at or after which the token cannot be used.
+     * Must be in the future. Defaults to not_before plus 100 days.
+     */
+    expires_on?: string;
+
+    /**
+     * RFC 3339 timestamp with a timezone before which the token cannot be used.
+     * Defaults to the current time. May be in the past.
+     */
+    not_before?: string;
+  }
 }
 
 export interface MeetingDeleteMeetingParticipantParams {
@@ -3522,19 +3587,32 @@ export interface MeetingGetMeetingParticipantsParams {
 
 export interface MeetingRefreshParticipantTokenParams {
   /**
-   * The account identifier tag.
+   * Path param: The account identifier tag.
    */
   account_id: string;
 
   /**
-   * The app identifier tag.
+   * Path param: The app identifier tag.
    */
   app_id: string;
 
   /**
-   * ID of the meeting. You can fetch the meeting ID using the create a meeting API.
+   * Path param: ID of the meeting. You can fetch the meeting ID using the create a
+   * meeting API.
    */
   meeting_id: string;
+
+  /**
+   * Body param: RFC 3339 timestamp with a timezone at or after which the token
+   * cannot be used. Must be in the future. Defaults to not_before plus 100 days.
+   */
+  expires_on?: string;
+
+  /**
+   * Body param: RFC 3339 timestamp with a timezone before which the token cannot be
+   * used. Defaults to the current time. May be in the past.
+   */
+  not_before?: string;
 }
 
 export interface MeetingReplaceMeetingByIDParams {
@@ -3659,7 +3737,8 @@ export namespace MeetingReplaceMeetingByIDParams {
       keywords?: Array<string>;
 
       /**
-       * Specifies the language code for transcription to ensure accurate results.
+       * Specifies the language code for transcription to ensure accurate results. If
+       * omitted, the language is auto-detected for post-meeting (Whisper) transcription.
        */
       language?: 'en-US' | 'en-IN' | 'de' | 'hi' | 'sv' | 'ru' | 'pl' | 'el' | 'fr' | 'nl';
 
@@ -4196,7 +4275,8 @@ export namespace MeetingUpdateMeetingByIDParams {
       keywords?: Array<string>;
 
       /**
-       * Specifies the language code for transcription to ensure accurate results.
+       * Specifies the language code for transcription to ensure accurate results. If
+       * omitted, the language is auto-detected for post-meeting (Whisper) transcription.
        */
       language?: 'en-US' | 'en-IN' | 'de' | 'hi' | 'sv' | 'ru' | 'pl' | 'el' | 'fr' | 'nl';
 

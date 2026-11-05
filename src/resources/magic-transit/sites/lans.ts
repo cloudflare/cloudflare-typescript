@@ -324,6 +324,8 @@ export interface LAN {
 
   physport?: number;
 
+  remote_subnets?: Array<LAN.RemoteSubnet>;
+
   routed_subnets?: Array<RoutedSubnet>;
 
   /**
@@ -342,6 +344,26 @@ export interface LAN {
    * VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
+}
+
+export namespace LAN {
+  /**
+   * A remote subnet reachable through Cloudflare that is addressed from this LAN by
+   * a local alias prefix of the same size. The local alias prefix must not overlap
+   * other subnets on the LAN, and the remote prefix must not overlap other remote
+   * prefixes on the LAN.
+   */
+  export interface RemoteSubnet {
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    local_alias_prefix: string;
+
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    remote_prefix: string;
+  }
 }
 
 /**
@@ -483,6 +505,11 @@ export interface LANCreateParams {
   /**
    * Body param
    */
+  remote_subnets?: Array<LANCreateParams.RemoteSubnet>;
+
+  /**
+   * Body param
+   */
   routed_subnets?: Array<RoutedSubnetParam>;
 
   /**
@@ -497,6 +524,26 @@ export interface LANCreateParams {
    * Body param: VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
+}
+
+export namespace LANCreateParams {
+  /**
+   * A remote subnet reachable through Cloudflare that is addressed from this LAN by
+   * a local alias prefix of the same size. The local alias prefix must not overlap
+   * other subnets on the LAN, and the remote prefix must not overlap other remote
+   * prefixes on the LAN.
+   */
+  export interface RemoteSubnet {
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    local_alias_prefix: string;
+
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    remote_prefix: string;
+  }
 }
 
 export interface LANUpdateParams {
@@ -549,6 +596,11 @@ export interface LANUpdateParams {
   /**
    * Body param
    */
+  remote_subnets?: Array<LANUpdateParams.RemoteSubnet>;
+
+  /**
+   * Body param
+   */
   routed_subnets?: Array<RoutedSubnetParam>;
 
   /**
@@ -563,6 +615,26 @@ export interface LANUpdateParams {
    * Body param: VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
+}
+
+export namespace LANUpdateParams {
+  /**
+   * A remote subnet reachable through Cloudflare that is addressed from this LAN by
+   * a local alias prefix of the same size. The local alias prefix must not overlap
+   * other subnets on the LAN, and the remote prefix must not overlap other remote
+   * prefixes on the LAN.
+   */
+  export interface RemoteSubnet {
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    local_alias_prefix: string;
+
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    remote_prefix: string;
+  }
 }
 
 export interface LANListParams {
@@ -634,6 +706,11 @@ export interface LANEditParams {
   /**
    * Body param
    */
+  remote_subnets?: Array<LANEditParams.RemoteSubnet>;
+
+  /**
+   * Body param
+   */
   routed_subnets?: Array<RoutedSubnetParam>;
 
   /**
@@ -648,6 +725,26 @@ export interface LANEditParams {
    * Body param: VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
+}
+
+export namespace LANEditParams {
+  /**
+   * A remote subnet reachable through Cloudflare that is addressed from this LAN by
+   * a local alias prefix of the same size. The local alias prefix must not overlap
+   * other subnets on the LAN, and the remote prefix must not overlap other remote
+   * prefixes on the LAN.
+   */
+  export interface RemoteSubnet {
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    local_alias_prefix: string;
+
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    remote_prefix: string;
+  }
 }
 
 export interface LANGetParams {

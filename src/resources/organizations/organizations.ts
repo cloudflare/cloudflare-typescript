@@ -17,13 +17,29 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * User API tokens can list and create Organizations, but reading, updating, or deleting an Organization requires a Global API key and your registered email address. The `cloudflare_organization` Terraform resource therefore requires a Global API key for its full lifecycle.
+ *
+ * See [Organizations authentication limitations](https://developers.cloudflare.com/fundamentals/organizations/limitations/#api-authentication) for credential compatibility by operation. Each endpoint’s **Security** section lists its supported authentication methods, with **Accepted Permissions** where applicable.
+ */
 export class BaseOrganizations extends APIResource {
   static override readonly _key: readonly ['organizations'] = Object.freeze(['organizations'] as const);
 
   /**
    * Create a new organization for a user. Sub-organization creation availability
-   * depends on the organization's capabilities. (Currently in Public Beta - see
-   * https://developers.cloudflare.com/fundamentals/organizations/)
+   * depends on the organization's capabilities. The optional `profile` object
+   * accepts partial profile details; its individual fields are not required.
+   * Organization names are limited to 65 UTF-8 bytes. Each profile field is limited
+   * to 1,000 UTF-8 bytes, and a non-empty business email must be valid. At least one
+   * of business name, address, phone, or email must be non-empty to persist a
+   * profile.
+   *
+   * @example
+   * ```ts
+   * const organization = await client.organizations.create({
+   *   name: 'x',
+   * });
+   * ```
    */
   create(body: OrganizationCreateParams, options?: RequestOptions): APIPromise<Organization> {
     return (
@@ -32,8 +48,16 @@ export class BaseOrganizations extends APIResource {
   }
 
   /**
-   * Update an organization's name. (Currently in Public Beta - see
-   * https://developers.cloudflare.com/fundamentals/organizations/)
+   * Update an organization's name. Supplying `parent_id` verifies the current
+   * parent; this endpoint cannot move an organization. Organization names are
+   * limited to 65 UTF-8 bytes.
+   *
+   * @example
+   * ```ts
+   * const organization = await client.organizations.update(
+   *   'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8',
+   * );
+   * ```
    */
   update(
     organizationID: string,
@@ -48,8 +72,17 @@ export class BaseOrganizations extends APIResource {
   }
 
   /**
-   * Retrieve a list of organizations a particular user has access to. (Currently in
-   * Public Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+   * Retrieve a list of organizations a particular user has access to. At most one of
+   * `containing.account`, `containing.user`, or `containing.organization` may be
+   * provided.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const organization of client.organizations.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: OrganizationListParams | null | undefined = {},
@@ -59,12 +92,19 @@ export class BaseOrganizations extends APIResource {
   }
 
   /**
-   * Delete an organization. The organization MUST be empty before deleting. It must
-   * not contain any sub-organizations, accounts, members or users. Sub-organization
-   * deletion availability depends on the organization's capabilities. (Currently in
-   * Public Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+   * Delete an organization. It must not contain active sub-organizations or
+   * accounts. A root organization must also have no active managed users.
+   * Sub-organization deletion availability depends on the organization's
+   * capabilities.
    *
-   * **Access Control:** Restricted to enterprise organizations.
+   * **Access Control:** Root deletion is restricted to enterprise organizations.
+   *
+   * @example
+   * ```ts
+   * const organization = await client.organizations.delete(
+   *   'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8',
+   * );
+   * ```
    */
   delete(organizationID: string, options?: RequestOptions): APIPromise<OrganizationDeleteResponse> {
     return (
@@ -75,8 +115,14 @@ export class BaseOrganizations extends APIResource {
   }
 
   /**
-   * Retrieve the details of a certain organization. (Currently in Public Beta - see
-   * https://developers.cloudflare.com/fundamentals/organizations/)
+   * Retrieve the details of a certain organization.
+   *
+   * @example
+   * ```ts
+   * const organization = await client.organizations.get(
+   *   'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8',
+   * );
+   * ```
    */
   get(organizationID: string, options?: RequestOptions): APIPromise<Organization> {
     return (
@@ -86,6 +132,11 @@ export class BaseOrganizations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+/**
+ * User API tokens can list and create Organizations, but reading, updating, or deleting an Organization requires a Global API key and your registered email address. The `cloudflare_organization` Terraform resource therefore requires a Global API key for its full lifecycle.
+ *
+ * See [Organizations authentication limitations](https://developers.cloudflare.com/fundamentals/organizations/limitations/#api-authentication) for credential compatibility by operation. Each endpoint’s **Security** section lists its supported authentication methods, with **Accepted Permissions** where applicable.
+ */
 export class Organizations extends BaseOrganizations {
   organizationProfile: OrganizationProfileAPI.OrganizationProfileResource =
     new OrganizationProfileAPI.OrganizationProfileResource(this._client);
@@ -114,6 +165,8 @@ export interface Organization {
 
 export namespace Organization {
   export interface Meta {
+    are_child_accounts_accessible_by_org_members?: boolean;
+
     /**
      * Ordered chain of organization tags from the root organization down to (and
      * including) this organization itself. Root organizations return a single-element
@@ -129,6 +182,8 @@ export namespace Organization {
      * Enable features for Organizations.
      */
     tenant_flags?: Meta.TenantFlags;
+
+    tenant_type?: string;
 
     [k: string]: unknown;
   }
@@ -168,31 +223,54 @@ export interface OrganizationDeleteResponse {
 }
 
 export interface OrganizationCreateParams {
+  /**
+   * The Organization name, limited to 65 UTF-8 bytes.
+   */
   name: string;
 
   parent?: OrganizationCreateParams.Parent;
 
-  profile?: OrganizationProfileAPI.OrganizationProfileParam;
+  /**
+   * Optional profile fields, each limited to 1,000 UTF-8 bytes. An empty profile is
+   * ignored.
+   */
+  profile?: OrganizationCreateParams.Profile;
 }
 
 export namespace OrganizationCreateParams {
   export interface Parent {
     id: string;
   }
+
+  /**
+   * Optional profile fields, each limited to 1,000 UTF-8 bytes. An empty profile is
+   * ignored.
+   */
+  export interface Profile {
+    business_address?: string;
+
+    business_email?: string;
+
+    business_name?: string;
+
+    business_phone?: string;
+
+    external_metadata?: string;
+  }
 }
 
 export interface OrganizationUpdateParams {
-  name: string;
+  /**
+   * The Organization's display name, limited to 65 UTF-8 bytes. An omitted, empty,
+   * or unchanged value is a no-op.
+   */
+  name?: string;
 
-  parent?: OrganizationUpdateParams.Parent;
-
-  profile?: OrganizationProfileAPI.OrganizationProfileParam;
-}
-
-export namespace OrganizationUpdateParams {
-  export interface Parent {
-    id: string;
-  }
+  /**
+   * The current parent Organization ID. A different value is rejected; this endpoint
+   * cannot move an Organization.
+   */
+  parent_id?: string;
 }
 
 export interface OrganizationListParams {
@@ -204,7 +282,21 @@ export interface OrganizationListParams {
 
   containing?: OrganizationListParams.Containing;
 
+  /**
+   * Sort direction for the `order_by` field. Defaults to `asc` when `order_by` is
+   * specified.
+   */
+  direction?: 'asc' | 'desc';
+
+  member?: OrganizationListParams.Member;
+
   name?: OrganizationListParams.Name;
+
+  /**
+   * Field to order results by. Currently supported values: `name`. When not
+   * specified, results are ordered by hierarchy.
+   */
+  order_by?: 'name';
 
   /**
    * The amount of items to return. Defaults to 10.
@@ -246,6 +338,15 @@ export namespace OrganizationListParams {
      * that organization.
      */
     user?: string;
+  }
+
+  export interface Member {
+    /**
+     * Filter organizations to those where the given user, by email, is an active
+     * member of that exact organization. This does not include hierarchy-derived
+     * access.
+     */
+    email?: string;
   }
 
   export interface Name {

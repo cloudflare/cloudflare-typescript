@@ -105,7 +105,8 @@ export class BaseBilling extends APIResource {
   }
 
   /**
-   * Retrieve aggregated usage meter event summaries for the given time range.
+   * Retrieve AI Gateway usage cost, in US dollars, aggregated by hour or day for the
+   * given time range.
    *
    * @example
    * ```ts
@@ -282,6 +283,9 @@ export namespace BillingUsageHistoryResponse {
   export interface History {
     id: string;
 
+    /**
+     * AI Gateway usage cost in the window, in US dollars.
+     */
     aggregated_value: number;
 
     end_time: number;

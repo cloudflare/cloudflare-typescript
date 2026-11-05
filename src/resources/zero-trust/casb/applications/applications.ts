@@ -75,7 +75,8 @@ export class BaseApplications extends APIResource {
       | 'OPENAI'
       | 'SALESFORCE'
       | 'SERVICENOW'
-      | 'SLACK',
+      | 'SLACK'
+      | 'ZOOM',
     params: ApplicationGetParams,
     options?: RequestOptions,
   ): APIPromise<ApplicationGetResponse> {
@@ -116,6 +117,7 @@ export interface ApplicationListResponse {
    * - `SALESFORCE` - SALESFORCE
    * - `SERVICENOW` - SERVICENOW
    * - `SLACK` - SLACK
+   * - `ZOOM` - ZOOM
    */
   id:
     | 'ANTHROPIC'
@@ -132,7 +134,8 @@ export interface ApplicationListResponse {
     | 'OPENAI'
     | 'SALESFORCE'
     | 'SERVICENOW'
-    | 'SLACK';
+    | 'SLACK'
+    | 'ZOOM';
 
   /**
    * Available auth methods.
@@ -259,6 +262,7 @@ export interface ApplicationGetResponse {
    * - `SALESFORCE` - SALESFORCE
    * - `SERVICENOW` - SERVICENOW
    * - `SLACK` - SLACK
+   * - `ZOOM` - ZOOM
    */
   id:
     | 'ANTHROPIC'
@@ -275,7 +279,8 @@ export interface ApplicationGetResponse {
     | 'OPENAI'
     | 'SALESFORCE'
     | 'SERVICENOW'
-    | 'SLACK';
+    | 'SLACK'
+    | 'ZOOM';
 
   /**
    * Available authentication methods.

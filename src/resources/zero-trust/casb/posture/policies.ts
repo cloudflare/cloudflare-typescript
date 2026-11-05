@@ -201,7 +201,7 @@ export interface PolicyCreateResponse {
 
   /**
    * The finding type this policy is associated with. Immutable after creation;
-   * changing it replaces the policy.
+   * attempts to change it via update are rejected.
    */
   finding_type_id: string;
 
@@ -326,7 +326,7 @@ export interface PolicyUpdateResponse {
 
   /**
    * The finding type this policy is associated with. Immutable after creation;
-   * changing it replaces the policy.
+   * attempts to change it via update are rejected.
    */
   finding_type_id: string;
 
@@ -451,7 +451,7 @@ export interface PolicyListResponse {
 
   /**
    * The finding type this policy is associated with. Immutable after creation;
-   * changing it replaces the policy.
+   * attempts to change it via update are rejected.
    */
   finding_type_id: string;
 
@@ -586,7 +586,7 @@ export interface PolicyGetResponse {
 
   /**
    * The finding type this policy is associated with. Immutable after creation;
-   * changing it replaces the policy.
+   * attempts to change it via update are rejected.
    */
   finding_type_id: string;
 

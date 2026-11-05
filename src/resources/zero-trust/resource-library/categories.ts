@@ -2,7 +2,11 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
-import { PagePromise, SinglePage } from '../../../core/pagination';
+import {
+  CursorPaginationAfter,
+  type CursorPaginationAfterParams,
+  PagePromise,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -14,7 +18,8 @@ export class BaseCategories extends APIResource {
   ] as const);
 
   /**
-   * List application categories.
+   * List the categories available for classifying applications, ordered by name.
+   * Results are paginated by `offset` or `cursor`.
    *
    * @example
    * ```ts
@@ -29,17 +34,17 @@ export class BaseCategories extends APIResource {
   list(
     params: CategoryListParams,
     options?: RequestOptions,
-  ): PagePromise<CategoryListResponsesSinglePage, CategoryListResponse> {
+  ): PagePromise<CategoryListResponsesCursorPaginationAfter, CategoryListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/resource-library/categories`,
-      SinglePage<CategoryListResponse>,
+      CursorPaginationAfter<CategoryListResponse>,
       { query, ...options },
     );
   }
 
   /**
-   * Get application category by ID.
+   * Retrieve an application category by its numeric ID.
    *
    * @example
    * ```ts
@@ -62,11 +67,11 @@ export class BaseCategories extends APIResource {
 }
 export class Categories extends BaseCategories {}
 
-export type CategoryListResponsesSinglePage = SinglePage<CategoryListResponse>;
+export type CategoryListResponsesCursorPaginationAfter = CursorPaginationAfter<CategoryListResponse>;
 
 export interface CategoryListResponse {
   /**
-   * Returns the category ID.
+   * Numeric identifier for an application category.
    */
   id: number;
 
@@ -88,7 +93,7 @@ export interface CategoryListResponse {
 
 export interface CategoryGetResponse {
   /**
-   * Returns the category ID.
+   * Numeric identifier for an application category.
    */
   id: number;
 
@@ -108,19 +113,21 @@ export interface CategoryGetResponse {
   name: string;
 }
 
-export interface CategoryListParams {
+export interface CategoryListParams extends CursorPaginationAfterParams {
   /**
    * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Query param: Limit of number of results to return.
+   * Query param: Number of results to return. Defaults to 25; values are clamped to
+   * 1–250.
    */
   limit?: number;
 
   /**
-   * Query param: Offset of results to return.
+   * Query param: Number of results to skip. Defaults to 0; negative values are
+   * clamped to 0. Ignored when `cursor` is provided.
    */
   offset?: number;
 }
@@ -136,7 +143,7 @@ export declare namespace Categories {
   export {
     type CategoryListResponse as CategoryListResponse,
     type CategoryGetResponse as CategoryGetResponse,
-    type CategoryListResponsesSinglePage as CategoryListResponsesSinglePage,
+    type CategoryListResponsesCursorPaginationAfter as CategoryListResponsesCursorPaginationAfter,
     type CategoryListParams as CategoryListParams,
     type CategoryGetParams as CategoryGetParams,
   };

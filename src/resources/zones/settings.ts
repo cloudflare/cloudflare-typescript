@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as SettingsAPI from './settings';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -72,7 +71,7 @@ export interface AdvancedDDoS {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -102,7 +101,7 @@ export interface AlwaysOnline {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -243,7 +242,7 @@ export interface Brotli {
   /**
    * Current value of the zone setting.
    */
-  value: 'off' | 'on';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -363,21 +362,7 @@ export interface ChallengeTTL {
   /**
    * Current value of the zone setting.
    */
-  value:
-    | 300
-    | 900
-    | 1800
-    | 2700
-    | 3600
-    | 7200
-    | 10800
-    | 14400
-    | 28800
-    | 57600
-    | 86400
-    | 604800
-    | 2592000
-    | 31536000;
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -404,7 +389,7 @@ export interface Ciphers {
   /**
    * Current value of the zone setting.
    */
-  value: Array<string>;
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -435,7 +420,7 @@ export interface DevelopmentMode {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -471,7 +456,7 @@ export interface EarlyHints {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -551,7 +536,7 @@ export interface H2Prioritization {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off' | 'custom';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -583,7 +568,7 @@ export interface HotlinkProtection {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -609,7 +594,7 @@ export interface HTTP2 {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -635,7 +620,7 @@ export interface HTTP3 {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -664,7 +649,7 @@ export interface ImageResizing {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off' | 'open';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -717,7 +702,7 @@ export interface IPV6 {
   /**
    * Current value of the zone setting.
    */
-  value: 'off' | 'on';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -745,7 +730,7 @@ export interface MinTLSVersion {
   /**
    * Current value of the zone setting.
    */
-  value: '1.0' | '1.1' | '1.2' | '1.3';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -809,7 +794,7 @@ export interface NEL {
   /**
    * Current value of the zone setting.
    */
-  value: NEL.Value;
+  value: NEL.Enabled | NEL.Enabled | NEL.Enabled | NEL.Enabled | NEL.Enabled;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -824,10 +809,23 @@ export interface NEL {
 }
 
 export namespace NEL {
-  /**
-   * Current value of the zone setting.
-   */
-  export interface Value {
+  export interface Enabled {
+    enabled?: boolean;
+  }
+
+  export interface Enabled {
+    enabled?: boolean;
+  }
+
+  export interface Enabled {
+    enabled?: boolean;
+  }
+
+  export interface Enabled {
+    enabled?: boolean;
+  }
+
+  export interface Enabled {
     enabled?: boolean;
   }
 }
@@ -873,7 +871,7 @@ export interface OpportunisticOnion {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -900,12 +898,9 @@ export interface OrangeToOrange {
   id: 'orange_to_orange';
 
   /**
-   * @deprecated This setting is deprecated. Orange to Orange (O2O) is applied
-   * automatically for eligible zones and no longer requires configuration; this
-   * setting only controlled the legacy O2O v1 (Managed CNAME) path. More information
-   * at https://developers.cloudflare.com/fundamentals/api/reference/deprecations/
+   * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -1004,7 +999,7 @@ export interface PrefetchPreload {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -1028,9 +1023,9 @@ export interface ProxyReadTimeout {
   id: 'proxy_read_timeout';
 
   /**
-   * Current value of the zone setting.
+   * Value of the zone setting. Notes: Value must be between 1 and 6000
    */
-  value: number;
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -1056,7 +1051,7 @@ export interface PseudoIPV4 {
   /**
    * Current value of the zone setting.
    */
-  value: 'off' | 'add_header' | 'overwrite_header';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -1142,7 +1137,12 @@ export interface SecurityHeaders {
   /**
    * Current value of the zone setting.
    */
-  value: SecurityHeaders.Value;
+  value:
+    | SecurityHeaders.StrictTransportSecurity
+    | SecurityHeaders.StrictTransportSecurity
+    | SecurityHeaders.StrictTransportSecurity
+    | SecurityHeaders.StrictTransportSecurity
+    | SecurityHeaders.StrictTransportSecurity;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -1157,17 +1157,170 @@ export interface SecurityHeaders {
 }
 
 export namespace SecurityHeaders {
-  /**
-   * Current value of the zone setting.
-   */
-  export interface Value {
+  export interface StrictTransportSecurity {
     /**
      * Strict Transport Security.
      */
-    strict_transport_security?: Value.StrictTransportSecurity;
+    strict_transport_security?: StrictTransportSecurity.StrictTransportSecurity;
   }
 
-  export namespace Value {
+  export namespace StrictTransportSecurity {
+    /**
+     * Strict Transport Security.
+     */
+    export interface StrictTransportSecurity {
+      /**
+       * Whether or not strict transport security is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * Include all subdomains for strict transport security.
+       */
+      include_subdomains?: boolean;
+
+      /**
+       * Max age in seconds of the strict transport security.
+       */
+      max_age?: number;
+
+      /**
+       * Whether or not to include 'X-Content-Type-Options: nosniff' header.
+       */
+      nosniff?: boolean;
+
+      /**
+       * Enable automatic preload of the HSTS configuration.
+       */
+      preload?: boolean;
+    }
+  }
+
+  export interface StrictTransportSecurity {
+    /**
+     * Strict Transport Security.
+     */
+    strict_transport_security?: StrictTransportSecurity.StrictTransportSecurity;
+  }
+
+  export namespace StrictTransportSecurity {
+    /**
+     * Strict Transport Security.
+     */
+    export interface StrictTransportSecurity {
+      /**
+       * Whether or not strict transport security is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * Include all subdomains for strict transport security.
+       */
+      include_subdomains?: boolean;
+
+      /**
+       * Max age in seconds of the strict transport security.
+       */
+      max_age?: number;
+
+      /**
+       * Whether or not to include 'X-Content-Type-Options: nosniff' header.
+       */
+      nosniff?: boolean;
+
+      /**
+       * Enable automatic preload of the HSTS configuration.
+       */
+      preload?: boolean;
+    }
+  }
+
+  export interface StrictTransportSecurity {
+    /**
+     * Strict Transport Security.
+     */
+    strict_transport_security?: StrictTransportSecurity.StrictTransportSecurity;
+  }
+
+  export namespace StrictTransportSecurity {
+    /**
+     * Strict Transport Security.
+     */
+    export interface StrictTransportSecurity {
+      /**
+       * Whether or not strict transport security is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * Include all subdomains for strict transport security.
+       */
+      include_subdomains?: boolean;
+
+      /**
+       * Max age in seconds of the strict transport security.
+       */
+      max_age?: number;
+
+      /**
+       * Whether or not to include 'X-Content-Type-Options: nosniff' header.
+       */
+      nosniff?: boolean;
+
+      /**
+       * Enable automatic preload of the HSTS configuration.
+       */
+      preload?: boolean;
+    }
+  }
+
+  export interface StrictTransportSecurity {
+    /**
+     * Strict Transport Security.
+     */
+    strict_transport_security?: StrictTransportSecurity.StrictTransportSecurity;
+  }
+
+  export namespace StrictTransportSecurity {
+    /**
+     * Strict Transport Security.
+     */
+    export interface StrictTransportSecurity {
+      /**
+       * Whether or not strict transport security is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * Include all subdomains for strict transport security.
+       */
+      include_subdomains?: boolean;
+
+      /**
+       * Max age in seconds of the strict transport security.
+       */
+      max_age?: number;
+
+      /**
+       * Whether or not to include 'X-Content-Type-Options: nosniff' header.
+       */
+      nosniff?: boolean;
+
+      /**
+       * Enable automatic preload of the HSTS configuration.
+       */
+      preload?: boolean;
+    }
+  }
+
+  export interface StrictTransportSecurity {
+    /**
+     * Strict Transport Security.
+     */
+    strict_transport_security?: StrictTransportSecurity.StrictTransportSecurity;
+  }
+
+  export namespace StrictTransportSecurity {
     /**
      * Strict Transport Security.
      */
@@ -1240,7 +1393,7 @@ export interface ServerSideExcludes {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -1335,7 +1488,7 @@ export interface TLS1_3 {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off' | 'zrt';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -1362,7 +1515,7 @@ export interface TLSClientAuth {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -1442,7 +1595,7 @@ export interface WebP {
   /**
    * Current value of the zone setting.
    */
-  value: 'off' | 'on';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -1474,7 +1627,7 @@ export interface Websocket {
   /**
    * Current value of the zone setting.
    */
-  value: 'off' | 'on';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -1500,7 +1653,7 @@ export interface ZeroRTT {
   /**
    * Current value of the zone setting.
    */
-  value: 'on' | 'off';
+  value: string | number | boolean | unknown | Array<string>;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -1581,6 +1734,7 @@ export type SettingEditResponse =
   | SettingEditResponse.ZonesTrueClientIPHeader2
   | SettingEditResponse.ZonesWAF2
   | SettingEditResponse.ZonesWebmcpEnabled
+  | SettingEditResponse.ZonesWebmcpMcpURL
   | SettingEditResponse.ZonesWebmcpPacks
   | WebP
   | Websocket;
@@ -1641,7 +1795,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -1667,7 +1821,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -1694,9 +1848,15 @@ export namespace SettingEditResponse {
     id: 'browser_cache_ttl';
 
     /**
-     * Current value of the zone setting.
+     * Value of the zone setting in seconds. Minimum values by plan:
+     *
+     * - Free: 1 second
+     * - Pro: 1 second
+     * - Business: 1 second
+     * - Enterprise: 1 second Setting a TTL of 0 is equivalent to selecting
+     *   `Respect Existing Headers` and is allowed for all plans.
      */
-    value: number;
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -1726,7 +1886,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -1756,7 +1916,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'aggressive' | 'basic' | 'simplified';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -1782,7 +1942,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -1812,7 +1972,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -1838,11 +1998,9 @@ export namespace SettingEditResponse {
     id: 'cname_flattening';
 
     /**
-     * @deprecated This zone setting is deprecated; please use the DNS Settings route
-     * instead. More information at
-     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
+     * Current value of the zone setting.
      */
-    value: 'flatten_at_root' | 'flatten_all';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -1869,28 +2027,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value:
-      | 30
-      | 60
-      | 300
-      | 1200
-      | 1800
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 18000
-      | 28800
-      | 43200
-      | 57600
-      | 72000
-      | 86400
-      | 172800
-      | 259200
-      | 345600
-      | 432000
-      | 518400
-      | 604800;
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -1917,7 +2054,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -1945,7 +2082,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -1971,33 +2108,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value:
-      | 100
-      | 125
-      | 150
-      | 175
-      | 200
-      | 225
-      | 250
-      | 275
-      | 300
-      | 325
-      | 350
-      | 375
-      | 400
-      | 425
-      | 450
-      | 475
-      | 500
-      | 1000
-      | 1500
-      | 2000
-      | 2500
-      | 3000
-      | 3500
-      | 4000
-      | 4500
-      | 5000;
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2022,10 +2133,9 @@ export namespace SettingEditResponse {
     id: 'mirage';
 
     /**
-     * @deprecated Mirage is being deprecated. More information at
-     * https://developers.cloudflare.com/speed/optimization/images/mirage/
+     * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2051,7 +2161,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2079,7 +2189,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2160,7 +2270,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'lossless' | 'lossy';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2187,7 +2297,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2214,12 +2324,9 @@ export namespace SettingEditResponse {
     id: 'privacy_pass';
 
     /**
-     * @deprecated Privacy Pass v1 was deprecated in 2023. (Announcement -
-     * https://blog.cloudflare.com/privacy-pass-standard/) and (API deprecation
-     * details -
-     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
+     * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2247,7 +2354,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2275,7 +2382,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2302,7 +2409,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2337,7 +2444,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2365,7 +2472,12 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: SettingsAPI.AutomaticPlatformOptimization;
+    value:
+      | ZonesSchemasAutomaticPlatformOptimization.UnionMember0
+      | ZonesSchemasAutomaticPlatformOptimization.UnionMember1
+      | ZonesSchemasAutomaticPlatformOptimization.UnionMember2
+      | ZonesSchemasAutomaticPlatformOptimization.UnionMember3
+      | ZonesSchemasAutomaticPlatformOptimization.UnionMember4;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2377,6 +2489,193 @@ export namespace SettingEditResponse {
      * last time this setting was modified.
      */
     modified_on?: string | null;
+  }
+
+  export namespace ZonesSchemasAutomaticPlatformOptimization {
+    export interface UnionMember0 {
+      /**
+       * Indicates whether or not
+       * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
+       * is enabled.
+       */
+      cache_by_device_type?: boolean;
+
+      /**
+       * Indicates whether or not Cloudflare proxy is enabled.
+       */
+      cf?: boolean;
+
+      /**
+       * Indicates whether or not Automatic Platform Optimization is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * An array of hostnames where Automatic Platform Optimization for WordPress is
+       * activated.
+       */
+      hostnames?: Array<string>;
+
+      /**
+       * Indicates whether or not site is powered by WordPress.
+       */
+      wordpress?: boolean;
+
+      /**
+       * Indicates whether or not
+       * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
+       * installed.
+       */
+      wp_plugin?: boolean;
+    }
+
+    export interface UnionMember1 {
+      /**
+       * Indicates whether or not
+       * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
+       * is enabled.
+       */
+      cache_by_device_type?: boolean;
+
+      /**
+       * Indicates whether or not Cloudflare proxy is enabled.
+       */
+      cf?: boolean;
+
+      /**
+       * Indicates whether or not Automatic Platform Optimization is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * An array of hostnames where Automatic Platform Optimization for WordPress is
+       * activated.
+       */
+      hostnames?: Array<string>;
+
+      /**
+       * Indicates whether or not site is powered by WordPress.
+       */
+      wordpress?: boolean;
+
+      /**
+       * Indicates whether or not
+       * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
+       * installed.
+       */
+      wp_plugin?: boolean;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * Indicates whether or not
+       * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
+       * is enabled.
+       */
+      cache_by_device_type?: boolean;
+
+      /**
+       * Indicates whether or not Cloudflare proxy is enabled.
+       */
+      cf?: boolean;
+
+      /**
+       * Indicates whether or not Automatic Platform Optimization is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * An array of hostnames where Automatic Platform Optimization for WordPress is
+       * activated.
+       */
+      hostnames?: Array<string>;
+
+      /**
+       * Indicates whether or not site is powered by WordPress.
+       */
+      wordpress?: boolean;
+
+      /**
+       * Indicates whether or not
+       * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
+       * installed.
+       */
+      wp_plugin?: boolean;
+    }
+
+    export interface UnionMember3 {
+      /**
+       * Indicates whether or not
+       * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
+       * is enabled.
+       */
+      cache_by_device_type?: boolean;
+
+      /**
+       * Indicates whether or not Cloudflare proxy is enabled.
+       */
+      cf?: boolean;
+
+      /**
+       * Indicates whether or not Automatic Platform Optimization is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * An array of hostnames where Automatic Platform Optimization for WordPress is
+       * activated.
+       */
+      hostnames?: Array<string>;
+
+      /**
+       * Indicates whether or not site is powered by WordPress.
+       */
+      wordpress?: boolean;
+
+      /**
+       * Indicates whether or not
+       * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
+       * installed.
+       */
+      wp_plugin?: boolean;
+    }
+
+    export interface UnionMember4 {
+      /**
+       * Indicates whether or not
+       * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
+       * is enabled.
+       */
+      cache_by_device_type?: boolean;
+
+      /**
+       * Indicates whether or not Cloudflare proxy is enabled.
+       */
+      cf?: boolean;
+
+      /**
+       * Indicates whether or not Automatic Platform Optimization is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * An array of hostnames where Automatic Platform Optimization for WordPress is
+       * activated.
+       */
+      hostnames?: Array<string>;
+
+      /**
+       * Indicates whether or not site is powered by WordPress.
+       */
+      wordpress?: boolean;
+
+      /**
+       * Indicates whether or not
+       * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
+       * installed.
+       */
+      wp_plugin?: boolean;
+    }
   }
 
   /**
@@ -2394,7 +2693,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2423,7 +2722,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2449,7 +2748,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2477,7 +2776,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2518,7 +2817,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'flexible' | 'full' | 'strict';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2544,7 +2843,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2575,7 +2874,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off' | 'open';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2604,9 +2903,13 @@ export namespace SettingEditResponse {
     id: 'transformations_allowed_origins';
 
     /**
-     * Current value of the zone setting.
+     * Comma-separated list of allowed origins. Refer to the
+     * [Image Transformations](https://developers.cloudflare.com/images/transform-images/sources/)
+     * and
+     * [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started)
+     * documentation for more information.
      */
-    value: string;
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2633,7 +2936,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2668,7 +2971,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2697,7 +3000,42 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * Optional per-zone path of the site's own MCP server, used by the WebMCP
+   * mcp-server-client tool pack to list and call the site's MCP tools from the
+   * browser. The path is resolved against the page's origin, so it applies to every
+   * hostname in the zone. Only takes effect when webmcp_enabled is on and the
+   * mcp-server-client pack is active. Leave empty to use /mcp. This setting is
+   * currently in beta and its behavior may change.
+   */
+  export interface ZonesWebmcpMcpURL {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'webmcp_mcp_url';
+
+    /**
+     * Root-relative path (with optional query string) of this zone's MCP endpoint, for
+     * example "/api/mcp". Surfaced to the injected bridge as the data-mcp-url
+     * attribute. Absolute and protocol-relative URLs, fragments, and characters
+     * outside RFC 3986 paths and queries are rejected. An empty value clears the
+     * override so the bridge uses /mcp.
+     */
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2724,9 +3062,12 @@ export namespace SettingEditResponse {
     id: 'webmcp_packs';
 
     /**
-     * Current value of the zone setting.
+     * Comma-separated list of WebMCP tool-pack names to activate for this zone (for
+     * example, "c2pa,mcp-server-client"), surfaced to the injected bridge as the
+     * data-packs attribute. An empty value clears the override so the bridge uses its
+     * built-in default pack set.
      */
-    value: string;
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2808,6 +3149,7 @@ export type SettingGetResponse =
   | SettingGetResponse.ZonesTrueClientIPHeader2
   | SettingGetResponse.ZonesWAF2
   | SettingGetResponse.ZonesWebmcpEnabled
+  | SettingGetResponse.ZonesWebmcpMcpURL
   | SettingGetResponse.ZonesWebmcpPacks
   | WebP
   | Websocket;
@@ -2868,7 +3210,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2894,7 +3236,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2921,9 +3263,15 @@ export namespace SettingGetResponse {
     id: 'browser_cache_ttl';
 
     /**
-     * Current value of the zone setting.
+     * Value of the zone setting in seconds. Minimum values by plan:
+     *
+     * - Free: 1 second
+     * - Pro: 1 second
+     * - Business: 1 second
+     * - Enterprise: 1 second Setting a TTL of 0 is equivalent to selecting
+     *   `Respect Existing Headers` and is allowed for all plans.
      */
-    value: number;
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2953,7 +3301,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2983,7 +3331,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'aggressive' | 'basic' | 'simplified';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3009,7 +3357,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3039,7 +3387,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3065,11 +3413,9 @@ export namespace SettingGetResponse {
     id: 'cname_flattening';
 
     /**
-     * @deprecated This zone setting is deprecated; please use the DNS Settings route
-     * instead. More information at
-     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
+     * Current value of the zone setting.
      */
-    value: 'flatten_at_root' | 'flatten_all';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3096,28 +3442,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value:
-      | 30
-      | 60
-      | 300
-      | 1200
-      | 1800
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 18000
-      | 28800
-      | 43200
-      | 57600
-      | 72000
-      | 86400
-      | 172800
-      | 259200
-      | 345600
-      | 432000
-      | 518400
-      | 604800;
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3144,7 +3469,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3172,7 +3497,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3198,33 +3523,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value:
-      | 100
-      | 125
-      | 150
-      | 175
-      | 200
-      | 225
-      | 250
-      | 275
-      | 300
-      | 325
-      | 350
-      | 375
-      | 400
-      | 425
-      | 450
-      | 475
-      | 500
-      | 1000
-      | 1500
-      | 2000
-      | 2500
-      | 3000
-      | 3500
-      | 4000
-      | 4500
-      | 5000;
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3249,10 +3548,9 @@ export namespace SettingGetResponse {
     id: 'mirage';
 
     /**
-     * @deprecated Mirage is being deprecated. More information at
-     * https://developers.cloudflare.com/speed/optimization/images/mirage/
+     * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3278,7 +3576,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3306,7 +3604,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3387,7 +3685,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'lossless' | 'lossy';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3414,7 +3712,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3441,12 +3739,9 @@ export namespace SettingGetResponse {
     id: 'privacy_pass';
 
     /**
-     * @deprecated Privacy Pass v1 was deprecated in 2023. (Announcement -
-     * https://blog.cloudflare.com/privacy-pass-standard/) and (API deprecation
-     * details -
-     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
+     * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3474,7 +3769,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3502,7 +3797,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3529,7 +3824,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3564,7 +3859,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3592,7 +3887,12 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: SettingsAPI.AutomaticPlatformOptimization;
+    value:
+      | ZonesSchemasAutomaticPlatformOptimization.UnionMember0
+      | ZonesSchemasAutomaticPlatformOptimization.UnionMember1
+      | ZonesSchemasAutomaticPlatformOptimization.UnionMember2
+      | ZonesSchemasAutomaticPlatformOptimization.UnionMember3
+      | ZonesSchemasAutomaticPlatformOptimization.UnionMember4;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3604,6 +3904,193 @@ export namespace SettingGetResponse {
      * last time this setting was modified.
      */
     modified_on?: string | null;
+  }
+
+  export namespace ZonesSchemasAutomaticPlatformOptimization {
+    export interface UnionMember0 {
+      /**
+       * Indicates whether or not
+       * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
+       * is enabled.
+       */
+      cache_by_device_type?: boolean;
+
+      /**
+       * Indicates whether or not Cloudflare proxy is enabled.
+       */
+      cf?: boolean;
+
+      /**
+       * Indicates whether or not Automatic Platform Optimization is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * An array of hostnames where Automatic Platform Optimization for WordPress is
+       * activated.
+       */
+      hostnames?: Array<string>;
+
+      /**
+       * Indicates whether or not site is powered by WordPress.
+       */
+      wordpress?: boolean;
+
+      /**
+       * Indicates whether or not
+       * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
+       * installed.
+       */
+      wp_plugin?: boolean;
+    }
+
+    export interface UnionMember1 {
+      /**
+       * Indicates whether or not
+       * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
+       * is enabled.
+       */
+      cache_by_device_type?: boolean;
+
+      /**
+       * Indicates whether or not Cloudflare proxy is enabled.
+       */
+      cf?: boolean;
+
+      /**
+       * Indicates whether or not Automatic Platform Optimization is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * An array of hostnames where Automatic Platform Optimization for WordPress is
+       * activated.
+       */
+      hostnames?: Array<string>;
+
+      /**
+       * Indicates whether or not site is powered by WordPress.
+       */
+      wordpress?: boolean;
+
+      /**
+       * Indicates whether or not
+       * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
+       * installed.
+       */
+      wp_plugin?: boolean;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * Indicates whether or not
+       * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
+       * is enabled.
+       */
+      cache_by_device_type?: boolean;
+
+      /**
+       * Indicates whether or not Cloudflare proxy is enabled.
+       */
+      cf?: boolean;
+
+      /**
+       * Indicates whether or not Automatic Platform Optimization is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * An array of hostnames where Automatic Platform Optimization for WordPress is
+       * activated.
+       */
+      hostnames?: Array<string>;
+
+      /**
+       * Indicates whether or not site is powered by WordPress.
+       */
+      wordpress?: boolean;
+
+      /**
+       * Indicates whether or not
+       * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
+       * installed.
+       */
+      wp_plugin?: boolean;
+    }
+
+    export interface UnionMember3 {
+      /**
+       * Indicates whether or not
+       * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
+       * is enabled.
+       */
+      cache_by_device_type?: boolean;
+
+      /**
+       * Indicates whether or not Cloudflare proxy is enabled.
+       */
+      cf?: boolean;
+
+      /**
+       * Indicates whether or not Automatic Platform Optimization is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * An array of hostnames where Automatic Platform Optimization for WordPress is
+       * activated.
+       */
+      hostnames?: Array<string>;
+
+      /**
+       * Indicates whether or not site is powered by WordPress.
+       */
+      wordpress?: boolean;
+
+      /**
+       * Indicates whether or not
+       * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
+       * installed.
+       */
+      wp_plugin?: boolean;
+    }
+
+    export interface UnionMember4 {
+      /**
+       * Indicates whether or not
+       * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
+       * is enabled.
+       */
+      cache_by_device_type?: boolean;
+
+      /**
+       * Indicates whether or not Cloudflare proxy is enabled.
+       */
+      cf?: boolean;
+
+      /**
+       * Indicates whether or not Automatic Platform Optimization is enabled.
+       */
+      enabled?: boolean;
+
+      /**
+       * An array of hostnames where Automatic Platform Optimization for WordPress is
+       * activated.
+       */
+      hostnames?: Array<string>;
+
+      /**
+       * Indicates whether or not site is powered by WordPress.
+       */
+      wordpress?: boolean;
+
+      /**
+       * Indicates whether or not
+       * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
+       * installed.
+       */
+      wp_plugin?: boolean;
+    }
   }
 
   /**
@@ -3621,7 +4108,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3650,7 +4137,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3676,7 +4163,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3704,7 +4191,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3745,7 +4232,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'flexible' | 'full' | 'strict';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3771,7 +4258,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3802,7 +4289,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off' | 'open';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3831,9 +4318,13 @@ export namespace SettingGetResponse {
     id: 'transformations_allowed_origins';
 
     /**
-     * Current value of the zone setting.
+     * Comma-separated list of allowed origins. Refer to the
+     * [Image Transformations](https://developers.cloudflare.com/images/transform-images/sources/)
+     * and
+     * [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started)
+     * documentation for more information.
      */
-    value: string;
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3860,7 +4351,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3895,7 +4386,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'on' | 'off';
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3924,7 +4415,42 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 'off' | 'on';
+    value: string | number | boolean | unknown | Array<string>;
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * Optional per-zone path of the site's own MCP server, used by the WebMCP
+   * mcp-server-client tool pack to list and call the site's MCP tools from the
+   * browser. The path is resolved against the page's origin, so it applies to every
+   * hostname in the zone. Only takes effect when webmcp_enabled is on and the
+   * mcp-server-client pack is active. Leave empty to use /mcp. This setting is
+   * currently in beta and its behavior may change.
+   */
+  export interface ZonesWebmcpMcpURL {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'webmcp_mcp_url';
+
+    /**
+     * Root-relative path (with optional query string) of this zone's MCP endpoint, for
+     * example "/api/mcp". Surfaced to the injected bridge as the data-mcp-url
+     * attribute. Absolute and protocol-relative URLs, fragments, and characters
+     * outside RFC 3986 paths and queries are rejected. An empty value clears the
+     * override so the bridge uses /mcp.
+     */
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3951,9 +4477,12 @@ export namespace SettingGetResponse {
     id: 'webmcp_packs';
 
     /**
-     * Current value of the zone setting.
+     * Comma-separated list of WebMCP tool-pack names to activate for this zone (for
+     * example, "c2pa,mcp-server-client"), surfaced to the injected bridge as the
+     * data-packs attribute. An empty value clears the override so the bridge uses its
+     * built-in default pack set.
      */
-    value: string;
+    value: string | number | boolean | unknown | Array<string>;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your

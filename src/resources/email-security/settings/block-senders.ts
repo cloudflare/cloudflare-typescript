@@ -211,6 +211,13 @@ export interface BlockSenderCreateResponse {
   created_at?: string;
 
   /**
+   * Timestamp at which the pattern expires. After this time, Email Security ignores
+   * the pattern. The value must lie in the future. Send `null` to clear the
+   * expiration.
+   */
+  expires_at?: string | null;
+
+  /**
    * Whether `pattern` is a regular expression instead of a literal value.
    */
   is_regex?: boolean;
@@ -260,6 +267,13 @@ export interface BlockSenderListResponse {
   comments?: string | null;
 
   created_at?: string;
+
+  /**
+   * Timestamp at which the pattern expires. After this time, Email Security ignores
+   * the pattern. The value must lie in the future. Send `null` to clear the
+   * expiration.
+   */
+  expires_at?: string | null;
 
   /**
    * Whether `pattern` is a regular expression instead of a literal value.
@@ -338,6 +352,13 @@ export namespace BlockSenderBatchResponse {
     created_at?: string;
 
     /**
+     * Timestamp at which the pattern expires. After this time, Email Security ignores
+     * the pattern. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
+    /**
      * Whether `pattern` is a regular expression instead of a literal value.
      */
     is_regex?: boolean;
@@ -389,6 +410,13 @@ export namespace BlockSenderBatchResponse {
     created_at?: string;
 
     /**
+     * Timestamp at which the pattern expires. After this time, Email Security ignores
+     * the pattern. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
+    /**
      * Whether `pattern` is a regular expression instead of a literal value.
      */
     is_regex?: boolean;
@@ -438,6 +466,13 @@ export namespace BlockSenderBatchResponse {
     comments?: string | null;
 
     created_at?: string;
+
+    /**
+     * Timestamp at which the pattern expires. After this time, Email Security ignores
+     * the pattern. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
 
     /**
      * Whether `pattern` is a regular expression instead of a literal value.
@@ -492,6 +527,13 @@ export interface BlockSenderEditResponse {
   created_at?: string;
 
   /**
+   * Timestamp at which the pattern expires. After this time, Email Security ignores
+   * the pattern. The value must lie in the future. Send `null` to clear the
+   * expiration.
+   */
+  expires_at?: string | null;
+
+  /**
    * Whether `pattern` is a regular expression instead of a literal value.
    */
   is_regex?: boolean;
@@ -541,6 +583,13 @@ export interface BlockSenderGetResponse {
   comments?: string | null;
 
   created_at?: string;
+
+  /**
+   * Timestamp at which the pattern expires. After this time, Email Security ignores
+   * the pattern. The value must lie in the future. Send `null` to clear the
+   * expiration.
+   */
+  expires_at?: string | null;
 
   /**
    * Whether `pattern` is a regular expression instead of a literal value.
@@ -622,6 +671,13 @@ export interface BlockSenderCreateParams {
    * Body param
    */
   comments?: string | null;
+
+  /**
+   * Body param: Timestamp at which the pattern expires. After this time, Email
+   * Security ignores the pattern. The value must lie in the future. Send `null` to
+   * clear the expiration.
+   */
+  expires_at?: string | null;
 }
 
 export interface BlockSenderListParams extends V4PagePaginationArrayParams {
@@ -634,6 +690,12 @@ export interface BlockSenderListParams extends V4PagePaginationArrayParams {
    * Query param: The sorting direction.
    */
   direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Filter to return only expired patterns (`true`) or only patterns
+   * that still apply (`false`). Omit to return both.
+   */
+  expired?: boolean;
 
   /**
    * Query param: Field to sort by.
@@ -707,6 +769,13 @@ export namespace BlockSenderBatchParams {
     comments?: string | null;
 
     /**
+     * Timestamp at which the pattern expires. After this time, Email Security ignores
+     * the pattern. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
+    /**
      * Whether `pattern` is a regular expression instead of a literal value.
      */
     is_regex?: boolean;
@@ -772,6 +841,13 @@ export namespace BlockSenderBatchParams {
     pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
     comments?: string | null;
+
+    /**
+     * Timestamp at which the pattern expires. After this time, Email Security ignores
+     * the pattern. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
   }
 
   /**
@@ -809,6 +885,13 @@ export namespace BlockSenderBatchParams {
     pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
     comments?: string | null;
+
+    /**
+     * Timestamp at which the pattern expires. After this time, Email Security ignores
+     * the pattern. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
   }
 }
 
@@ -822,6 +905,13 @@ export interface BlockSenderEditParams {
    * Body param
    */
   comments?: string | null;
+
+  /**
+   * Body param: Timestamp at which the pattern expires. After this time, Email
+   * Security ignores the pattern. The value must lie in the future. Send `null` to
+   * clear the expiration.
+   */
+  expires_at?: string | null;
 
   /**
    * Body param: Whether `pattern` is a regular expression instead of a literal

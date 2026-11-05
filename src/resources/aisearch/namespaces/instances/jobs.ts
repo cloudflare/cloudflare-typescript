@@ -28,23 +28,23 @@ export class BaseJobs extends APIResource {
    *     'my-ai-search',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       name: 'my-namespace',
+   *       namespace: 'my-namespace',
    *     },
    *   );
    * ```
    */
   create(id: string, params: JobCreateParams, options?: RequestOptions): APIPromise<JobCreateResponse> {
-    const { account_id, name, ...body } = params;
+    const { account_id, namespace, ...body } = params;
     return (
-      this._client.post(path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/jobs`, {
-        body,
-        ...options,
-      }) as APIPromise<{ result: JobCreateResponse }>
+      this._client.post(
+        path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/jobs`,
+        { body, ...options },
+      ) as APIPromise<{ result: JobCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Cancel an in-progress indexing job for an AI Search instance.
+   * Cancels an in-progress indexing job for an AI Search instance.
    *
    * @example
    * ```ts
@@ -53,7 +53,7 @@ export class BaseJobs extends APIResource {
    *     'job_id',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       name: 'my-namespace',
+   *       namespace: 'my-namespace',
    *       id: 'my-ai-search',
    *       action: 'cancel',
    *     },
@@ -61,10 +61,10 @@ export class BaseJobs extends APIResource {
    * ```
    */
   update(jobID: string, params: JobUpdateParams, options?: RequestOptions): APIPromise<JobUpdateResponse> {
-    const { account_id, name, id, ...body } = params;
+    const { account_id, namespace, id, ...body } = params;
     return (
       this._client.patch(
-        path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/jobs/${jobID}`,
+        path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/jobs/${jobID}`,
         { body, ...options },
       ) as APIPromise<{ result: JobUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -80,7 +80,7 @@ export class BaseJobs extends APIResource {
    *   'my-ai-search',
    *   {
    *     account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *     name: 'my-namespace',
+   *     namespace: 'my-namespace',
    *   },
    * )) {
    *   // ...
@@ -92,9 +92,9 @@ export class BaseJobs extends APIResource {
     params: JobListParams,
     options?: RequestOptions,
   ): PagePromise<JobListResponsesV4PagePaginationArray, JobListResponse> {
-    const { account_id, name, ...query } = params;
+    const { account_id, namespace, ...query } = params;
     return this._client.getAPIList(
-      path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/jobs`,
+      path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/jobs`,
       V4PagePaginationArray<JobListResponse>,
       { query, ...options },
     );
@@ -110,17 +110,17 @@ export class BaseJobs extends APIResource {
    *     'job_id',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       name: 'my-namespace',
+   *       namespace: 'my-namespace',
    *       id: 'my-ai-search',
    *     },
    *   );
    * ```
    */
   get(jobID: string, params: JobGetParams, options?: RequestOptions): APIPromise<JobGetResponse> {
-    const { account_id, name, id } = params;
+    const { account_id, namespace, id } = params;
     return (
       this._client.get(
-        path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/jobs/${jobID}`,
+        path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/jobs/${jobID}`,
         options,
       ) as APIPromise<{ result: JobGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -136,17 +136,17 @@ export class BaseJobs extends APIResource {
    *     'job_id',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       name: 'my-namespace',
+   *       namespace: 'my-namespace',
    *       id: 'my-ai-search',
    *     },
    *   );
    * ```
    */
   logs(jobID: string, params: JobLogsParams, options?: RequestOptions): APIPromise<JobLogsResponse> {
-    const { account_id, name, id, ...query } = params;
+    const { account_id, namespace, id, ...query } = params;
     return (
       this._client.get(
-        path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/jobs/${jobID}/logs`,
+        path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/jobs/${jobID}/logs`,
         { query, ...options },
       ) as APIPromise<{ result: JobLogsResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -241,9 +241,9 @@ export interface JobCreateParams {
   account_id: string;
 
   /**
-   * Path param: Namespace name
+   * Path param: Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
    * Body param
@@ -258,9 +258,9 @@ export interface JobUpdateParams {
   account_id: string;
 
   /**
-   * Path param: Namespace name
+   * Path param: Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
    * Path param: AI Search instance ID. Lowercase alphanumeric, hyphens, and
@@ -281,18 +281,18 @@ export interface JobListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Path param: Namespace name
+   * Path param: Namespace name.
    */
-  name: string;
+  namespace: string;
 }
 
 export interface JobGetParams {
   account_id: string;
 
   /**
-   * Namespace name
+   * Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
    * AI Search instance ID. Lowercase alphanumeric, hyphens, and underscores.
@@ -307,9 +307,9 @@ export interface JobLogsParams {
   account_id: string;
 
   /**
-   * Path param: Namespace name
+   * Path param: Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
    * Path param: AI Search instance ID. Lowercase alphanumeric, hyphens, and

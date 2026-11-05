@@ -32,11 +32,8 @@ const runTests = (
   test('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.queries.create({
       account_id: 'account_id',
-      alert_enabled: true,
-      alert_rollup_enabled: true,
       name: 'name',
       query_json: 'query_json',
-      rule_enabled: true,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,10 +47,10 @@ const runTests = (
   test('create: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.queries.create({
       account_id: 'account_id',
-      alert_enabled: true,
-      alert_rollup_enabled: true,
       name: 'name',
       query_json: 'query_json',
+      alert_enabled: true,
+      alert_rollup_enabled: true,
       rule_enabled: true,
       rule_scope: 'rule_scope',
     });

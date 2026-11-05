@@ -56,6 +56,60 @@ const runTests = (
       },
     );
   });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.zeroTrust.identityProviders.scim.groups.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        identity_provider_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.zeroTrust.identityProviders.scim.groups.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        identity_provider_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      },
+    );
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.zeroTrust.identityProviders.scim.groups.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        identity_provider_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.zeroTrust.identityProviders.scim.groups.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        identity_provider_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      },
+    );
+  });
 };
 describe('resource groups', () => runTests(client));
 describe('resource groups (tree shakable, base)', () => runTests(partialClient));

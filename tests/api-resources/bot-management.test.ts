@@ -33,6 +33,13 @@ const runTests = (client: PartialCloudflare<{ botManagement: BaseBotManagement }
   test('update: required and optional params', async () => {
     const response = await client.botManagement.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      ai_agents: {
+        anthropic_agent: 'block',
+        google_agent: 'block',
+        instinct: 'block',
+        muse: 'block',
+        openai_agent: 'block',
+      },
       ai_bots_migration_opt_out: false,
       ai_bots_protection: 'block',
       ai_search: 'block',

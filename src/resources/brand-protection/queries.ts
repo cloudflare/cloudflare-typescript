@@ -13,7 +13,7 @@ export class BaseQueries extends APIResource {
   ] as const);
 
   /**
-   * Return a success message after creating new saved string queries
+   * Return a success message after creating new saved string queries.
    */
   create(params: QueryCreateParams, options?: RequestOptions): APIPromise<void> {
     const { account_id, id, query_scan, query_tag, ...body } = params;
@@ -26,7 +26,7 @@ export class BaseQueries extends APIResource {
   }
 
   /**
-   * Return a success message after deleting saved string queries by ID
+   * Return a success message after deleting saved string queries by ID.
    */
   delete(params: QueryDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { account_id, id, scan, tag } = params;
@@ -38,7 +38,7 @@ export class BaseQueries extends APIResource {
   }
 
   /**
-   * Return a success message after creating new saved string queries in bulk
+   * Return a success message after creating new saved string queries in bulk.
    */
   bulk(params: QueryBulkParams, options?: RequestOptions): APIPromise<void> {
     const { account_id, ...body } = params;
@@ -90,12 +90,20 @@ export interface QueryCreateParams {
   /**
    * Body param
    */
-  string_matches?: unknown;
+  string_matches?: Array<QueryCreateParams.StringMatch>;
 
   /**
    * Body param
    */
   body_tag?: string;
+}
+
+export namespace QueryCreateParams {
+  export interface StringMatch {
+    pattern: string;
+
+    max_edit_distance?: number;
+  }
 }
 
 export interface QueryDeleteParams {

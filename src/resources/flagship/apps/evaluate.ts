@@ -44,6 +44,12 @@ export interface EvaluateGetResponse {
    */
   variant: string;
 
+  /**
+   * Key-value metadata associated with the flag. Returned only when the flag has
+   * metadata.
+   */
+  metadata?: { [key: string]: boolean | string | number };
+
   value?: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
 }
 

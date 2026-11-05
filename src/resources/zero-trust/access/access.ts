@@ -24,6 +24,8 @@ import {
   CustomPageGetParams,
   CustomPageListParams,
   CustomPageUpdateParams,
+  CustomPageValidateParams,
+  CustomPageValidateResponse,
   CustomPageWithoutHTML,
   CustomPageWithoutHTMLsV4PagePaginationArray,
   CustomPages,
@@ -169,6 +171,7 @@ import {
   BaseApplications,
   CORSHeaders,
   Decision,
+  DestinationOverride,
   OIDCSaaSApp,
   SAMLSaaSApp,
   SCIMConfigAuthenticationHTTPBasic,
@@ -196,6 +199,24 @@ import * as InfrastructureAPI from './infrastructure/infrastructure';
 import { BaseInfrastructure, Infrastructure } from './infrastructure/infrastructure';
 import * as LogsAPI from './logs/logs';
 import { BaseLogs, Logs } from './logs/logs';
+import * as MfaAPI from './mfa/mfa';
+import { BaseMfa, Mfa } from './mfa/mfa';
+import * as UserPopulationsAPI from './user-populations/user-populations';
+import {
+  BaseUserPopulations,
+  UserPopulationCreateParams,
+  UserPopulationCreateResponse,
+  UserPopulationDeleteParams,
+  UserPopulationDeleteResponse,
+  UserPopulationGetParams,
+  UserPopulationGetResponse,
+  UserPopulationListParams,
+  UserPopulationListResponse,
+  UserPopulationListResponsesV4PagePaginationArray,
+  UserPopulationUpdateParams,
+  UserPopulationUpdateResponse,
+  UserPopulations,
+} from './user-populations/user-populations';
 import * as UsersAPI from './users/users';
 import {
   AccessUser,
@@ -237,6 +258,8 @@ export class Access extends BaseAccess {
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
+  userPopulations: UserPopulationsAPI.UserPopulations = new UserPopulationsAPI.UserPopulations(this._client);
+  mfa: MfaAPI.Mfa = new MfaAPI.Mfa(this._client);
   customPages: CustomPagesAPI.CustomPages = new CustomPagesAPI.CustomPages(this._client);
   tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
@@ -268,6 +291,10 @@ Access.Logs = Logs;
 Access.BaseLogs = BaseLogs;
 Access.Users = Users;
 Access.BaseUsers = BaseUsers;
+Access.UserPopulations = UserPopulations;
+Access.BaseUserPopulations = BaseUserPopulations;
+Access.Mfa = Mfa;
+Access.BaseMfa = BaseMfa;
 Access.CustomPages = CustomPages;
 Access.BaseCustomPages = BaseCustomPages;
 Access.Tags = Tags;
@@ -330,6 +357,7 @@ export declare namespace Access {
     type ApplicationType as ApplicationType,
     type CORSHeaders as CORSHeaders,
     type Decision as Decision,
+    type DestinationOverride as DestinationOverride,
     type OIDCSaaSApp as OIDCSaaSApp,
     type SaaSAppNameIDFormat as SaaSAppNameIDFormat,
     type SAMLSaaSApp as SAMLSaaSApp,
@@ -444,17 +472,37 @@ export declare namespace Access {
   };
 
   export {
+    UserPopulations as UserPopulations,
+    BaseUserPopulations as BaseUserPopulations,
+    type UserPopulationCreateResponse as UserPopulationCreateResponse,
+    type UserPopulationUpdateResponse as UserPopulationUpdateResponse,
+    type UserPopulationListResponse as UserPopulationListResponse,
+    type UserPopulationDeleteResponse as UserPopulationDeleteResponse,
+    type UserPopulationGetResponse as UserPopulationGetResponse,
+    type UserPopulationListResponsesV4PagePaginationArray as UserPopulationListResponsesV4PagePaginationArray,
+    type UserPopulationCreateParams as UserPopulationCreateParams,
+    type UserPopulationUpdateParams as UserPopulationUpdateParams,
+    type UserPopulationListParams as UserPopulationListParams,
+    type UserPopulationDeleteParams as UserPopulationDeleteParams,
+    type UserPopulationGetParams as UserPopulationGetParams,
+  };
+
+  export { Mfa as Mfa, BaseMfa as BaseMfa };
+
+  export {
     CustomPages as CustomPages,
     BaseCustomPages as BaseCustomPages,
     type CustomPage as CustomPage,
     type CustomPageWithoutHTML as CustomPageWithoutHTML,
     type CustomPageDeleteResponse as CustomPageDeleteResponse,
+    type CustomPageValidateResponse as CustomPageValidateResponse,
     type CustomPageWithoutHTMLsV4PagePaginationArray as CustomPageWithoutHTMLsV4PagePaginationArray,
     type CustomPageCreateParams as CustomPageCreateParams,
     type CustomPageUpdateParams as CustomPageUpdateParams,
     type CustomPageListParams as CustomPageListParams,
     type CustomPageDeleteParams as CustomPageDeleteParams,
     type CustomPageGetParams as CustomPageGetParams,
+    type CustomPageValidateParams as CustomPageValidateParams,
   };
 
   export {

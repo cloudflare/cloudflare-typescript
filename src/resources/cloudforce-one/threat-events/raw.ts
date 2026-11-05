@@ -13,8 +13,8 @@ export class BaseRaw extends APIResource {
   ] as const);
 
   /**
-   * Partially updates raw threat event data in Cloudforce One, modifying specific
-   * fields of the event.
+   * Legacy. Updates raw data stored under a `raw_id`, which new events don't use.
+   * There is no direct replacement.
    *
    * @example
    * ```ts
@@ -34,7 +34,9 @@ export class BaseRaw extends APIResource {
   }
 
   /**
-   * Retrieves raw threat event data for a specific event in Cloudforce One.
+   * Legacy. Returns raw data stored under a `raw_id`, which new events don't use.
+   * Use `threat-intel events raw get`
+   * (`GET /events/datasets/{dataset_id}/events/{event_id}/raw`) instead.
    *
    * @example
    * ```ts

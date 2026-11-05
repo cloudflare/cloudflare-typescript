@@ -9,6 +9,7 @@ export {
   type VersionListParams,
   type VersionDeleteParams,
   type VersionGetParams,
+  type VersionProfileParams,
   type VersionsV4PagePaginationArray,
 } from './versions';
 export {

@@ -17,8 +17,9 @@ export class BaseUsage extends APIResource {
    * includes all metered usage, including usage that falls within free-tier
    * allowances and may result in zero cost.
    *
-   * **Note:** Cost and pricing fields are not yet populated and will be absent from
-   * responses until billing integration is complete.
+   * **Note:** This endpoint serves `usage` records only; cost and pricing fields are
+   * absent from responses. To retrieve rated costs, use `POST` on the same path with
+   * `Metric: cost`.
    *
    * When `from` and `to` are omitted, defaults to the start of the current month
    * through today. The maximum date range is 31 days.
@@ -91,8 +92,9 @@ export class BaseUsage extends APIResource {
    * includes all metered usage, including usage that falls within free-tier
    * allowances and may result in zero cost.
    *
-   * **Note:** Cost and pricing fields are not yet populated and will be absent from
-   * responses until billing integration is complete.
+   * **Note:** This endpoint serves `usage` records only; cost and pricing fields are
+   * absent from responses. To retrieve rated costs, use `POST` on the same path with
+   * `Metric: cost`.
    *
    * When `from` and `to` are omitted, defaults to the start of the current month
    * through today. The maximum date range is 31 days.
@@ -187,12 +189,6 @@ export namespace UsageGetResponse {
     ChargePeriodStart: string;
 
     /**
-     * Measured usage amount within the charge period. Reflects raw metered consumption
-     * before pricing transformations.
-     */
-    ConsumedQuantity: number;
-
-    /**
      * Unit of measure for the consumed quantity (e.g., "GB", "Requests",
      * "vCPU-Hours").
      */
@@ -260,6 +256,12 @@ export namespace UsageGetResponse {
      * invoiced in a previous billing period.
      */
     ChargeClass?: 'Correction' | null;
+
+    /**
+     * Measured usage amount within the charge period. Reflects raw metered consumption
+     * before pricing transformations.
+     */
+    ConsumedQuantity?: number;
 
     /**
      * Cost calculated by multiplying ContractedUnitPrice and the corresponding
@@ -636,12 +638,6 @@ export namespace UsageGetAccountUsageV2Response {
     ChargePeriodStart: string;
 
     /**
-     * Measured usage amount within the charge period. Reflects raw metered consumption
-     * before pricing transformations.
-     */
-    ConsumedQuantity: number;
-
-    /**
      * Unit of measure for the consumed quantity (e.g., "GB", "Requests",
      * "vCPU-Hours").
      */
@@ -709,6 +705,12 @@ export namespace UsageGetAccountUsageV2Response {
      * invoiced in a previous billing period.
      */
     ChargeClass?: 'Correction' | null;
+
+    /**
+     * Measured usage amount within the charge period. Reflects raw metered consumption
+     * before pricing transformations.
+     */
+    ConsumedQuantity?: number;
 
     /**
      * Cost calculated by multiplying ContractedUnitPrice and the corresponding

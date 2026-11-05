@@ -42,6 +42,7 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { json: BaseJson
     const response = await client.browserRendering.json.create({
       account_id: 'account_id',
       url: 'url',
+      browser: 'kitesurf',
       cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [

@@ -32,7 +32,7 @@ const runTests = (
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.riskScoring.behaviours.update({
       account_id: 'account_id',
-      behaviors: { foo: { enabled: true, risk_level: 'low' } },
+      behaviors: { foo: { enabled: true, risk_level: 'info' } },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +46,7 @@ const runTests = (
   test('update: required and optional params', async () => {
     const response = await client.zeroTrust.riskScoring.behaviours.update({
       account_id: 'account_id',
-      behaviors: { foo: { enabled: true, risk_level: 'low' } },
+      behaviors: { foo: { enabled: true, risk_level: 'info' } },
     });
   });
 

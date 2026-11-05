@@ -41,7 +41,7 @@ export class BaseWARPConnector extends APIResource {
   ] as const);
 
   /**
-   * Creates a new Warp Connector Tunnel in an account.
+   * Creates a new Mesh node in an account.
    *
    * @example
    * ```ts
@@ -65,7 +65,7 @@ export class BaseWARPConnector extends APIResource {
   }
 
   /**
-   * Lists and filters Warp Connector Tunnels in an account.
+   * Lists and filters Mesh nodes in an account.
    *
    * @example
    * ```ts
@@ -90,7 +90,7 @@ export class BaseWARPConnector extends APIResource {
   }
 
   /**
-   * Deletes a Warp Connector Tunnel from an account.
+   * Deletes a Mesh node from an account.
    *
    * @example
    * ```ts
@@ -115,7 +115,7 @@ export class BaseWARPConnector extends APIResource {
   }
 
   /**
-   * Updates an existing Warp Connector Tunnel.
+   * Updates an existing Mesh node.
    *
    * @example
    * ```ts
@@ -141,7 +141,7 @@ export class BaseWARPConnector extends APIResource {
   }
 
   /**
-   * Fetches a single Warp Connector Tunnel.
+   * Fetches a single Mesh node.
    *
    * @example
    * ```ts
@@ -177,7 +177,7 @@ export type WARPConnectorListResponsesV4PagePaginationArray =
   V4PagePaginationArray<WARPConnectorListResponse>;
 
 /**
- * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
+ * A Mesh node that connects your origin to Cloudflare's edge.
  */
 export interface WARPConnectorCreateResponse {
   /**
@@ -290,7 +290,7 @@ export namespace WARPConnectorCreateResponse {
 }
 
 /**
- * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
+ * A Mesh node that connects your origin to Cloudflare's edge.
  */
 export interface WARPConnectorListResponse {
   /**
@@ -403,7 +403,7 @@ export namespace WARPConnectorListResponse {
 }
 
 /**
- * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
+ * A Mesh node that connects your origin to Cloudflare's edge.
  */
 export interface WARPConnectorDeleteResponse {
   /**
@@ -516,7 +516,7 @@ export namespace WARPConnectorDeleteResponse {
 }
 
 /**
- * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
+ * A Mesh node that connects your origin to Cloudflare's edge.
  */
 export interface WARPConnectorEditResponse {
   /**
@@ -629,7 +629,7 @@ export namespace WARPConnectorEditResponse {
 }
 
 /**
- * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
+ * A Mesh node that connects your origin to Cloudflare's edge.
  */
 export interface WARPConnectorGetResponse {
   /**

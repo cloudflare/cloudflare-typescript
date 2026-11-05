@@ -41,7 +41,8 @@ export class BaseAuthMethods extends APIResource {
       | 'OPENAI'
       | 'SALESFORCE'
       | 'SERVICENOW'
-      | 'SLACK',
+      | 'SLACK'
+      | 'ZOOM',
     params: AuthMethodListParams,
     options?: RequestOptions,
   ): PagePromise<AuthMethodListResponsesSinglePage, AuthMethodListResponse> {

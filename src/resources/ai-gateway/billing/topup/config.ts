@@ -14,8 +14,10 @@ export class BaseConfig extends APIResource {
   ] as const);
 
   /**
-   * Configure auto top-up with a balance threshold and top-up amount. Dashboard
-   * sessions only: API token, OAuth, and service credentials are rejected with 403.
+   * Configure auto top-up with a balance threshold and top-up amount. Requests that
+   * add a payment method first return authentication details. The configuration is
+   * saved only after the authenticated setup is submitted. Dashboard sessions only:
+   * API token, OAuth, and service credentials are rejected with 403.
    *
    * @example
    * ```ts
@@ -81,10 +83,37 @@ export class BaseConfig extends APIResource {
 }
 export class Config extends BaseConfig {}
 
-export interface ConfigCreateResponse {
-  amount: number;
+export type ConfigCreateResponse =
+  | ConfigCreateResponse.UnionMember0
+  | ConfigCreateResponse.UnionMember1
+  | ConfigCreateResponse.UnionMember2;
 
-  threshold: number;
+export namespace ConfigCreateResponse {
+  export interface UnionMember0 {
+    amount: number;
+
+    threshold: number;
+  }
+
+  export interface UnionMember1 {
+    amount: number;
+
+    status: 'configured';
+
+    threshold: number;
+  }
+
+  export interface UnionMember2 {
+    amount: number;
+
+    client_secret: string;
+
+    setup_intent_id: string;
+
+    status: 'requires_action';
+
+    threshold: number;
+  }
 }
 
 export type ConfigDeleteResponse = unknown;
@@ -101,21 +130,62 @@ export interface ConfigGetResponse {
   lastFailedAt?: number | null;
 }
 
-export interface ConfigCreateParams {
-  /**
-   * Path param: Cloudflare account ID.
-   */
-  account_id: string;
+export type ConfigCreateParams = ConfigCreateParams.Variant0 | ConfigCreateParams.Variant1;
 
-  /**
-   * Body param: Auto top-up amount in cents (min 1000).
-   */
-  amount: number;
+export declare namespace ConfigCreateParams {
+  export interface Variant0 {
+    /**
+     * Path param: Cloudflare account ID.
+     */
+    account_id: string;
 
-  /**
-   * Body param: Balance threshold in cents that triggers auto top-up (min 500).
-   */
-  threshold: number;
+    /**
+     * Body param: Auto top-up amount in cents (min 1000).
+     */
+    amount: number;
+
+    /**
+     * Body param: Balance threshold in cents that triggers auto top-up (min 500).
+     */
+    threshold: number;
+  }
+
+  export interface Variant1 {
+    /**
+     * Path param: Cloudflare account ID.
+     */
+    account_id: string;
+
+    /**
+     * Body param: Auto top-up amount in cents (min 1000).
+     */
+    amount: number;
+
+    /**
+     * Body param: Version of the off-session auto-top-up consent accepted by the user.
+     */
+    consent_version: string;
+
+    /**
+     * Body param: Card to authenticate for future automatic top-ups.
+     */
+    payment_method_id: string;
+
+    /**
+     * Body param: Client-generated UUID that makes payment-method setup safe to retry.
+     */
+    setup_idempotency_key: string;
+
+    /**
+     * Body param: Balance threshold in cents that triggers auto top-up (min 500).
+     */
+    threshold: number;
+
+    /**
+     * Body param: Successfully confirmed payment-method setup identifier.
+     */
+    setup_intent_id?: string;
+  }
 }
 
 export interface ConfigDeleteParams {

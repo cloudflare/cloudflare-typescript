@@ -292,6 +292,10 @@ export interface AIGatewayCreateResponse {
 
   rate_limiting_limit: number | null;
 
+  /**
+   * Require authentication for gateway access. New gateways must have authentication
+   * enabled. Once enabled, authentication cannot be disabled.
+   */
   authentication?: boolean;
 
   /**
@@ -301,6 +305,17 @@ export interface AIGatewayCreateResponse {
   byok_only?: boolean;
 
   dlp?: AIGatewayCreateResponse.UnionMember0 | AIGatewayCreateResponse.UnionMember1;
+
+  /**
+   * FedRAMP compliance level: fedramp-medium or fedramp-high.
+   */
+  fedramp_level?: 'fedramp-medium' | 'fedramp-high' | null;
+
+  /**
+   * FedRAMP enforcement mode. "prefer" prioritizes compliant connectors but allows
+   * fallback. "require" strictly filters.
+   */
+  fedramp_mode?: 'prefer' | 'require' | null;
 
   guardrails?: AIGatewayCreateResponse.Guardrails | null;
 
@@ -337,6 +352,10 @@ export interface AIGatewayCreateResponse {
 
   spend_limits?: AIGatewayCreateResponse.SpendLimits | null;
 
+  /**
+   * Secrets Store used by this gateway. Omit on update to keep the current store.
+   * Cannot be cleared while stored keys or secret references depend on it.
+   */
   store_id?: string | null;
 
   stripe?: AIGatewayCreateResponse.Stripe | null;
@@ -401,6 +420,8 @@ export namespace AIGatewayCreateResponse {
 
       S13?: 'FLAG' | 'BLOCK';
 
+      S14?: 'FLAG' | 'BLOCK';
+
       S2?: 'FLAG' | 'BLOCK';
 
       S3?: 'FLAG' | 'BLOCK';
@@ -430,6 +451,8 @@ export namespace AIGatewayCreateResponse {
       S12?: 'FLAG' | 'BLOCK';
 
       S13?: 'FLAG' | 'BLOCK';
+
+      S14?: 'FLAG' | 'BLOCK';
 
       S2?: 'FLAG' | 'BLOCK';
 
@@ -544,6 +567,10 @@ export interface AIGatewayUpdateResponse {
 
   rate_limiting_limit: number | null;
 
+  /**
+   * Require authentication for gateway access. New gateways must have authentication
+   * enabled. Once enabled, authentication cannot be disabled.
+   */
   authentication?: boolean;
 
   /**
@@ -553,6 +580,17 @@ export interface AIGatewayUpdateResponse {
   byok_only?: boolean;
 
   dlp?: AIGatewayUpdateResponse.UnionMember0 | AIGatewayUpdateResponse.UnionMember1;
+
+  /**
+   * FedRAMP compliance level: fedramp-medium or fedramp-high.
+   */
+  fedramp_level?: 'fedramp-medium' | 'fedramp-high' | null;
+
+  /**
+   * FedRAMP enforcement mode. "prefer" prioritizes compliant connectors but allows
+   * fallback. "require" strictly filters.
+   */
+  fedramp_mode?: 'prefer' | 'require' | null;
 
   guardrails?: AIGatewayUpdateResponse.Guardrails | null;
 
@@ -589,6 +627,10 @@ export interface AIGatewayUpdateResponse {
 
   spend_limits?: AIGatewayUpdateResponse.SpendLimits | null;
 
+  /**
+   * Secrets Store used by this gateway. Omit on update to keep the current store.
+   * Cannot be cleared while stored keys or secret references depend on it.
+   */
   store_id?: string | null;
 
   stripe?: AIGatewayUpdateResponse.Stripe | null;
@@ -653,6 +695,8 @@ export namespace AIGatewayUpdateResponse {
 
       S13?: 'FLAG' | 'BLOCK';
 
+      S14?: 'FLAG' | 'BLOCK';
+
       S2?: 'FLAG' | 'BLOCK';
 
       S3?: 'FLAG' | 'BLOCK';
@@ -682,6 +726,8 @@ export namespace AIGatewayUpdateResponse {
       S12?: 'FLAG' | 'BLOCK';
 
       S13?: 'FLAG' | 'BLOCK';
+
+      S14?: 'FLAG' | 'BLOCK';
 
       S2?: 'FLAG' | 'BLOCK';
 
@@ -796,6 +842,10 @@ export interface AIGatewayListResponse {
 
   rate_limiting_limit: number | null;
 
+  /**
+   * Require authentication for gateway access. New gateways must have authentication
+   * enabled. Once enabled, authentication cannot be disabled.
+   */
   authentication?: boolean;
 
   /**
@@ -805,6 +855,17 @@ export interface AIGatewayListResponse {
   byok_only?: boolean;
 
   dlp?: AIGatewayListResponse.UnionMember0 | AIGatewayListResponse.UnionMember1;
+
+  /**
+   * FedRAMP compliance level: fedramp-medium or fedramp-high.
+   */
+  fedramp_level?: 'fedramp-medium' | 'fedramp-high' | null;
+
+  /**
+   * FedRAMP enforcement mode. "prefer" prioritizes compliant connectors but allows
+   * fallback. "require" strictly filters.
+   */
+  fedramp_mode?: 'prefer' | 'require' | null;
 
   guardrails?: AIGatewayListResponse.Guardrails | null;
 
@@ -841,6 +902,10 @@ export interface AIGatewayListResponse {
 
   spend_limits?: AIGatewayListResponse.SpendLimits | null;
 
+  /**
+   * Secrets Store used by this gateway. Omit on update to keep the current store.
+   * Cannot be cleared while stored keys or secret references depend on it.
+   */
   store_id?: string | null;
 
   stripe?: AIGatewayListResponse.Stripe | null;
@@ -905,6 +970,8 @@ export namespace AIGatewayListResponse {
 
       S13?: 'FLAG' | 'BLOCK';
 
+      S14?: 'FLAG' | 'BLOCK';
+
       S2?: 'FLAG' | 'BLOCK';
 
       S3?: 'FLAG' | 'BLOCK';
@@ -934,6 +1001,8 @@ export namespace AIGatewayListResponse {
       S12?: 'FLAG' | 'BLOCK';
 
       S13?: 'FLAG' | 'BLOCK';
+
+      S14?: 'FLAG' | 'BLOCK';
 
       S2?: 'FLAG' | 'BLOCK';
 
@@ -1048,6 +1117,10 @@ export interface AIGatewayDeleteResponse {
 
   rate_limiting_limit: number | null;
 
+  /**
+   * Require authentication for gateway access. New gateways must have authentication
+   * enabled. Once enabled, authentication cannot be disabled.
+   */
   authentication?: boolean;
 
   /**
@@ -1057,6 +1130,17 @@ export interface AIGatewayDeleteResponse {
   byok_only?: boolean;
 
   dlp?: AIGatewayDeleteResponse.UnionMember0 | AIGatewayDeleteResponse.UnionMember1;
+
+  /**
+   * FedRAMP compliance level: fedramp-medium or fedramp-high.
+   */
+  fedramp_level?: 'fedramp-medium' | 'fedramp-high' | null;
+
+  /**
+   * FedRAMP enforcement mode. "prefer" prioritizes compliant connectors but allows
+   * fallback. "require" strictly filters.
+   */
+  fedramp_mode?: 'prefer' | 'require' | null;
 
   guardrails?: AIGatewayDeleteResponse.Guardrails | null;
 
@@ -1093,6 +1177,10 @@ export interface AIGatewayDeleteResponse {
 
   spend_limits?: AIGatewayDeleteResponse.SpendLimits | null;
 
+  /**
+   * Secrets Store used by this gateway. Omit on update to keep the current store.
+   * Cannot be cleared while stored keys or secret references depend on it.
+   */
   store_id?: string | null;
 
   stripe?: AIGatewayDeleteResponse.Stripe | null;
@@ -1157,6 +1245,8 @@ export namespace AIGatewayDeleteResponse {
 
       S13?: 'FLAG' | 'BLOCK';
 
+      S14?: 'FLAG' | 'BLOCK';
+
       S2?: 'FLAG' | 'BLOCK';
 
       S3?: 'FLAG' | 'BLOCK';
@@ -1186,6 +1276,8 @@ export namespace AIGatewayDeleteResponse {
       S12?: 'FLAG' | 'BLOCK';
 
       S13?: 'FLAG' | 'BLOCK';
+
+      S14?: 'FLAG' | 'BLOCK';
 
       S2?: 'FLAG' | 'BLOCK';
 
@@ -1300,6 +1392,10 @@ export interface AIGatewayGetResponse {
 
   rate_limiting_limit: number | null;
 
+  /**
+   * Require authentication for gateway access. New gateways must have authentication
+   * enabled. Once enabled, authentication cannot be disabled.
+   */
   authentication?: boolean;
 
   /**
@@ -1309,6 +1405,17 @@ export interface AIGatewayGetResponse {
   byok_only?: boolean;
 
   dlp?: AIGatewayGetResponse.UnionMember0 | AIGatewayGetResponse.UnionMember1;
+
+  /**
+   * FedRAMP compliance level: fedramp-medium or fedramp-high.
+   */
+  fedramp_level?: 'fedramp-medium' | 'fedramp-high' | null;
+
+  /**
+   * FedRAMP enforcement mode. "prefer" prioritizes compliant connectors but allows
+   * fallback. "require" strictly filters.
+   */
+  fedramp_mode?: 'prefer' | 'require' | null;
 
   guardrails?: AIGatewayGetResponse.Guardrails | null;
 
@@ -1345,6 +1452,10 @@ export interface AIGatewayGetResponse {
 
   spend_limits?: AIGatewayGetResponse.SpendLimits | null;
 
+  /**
+   * Secrets Store used by this gateway. Omit on update to keep the current store.
+   * Cannot be cleared while stored keys or secret references depend on it.
+   */
   store_id?: string | null;
 
   stripe?: AIGatewayGetResponse.Stripe | null;
@@ -1409,6 +1520,8 @@ export namespace AIGatewayGetResponse {
 
       S13?: 'FLAG' | 'BLOCK';
 
+      S14?: 'FLAG' | 'BLOCK';
+
       S2?: 'FLAG' | 'BLOCK';
 
       S3?: 'FLAG' | 'BLOCK';
@@ -1438,6 +1551,8 @@ export namespace AIGatewayGetResponse {
       S12?: 'FLAG' | 'BLOCK';
 
       S13?: 'FLAG' | 'BLOCK';
+
+      S14?: 'FLAG' | 'BLOCK';
 
       S2?: 'FLAG' | 'BLOCK';
 
@@ -1569,7 +1684,8 @@ export interface AIGatewayCreateParams {
   rate_limiting_limit: number | null;
 
   /**
-   * Body param
+   * Body param: Require authentication for gateway access. New gateways must have
+   * authentication enabled. Once enabled, authentication cannot be disabled.
    */
   authentication?: boolean;
 
@@ -1645,7 +1761,9 @@ export interface AIGatewayCreateParams {
   spend_limits?: AIGatewayCreateParams.SpendLimits | null;
 
   /**
-   * Body param
+   * Body param: Secrets Store used by this gateway. Omit on update to keep the
+   * current store. Cannot be cleared while stored keys or secret references depend
+   * on it.
    */
   store_id?: string | null;
 
@@ -1717,6 +1835,8 @@ export namespace AIGatewayCreateParams {
 
       S13?: 'FLAG' | 'BLOCK';
 
+      S14?: 'FLAG' | 'BLOCK';
+
       S2?: 'FLAG' | 'BLOCK';
 
       S3?: 'FLAG' | 'BLOCK';
@@ -1746,6 +1866,8 @@ export namespace AIGatewayCreateParams {
       S12?: 'FLAG' | 'BLOCK';
 
       S13?: 'FLAG' | 'BLOCK';
+
+      S14?: 'FLAG' | 'BLOCK';
 
       S2?: 'FLAG' | 'BLOCK';
 
@@ -1872,7 +1994,8 @@ export interface AIGatewayUpdateParams {
   rate_limiting_limit: number | null;
 
   /**
-   * Body param
+   * Body param: Require authentication for gateway access. New gateways must have
+   * authentication enabled. Once enabled, authentication cannot be disabled.
    */
   authentication?: boolean;
 
@@ -1948,7 +2071,9 @@ export interface AIGatewayUpdateParams {
   spend_limits?: AIGatewayUpdateParams.SpendLimits | null;
 
   /**
-   * Body param
+   * Body param: Secrets Store used by this gateway. Omit on update to keep the
+   * current store. Cannot be cleared while stored keys or secret references depend
+   * on it.
    */
   store_id?: string | null;
 
@@ -2020,6 +2145,8 @@ export namespace AIGatewayUpdateParams {
 
       S13?: 'FLAG' | 'BLOCK';
 
+      S14?: 'FLAG' | 'BLOCK';
+
       S2?: 'FLAG' | 'BLOCK';
 
       S3?: 'FLAG' | 'BLOCK';
@@ -2049,6 +2176,8 @@ export namespace AIGatewayUpdateParams {
       S12?: 'FLAG' | 'BLOCK';
 
       S13?: 'FLAG' | 'BLOCK';
+
+      S14?: 'FLAG' | 'BLOCK';
 
       S2?: 'FLAG' | 'BLOCK';
 

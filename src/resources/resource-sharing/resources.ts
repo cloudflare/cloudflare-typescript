@@ -25,7 +25,7 @@ export class BaseResources extends APIResource {
    *       meta: {},
    *       resource_account_id:
    *         '023e105f4ecef8ad9ca31a8372d0c353',
-   *       resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       resource_id: '0a679032-bbb2-4b7e-9acc-dd5c5cb27a17',
    *       resource_type: 'custom-ruleset',
    *     },
    *   );
@@ -46,8 +46,8 @@ export class BaseResources extends APIResource {
   }
 
   /**
-   * Update is not immediate, an updated share resource object with a new status will
-   * be returned.
+   * Updates the resource's `meta`. Only resources with `status=active` can be
+   * updated.
    *
    * @example
    * ```ts
@@ -172,7 +172,7 @@ export interface ResourceCreateResponse {
   id: string;
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
@@ -182,7 +182,7 @@ export interface ResourceCreateResponse {
   meta: unknown;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -192,7 +192,7 @@ export interface ResourceCreateResponse {
   resource_account_id: string;
 
   /**
-   * Share Resource identifier.
+   * Identifier assigned by the service that owns the shared resource.
    */
   resource_id: string;
 
@@ -226,7 +226,7 @@ export interface ResourceUpdateResponse {
   id: string;
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
@@ -236,7 +236,7 @@ export interface ResourceUpdateResponse {
   meta: unknown;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -246,7 +246,7 @@ export interface ResourceUpdateResponse {
   resource_account_id: string;
 
   /**
-   * Share Resource identifier.
+   * Identifier assigned by the service that owns the shared resource.
    */
   resource_id: string;
 
@@ -280,7 +280,7 @@ export interface ResourceListResponse {
   id: string;
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
@@ -290,7 +290,7 @@ export interface ResourceListResponse {
   meta: unknown;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -300,7 +300,7 @@ export interface ResourceListResponse {
   resource_account_id: string;
 
   /**
-   * Share Resource identifier.
+   * Identifier assigned by the service that owns the shared resource.
    */
   resource_id: string;
 
@@ -334,7 +334,7 @@ export interface ResourceDeleteResponse {
   id: string;
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
@@ -344,7 +344,7 @@ export interface ResourceDeleteResponse {
   meta: unknown;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -354,7 +354,7 @@ export interface ResourceDeleteResponse {
   resource_account_id: string;
 
   /**
-   * Share Resource identifier.
+   * Identifier assigned by the service that owns the shared resource.
    */
   resource_id: string;
 
@@ -388,7 +388,7 @@ export interface ResourceGetResponse {
   id: string;
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
@@ -398,7 +398,7 @@ export interface ResourceGetResponse {
   meta: unknown;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -408,7 +408,7 @@ export interface ResourceGetResponse {
   resource_account_id: string;
 
   /**
-   * Share Resource identifier.
+   * Identifier assigned by the service that owns the shared resource.
    */
   resource_id: string;
 
@@ -447,12 +447,13 @@ export interface ResourceCreateParams {
   meta: unknown;
 
   /**
-   * Body param: Account identifier.
+   * Body param: The account that owns the resource. Must match the `account_id` in
+   * the path.
    */
   resource_account_id: string;
 
   /**
-   * Body param: Share Resource identifier.
+   * Body param: Identifier assigned by the service that owns the shared resource.
    */
   resource_id: string;
 

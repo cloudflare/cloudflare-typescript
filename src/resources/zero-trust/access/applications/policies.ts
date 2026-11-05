@@ -318,6 +318,7 @@ export type AccessRule =
   | SAMLGroupRule
   | AccessRule.AccessOIDCClaimRule
   | ServiceTokenRule
+  | AccessRule.AccessServiceTokenTagRule
   | AccessRule.AccessLinkedAppTokenRule
   | AccessRule.AccessUserRiskScoreRule
   | AccessRule.AccessCloudflareAccountMemberRule;
@@ -408,6 +409,30 @@ export namespace AccessRule {
   }
 
   /**
+   * Matches an Access service token with the specified tag key and value. Only
+   * compatible with non_identity decisions.
+   */
+  export interface AccessServiceTokenTagRule {
+    service_token_tag: AccessServiceTokenTagRule.ServiceTokenTag;
+  }
+
+  export namespace AccessServiceTokenTagRule {
+    export interface ServiceTokenTag {
+      /**
+       * The tag key to match. Keys are case-sensitive and may contain Unicode letters
+       * and digits, underscores, periods, and hyphens.
+       */
+      key: string;
+
+      /**
+       * The tag value to match. Values are case-sensitive, preserve whitespace, and must
+       * not contain NUL characters.
+       */
+      value: string;
+    }
+  }
+
+  /**
    * Matches OAuth 2.0 access tokens issued by the specified Access OIDC SaaS
    * application. Only compatible with non_identity and bypass decisions.
    */
@@ -486,6 +511,7 @@ export type AccessRuleParam =
   | SAMLGroupRuleParam
   | AccessRuleParam.AccessOIDCClaimRule
   | ServiceTokenRuleParam
+  | AccessRuleParam.AccessServiceTokenTagRule
   | AccessRuleParam.AccessLinkedAppTokenRule
   | AccessRuleParam.AccessUserRiskScoreRule
   | AccessRuleParam.AccessCloudflareAccountMemberRule;
@@ -572,6 +598,30 @@ export namespace AccessRuleParam {
        * The ID of your OIDC identity provider.
        */
       identity_provider_id: string;
+    }
+  }
+
+  /**
+   * Matches an Access service token with the specified tag key and value. Only
+   * compatible with non_identity decisions.
+   */
+  export interface AccessServiceTokenTagRule {
+    service_token_tag: AccessServiceTokenTagRule.ServiceTokenTag;
+  }
+
+  export namespace AccessServiceTokenTagRule {
+    export interface ServiceTokenTag {
+      /**
+       * The tag key to match. Keys are case-sensitive and may contain Unicode letters
+       * and digits, underscores, periods, and hyphens.
+       */
+      key: string;
+
+      /**
+       * The tag value to match. Values are case-sensitive, preserve whitespace, and must
+       * not contain NUL characters.
+       */
+      value: string;
     }
   }
 
@@ -1352,6 +1402,13 @@ export namespace PolicyCreateResponse {
     name?: string;
 
     /**
+     * The account ID used to resolve policy resources and identity for cross-account
+     * WARP authentication. The account must be trusted by the account that owns this
+     * policy.
+     */
+    policy_resolution_account_id?: string;
+
+    /**
      * The order of execution for this policy. Must be unique for each policy within an
      * app.
      */
@@ -1477,6 +1534,13 @@ export namespace PolicyCreateResponse {
      * The name of the Access policy.
      */
     name?: string;
+
+    /**
+     * The account ID used to resolve policy resources and identity for cross-account
+     * WARP authentication. The account must be trusted by the account that owns this
+     * policy.
+     */
+    policy_resolution_account_id?: string;
 
     /**
      * Rules evaluated with an AND logical operator. To match the policy, a user must
@@ -1613,6 +1677,13 @@ export namespace PolicyUpdateResponse {
     name?: string;
 
     /**
+     * The account ID used to resolve policy resources and identity for cross-account
+     * WARP authentication. The account must be trusted by the account that owns this
+     * policy.
+     */
+    policy_resolution_account_id?: string;
+
+    /**
      * The order of execution for this policy. Must be unique for each policy within an
      * app.
      */
@@ -1738,6 +1809,13 @@ export namespace PolicyUpdateResponse {
      * The name of the Access policy.
      */
     name?: string;
+
+    /**
+     * The account ID used to resolve policy resources and identity for cross-account
+     * WARP authentication. The account must be trusted by the account that owns this
+     * policy.
+     */
+    policy_resolution_account_id?: string;
 
     /**
      * Rules evaluated with an AND logical operator. To match the policy, a user must
@@ -1874,6 +1952,13 @@ export namespace PolicyListResponse {
     name?: string;
 
     /**
+     * The account ID used to resolve policy resources and identity for cross-account
+     * WARP authentication. The account must be trusted by the account that owns this
+     * policy.
+     */
+    policy_resolution_account_id?: string;
+
+    /**
      * The order of execution for this policy. Must be unique for each policy within an
      * app.
      */
@@ -1999,6 +2084,13 @@ export namespace PolicyListResponse {
      * The name of the Access policy.
      */
     name?: string;
+
+    /**
+     * The account ID used to resolve policy resources and identity for cross-account
+     * WARP authentication. The account must be trusted by the account that owns this
+     * policy.
+     */
+    policy_resolution_account_id?: string;
 
     /**
      * Rules evaluated with an AND logical operator. To match the policy, a user must
@@ -2142,6 +2234,13 @@ export namespace PolicyGetResponse {
     name?: string;
 
     /**
+     * The account ID used to resolve policy resources and identity for cross-account
+     * WARP authentication. The account must be trusted by the account that owns this
+     * policy.
+     */
+    policy_resolution_account_id?: string;
+
+    /**
      * The order of execution for this policy. Must be unique for each policy within an
      * app.
      */
@@ -2267,6 +2366,13 @@ export namespace PolicyGetResponse {
      * The name of the Access policy.
      */
     name?: string;
+
+    /**
+     * The account ID used to resolve policy resources and identity for cross-account
+     * WARP authentication. The account must be trusted by the account that owns this
+     * policy.
+     */
+    policy_resolution_account_id?: string;
 
     /**
      * Rules evaluated with an AND logical operator. To match the policy, a user must
@@ -2506,6 +2612,13 @@ export declare namespace PolicyCreateParams {
      * infrastructure applications.
      */
     mfa_config?: AccessInfraPolicyReq.MfaConfig;
+
+    /**
+     * Body param: The account ID used to resolve policy resources and identity for
+     * cross-account WARP authentication. The account must be trusted by the account
+     * that owns this policy.
+     */
+    policy_resolution_account_id?: string;
 
     /**
      * Body param: Rules evaluated with an AND logical operator. To match the policy, a
@@ -2753,6 +2866,13 @@ export declare namespace PolicyUpdateParams {
      * infrastructure applications.
      */
     mfa_config?: AccessInfraPolicyReq.MfaConfig;
+
+    /**
+     * Body param: The account ID used to resolve policy resources and identity for
+     * cross-account WARP authentication. The account must be trusted by the account
+     * that owns this policy.
+     */
+    policy_resolution_account_id?: string;
 
     /**
      * Body param: Rules evaluated with an AND logical operator. To match the policy, a

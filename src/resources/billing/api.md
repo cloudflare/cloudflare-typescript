@@ -8,6 +8,44 @@ Methods:
 
 - <code title="post /billing/address-validation">client.billing.<a href="./src/resources/billing/billing.ts">addressValidation</a>({ ...params }) -> BillingAddressValidationResponse</code>
 
+## SpendPolicies
+
+Types:
+
+- <code><a href="./src/resources/billing/spend-policies/spend-policies.ts">SpendPolicyCreateResponse</a></code>
+- <code><a href="./src/resources/billing/spend-policies/spend-policies.ts">SpendPolicyUpdateResponse</a></code>
+- <code><a href="./src/resources/billing/spend-policies/spend-policies.ts">SpendPolicyListResponse</a></code>
+- <code><a href="./src/resources/billing/spend-policies/spend-policies.ts">SpendPolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/billing/spend-policies/spend-policies.ts">SpendPolicyGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/billing/spend-policies">client.billing.spendPolicies.<a href="./src/resources/billing/spend-policies/spend-policies.ts">create</a>({ ...params }) -> SpendPolicyCreateResponse</code>
+- <code title="put /accounts/{account_id}/billing/spend-policies/{policy_id}">client.billing.spendPolicies.<a href="./src/resources/billing/spend-policies/spend-policies.ts">update</a>(policyID, { ...params }) -> SpendPolicyUpdateResponse</code>
+- <code title="get /accounts/{account_id}/billing/spend-policies">client.billing.spendPolicies.<a href="./src/resources/billing/spend-policies/spend-policies.ts">list</a>({ ...params }) -> SpendPolicyListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/billing/spend-policies/{policy_id}">client.billing.spendPolicies.<a href="./src/resources/billing/spend-policies/spend-policies.ts">delete</a>(policyID, { ...params }) -> SpendPolicyDeleteResponse</code>
+- <code title="get /accounts/{account_id}/billing/spend-policies/{policy_id}">client.billing.spendPolicies.<a href="./src/resources/billing/spend-policies/spend-policies.ts">get</a>(policyID, { ...params }) -> SpendPolicyGetResponse</code>
+
+### Audit
+
+Types:
+
+- <code><a href="./src/resources/billing/spend-policies/audit.ts">AuditListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/billing/spend-policies/{policy_id}/audit">client.billing.spendPolicies.audit.<a href="./src/resources/billing/spend-policies/audit.ts">list</a>(policyID, { ...params }) -> AuditListResponsesSinglePage</code>
+
+### Activity
+
+Types:
+
+- <code><a href="./src/resources/billing/spend-policies/activity.ts">ActivityListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/billing/spend-policies/activity">client.billing.spendPolicies.activity.<a href="./src/resources/billing/spend-policies/activity.ts">list</a>({ ...params }) -> ActivityListResponsesCursorPaginationAfter</code>
+
 ## Profiles
 
 Types:
