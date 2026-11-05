@@ -130,6 +130,12 @@ export interface WorkflowUpdateResponse {
   triggered_on: string | null;
 
   version_id: string;
+
+  /**
+   * Jurisdiction where instances of this workflow run and store data. Set when the
+   * workflow is created and cannot be changed.
+   */
+  jurisdiction?: 'eu' | 'fedramp' | 'us' | null;
 }
 
 export interface WorkflowListResponse {
@@ -148,6 +154,12 @@ export interface WorkflowListResponse {
   script_name: string;
 
   triggered_on: string | null;
+
+  /**
+   * Jurisdiction where instances of this workflow run and store data. Set when the
+   * workflow is created and cannot be changed.
+   */
+  jurisdiction?: 'eu' | 'fedramp' | 'us' | null;
 
   schedules?: Array<WorkflowListResponse.Schedule>;
 
@@ -187,6 +199,12 @@ export interface WorkflowGetResponse {
   script_name: string;
 
   triggered_on: string | null;
+
+  /**
+   * Jurisdiction where instances of this workflow run and store data. Set when the
+   * workflow is created and cannot be changed.
+   */
+  jurisdiction?: 'eu' | 'fedramp' | 'us' | null;
 
   schedules?: Array<WorkflowGetResponse.Schedule>;
 
@@ -230,6 +248,13 @@ export interface WorkflowUpdateParams {
    * not set their own retention.
    */
   default_retention?: WorkflowUpdateParams.DefaultRetention;
+
+  /**
+   * Body param: Jurisdiction where instances of this workflow run and store data.
+   * Can only be set when the workflow is created and cannot be changed afterwards;
+   * omit it to keep the existing jurisdiction.
+   */
+  jurisdiction?: 'eu' | 'fedramp' | 'us';
 
   /**
    * Body param

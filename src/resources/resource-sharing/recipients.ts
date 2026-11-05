@@ -179,12 +179,12 @@ export interface RecipientCreateResponse {
   association_status: 'associating' | 'associated' | 'disassociating' | 'disassociated';
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -194,24 +194,25 @@ export interface RecipientCreateResponse {
 export namespace RecipientCreateResponse {
   export interface Resource {
     /**
-     * Share Recipient error message.
+     * Error from the most recent attempt to apply the resource to the recipient. Empty
+     * string when no error has been recorded.
      */
     error: string;
 
     /**
-     * Share Resource identifier.
+     * Identifier assigned by the service that owns the shared resource.
      */
     resource_id: string;
 
     /**
-     * Resource Version.
+     * Resource version applied to the recipient, if reconciliation has occurred.
      */
-    resource_version: number;
+    resource_version: number | null;
 
     /**
      * Whether the error is terminal or will be continually retried.
      */
-    terminal: boolean;
+    terminal: boolean | null;
   }
 }
 
@@ -250,12 +251,12 @@ export interface RecipientListResponse {
   association_status: 'associating' | 'associated' | 'disassociating' | 'disassociated';
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -265,24 +266,25 @@ export interface RecipientListResponse {
 export namespace RecipientListResponse {
   export interface Resource {
     /**
-     * Share Recipient error message.
+     * Error from the most recent attempt to apply the resource to the recipient. Empty
+     * string when no error has been recorded.
      */
     error: string;
 
     /**
-     * Share Resource identifier.
+     * Identifier assigned by the service that owns the shared resource.
      */
     resource_id: string;
 
     /**
-     * Resource Version.
+     * Resource version applied to the recipient, if reconciliation has occurred.
      */
-    resource_version: number;
+    resource_version: number | null;
 
     /**
      * Whether the error is terminal or will be continually retried.
      */
-    terminal: boolean;
+    terminal: boolean | null;
   }
 }
 
@@ -321,12 +323,12 @@ export interface RecipientDeleteResponse {
   association_status: 'associating' | 'associated' | 'disassociating' | 'disassociated';
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -336,24 +338,25 @@ export interface RecipientDeleteResponse {
 export namespace RecipientDeleteResponse {
   export interface Resource {
     /**
-     * Share Recipient error message.
+     * Error from the most recent attempt to apply the resource to the recipient. Empty
+     * string when no error has been recorded.
      */
     error: string;
 
     /**
-     * Share Resource identifier.
+     * Identifier assigned by the service that owns the shared resource.
      */
     resource_id: string;
 
     /**
-     * Resource Version.
+     * Resource version applied to the recipient, if reconciliation has occurred.
      */
-    resource_version: number;
+    resource_version: number | null;
 
     /**
      * Whether the error is terminal or will be continually retried.
      */
-    terminal: boolean;
+    terminal: boolean | null;
   }
 }
 
@@ -392,12 +395,12 @@ export interface RecipientGetResponse {
   association_status: 'associating' | 'associated' | 'disassociating' | 'disassociated';
 
   /**
-   * When the share was created.
+   * When the object was created.
    */
   created: string;
 
   /**
-   * When the share was modified.
+   * When the object was last modified.
    */
   modified: string;
 
@@ -407,24 +410,25 @@ export interface RecipientGetResponse {
 export namespace RecipientGetResponse {
   export interface Resource {
     /**
-     * Share Recipient error message.
+     * Error from the most recent attempt to apply the resource to the recipient. Empty
+     * string when no error has been recorded.
      */
     error: string;
 
     /**
-     * Share Resource identifier.
+     * Identifier assigned by the service that owns the shared resource.
      */
     resource_id: string;
 
     /**
-     * Resource Version.
+     * Resource version applied to the recipient, if reconciliation has occurred.
      */
-    resource_version: number;
+    resource_version: number | null;
 
     /**
      * Whether the error is terminal or will be continually retried.
      */
-    terminal: boolean;
+    terminal: boolean | null;
   }
 }
 
@@ -439,11 +443,6 @@ export interface RecipientCreateParams {
    * are accepted during the deprecation period.
    */
   body_account_id?: string;
-
-  /**
-   * Body param: Organization identifier.
-   */
-  organization_id?: string;
 
   /**
    * Body param: The account that will receive the share.

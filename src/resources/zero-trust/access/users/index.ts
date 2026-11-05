@@ -20,8 +20,16 @@ export {
   LastSeenIdentity,
   BaseLastSeenIdentity,
   type Identity,
+  type LastSeenIdentityGetResponse,
   type LastSeenIdentityGetParams,
 } from './last-seen-identity';
+export {
+  MfaAuthenticators,
+  BaseMfaAuthenticators,
+  type MfaAuthenticatorDeleteResponse,
+  type MfaAuthenticatorDeleteParams,
+} from './mfa-authenticators';
+export { Passkeys, BasePasskeys, type PasskeyDeleteResponse, type PasskeyDeleteParams } from './passkeys';
 export {
   Users,
   BaseUsers,

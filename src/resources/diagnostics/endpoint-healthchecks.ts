@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
+import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -38,7 +39,7 @@ export class BaseEndpointHealthchecks extends APIResource {
   }
 
   /**
-   * Update a Endpoint Health Check.
+   * Update an Endpoint Health Check.
    *
    * @example
    * ```ts
@@ -72,23 +73,24 @@ export class BaseEndpointHealthchecks extends APIResource {
    *
    * @example
    * ```ts
-   * const endpointHealthchecks =
-   *   await client.diagnostics.endpointHealthchecks.list({
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
+   * // Automatically fetches more pages as needed.
+   * for await (const endpointHealthcheckListResponse of client.diagnostics.endpointHealthchecks.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   list(
     params: EndpointHealthcheckListParams,
     options?: RequestOptions,
-  ): APIPromise<EndpointHealthcheckListResponse> {
+  ): PagePromise<EndpointHealthcheckListResponsesSinglePage, EndpointHealthcheckListResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        path`/accounts/${account_id}/diagnostics/endpoint-healthchecks`,
-        options,
-      ) as APIPromise<{ result: EndpointHealthcheckListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/diagnostics/endpoint-healthchecks`,
+      SinglePage<EndpointHealthcheckListResponse>,
+      options,
+    );
   }
 
   /**
@@ -142,6 +144,8 @@ export class BaseEndpointHealthchecks extends APIResource {
   }
 }
 export class EndpointHealthchecks extends BaseEndpointHealthchecks {}
+
+export type EndpointHealthcheckListResponsesSinglePage = SinglePage<EndpointHealthcheckListResponse>;
 
 export interface EndpointHealthcheck {
   /**
@@ -366,6 +370,7 @@ export declare namespace EndpointHealthchecks {
     type EndpointHealthcheckListResponse as EndpointHealthcheckListResponse,
     type EndpointHealthcheckDeleteResponse as EndpointHealthcheckDeleteResponse,
     type EndpointHealthcheckGetResponse as EndpointHealthcheckGetResponse,
+    type EndpointHealthcheckListResponsesSinglePage as EndpointHealthcheckListResponsesSinglePage,
     type EndpointHealthcheckCreateParams as EndpointHealthcheckCreateParams,
     type EndpointHealthcheckUpdateParams as EndpointHealthcheckUpdateParams,
     type EndpointHealthcheckListParams as EndpointHealthcheckListParams,

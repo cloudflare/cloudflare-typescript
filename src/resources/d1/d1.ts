@@ -21,6 +21,7 @@ import {
   DatabaseRawParams,
   DatabaseRawResponse,
   DatabaseRawResponsesSinglePage,
+  DatabaseUndeleteParams,
   DatabaseUpdateParams,
   QueryResult,
   QueryResultsSinglePage,
@@ -119,5 +120,6 @@ export declare namespace D1Resource {
     type DatabaseImportParams as DatabaseImportParams,
     type DatabaseQueryParams as DatabaseQueryParams,
     type DatabaseRawParams as DatabaseRawParams,
+    type DatabaseUndeleteParams as DatabaseUndeleteParams,
   };
 }

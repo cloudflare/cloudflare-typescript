@@ -58,8 +58,10 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { pools: BasePools 
           weight: 0.6,
         },
       ],
+      check_regions: ['WEU', 'ENAM'],
       description: 'Primary data center - Provider XYZ',
       enabled: false,
+      health_sources: ['regional', 'global'],
       latitude: 0,
       load_shedding: {
         default_percent: 0,
@@ -71,6 +73,7 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { pools: BasePools 
       minimum_origins: 0,
       monitor: 'monitor',
       monitor_group: 'monitor_group',
+      networks: ['cloudflare', 'jdcloud'],
       notification_email: 'someone@example.com,sometwo@example.com',
       notification_filter: {
         origin: { disable: true, healthy: true },
@@ -126,6 +129,7 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { pools: BasePools 
       minimum_origins: 0,
       monitor: 'monitor',
       monitor_group: 'monitor_group',
+      networks: ['cloudflare', 'jdcloud'],
       notification_email: 'someone@example.com,sometwo@example.com',
       notification_filter: {
         origin: { disable: true, healthy: true },
@@ -228,6 +232,7 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { pools: BasePools 
       monitor: 'monitor',
       monitor_group: 'monitor_group',
       name: 'primary-dc-1',
+      networks: ['cloudflare', 'jdcloud'],
       notification_email: 'someone@example.com,sometwo@example.com',
       notification_filter: {
         origin: { disable: true, healthy: true },

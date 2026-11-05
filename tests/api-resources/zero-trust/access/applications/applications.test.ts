@@ -32,8 +32,9 @@ const runTests = (
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = client.zeroTrust.access.applications.create({
-      domain: 'test.example.com/admin',
+      oauth_configuration: {},
       type: 'self_hosted',
+      user_populations: ['f174e90a-fafe-4643-bbbc-4a0ed4fc8415'],
       account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -48,87 +49,6 @@ const runTests = (
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await client.zeroTrust.access.applications.create({
-      domain: 'test.example.com/admin',
-      type: 'self_hosted',
-      account_id: 'account_id',
-      allow_authenticate_via_warp: true,
-      allow_iframe: true,
-      allowed_idps: ['699d98642c564d2e855e9661899b7252'],
-      app_launcher_visible: true,
-      auto_redirect_to_identity: true,
-      cors_headers: {
-        allow_all_headers: true,
-        allow_all_methods: true,
-        allow_all_origins: true,
-        allow_credentials: true,
-        allowed_headers: ['string'],
-        allowed_methods: ['GET'],
-        allowed_origins: ['https://example.com'],
-        max_age: -1,
-      },
-      custom_deny_message: 'custom_deny_message',
-      custom_deny_url: 'custom_deny_url',
-      custom_non_identity_deny_url: 'custom_non_identity_deny_url',
-      custom_pages: ['699d98642c564d2e855e9661899b7252'],
-      destinations: [
-        {
-          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
-          type: 'public',
-          uri: 'test.example.com/admin',
-        },
-        {
-          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
-          type: 'public',
-          uri: 'test.anotherexample.com/staff',
-        },
-        {
-          cidr: '10.5.0.0/24',
-          hostname: 'hostname',
-          l4_protocol: 'tcp',
-          port_range: '80-90',
-          type: 'private',
-          vnet_id: 'vnet_id',
-        },
-        {
-          cidr: '10.5.0.3/32',
-          hostname: 'hostname',
-          l4_protocol: 'tcp',
-          port_range: '80',
-          type: 'private',
-          vnet_id: 'vnet_id',
-        },
-        {
-          cidr: 'cidr',
-          hostname: 'private-sni.example.com',
-          l4_protocol: 'tcp',
-          port_range: 'port_range',
-          type: 'private',
-          vnet_id: 'vnet_id',
-        },
-        { mcp_server_id: 'mcp-server-1', type: 'via_mcp_server_portal' },
-        {
-          type: 'worker',
-          worker_id: '617f1d0431a98306ff61e336d79fce86',
-          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
-        },
-        {
-          type: 'preview_worker',
-          worker_id: '617f1d0431a98306ff61e336d79fce86',
-          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
-        },
-        { type: 'all_workers', overrides: [{ behavior: 'public', path_pattern: '/health/*' }] },
-        { type: 'all_preview_workers', overrides: [{ behavior: 'public', path_pattern: '/health/*' }] },
-      ],
-      eager_redirect_cookie_setting: true,
-      enable_binding_cookie: true,
-      http_only_cookie_attribute: true,
-      logo_url: 'https://www.cloudflare.com/img/logo-web-badges/cf-logo-on-white-bg.svg',
-      mfa_config: {
-        allowed_authenticators: ['totp', 'biometrics', 'security_key'],
-        mfa_disabled: false,
-        session_duration: '24h',
-      },
-      name: 'Admin Site',
       oauth_configuration: {
         dynamic_client_registration: {
           allow_any_on_localhost: true,
@@ -139,51 +59,29 @@ const runTests = (
         enabled: true,
         grant: { access_token_lifetime: '5m', session_duration: '24h' },
       },
-      options_preflight_bypass: true,
-      path_cookie_attribute: true,
-      policies: ['f174e90a-fafe-4643-bbbc-4a0ed4fc8415'],
-      read_service_tokens_from_header: 'Authorization',
-      same_site_cookie_attribute: 'strict',
-      scim_config: {
-        idp_uid: 'idp_uid',
-        remote_uri: 'remote_uri',
-        authentication: {
-          password: 'password',
-          scheme: 'httpbasic',
-          user: 'user',
+      type: 'self_hosted',
+      user_populations: ['f174e90a-fafe-4643-bbbc-4a0ed4fc8415'],
+      account_id: 'account_id',
+      allowed_idps: ['699d98642c564d2e855e9661899b7252'],
+      destinations: [
+        {
+          uri: 'uri',
+          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
+          type: 'public',
         },
-        deactivate_on_delete: true,
-        enabled: true,
-        mappings: [
-          {
-            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
-            enabled: true,
-            filter: 'title pr or userType eq "Intern"',
-            operations: {
-              create: true,
-              delete: true,
-              update: true,
-            },
-            strictness: 'strict',
-            transform_jsonata:
-              "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
-          },
-        ],
-      },
+      ],
+      domain: 'test.example.com/admin',
+      name: 'Admin Site',
       self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
-      service_auth_401_redirect: true,
-      session_duration: '24h',
-      skip_interstitial: true,
-      tags: ['engineers'],
-      use_clientless_isolation_app_launcher_url: false,
     });
   });
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = client.zeroTrust.access.applications.update('023e105f4ecef8ad9ca31a8372d0c353', {
-      domain: 'test.example.com/admin',
+      oauth_configuration: {},
       type: 'self_hosted',
+      user_populations: ['f174e90a-fafe-4643-bbbc-4a0ed4fc8415'],
       account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -198,87 +96,6 @@ const runTests = (
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
     const response = await client.zeroTrust.access.applications.update('023e105f4ecef8ad9ca31a8372d0c353', {
-      domain: 'test.example.com/admin',
-      type: 'self_hosted',
-      account_id: 'account_id',
-      allow_authenticate_via_warp: true,
-      allow_iframe: true,
-      allowed_idps: ['699d98642c564d2e855e9661899b7252'],
-      app_launcher_visible: true,
-      auto_redirect_to_identity: true,
-      cors_headers: {
-        allow_all_headers: true,
-        allow_all_methods: true,
-        allow_all_origins: true,
-        allow_credentials: true,
-        allowed_headers: ['string'],
-        allowed_methods: ['GET'],
-        allowed_origins: ['https://example.com'],
-        max_age: -1,
-      },
-      custom_deny_message: 'custom_deny_message',
-      custom_deny_url: 'custom_deny_url',
-      custom_non_identity_deny_url: 'custom_non_identity_deny_url',
-      custom_pages: ['699d98642c564d2e855e9661899b7252'],
-      destinations: [
-        {
-          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
-          type: 'public',
-          uri: 'test.example.com/admin',
-        },
-        {
-          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
-          type: 'public',
-          uri: 'test.anotherexample.com/staff',
-        },
-        {
-          cidr: '10.5.0.0/24',
-          hostname: 'hostname',
-          l4_protocol: 'tcp',
-          port_range: '80-90',
-          type: 'private',
-          vnet_id: 'vnet_id',
-        },
-        {
-          cidr: '10.5.0.3/32',
-          hostname: 'hostname',
-          l4_protocol: 'tcp',
-          port_range: '80',
-          type: 'private',
-          vnet_id: 'vnet_id',
-        },
-        {
-          cidr: 'cidr',
-          hostname: 'private-sni.example.com',
-          l4_protocol: 'tcp',
-          port_range: 'port_range',
-          type: 'private',
-          vnet_id: 'vnet_id',
-        },
-        { mcp_server_id: 'mcp-server-1', type: 'via_mcp_server_portal' },
-        {
-          type: 'worker',
-          worker_id: '617f1d0431a98306ff61e336d79fce86',
-          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
-        },
-        {
-          type: 'preview_worker',
-          worker_id: '617f1d0431a98306ff61e336d79fce86',
-          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
-        },
-        { type: 'all_workers', overrides: [{ behavior: 'public', path_pattern: '/health/*' }] },
-        { type: 'all_preview_workers', overrides: [{ behavior: 'public', path_pattern: '/health/*' }] },
-      ],
-      eager_redirect_cookie_setting: true,
-      enable_binding_cookie: true,
-      http_only_cookie_attribute: true,
-      logo_url: 'https://www.cloudflare.com/img/logo-web-badges/cf-logo-on-white-bg.svg',
-      mfa_config: {
-        allowed_authenticators: ['totp', 'biometrics', 'security_key'],
-        mfa_disabled: false,
-        session_duration: '24h',
-      },
-      name: 'Admin Site',
       oauth_configuration: {
         dynamic_client_registration: {
           allow_any_on_localhost: true,
@@ -289,43 +106,20 @@ const runTests = (
         enabled: true,
         grant: { access_token_lifetime: '5m', session_duration: '24h' },
       },
-      options_preflight_bypass: true,
-      path_cookie_attribute: true,
-      policies: ['f174e90a-fafe-4643-bbbc-4a0ed4fc8415'],
-      read_service_tokens_from_header: 'Authorization',
-      same_site_cookie_attribute: 'strict',
-      scim_config: {
-        idp_uid: 'idp_uid',
-        remote_uri: 'remote_uri',
-        authentication: {
-          password: 'password',
-          scheme: 'httpbasic',
-          user: 'user',
+      type: 'self_hosted',
+      user_populations: ['f174e90a-fafe-4643-bbbc-4a0ed4fc8415'],
+      account_id: 'account_id',
+      allowed_idps: ['699d98642c564d2e855e9661899b7252'],
+      destinations: [
+        {
+          uri: 'uri',
+          overrides: [{ behavior: 'public', path_pattern: '/health/*' }],
+          type: 'public',
         },
-        deactivate_on_delete: true,
-        enabled: true,
-        mappings: [
-          {
-            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
-            enabled: true,
-            filter: 'title pr or userType eq "Intern"',
-            operations: {
-              create: true,
-              delete: true,
-              update: true,
-            },
-            strictness: 'strict',
-            transform_jsonata:
-              "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
-          },
-        ],
-      },
+      ],
+      domain: 'test.example.com/admin',
+      name: 'Admin Site',
       self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
-      service_auth_401_redirect: true,
-      session_duration: '24h',
-      skip_interstitial: true,
-      tags: ['engineers'],
-      use_clientless_isolation_app_launcher_url: false,
     });
   });
 

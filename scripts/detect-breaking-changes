@@ -24,7 +24,6 @@ TEST_PATHS=(
 	tests/api-resources/accounts/speed-settings/transformations.test.ts
 	tests/api-resources/accounts/payment-methods.test.ts
 	tests/api-resources/accounts/pay-invoice.test.ts
-	tests/api-resources/accounts/pay-bad-debt.test.ts
 	tests/api-resources/accounts/receipts.test.ts
 	tests/api-resources/accounts/invoices.test.ts
 	tests/api-resources/accounts/client-secret.test.ts
@@ -35,10 +34,7 @@ TEST_PATHS=(
 	tests/api-resources/organizations/billing/billing.test.ts
 	tests/api-resources/organizations/billing/usage.test.ts
 	tests/api-resources/tenants/tenants.test.ts
-	tests/api-resources/tenants/account-types.test.ts
 	tests/api-resources/tenants/accounts.test.ts
-	tests/api-resources/tenants/entitlements.test.ts
-	tests/api-resources/tenants/memberships.test.ts
 	tests/api-resources/origin-ca-certificates.test.ts
 	tests/api-resources/ips.test.ts
 	tests/api-resources/memberships.test.ts
@@ -125,7 +121,6 @@ TEST_PATHS=(
 	tests/api-resources/custom-hostnames/certificate-pack/certificates.test.ts
 	tests/api-resources/custom-hostnames/quota.test.ts
 	tests/api-resources/custom-nameservers.test.ts
-	tests/api-resources/tenant-custom-nameservers.test.ts
 	tests/api-resources/dns-firewall/dns-firewall.test.ts
 	tests/api-resources/dns-firewall/analytics/analytics.test.ts
 	tests/api-resources/dns-firewall/analytics/reports/reports.test.ts
@@ -141,6 +136,7 @@ TEST_PATHS=(
 	tests/api-resources/dns/settings/settings.test.ts
 	tests/api-resources/dns/settings/zone.test.ts
 	tests/api-resources/dns/settings/account/account.test.ts
+	tests/api-resources/dns/settings/account/nameserver-sets.test.ts
 	tests/api-resources/dns/settings/account/views.test.ts
 	tests/api-resources/dns/analytics/analytics.test.ts
 	tests/api-resources/dns/analytics/reports/reports.test.ts
@@ -357,6 +353,9 @@ TEST_PATHS=(
 	tests/api-resources/dls/regional-services/prefix-bindings.test.ts
 	tests/api-resources/audit-logs.test.ts
 	tests/api-resources/billing/billing.test.ts
+	tests/api-resources/billing/spend-policies/spend-policies.test.ts
+	tests/api-resources/billing/spend-policies/audit.test.ts
+	tests/api-resources/billing/spend-policies/activity.test.ts
 	tests/api-resources/billing/profiles/profiles.test.ts
 	tests/api-resources/billing/profiles/payment-method.test.ts
 	tests/api-resources/billing/usage.test.ts
@@ -451,13 +450,8 @@ TEST_PATHS=(
 	tests/api-resources/magic-network-monitoring/configs/full.test.ts
 	tests/api-resources/magic-network-monitoring/rules/rules.test.ts
 	tests/api-resources/magic-network-monitoring/rules/advertisements.test.ts
-	tests/api-resources/magic-cloud-networking/magic-cloud-networking.test.ts
-	tests/api-resources/magic-cloud-networking/catalog-syncs/catalog-syncs.test.ts
-	tests/api-resources/magic-cloud-networking/catalog-syncs/prebuilt-policies.test.ts
-	tests/api-resources/magic-cloud-networking/on-ramps/on-ramps.test.ts
-	tests/api-resources/magic-cloud-networking/on-ramps/address-spaces.test.ts
-	tests/api-resources/magic-cloud-networking/cloud-integrations.test.ts
-	tests/api-resources/magic-cloud-networking/resources.test.ts
+	tests/api-resources/monetization/monetization.test.ts
+	tests/api-resources/monetization/rules.test.ts
 	tests/api-resources/network-interconnects/network-interconnects.test.ts
 	tests/api-resources/network-interconnects/cnis.test.ts
 	tests/api-resources/network-interconnects/interconnects.test.ts
@@ -474,7 +468,6 @@ TEST_PATHS=(
 	tests/api-resources/pages/projects/domains.test.ts
 	tests/api-resources/pages/assets.test.ts
 	tests/api-resources/registrar/registrar.test.ts
-	tests/api-resources/registrar/domains.test.ts
 	tests/api-resources/registrar/registrations.test.ts
 	tests/api-resources/registrar/registration-status.test.ts
 	tests/api-resources/registrar/update-status.test.ts
@@ -533,6 +526,7 @@ TEST_PATHS=(
 	tests/api-resources/r2/buckets/metrics.test.ts
 	tests/api-resources/r2/buckets/sippy.test.ts
 	tests/api-resources/r2/buckets/objects.test.ts
+	tests/api-resources/r2/buckets/jobs.test.ts
 	tests/api-resources/r2/temporary-credentials.test.ts
 	tests/api-resources/r2/super-slurper/super-slurper.test.ts
 	tests/api-resources/r2/super-slurper/jobs/jobs.test.ts
@@ -561,6 +555,18 @@ TEST_PATHS=(
 	tests/api-resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.test.ts
 	tests/api-resources/workers-for-platforms/dispatch/namespaces/scripts/tags.test.ts
 	tests/api-resources/zero-trust/zero-trust.test.ts
+	tests/api-resources/zero-trust/cws/cws.test.ts
+	tests/api-resources/zero-trust/cws/basic-auth-credentials/basic-auth-credentials.test.ts
+	tests/api-resources/zero-trust/cws/basic-auth-credentials/secrets.test.ts
+	tests/api-resources/zero-trust/cws/deployments.test.ts
+	tests/api-resources/zero-trust/cws/domain-acls.test.ts
+	tests/api-resources/zero-trust/cws/policies.test.ts
+	tests/api-resources/zero-trust/cws/policy-sets.test.ts
+	tests/api-resources/zero-trust/cws/rego-metadata.test.ts
+	tests/api-resources/zero-trust/cws/rego-modules.test.ts
+	tests/api-resources/zero-trust/cws/tenant-structures/tenant-structures.test.ts
+	tests/api-resources/zero-trust/cws/tenant-structures/nodes.test.ts
+	tests/api-resources/zero-trust/cws/workloads.test.ts
 	tests/api-resources/zero-trust/devices/devices.test.ts
 	tests/api-resources/zero-trust/devices/devices_.test.ts
 	tests/api-resources/zero-trust/devices/resilience/resilience.test.ts
@@ -620,12 +626,19 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/access/keys.test.ts
 	tests/api-resources/zero-trust/access/logs/logs.test.ts
 	tests/api-resources/zero-trust/access/logs/access-requests.test.ts
+	tests/api-resources/zero-trust/access/logs/jit-requests.test.ts
 	tests/api-resources/zero-trust/access/logs/scim/scim.test.ts
 	tests/api-resources/zero-trust/access/logs/scim/updates.test.ts
 	tests/api-resources/zero-trust/access/users/users.test.ts
 	tests/api-resources/zero-trust/access/users/active-sessions.test.ts
 	tests/api-resources/zero-trust/access/users/last-seen-identity.test.ts
 	tests/api-resources/zero-trust/access/users/failed-logins.test.ts
+	tests/api-resources/zero-trust/access/users/mfa-authenticators.test.ts
+	tests/api-resources/zero-trust/access/users/passkeys.test.ts
+	tests/api-resources/zero-trust/access/user-populations/user-populations.test.ts
+	tests/api-resources/zero-trust/access/user-populations/users.test.ts
+	tests/api-resources/zero-trust/access/mfa/mfa.test.ts
+	tests/api-resources/zero-trust/access/mfa/authenticator-catalog.test.ts
 	tests/api-resources/zero-trust/access/custom-pages.test.ts
 	tests/api-resources/zero-trust/access/tags.test.ts
 	tests/api-resources/zero-trust/access/policies.test.ts
@@ -639,6 +652,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/casb/posture/exports.test.ts
 	tests/api-resources/zero-trust/casb/posture/finding-types/finding-types.test.ts
 	tests/api-resources/zero-trust/casb/posture/finding-types/remediation-types.test.ts
+	tests/api-resources/zero-trust/casb/posture/asset-schemas.test.ts
 	tests/api-resources/zero-trust/casb/posture/content.test.ts
 	tests/api-resources/zero-trust/casb/posture/remediations/remediations.test.ts
 	tests/api-resources/zero-trust/casb/posture/remediations/jobs.test.ts
@@ -698,6 +712,8 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/dlp/entries/custom.test.ts
 	tests/api-resources/zero-trust/dlp/entries/predefined.test.ts
 	tests/api-resources/zero-trust/dlp/entries/integration.test.ts
+	tests/api-resources/zero-trust/dlp/validators/validators.test.ts
+	tests/api-resources/zero-trust/dlp/validators/proximity-words.test.ts
 	tests/api-resources/zero-trust/dlp/sensitivity-groups/sensitivity-groups.test.ts
 	tests/api-resources/zero-trust/dlp/sensitivity-groups/levels/levels.test.ts
 	tests/api-resources/zero-trust/dlp/sensitivity-groups/levels/order.test.ts
@@ -718,6 +734,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/gateway/rules.test.ts
 	tests/api-resources/zero-trust/gateway/certificates.test.ts
 	tests/api-resources/zero-trust/gateway/pacfiles.test.ts
+	tests/api-resources/zero-trust/gateway/dns-destination-ips.test.ts
 	tests/api-resources/zero-trust/networks/networks.test.ts
 	tests/api-resources/zero-trust/networks/routes/routes.test.ts
 	tests/api-resources/zero-trust/networks/routes/ips.test.ts
@@ -1072,7 +1089,6 @@ TEST_PATHS=(
 	tests/api-resources/browser-rendering/devtools/session.test.ts
 	tests/api-resources/browser-rendering/devtools/browser/browser.test.ts
 	tests/api-resources/browser-rendering/devtools/browser/live-view.test.ts
-	tests/api-resources/browser-rendering/devtools/browser/page.test.ts
 	tests/api-resources/browser-rendering/devtools/browser/targets.test.ts
 	tests/api-resources/custom-pages/custom-pages.test.ts
 	tests/api-resources/custom-pages/assets.test.ts
@@ -1083,6 +1099,9 @@ TEST_PATHS=(
 	tests/api-resources/pipelines/pipelines.test.ts
 	tests/api-resources/pipelines/sinks.test.ts
 	tests/api-resources/pipelines/streams.test.ts
+	tests/api-resources/k2/k2.test.ts
+	tests/api-resources/k2/streams/streams.test.ts
+	tests/api-resources/k2/streams/subscriptions.test.ts
 	tests/api-resources/schema-validation/schema-validation.test.ts
 	tests/api-resources/schema-validation/schemas.test.ts
 	tests/api-resources/schema-validation/settings/settings.test.ts

@@ -81,7 +81,7 @@ export type TunnelListResponse = Shared.CloudflareTunnel | TunnelListResponse.Tu
 
 export namespace TunnelListResponse {
   /**
-   * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
+   * A Mesh node that connects your origin to Cloudflare's edge.
    */
   export interface TunnelWARPConnectorTunnel {
     /**

@@ -9,13 +9,11 @@ export {
   type BrowserVersionResponse,
   type BrowserCreateParams,
   type BrowserDeleteParams,
-  type BrowserConnectParams,
-  type BrowserLaunchParams,
   type BrowserProtocolParams,
   type BrowserVersionParams,
 } from './browser';
 export { LiveView, BaseLiveView, type LiveViewCreateResponse, type LiveViewCreateParams } from './live-view';
-export { Page, BasePage, type PageGetParams } from './page';
+export { Page, BasePage } from './page';
 export {
   Targets,
   BaseTargets,

@@ -2,7 +2,6 @@
 
 Types:
 
-- <code><a href="./src/resources/precursor.ts">EnforcementRule</a></code>
 - <code><a href="./src/resources/precursor.ts">PrecursorConfig</a></code>
 
 Methods:

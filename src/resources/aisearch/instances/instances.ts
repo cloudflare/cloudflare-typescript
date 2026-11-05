@@ -32,12 +32,13 @@ export class BaseInstances extends APIResource {
 
   /**
    * Create a new AI Search instance with the given configuration. If type is omitted
-   * or null, a non-blank HTTP(S) source infers web-crawler and an existing R2 bucket
-   * source infers r2. A missing or blank source without a type creates a managed
-   * upload-only instance. Search for Agents instances require the default namespace.
+   * or null, a non-blank HTTP(S) source infers web-crawler and any other source
+   * infers r2; r2 sources must name an existing bucket. A missing or blank source
+   * without a type creates a managed upload-only instance.
    *
-   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
-   * (and descendant paths) instead.
+   * Deprecated: use
+   * /accounts/{account_id}/ai-search/namespaces/{namespace}/instances (and
+   * descendant paths) instead.
    *
    * @deprecated
    */
@@ -52,13 +53,11 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * Update an AI Search instance. Submitting Search for Agents metadata requires the
-   * default namespace; omitting or removing it is allowed elsewhere. Submit Search
-   * for Agents metadata and restrictive or unknown public endpoint changes or custom
-   * domains in separate PUT requests, even when resubmitting unchanged metadata.
+   * Updates the configuration of an AI Search instance.
    *
-   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
-   * (and descendant paths) instead.
+   * Deprecated: use
+   * /accounts/{account_id}/ai-search/namespaces/{namespace}/instances (and
+   * descendant paths) instead.
    *
    * @deprecated
    */
@@ -77,10 +76,11 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * List all AI Search instances in the account.
+   * Lists all AI Search instances in the account.
    *
-   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
-   * (and descendant paths) instead.
+   * Deprecated: use
+   * /accounts/{account_id}/ai-search/namespaces/{namespace}/instances (and
+   * descendant paths) instead.
    *
    * @deprecated
    */
@@ -97,10 +97,11 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * Permanently delete an AI Search instance and all its indexed data.
+   * Deletes an AI Search instance and all its indexed data permanently.
    *
-   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
-   * (and descendant paths) instead.
+   * Deprecated: use
+   * /accounts/{account_id}/ai-search/namespaces/{namespace}/instances (and
+   * descendant paths) instead.
    *
    * @deprecated
    */
@@ -121,8 +122,9 @@ export class BaseInstances extends APIResource {
    * Performs a chat completion request against an AI Search instance, using indexed
    * content as context for generating responses.
    *
-   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
-   * (and descendant paths) instead.
+   * Deprecated: use
+   * /accounts/{account_id}/ai-search/namespaces/{namespace}/instances (and
+   * descendant paths) instead.
    *
    * @deprecated
    */
@@ -141,8 +143,9 @@ export class BaseInstances extends APIResource {
   /**
    * Retrieve the configuration and status of an AI Search instance.
    *
-   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
-   * (and descendant paths) instead.
+   * Deprecated: use
+   * /accounts/{account_id}/ai-search/namespaces/{namespace}/instances (and
+   * descendant paths) instead.
    *
    * @deprecated
    */
@@ -159,8 +162,9 @@ export class BaseInstances extends APIResource {
    * Executes a semantic search query against an AI Search instance to find relevant
    * indexed content.
    *
-   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
-   * (and descendant paths) instead.
+   * Deprecated: use
+   * /accounts/{account_id}/ai-search/namespaces/{namespace}/instances (and
+   * descendant paths) instead.
    *
    * @deprecated
    */
@@ -181,8 +185,9 @@ export class BaseInstances extends APIResource {
   /**
    * Retrieve usage and indexing statistics for an AI Search instance.
    *
-   * Deprecated: use /accounts/{account_id}/ai-search/namespaces/{name}/instances
-   * (and descendant paths) instead.
+   * Deprecated: use
+   * /accounts/{account_id}/ai-search/namespaces/{namespace}/instances (and
+   * descendant paths) instead.
    *
    * @deprecated
    */
@@ -257,8 +262,8 @@ export interface InstanceCreateResponse {
   hybrid_search_enabled?: boolean;
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to vector and
-   * keyword indexing for new instances.
+   * Controls which storage backends indexing uses. Defaults to vector and keyword
+   * indexing for new instances. When set, both vector and keyword are required.
    */
   index_method?: InstanceCreateResponse.IndexMethod;
 
@@ -294,6 +299,9 @@ export interface InstanceCreateResponse {
 
   rewrite_query?: boolean;
 
+  /**
+   * Minimum similarity score a chunk must reach to be returned. Defaults to 0.4.
+   */
   score_threshold?: number;
 
   source?: string | null;
@@ -305,6 +313,7 @@ export interface InstanceCreateResponse {
   /**
    * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
    * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Defaults to 86400 (24h).
    */
   sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
@@ -326,8 +335,8 @@ export namespace InstanceCreateResponse {
   }
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to vector and
-   * keyword indexing for new instances.
+   * Controls which storage backends indexing uses. Defaults to vector and keyword
+   * indexing for new instances. When set, both vector and keyword are required.
    */
   export interface IndexMethod {
     /**
@@ -360,7 +369,19 @@ export namespace InstanceCreateResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    created_from_emdash_plugin?: Metadata.CreatedFromEmdashPlugin;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface CreatedFromEmdashPlugin {
+      type: 'native' | 'rest';
+
+      version: string;
+
+      [k: string]: unknown;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -397,7 +418,7 @@ export namespace InstanceCreateResponse {
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
       /**
-       * Disable chat completions endpoint for this public endpoint
+       * Disable chat completions endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -406,7 +427,7 @@ export namespace InstanceCreateResponse {
       description?: string;
 
       /**
-       * Disable MCP endpoint for this public endpoint
+       * Disable MCP endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -421,7 +442,7 @@ export namespace InstanceCreateResponse {
 
     export interface SearchEndpoint {
       /**
-       * Disable search endpoint for this public endpoint
+       * Disable search endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -437,11 +458,11 @@ export namespace InstanceCreateResponse {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * Controls which documents become candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. When omitted on an
-     * update, the existing stored value is preserved; when never set, search falls
-     * back to 'and'.
+     * containing at least one term and ranks results according to BM25 relevance. When
+     * omitted on an update, the existing stored value stays unchanged; when never set,
+     * search falls back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -470,7 +491,7 @@ export namespace InstanceCreateResponse {
     /**
      * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced). Most accounts are limited to 10
+     * /admin/users and /admin/settings/advanced). Most accounts have a limit of 10
      * rules; contact support to raise it.
      */
     exclude_items?: Array<string>;
@@ -478,7 +499,7 @@ export namespace InstanceCreateResponse {
     /**
      * List of path patterns to include. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post). Most accounts are limited to 10 rules; contact
+     * /blog/post and /blog/2024/post). Most accounts have a limit of 10 rules; contact
      * support to raise it.
      */
     include_items?: Array<string>;
@@ -493,7 +514,7 @@ export namespace InstanceCreateResponse {
   export namespace SourceParams {
     export interface WebCrawler {
       /**
-       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * Options for parse_type 'discover', where Browser Run discovers URLs through link
        * following and sitemaps. Ignored for 'sitemap'.
        */
       discover_options?: WebCrawler.DiscoverOptions;
@@ -501,15 +522,16 @@ export namespace InstanceCreateResponse {
       parse_options?: WebCrawler.ParseOptions;
 
       /**
-       * How URLs are discovered. 'sitemap' reads XML sitemaps; 'discover' follows links
-       * recursively and requires the source to be a Verified zone on this account.
+       * How the crawler finds URLs. 'sitemap' reads XML sitemaps; 'discover' follows
+       * links recursively and requires the source to belong to a Verified zone on this
+       * account.
        */
       parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
       /**
-       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * Options for parse_type 'discover', where Browser Run discovers URLs through link
        * following and sitemaps. Ignored for 'sitemap'.
        */
       export interface DiscoverOptions {
@@ -519,8 +541,8 @@ export namespace InstanceCreateResponse {
         depth?: number;
 
         /**
-         * Follow links that point outside the source domain. Must stay `false` — discover
-         * crawls are restricted to the zone you own.
+         * Follow links that point outside the source domain. Must stay `false` because
+         * discover crawls only cover the zone you own.
          */
         include_external_links?: boolean;
 
@@ -550,15 +572,16 @@ export namespace InstanceCreateResponse {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
-         * the field to disable content selection — empty arrays are rejected.
+         * matching path wins. The crawler stores and indexes only the matched HTML
+         * fragment. Omit the field to disable content selection; the API rejects empty
+         * arrays.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
         /**
-         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
-         * token characters (no spaces, colons, or control characters); values must be
-         * HTAB + printable ASCII (no CR/LF).
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must use
+         * RFC-7230 token characters, excluding spaces, colons, and control characters.
+         * Values must use HTAB and printable ASCII only, excluding CR and LF.
          */
         include_headers?: { [key: string]: string };
 
@@ -582,9 +605,9 @@ export namespace InstanceCreateResponse {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Must not
-           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
-           * if multiple elements match, the selector is ignored and the full page is used.
+           * CSS selector to extract content from pages matching the path pattern. Disallowed
+           * characters: ;, `, $, {, }, \. Must target a single element; if multiple elements
+           * match, the crawler ignores the selector and uses the full page.
            */
           selector: string;
         }
@@ -645,8 +668,8 @@ export interface InstanceUpdateResponse {
   hybrid_search_enabled?: boolean;
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to vector and
-   * keyword indexing for new instances.
+   * Controls which storage backends indexing uses. Defaults to vector and keyword
+   * indexing for new instances. When set, both vector and keyword are required.
    */
   index_method?: InstanceUpdateResponse.IndexMethod;
 
@@ -682,6 +705,9 @@ export interface InstanceUpdateResponse {
 
   rewrite_query?: boolean;
 
+  /**
+   * Minimum similarity score a chunk must reach to be returned. Defaults to 0.4.
+   */
   score_threshold?: number;
 
   source?: string | null;
@@ -693,6 +719,7 @@ export interface InstanceUpdateResponse {
   /**
    * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
    * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Defaults to 86400 (24h).
    */
   sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
@@ -714,8 +741,8 @@ export namespace InstanceUpdateResponse {
   }
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to vector and
-   * keyword indexing for new instances.
+   * Controls which storage backends indexing uses. Defaults to vector and keyword
+   * indexing for new instances. When set, both vector and keyword are required.
    */
   export interface IndexMethod {
     /**
@@ -748,7 +775,19 @@ export namespace InstanceUpdateResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    created_from_emdash_plugin?: Metadata.CreatedFromEmdashPlugin;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface CreatedFromEmdashPlugin {
+      type: 'native' | 'rest';
+
+      version: string;
+
+      [k: string]: unknown;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -785,7 +824,7 @@ export namespace InstanceUpdateResponse {
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
       /**
-       * Disable chat completions endpoint for this public endpoint
+       * Disable chat completions endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -794,7 +833,7 @@ export namespace InstanceUpdateResponse {
       description?: string;
 
       /**
-       * Disable MCP endpoint for this public endpoint
+       * Disable MCP endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -809,7 +848,7 @@ export namespace InstanceUpdateResponse {
 
     export interface SearchEndpoint {
       /**
-       * Disable search endpoint for this public endpoint
+       * Disable search endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -825,11 +864,11 @@ export namespace InstanceUpdateResponse {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * Controls which documents become candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. When omitted on an
-     * update, the existing stored value is preserved; when never set, search falls
-     * back to 'and'.
+     * containing at least one term and ranks results according to BM25 relevance. When
+     * omitted on an update, the existing stored value stays unchanged; when never set,
+     * search falls back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -858,7 +897,7 @@ export namespace InstanceUpdateResponse {
     /**
      * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced). Most accounts are limited to 10
+     * /admin/users and /admin/settings/advanced). Most accounts have a limit of 10
      * rules; contact support to raise it.
      */
     exclude_items?: Array<string>;
@@ -866,7 +905,7 @@ export namespace InstanceUpdateResponse {
     /**
      * List of path patterns to include. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post). Most accounts are limited to 10 rules; contact
+     * /blog/post and /blog/2024/post). Most accounts have a limit of 10 rules; contact
      * support to raise it.
      */
     include_items?: Array<string>;
@@ -881,7 +920,7 @@ export namespace InstanceUpdateResponse {
   export namespace SourceParams {
     export interface WebCrawler {
       /**
-       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * Options for parse_type 'discover', where Browser Run discovers URLs through link
        * following and sitemaps. Ignored for 'sitemap'.
        */
       discover_options?: WebCrawler.DiscoverOptions;
@@ -889,15 +928,16 @@ export namespace InstanceUpdateResponse {
       parse_options?: WebCrawler.ParseOptions;
 
       /**
-       * How URLs are discovered. 'sitemap' reads XML sitemaps; 'discover' follows links
-       * recursively and requires the source to be a Verified zone on this account.
+       * How the crawler finds URLs. 'sitemap' reads XML sitemaps; 'discover' follows
+       * links recursively and requires the source to belong to a Verified zone on this
+       * account.
        */
       parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
       /**
-       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * Options for parse_type 'discover', where Browser Run discovers URLs through link
        * following and sitemaps. Ignored for 'sitemap'.
        */
       export interface DiscoverOptions {
@@ -907,8 +947,8 @@ export namespace InstanceUpdateResponse {
         depth?: number;
 
         /**
-         * Follow links that point outside the source domain. Must stay `false` — discover
-         * crawls are restricted to the zone you own.
+         * Follow links that point outside the source domain. Must stay `false` because
+         * discover crawls only cover the zone you own.
          */
         include_external_links?: boolean;
 
@@ -938,15 +978,16 @@ export namespace InstanceUpdateResponse {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
-         * the field to disable content selection — empty arrays are rejected.
+         * matching path wins. The crawler stores and indexes only the matched HTML
+         * fragment. Omit the field to disable content selection; the API rejects empty
+         * arrays.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
         /**
-         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
-         * token characters (no spaces, colons, or control characters); values must be
-         * HTAB + printable ASCII (no CR/LF).
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must use
+         * RFC-7230 token characters, excluding spaces, colons, and control characters.
+         * Values must use HTAB and printable ASCII only, excluding CR and LF.
          */
         include_headers?: { [key: string]: string };
 
@@ -970,9 +1011,9 @@ export namespace InstanceUpdateResponse {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Must not
-           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
-           * if multiple elements match, the selector is ignored and the full page is used.
+           * CSS selector to extract content from pages matching the path pattern. Disallowed
+           * characters: ;, `, $, {, }, \. Must target a single element; if multiple elements
+           * match, the crawler ignores the selector and uses the full page.
            */
           selector: string;
         }
@@ -1099,9 +1140,21 @@ export namespace InstanceListResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    created_from_emdash_plugin?: Metadata.CreatedFromEmdashPlugin;
+
     worker_domain?: string;
 
     [k: string]: unknown;
+  }
+
+  export namespace Metadata {
+    export interface CreatedFromEmdashPlugin {
+      type: 'native' | 'rest';
+
+      version: string;
+
+      [k: string]: unknown;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -1210,7 +1263,7 @@ export namespace InstanceListResponse {
         include_subdomains?: boolean;
 
         /**
-         * Maximum number of pages to crawl. New values are capped at 100000; instances
+         * Maximum number of pages to crawl. New values have a maximum of 100000; instances
          * configured before that cap may report a higher stored value, which the crawler
          * clamps at run time.
          */
@@ -1302,8 +1355,8 @@ export interface InstanceDeleteResponse {
   hybrid_search_enabled?: boolean;
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to vector and
-   * keyword indexing for new instances.
+   * Controls which storage backends indexing uses. Defaults to vector and keyword
+   * indexing for new instances. When set, both vector and keyword are required.
    */
   index_method?: InstanceDeleteResponse.IndexMethod;
 
@@ -1339,6 +1392,9 @@ export interface InstanceDeleteResponse {
 
   rewrite_query?: boolean;
 
+  /**
+   * Minimum similarity score a chunk must reach to be returned. Defaults to 0.4.
+   */
   score_threshold?: number;
 
   source?: string | null;
@@ -1350,6 +1406,7 @@ export interface InstanceDeleteResponse {
   /**
    * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
    * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Defaults to 86400 (24h).
    */
   sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
@@ -1371,8 +1428,8 @@ export namespace InstanceDeleteResponse {
   }
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to vector and
-   * keyword indexing for new instances.
+   * Controls which storage backends indexing uses. Defaults to vector and keyword
+   * indexing for new instances. When set, both vector and keyword are required.
    */
   export interface IndexMethod {
     /**
@@ -1405,7 +1462,19 @@ export namespace InstanceDeleteResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    created_from_emdash_plugin?: Metadata.CreatedFromEmdashPlugin;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface CreatedFromEmdashPlugin {
+      type: 'native' | 'rest';
+
+      version: string;
+
+      [k: string]: unknown;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -1442,7 +1511,7 @@ export namespace InstanceDeleteResponse {
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
       /**
-       * Disable chat completions endpoint for this public endpoint
+       * Disable chat completions endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -1451,7 +1520,7 @@ export namespace InstanceDeleteResponse {
       description?: string;
 
       /**
-       * Disable MCP endpoint for this public endpoint
+       * Disable MCP endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -1466,7 +1535,7 @@ export namespace InstanceDeleteResponse {
 
     export interface SearchEndpoint {
       /**
-       * Disable search endpoint for this public endpoint
+       * Disable search endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -1482,11 +1551,11 @@ export namespace InstanceDeleteResponse {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * Controls which documents become candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. When omitted on an
-     * update, the existing stored value is preserved; when never set, search falls
-     * back to 'and'.
+     * containing at least one term and ranks results according to BM25 relevance. When
+     * omitted on an update, the existing stored value stays unchanged; when never set,
+     * search falls back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -1515,7 +1584,7 @@ export namespace InstanceDeleteResponse {
     /**
      * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced). Most accounts are limited to 10
+     * /admin/users and /admin/settings/advanced). Most accounts have a limit of 10
      * rules; contact support to raise it.
      */
     exclude_items?: Array<string>;
@@ -1523,7 +1592,7 @@ export namespace InstanceDeleteResponse {
     /**
      * List of path patterns to include. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post). Most accounts are limited to 10 rules; contact
+     * /blog/post and /blog/2024/post). Most accounts have a limit of 10 rules; contact
      * support to raise it.
      */
     include_items?: Array<string>;
@@ -1538,7 +1607,7 @@ export namespace InstanceDeleteResponse {
   export namespace SourceParams {
     export interface WebCrawler {
       /**
-       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * Options for parse_type 'discover', where Browser Run discovers URLs through link
        * following and sitemaps. Ignored for 'sitemap'.
        */
       discover_options?: WebCrawler.DiscoverOptions;
@@ -1546,15 +1615,16 @@ export namespace InstanceDeleteResponse {
       parse_options?: WebCrawler.ParseOptions;
 
       /**
-       * How URLs are discovered. 'sitemap' reads XML sitemaps; 'discover' follows links
-       * recursively and requires the source to be a Verified zone on this account.
+       * How the crawler finds URLs. 'sitemap' reads XML sitemaps; 'discover' follows
+       * links recursively and requires the source to belong to a Verified zone on this
+       * account.
        */
       parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
       /**
-       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * Options for parse_type 'discover', where Browser Run discovers URLs through link
        * following and sitemaps. Ignored for 'sitemap'.
        */
       export interface DiscoverOptions {
@@ -1564,8 +1634,8 @@ export namespace InstanceDeleteResponse {
         depth?: number;
 
         /**
-         * Follow links that point outside the source domain. Must stay `false` — discover
-         * crawls are restricted to the zone you own.
+         * Follow links that point outside the source domain. Must stay `false` because
+         * discover crawls only cover the zone you own.
          */
         include_external_links?: boolean;
 
@@ -1595,15 +1665,16 @@ export namespace InstanceDeleteResponse {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
-         * the field to disable content selection — empty arrays are rejected.
+         * matching path wins. The crawler stores and indexes only the matched HTML
+         * fragment. Omit the field to disable content selection; the API rejects empty
+         * arrays.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
         /**
-         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
-         * token characters (no spaces, colons, or control characters); values must be
-         * HTAB + printable ASCII (no CR/LF).
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must use
+         * RFC-7230 token characters, excluding spaces, colons, and control characters.
+         * Values must use HTAB and printable ASCII only, excluding CR and LF.
          */
         include_headers?: { [key: string]: string };
 
@@ -1627,9 +1698,9 @@ export namespace InstanceDeleteResponse {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Must not
-           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
-           * if multiple elements match, the selector is ignored and the full page is used.
+           * CSS selector to extract content from pages matching the path pattern. Disallowed
+           * characters: ;, `, $, {, }, \. Must target a single element; if multiple elements
+           * match, the crawler ignores the selector and uses the full page.
            */
           selector: string;
         }
@@ -1720,7 +1791,29 @@ export namespace InstanceChatCompletionsResponse {
 
     item?: Chunk.Item;
 
+    /**
+     * Audio/video transcript chunks only: end, in milliseconds from the start of the
+     * media (whole seconds), of the last transcript section the matched chunk covers.
+     * Describes the matched chunk before any context expansion, not the expanded
+     * `text`.
+     */
+    media_end_ms?: number;
+
+    /**
+     * Audio/video transcript chunks only: start, in milliseconds from the start of the
+     * media (whole seconds), of the transcript section the matched chunk begins in.
+     * Describes the matched chunk before any context expansion, not the expanded
+     * `text`.
+     */
+    media_start_ms?: number;
+
     scoring_details?: Chunk.ScoringDetails;
+
+    /**
+     * Audio/video transcript chunks only: type of the source media file. Omitted for
+     * all other chunks.
+     */
+    source_media_type?: 'audio' | 'video';
   }
 
   export namespace Chunk {
@@ -1800,8 +1893,8 @@ export interface InstanceReadResponse {
   hybrid_search_enabled?: boolean;
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to vector and
-   * keyword indexing for new instances.
+   * Controls which storage backends indexing uses. Defaults to vector and keyword
+   * indexing for new instances. When set, both vector and keyword are required.
    */
   index_method?: InstanceReadResponse.IndexMethod;
 
@@ -1837,6 +1930,9 @@ export interface InstanceReadResponse {
 
   rewrite_query?: boolean;
 
+  /**
+   * Minimum similarity score a chunk must reach to be returned. Defaults to 0.4.
+   */
   score_threshold?: number;
 
   source?: string | null;
@@ -1848,6 +1944,7 @@ export interface InstanceReadResponse {
   /**
    * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
    * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Defaults to 86400 (24h).
    */
   sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
@@ -1869,8 +1966,8 @@ export namespace InstanceReadResponse {
   }
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to vector and
-   * keyword indexing for new instances.
+   * Controls which storage backends indexing uses. Defaults to vector and keyword
+   * indexing for new instances. When set, both vector and keyword are required.
    */
   export interface IndexMethod {
     /**
@@ -1903,7 +2000,19 @@ export namespace InstanceReadResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    created_from_emdash_plugin?: Metadata.CreatedFromEmdashPlugin;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface CreatedFromEmdashPlugin {
+      type: 'native' | 'rest';
+
+      version: string;
+
+      [k: string]: unknown;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -1940,7 +2049,7 @@ export namespace InstanceReadResponse {
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
       /**
-       * Disable chat completions endpoint for this public endpoint
+       * Disable chat completions endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -1949,7 +2058,7 @@ export namespace InstanceReadResponse {
       description?: string;
 
       /**
-       * Disable MCP endpoint for this public endpoint
+       * Disable MCP endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -1964,7 +2073,7 @@ export namespace InstanceReadResponse {
 
     export interface SearchEndpoint {
       /**
-       * Disable search endpoint for this public endpoint
+       * Disable search endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -1980,11 +2089,11 @@ export namespace InstanceReadResponse {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * Controls which documents become candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. When omitted on an
-     * update, the existing stored value is preserved; when never set, search falls
-     * back to 'and'.
+     * containing at least one term and ranks results according to BM25 relevance. When
+     * omitted on an update, the existing stored value stays unchanged; when never set,
+     * search falls back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -2013,7 +2122,7 @@ export namespace InstanceReadResponse {
     /**
      * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced). Most accounts are limited to 10
+     * /admin/users and /admin/settings/advanced). Most accounts have a limit of 10
      * rules; contact support to raise it.
      */
     exclude_items?: Array<string>;
@@ -2021,7 +2130,7 @@ export namespace InstanceReadResponse {
     /**
      * List of path patterns to include. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post). Most accounts are limited to 10 rules; contact
+     * /blog/post and /blog/2024/post). Most accounts have a limit of 10 rules; contact
      * support to raise it.
      */
     include_items?: Array<string>;
@@ -2036,7 +2145,7 @@ export namespace InstanceReadResponse {
   export namespace SourceParams {
     export interface WebCrawler {
       /**
-       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * Options for parse_type 'discover', where Browser Run discovers URLs through link
        * following and sitemaps. Ignored for 'sitemap'.
        */
       discover_options?: WebCrawler.DiscoverOptions;
@@ -2044,15 +2153,16 @@ export namespace InstanceReadResponse {
       parse_options?: WebCrawler.ParseOptions;
 
       /**
-       * How URLs are discovered. 'sitemap' reads XML sitemaps; 'discover' follows links
-       * recursively and requires the source to be a Verified zone on this account.
+       * How the crawler finds URLs. 'sitemap' reads XML sitemaps; 'discover' follows
+       * links recursively and requires the source to belong to a Verified zone on this
+       * account.
        */
       parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
       /**
-       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * Options for parse_type 'discover', where Browser Run discovers URLs through link
        * following and sitemaps. Ignored for 'sitemap'.
        */
       export interface DiscoverOptions {
@@ -2062,8 +2172,8 @@ export namespace InstanceReadResponse {
         depth?: number;
 
         /**
-         * Follow links that point outside the source domain. Must stay `false` — discover
-         * crawls are restricted to the zone you own.
+         * Follow links that point outside the source domain. Must stay `false` because
+         * discover crawls only cover the zone you own.
          */
         include_external_links?: boolean;
 
@@ -2093,15 +2203,16 @@ export namespace InstanceReadResponse {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
-         * the field to disable content selection — empty arrays are rejected.
+         * matching path wins. The crawler stores and indexes only the matched HTML
+         * fragment. Omit the field to disable content selection; the API rejects empty
+         * arrays.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
         /**
-         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
-         * token characters (no spaces, colons, or control characters); values must be
-         * HTAB + printable ASCII (no CR/LF).
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must use
+         * RFC-7230 token characters, excluding spaces, colons, and control characters.
+         * Values must use HTAB and printable ASCII only, excluding CR and LF.
          */
         include_headers?: { [key: string]: string };
 
@@ -2125,9 +2236,9 @@ export namespace InstanceReadResponse {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Must not
-           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
-           * if multiple elements match, the selector is ignored and the full page is used.
+           * CSS selector to extract content from pages matching the path pattern. Disallowed
+           * characters: ;, `, $, {, }, \. Must target a single element; if multiple elements
+           * match, the crawler ignores the selector and uses the full page.
            */
           selector: string;
         }
@@ -2156,7 +2267,29 @@ export namespace InstanceSearchResponse {
 
     item?: Chunk.Item;
 
+    /**
+     * Audio/video transcript chunks only: end, in milliseconds from the start of the
+     * media (whole seconds), of the last transcript section the matched chunk covers.
+     * Describes the matched chunk before any context expansion, not the expanded
+     * `text`.
+     */
+    media_end_ms?: number;
+
+    /**
+     * Audio/video transcript chunks only: start, in milliseconds from the start of the
+     * media (whole seconds), of the transcript section the matched chunk begins in.
+     * Describes the matched chunk before any context expansion, not the expanded
+     * `text`.
+     */
+    media_start_ms?: number;
+
     scoring_details?: Chunk.ScoringDetails;
+
+    /**
+     * Audio/video transcript chunks only: type of the source media file. Omitted for
+     * all other chunks.
+     */
+    source_media_type?: 'audio' | 'video';
   }
 
   export namespace Chunk {
@@ -2188,8 +2321,8 @@ export interface InstanceStatsResponse {
   completed?: number;
 
   /**
-   * True when status counts are unavailable (e.g. legacy stats query exceeded D1
-   * statement-size limit). Counts are omitted in this case.
+   * True when the API cannot compute status counts (e.g. the legacy stats query
+   * exceeded the D1 statement-size limit). The response omits counts in this case.
    */
   degraded?: boolean;
 
@@ -2332,8 +2465,9 @@ export interface InstanceCreateParams {
   hybrid_search_enabled?: boolean;
 
   /**
-   * Body param: Controls which storage backends are used during indexing. Defaults
-   * to vector and keyword indexing for new instances.
+   * Body param: Controls which storage backends indexing uses. Defaults to vector
+   * and keyword indexing for new instances. When set, both vector and keyword are
+   * required.
    */
   index_method?: InstanceCreateParams.IndexMethod;
 
@@ -2385,7 +2519,8 @@ export interface InstanceCreateParams {
   rewrite_query?: boolean;
 
   /**
-   * Body param
+   * Body param: Minimum similarity score a chunk must reach to be returned. Defaults
+   * to 0.4.
    */
   score_threshold?: number;
 
@@ -2402,7 +2537,7 @@ export interface InstanceCreateParams {
   /**
    * Body param: Interval between automatic syncs, in seconds. Allowed values: 900
    * (15min), 1800 (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200
-   * (12h), 86400 (24h).
+   * (12h), 86400 (24h). Defaults to 86400 (24h).
    */
   sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
@@ -2427,8 +2562,8 @@ export namespace InstanceCreateParams {
   }
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to vector and
-   * keyword indexing for new instances.
+   * Controls which storage backends indexing uses. Defaults to vector and keyword
+   * indexing for new instances. When set, both vector and keyword are required.
    */
   export interface IndexMethod {
     /**
@@ -2461,7 +2596,19 @@ export namespace InstanceCreateParams {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    created_from_emdash_plugin?: Metadata.CreatedFromEmdashPlugin;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface CreatedFromEmdashPlugin {
+      type: 'native' | 'rest';
+
+      version: string;
+
+      [k: string]: unknown;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -2498,7 +2645,7 @@ export namespace InstanceCreateParams {
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
       /**
-       * Disable chat completions endpoint for this public endpoint
+       * Disable chat completions endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -2507,7 +2654,7 @@ export namespace InstanceCreateParams {
       description?: string;
 
       /**
-       * Disable MCP endpoint for this public endpoint
+       * Disable MCP endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -2522,7 +2669,7 @@ export namespace InstanceCreateParams {
 
     export interface SearchEndpoint {
       /**
-       * Disable search endpoint for this public endpoint
+       * Disable search endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -2538,11 +2685,11 @@ export namespace InstanceCreateParams {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * Controls which documents become candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. When omitted on an
-     * update, the existing stored value is preserved; when never set, search falls
-     * back to 'and'.
+     * containing at least one term and ranks results according to BM25 relevance. When
+     * omitted on an update, the existing stored value stays unchanged; when never set,
+     * search falls back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -2571,7 +2718,7 @@ export namespace InstanceCreateParams {
     /**
      * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced). Most accounts are limited to 10
+     * /admin/users and /admin/settings/advanced). Most accounts have a limit of 10
      * rules; contact support to raise it.
      */
     exclude_items?: Array<string>;
@@ -2579,7 +2726,7 @@ export namespace InstanceCreateParams {
     /**
      * List of path patterns to include. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post). Most accounts are limited to 10 rules; contact
+     * /blog/post and /blog/2024/post). Most accounts have a limit of 10 rules; contact
      * support to raise it.
      */
     include_items?: Array<string>;
@@ -2594,7 +2741,7 @@ export namespace InstanceCreateParams {
   export namespace SourceParams {
     export interface WebCrawler {
       /**
-       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * Options for parse_type 'discover', where Browser Run discovers URLs through link
        * following and sitemaps. Ignored for 'sitemap'.
        */
       discover_options?: WebCrawler.DiscoverOptions;
@@ -2602,15 +2749,16 @@ export namespace InstanceCreateParams {
       parse_options?: WebCrawler.ParseOptions;
 
       /**
-       * How URLs are discovered. 'sitemap' reads XML sitemaps; 'discover' follows links
-       * recursively and requires the source to be a Verified zone on this account.
+       * How the crawler finds URLs. 'sitemap' reads XML sitemaps; 'discover' follows
+       * links recursively and requires the source to belong to a Verified zone on this
+       * account.
        */
       parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
       /**
-       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * Options for parse_type 'discover', where Browser Run discovers URLs through link
        * following and sitemaps. Ignored for 'sitemap'.
        */
       export interface DiscoverOptions {
@@ -2620,8 +2768,8 @@ export namespace InstanceCreateParams {
         depth?: number;
 
         /**
-         * Follow links that point outside the source domain. Must stay `false` — discover
-         * crawls are restricted to the zone you own.
+         * Follow links that point outside the source domain. Must stay `false` because
+         * discover crawls only cover the zone you own.
          */
         include_external_links?: boolean;
 
@@ -2651,15 +2799,16 @@ export namespace InstanceCreateParams {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
-         * the field to disable content selection — empty arrays are rejected.
+         * matching path wins. The crawler stores and indexes only the matched HTML
+         * fragment. Omit the field to disable content selection; the API rejects empty
+         * arrays.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
         /**
-         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
-         * token characters (no spaces, colons, or control characters); values must be
-         * HTAB + printable ASCII (no CR/LF).
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must use
+         * RFC-7230 token characters, excluding spaces, colons, and control characters.
+         * Values must use HTAB and printable ASCII only, excluding CR and LF.
          */
         include_headers?: { [key: string]: string };
 
@@ -2683,9 +2832,9 @@ export namespace InstanceCreateParams {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Must not
-           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
-           * if multiple elements match, the selector is ignored and the full page is used.
+           * CSS selector to extract content from pages matching the path pattern. Disallowed
+           * characters: ;, `, $, {, }, \. Must target a single element; if multiple elements
+           * match, the crawler ignores the selector and uses the full page.
            */
           selector: string;
         }
@@ -2760,8 +2909,9 @@ export interface InstanceUpdateParams {
   fusion_method?: 'max' | 'rrf';
 
   /**
-   * Body param: Controls which storage backends are used during indexing. Defaults
-   * to vector and keyword indexing for new instances.
+   * Body param: Controls which storage backends indexing uses. Defaults to vector
+   * and keyword indexing for new instances. When set, both vector and keyword are
+   * required.
    */
   index_method?: InstanceUpdateParams.IndexMethod;
 
@@ -2818,7 +2968,8 @@ export interface InstanceUpdateParams {
   rewrite_query?: boolean;
 
   /**
-   * Body param
+   * Body param: Minimum similarity score a chunk must reach to be returned. Defaults
+   * to 0.4.
    */
   score_threshold?: number;
 
@@ -2845,7 +2996,7 @@ export interface InstanceUpdateParams {
   /**
    * Body param: Interval between automatic syncs, in seconds. Allowed values: 900
    * (15min), 1800 (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200
-   * (12h), 86400 (24h).
+   * (12h), 86400 (24h). Defaults to 86400 (24h).
    */
   sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
@@ -2878,8 +3029,8 @@ export namespace InstanceUpdateParams {
   }
 
   /**
-   * Controls which storage backends are used during indexing. Defaults to vector and
-   * keyword indexing for new instances.
+   * Controls which storage backends indexing uses. Defaults to vector and keyword
+   * indexing for new instances. When set, both vector and keyword are required.
    */
   export interface IndexMethod {
     /**
@@ -2912,7 +3063,19 @@ export namespace InstanceUpdateParams {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    created_from_emdash_plugin?: Metadata.CreatedFromEmdashPlugin;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface CreatedFromEmdashPlugin {
+      type: 'native' | 'rest';
+
+      version: string;
+
+      [k: string]: unknown;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -2949,7 +3112,7 @@ export namespace InstanceUpdateParams {
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
       /**
-       * Disable chat completions endpoint for this public endpoint
+       * Disable chat completions endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -2958,7 +3121,7 @@ export namespace InstanceUpdateParams {
       description?: string;
 
       /**
-       * Disable MCP endpoint for this public endpoint
+       * Disable MCP endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -2973,7 +3136,7 @@ export namespace InstanceUpdateParams {
 
     export interface SearchEndpoint {
       /**
-       * Disable search endpoint for this public endpoint
+       * Disable search endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -2989,11 +3152,11 @@ export namespace InstanceUpdateParams {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * Controls which documents become candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. When omitted on an
-     * update, the existing stored value is preserved; when never set, search falls
-     * back to 'and'.
+     * containing at least one term and ranks results according to BM25 relevance. When
+     * omitted on an update, the existing stored value stays unchanged; when never set,
+     * search falls back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -3022,7 +3185,7 @@ export namespace InstanceUpdateParams {
     /**
      * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced). Most accounts are limited to 10
+     * /admin/users and /admin/settings/advanced). Most accounts have a limit of 10
      * rules; contact support to raise it.
      */
     exclude_items?: Array<string>;
@@ -3030,7 +3193,7 @@ export namespace InstanceUpdateParams {
     /**
      * List of path patterns to include. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post). Most accounts are limited to 10 rules; contact
+     * /blog/post and /blog/2024/post). Most accounts have a limit of 10 rules; contact
      * support to raise it.
      */
     include_items?: Array<string>;
@@ -3045,7 +3208,7 @@ export namespace InstanceUpdateParams {
   export namespace SourceParams {
     export interface WebCrawler {
       /**
-       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * Options for parse_type 'discover', where Browser Run discovers URLs through link
        * following and sitemaps. Ignored for 'sitemap'.
        */
       discover_options?: WebCrawler.DiscoverOptions;
@@ -3053,15 +3216,16 @@ export namespace InstanceUpdateParams {
       parse_options?: WebCrawler.ParseOptions;
 
       /**
-       * How URLs are discovered. 'sitemap' reads XML sitemaps; 'discover' follows links
-       * recursively and requires the source to be a Verified zone on this account.
+       * How the crawler finds URLs. 'sitemap' reads XML sitemaps; 'discover' follows
+       * links recursively and requires the source to belong to a Verified zone on this
+       * account.
        */
       parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
       /**
-       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * Options for parse_type 'discover', where Browser Run discovers URLs through link
        * following and sitemaps. Ignored for 'sitemap'.
        */
       export interface DiscoverOptions {
@@ -3071,8 +3235,8 @@ export namespace InstanceUpdateParams {
         depth?: number;
 
         /**
-         * Follow links that point outside the source domain. Must stay `false` — discover
-         * crawls are restricted to the zone you own.
+         * Follow links that point outside the source domain. Must stay `false` because
+         * discover crawls only cover the zone you own.
          */
         include_external_links?: boolean;
 
@@ -3102,15 +3266,16 @@ export namespace InstanceUpdateParams {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
-         * the field to disable content selection — empty arrays are rejected.
+         * matching path wins. The crawler stores and indexes only the matched HTML
+         * fragment. Omit the field to disable content selection; the API rejects empty
+         * arrays.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
         /**
-         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
-         * token characters (no spaces, colons, or control characters); values must be
-         * HTAB + printable ASCII (no CR/LF).
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must use
+         * RFC-7230 token characters, excluding spaces, colons, and control characters.
+         * Values must use HTAB and printable ASCII only, excluding CR and LF.
          */
         include_headers?: { [key: string]: string };
 
@@ -3134,9 +3299,9 @@ export namespace InstanceUpdateParams {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Must not
-           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
-           * if multiple elements match, the selector is ignored and the full page is used.
+           * CSS selector to extract content from pages matching the path pattern. Disallowed
+           * characters: ;, `, $, {, }, \. Must target a single element; if multiple elements
+           * match, the crawler ignores the selector and uses the full page.
            */
           selector: string;
         }
@@ -3152,12 +3317,13 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: Filter by exact Search for Agents hostname (case-insensitive).
+   * Query param: Return only instances with this exact Search for Agents hostname
+   * (case-insensitive).
    */
   hostname?: string;
 
   /**
-   * Query param: Filter by namespace.
+   * Query param: Return only instances in this namespace.
    */
   namespace?: string;
 
@@ -3265,9 +3431,9 @@ export namespace InstanceChatCompletionsParams {
     cache?: AISearchOptions.Cache;
 
     /**
-     * Metadata added to AI Gateway logs for requests triggered by this operation.
-     * Accepts up to 2 string, number, or boolean entries. Keys 'ai-search', 'task',
-     * 'origin', and keys beginning with 'cf.' are reserved.
+     * Metadata added to AI Gateway logs for requests this operation triggers. Accepts
+     * up to 2 string, number, or boolean entries. Reserved keys: 'ai-search', 'task',
+     * 'origin', and any key beginning with 'cf.'.
      */
     custom_metadata?: { [key: string]: string | number | boolean };
 
@@ -3321,15 +3487,24 @@ export namespace InstanceChatCompletionsParams {
       fusion_method?: 'max' | 'rrf';
 
       /**
-       * Controls which documents are candidates for BM25 scoring. 'and' restricts
+       * Controls which documents become candidates for BM25 scoring. 'and' restricts
        * candidates to documents containing all query terms; 'or' includes any document
-       * containing at least one term, ranked by BM25 relevance. When omitted, falls back
-       * to the instance-level retrieval_options.keyword_match_mode, then to 'and'.
+       * containing at least one term and ranks results according to BM25 relevance. When
+       * omitted, falls back to the instance-level retrieval_options.keyword_match_mode,
+       * then to 'and'.
        */
       keyword_match_mode?: 'and' | 'or';
 
+      /**
+       * Minimum similarity score a chunk must reach to be returned. When omitted, falls
+       * back to the instance-level score_threshold, then to 0.4.
+       */
       match_threshold?: number;
 
+      /**
+       * Maximum number of results to return. When omitted, falls back to the
+       * instance-level max_num_results, then to 10.
+       */
       max_num_results?: number;
 
       retrieval_type?: 'vector' | 'keyword' | 'hybrid';
@@ -3395,9 +3570,9 @@ export namespace InstanceSearchParams {
     cache?: AISearchOptions.Cache;
 
     /**
-     * Metadata added to AI Gateway logs for requests triggered by this operation.
-     * Accepts up to 2 string, number, or boolean entries. Keys 'ai-search', 'task',
-     * 'origin', and keys beginning with 'cf.' are reserved.
+     * Metadata added to AI Gateway logs for requests this operation triggers. Accepts
+     * up to 2 string, number, or boolean entries. Reserved keys: 'ai-search', 'task',
+     * 'origin', and any key beginning with 'cf.'.
      */
     custom_metadata?: { [key: string]: string | number | boolean };
 
@@ -3451,15 +3626,24 @@ export namespace InstanceSearchParams {
       fusion_method?: 'max' | 'rrf';
 
       /**
-       * Controls which documents are candidates for BM25 scoring. 'and' restricts
+       * Controls which documents become candidates for BM25 scoring. 'and' restricts
        * candidates to documents containing all query terms; 'or' includes any document
-       * containing at least one term, ranked by BM25 relevance. When omitted, falls back
-       * to the instance-level retrieval_options.keyword_match_mode, then to 'and'.
+       * containing at least one term and ranks results according to BM25 relevance. When
+       * omitted, falls back to the instance-level retrieval_options.keyword_match_mode,
+       * then to 'and'.
        */
       keyword_match_mode?: 'and' | 'or';
 
+      /**
+       * Minimum similarity score a chunk must reach to be returned. When omitted, falls
+       * back to the instance-level score_threshold, then to 0.4.
+       */
       match_threshold?: number;
 
+      /**
+       * Maximum number of results to return. When omitted, falls back to the
+       * instance-level max_num_results, then to 10.
+       */
       max_num_results?: number;
 
       retrieval_type?: 'vector' | 'keyword' | 'hybrid';

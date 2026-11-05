@@ -313,7 +313,8 @@ export interface GatewayRule {
     | 'egress'
     | 'resolve'
     | 'quarantine'
-    | 'redirect';
+    | 'redirect'
+    | 'forward';
 
   /**
    * Specify whether the rule is enabled.
@@ -484,12 +485,6 @@ export interface RuleSetting {
   allow_child_bypass?: boolean | null;
 
   /**
-   * Define the settings for the Audit SSH action. Settable only for `l4` rules with
-   * `audit_ssh` action.
-   */
-  audit_ssh?: RuleSetting.AuditSSH | null;
-
-  /**
    * Configure browser isolation behavior. Settable only for `http` rules with the
    * action set to `isolate`.
    */
@@ -553,6 +548,12 @@ export interface RuleSetting {
    * rule matches.
    */
   forensic_copy?: RuleSetting.ForensicCopy | null;
+
+  /**
+   * Forward matching HTTP requests to a Worker. Required for `http` rules with the
+   * action set to `forward`.
+   */
+  forward?: RuleSetting.Forward | null;
 
   /**
    * Ignore category matches at CNAME domains in a response. When off, evaluate
@@ -658,17 +659,6 @@ export interface RuleSetting {
 
 export namespace RuleSetting {
   /**
-   * Define the settings for the Audit SSH action. Settable only for `l4` rules with
-   * `audit_ssh` action.
-   */
-  export interface AuditSSH {
-    /**
-     * Enable SSH command logging.
-     */
-    command_logging?: boolean;
-  }
-
-  /**
    * Configure browser isolation behavior. Settable only for `http` rules with the
    * action set to `isolate`.
    */
@@ -713,10 +703,14 @@ export namespace RuleSetting {
     du?: boolean;
 
     /**
-     * Configure keyboard usage behavior. If this field is absent, keyboard usage
-     * remains enabled. Applies only when version == "v2".
+     * Configure keyboard usage behavior. When set to enable_read_only_actions, only
+     * approved browser commands (find, copy, print, zoom, and select-all) may execute;
+     * other keyboard input is blocked from reaching the page. Copy and print remain
+     * subject to their independent controls. If this field is absent, keyboard usage
+     * remains enabled. Applies only when version == "v2". The enable_read_only_actions
+     * value requires an explicit version of "v2".
      */
-    keyboard?: 'enabled' | 'disabled';
+    keyboard?: 'enabled' | 'disabled' | 'enable_read_only_actions';
 
     /**
      * Configure paste behavior. If set to remote_only, users cannot paste content from
@@ -827,6 +821,17 @@ export namespace RuleSetting {
      * Enable sending the copy to storage.
      */
     enabled?: boolean;
+  }
+
+  /**
+   * Forward matching HTTP requests to a Worker. Required for `http` rules with the
+   * action set to `forward`.
+   */
+  export interface Forward {
+    /**
+     * Specify the public Worker ID of the target Worker.
+     */
+    worker_id: string;
   }
 
   /**
@@ -987,12 +992,6 @@ export interface RuleSettingParam {
   allow_child_bypass?: boolean | null;
 
   /**
-   * Define the settings for the Audit SSH action. Settable only for `l4` rules with
-   * `audit_ssh` action.
-   */
-  audit_ssh?: RuleSettingParam.AuditSSH | null;
-
-  /**
    * Configure browser isolation behavior. Settable only for `http` rules with the
    * action set to `isolate`.
    */
@@ -1056,6 +1055,12 @@ export interface RuleSettingParam {
    * rule matches.
    */
   forensic_copy?: RuleSettingParam.ForensicCopy | null;
+
+  /**
+   * Forward matching HTTP requests to a Worker. Required for `http` rules with the
+   * action set to `forward`.
+   */
+  forward?: RuleSettingParam.Forward | null;
 
   /**
    * Ignore category matches at CNAME domains in a response. When off, evaluate
@@ -1161,17 +1166,6 @@ export interface RuleSettingParam {
 
 export namespace RuleSettingParam {
   /**
-   * Define the settings for the Audit SSH action. Settable only for `l4` rules with
-   * `audit_ssh` action.
-   */
-  export interface AuditSSH {
-    /**
-     * Enable SSH command logging.
-     */
-    command_logging?: boolean;
-  }
-
-  /**
    * Configure browser isolation behavior. Settable only for `http` rules with the
    * action set to `isolate`.
    */
@@ -1216,10 +1210,14 @@ export namespace RuleSettingParam {
     du?: boolean;
 
     /**
-     * Configure keyboard usage behavior. If this field is absent, keyboard usage
-     * remains enabled. Applies only when version == "v2".
+     * Configure keyboard usage behavior. When set to enable_read_only_actions, only
+     * approved browser commands (find, copy, print, zoom, and select-all) may execute;
+     * other keyboard input is blocked from reaching the page. Copy and print remain
+     * subject to their independent controls. If this field is absent, keyboard usage
+     * remains enabled. Applies only when version == "v2". The enable_read_only_actions
+     * value requires an explicit version of "v2".
      */
-    keyboard?: 'enabled' | 'disabled';
+    keyboard?: 'enabled' | 'disabled' | 'enable_read_only_actions';
 
     /**
      * Configure paste behavior. If set to remote_only, users cannot paste content from
@@ -1330,6 +1328,17 @@ export namespace RuleSettingParam {
      * Enable sending the copy to storage.
      */
     enabled?: boolean;
+  }
+
+  /**
+   * Forward matching HTTP requests to a Worker. Required for `http` rules with the
+   * action set to `forward`.
+   */
+  export interface Forward {
+    /**
+     * Specify the public Worker ID of the target Worker.
+     */
+    worker_id: string;
   }
 
   /**
@@ -1637,7 +1646,8 @@ export interface RuleCreateParams {
     | 'egress'
     | 'resolve'
     | 'quarantine'
-    | 'redirect';
+    | 'redirect'
+    | 'forward';
 
   /**
    * Body param: Specify the rule name.
@@ -1765,7 +1775,8 @@ export interface RuleUpdateParams {
     | 'egress'
     | 'resolve'
     | 'quarantine'
-    | 'redirect';
+    | 'redirect'
+    | 'forward';
 
   /**
    * Body param: Specify the rule name.

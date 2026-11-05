@@ -15,7 +15,8 @@ export class BaseRaw extends APIResource {
   ] as const);
 
   /**
-   * Retrieves the feed document fetched by the most recent poll.
+   * Retrieves the feed document fetched by the most recent poll as text/plain by
+   * default or application/xml when format is xml.
    *
    * @example
    * ```ts
@@ -45,7 +46,8 @@ export interface RawGetParams {
   account_id: string;
 
   /**
-   * Query param
+   * Query param: Response format. Use xml for application/xml; omit it for the
+   * default text/plain response.
    */
   format?: 'xml';
 }

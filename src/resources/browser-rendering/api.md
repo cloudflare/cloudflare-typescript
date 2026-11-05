@@ -127,8 +127,6 @@ Methods:
 
 - <code title="post /accounts/{account_id}/browser-rendering/devtools/browser">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">create</a>({ ...params }) -> BrowserCreateResponse</code>
 - <code title="delete /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">delete</a>(sessionID, { ...params }) -> BrowserDeleteResponse</code>
-- <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">connect</a>(sessionID, { ...params }) -> void</code>
-- <code title="get /accounts/{account_id}/browser-rendering/devtools/browser">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">launch</a>({ ...params }) -> void</code>
 - <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/protocol">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">protocol</a>(sessionID, { ...params }) -> BrowserProtocolResponse</code>
 - <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/version">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">version</a>(sessionID, { ...params }) -> BrowserVersionResponse</code>
 
@@ -143,10 +141,6 @@ Methods:
 - <code title="post /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/live_view">client.browserRendering.devtools.browser.liveView.<a href="./src/resources/browser-rendering/devtools/browser/live-view.ts">create</a>(sessionID, { ...params }) -> LiveViewCreateResponse</code>
 
 #### Page
-
-Methods:
-
-- <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/page/{target_id}">client.browserRendering.devtools.browser.page.<a href="./src/resources/browser-rendering/devtools/browser/page.ts">get</a>(targetID, { ...params }) -> void</code>
 
 #### Targets
 

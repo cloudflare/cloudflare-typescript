@@ -112,7 +112,7 @@ const runTests = (client: PartialCloudflare<{ emailSending: { suppressions: Base
       account_id: '12345678',
       expires_at: '2027-01-01T00:00:00Z',
       note: 'Customer re-confirmed opt-in',
-      scope: {},
+      scope: { type: 'account' },
     });
   });
 

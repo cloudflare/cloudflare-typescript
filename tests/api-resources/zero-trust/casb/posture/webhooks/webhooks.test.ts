@@ -32,7 +32,7 @@ const runTests = (
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.casb.posture.webhooks.create({
       account_id: '46148281d8a93d002ef242d8b0d5f9f6',
-      authentication_type: 'Bearer Auth',
+      authentication_type: 'HMAC-Signing',
       destination_url: 'https://example.com/webhook',
       label: 'Send to Slack',
     });
@@ -48,13 +48,10 @@ const runTests = (
   test('create: required and optional params', async () => {
     const response = await client.zeroTrust.casb.posture.webhooks.create({
       account_id: '46148281d8a93d002ef242d8b0d5f9f6',
-      authentication_type: 'Bearer Auth',
+      authentication_type: 'HMAC-Signing',
       destination_url: 'https://example.com/webhook',
       label: 'Send to Slack',
-      headers: [
-        { key: 'Authorization', value: 'Bearer token123' },
-        { key: 'X-Custom-Header', value: 'value' },
-      ],
+      headers: [{ key: 'X-Custom-Header', value: 'value' }],
       signing_secret: 'my-secret-key',
       status: 'enabled',
     });
@@ -65,7 +62,7 @@ const runTests = (
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: '46148281d8a93d002ef242d8b0d5f9f6',
-        authentication_type: 'Bearer Auth',
+        authentication_type: 'HMAC-Signing',
         destination_url: 'https://example.com/webhook',
         label: 'Send to Slack',
         status: 'enabled',
@@ -85,14 +82,11 @@ const runTests = (
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: '46148281d8a93d002ef242d8b0d5f9f6',
-        authentication_type: 'Bearer Auth',
+        authentication_type: 'HMAC-Signing',
         destination_url: 'https://example.com/webhook',
         label: 'Send to Slack',
         status: 'enabled',
-        headers: [
-          { key: 'Authorization', value: 'Bearer token123' },
-          { key: 'X-Custom-Header', value: 'value' },
-        ],
+        headers: [{ key: 'X-Custom-Header', value: 'value' }],
         signing_secret: 'my-secret-key',
       },
     );
@@ -141,7 +135,7 @@ const runTests = (
   test('evaluate: only required params', async () => {
     const responsePromise = client.zeroTrust.casb.posture.webhooks.evaluate({
       account_id: '46148281d8a93d002ef242d8b0d5f9f6',
-      authentication_type: 'Bearer Auth',
+      authentication_type: 'HMAC-Signing',
       destination_url: 'https://example.com/webhook',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -156,12 +150,9 @@ const runTests = (
   test('evaluate: required and optional params', async () => {
     const response = await client.zeroTrust.casb.posture.webhooks.evaluate({
       account_id: '46148281d8a93d002ef242d8b0d5f9f6',
-      authentication_type: 'Bearer Auth',
+      authentication_type: 'HMAC-Signing',
       destination_url: 'https://example.com/webhook',
-      headers: [
-        { key: 'Authorization', value: 'Bearer token123' },
-        { key: 'X-Custom-Header', value: 'value' },
-      ],
+      headers: [{ key: 'X-Custom-Header', value: 'value' }],
       signing_secret: 'my-secret-key',
     });
   });

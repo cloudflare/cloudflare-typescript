@@ -94,12 +94,12 @@ export class BaseR2DataCatalog extends APIResource {
     params: R2DataCatalogEnableParams,
     options?: RequestOptions,
   ): APIPromise<R2DataCatalogEnableResponse> {
-    const { account_id } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(
-        path`/accounts/${account_id}/r2-catalog/${bucketName}/enable`,
-        options,
-      ) as APIPromise<{ result: R2DataCatalogEnableResponse }>
+      this._client.post(path`/accounts/${account_id}/r2-catalog/${bucketName}/enable`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: R2DataCatalogEnableResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -142,7 +142,7 @@ export interface R2DataCatalogListResponse {
 
 export namespace R2DataCatalogListResponse {
   /**
-   * Contains R2 Data Catalog information.
+   * Contains catalog information.
    */
   export interface Warehouse {
     /**
@@ -169,6 +169,12 @@ export namespace R2DataCatalogListResponse {
      * Shows the credential configuration status.
      */
     credential_status?: 'present' | 'absent' | null;
+
+    /**
+     * Specifies the data-locality jurisdiction of the catalog. The first enable sets
+     * it, and it cannot change. Currently always `default`.
+     */
+    jurisdiction?: string;
 
     /**
      * Configures maintenance for the catalog.
@@ -255,7 +261,7 @@ export interface R2DataCatalogEnableResponse {
 }
 
 /**
- * Contains R2 Data Catalog information.
+ * Contains catalog information.
  */
 export interface R2DataCatalogGetResponse {
   /**
@@ -282,6 +288,12 @@ export interface R2DataCatalogGetResponse {
    * Shows the credential configuration status.
    */
   credential_status?: 'present' | 'absent' | null;
+
+  /**
+   * Specifies the data-locality jurisdiction of the catalog. The first enable sets
+   * it, and it cannot change. Currently always `default`.
+   */
+  jurisdiction?: string;
 
   /**
    * Configures maintenance for the catalog.
@@ -379,9 +391,26 @@ export interface R2DataCatalogDisableParams {
 
 export interface R2DataCatalogEnableParams {
   /**
-   * Identifies the account.
+   * Path param: Identifies the account.
    */
   account_id: string;
+
+  /**
+   * Body param: Contains request to store catalog credentials.
+   */
+  credential?: R2DataCatalogEnableParams.Credential;
+}
+
+export namespace R2DataCatalogEnableParams {
+  /**
+   * Contains request to store catalog credentials.
+   */
+  export interface Credential {
+    /**
+     * Provides the Cloudflare API token for accessing R2.
+     */
+    token: string;
+  }
 }
 
 export interface R2DataCatalogGetParams {

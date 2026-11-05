@@ -12,7 +12,7 @@ export class BaseMatches extends APIResource {
   ] as const);
 
   /**
-   * Return matches as CSV for string queries based on ID
+   * Return matches as CSV for string queries based on ID.
    */
   download(params: MatchDownloadParams, options?: RequestOptions): APIPromise<MatchDownloadResponse> {
     const { account_id, ...query } = params;
@@ -23,7 +23,7 @@ export class BaseMatches extends APIResource {
   }
 
   /**
-   * Return matches for string queries based on ID
+   * Return matches for string queries based on ID.
    */
   get(params: MatchGetParams, options?: RequestOptions): APIPromise<MatchGetResponse> {
     const { account_id, ...query } = params;

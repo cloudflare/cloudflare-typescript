@@ -27,10 +27,10 @@ export class BaseSnapshot extends APIResource {
    * ```
    */
   create(params: SnapshotCreateParams, options?: RequestOptions): APIPromise<SnapshotCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id, browser, cacheTTL, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/browser-rendering/snapshot`, {
-        query: { cacheTTL },
+        query: { browser, cacheTTL },
         body,
         ...options,
       }) as APIPromise<{ result: SnapshotCreateResponse }>
@@ -134,6 +134,11 @@ export declare namespace SnapshotCreateParams {
      * Body param
      */
     url: string;
+
+    /**
+     * Query param: Rendering backend. Set to `kitesurf` to use Kitesurf (beta).
+     */
+    browser?: 'kitesurf';
 
     /**
      * Query param: Cache TTL default is 5s. Set to 0 to disable.
@@ -444,6 +449,11 @@ export declare namespace SnapshotCreateParams {
      * Body param
      */
     html: string;
+
+    /**
+     * Query param: Rendering backend. Set to `kitesurf` to use Kitesurf (beta).
+     */
+    browser?: 'kitesurf';
 
     /**
      * Query param: Cache TTL default is 5s. Set to 0 to disable.

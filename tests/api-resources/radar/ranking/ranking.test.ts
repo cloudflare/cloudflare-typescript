@@ -46,7 +46,7 @@ const runTests = (client: PartialCloudflare<{ radar: { ranking: BaseRanking } }>
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
-          domainCategory: ['string'],
+          domainCategory: ['News & Media'],
           domains: ['google.com'],
           format: 'JSON',
           limit: 1,
@@ -76,7 +76,7 @@ const runTests = (client: PartialCloudflare<{ radar: { ranking: BaseRanking } }>
       client.radar.ranking.top(
         {
           date: ['2019-12-27'],
-          domainCategory: ['string'],
+          domainCategory: ['News & Media'],
           format: 'JSON',
           limit: 5,
           location: ['string'],

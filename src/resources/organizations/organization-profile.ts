@@ -13,8 +13,19 @@ export class BaseOrganizationProfileResource extends APIResource {
   ] as const);
 
   /**
-   * Modify organization profile. (Currently in Public Beta - see
-   * https://developers.cloudflare.com/fundamentals/organizations/)
+   * Partially updates the business profile (name, email, phone, address, and
+   * external metadata) associated with this organization's customer record, creating
+   * the profile if it does not exist. Changes apply to every account and
+   * organization sharing that profile. Omitted, empty, or null fields are left
+   * unchanged. Each profile field is limited to 1,000 UTF-8 bytes. Only available to
+   * members of the organization.
+   *
+   * @example
+   * ```ts
+   * await client.organizations.organizationProfile.update(
+   *   'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8',
+   * );
+   * ```
    */
   update(
     organizationID: string,
@@ -29,8 +40,18 @@ export class BaseOrganizationProfileResource extends APIResource {
   }
 
   /**
-   * Get an organizations profile if it exists. (Currently in Public Beta - see
-   * https://developers.cloudflare.com/fundamentals/organizations/)
+   * Retrieves the business profile (name, email, phone, address, and external
+   * metadata) associated with this organization's customer record. Profiles can be
+   * shared across accounts and organizations. Only available to members of the
+   * organization.
+   *
+   * @example
+   * ```ts
+   * const organizationProfile =
+   *   await client.organizations.organizationProfile.get(
+   *     'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8',
+   *   );
+   * ```
    */
   get(organizationID: string, options?: RequestOptions): APIPromise<OrganizationProfile> {
     return (
@@ -54,28 +75,16 @@ export interface OrganizationProfile {
   external_metadata: string;
 }
 
-export interface OrganizationProfileParam {
-  business_address: string;
-
-  business_email: string;
-
-  business_name: string;
-
-  business_phone: string;
-
-  external_metadata: string;
-}
-
 export interface OrganizationProfileUpdateParams {
-  business_address: string;
+  business_address?: string | null;
 
-  business_email: string;
+  business_email?: string | null;
 
-  business_name: string;
+  business_name?: string | null;
 
-  business_phone: string;
+  business_phone?: string | null;
 
-  external_metadata: string;
+  external_metadata?: string | null;
 }
 
 export declare namespace OrganizationProfileResource {

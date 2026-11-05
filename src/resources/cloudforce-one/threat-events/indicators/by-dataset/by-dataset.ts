@@ -12,8 +12,8 @@ export class BaseByDataset extends APIResource {
     Object.freeze(['cloudforceOne', 'threatEvents', 'indicators', 'byDataset'] as const);
 
   /**
-   * This method is deprecated. Please use /events/indicators to retrieve a paginated
-   * list of indicators.
+   * Legacy. Use `threat-intel indicators list` (`GET /events/indicators`) instead.
+   * It supports multiple datasets and cursor pagination.
    *
    * @deprecated Use indicators.list instead (GET /accounts/{account_id}/cloudforce-one/events/indicators).
    */
@@ -30,7 +30,7 @@ export class BaseByDataset extends APIResource {
   }
 
   /**
-   * Retrieves a specific indicator by its UUID.
+   * Returns an indicator by its UUID.
    *
    * @example
    * ```ts

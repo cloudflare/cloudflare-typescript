@@ -142,6 +142,13 @@ export interface SettingsPolicy {
   dns_search_suffixes?: Array<SettingsPolicy.DNSSearchSuffix>;
 
   /**
+   * Determines whether the WARP client can silently reauthenticate the user with
+   * device credentials (Microsoft Entra) instead of prompting for browser-based
+   * reauthentication.
+   */
+  enable_device_credential_authentication?: boolean;
+
+  /**
    * Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -191,7 +198,7 @@ export interface SettingsPolicy {
    * The wirefilter expression to match devices. Available values: "identity.email",
    * "identity.groups.id", "identity.groups.name", "identity.groups.email",
    * "identity.service_token_uuid", "identity.saml_attributes", "network", "os.name",
-   * "os.version".
+   * "os.version", "device.tags".
    */
   match?: string;
 
@@ -238,6 +245,9 @@ export interface SettingsPolicy {
    */
   switch_locked?: boolean;
 
+  /**
+   * @deprecated
+   */
   target_tests?: Array<SettingsPolicy.TargetTest>;
 
   /**
@@ -314,6 +324,12 @@ export namespace SettingsPolicy {
      * or masque_endpoints must be provided.
      */
     wireguard_endpoints: Array<string>;
+
+    /**
+     * Whether WARP users may manually override the automatic Global Acceleration
+     * decision. Defaults to true when not provided.
+     */
+    allow_manual_override?: boolean;
 
     /**
      * Automatically switch Global Acceleration regions based on device location.

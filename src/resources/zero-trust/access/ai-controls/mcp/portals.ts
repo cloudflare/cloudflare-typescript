@@ -255,10 +255,10 @@ export namespace PortalCreateResponse {
     error_details?: Server.ErrorDetails;
 
     /**
-     * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
-     * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-     * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true.
+     * When true, per-user authorization uses the shared Cloudflare callback URL as the
+     * 'redirect_uri' instead of the portal callback URL. The default is false. Set
+     * 'is_shared_oauth_callback_enabled' to true to enable the shared Cloudflare
+     * callback URL for this MCP server.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -271,6 +271,11 @@ export namespace PortalCreateResponse {
     modified_by?: string;
 
     on_behalf?: boolean;
+
+    /**
+     * Timestamp of the most recent successful admin OAuth registration.
+     */
+    registered_at?: string | null;
 
     /**
      * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
@@ -506,10 +511,10 @@ export namespace PortalUpdateResponse {
     error_details?: Server.ErrorDetails;
 
     /**
-     * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
-     * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-     * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true.
+     * When true, per-user authorization uses the shared Cloudflare callback URL as the
+     * 'redirect_uri' instead of the portal callback URL. The default is false. Set
+     * 'is_shared_oauth_callback_enabled' to true to enable the shared Cloudflare
+     * callback URL for this MCP server.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -522,6 +527,11 @@ export namespace PortalUpdateResponse {
     modified_by?: string;
 
     on_behalf?: boolean;
+
+    /**
+     * Timestamp of the most recent successful admin OAuth registration.
+     */
+    registered_at?: string | null;
 
     /**
      * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
@@ -757,10 +767,10 @@ export namespace PortalListResponse {
     error_details?: Server.ErrorDetails;
 
     /**
-     * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
-     * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-     * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true.
+     * When true, per-user authorization uses the shared Cloudflare callback URL as the
+     * 'redirect_uri' instead of the portal callback URL. The default is false. Set
+     * 'is_shared_oauth_callback_enabled' to true to enable the shared Cloudflare
+     * callback URL for this MCP server.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -773,6 +783,11 @@ export namespace PortalListResponse {
     modified_by?: string;
 
     on_behalf?: boolean;
+
+    /**
+     * Timestamp of the most recent successful admin OAuth registration.
+     */
+    registered_at?: string | null;
 
     /**
      * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
@@ -1061,10 +1076,10 @@ export namespace PortalReadResponse {
     error_details?: Server.ErrorDetails;
 
     /**
-     * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
-     * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-     * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true.
+     * When true, per-user authorization uses the shared Cloudflare callback URL as the
+     * 'redirect_uri' instead of the portal callback URL. The default is false. Set
+     * 'is_shared_oauth_callback_enabled' to true to enable the shared Cloudflare
+     * callback URL for this MCP server.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -1077,6 +1092,11 @@ export namespace PortalReadResponse {
     modified_by?: string;
 
     on_behalf?: boolean;
+
+    /**
+     * Timestamp of the most recent successful admin OAuth registration.
+     */
+    registered_at?: string | null;
 
     /**
      * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.

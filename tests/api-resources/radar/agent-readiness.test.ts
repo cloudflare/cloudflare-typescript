@@ -45,7 +45,7 @@ const runTests = (client: PartialCloudflare<{ radar: { agentReadiness: BaseAgent
         'CHECK',
         {
           date: '2024-09-19',
-          domainCategory: ['string'],
+          domainCategory: ['News & Media'],
           format: 'JSON',
           name: ['main_series'],
         },

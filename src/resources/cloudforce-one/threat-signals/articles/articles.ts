@@ -105,7 +105,8 @@ export class BaseArticles extends APIResource {
   }
 
   /**
-   * Retrieves a Threat Signals article with its summary, tags and indicator status.
+   * Retrieves a Threat Signals article with its summary, tags, indicator status and
+   * relevance to the account's Priority Intelligence Requirements.
    *
    * @example
    * ```ts
@@ -175,6 +176,22 @@ export namespace ArticleListResponse {
     read_at: string | null;
 
     /**
+     * Beta. The article's relevance to the account's active Priority Intelligence
+     * Requirements. Null when the article has not been scored against them, including
+     * when the account has no active PIRs, or has not been scored against the
+     * requested pir_id.
+     */
+    relevance: Article.Relevance | null;
+
+    /**
+     * Beta. Intrinsic article severity band, from informational to critical,
+     * independent of any organisation or Priority Intelligence Requirement. Null when
+     * the account has no active Priority Intelligence Requirements, scoring has not
+     * completed, or a historic article has not entered an automatic rescore window.
+     */
+    severity: 'informational' | 'low' | 'medium' | 'high' | 'critical' | null;
+
+    /**
      * Persisted enrichment summary. Null until enrichment produces a summary.
      */
     summary: string | null;
@@ -185,6 +202,46 @@ export namespace ArticleListResponse {
   }
 
   export namespace Article {
+    /**
+     * Beta. The article's relevance to the account's active Priority Intelligence
+     * Requirements. Null when the article has not been scored against them, including
+     * when the account has no active PIRs, or has not been scored against the
+     * requested pir_id.
+     */
+    export interface Relevance {
+      /**
+       * Beta. How relevant the article is to a Priority Intelligence Requirement: high,
+       * medium, or low. Cloudflare may change the scores behind each band as relevance
+       * scoring is calibrated.
+       */
+      band: 'low' | 'medium' | 'high';
+
+      /**
+       * Beta. The pir_id requested from the article list, or otherwise the account's
+       * most relevant active PIR for this article.
+       */
+      pir_id: string;
+
+      /**
+       * Beta. Every active PIR the article was scored against, most relevant first.
+       * Draft and deleted PIRs are excluded.
+       */
+      pirs: Array<Relevance.Pir>;
+    }
+
+    export namespace Relevance {
+      export interface Pir {
+        /**
+         * Beta. How relevant the article is to a Priority Intelligence Requirement: high,
+         * medium, or low. Cloudflare may change the scores behind each band as relevance
+         * scoring is calibrated.
+         */
+        band: 'low' | 'medium' | 'high';
+
+        pir_id: string;
+      }
+    }
+
     export interface Tag {
       applied_by: 'ai' | 'analyst' | 'system';
 
@@ -229,6 +286,14 @@ export interface ArticleEditResponse {
   read: boolean;
 
   read_at: string | null;
+
+  /**
+   * Beta. Intrinsic article severity band, from informational to critical,
+   * independent of any organisation or Priority Intelligence Requirement. Null when
+   * the account has no active Priority Intelligence Requirements, scoring has not
+   * completed, or a historic article has not entered an automatic rescore window.
+   */
+  severity: 'informational' | 'low' | 'medium' | 'high' | 'critical' | null;
 
   source_count: number;
 
@@ -297,6 +362,22 @@ export interface ArticleGetResponse {
 
   read_at: string | null;
 
+  /**
+   * Beta. The article's relevance to the account's active Priority Intelligence
+   * Requirements. Null when the article has not been scored against them, including
+   * when the account has no active PIRs, or has not been scored against the
+   * requested pir_id.
+   */
+  relevance: ArticleGetResponse.Relevance | null;
+
+  /**
+   * Beta. Intrinsic article severity band, from informational to critical,
+   * independent of any organisation or Priority Intelligence Requirement. Null when
+   * the account has no active Priority Intelligence Requirements, scoring has not
+   * completed, or a historic article has not entered an automatic rescore window.
+   */
+  severity: 'informational' | 'low' | 'medium' | 'high' | 'critical' | null;
+
   source_count: number;
 
   /**
@@ -322,6 +403,46 @@ export namespace ArticleGetResponse {
     what_happened: string;
 
     who_affected: string;
+  }
+
+  /**
+   * Beta. The article's relevance to the account's active Priority Intelligence
+   * Requirements. Null when the article has not been scored against them, including
+   * when the account has no active PIRs, or has not been scored against the
+   * requested pir_id.
+   */
+  export interface Relevance {
+    /**
+     * Beta. How relevant the article is to a Priority Intelligence Requirement: high,
+     * medium, or low. Cloudflare may change the scores behind each band as relevance
+     * scoring is calibrated.
+     */
+    band: 'low' | 'medium' | 'high';
+
+    /**
+     * Beta. The pir_id requested from the article list, or otherwise the account's
+     * most relevant active PIR for this article.
+     */
+    pir_id: string;
+
+    /**
+     * Beta. Every active PIR the article was scored against, most relevant first.
+     * Draft and deleted PIRs are excluded.
+     */
+    pirs: Array<Relevance.Pir>;
+  }
+
+  export namespace Relevance {
+    export interface Pir {
+      /**
+       * Beta. How relevant the article is to a Priority Intelligence Requirement: high,
+       * medium, or low. Cloudflare may change the scores behind each band as relevance
+       * scoring is calibrated.
+       */
+      band: 'low' | 'medium' | 'high';
+
+      pir_id: string;
+    }
   }
 
   export interface Tag {
@@ -357,62 +478,96 @@ export interface ArticleListParams {
   cursor?: string;
 
   /**
-   * Query param
+   * Query param: Exact feed-category filter after trimming. Omit to include every
+   * category.
    */
   feed_category?: string;
 
   /**
-   * Query param
+   * Query param: Feed UUID filter. Omit to include articles from every account feed.
    */
   feed_id?: string;
 
   /**
-   * Query param
+   * Query param: Include articles fetched at or after this ISO 8601 date-time with Z
+   * or a numeric UTC offset; normalized to UTC.
    */
   fetched_after?: string;
 
   /**
-   * Query param
+   * Query param: Include articles fetched at or before this ISO 8601 date-time with
+   * Z or a numeric UTC offset; normalized to UTC.
    */
   fetched_before?: string;
 
   /**
-   * Query param
+   * Query param: When true on the first page, count matching articles and return an
+   * exact total. Defaults to false; cursor pages do not recalculate totals.
    */
   include_total?: boolean;
 
   /**
-   * Query param
+   * Query param: Beta. Return only articles at or above this relevance band for
+   * pir_id, or for any active PIR when pir_id is omitted. Excludes articles that
+   * have not been scored.
+   */
+  min_relevance?: 'low' | 'medium' | 'high';
+
+  /**
+   * Query param: Number of articles per cursor page, from 1 to 100. Defaults to 20.
    */
   per_page?: number;
 
   /**
-   * Query param
+   * Query param: Beta. Active Priority Intelligence Requirement to report, filter,
+   * and sort relevance by. Omit to use each article's most relevant active PIR.
+   * Returns a 400 error unless the PIR is active.
+   */
+  pir_id?: string;
+
+  /**
+   * Query param: Include articles published at or after this ISO 8601 date-time with
+   * Z or a numeric UTC offset; normalized to UTC.
    */
   published_after?: string;
 
   /**
-   * Query param
+   * Query param: Include articles published at or before this ISO 8601 date-time
+   * with Z or a numeric UTC offset; normalized to UTC.
    */
   published_before?: string;
 
   /**
-   * Query param
+   * Query param: Filter by read state. Accepts true, false, 1, or 0; omit to include
+   * read and unread articles.
    */
   read?: boolean;
 
   /**
-   * Query param
+   * Query param: NFC-normalized, trimmed literal substring filter on article titles;
+   * ASCII case-insensitive, from 1 to 500 characters.
    */
   search?: string;
 
   /**
-   * Query param
+   * Query param: Beta. Repeatable intrinsic severity band filter. An article matches
+   * any selected band, the band reported as its severity. Excludes articles without
+   * a severity. Like the severity field, severity is reported only while the account
+   * has an active Priority Intelligence Requirement; otherwise no articles match.
+   */
+  severity?: Array<'informational' | 'low' | 'medium' | 'high' | 'critical'>;
+
+  /**
+   * Query param: Sort by fetched_at, published_at, title, or relevance (beta).
+   * Prefix the field with - for descending order; defaults to -fetched_at.
+   * -relevance lists the most relevant articles first, by pir_id or by each
+   * article's most relevant active PIR, with unscored articles last.
    */
   sort?: string;
 
   /**
-   * Query param
+   * Query param: Filter by curated or custom feed source. Omit to include both
+   * source types.
    */
   source_type?: 'curated' | 'custom';
 
@@ -454,12 +609,12 @@ export interface ArticleBulkEditParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Array of article UUIDs to mark (1-50).
    */
   article_ids: Array<string>;
 
   /**
-   * Body param
+   * Body param: True to mark read, false to mark unread.
    */
   read: boolean;
 }
@@ -471,7 +626,7 @@ export interface ArticleEditParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: True to mark the article read, false to mark unread.
    */
   read: boolean;
 }

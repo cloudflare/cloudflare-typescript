@@ -190,6 +190,16 @@ export interface WAN {
   priority?: number;
 
   /**
+   * Provisioned download rate of the WAN circuit in kilobits per second.
+   */
+  provisioned_download_kbps?: number;
+
+  /**
+   * Provisioned upload rate of the WAN circuit in kilobits per second.
+   */
+  provisioned_upload_kbps?: number;
+
+  /**
    * Identifier
    */
   site_id?: string;
@@ -225,27 +235,11 @@ export interface WANStaticAddressing {
    * A valid CIDR notation representing an IP range.
    */
   secondary_address?: string;
-}
-
-/**
- * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
- * availability mode.
- */
-export interface WANStaticAddressingParam {
-  /**
-   * A valid CIDR notation representing an IP range.
-   */
-  address: string;
 
   /**
-   * A valid IPv4 address.
+   * Gateway address for the secondary connector of a high availability site.
    */
-  gateway_address: string;
-
-  /**
-   * A valid CIDR notation representing an IP range.
-   */
-  secondary_address?: string;
+  secondary_gateway_address?: string;
 }
 
 export interface WANCreateParams {
@@ -281,15 +275,53 @@ export interface WANCreateParams {
   priority?: number;
 
   /**
-   * Body param: (optional) if omitted, use DHCP. Submit secondary_address when site
-   * is in high availability mode.
+   * Body param: Provisioned download rate of the WAN circuit in kilobits per second.
    */
-  static_addressing?: WANStaticAddressingParam;
+  provisioned_download_kbps?: number;
+
+  /**
+   * Body param: Provisioned upload rate of the WAN circuit in kilobits per second.
+   */
+  provisioned_upload_kbps?: number;
+
+  /**
+   * Body param: Static addressing configuration for a WAN. Omit to use DHCP. Submit
+   * secondary_address when the site is in high availability mode.
+   */
+  static_addressing?: WANCreateParams.StaticAddressing;
 
   /**
    * Body param: VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
+}
+
+export namespace WANCreateParams {
+  /**
+   * Static addressing configuration for a WAN. Omit to use DHCP. Submit
+   * secondary_address when the site is in high availability mode.
+   */
+  export interface StaticAddressing {
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    address: string;
+
+    /**
+     * A valid IPv4 address.
+     */
+    gateway_address: string;
+
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    secondary_address?: string;
+
+    /**
+     * Gateway address for the secondary connector of a high availability site.
+     */
+    secondary_gateway_address?: string;
+  }
 }
 
 export interface WANUpdateParams {
@@ -329,15 +361,56 @@ export interface WANUpdateParams {
   priority?: number;
 
   /**
-   * Body param: (optional) if omitted, use DHCP. Submit secondary_address when site
-   * is in high availability mode.
+   * Body param: Provisioned download rate of the WAN circuit in kilobits per second.
+   * Set to null to remove it.
    */
-  static_addressing?: WANStaticAddressingParam;
+  provisioned_download_kbps?: number | null;
+
+  /**
+   * Body param: Provisioned upload rate of the WAN circuit in kilobits per second.
+   * Set to null to remove it.
+   */
+  provisioned_upload_kbps?: number | null;
+
+  /**
+   * Body param: Static addressing configuration. PATCH updates only the fields
+   * provided, and PUT replaces the configuration.
+   */
+  static_addressing?: WANUpdateParams.StaticAddressing;
 
   /**
    * Body param: VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
+}
+
+export namespace WANUpdateParams {
+  /**
+   * Static addressing configuration. PATCH updates only the fields provided, and PUT
+   * replaces the configuration.
+   */
+  export interface StaticAddressing {
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    address?: string;
+
+    /**
+     * A valid IPv4 address.
+     */
+    gateway_address?: string;
+
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    secondary_address?: string;
+
+    /**
+     * Gateway address for the secondary connector of a high availability site. Set to
+     * null to remove it.
+     */
+    secondary_gateway_address?: string | null;
+  }
 }
 
 export interface WANListParams {
@@ -396,15 +469,56 @@ export interface WANEditParams {
   priority?: number;
 
   /**
-   * Body param: (optional) if omitted, use DHCP. Submit secondary_address when site
-   * is in high availability mode.
+   * Body param: Provisioned download rate of the WAN circuit in kilobits per second.
+   * Set to null to remove it.
    */
-  static_addressing?: WANStaticAddressingParam;
+  provisioned_download_kbps?: number | null;
+
+  /**
+   * Body param: Provisioned upload rate of the WAN circuit in kilobits per second.
+   * Set to null to remove it.
+   */
+  provisioned_upload_kbps?: number | null;
+
+  /**
+   * Body param: Static addressing configuration. PATCH updates only the fields
+   * provided, and PUT replaces the configuration.
+   */
+  static_addressing?: WANEditParams.StaticAddressing;
 
   /**
    * Body param: VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
+}
+
+export namespace WANEditParams {
+  /**
+   * Static addressing configuration. PATCH updates only the fields provided, and PUT
+   * replaces the configuration.
+   */
+  export interface StaticAddressing {
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    address?: string;
+
+    /**
+     * A valid IPv4 address.
+     */
+    gateway_address?: string;
+
+    /**
+     * A valid CIDR notation representing an IP range.
+     */
+    secondary_address?: string;
+
+    /**
+     * Gateway address for the secondary connector of a high availability site. Set to
+     * null to remove it.
+     */
+    secondary_gateway_address?: string | null;
+  }
 }
 
 export interface WANGetParams {

@@ -33,15 +33,17 @@ const runTests = (client: PartialCloudflare<{ precursor: BasePrecursor }>) => {
   test('update: required and optional params', async () => {
     const response = await client.precursor.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      default_mode: 'min-friction',
-      enforcement_rules: [
+      'Cloudflare-Version': '1.0',
+      mode: 'monitor',
+      rules: [
         {
           expression: 'http.request.uri.path eq "/login"',
-          mode: 'max-security',
-          description: 'Ease friction on the login path',
+          show_interstitial: true,
+          description: 'Show an interstitial on the login path',
           enabled: true,
         },
       ],
+      show_interstitial: true,
     });
   });
 
@@ -57,7 +59,10 @@ const runTests = (client: PartialCloudflare<{ precursor: BasePrecursor }>) => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.precursor.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.precursor.get({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      'Cloudflare-Version': '1.0',
+    });
   });
 };
 describe('resource precursor', () => runTests(client));

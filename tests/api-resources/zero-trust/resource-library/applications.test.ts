@@ -51,7 +51,7 @@ const runTests = (
       human_id: 'HR',
       ip_subnets: ['192.168.1.0/24', '2001:db8::/48'],
       name: 'HR',
-      port_protocols: ['tcp/80', 'tcp/443'],
+      port_protocols: ['tcp/443', 'udp/10000-20000'],
       support_domains: ['example.com', 'foo.com'],
     });
   });
@@ -74,7 +74,7 @@ const runTests = (
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       hostnames: ['example.com', 'foo.com'],
       ip_subnets: ['192.168.1.0/24', '2001:db8::/48'],
-      port_protocols: ['tcp/80', 'tcp/443'],
+      port_protocols: ['tcp/443', 'udp/10000-20000'],
       support_domains: ['example.com', 'foo.com'],
     });
   });
@@ -95,9 +95,11 @@ const runTests = (
   test('list: required and optional params', async () => {
     const response = await client.zeroTrust.resourceLibrary.applications.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      cursor: 'cursor',
       fields: 'fields',
       filter: 'filter',
       limit: 0,
+      lookup: 'xx',
       offset: 0,
       order_by: 'order_by',
       search: 'xx',

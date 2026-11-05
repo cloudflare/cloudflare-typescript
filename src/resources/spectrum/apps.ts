@@ -194,6 +194,18 @@ export namespace AppCreateResponse {
     origin_worker_id?: string;
 
     /**
+     * Name of the Worker origin. Omitted when the Worker is not found or its name
+     * cannot be resolved.
+     */
+    origin_worker_name?: string;
+
+    /**
+     * Lookup status of the Worker origin. Unknown indicates that its name could not be
+     * resolved. Only returned for Worker origins.
+     */
+    origin_worker_status?: 'available' | 'not_found' | 'unknown';
+
+    /**
      * Enables Proxy Protocol to the origin. Refer to
      * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
      * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
@@ -336,6 +348,18 @@ export namespace AppUpdateResponse {
     origin_worker_id?: string;
 
     /**
+     * Name of the Worker origin. Omitted when the Worker is not found or its name
+     * cannot be resolved.
+     */
+    origin_worker_name?: string;
+
+    /**
+     * Lookup status of the Worker origin. Unknown indicates that its name could not be
+     * resolved. Only returned for Worker origins.
+     */
+    origin_worker_status?: 'available' | 'not_found' | 'unknown';
+
+    /**
      * Enables Proxy Protocol to the origin. Refer to
      * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
      * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
@@ -476,6 +500,18 @@ export namespace AppListResponse {
      * argo_smart_routing. tls may only be "off" or "flexible".
      */
     origin_worker_id?: string;
+
+    /**
+     * Name of the Worker origin. Omitted when the Worker is not found or its name
+     * cannot be resolved.
+     */
+    origin_worker_name?: string;
+
+    /**
+     * Lookup status of the Worker origin. Unknown indicates that its name could not be
+     * resolved. Only returned for Worker origins.
+     */
+    origin_worker_status?: 'available' | 'not_found' | 'unknown';
 
     /**
      * Enables Proxy Protocol to the origin. Refer to
@@ -625,6 +661,18 @@ export namespace AppGetResponse {
      * argo_smart_routing. tls may only be "off" or "flexible".
      */
     origin_worker_id?: string;
+
+    /**
+     * Name of the Worker origin. Omitted when the Worker is not found or its name
+     * cannot be resolved.
+     */
+    origin_worker_name?: string;
+
+    /**
+     * Lookup status of the Worker origin. Unknown indicates that its name could not be
+     * resolved. Only returned for Worker origins.
+     */
+    origin_worker_status?: 'available' | 'not_found' | 'unknown';
 
     /**
      * Enables Proxy Protocol to the origin. Refer to

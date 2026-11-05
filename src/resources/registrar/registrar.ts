@@ -1,18 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as DomainsAPI from './domains';
-import {
-  BaseDomains,
-  Domain as DomainsAPIDomain,
-  DomainGetParams,
-  DomainGetResponse,
-  DomainListParams,
-  DomainUpdateParams,
-  DomainUpdateResponse,
-  Domains,
-  DomainsSinglePage,
-} from './domains';
 import * as ExtensionsAPI from './extensions';
 import {
   BaseExtensions,
@@ -419,7 +407,6 @@ export class BaseRegistrar extends APIResource {
  * state or requires user action.
  */
 export class Registrar extends BaseRegistrar {
-  domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
   registrations: RegistrationsAPI.Registrations = new RegistrationsAPI.Registrations(this._client);
   registrationStatus: RegistrationStatusAPI.RegistrationStatus = new RegistrationStatusAPI.RegistrationStatus(
     this._client,
@@ -1119,8 +1106,6 @@ export namespace RegistrarTransferCheckParams {
   }
 }
 
-Registrar.Domains = Domains;
-Registrar.BaseDomains = BaseDomains;
 Registrar.Registrations = Registrations;
 Registrar.BaseRegistrations = BaseRegistrations;
 Registrar.RegistrationStatus = RegistrationStatus;
@@ -1144,18 +1129,6 @@ export declare namespace Registrar {
     type RegistrarCheckParams as RegistrarCheckParams,
     type RegistrarSearchParams as RegistrarSearchParams,
     type RegistrarTransferCheckParams as RegistrarTransferCheckParams,
-  };
-
-  export {
-    Domains as Domains,
-    BaseDomains as BaseDomains,
-    type DomainsAPIDomain as Domain,
-    type DomainUpdateResponse as DomainUpdateResponse,
-    type DomainGetResponse as DomainGetResponse,
-    type DomainsSinglePage as DomainsSinglePage,
-    type DomainUpdateParams as DomainUpdateParams,
-    type DomainListParams as DomainListParams,
-    type DomainGetParams as DomainGetParams,
   };
 
   export {

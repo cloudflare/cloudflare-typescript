@@ -145,24 +145,26 @@ export class BaseIndexes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.vectorize.indexes.getByIDs(
+   * // Automatically fetches more pages as needed.
+   * for await (const indexGetByIDsResponse of client.vectorize.indexes.getByIDs(
    *   'example-index',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   getByIDs(
     indexName: string,
     params: IndexGetByIDsParams,
     options?: RequestOptions,
-  ): APIPromise<IndexGetByIDsResponse | null> {
+  ): PagePromise<IndexGetByIDsResponsesSinglePage, IndexGetByIDsResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(path`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/get_by_ids`, {
-        body,
-        ...options,
-      }) as APIPromise<{ result: IndexGetByIDsResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/get_by_ids`,
+      SinglePage<IndexGetByIDsResponse>,
+      { body, method: 'post', ...options },
+    );
   }
 
   /**
@@ -311,6 +313,8 @@ export class Indexes extends BaseIndexes {
 
 export type CreateIndicesSinglePage = SinglePage<CreateIndex>;
 
+export type IndexGetByIDsResponsesSinglePage = SinglePage<IndexGetByIDsResponse>;
+
 export interface CreateIndex {
   config?: CreateIndex.Config;
 
@@ -456,10 +460,18 @@ export interface IndexDeleteByIDsResponse {
   mutationId?: string;
 }
 
-/**
- * Array of vectors with matching ids.
- */
-export type IndexGetByIDsResponse = unknown;
+export interface IndexGetByIDsResponse {
+  /**
+   * Identifier for a Vector
+   */
+  id?: string;
+
+  metadata?: unknown;
+
+  namespace?: string | null;
+
+  values?: Array<number>;
+}
 
 export interface IndexInfoResponse {
   /**
@@ -476,7 +488,7 @@ export interface IndexInfoResponse {
   /**
    * The unique identifier for the async mutation operation containing the changeset.
    */
-  processedUpToMutation?: string;
+  processedUpToMutation?: string | null;
 
   /**
    * Specifies the number of vectors present in the index
@@ -765,6 +777,7 @@ export declare namespace Indexes {
     type IndexQueryResponse as IndexQueryResponse,
     type IndexUpsertResponse as IndexUpsertResponse,
     type CreateIndicesSinglePage as CreateIndicesSinglePage,
+    type IndexGetByIDsResponsesSinglePage as IndexGetByIDsResponsesSinglePage,
     type IndexCreateParams as IndexCreateParams,
     type IndexListParams as IndexListParams,
     type IndexDeleteParams as IndexDeleteParams,

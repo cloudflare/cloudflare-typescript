@@ -47,6 +47,7 @@ const runTests = (
     const response = await client.browserRendering.accessibilityTree.create({
       account_id: 'account_id',
       url: 'url',
+      browser: 'kitesurf',
       cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [

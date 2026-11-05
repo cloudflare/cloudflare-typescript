@@ -599,6 +599,13 @@ export namespace ApplicationCreateResponse {
     configuration?: CcDurableObjectApplication.Configuration;
 
     /**
+     * The jurisdiction of a Durable Object-managed application's primary control-plane
+     * object. Set this when creating the application; it cannot be changed afterwards.
+     * Other placement constraints are not supported by this scheduling policy.
+     */
+    constraints?: CcDurableObjectApplication.Constraints;
+
+    /**
      * Aggregate current activity for the latest observed placement of each instance.
      * Runtime snapshots feed periodic background sweeps. Counts refresh after each
      * complete sweep. Instance listings retain their separate three-month history for
@@ -661,6 +668,15 @@ export namespace ApplicationCreateResponse {
 
         port?: number;
       }
+    }
+
+    /**
+     * The jurisdiction of a Durable Object-managed application's primary control-plane
+     * object. Set this when creating the application; it cannot be changed afterwards.
+     * Other placement constraints are not supported by this scheduling policy.
+     */
+    export interface Constraints {
+      jurisdiction: 'eu' | 'fedramp' | 'us';
     }
 
     /**
@@ -1133,6 +1149,13 @@ export namespace ApplicationListResponse {
     configuration?: CcDurableObjectApplication.Configuration;
 
     /**
+     * The jurisdiction of a Durable Object-managed application's primary control-plane
+     * object. Set this when creating the application; it cannot be changed afterwards.
+     * Other placement constraints are not supported by this scheduling policy.
+     */
+    constraints?: CcDurableObjectApplication.Constraints;
+
+    /**
      * Aggregate current activity for the latest observed placement of each instance.
      * Runtime snapshots feed periodic background sweeps. Counts refresh after each
      * complete sweep. Instance listings retain their separate three-month history for
@@ -1195,6 +1218,15 @@ export namespace ApplicationListResponse {
 
         port?: number;
       }
+    }
+
+    /**
+     * The jurisdiction of a Durable Object-managed application's primary control-plane
+     * object. Set this when creating the application; it cannot be changed afterwards.
+     * Other placement constraints are not supported by this scheduling policy.
+     */
+    export interface Constraints {
+      jurisdiction: 'eu' | 'fedramp' | 'us';
     }
 
     /**
@@ -1674,6 +1706,13 @@ export namespace ApplicationEditResponse {
     configuration?: CcDurableObjectApplication.Configuration;
 
     /**
+     * The jurisdiction of a Durable Object-managed application's primary control-plane
+     * object. Set this when creating the application; it cannot be changed afterwards.
+     * Other placement constraints are not supported by this scheduling policy.
+     */
+    constraints?: CcDurableObjectApplication.Constraints;
+
+    /**
      * Aggregate current activity for the latest observed placement of each instance.
      * Runtime snapshots feed periodic background sweeps. Counts refresh after each
      * complete sweep. Instance listings retain their separate three-month history for
@@ -1736,6 +1775,15 @@ export namespace ApplicationEditResponse {
 
         port?: number;
       }
+    }
+
+    /**
+     * The jurisdiction of a Durable Object-managed application's primary control-plane
+     * object. Set this when creating the application; it cannot be changed afterwards.
+     * Other placement constraints are not supported by this scheduling policy.
+     */
+    export interface Constraints {
+      jurisdiction: 'eu' | 'fedramp' | 'us';
     }
 
     /**
@@ -2208,6 +2256,13 @@ export namespace ApplicationGetResponse {
     configuration?: CcDurableObjectApplication.Configuration;
 
     /**
+     * The jurisdiction of a Durable Object-managed application's primary control-plane
+     * object. Set this when creating the application; it cannot be changed afterwards.
+     * Other placement constraints are not supported by this scheduling policy.
+     */
+    constraints?: CcDurableObjectApplication.Constraints;
+
+    /**
      * Aggregate current activity for the latest observed placement of each instance.
      * Runtime snapshots feed periodic background sweeps. Counts refresh after each
      * complete sweep. Instance listings retain their separate three-month history for
@@ -2270,6 +2325,15 @@ export namespace ApplicationGetResponse {
 
         port?: number;
       }
+    }
+
+    /**
+     * The jurisdiction of a Durable Object-managed application's primary control-plane
+     * object. Set this when creating the application; it cannot be changed afterwards.
+     * Other placement constraints are not supported by this scheduling policy.
+     */
+    export interface Constraints {
+      jurisdiction: 'eu' | 'fedramp' | 'us';
     }
 
     /**
@@ -2586,6 +2650,14 @@ export declare namespace ApplicationCreateParams {
     configuration?: CcContainersCreateDurableObjectApplicationRequest.Configuration;
 
     /**
+     * Body param: The jurisdiction of a Durable Object-managed application's primary
+     * control-plane object. Set this when creating the application; it cannot be
+     * changed afterwards. Other placement constraints are not supported by this
+     * scheduling policy.
+     */
+    constraints?: CcContainersCreateDurableObjectApplicationRequest.Constraints;
+
+    /**
      * Body param: Application-wide logging settings for a Durable Object-managed
      * application. The application publishes these settings to its runtime metadata.
      * Updating them does not create a deployment or rollout.
@@ -2655,6 +2727,15 @@ export declare namespace ApplicationCreateParams {
 
         port?: number;
       }
+    }
+
+    /**
+     * The jurisdiction of a Durable Object-managed application's primary control-plane
+     * object. Set this when creating the application; it cannot be changed afterwards.
+     * Other placement constraints are not supported by this scheduling policy.
+     */
+    export interface Constraints {
+      jurisdiction: 'eu' | 'fedramp' | 'us';
     }
 
     /**

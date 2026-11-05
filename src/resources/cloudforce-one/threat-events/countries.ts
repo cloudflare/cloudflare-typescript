@@ -13,7 +13,8 @@ export class BaseCountries extends APIResource {
   ] as const);
 
   /**
-   * Lists countries referenced in Cloudforce One threat intelligence data.
+   * Lists the countries used in threat intelligence data, such as attacker and
+   * target countries.
    *
    * @example
    * ```ts

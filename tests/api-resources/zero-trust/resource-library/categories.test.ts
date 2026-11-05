@@ -45,6 +45,7 @@ const runTests = (
   test('list: required and optional params', async () => {
     const response = await client.zeroTrust.resourceLibrary.categories.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      cursor: 'cursor',
       limit: 0,
       offset: 0,
     });

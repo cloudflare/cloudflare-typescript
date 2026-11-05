@@ -218,6 +218,13 @@ export interface AllowPolicyCreateResponse {
   comments?: string | null;
 
   /**
+   * Timestamp at which the policy expires. After this time, Email Security ignores
+   * the policy. The value must lie in the future. Send `null` to clear the
+   * expiration.
+   */
+  expires_at?: string | null;
+
+  /**
    * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
    * Malicious and Suspicious dispositions still apply.
    */
@@ -258,7 +265,8 @@ export interface AllowPolicyCreateResponse {
    * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
    * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
    * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
-   * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+   * broadcast addresses, including their IPv4-mapped IPv6 equivalents. The API also
+   * rejects a pattern that equals a domain onboarded to the account, ignoring case.
    */
   pattern?: string;
 
@@ -303,6 +311,13 @@ export interface AllowPolicyListResponse {
   comments?: string | null;
 
   /**
+   * Timestamp at which the policy expires. After this time, Email Security ignores
+   * the policy. The value must lie in the future. Send `null` to clear the
+   * expiration.
+   */
+  expires_at?: string | null;
+
+  /**
    * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
    * Malicious and Suspicious dispositions still apply.
    */
@@ -343,7 +358,8 @@ export interface AllowPolicyListResponse {
    * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
    * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
    * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
-   * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+   * broadcast addresses, including their IPv4-mapped IPv6 equivalents. The API also
+   * rejects a pattern that equals a domain onboarded to the account, ignoring case.
    */
   pattern?: string;
 
@@ -413,6 +429,13 @@ export namespace AllowPolicyBatchResponse {
     comments?: string | null;
 
     /**
+     * Timestamp at which the policy expires. After this time, Email Security ignores
+     * the policy. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
+    /**
      * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
      * Malicious and Suspicious dispositions still apply.
      */
@@ -453,7 +476,8 @@ export namespace AllowPolicyBatchResponse {
      * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
      * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
      * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
-     * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+     * broadcast addresses, including their IPv4-mapped IPv6 equivalents. The API also
+     * rejects a pattern that equals a domain onboarded to the account, ignoring case.
      */
     pattern?: string;
 
@@ -498,6 +522,13 @@ export namespace AllowPolicyBatchResponse {
     comments?: string | null;
 
     /**
+     * Timestamp at which the policy expires. After this time, Email Security ignores
+     * the policy. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
+    /**
      * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
      * Malicious and Suspicious dispositions still apply.
      */
@@ -538,7 +569,8 @@ export namespace AllowPolicyBatchResponse {
      * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
      * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
      * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
-     * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+     * broadcast addresses, including their IPv4-mapped IPv6 equivalents. The API also
+     * rejects a pattern that equals a domain onboarded to the account, ignoring case.
      */
     pattern?: string;
 
@@ -583,6 +615,13 @@ export namespace AllowPolicyBatchResponse {
     comments?: string | null;
 
     /**
+     * Timestamp at which the policy expires. After this time, Email Security ignores
+     * the policy. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
+    /**
      * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
      * Malicious and Suspicious dispositions still apply.
      */
@@ -623,7 +662,8 @@ export namespace AllowPolicyBatchResponse {
      * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
      * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
      * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
-     * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+     * broadcast addresses, including their IPv4-mapped IPv6 equivalents. The API also
+     * rejects a pattern that equals a domain onboarded to the account, ignoring case.
      */
     pattern?: string;
 
@@ -669,6 +709,13 @@ export interface AllowPolicyEditResponse {
   comments?: string | null;
 
   /**
+   * Timestamp at which the policy expires. After this time, Email Security ignores
+   * the policy. The value must lie in the future. Send `null` to clear the
+   * expiration.
+   */
+  expires_at?: string | null;
+
+  /**
    * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
    * Malicious and Suspicious dispositions still apply.
    */
@@ -709,7 +756,8 @@ export interface AllowPolicyEditResponse {
    * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
    * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
    * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
-   * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+   * broadcast addresses, including their IPv4-mapped IPv6 equivalents. The API also
+   * rejects a pattern that equals a domain onboarded to the account, ignoring case.
    */
   pattern?: string;
 
@@ -754,6 +802,13 @@ export interface AllowPolicyGetResponse {
   comments?: string | null;
 
   /**
+   * Timestamp at which the policy expires. After this time, Email Security ignores
+   * the policy. The value must lie in the future. Send `null` to clear the
+   * expiration.
+   */
+  expires_at?: string | null;
+
+  /**
    * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
    * Malicious and Suspicious dispositions still apply.
    */
@@ -794,7 +849,8 @@ export interface AllowPolicyGetResponse {
    * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
    * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
    * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
-   * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+   * broadcast addresses, including their IPv4-mapped IPv6 equivalents. The API also
+   * rejects a pattern that equals a domain onboarded to the account, ignoring case.
    */
   pattern?: string;
 
@@ -855,7 +911,8 @@ export interface AllowPolicyCreateParams {
    * IP (e.g. `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or
    * `2606:4700:4700::/48`); the API rejects private or unique-local, loopback,
    * link-local, unspecified, and IPv4 broadcast addresses, including their
-   * IPv4-mapped IPv6 equivalents.
+   * IPv4-mapped IPv6 equivalents. The API also rejects a pattern that equals a
+   * domain onboarded to the account, ignoring case.
    */
   pattern: string;
 
@@ -886,6 +943,13 @@ export interface AllowPolicyCreateParams {
   comments?: string | null;
 
   /**
+   * Body param: Timestamp at which the policy expires. After this time, Email
+   * Security ignores the policy. The value must lie in the future. Send `null` to
+   * clear the expiration.
+   */
+  expires_at?: string | null;
+
+  /**
    * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
@@ -911,6 +975,12 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
    * Query param: The sorting direction.
    */
   direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Filter to return only expired policies (`true`) or only policies
+   * that still apply (`false`). Omit to return both.
+   */
+  expired?: boolean;
 
   /**
    * Query param: Filter to show only policies where messages from the sender are
@@ -1008,6 +1078,13 @@ export namespace AllowPolicyBatchParams {
     comments?: string | null;
 
     /**
+     * Timestamp at which the policy expires. After this time, Email Security ignores
+     * the policy. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
+    /**
      * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
      * Malicious and Suspicious dispositions still apply.
      */
@@ -1046,7 +1123,8 @@ export namespace AllowPolicyBatchParams {
      * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
      * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
      * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
-     * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+     * broadcast addresses, including their IPv4-mapped IPv6 equivalents. The API also
+     * rejects a pattern that equals a domain onboarded to the account, ignoring case.
      */
     pattern?: string;
 
@@ -1100,7 +1178,8 @@ export namespace AllowPolicyBatchParams {
      * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
      * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
      * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
-     * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+     * broadcast addresses, including their IPv4-mapped IPv6 equivalents. The API also
+     * rejects a pattern that equals a domain onboarded to the account, ignoring case.
      */
     pattern: string;
 
@@ -1128,6 +1207,13 @@ export namespace AllowPolicyBatchParams {
     comments?: string | null;
 
     /**
+     * Timestamp at which the policy expires. After this time, Email Security ignores
+     * the policy. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
+    /**
      * @deprecated Use `is_exempt_recipient` instead.
      */
     is_recipient?: boolean;
@@ -1148,6 +1234,13 @@ export namespace AllowPolicyBatchParams {
    */
   export interface Put {
     comments?: string | null;
+
+    /**
+     * Timestamp at which the policy expires. After this time, Email Security ignores
+     * the policy. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
 
     /**
      * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
@@ -1188,7 +1281,8 @@ export namespace AllowPolicyBatchParams {
      * (e.g. `example.com`), or a plain IPv4 or IPv6 address or CIDR block for IP (e.g.
      * `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or `2606:4700:4700::/48`); the
      * API rejects private or unique-local, loopback, link-local, unspecified, and IPv4
-     * broadcast addresses, including their IPv4-mapped IPv6 equivalents.
+     * broadcast addresses, including their IPv4-mapped IPv6 equivalents. The API also
+     * rejects a pattern that equals a domain onboarded to the account, ignoring case.
      */
     pattern?: string;
 
@@ -1225,6 +1319,13 @@ export interface AllowPolicyEditParams {
    * Body param
    */
   comments?: string | null;
+
+  /**
+   * Body param: Timestamp at which the policy expires. After this time, Email
+   * Security ignores the policy. The value must lie in the future. Send `null` to
+   * clear the expiration.
+   */
+  expires_at?: string | null;
 
   /**
    * Body param: Exempts messages from this sender from Spam, Spoof and Bulk
@@ -1270,7 +1371,8 @@ export interface AllowPolicyEditParams {
    * IP (e.g. `1.2.3.4`, `1.2.3.0/24`, `2606:4700:4700::1111`, or
    * `2606:4700:4700::/48`); the API rejects private or unique-local, loopback,
    * link-local, unspecified, and IPv4 broadcast addresses, including their
-   * IPv4-mapped IPv6 equivalents.
+   * IPv4-mapped IPv6 equivalents. The API also rejects a pattern that equals a
+   * domain onboarded to the account, ignoring case.
    */
   pattern?: string;
 

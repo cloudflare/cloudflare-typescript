@@ -23,15 +23,6 @@ const runTests = (client: PartialCloudflare<{ resourceSharing: BaseResourceShari
     const responsePromise = client.resourceSharing.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My Shared WAF Managed Rule',
-      recipients: [{}],
-      resources: [
-        {
-          meta: {},
-          resource_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          resource_type: 'custom-ruleset',
-        },
-      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,6 +37,7 @@ const runTests = (client: PartialCloudflare<{ resourceSharing: BaseResourceShari
     const response = await client.resourceSharing.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My Shared WAF Managed Rule',
+      excluded_recipients: [{ account_id: '023e105f4ecef8ad9ca31a8372d0c353' }],
       recipients: [
         {
           account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -57,10 +49,11 @@ const runTests = (client: PartialCloudflare<{ resourceSharing: BaseResourceShari
         {
           meta: {},
           resource_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
+          resource_id: '0a679032-bbb2-4b7e-9acc-dd5c5cb27a17',
           resource_type: 'custom-ruleset',
         },
       ],
+      tags: { foo: 'string' },
     });
   });
 
@@ -82,6 +75,7 @@ const runTests = (client: PartialCloudflare<{ resourceSharing: BaseResourceShari
     const response = await client.resourceSharing.update('3fd85f74b32742f1bff64a85009dda07', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My Shared WAF Managed Rule',
+      tags: { foo: 'string' },
     });
   });
 
@@ -102,6 +96,7 @@ const runTests = (client: PartialCloudflare<{ resourceSharing: BaseResourceShari
       direction: 'asc',
       include_recipient_counts: true,
       include_resources: true,
+      include_tags_from: 'api',
       kind: 'sent',
       order: 'name',
       page: 2,
@@ -150,6 +145,7 @@ const runTests = (client: PartialCloudflare<{ resourceSharing: BaseResourceShari
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       include_recipient_counts: true,
       include_resources: true,
+      include_tags_from: 'api',
     });
   });
 };

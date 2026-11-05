@@ -12,11 +12,10 @@ export class BaseIndicators extends APIResource {
     Object.freeze(['cloudforceOne', 'threatEvents', 'tags', 'indicators'] as const);
 
   /**
-   * Returns indicators associated with the provided tag UUID, with pagination. By
-   * default fans out across every indicator dataset the account can read; pass
-   * datasetIds to scope to UUIDs, analytics datasets, or operational datasets.
-   * Analytics datasets do not expose tag associations, so the analytics scope
-   * returns an empty result.
+   * Lists the indicators that carry a tag, with pagination. By default, every
+   * intelligence dataset you can read is searched; use `datasetIds` to limit the
+   * search to specific datasets or a scope value. Analytics datasets don't store tag
+   * associations, so the `analytics` scope returns no results.
    *
    * @example
    * ```ts
@@ -135,10 +134,10 @@ export interface IndicatorListParams {
 
   /**
    * Query param: Dataset UUIDs to scope to (repeat the param for multiple), or one
-   * standalone scope: 'all'/'\*', 'analytics' for isAnalytics=true datasets, or
-   * 'operational' for isAnalytics=false datasets. Analytics datasets do not expose
-   * tag associations, so 'analytics' returns an empty result. Omit to search all
-   * readable datasets.
+   * standalone scope value: 'all'/'\*' or 'operational' for readable intelligence
+   * datasets (isAnalytics=false), or 'analytics' for readable analytics datasets
+   * (isAnalytics=true). Analytics datasets do not expose tag associations, so
+   * 'analytics' returns an empty result. Omit for 'all'.
    */
   datasetIds?: Array<string>;
 

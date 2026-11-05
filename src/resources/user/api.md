@@ -93,9 +93,13 @@ Methods:
 
 ## Tenants
 
+Types:
+
+- <code><a href="./src/resources/user/tenants.ts">TenantListResponse</a></code>
+
 Methods:
 
-- <code title="get /user/tenants">client.user.tenants.<a href="./src/resources/user/tenants.ts">list</a>() -> OrganizationsSinglePage</code>
+- <code title="get /user/tenants">client.user.tenants.<a href="./src/resources/user/tenants.ts">list</a>() -> TenantListResponsesSinglePage</code>
 
 ## Tokens
 

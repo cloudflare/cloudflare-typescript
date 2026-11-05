@@ -10,7 +10,8 @@ export class BaseTagCategories extends APIResource {
     Object.freeze(['cloudforceOne', 'threatSignals', 'skills', 'tagCategories'] as const);
 
   /**
-   * Replaces the tag categories the default tagging skill may choose tags from.
+   * Replaces the Tag Categories the managed default tagging skill may select tags
+   * from. This configures the managed default tagging skill, not Custom Skills.
    *
    * @example
    * ```ts
@@ -41,7 +42,8 @@ export class BaseTagCategories extends APIResource {
   }
 
   /**
-   * Retrieves the tag categories the default tagging skill may choose tags from.
+   * Retrieves the Tag Categories the managed default tagging skill may select tags
+   * from. This configures the managed default tagging skill, not Custom Skills.
    *
    * @example
    * ```ts
@@ -87,7 +89,8 @@ export interface TagCategoryUpdateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Up to 100 unique tag category UUIDs that the managed default tagging
+   * skill may select tags from.
    */
   category_uuids: Array<string>;
 }

@@ -18,26 +18,30 @@ export class BaseBulk extends APIResource {
    *
    * @example
    * ```ts
-   * const bulks =
+   * const bulk =
    *   await client.accounts.subscriptions.bulk.create({
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   });
    * ```
    */
-  create(params: BulkCreateParams, options?: RequestOptions): APIPromise<BulkCreateResponse | null> {
+  create(params: BulkCreateParams, options?: RequestOptions): APIPromise<BulkCreateResponse> {
     const { account_id, idemp_key, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/bulk/subscriptions`, {
         query: { idemp_key },
         body,
         ...options,
-      }) as APIPromise<{ result: BulkCreateResponse | null }>
+      }) as APIPromise<{ result: BulkCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 export class Bulk extends BaseBulk {}
 
-export type BulkCreateResponse = Array<unknown>;
+export interface BulkCreateResponse {
+  client_secrets?: Array<string> | null;
+
+  subscriptions?: Array<Shared.Subscription>;
+}
 
 export interface BulkCreateParams {
   /**

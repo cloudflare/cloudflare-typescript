@@ -26,10 +26,10 @@ export class BaseScrape extends APIResource {
    * ```
    */
   create(params: ScrapeCreateParams, options?: RequestOptions): APIPromise<ScrapeCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id, browser, cacheTTL, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/browser-rendering/scrape`, {
-        query: { cacheTTL },
+        query: { browser, cacheTTL },
         body,
         ...options,
       }) as APIPromise<{ result: ScrapeCreateResponse }>
@@ -114,6 +114,11 @@ export declare namespace ScrapeCreateParams {
      * Body param
      */
     url: string;
+
+    /**
+     * Query param: Rendering backend. Set to `kitesurf` to use Kitesurf (beta).
+     */
+    browser?: 'kitesurf';
 
     /**
      * Query param: Cache TTL default is 5s. Set to 0 to disable.
@@ -391,6 +396,11 @@ export declare namespace ScrapeCreateParams {
      * Body param
      */
     html: string;
+
+    /**
+     * Query param: Rendering backend. Set to `kitesurf` to use Kitesurf (beta).
+     */
+    browser?: 'kitesurf';
 
     /**
      * Query param: Cache TTL default is 5s. Set to 0 to disable.

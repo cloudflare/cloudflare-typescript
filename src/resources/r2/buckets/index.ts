@@ -36,6 +36,16 @@ export {
   type EventNotificationGetParams,
 } from './event-notifications';
 export {
+  Jobs,
+  BaseJobs,
+  type JobCreateResponse,
+  type JobListResponse,
+  type JobGetResponse,
+  type JobCreateParams,
+  type JobListParams,
+  type JobGetParams,
+} from './jobs';
+export {
   Lifecycle,
   BaseLifecycle,
   type LifecycleUpdateResponse,

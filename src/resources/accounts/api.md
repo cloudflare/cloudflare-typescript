@@ -77,7 +77,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/bulk/subscriptions">client.accounts.subscriptions.bulk.<a href="./src/resources/accounts/subscriptions/bulk.ts">create</a>({ ...params }) -> BulkCreateResponse | null</code>
+- <code title="post /accounts/{account_id}/bulk/subscriptions">client.accounts.subscriptions.bulk.<a href="./src/resources/accounts/subscriptions/bulk.ts">create</a>({ ...params }) -> BulkCreateResponse</code>
 
 ## Tokens
 
@@ -183,14 +183,6 @@ Methods:
 - <code title="post /accounts/{account_id}/pay-invoice">client.accounts.payInvoice.<a href="./src/resources/accounts/pay-invoice.ts">create</a>({ ...params }) -> PayInvoiceCreateResponse</code>
 
 ## PayBadDebt
-
-Types:
-
-- <code><a href="./src/resources/accounts/pay-bad-debt.ts">PayBadDebtCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/pay-bad-debt">client.accounts.payBadDebt.<a href="./src/resources/accounts/pay-bad-debt.ts">create</a>({ ...params }) -> PayBadDebtCreateResponse</code>
 
 ## Receipts
 

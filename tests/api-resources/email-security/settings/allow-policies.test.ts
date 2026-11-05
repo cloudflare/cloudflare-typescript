@@ -60,6 +60,7 @@ const runTests = (
       pattern_type: 'EMAIL',
       verify_sender: true,
       comments: 'Trust all messages send from test@example.com',
+      expires_at: '2027-01-01T00:00:00Z',
       is_recipient: false,
       is_sender: true,
       is_spoof: false,
@@ -83,6 +84,7 @@ const runTests = (
     const response = await client.emailSecurity.settings.allowPolicies.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
+      expired: true,
       is_acceptable_sender: true,
       is_exempt_recipient: true,
       is_trusted_sender: true,
@@ -151,6 +153,7 @@ const runTests = (
       patches: [
         {
           comments: 'Trust all messages send from test@example.com',
+          expires_at: '2027-01-01T00:00:00Z',
           is_acceptable_sender: false,
           is_exempt_recipient: false,
           is_recipient: false,
@@ -173,6 +176,7 @@ const runTests = (
           pattern_type: 'EMAIL',
           verify_sender: true,
           comments: 'Trust all messages send from test@example.com',
+          expires_at: '2027-01-01T00:00:00Z',
           is_recipient: false,
           is_sender: true,
           is_spoof: false,
@@ -181,6 +185,7 @@ const runTests = (
       puts: [
         {
           comments: 'Trust all messages send from test@example.com',
+          expires_at: '2027-01-01T00:00:00Z',
           is_acceptable_sender: false,
           is_exempt_recipient: false,
           is_recipient: false,
@@ -218,6 +223,7 @@ const runTests = (
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         comments: 'Trust all messages send from test@example.com',
+        expires_at: '2027-01-01T00:00:00Z',
         is_acceptable_sender: false,
         is_exempt_recipient: false,
         is_recipient: false,

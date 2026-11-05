@@ -33,6 +33,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { casb: { integrations:
       application: 'GOOGLE_WORKSPACE',
       credentials: { admin_email: 'bar' },
       name: 'My Google Workspace',
+      use_cases: ['casb', 'ces'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -49,10 +50,10 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { casb: { integrations:
       application: 'GOOGLE_WORKSPACE',
       credentials: { admin_email: 'bar' },
       name: 'My Google Workspace',
+      use_cases: ['casb', 'ces'],
       auth_method: 'service_account',
       dlp_profiles: ['e91a2360-da51-4fdf-9711-bcdecd462614'],
       permissions: ['https://www.googleapis.com/auth/drive.readonly'],
-      use_cases: ['casb', 'ces'],
     });
   });
 

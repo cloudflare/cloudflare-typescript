@@ -274,15 +274,6 @@ export interface Identifier {
   id?: string;
 }
 
-export interface LoadBalancerPreview {
-  /**
-   * Monitored pool IDs mapped to their respective names.
-   */
-  pools?: { [key: string]: string };
-
-  preview_id?: string;
-}
-
 export interface Member {
   /**
    * Membership identifier tag.
@@ -417,7 +408,7 @@ export namespace Member {
       id: string;
 
       /**
-       * A scope is a combination of scope objects which provides additional context.
+       * The scope associated to the resource group
        */
       scope: ResourceGroup.Scope;
 
@@ -434,7 +425,7 @@ export namespace Member {
 
     export namespace ResourceGroup {
       /**
-       * A scope is a combination of scope objects which provides additional context.
+       * The scope associated to the resource group
        */
       export interface Scope {
         /**
@@ -921,6 +912,20 @@ export interface Token {
    * Status of the token.
    */
   status?: 'active' | 'disabled' | 'expired';
+
+  /**
+   * The prefix of the token value, before the first underscore. Use it with
+   * `token_suffix` to identify a token. Only present for tokens created or rolled
+   * after this field was added.
+   */
+  token_prefix?: string;
+
+  /**
+   * The last 4 characters of the token value. Use it with `token_prefix` to identify
+   * a token. It is not unique. Only present for tokens created or rolled after this
+   * field was added.
+   */
+  token_suffix?: string;
 }
 
 export namespace Token {

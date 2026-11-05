@@ -12,17 +12,9 @@ export class BaseTieredCaching extends APIResource {
   ] as const);
 
   /**
-   * Tiered Cache works by dividing Cloudflare's data centers into a hierarchy of
-   * lower-tiers and upper-tiers. If content is not cached in lower-tier data centers
-   * (generally the ones closest to a visitor), the lower-tier must ask an upper-tier
-   * to see if it has the content. If the upper-tier does not have the content, only
-   * the upper-tier can ask the origin for content. This practice improves bandwidth
-   * efficiency by limiting the number of data centers that can ask the origin for
-   * content, which reduces origin load and makes websites more cost-effective to
-   * operate. Additionally, Tiered Cache concentrates connections to origin servers
-   * so they come from a small number of data centers rather than the full set of
-   * network locations. This results in fewer open connections using server
-   * resources.
+   * Enables or disables Tiered Cache for a zone. Tiered Cache reduces origin traffic
+   * by serving lower-tier cache misses from upper-tier data centers before
+   * requesting content from your origin.
    *
    * @example
    * ```ts
@@ -42,17 +34,9 @@ export class BaseTieredCaching extends APIResource {
   }
 
   /**
-   * Tiered Cache works by dividing Cloudflare's data centers into a hierarchy of
-   * lower-tiers and upper-tiers. If content is not cached in lower-tier data centers
-   * (generally the ones closest to a visitor), the lower-tier must ask an upper-tier
-   * to see if it has the content. If the upper-tier does not have the content, only
-   * the upper-tier can ask the origin for content. This practice improves bandwidth
-   * efficiency by limiting the number of data centers that can ask the origin for
-   * content, which reduces origin load and makes websites more cost-effective to
-   * operate. Additionally, Tiered Cache concentrates connections to origin servers
-   * so they come from a small number of data centers rather than the full set of
-   * network locations. This results in fewer open connections using server
-   * resources.
+   * Retrieves whether Tiered Cache is enabled for a zone. Tiered Cache reduces
+   * origin traffic by serving lower-tier cache misses from upper-tier data centers
+   * before requesting content from your origin.
    *
    * @example
    * ```ts
@@ -123,7 +107,7 @@ export interface TieredCachingEditParams {
   zone_id: string;
 
   /**
-   * Body param: Enables Tiered Caching.
+   * Body param: Enables or disables Tiered Cache.
    */
   value: 'on' | 'off';
 }

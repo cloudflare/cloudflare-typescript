@@ -25,6 +25,17 @@ import {
   EventNotificationUpdateResponse,
   EventNotifications,
 } from './event-notifications';
+import * as JobsAPI from './jobs';
+import {
+  BaseJobs,
+  JobCreateParams,
+  JobCreateResponse,
+  JobGetParams,
+  JobGetResponse,
+  JobListParams,
+  JobListResponse,
+  Jobs,
+} from './jobs';
 import * as LifecycleAPI from './lifecycle';
 import {
   BaseLifecycle,
@@ -245,6 +256,7 @@ export class Buckets extends BaseBuckets {
   metrics: MetricsAPI.Metrics = new MetricsAPI.Metrics(this._client);
   sippy: SippyAPI.SippyResource = new SippyAPI.SippyResource(this._client);
   objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);
+  jobs: JobsAPI.Jobs = new JobsAPI.Jobs(this._client);
 }
 
 /**
@@ -278,7 +290,7 @@ export interface Bucket {
 }
 
 export interface BucketListResponse {
-  buckets?: Array<Bucket>;
+  buckets: Array<Bucket>;
 }
 
 export type BucketDeleteResponse = unknown;
@@ -419,6 +431,8 @@ Buckets.SippyResource = SippyResource;
 Buckets.BaseSippyResource = BaseSippyResource;
 Buckets.Objects = Objects;
 Buckets.BaseObjects = BaseObjects;
+Buckets.Jobs = Jobs;
+Buckets.BaseJobs = BaseJobs;
 
 export declare namespace Buckets {
   export {
@@ -505,5 +519,16 @@ export declare namespace Buckets {
     type ObjectDeleteParams as ObjectDeleteParams,
     type ObjectGetParams as ObjectGetParams,
     type ObjectUploadParams as ObjectUploadParams,
+  };
+
+  export {
+    Jobs as Jobs,
+    BaseJobs as BaseJobs,
+    type JobCreateResponse as JobCreateResponse,
+    type JobListResponse as JobListResponse,
+    type JobGetResponse as JobGetResponse,
+    type JobCreateParams as JobCreateParams,
+    type JobListParams as JobListParams,
+    type JobGetParams as JobGetParams,
   };
 }

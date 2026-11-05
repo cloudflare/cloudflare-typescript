@@ -23,7 +23,8 @@ export class BaseSkills extends APIResource {
   ] as const);
 
   /**
-   * Creates a custom AI skill for the account.
+   * Creates a Custom Skill for the account. Free Threat Signals accounts cannot
+   * create Custom Skills.
    *
    * @example
    * ```ts
@@ -33,7 +34,6 @@ export class BaseSkills extends APIResource {
    *     name: 'x',
    *     output_schema: 'x',
    *     prompt: 'x',
-   *     type: 'summary',
    *   });
    * ```
    */
@@ -48,7 +48,8 @@ export class BaseSkills extends APIResource {
   }
 
   /**
-   * Lists the default and custom skills available to the account.
+   * Lists active Managed Default Skills and Custom Skills. Free Threat Signals
+   * accounts see active managed defaults only, with custom_skills_available: false.
    *
    * @example
    * ```ts
@@ -73,7 +74,9 @@ export class BaseSkills extends APIResource {
   }
 
   /**
-   * Deletes a custom skill. Default skills cannot be deleted.
+   * Deletes a Custom Skill. The skill's stored outputs on articles are deleted with
+   * it. Managed Default Skills cannot be deleted. Free Threat Signals accounts
+   * cannot delete Custom Skills.
    *
    * @example
    * ```ts
@@ -99,7 +102,8 @@ export class BaseSkills extends APIResource {
   }
 
   /**
-   * Updates a custom skill. Default skills are read-only.
+   * Updates a Custom Skill. Managed Default Skills cannot be updated. Free Threat
+   * Signals accounts cannot update Custom Skills.
    *
    * @example
    * ```ts
@@ -121,7 +125,8 @@ export class BaseSkills extends APIResource {
   }
 
   /**
-   * Retrieves a default or custom skill by ID.
+   * Retrieves a Managed Default Skill or Custom Skill. Managed catalog definitions
+   * are readable. Free Threat Signals accounts cannot read Custom Skills.
    *
    * @example
    * ```ts
@@ -190,10 +195,8 @@ export interface SkillListResponse {
   count: number;
 
   /**
-   * Whether the authenticated account may access custom-skill capabilities under
-   * Stakeout's Threat Signals access-mode policy. This is a policy availability
-   * indicator, not a row-existence indicator. False for threat_signals_only mode;
-   * true for entitled, allowlisted, cfone_internal, and service modes.
+   * Whether Custom Skills are available to the account. False for Free Threat
+   * Signals accounts, which receive managed default skills only.
    */
   custom_skills_available: boolean;
 
@@ -355,24 +358,24 @@ export interface SkillCreateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Custom Skill name (1–100 characters).
    */
   name: string;
 
   /**
-   * Body param
+   * Body param: JSON Schema serialized as a string (max 4096 characters).
    */
   output_schema: string;
 
   /**
-   * Body param
+   * Body param: AI prompt (1–4000 characters) defining the skill's instructions.
    */
   prompt: string;
 
   /**
-   * Body param
+   * Body param: Optional label; does not affect execution. Defaults to "summary".
    */
-  type: 'summary' | 'tags';
+  type?: 'summary' | 'tags';
 }
 
 export interface SkillListParams extends V4PagePaginationParams {
@@ -393,27 +396,27 @@ export interface SkillEditParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Optional skill configuration (stored but not currently interpreted).
    */
   config?: string;
 
   /**
-   * Body param
+   * Body param: Whether the skill is active and eligible for feed assignment.
    */
   is_active?: boolean;
 
   /**
-   * Body param
+   * Body param: Custom Skill name (1–100 characters).
    */
   name?: string;
 
   /**
-   * Body param
+   * Body param: JSON Schema serialized as a string (max 4096 characters).
    */
   output_schema?: string;
 
   /**
-   * Body param
+   * Body param: AI prompt (1–4000 characters) defining the skill's instructions.
    */
   prompt?: string;
 }

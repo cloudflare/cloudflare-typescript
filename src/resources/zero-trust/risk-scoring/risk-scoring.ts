@@ -103,7 +103,7 @@ export interface RiskScoringGetResponse {
 
   last_reset_time?: string | null;
 
-  risk_level?: 'low' | 'medium' | 'high';
+  risk_level?: 'info' | 'low' | 'medium' | 'high';
 }
 
 export namespace RiskScoringGetResponse {
@@ -112,7 +112,7 @@ export namespace RiskScoringGetResponse {
 
     name: string;
 
-    risk_level: 'low' | 'medium' | 'high';
+    risk_level: 'info' | 'low' | 'medium' | 'high';
 
     timestamp: string;
 

@@ -102,7 +102,10 @@ export class BaseBasinCatalog extends APIResource {
    * ```ts
    * const response = await client.basinCatalog.enable(
    *   'my-data-bucket',
-   *   { account_id: '0123456789abcdef0123456789abcdef' },
+   *   {
+   *     account_id: '0123456789abcdef0123456789abcdef',
+   *     credential: { token: 'your-cloudflare-api-token-here' },
+   *   },
    * );
    * ```
    */
@@ -111,12 +114,12 @@ export class BaseBasinCatalog extends APIResource {
     params: BasinCatalogEnableParams,
     options?: RequestOptions,
   ): APIPromise<BasinCatalogEnableResponse> {
-    const { account_id } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(
-        path`/accounts/${account_id}/basin-catalog/${bucketName}/enable`,
-        options,
-      ) as APIPromise<{ result: BasinCatalogEnableResponse }>
+      this._client.post(path`/accounts/${account_id}/basin-catalog/${bucketName}/enable`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: BasinCatalogEnableResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -165,7 +168,7 @@ export interface BasinCatalogListResponse {
 
 export namespace BasinCatalogListResponse {
   /**
-   * Contains R2 Data Catalog information.
+   * Contains catalog information.
    */
   export interface Warehouse {
     /**
@@ -192,6 +195,12 @@ export namespace BasinCatalogListResponse {
      * Shows the credential configuration status.
      */
     credential_status?: 'present' | 'absent' | null;
+
+    /**
+     * Specifies the data-locality jurisdiction of the catalog. The first enable sets
+     * it, and it cannot change. Currently always `default`.
+     */
+    jurisdiction?: string;
 
     /**
      * Configures maintenance for the catalog.
@@ -278,7 +287,7 @@ export interface BasinCatalogEnableResponse {
 }
 
 /**
- * Contains R2 Data Catalog information.
+ * Contains catalog information.
  */
 export interface BasinCatalogGetResponse {
   /**
@@ -305,6 +314,12 @@ export interface BasinCatalogGetResponse {
    * Shows the credential configuration status.
    */
   credential_status?: 'present' | 'absent' | null;
+
+  /**
+   * Specifies the data-locality jurisdiction of the catalog. The first enable sets
+   * it, and it cannot change. Currently always `default`.
+   */
+  jurisdiction?: string;
 
   /**
    * Configures maintenance for the catalog.
@@ -402,9 +417,26 @@ export interface BasinCatalogDisableParams {
 
 export interface BasinCatalogEnableParams {
   /**
-   * Identifies the account.
+   * Path param: Identifies the account.
    */
   account_id: string;
+
+  /**
+   * Body param: Contains request to store catalog credentials.
+   */
+  credential?: BasinCatalogEnableParams.Credential;
+}
+
+export namespace BasinCatalogEnableParams {
+  /**
+   * Contains request to store catalog credentials.
+   */
+  export interface Credential {
+    /**
+     * Provides the Cloudflare API token for accessing R2.
+     */
+    token: string;
+  }
 }
 
 export interface BasinCatalogGetParams {

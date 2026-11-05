@@ -13,6 +13,8 @@ import {
   InstanceListParams,
   InstanceListResponse,
   InstanceListResponsesV4PagePaginationArray,
+  InstanceMoveParams,
+  InstanceMoveResponse,
   InstanceReadParams,
   InstanceReadResponse,
   InstanceSearchParams,
@@ -60,7 +62,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Update the description and/or the public endpoint configuration of an existing
+   * Updates the description and/or the public endpoint configuration of an existing
    * namespace. The default namespace's description cannot be modified, but its
    * public endpoint can.
    *
@@ -87,7 +89,8 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * List namespaces in the account, including their descriptions and creation times.
+   * Lists namespaces in the account, including their descriptions and creation
+   * times.
    *
    * @example
    * ```ts
@@ -112,8 +115,9 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Permanently delete a namespace. The namespace must be empty (no instances), and
-   * the default namespace cannot be deleted.
+   * Deletes a namespace permanently. The namespace must not contain any instances
+   * (instances whose deletion is still in progress do not count), and the default
+   * namespace cannot be deleted.
    *
    * @example
    * ```ts
@@ -266,8 +270,8 @@ export namespace NamespaceCreateResponse {
 
     /**
      * Instance IDs exposed through the namespace public endpoint. Empty means nothing
-     * is searchable. Every ID must be an existing instance in this namespace, and the
-     * list cannot exceed the account's multi-instance search limit.
+     * is searchable. Every ID must reference an existing instance in this namespace,
+     * and the list must stay within the account's multi-instance search limit.
      */
     instances_allowed?: Array<string>;
 
@@ -281,7 +285,7 @@ export namespace NamespaceCreateResponse {
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
       /**
-       * Disable chat completions endpoint for this public endpoint
+       * Disable chat completions endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -290,7 +294,7 @@ export namespace NamespaceCreateResponse {
       description?: string;
 
       /**
-       * Disable MCP endpoint for this public endpoint
+       * Disable MCP endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -305,7 +309,7 @@ export namespace NamespaceCreateResponse {
 
     export interface SearchEndpoint {
       /**
-       * Disable search endpoint for this public endpoint
+       * Disable search endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -354,8 +358,8 @@ export namespace NamespaceUpdateResponse {
 
     /**
      * Instance IDs exposed through the namespace public endpoint. Empty means nothing
-     * is searchable. Every ID must be an existing instance in this namespace, and the
-     * list cannot exceed the account's multi-instance search limit.
+     * is searchable. Every ID must reference an existing instance in this namespace,
+     * and the list must stay within the account's multi-instance search limit.
      */
     instances_allowed?: Array<string>;
 
@@ -369,7 +373,7 @@ export namespace NamespaceUpdateResponse {
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
       /**
-       * Disable chat completions endpoint for this public endpoint
+       * Disable chat completions endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -378,7 +382,7 @@ export namespace NamespaceUpdateResponse {
       description?: string;
 
       /**
-       * Disable MCP endpoint for this public endpoint
+       * Disable MCP endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -393,7 +397,7 @@ export namespace NamespaceUpdateResponse {
 
     export interface SearchEndpoint {
       /**
-       * Disable search endpoint for this public endpoint
+       * Disable search endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -442,8 +446,8 @@ export namespace NamespaceListResponse {
 
     /**
      * Instance IDs exposed through the namespace public endpoint. Empty means nothing
-     * is searchable. Every ID must be an existing instance in this namespace, and the
-     * list cannot exceed the account's multi-instance search limit.
+     * is searchable. Every ID must reference an existing instance in this namespace,
+     * and the list must stay within the account's multi-instance search limit.
      */
     instances_allowed?: Array<string>;
 
@@ -457,7 +461,7 @@ export namespace NamespaceListResponse {
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
       /**
-       * Disable chat completions endpoint for this public endpoint
+       * Disable chat completions endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -466,7 +470,7 @@ export namespace NamespaceListResponse {
       description?: string;
 
       /**
-       * Disable MCP endpoint for this public endpoint
+       * Disable MCP endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -481,7 +485,7 @@ export namespace NamespaceListResponse {
 
     export interface SearchEndpoint {
       /**
-       * Disable search endpoint for this public endpoint
+       * Disable search endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -576,7 +580,29 @@ export namespace NamespaceChatCompletionsResponse {
 
     item?: Chunk.Item;
 
+    /**
+     * Audio/video transcript chunks only: end, in milliseconds from the start of the
+     * media (whole seconds), of the last transcript section the matched chunk covers.
+     * Describes the matched chunk before any context expansion, not the expanded
+     * `text`.
+     */
+    media_end_ms?: number;
+
+    /**
+     * Audio/video transcript chunks only: start, in milliseconds from the start of the
+     * media (whole seconds), of the transcript section the matched chunk begins in.
+     * Describes the matched chunk before any context expansion, not the expanded
+     * `text`.
+     */
+    media_start_ms?: number;
+
     scoring_details?: Chunk.ScoringDetails;
+
+    /**
+     * Audio/video transcript chunks only: type of the source media file. Omitted for
+     * all other chunks.
+     */
+    source_media_type?: 'audio' | 'video';
   }
 
   export namespace Chunk {
@@ -652,8 +678,8 @@ export namespace NamespaceReadResponse {
 
     /**
      * Instance IDs exposed through the namespace public endpoint. Empty means nothing
-     * is searchable. Every ID must be an existing instance in this namespace, and the
-     * list cannot exceed the account's multi-instance search limit.
+     * is searchable. Every ID must reference an existing instance in this namespace,
+     * and the list must stay within the account's multi-instance search limit.
      */
     instances_allowed?: Array<string>;
 
@@ -667,7 +693,7 @@ export namespace NamespaceReadResponse {
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
       /**
-       * Disable chat completions endpoint for this public endpoint
+       * Disable chat completions endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -676,7 +702,7 @@ export namespace NamespaceReadResponse {
       description?: string;
 
       /**
-       * Disable MCP endpoint for this public endpoint
+       * Disable MCP endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -691,7 +717,7 @@ export namespace NamespaceReadResponse {
 
     export interface SearchEndpoint {
       /**
-       * Disable search endpoint for this public endpoint
+       * Disable search endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -722,7 +748,29 @@ export namespace NamespaceSearchResponse {
 
     item?: Chunk.Item;
 
+    /**
+     * Audio/video transcript chunks only: end, in milliseconds from the start of the
+     * media (whole seconds), of the last transcript section the matched chunk covers.
+     * Describes the matched chunk before any context expansion, not the expanded
+     * `text`.
+     */
+    media_end_ms?: number;
+
+    /**
+     * Audio/video transcript chunks only: start, in milliseconds from the start of the
+     * media (whole seconds), of the transcript section the matched chunk begins in.
+     * Describes the matched chunk before any context expansion, not the expanded
+     * `text`.
+     */
+    media_start_ms?: number;
+
     scoring_details?: Chunk.ScoringDetails;
+
+    /**
+     * Audio/video transcript chunks only: type of the source media file. Omitted for
+     * all other chunks.
+     */
+    source_media_type?: 'audio' | 'video';
   }
 
   export namespace Chunk {
@@ -805,8 +853,8 @@ export namespace NamespaceCreateParams {
 
     /**
      * Instance IDs exposed through the namespace public endpoint. Empty means nothing
-     * is searchable. Every ID must be an existing instance in this namespace, and the
-     * list cannot exceed the account's multi-instance search limit.
+     * is searchable. Every ID must reference an existing instance in this namespace,
+     * and the list must stay within the account's multi-instance search limit.
      */
     instances_allowed?: Array<string>;
 
@@ -820,7 +868,7 @@ export namespace NamespaceCreateParams {
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
       /**
-       * Disable chat completions endpoint for this public endpoint
+       * Disable chat completions endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -829,7 +877,7 @@ export namespace NamespaceCreateParams {
       description?: string;
 
       /**
-       * Disable MCP endpoint for this public endpoint
+       * Disable MCP endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -844,7 +892,7 @@ export namespace NamespaceCreateParams {
 
     export interface SearchEndpoint {
       /**
-       * Disable search endpoint for this public endpoint
+       * Disable search endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -895,8 +943,8 @@ export namespace NamespaceUpdateParams {
 
     /**
      * Instance IDs exposed through the namespace public endpoint. Empty means nothing
-     * is searchable. Every ID must be an existing instance in this namespace, and the
-     * list cannot exceed the account's multi-instance search limit.
+     * is searchable. Every ID must reference an existing instance in this namespace,
+     * and the list must stay within the account's multi-instance search limit.
      */
     instances_allowed?: Array<string>;
 
@@ -910,7 +958,7 @@ export namespace NamespaceUpdateParams {
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
       /**
-       * Disable chat completions endpoint for this public endpoint
+       * Disable chat completions endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -919,7 +967,7 @@ export namespace NamespaceUpdateParams {
       description?: string;
 
       /**
-       * Disable MCP endpoint for this public endpoint
+       * Disable MCP endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -934,7 +982,7 @@ export namespace NamespaceUpdateParams {
 
     export interface SearchEndpoint {
       /**
-       * Disable search endpoint for this public endpoint
+       * Disable search endpoint for this public endpoint.
        */
       disabled?: boolean;
     }
@@ -996,9 +1044,9 @@ export namespace NamespaceChatCompletionsParams {
     cache?: AISearchOptions.Cache;
 
     /**
-     * Metadata added to AI Gateway logs for requests triggered by this operation.
-     * Accepts up to 2 string, number, or boolean entries. Keys 'ai-search', 'task',
-     * 'origin', and keys beginning with 'cf.' are reserved.
+     * Metadata added to AI Gateway logs for requests this operation triggers. Accepts
+     * up to 2 string, number, or boolean entries. Reserved keys: 'ai-search', 'task',
+     * 'origin', and any key beginning with 'cf.'.
      */
     custom_metadata?: { [key: string]: string | number | boolean };
 
@@ -1052,15 +1100,25 @@ export namespace NamespaceChatCompletionsParams {
       fusion_method?: 'max' | 'rrf';
 
       /**
-       * Controls which documents are candidates for BM25 scoring. 'and' restricts
+       * Controls which documents become candidates for BM25 scoring. 'and' restricts
        * candidates to documents containing all query terms; 'or' includes any document
-       * containing at least one term, ranked by BM25 relevance. When omitted, falls back
-       * to the instance-level retrieval_options.keyword_match_mode, then to 'and'.
+       * containing at least one term and ranks results according to BM25 relevance. When
+       * omitted, falls back to the instance-level retrieval_options.keyword_match_mode,
+       * then to 'and'.
        */
       keyword_match_mode?: 'and' | 'or';
 
+      /**
+       * Minimum score a chunk must reach to be returned. When omitted, each instance's
+       * chunks are filtered by that instance's score_threshold, capped at the lower of
+       * the first instance's score_threshold and 0.4.
+       */
       match_threshold?: number;
 
+      /**
+       * Maximum number of merged results to return. When omitted, defaults to the first
+       * instance's max_num_results, then 10.
+       */
       max_num_results?: number;
 
       retrieval_type?: 'vector' | 'keyword' | 'hybrid';
@@ -1176,9 +1234,9 @@ export namespace NamespaceSearchParams {
     cache?: AISearchOptions.Cache;
 
     /**
-     * Metadata added to AI Gateway logs for requests triggered by this operation.
-     * Accepts up to 2 string, number, or boolean entries. Keys 'ai-search', 'task',
-     * 'origin', and keys beginning with 'cf.' are reserved.
+     * Metadata added to AI Gateway logs for requests this operation triggers. Accepts
+     * up to 2 string, number, or boolean entries. Reserved keys: 'ai-search', 'task',
+     * 'origin', and any key beginning with 'cf.'.
      */
     custom_metadata?: { [key: string]: string | number | boolean };
 
@@ -1232,15 +1290,24 @@ export namespace NamespaceSearchParams {
       fusion_method?: 'max' | 'rrf';
 
       /**
-       * Controls which documents are candidates for BM25 scoring. 'and' restricts
+       * Controls which documents become candidates for BM25 scoring. 'and' restricts
        * candidates to documents containing all query terms; 'or' includes any document
-       * containing at least one term, ranked by BM25 relevance. When omitted, falls back
-       * to the instance-level retrieval_options.keyword_match_mode, then to 'and'.
+       * containing at least one term and ranks results according to BM25 relevance. When
+       * omitted, falls back to the instance-level retrieval_options.keyword_match_mode,
+       * then to 'and'.
        */
       keyword_match_mode?: 'and' | 'or';
 
+      /**
+       * Minimum score a chunk must reach to be returned. When omitted, each instance's
+       * chunks are filtered by that instance's score_threshold, capped at 0.4.
+       */
       match_threshold?: number;
 
+      /**
+       * Maximum number of merged results to return. When omitted, defaults to the sum of
+       * the searched instances' max_num_results (each falling back to 10), up to 50.
+       */
       max_num_results?: number;
 
       retrieval_type?: 'vector' | 'keyword' | 'hybrid';
@@ -1348,6 +1415,7 @@ export declare namespace Namespaces {
     type InstanceListResponse as InstanceListResponse,
     type InstanceDeleteResponse as InstanceDeleteResponse,
     type InstanceChatCompletionsResponse as InstanceChatCompletionsResponse,
+    type InstanceMoveResponse as InstanceMoveResponse,
     type InstanceReadResponse as InstanceReadResponse,
     type InstanceSearchResponse as InstanceSearchResponse,
     type InstanceStatsResponse as InstanceStatsResponse,
@@ -1357,6 +1425,7 @@ export declare namespace Namespaces {
     type InstanceListParams as InstanceListParams,
     type InstanceDeleteParams as InstanceDeleteParams,
     type InstanceChatCompletionsParams as InstanceChatCompletionsParams,
+    type InstanceMoveParams as InstanceMoveParams,
     type InstanceReadParams as InstanceReadParams,
     type InstanceSearchParams as InstanceSearchParams,
     type InstanceStatsParams as InstanceStatsParams,

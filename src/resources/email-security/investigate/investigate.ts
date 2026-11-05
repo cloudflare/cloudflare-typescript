@@ -255,7 +255,7 @@ export interface InvestigateListResponse {
 
   to_name?: Array<string> | null;
 
-  validation?: InvestigateListResponse.Validation | null;
+  validation?: InvestigateListResponse.EmailSecurityValidation | unknown;
 
   x_originating_ip?: string | null;
 }
@@ -387,7 +387,7 @@ export namespace InvestigateListResponse {
     value?: string | null;
   }
 
-  export interface Validation {
+  export interface EmailSecurityValidation {
     comment?: string | null;
 
     dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
@@ -521,7 +521,7 @@ export interface InvestigateGetResponse {
 
   to_name?: Array<string> | null;
 
-  validation?: InvestigateGetResponse.Validation | null;
+  validation?: InvestigateGetResponse.EmailSecurityValidation | unknown;
 
   x_originating_ip?: string | null;
 }
@@ -653,7 +653,7 @@ export namespace InvestigateGetResponse {
     value?: string | null;
   }
 
-  export interface Validation {
+  export interface EmailSecurityValidation {
     comment?: string | null;
 
     dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;

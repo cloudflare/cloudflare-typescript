@@ -318,6 +318,15 @@ export namespace PredefinedListResponse {
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+
+    /**
+     * Validators this entry references, by id, at most 10. An empty list means the
+     * entry references none.
+     *
+     * Returned by the entry endpoints. Not returned on entries embedded in other
+     * responses, such as profiles.
+     */
+    validator_ids?: Array<string>;
   }
 
   export interface UnionMember1 {
@@ -497,7 +506,7 @@ export namespace PredefinedListResponse {
 
     updated_at: string;
 
-    word_list: unknown;
+    word_list: Array<string>;
 
     profile_id?: string | null;
 
@@ -545,6 +554,15 @@ export namespace PredefinedGetResponse {
     profiles?: Array<UnionMember0.Profile>;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+
+    /**
+     * Validators this entry references, by id, at most 10. An empty list means the
+     * entry references none.
+     *
+     * Returned by the entry endpoints. Not returned on entries embedded in other
+     * responses, such as profiles.
+     */
+    validator_ids?: Array<string>;
   }
 
   export namespace UnionMember0 {
@@ -798,7 +816,7 @@ export namespace PredefinedGetResponse {
 
     updated_at: string;
 
-    word_list: unknown;
+    word_list: Array<string>;
 
     profile_id?: string | null;
 

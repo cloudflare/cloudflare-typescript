@@ -20,7 +20,7 @@ const partialClient = createClient({
 
 const runTests = (client: PartialCloudflare<{ organizations: BaseOrganizations }>) => {
   test('create: only required params', async () => {
-    const responsePromise = client.organizations.create({ name: 'name' });
+    const responsePromise = client.organizations.create({ name: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -32,7 +32,7 @@ const runTests = (client: PartialCloudflare<{ organizations: BaseOrganizations }
 
   test('create: required and optional params', async () => {
     const response = await client.organizations.create({
-      name: 'name',
+      name: 'x',
       parent: { id: 'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8' },
       profile: {
         business_address: 'business_address',
@@ -44,8 +44,8 @@ const runTests = (client: PartialCloudflare<{ organizations: BaseOrganizations }
     });
   });
 
-  test('update: only required params', async () => {
-    const responsePromise = client.organizations.update('a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8', { name: 'name' });
+  test('update', async () => {
+    const responsePromise = client.organizations.update('a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,20 +53,6 @@ const runTests = (client: PartialCloudflare<{ organizations: BaseOrganizations }
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('update: required and optional params', async () => {
-    const response = await client.organizations.update('a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8', {
-      name: 'name',
-      parent: { id: 'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8' },
-      profile: {
-        business_address: 'business_address',
-        business_email: 'business_email',
-        business_name: 'business_name',
-        business_phone: 'business_phone',
-        external_metadata: 'external_metadata',
-      },
-    });
   });
 
   test('list', async () => {
@@ -91,11 +77,14 @@ const runTests = (client: PartialCloudflare<{ organizations: BaseOrganizations }
             organization: 'organization',
             user: 'user',
           },
+          direction: 'asc',
+          member: { email: 'email' },
           name: {
             contains: 'contains',
             endsWith: 'endsWith',
             startsWith: 'startsWith',
           },
+          order_by: 'name',
           page_size: 0,
           page_token: 'page_token',
           parent: { id: 'a7b9c3d2e8f4a1b5c6d0e9f2a3b7c4d8' },

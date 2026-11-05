@@ -31,7 +31,7 @@ import {
   Status,
 } from './members';
 import * as PayBadDebtAPI from './pay-bad-debt';
-import { BasePayBadDebt, PayBadDebt, PayBadDebtCreateParams, PayBadDebtCreateResponse } from './pay-bad-debt';
+import { BasePayBadDebt, PayBadDebt } from './pay-bad-debt';
 import * as PayInvoiceAPI from './pay-invoice';
 import { BasePayInvoice, PayInvoice, PayInvoiceCreateParams, PayInvoiceCreateResponse } from './pay-invoice';
 import * as PaymentMethodsAPI from './payment-methods';
@@ -102,7 +102,8 @@ export class BaseAccounts extends APIResource {
    * `standalone: true` and omit `unit`. Providing both fields is invalid. If you
    * omit both fields, Cloudflare can determine the destination only when the User is
    * an administrator of exactly one Organization. Cloudflare creates the Account in
-   * that Organization; otherwise, the request returns an error.
+   * that Organization; otherwise, the request returns an error. Account names are
+   * limited to 65 UTF-8 bytes.
    *
    * @example
    * ```ts
@@ -126,7 +127,7 @@ export class BaseAccounts extends APIResource {
   }
 
   /**
-   * Update an existing account.
+   * Update an existing account. Account names are limited to 65 UTF-8 bytes.
    *
    * @example
    * ```ts
@@ -238,6 +239,11 @@ export interface Account {
   created_on?: string;
 
   /**
+   * Legacy account flags.
+   */
+  legacy_flags?: Account.LegacyFlags;
+
+  /**
    * Parent container details
    */
   managed_by?: Account.ManagedBy;
@@ -249,6 +255,41 @@ export interface Account {
 }
 
 export namespace Account {
+  /**
+   * Legacy account flags.
+   */
+  export interface LegacyFlags {
+    /**
+     * Enterprise zone quota for standard and enterprise accounts. Accounts without a
+     * quota have a maximum of 0.
+     */
+    enterprise_zone_quota?: LegacyFlags.EnterpriseZoneQuota;
+  }
+
+  export namespace LegacyFlags {
+    /**
+     * Enterprise zone quota for standard and enterprise accounts. Accounts without a
+     * quota have a maximum of 0.
+     */
+    export interface EnterpriseZoneQuota {
+      /**
+       * Number of additional Enterprise zones available. Returns 0 if the quota is not
+       * allocated or is exhausted.
+       */
+      available?: number;
+
+      /**
+       * Current number of Enterprise zones.
+       */
+      current?: number;
+
+      /**
+       * Maximum number of Enterprise zones allowed.
+       */
+      maximum?: number;
+    }
+  }
+
   /**
    * Parent container details
    */
@@ -262,6 +303,16 @@ export namespace Account {
      * Name of the parent Organization, if one exists
      */
     parent_org_name?: string;
+
+    /**
+     * ID of the root Organization, if one exists
+     */
+    root_org_id?: string;
+
+    /**
+     * Indicates whether the parent Organization hierarchy should be displayed
+     */
+    should_display_parent_orgs?: boolean;
   }
 
   /**
@@ -290,7 +341,7 @@ export interface AccountDeleteResponse {
 
 export interface AccountCreateParams {
   /**
-   * Body param: Account name
+   * Body param: Account name, limited to 65 UTF-8 bytes.
    */
   name: string;
 
@@ -301,7 +352,7 @@ export interface AccountCreateParams {
   standalone?: true;
 
   /**
-   * Body param
+   * @deprecated The 'type' field should no longer be set through the API.
    */
   type?: 'standard' | 'enterprise';
 
@@ -347,7 +398,7 @@ export interface AccountUpdateParams {
   id: string;
 
   /**
-   * Body param: Account name
+   * Body param: Account name, limited to 65 UTF-8 bytes.
    */
   name: string;
 
@@ -538,12 +589,7 @@ export declare namespace Accounts {
     type PayInvoiceCreateParams as PayInvoiceCreateParams,
   };
 
-  export {
-    PayBadDebt as PayBadDebt,
-    BasePayBadDebt as BasePayBadDebt,
-    type PayBadDebtCreateResponse as PayBadDebtCreateResponse,
-    type PayBadDebtCreateParams as PayBadDebtCreateParams,
-  };
+  export { PayBadDebt as PayBadDebt, BasePayBadDebt as BasePayBadDebt };
 
   export { Receipts as Receipts, BaseReceipts as BaseReceipts, type ReceiptPDFParams as ReceiptPDFParams };
 

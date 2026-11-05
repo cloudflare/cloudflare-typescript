@@ -13,7 +13,9 @@ export class BaseRelate extends APIResource {
   ] as const);
 
   /**
-   * Removes a reference link between related threat events in Cloudforce One.
+   * Legacy. Removes references created with
+   * `threat-intel events legacy references create`. Use
+   * `threat-intel events relationships` for new event links.
    *
    * @example
    * ```ts

@@ -27,12 +27,7 @@ export {
   type MemberDeleteParams,
   type MemberGetParams,
 } from './members';
-export {
-  PayBadDebt,
-  BasePayBadDebt,
-  type PayBadDebtCreateResponse,
-  type PayBadDebtCreateParams,
-} from './pay-bad-debt';
+export { PayBadDebt, BasePayBadDebt } from './pay-bad-debt';
 export {
   PayInvoice,
   BasePayInvoice,

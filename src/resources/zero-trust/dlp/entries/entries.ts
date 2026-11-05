@@ -213,6 +213,15 @@ export interface EntryCreateResponse {
    * @deprecated
    */
   profile_id?: string | null;
+
+  /**
+   * Validators this entry references, by id, at most 10. An empty list means the
+   * entry references none.
+   *
+   * Returned by the entry endpoints. Not returned on entries embedded in other
+   * responses, such as profiles.
+   */
+  validator_ids?: Array<string>;
 }
 
 export type EntryUpdateResponse =
@@ -249,6 +258,15 @@ export namespace EntryUpdateResponse {
      * @deprecated
      */
     profile_id?: string | null;
+
+    /**
+     * Validators this entry references, by id, at most 10. An empty list means the
+     * entry references none.
+     *
+     * Returned by the entry endpoints. Not returned on entries embedded in other
+     * responses, such as profiles.
+     */
+    validator_ids?: Array<string>;
   }
 
   export interface CustomPromptTopicEntry {
@@ -418,7 +436,7 @@ export namespace EntryUpdateResponse {
 
     updated_at: string;
 
-    word_list: unknown;
+    word_list: Array<string>;
 
     profile_id?: string | null;
   }
@@ -460,6 +478,15 @@ export namespace EntryListResponse {
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+
+    /**
+     * Validators this entry references, by id, at most 10. An empty list means the
+     * entry references none.
+     *
+     * Returned by the entry endpoints. Not returned on entries embedded in other
+     * responses, such as profiles.
+     */
+    validator_ids?: Array<string>;
   }
 
   export interface UnionMember1 {
@@ -639,7 +666,7 @@ export namespace EntryListResponse {
 
     updated_at: string;
 
-    word_list: unknown;
+    word_list: Array<string>;
 
     profile_id?: string | null;
 
@@ -687,6 +714,15 @@ export namespace EntryGetResponse {
     profiles?: Array<UnionMember0.Profile>;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+
+    /**
+     * Validators this entry references, by id, at most 10. An empty list means the
+     * entry references none.
+     *
+     * Returned by the entry endpoints. Not returned on entries embedded in other
+     * responses, such as profiles.
+     */
+    validator_ids?: Array<string>;
   }
 
   export namespace UnionMember0 {
@@ -940,7 +976,7 @@ export namespace EntryGetResponse {
 
     updated_at: string;
 
-    word_list: unknown;
+    word_list: Array<string>;
 
     profile_id?: string | null;
 
@@ -991,6 +1027,11 @@ export interface EntryCreateParams {
    * Body param
    */
   profile_id?: string;
+
+  /**
+   * Body param: Validators the new entry should reference, by id, at most 10.
+   */
+  validator_ids?: Array<string>;
 }
 
 export type EntryUpdateParams =
@@ -1029,6 +1070,16 @@ export declare namespace EntryUpdateParams {
      * Body param
      */
     enabled?: boolean;
+
+    /**
+     * Body param: Validators this entry should reference, by id, at most 10. Replaces
+     * the current set.
+     *
+     * Optional, unlike the rest of this body: omitting it leaves the current
+     * attachments alone, so a client that predates validators cannot detach them by
+     * accident. Send `[]` to detach.
+     */
+    validator_ids?: Array<string>;
   }
 
   export interface Variant1 {

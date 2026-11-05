@@ -76,31 +76,147 @@ export class URLNormalization extends BaseURLNormalization {}
 /**
  * A result.
  */
-export interface URLNormalizationUpdateResponse {
-  /**
-   * The scope of the URL normalization.
-   */
-  scope: 'incoming' | 'both' | 'none';
+export type URLNormalizationUpdateResponse =
+  | URLNormalizationUpdateResponse.UnionMember0
+  | null
+  | URLNormalizationUpdateResponse.UnionMember1
+  | URLNormalizationUpdateResponse.UnionMember2
+  | URLNormalizationUpdateResponse.UnionMember3
+  | URLNormalizationUpdateResponse.UnionMember4;
 
-  /**
-   * The type of URL normalization performed by Cloudflare.
-   */
-  type: 'cloudflare' | 'rfc3986';
+export namespace URLNormalizationUpdateResponse {
+  export interface UnionMember0 {
+    /**
+     * The scope of the URL normalization.
+     */
+    scope?: 'incoming' | 'both' | 'none';
+
+    /**
+     * The type of URL normalization performed by Cloudflare.
+     */
+    type?: 'cloudflare' | 'rfc3986';
+  }
+
+  export interface UnionMember1 {
+    /**
+     * The scope of the URL normalization.
+     */
+    scope?: 'incoming' | 'both' | 'none';
+
+    /**
+     * The type of URL normalization performed by Cloudflare.
+     */
+    type?: 'cloudflare' | 'rfc3986';
+  }
+
+  export interface UnionMember2 {
+    /**
+     * The scope of the URL normalization.
+     */
+    scope?: 'incoming' | 'both' | 'none';
+
+    /**
+     * The type of URL normalization performed by Cloudflare.
+     */
+    type?: 'cloudflare' | 'rfc3986';
+  }
+
+  export interface UnionMember3 {
+    /**
+     * The scope of the URL normalization.
+     */
+    scope?: 'incoming' | 'both' | 'none';
+
+    /**
+     * The type of URL normalization performed by Cloudflare.
+     */
+    type?: 'cloudflare' | 'rfc3986';
+  }
+
+  export interface UnionMember4 {
+    /**
+     * The scope of the URL normalization.
+     */
+    scope?: 'incoming' | 'both' | 'none';
+
+    /**
+     * The type of URL normalization performed by Cloudflare.
+     */
+    type?: 'cloudflare' | 'rfc3986';
+  }
 }
 
 /**
  * A result.
  */
-export interface URLNormalizationGetResponse {
-  /**
-   * The scope of the URL normalization.
-   */
-  scope: 'incoming' | 'both' | 'none';
+export type URLNormalizationGetResponse =
+  | URLNormalizationGetResponse.UnionMember0
+  | null
+  | URLNormalizationGetResponse.UnionMember1
+  | URLNormalizationGetResponse.UnionMember2
+  | URLNormalizationGetResponse.UnionMember3
+  | URLNormalizationGetResponse.UnionMember4;
 
-  /**
-   * The type of URL normalization performed by Cloudflare.
-   */
-  type: 'cloudflare' | 'rfc3986';
+export namespace URLNormalizationGetResponse {
+  export interface UnionMember0 {
+    /**
+     * The scope of the URL normalization.
+     */
+    scope?: 'incoming' | 'both' | 'none';
+
+    /**
+     * The type of URL normalization performed by Cloudflare.
+     */
+    type?: 'cloudflare' | 'rfc3986';
+  }
+
+  export interface UnionMember1 {
+    /**
+     * The scope of the URL normalization.
+     */
+    scope?: 'incoming' | 'both' | 'none';
+
+    /**
+     * The type of URL normalization performed by Cloudflare.
+     */
+    type?: 'cloudflare' | 'rfc3986';
+  }
+
+  export interface UnionMember2 {
+    /**
+     * The scope of the URL normalization.
+     */
+    scope?: 'incoming' | 'both' | 'none';
+
+    /**
+     * The type of URL normalization performed by Cloudflare.
+     */
+    type?: 'cloudflare' | 'rfc3986';
+  }
+
+  export interface UnionMember3 {
+    /**
+     * The scope of the URL normalization.
+     */
+    scope?: 'incoming' | 'both' | 'none';
+
+    /**
+     * The type of URL normalization performed by Cloudflare.
+     */
+    type?: 'cloudflare' | 'rfc3986';
+  }
+
+  export interface UnionMember4 {
+    /**
+     * The scope of the URL normalization.
+     */
+    scope?: 'incoming' | 'both' | 'none';
+
+    /**
+     * The type of URL normalization performed by Cloudflare.
+     */
+    type?: 'cloudflare' | 'rfc3986';
+  }
 }
 
 export interface URLNormalizationUpdateParams {

@@ -37,6 +37,7 @@ Methods:
 - <code title="get /accounts/{account_id}/workers/workers/{worker_id}/versions">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">list</a>(workerID, { ...params }) -> VersionsV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/workers/workers/{worker_id}/versions/{version_id}">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">delete</a>(versionID, { ...params }) -> VersionDeleteResponse</code>
 - <code title="get /accounts/{account_id}/workers/workers/{worker_id}/versions/{version_id}">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">get</a>(versionID, { ...params }) -> Version</code>
+- <code title="post /accounts/{account_id}/workers/workers/{worker_id}/versions/{version_id}/profile">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">profile</a>(versionID, { ...params }) -> Response</code>
 
 ## Routes
 

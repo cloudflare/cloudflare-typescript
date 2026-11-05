@@ -296,14 +296,91 @@ export namespace FindingListResponse {
     vendor: string;
 
     /**
+     * Whether this finding type applies to every current and future integration of the
+     * vendor.
+     */
+    applies_to_all_integrations?: boolean;
+
+    /**
+     * Asset class the finding type's policy evaluates.
+     */
+    asset_class?: string;
+
+    /**
+     * Canonical vendor enum value.
+     */
+    asset_vendor?:
+      | 'ANTHROPIC'
+      | 'AWS'
+      | 'BITBUCKET'
+      | 'BOX'
+      | 'CONFLUENCE'
+      | 'DROPBOX'
+      | 'GITHUB'
+      | 'GOOGLE_CLOUD_PLATFORM'
+      | 'GOOGLE_WORKSPACE'
+      | 'JIRA'
+      | 'MICROSOFT'
+      | 'OPENAI'
+      | 'SALESFORCE'
+      | 'SERVICENOW'
+      | 'SLACK'
+      | 'ZOOM';
+
+    /**
+     * Timestamp when the finding type was created.
+     */
+    created_at?: string;
+
+    /**
      * Detailed description of the finding.
      */
     description?: string | null;
 
     /**
+     * Rego expression backing this finding type. For custom finding types, generated
+     * package and import declarations are omitted. System expressions are returned
+     * unchanged.
+     */
+    expression?: string;
+
+    /**
+     * Integrations this finding type applies to when applies_to_all_integrations is
+     * false.
+     */
+    integration_ids?: Array<string>;
+
+    /**
+     * Number of currently active finding instances across the account's integrations.
+     * Zero when none have been detected.
+     */
+    match_count?: number;
+
+    /**
+     * Whether the finding type is system-managed or customer-created.
+     */
+    origin?: 'system' | 'custom';
+
+    /**
+     * Whether evaluation of this finding type is suspended by an operator. Present
+     * only when true.
+     */
+    quarantined?: boolean;
+
+    /**
      * Remediation guide information for a finding.
      */
     remediation?: Finding.Remediation | null;
+
+    /**
+     * Timestamp when the finding type was last updated.
+     */
+    updated_at?: string;
+
+    /**
+     * Current version of the finding type. Incremented on each update.
+     */
+    version?: number;
   }
 
   export namespace Finding {
@@ -695,14 +772,91 @@ export namespace FindingGetResponse {
     vendor: string;
 
     /**
+     * Whether this finding type applies to every current and future integration of the
+     * vendor.
+     */
+    applies_to_all_integrations?: boolean;
+
+    /**
+     * Asset class the finding type's policy evaluates.
+     */
+    asset_class?: string;
+
+    /**
+     * Canonical vendor enum value.
+     */
+    asset_vendor?:
+      | 'ANTHROPIC'
+      | 'AWS'
+      | 'BITBUCKET'
+      | 'BOX'
+      | 'CONFLUENCE'
+      | 'DROPBOX'
+      | 'GITHUB'
+      | 'GOOGLE_CLOUD_PLATFORM'
+      | 'GOOGLE_WORKSPACE'
+      | 'JIRA'
+      | 'MICROSOFT'
+      | 'OPENAI'
+      | 'SALESFORCE'
+      | 'SERVICENOW'
+      | 'SLACK'
+      | 'ZOOM';
+
+    /**
+     * Timestamp when the finding type was created.
+     */
+    created_at?: string;
+
+    /**
      * Detailed description of the finding.
      */
     description?: string | null;
 
     /**
+     * Rego expression backing this finding type. For custom finding types, generated
+     * package and import declarations are omitted. System expressions are returned
+     * unchanged.
+     */
+    expression?: string;
+
+    /**
+     * Integrations this finding type applies to when applies_to_all_integrations is
+     * false.
+     */
+    integration_ids?: Array<string>;
+
+    /**
+     * Number of currently active finding instances across the account's integrations.
+     * Zero when none have been detected.
+     */
+    match_count?: number;
+
+    /**
+     * Whether the finding type is system-managed or customer-created.
+     */
+    origin?: 'system' | 'custom';
+
+    /**
+     * Whether evaluation of this finding type is suspended by an operator. Present
+     * only when true.
+     */
+    quarantined?: boolean;
+
+    /**
      * Remediation guide information for a finding.
      */
     remediation?: Finding.Remediation | null;
+
+    /**
+     * Timestamp when the finding type was last updated.
+     */
+    updated_at?: string;
+
+    /**
+     * Current version of the finding type. Incremented on each update.
+     */
+    version?: number;
   }
 
   export namespace Finding {
@@ -1048,14 +1202,91 @@ export namespace FindingIgnoreResponse {
     vendor: string;
 
     /**
+     * Whether this finding type applies to every current and future integration of the
+     * vendor.
+     */
+    applies_to_all_integrations?: boolean;
+
+    /**
+     * Asset class the finding type's policy evaluates.
+     */
+    asset_class?: string;
+
+    /**
+     * Canonical vendor enum value.
+     */
+    asset_vendor?:
+      | 'ANTHROPIC'
+      | 'AWS'
+      | 'BITBUCKET'
+      | 'BOX'
+      | 'CONFLUENCE'
+      | 'DROPBOX'
+      | 'GITHUB'
+      | 'GOOGLE_CLOUD_PLATFORM'
+      | 'GOOGLE_WORKSPACE'
+      | 'JIRA'
+      | 'MICROSOFT'
+      | 'OPENAI'
+      | 'SALESFORCE'
+      | 'SERVICENOW'
+      | 'SLACK'
+      | 'ZOOM';
+
+    /**
+     * Timestamp when the finding type was created.
+     */
+    created_at?: string;
+
+    /**
      * Detailed description of the finding.
      */
     description?: string | null;
 
     /**
+     * Rego expression backing this finding type. For custom finding types, generated
+     * package and import declarations are omitted. System expressions are returned
+     * unchanged.
+     */
+    expression?: string;
+
+    /**
+     * Integrations this finding type applies to when applies_to_all_integrations is
+     * false.
+     */
+    integration_ids?: Array<string>;
+
+    /**
+     * Number of currently active finding instances across the account's integrations.
+     * Zero when none have been detected.
+     */
+    match_count?: number;
+
+    /**
+     * Whether the finding type is system-managed or customer-created.
+     */
+    origin?: 'system' | 'custom';
+
+    /**
+     * Whether evaluation of this finding type is suspended by an operator. Present
+     * only when true.
+     */
+    quarantined?: boolean;
+
+    /**
      * Remediation guide information for a finding.
      */
     remediation?: Finding.Remediation | null;
+
+    /**
+     * Timestamp when the finding type was last updated.
+     */
+    updated_at?: string;
+
+    /**
+     * Current version of the finding type. Incremented on each update.
+     */
+    version?: number;
   }
 
   export namespace Finding {
@@ -1401,14 +1632,91 @@ export namespace FindingResetSeverityResponse {
     vendor: string;
 
     /**
+     * Whether this finding type applies to every current and future integration of the
+     * vendor.
+     */
+    applies_to_all_integrations?: boolean;
+
+    /**
+     * Asset class the finding type's policy evaluates.
+     */
+    asset_class?: string;
+
+    /**
+     * Canonical vendor enum value.
+     */
+    asset_vendor?:
+      | 'ANTHROPIC'
+      | 'AWS'
+      | 'BITBUCKET'
+      | 'BOX'
+      | 'CONFLUENCE'
+      | 'DROPBOX'
+      | 'GITHUB'
+      | 'GOOGLE_CLOUD_PLATFORM'
+      | 'GOOGLE_WORKSPACE'
+      | 'JIRA'
+      | 'MICROSOFT'
+      | 'OPENAI'
+      | 'SALESFORCE'
+      | 'SERVICENOW'
+      | 'SLACK'
+      | 'ZOOM';
+
+    /**
+     * Timestamp when the finding type was created.
+     */
+    created_at?: string;
+
+    /**
      * Detailed description of the finding.
      */
     description?: string | null;
 
     /**
+     * Rego expression backing this finding type. For custom finding types, generated
+     * package and import declarations are omitted. System expressions are returned
+     * unchanged.
+     */
+    expression?: string;
+
+    /**
+     * Integrations this finding type applies to when applies_to_all_integrations is
+     * false.
+     */
+    integration_ids?: Array<string>;
+
+    /**
+     * Number of currently active finding instances across the account's integrations.
+     * Zero when none have been detected.
+     */
+    match_count?: number;
+
+    /**
+     * Whether the finding type is system-managed or customer-created.
+     */
+    origin?: 'system' | 'custom';
+
+    /**
+     * Whether evaluation of this finding type is suspended by an operator. Present
+     * only when true.
+     */
+    quarantined?: boolean;
+
+    /**
      * Remediation guide information for a finding.
      */
     remediation?: Finding.Remediation | null;
+
+    /**
+     * Timestamp when the finding type was last updated.
+     */
+    updated_at?: string;
+
+    /**
+     * Current version of the finding type. Incremented on each update.
+     */
+    version?: number;
   }
 
   export namespace Finding {
@@ -1754,14 +2062,91 @@ export namespace FindingTuneSeverityResponse {
     vendor: string;
 
     /**
+     * Whether this finding type applies to every current and future integration of the
+     * vendor.
+     */
+    applies_to_all_integrations?: boolean;
+
+    /**
+     * Asset class the finding type's policy evaluates.
+     */
+    asset_class?: string;
+
+    /**
+     * Canonical vendor enum value.
+     */
+    asset_vendor?:
+      | 'ANTHROPIC'
+      | 'AWS'
+      | 'BITBUCKET'
+      | 'BOX'
+      | 'CONFLUENCE'
+      | 'DROPBOX'
+      | 'GITHUB'
+      | 'GOOGLE_CLOUD_PLATFORM'
+      | 'GOOGLE_WORKSPACE'
+      | 'JIRA'
+      | 'MICROSOFT'
+      | 'OPENAI'
+      | 'SALESFORCE'
+      | 'SERVICENOW'
+      | 'SLACK'
+      | 'ZOOM';
+
+    /**
+     * Timestamp when the finding type was created.
+     */
+    created_at?: string;
+
+    /**
      * Detailed description of the finding.
      */
     description?: string | null;
 
     /**
+     * Rego expression backing this finding type. For custom finding types, generated
+     * package and import declarations are omitted. System expressions are returned
+     * unchanged.
+     */
+    expression?: string;
+
+    /**
+     * Integrations this finding type applies to when applies_to_all_integrations is
+     * false.
+     */
+    integration_ids?: Array<string>;
+
+    /**
+     * Number of currently active finding instances across the account's integrations.
+     * Zero when none have been detected.
+     */
+    match_count?: number;
+
+    /**
+     * Whether the finding type is system-managed or customer-created.
+     */
+    origin?: 'system' | 'custom';
+
+    /**
+     * Whether evaluation of this finding type is suspended by an operator. Present
+     * only when true.
+     */
+    quarantined?: boolean;
+
+    /**
      * Remediation guide information for a finding.
      */
     remediation?: Finding.Remediation | null;
+
+    /**
+     * Timestamp when the finding type was last updated.
+     */
+    updated_at?: string;
+
+    /**
+     * Current version of the finding type. Incremented on each update.
+     */
+    version?: number;
   }
 
   export namespace Finding {
@@ -2107,14 +2492,91 @@ export namespace FindingUnignoreResponse {
     vendor: string;
 
     /**
+     * Whether this finding type applies to every current and future integration of the
+     * vendor.
+     */
+    applies_to_all_integrations?: boolean;
+
+    /**
+     * Asset class the finding type's policy evaluates.
+     */
+    asset_class?: string;
+
+    /**
+     * Canonical vendor enum value.
+     */
+    asset_vendor?:
+      | 'ANTHROPIC'
+      | 'AWS'
+      | 'BITBUCKET'
+      | 'BOX'
+      | 'CONFLUENCE'
+      | 'DROPBOX'
+      | 'GITHUB'
+      | 'GOOGLE_CLOUD_PLATFORM'
+      | 'GOOGLE_WORKSPACE'
+      | 'JIRA'
+      | 'MICROSOFT'
+      | 'OPENAI'
+      | 'SALESFORCE'
+      | 'SERVICENOW'
+      | 'SLACK'
+      | 'ZOOM';
+
+    /**
+     * Timestamp when the finding type was created.
+     */
+    created_at?: string;
+
+    /**
      * Detailed description of the finding.
      */
     description?: string | null;
 
     /**
+     * Rego expression backing this finding type. For custom finding types, generated
+     * package and import declarations are omitted. System expressions are returned
+     * unchanged.
+     */
+    expression?: string;
+
+    /**
+     * Integrations this finding type applies to when applies_to_all_integrations is
+     * false.
+     */
+    integration_ids?: Array<string>;
+
+    /**
+     * Number of currently active finding instances across the account's integrations.
+     * Zero when none have been detected.
+     */
+    match_count?: number;
+
+    /**
+     * Whether the finding type is system-managed or customer-created.
+     */
+    origin?: 'system' | 'custom';
+
+    /**
+     * Whether evaluation of this finding type is suspended by an operator. Present
+     * only when true.
+     */
+    quarantined?: boolean;
+
+    /**
      * Remediation guide information for a finding.
      */
     remediation?: Finding.Remediation | null;
+
+    /**
+     * Timestamp when the finding type was last updated.
+     */
+    updated_at?: string;
+
+    /**
+     * Current version of the finding type. Incremented on each update.
+     */
+    version?: number;
   }
 
   export namespace Finding {
@@ -2515,7 +2977,7 @@ export interface FindingExportParams {
   /**
    * Body param: Filter by finding's category product.
    */
-  product?: 'SaaS' | 'Cloud' | null;
+  product?: 'SaaS' | 'Cloud';
 
   /**
    * Body param: A search term.

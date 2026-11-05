@@ -9,7 +9,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">CloudflareTunnel</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
 - <code><a href="./src/resources/shared.ts">Identifier</a></code>
-- <code><a href="./src/resources/shared.ts">LoadBalancerPreview</a></code>
 - <code><a href="./src/resources/shared.ts">Member</a></code>
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Permission</a></code>
@@ -183,7 +182,7 @@ Methods:
 
 # [MagicNetworkMonitoring](src/resources/magic-network-monitoring/api.md)
 
-# [MagicCloudNetworking](src/resources/magic-cloud-networking/api.md)
+# [Monetization](src/resources/monetization/api.md)
 
 # [NetworkInterconnects](src/resources/network-interconnects/api.md)
 
@@ -306,6 +305,8 @@ Methods:
 # [SecretsStore](src/resources/secrets-store/api.md)
 
 # [Pipelines](src/resources/pipelines/api.md)
+
+# [K2](src/resources/k2/api.md)
 
 # [SchemaValidation](src/resources/schema-validation/api.md)
 

@@ -60,7 +60,11 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { instances: BaseInstanc
       index_method: { keyword: true, vector: true },
       indexing_options: { keyword_tokenizer: 'porter', use_ocr: true },
       max_num_results: 1,
-      metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
+      metadata: {
+        created_from_aisearch_wizard: true,
+        created_from_emdash_plugin: { type: 'native', version: 'version' },
+        worker_domain: 'worker_domain',
+      },
       public_endpoint_params: {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
@@ -145,7 +149,11 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { instances: BaseInstanc
       index_method: { keyword: true, vector: true },
       indexing_options: { keyword_tokenizer: 'porter', use_ocr: true },
       max_num_results: 1,
-      metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
+      metadata: {
+        created_from_aisearch_wizard: true,
+        created_from_emdash_plugin: { type: 'native', version: 'version' },
+        worker_domain: 'worker_domain',
+      },
       paused: true,
       public_endpoint_params: {
         authorized_hosts: ['string'],

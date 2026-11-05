@@ -167,6 +167,15 @@ export namespace PredefinedProfile {
      * @deprecated
      */
     profile_id?: string | null;
+
+    /**
+     * Validators this entry references, by id, at most 10. An empty list means the
+     * entry references none.
+     *
+     * Returned by the entry endpoints. Not returned on entries embedded in other
+     * responses, such as profiles.
+     */
+    validator_ids?: Array<string>;
   }
 
   export interface CustomPromptTopicEntry {
@@ -336,7 +345,7 @@ export namespace PredefinedProfile {
 
     updated_at: string;
 
-    word_list: unknown;
+    word_list: Array<string>;
 
     profile_id?: string | null;
   }

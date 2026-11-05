@@ -697,9 +697,19 @@ export interface StreamListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
+   * Query param: Sort direction.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
    * Query param: Filters streams by name (case-insensitive substring).
    */
   name?: string;
+
+  /**
+   * Query param: Sorts streams by this field. Defaults to `created_at`.
+   */
+  order_by?: 'name' | 'created_at';
 
   /**
    * Query param: Specifies the public ID of the pipeline.

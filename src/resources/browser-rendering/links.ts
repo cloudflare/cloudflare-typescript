@@ -23,10 +23,10 @@ export class BaseLinks extends APIResource {
    * ```
    */
   create(params: LinkCreateParams, options?: RequestOptions): APIPromise<LinkCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id, browser, cacheTTL, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/browser-rendering/links`, {
-        query: { cacheTTL },
+        query: { browser, cacheTTL },
         body,
         ...options,
       }) as APIPromise<{ result: LinkCreateResponse }>
@@ -50,6 +50,11 @@ export declare namespace LinkCreateParams {
      * Body param
      */
     url: string;
+
+    /**
+     * Query param: Rendering backend. Set to `kitesurf` to use Kitesurf (beta).
+     */
+    browser?: 'kitesurf';
 
     /**
      * Query param: Cache TTL default is 5s. Set to 0 to disable.
@@ -328,6 +333,11 @@ export declare namespace LinkCreateParams {
      * Body param
      */
     html: string;
+
+    /**
+     * Query param: Rendering backend. Set to `kitesurf` to use Kitesurf (beta).
+     */
+    browser?: 'kitesurf';
 
     /**
      * Query param: Cache TTL default is 5s. Set to 0 to disable.

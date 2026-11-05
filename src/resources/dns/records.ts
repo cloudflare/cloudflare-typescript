@@ -11028,10 +11028,11 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
   search?: string;
 
   /**
-   * Query param: Filters to records at or below the given NS delegation name,
-   * excluding the NS records that form the delegation itself. The value must be a
-   * subdomain of the zone; the zone apex is not accepted. Requires
-   * `include_shadow_metadata=true`. See
+   * Query param: Filters the response to records at or below the specified NS
+   * delegation name. NS, DS, and NSEC records at the delegation name are excluded
+   * because they are not shadowed by that delegation. Those record types are
+   * included only when they exist below the delegation. The value must be a non-apex
+   * subdomain of the zone. Requires `include_shadow_metadata=true`. See
    * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
    */
   shadowed_by_name?: string;

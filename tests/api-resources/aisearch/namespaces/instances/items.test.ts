@@ -32,7 +32,7 @@ const runTests = (
   test('list: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.items.list('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +46,7 @@ const runTests = (
   test('list: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.items.list('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       item_id: 'item_id',
       key: 'key',
       metadata_filter: 'metadata_filter',
@@ -62,7 +62,7 @@ const runTests = (
   test('delete: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.items.delete('item_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -77,7 +77,7 @@ const runTests = (
   test('delete: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.items.delete('item_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
     });
   });
@@ -85,7 +85,7 @@ const runTests = (
   test('chunks: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.items.chunks('item_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -100,7 +100,7 @@ const runTests = (
   test('chunks: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.items.chunks('item_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
       limit: 1,
       offset: 0,
@@ -110,7 +110,7 @@ const runTests = (
   test('createOrUpdate: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.items.createOrUpdate('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       key: 'key',
       next_action: 'INDEX',
     });
@@ -126,7 +126,7 @@ const runTests = (
   test('createOrUpdate: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.items.createOrUpdate('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       key: 'key',
       next_action: 'INDEX',
       wait_for_completion: true,
@@ -137,7 +137,7 @@ const runTests = (
   test.skip('download: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.items.download('item_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
     });
   });
@@ -145,7 +145,7 @@ const runTests = (
   test('get: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.items.get('item_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -160,7 +160,7 @@ const runTests = (
   test('get: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.items.get('item_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
     });
   });
@@ -168,7 +168,7 @@ const runTests = (
   test('logs: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.items.logs('item_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -183,7 +183,7 @@ const runTests = (
   test('logs: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.items.logs('item_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
       cursor: 'cursor',
       limit: 1,
@@ -193,7 +193,7 @@ const runTests = (
   test('sync: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.items.sync('item_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
       next_action: 'INDEX',
     });
@@ -209,7 +209,7 @@ const runTests = (
   test('sync: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.items.sync('item_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
       next_action: 'INDEX',
       wait_for_completion: true,
@@ -219,7 +219,7 @@ const runTests = (
   test('upload: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.items.upload('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       file: { file: await toFile(Buffer.from('Example data'), 'README.md') },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -234,7 +234,7 @@ const runTests = (
   test('upload: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.items.upload('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       file: {
         file: await toFile(Buffer.from('Example data'), 'README.md'),
         metadata: 'metadata',

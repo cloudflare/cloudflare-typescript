@@ -3,10 +3,17 @@
 export {
   FindingTypes,
   BaseFindingTypes,
+  type FindingTypeCreateResponse,
+  type FindingTypeUpdateResponse,
   type FindingTypeListResponse,
   type FindingTypeGetResponse,
+  type FindingTypeValidateResponse,
+  type FindingTypeCreateParams,
+  type FindingTypeUpdateParams,
   type FindingTypeListParams,
+  type FindingTypeDeleteParams,
   type FindingTypeGetParams,
+  type FindingTypeValidateParams,
   type FindingTypeListResponsesV4PagePaginationArray,
 } from './finding-types';
 export {
