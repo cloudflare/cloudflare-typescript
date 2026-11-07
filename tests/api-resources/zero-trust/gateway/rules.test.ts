@@ -57,7 +57,6 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { rules: Bas
       rule_settings: {
         add_headers: { 'My-Next-Header': ['foo', 'bar'], 'X-Custom-Header-Name': ['somecustomvalue'] },
         allow_child_bypass: false,
-        audit_ssh: { command_logging: false },
         biso_admin_controls: {
           copy: 'remote_only',
           dcp: true,
@@ -103,6 +102,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { rules: Bas
           ipv6: '2001:DB8::/64',
         },
         forensic_copy: { enabled: true },
+        forward: { worker_id: '0123456789abcdef0123456789abcdef' },
         ignore_cname_category_matches: true,
         insecure_disable_dnssec_validation: false,
         ip_categories: true,
@@ -173,7 +173,6 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { rules: Bas
       rule_settings: {
         add_headers: { 'My-Next-Header': ['foo', 'bar'], 'X-Custom-Header-Name': ['somecustomvalue'] },
         allow_child_bypass: false,
-        audit_ssh: { command_logging: false },
         biso_admin_controls: {
           copy: 'remote_only',
           dcp: true,
@@ -219,6 +218,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { rules: Bas
           ipv6: '2001:DB8::/64',
         },
         forensic_copy: { enabled: true },
+        forward: { worker_id: '0123456789abcdef0123456789abcdef' },
         ignore_cname_category_matches: true,
         insecure_disable_dnssec_validation: false,
         ip_categories: true,

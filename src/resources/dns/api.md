@@ -125,6 +125,22 @@ Methods:
 - <code title="patch /accounts/{account_id}/dns_settings">client.dns.settings.account.<a href="./src/resources/dns/settings/account/account.ts">edit</a>({ ...params }) -> AccountEditResponse</code>
 - <code title="get /accounts/{account_id}/dns_settings">client.dns.settings.account.<a href="./src/resources/dns/settings/account/account.ts">get</a>({ ...params }) -> AccountGetResponse</code>
 
+#### NameserverSets
+
+Types:
+
+- <code><a href="./src/resources/dns/settings/account/nameserver-sets.ts">NameserverSetCreateResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/nameserver-sets.ts">NameserverSetListResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/nameserver-sets.ts">NameserverSetDeleteResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/nameserver-sets.ts">NameserverSetGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dns_settings/nameserver_sets">client.dns.settings.account.nameserverSets.<a href="./src/resources/dns/settings/account/nameserver-sets.ts">create</a>({ ...params }) -> NameserverSetCreateResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings/nameserver_sets">client.dns.settings.account.nameserverSets.<a href="./src/resources/dns/settings/account/nameserver-sets.ts">list</a>({ ...params }) -> NameserverSetListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/dns_settings/nameserver_sets/{nameserver_set_id}">client.dns.settings.account.nameserverSets.<a href="./src/resources/dns/settings/account/nameserver-sets.ts">delete</a>(nameserverSetID, { ...params }) -> NameserverSetDeleteResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings/nameserver_sets/{nameserver_set_id}">client.dns.settings.account.nameserverSets.<a href="./src/resources/dns/settings/account/nameserver-sets.ts">get</a>(nameserverSetID, { ...params }) -> NameserverSetGetResponse</code>
+
 #### Views
 
 Types:

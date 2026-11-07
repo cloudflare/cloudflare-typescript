@@ -17,10 +17,7 @@ export class BaseAdvertisements extends APIResource {
    * const advertisement =
    *   await client.magicNetworkMonitoring.rules.advertisements.edit(
    *     '2890e6fa406311ed9b5a23f70f6fb8cf',
-   *     {
-   *       account_id: '6f91088a406011ed95aed352566e8d4c',
-   *       body: {},
-   *     },
+   *     { account_id: '6f91088a406011ed95aed352566e8d4c' },
    *   );
    * ```
    */
@@ -29,12 +26,12 @@ export class BaseAdvertisements extends APIResource {
     params: AdvertisementEditParams,
     options?: RequestOptions,
   ): APIPromise<Advertisement | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.patch(path`/accounts/${account_id}/mnm/rules/${ruleID}/advertisement`, {
-        body: body,
-        ...options,
-      }) as APIPromise<{ result: Advertisement | null }>
+      this._client.patch(
+        path`/accounts/${account_id}/mnm/rules/${ruleID}/advertisement`,
+        options,
+      ) as APIPromise<{ result: Advertisement | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -50,15 +47,7 @@ export interface Advertisement {
 }
 
 export interface AdvertisementEditParams {
-  /**
-   * Path param
-   */
   account_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export declare namespace Advertisements {

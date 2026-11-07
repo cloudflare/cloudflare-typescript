@@ -31,7 +31,7 @@ export class BaseItems extends APIResource {
    *   'my-ai-search',
    *   {
    *     account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *     name: 'my-namespace',
+   *     namespace: 'my-namespace',
    *   },
    * )) {
    *   // ...
@@ -43,9 +43,9 @@ export class BaseItems extends APIResource {
     params: ItemListParams,
     options?: RequestOptions,
   ): PagePromise<ItemListResponsesV4PagePaginationArray, ItemListResponse> {
-    const { account_id, name, ...query } = params;
+    const { account_id, namespace, ...query } = params;
     return this._client.getAPIList(
-      path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items`,
+      path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/items`,
       V4PagePaginationArray<ItemListResponse>,
       { query, ...options },
     );
@@ -61,17 +61,17 @@ export class BaseItems extends APIResource {
    *     'item_id',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       name: 'my-namespace',
+   *       namespace: 'my-namespace',
    *       id: 'my-ai-search',
    *     },
    *   );
    * ```
    */
   delete(itemID: string, params: ItemDeleteParams, options?: RequestOptions): APIPromise<ItemDeleteResponse> {
-    const { account_id, name, id } = params;
+    const { account_id, namespace, id } = params;
     return (
       this._client.delete(
-        path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items/${itemID}`,
+        path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/items/${itemID}`,
         options,
       ) as APIPromise<{ result: ItemDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -88,17 +88,17 @@ export class BaseItems extends APIResource {
    *     'item_id',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       name: 'my-namespace',
+   *       namespace: 'my-namespace',
    *       id: 'my-ai-search',
    *     },
    *   );
    * ```
    */
   chunks(itemID: string, params: ItemChunksParams, options?: RequestOptions): APIPromise<ItemChunksResponse> {
-    const { account_id, name, id, ...query } = params;
+    const { account_id, namespace, id, ...query } = params;
     return (
       this._client.get(
-        path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items/${itemID}/chunks`,
+        path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/items/${itemID}/chunks`,
         { query, ...options },
       ) as APIPromise<{ result: ItemChunksResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -114,7 +114,7 @@ export class BaseItems extends APIResource {
    *     'my-ai-search',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       name: 'my-namespace',
+   *       namespace: 'my-namespace',
    *       key: 'key',
    *       next_action: 'INDEX',
    *     },
@@ -126,12 +126,12 @@ export class BaseItems extends APIResource {
     params: ItemCreateOrUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ItemCreateOrUpdateResponse> {
-    const { account_id, name, ...body } = params;
+    const { account_id, namespace, ...body } = params;
     return (
-      this._client.put(path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items`, {
-        body,
-        ...options,
-      }) as APIPromise<{ result: ItemCreateOrUpdateResponse }>
+      this._client.put(
+        path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/items`,
+        { body, ...options },
+      ) as APIPromise<{ result: ItemCreateOrUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -146,7 +146,7 @@ export class BaseItems extends APIResource {
    *     'item_id',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       name: 'my-namespace',
+   *       namespace: 'my-namespace',
    *       id: 'my-ai-search',
    *     },
    *   );
@@ -156,9 +156,9 @@ export class BaseItems extends APIResource {
    * ```
    */
   download(itemID: string, params: ItemDownloadParams, options?: RequestOptions): APIPromise<Response> {
-    const { account_id, name, id } = params;
+    const { account_id, namespace, id } = params;
     return this._client.get(
-      path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items/${itemID}/download`,
+      path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/items/${itemID}/download`,
       {
         ...options,
         headers: buildHeaders([{ Accept: 'application/octet-stream' }, options?.headers]),
@@ -177,17 +177,17 @@ export class BaseItems extends APIResource {
    *     'item_id',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       name: 'my-namespace',
+   *       namespace: 'my-namespace',
    *       id: 'my-ai-search',
    *     },
    *   );
    * ```
    */
   get(itemID: string, params: ItemGetParams, options?: RequestOptions): APIPromise<ItemGetResponse> {
-    const { account_id, name, id } = params;
+    const { account_id, namespace, id } = params;
     return (
       this._client.get(
-        path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items/${itemID}`,
+        path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/items/${itemID}`,
         options,
       ) as APIPromise<{ result: ItemGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -203,24 +203,24 @@ export class BaseItems extends APIResource {
    *     'item_id',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       name: 'my-namespace',
+   *       namespace: 'my-namespace',
    *       id: 'my-ai-search',
    *     },
    *   );
    * ```
    */
   logs(itemID: string, params: ItemLogsParams, options?: RequestOptions): APIPromise<ItemLogsResponse> {
-    const { account_id, name, id, ...query } = params;
+    const { account_id, namespace, id, ...query } = params;
     return (
       this._client.get(
-        path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items/${itemID}/logs`,
+        path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/items/${itemID}/logs`,
         { query, ...options },
       ) as APIPromise<{ result: ItemLogsResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Syncs an item to an AI Search instance index.
+   * Synchronizes an item to an AI Search instance index.
    *
    * @example
    * ```ts
@@ -229,7 +229,7 @@ export class BaseItems extends APIResource {
    *     'item_id',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       name: 'my-namespace',
+   *       namespace: 'my-namespace',
    *       id: 'my-ai-search',
    *       next_action: 'INDEX',
    *     },
@@ -237,10 +237,10 @@ export class BaseItems extends APIResource {
    * ```
    */
   sync(itemID: string, params: ItemSyncParams, options?: RequestOptions): APIPromise<ItemSyncResponse> {
-    const { account_id, name, id, ...body } = params;
+    const { account_id, namespace, id, ...body } = params;
     return (
       this._client.patch(
-        path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items/${itemID}`,
+        path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/items/${itemID}`,
         { body, ...options },
       ) as APIPromise<{ result: ItemSyncResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -256,17 +256,17 @@ export class BaseItems extends APIResource {
    *     'my-ai-search',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       name: 'my-namespace',
+   *       namespace: 'my-namespace',
    *       file: { file: fs.createReadStream('path/to/file') },
    *     },
    *   );
    * ```
    */
   upload(id: string, params: ItemUploadParams, options?: RequestOptions): APIPromise<ItemUploadResponse> {
-    const { account_id, name, file } = params;
+    const { account_id, namespace, file } = params;
     return (
       this._client.post(
-        path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items`,
+        path`/accounts/${account_id}/ai-search/namespaces/${namespace}/instances/${id}/items`,
         multipartFormRequestOptions({ body: file, ...options }, this._client),
       ) as APIPromise<{ result: ItemUploadResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -326,6 +326,24 @@ export namespace ItemChunksResponse {
     text: string;
 
     end_byte?: number;
+
+    /**
+     * Audio/video transcript chunks only: end, in milliseconds from the start of the
+     * media (whole seconds), of the last transcript section the chunk covers.
+     */
+    media_end_ms?: number;
+
+    /**
+     * Audio/video transcript chunks only: start, in milliseconds from the start of the
+     * media (whole seconds), of the transcript section the chunk begins in.
+     */
+    media_start_ms?: number;
+
+    /**
+     * Audio/video transcript chunks only: type of the source media file. Omitted for
+     * all other chunks.
+     */
+    source_media_type?: 'audio' | 'video';
 
     start_byte?: number;
   }
@@ -526,25 +544,26 @@ export interface ItemListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Path param: Namespace name
+   * Path param: Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
-   * Query param: Filter items by their unique ID. Returns at most one item.
+   * Query param: Return only the item with this unique ID. Returns at most one item.
    */
   item_id?: string;
 
   /**
-   * Query param: Filter items by their exact key (object key / filename). Keys are
-   * unique per source, so combine with `source` to disambiguate across data sources.
+   * Query param: Return only items with this exact key (object key / filename). Each
+   * key is unique within a source, so combine with `source` to disambiguate across
+   * data sources.
    */
   key?: string;
 
   /**
    * Query param: JSON-encoded metadata filter using Vectorize filter syntax.
    * Examples: {"folder":"reports/"},
-   * {"timestamp":{"$gte":1700000000000}}, {"folder":{"$in":["docs/","reports/"]}}
+   * {"timestamp":{"$gte":1700000000000}}, {"folder":{"$in":["docs/","reports/"]}}.
    */
   metadata_filter?: string;
 
@@ -554,15 +573,15 @@ export interface ItemListParams extends V4PagePaginationArrayParams {
   search?: string;
 
   /**
-   * Query param: Sort order for items. "status" (default) sorts by status priority
-   * then last_seen_at. "modified_at" sorts by file modification time (most recent
-   * first), falling back to created_at.
+   * Query param: Sort order for items. "status" (default) sorts items according to
+   * status priority, then last_seen_at. "modified_at" sorts items according to file
+   * modification time (most recent first), falling back to created_at.
    */
   sort_by?: 'status' | 'modified_at';
 
   /**
-   * Query param: Filter items by source_id. Use "builtin" for uploaded files, or a
-   * source identifier like "web-crawler:https://example.com".
+   * Query param: Return only items with this source_id. Use "builtin" for uploaded
+   * files, or a source identifier like "web-crawler:https://example.com".
    */
   source?: string;
 
@@ -576,9 +595,9 @@ export interface ItemDeleteParams {
   account_id: string;
 
   /**
-   * Namespace name
+   * Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
    * AI Search instance ID. Lowercase alphanumeric, hyphens, and underscores.
@@ -593,9 +612,9 @@ export interface ItemChunksParams {
   account_id: string;
 
   /**
-   * Path param: Namespace name
+   * Path param: Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
    * Path param: AI Search instance ID. Lowercase alphanumeric, hyphens, and
@@ -621,9 +640,9 @@ export interface ItemCreateOrUpdateParams {
   account_id: string;
 
   /**
-   * Path param: Namespace name
+   * Path param: Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
    * Body param: Item key / filename. Must not exceed 128 characters.
@@ -636,11 +655,11 @@ export interface ItemCreateOrUpdateParams {
   next_action: 'INDEX';
 
   /**
-   * Body param: Wait for indexing to fully complete before responding. On RAGs with
-   * vector indexing enabled, this additionally waits for Vectorize ingestion
-   * confirmation (up to 40s) so the returned item reflects a queryable state. On
-   * timeout the item is returned in `running` state and the background alarm
-   * continues polling. Defaults to false.
+   * Body param: Wait for indexing before responding. After processing,
+   * vector-indexed instances use any time remaining in a 25s wait budget to confirm
+   * Vectorize ingestion. Processing itself continues uninterrupted and can exceed
+   * that budget. If confirmation times out, the response returns the current item
+   * state and background indexing continues. Defaults to false.
    */
   wait_for_completion?: boolean;
 }
@@ -649,9 +668,9 @@ export interface ItemDownloadParams {
   account_id: string;
 
   /**
-   * Namespace name
+   * Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
    * AI Search instance ID. Lowercase alphanumeric, hyphens, and underscores.
@@ -663,9 +682,9 @@ export interface ItemGetParams {
   account_id: string;
 
   /**
-   * Namespace name
+   * Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
    * AI Search instance ID. Lowercase alphanumeric, hyphens, and underscores.
@@ -680,9 +699,9 @@ export interface ItemLogsParams {
   account_id: string;
 
   /**
-   * Path param: Namespace name
+   * Path param: Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
    * Path param: AI Search instance ID. Lowercase alphanumeric, hyphens, and
@@ -708,9 +727,9 @@ export interface ItemSyncParams {
   account_id: string;
 
   /**
-   * Path param: Namespace name
+   * Path param: Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
    * Path param: AI Search instance ID. Lowercase alphanumeric, hyphens, and
@@ -724,11 +743,11 @@ export interface ItemSyncParams {
   next_action: 'INDEX';
 
   /**
-   * Body param: Wait for indexing to fully complete before responding. On RAGs with
-   * vector indexing enabled, this additionally waits for Vectorize ingestion
-   * confirmation (up to 40s) so the returned item reflects a queryable state. On
-   * timeout the item is returned in `running` state and the background alarm
-   * continues polling. Defaults to false.
+   * Body param: Wait for indexing before responding. After processing,
+   * vector-indexed instances use any time remaining in a 25s wait budget to confirm
+   * Vectorize ingestion. Processing itself continues uninterrupted and can exceed
+   * that budget. If confirmation times out, the response returns the current item
+   * state and background indexing continues. Defaults to false.
    */
   wait_for_completion?: boolean;
 }
@@ -740,9 +759,9 @@ export interface ItemUploadParams {
   account_id: string;
 
   /**
-   * Path param: Namespace name
+   * Path param: Namespace name.
    */
-  name: string;
+  namespace: string;
 
   /**
    * Body param
@@ -763,11 +782,11 @@ export namespace ItemUploadParams {
     metadata?: string;
 
     /**
-     * Wait for indexing to fully complete before responding. On RAGs with vector
-     * indexing enabled, this additionally waits for Vectorize ingestion confirmation
-     * (up to 40s) so the returned item reflects a queryable state. On timeout the item
-     * is returned in `running` state and the background alarm continues polling.
-     * Defaults to false.
+     * Wait for indexing before responding. After processing, vector-indexed instances
+     * use any time remaining in a 25s wait budget to confirm Vectorize ingestion.
+     * Processing itself continues uninterrupted and can exceed that budget. If
+     * confirmation times out, the response returns the current item state and
+     * background indexing continues. Defaults to false.
      */
     wait_for_completion?: boolean;
   }

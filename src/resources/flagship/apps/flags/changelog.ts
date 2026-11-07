@@ -96,6 +96,12 @@ export namespace ChangelogListResponse {
        */
       description?: string | null;
 
+      /**
+       * Key-value metadata associated with the flag. Returned only when the flag has
+       * metadata.
+       */
+      metadata?: { [key: string]: boolean | string | number };
+
       updated_at?: string;
 
       updated_by?: string;
@@ -107,7 +113,7 @@ export namespace ChangelogListResponse {
          * Conditions the context must satisfy for this rule to match. An empty array
          * matches all contexts.
          */
-        conditions: Array<Rule.UnionMember0 | Rule.UnionMember1>;
+        conditions: Array<Rule.FlagshipBaseCondition | Rule.FlagshipLogicalCondition>;
 
         /**
          * Evaluation order: the API evaluates rules with lower numbers first. Must be
@@ -124,7 +130,7 @@ export namespace ChangelogListResponse {
       }
 
       export namespace Rule {
-        export interface UnionMember0 {
+        export interface FlagshipBaseCondition {
           attribute: string;
 
           operator:
@@ -145,14 +151,17 @@ export namespace ChangelogListResponse {
           value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
 
-        export interface UnionMember1 {
-          clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+        export interface FlagshipLogicalCondition {
+          clauses: Array<
+            | FlagshipLogicalCondition.FlagshipBaseCondition
+            | FlagshipLogicalCondition.FlagshipLogicalCondition1
+          >;
 
           logical_operator: 'AND' | 'OR';
         }
 
-        export namespace UnionMember1 {
-          export interface UnionMember0 {
+        export namespace FlagshipLogicalCondition {
+          export interface FlagshipBaseCondition {
             attribute: string;
 
             operator:
@@ -173,14 +182,17 @@ export namespace ChangelogListResponse {
             value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
 
-          export interface UnionMember1 {
-            clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+          export interface FlagshipLogicalCondition1 {
+            clauses: Array<
+              | FlagshipLogicalCondition1.FlagshipBaseCondition
+              | FlagshipLogicalCondition1.FlagshipLogicalCondition2
+            >;
 
             logical_operator: 'AND' | 'OR';
           }
 
-          export namespace UnionMember1 {
-            export interface UnionMember0 {
+          export namespace FlagshipLogicalCondition1 {
+            export interface FlagshipBaseCondition {
               attribute: string;
 
               operator:
@@ -201,14 +213,17 @@ export namespace ChangelogListResponse {
               value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
 
-            export interface UnionMember1 {
-              clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+            export interface FlagshipLogicalCondition2 {
+              clauses: Array<
+                | FlagshipLogicalCondition2.FlagshipBaseCondition
+                | FlagshipLogicalCondition2.FlagshipLogicalCondition3
+              >;
 
               logical_operator: 'AND' | 'OR';
             }
 
-            export namespace UnionMember1 {
-              export interface UnionMember0 {
+            export namespace FlagshipLogicalCondition2 {
+              export interface FlagshipBaseCondition {
                 attribute: string;
 
                 operator:
@@ -229,14 +244,17 @@ export namespace ChangelogListResponse {
                 value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
 
-              export interface UnionMember1 {
-                clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+              export interface FlagshipLogicalCondition3 {
+                clauses: Array<
+                  | FlagshipLogicalCondition3.FlagshipBaseCondition
+                  | FlagshipLogicalCondition3.FlagshipLogicalCondition4
+                >;
 
                 logical_operator: 'AND' | 'OR';
               }
 
-              export namespace UnionMember1 {
-                export interface UnionMember0 {
+              export namespace FlagshipLogicalCondition3 {
+                export interface FlagshipBaseCondition {
                   attribute: string;
 
                   operator:
@@ -257,14 +275,14 @@ export namespace ChangelogListResponse {
                   value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                 }
 
-                export interface UnionMember1 {
-                  clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+                export interface FlagshipLogicalCondition4 {
+                  clauses: Array<FlagshipLogicalCondition4.Clause>;
 
                   logical_operator: 'AND' | 'OR';
                 }
 
-                export namespace UnionMember1 {
-                  export interface UnionMember0 {
+                export namespace FlagshipLogicalCondition4 {
+                  export interface Clause {
                     attribute: string;
 
                     operator:
@@ -283,14 +301,6 @@ export namespace ChangelogListResponse {
                       | 'not_has';
 
                     value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
-                  }
-
-                  export interface UnionMember1 {
-                    clauses: Array<
-                      string | null | number | boolean | { [key: string]: unknown } | Array<unknown>
-                    >;
-
-                    logical_operator: 'AND' | 'OR';
                   }
                 }
               }
@@ -367,6 +377,12 @@ export namespace ChangelogListResponse {
        */
       description?: string | null;
 
+      /**
+       * Key-value metadata associated with the flag. Returned only when the flag has
+       * metadata.
+       */
+      metadata?: { [key: string]: boolean | string | number };
+
       updated_at?: string;
 
       updated_by?: string;
@@ -378,7 +394,7 @@ export namespace ChangelogListResponse {
          * Conditions the context must satisfy for this rule to match. An empty array
          * matches all contexts.
          */
-        conditions: Array<Rule.UnionMember0 | Rule.UnionMember1>;
+        conditions: Array<Rule.FlagshipBaseCondition | Rule.FlagshipLogicalCondition>;
 
         /**
          * Evaluation order: the API evaluates rules with lower numbers first. Must be
@@ -395,7 +411,7 @@ export namespace ChangelogListResponse {
       }
 
       export namespace Rule {
-        export interface UnionMember0 {
+        export interface FlagshipBaseCondition {
           attribute: string;
 
           operator:
@@ -416,14 +432,17 @@ export namespace ChangelogListResponse {
           value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
 
-        export interface UnionMember1 {
-          clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+        export interface FlagshipLogicalCondition {
+          clauses: Array<
+            | FlagshipLogicalCondition.FlagshipBaseCondition
+            | FlagshipLogicalCondition.FlagshipLogicalCondition1
+          >;
 
           logical_operator: 'AND' | 'OR';
         }
 
-        export namespace UnionMember1 {
-          export interface UnionMember0 {
+        export namespace FlagshipLogicalCondition {
+          export interface FlagshipBaseCondition {
             attribute: string;
 
             operator:
@@ -444,14 +463,17 @@ export namespace ChangelogListResponse {
             value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
 
-          export interface UnionMember1 {
-            clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+          export interface FlagshipLogicalCondition1 {
+            clauses: Array<
+              | FlagshipLogicalCondition1.FlagshipBaseCondition
+              | FlagshipLogicalCondition1.FlagshipLogicalCondition2
+            >;
 
             logical_operator: 'AND' | 'OR';
           }
 
-          export namespace UnionMember1 {
-            export interface UnionMember0 {
+          export namespace FlagshipLogicalCondition1 {
+            export interface FlagshipBaseCondition {
               attribute: string;
 
               operator:
@@ -472,14 +494,17 @@ export namespace ChangelogListResponse {
               value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
 
-            export interface UnionMember1 {
-              clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+            export interface FlagshipLogicalCondition2 {
+              clauses: Array<
+                | FlagshipLogicalCondition2.FlagshipBaseCondition
+                | FlagshipLogicalCondition2.FlagshipLogicalCondition3
+              >;
 
               logical_operator: 'AND' | 'OR';
             }
 
-            export namespace UnionMember1 {
-              export interface UnionMember0 {
+            export namespace FlagshipLogicalCondition2 {
+              export interface FlagshipBaseCondition {
                 attribute: string;
 
                 operator:
@@ -500,14 +525,17 @@ export namespace ChangelogListResponse {
                 value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
 
-              export interface UnionMember1 {
-                clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+              export interface FlagshipLogicalCondition3 {
+                clauses: Array<
+                  | FlagshipLogicalCondition3.FlagshipBaseCondition
+                  | FlagshipLogicalCondition3.FlagshipLogicalCondition4
+                >;
 
                 logical_operator: 'AND' | 'OR';
               }
 
-              export namespace UnionMember1 {
-                export interface UnionMember0 {
+              export namespace FlagshipLogicalCondition3 {
+                export interface FlagshipBaseCondition {
                   attribute: string;
 
                   operator:
@@ -528,14 +556,14 @@ export namespace ChangelogListResponse {
                   value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                 }
 
-                export interface UnionMember1 {
-                  clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+                export interface FlagshipLogicalCondition4 {
+                  clauses: Array<FlagshipLogicalCondition4.Clause>;
 
                   logical_operator: 'AND' | 'OR';
                 }
 
-                export namespace UnionMember1 {
-                  export interface UnionMember0 {
+                export namespace FlagshipLogicalCondition4 {
+                  export interface Clause {
                     attribute: string;
 
                     operator:
@@ -554,14 +582,6 @@ export namespace ChangelogListResponse {
                       | 'not_has';
 
                     value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
-                  }
-
-                  export interface UnionMember1 {
-                    clauses: Array<
-                      string | null | number | boolean | { [key: string]: unknown } | Array<unknown>
-                    >;
-
-                    logical_operator: 'AND' | 'OR';
                   }
                 }
               }
@@ -640,6 +660,12 @@ export namespace ChangelogListResponse {
        */
       description?: string | null;
 
+      /**
+       * Key-value metadata associated with the flag. Returned only when the flag has
+       * metadata.
+       */
+      metadata?: { [key: string]: boolean | string | number };
+
       updated_at?: string;
 
       updated_by?: string;
@@ -651,7 +677,7 @@ export namespace ChangelogListResponse {
          * Conditions the context must satisfy for this rule to match. An empty array
          * matches all contexts.
          */
-        conditions: Array<Rule.UnionMember0 | Rule.UnionMember1>;
+        conditions: Array<Rule.FlagshipBaseCondition | Rule.FlagshipLogicalCondition>;
 
         /**
          * Evaluation order: the API evaluates rules with lower numbers first. Must be
@@ -668,7 +694,7 @@ export namespace ChangelogListResponse {
       }
 
       export namespace Rule {
-        export interface UnionMember0 {
+        export interface FlagshipBaseCondition {
           attribute: string;
 
           operator:
@@ -689,14 +715,17 @@ export namespace ChangelogListResponse {
           value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
 
-        export interface UnionMember1 {
-          clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+        export interface FlagshipLogicalCondition {
+          clauses: Array<
+            | FlagshipLogicalCondition.FlagshipBaseCondition
+            | FlagshipLogicalCondition.FlagshipLogicalCondition1
+          >;
 
           logical_operator: 'AND' | 'OR';
         }
 
-        export namespace UnionMember1 {
-          export interface UnionMember0 {
+        export namespace FlagshipLogicalCondition {
+          export interface FlagshipBaseCondition {
             attribute: string;
 
             operator:
@@ -717,14 +746,17 @@ export namespace ChangelogListResponse {
             value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
 
-          export interface UnionMember1 {
-            clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+          export interface FlagshipLogicalCondition1 {
+            clauses: Array<
+              | FlagshipLogicalCondition1.FlagshipBaseCondition
+              | FlagshipLogicalCondition1.FlagshipLogicalCondition2
+            >;
 
             logical_operator: 'AND' | 'OR';
           }
 
-          export namespace UnionMember1 {
-            export interface UnionMember0 {
+          export namespace FlagshipLogicalCondition1 {
+            export interface FlagshipBaseCondition {
               attribute: string;
 
               operator:
@@ -745,14 +777,17 @@ export namespace ChangelogListResponse {
               value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
 
-            export interface UnionMember1 {
-              clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+            export interface FlagshipLogicalCondition2 {
+              clauses: Array<
+                | FlagshipLogicalCondition2.FlagshipBaseCondition
+                | FlagshipLogicalCondition2.FlagshipLogicalCondition3
+              >;
 
               logical_operator: 'AND' | 'OR';
             }
 
-            export namespace UnionMember1 {
-              export interface UnionMember0 {
+            export namespace FlagshipLogicalCondition2 {
+              export interface FlagshipBaseCondition {
                 attribute: string;
 
                 operator:
@@ -773,14 +808,17 @@ export namespace ChangelogListResponse {
                 value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
 
-              export interface UnionMember1 {
-                clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+              export interface FlagshipLogicalCondition3 {
+                clauses: Array<
+                  | FlagshipLogicalCondition3.FlagshipBaseCondition
+                  | FlagshipLogicalCondition3.FlagshipLogicalCondition4
+                >;
 
                 logical_operator: 'AND' | 'OR';
               }
 
-              export namespace UnionMember1 {
-                export interface UnionMember0 {
+              export namespace FlagshipLogicalCondition3 {
+                export interface FlagshipBaseCondition {
                   attribute: string;
 
                   operator:
@@ -801,14 +839,14 @@ export namespace ChangelogListResponse {
                   value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                 }
 
-                export interface UnionMember1 {
-                  clauses: Array<UnionMember1.UnionMember0 | UnionMember1.UnionMember1>;
+                export interface FlagshipLogicalCondition4 {
+                  clauses: Array<FlagshipLogicalCondition4.Clause>;
 
                   logical_operator: 'AND' | 'OR';
                 }
 
-                export namespace UnionMember1 {
-                  export interface UnionMember0 {
+                export namespace FlagshipLogicalCondition4 {
+                  export interface Clause {
                     attribute: string;
 
                     operator:
@@ -827,14 +865,6 @@ export namespace ChangelogListResponse {
                       | 'not_has';
 
                     value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
-                  }
-
-                  export interface UnionMember1 {
-                    clauses: Array<
-                      string | null | number | boolean | { [key: string]: unknown } | Array<unknown>
-                    >;
-
-                    logical_operator: 'AND' | 'OR';
                   }
                 }
               }

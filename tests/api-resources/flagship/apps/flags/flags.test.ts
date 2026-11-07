@@ -79,6 +79,7 @@ const runTests = (client: PartialCloudflare<{ flagship: { apps: { flags: BaseFla
       ],
       variations: { foo: 'string' },
       description: 'description',
+      metadata: { foo: true },
       type: 'boolean',
     });
   });
@@ -137,6 +138,7 @@ const runTests = (client: PartialCloudflare<{ flagship: { apps: { flags: BaseFla
       ],
       variations: { foo: 'string' },
       description: 'description',
+      metadata: { foo: true },
       type: 'boolean',
     });
   });

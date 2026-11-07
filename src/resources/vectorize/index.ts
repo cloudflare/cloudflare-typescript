@@ -29,5 +29,6 @@ export {
   type IndexQueryParams,
   type IndexUpsertParams,
   type CreateIndicesSinglePage,
+  type IndexGetByIDsResponsesSinglePage,
 } from './indexes/index';
 export { Vectorize, BaseVectorize } from './vectorize';

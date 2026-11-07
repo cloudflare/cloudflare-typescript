@@ -53,6 +53,22 @@ import {
   ProfileUpdateResponse,
   Profiles,
 } from './profiles/profiles';
+import * as SpendPoliciesAPI from './spend-policies/spend-policies';
+import {
+  BaseSpendPolicies,
+  SpendPolicies,
+  SpendPolicyCreateParams,
+  SpendPolicyCreateResponse,
+  SpendPolicyDeleteParams,
+  SpendPolicyDeleteResponse,
+  SpendPolicyGetParams,
+  SpendPolicyGetResponse,
+  SpendPolicyListParams,
+  SpendPolicyListResponse,
+  SpendPolicyListResponsesSinglePage,
+  SpendPolicyUpdateParams,
+  SpendPolicyUpdateResponse,
+} from './spend-policies/spend-policies';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
@@ -81,6 +97,7 @@ export class BaseBilling extends APIResource {
   }
 }
 export class Billing extends BaseBilling {
+  spendPolicies: SpendPoliciesAPI.SpendPolicies = new SpendPoliciesAPI.SpendPolicies(this._client);
   profiles: ProfilesAPI.Profiles = new ProfilesAPI.Profiles(this._client);
   usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
   credits: CreditsAPI.Credits = new CreditsAPI.Credits(this._client);
@@ -168,6 +185,8 @@ export interface BillingAddressValidationParams {
   zipcode?: string;
 }
 
+Billing.SpendPolicies = SpendPolicies;
+Billing.BaseSpendPolicies = BaseSpendPolicies;
 Billing.Profiles = Profiles;
 Billing.BaseProfiles = BaseProfiles;
 Billing.Usage = Usage;
@@ -187,6 +206,22 @@ export declare namespace Billing {
   export {
     type BillingAddressValidationResponse as BillingAddressValidationResponse,
     type BillingAddressValidationParams as BillingAddressValidationParams,
+  };
+
+  export {
+    SpendPolicies as SpendPolicies,
+    BaseSpendPolicies as BaseSpendPolicies,
+    type SpendPolicyCreateResponse as SpendPolicyCreateResponse,
+    type SpendPolicyUpdateResponse as SpendPolicyUpdateResponse,
+    type SpendPolicyListResponse as SpendPolicyListResponse,
+    type SpendPolicyDeleteResponse as SpendPolicyDeleteResponse,
+    type SpendPolicyGetResponse as SpendPolicyGetResponse,
+    type SpendPolicyListResponsesSinglePage as SpendPolicyListResponsesSinglePage,
+    type SpendPolicyCreateParams as SpendPolicyCreateParams,
+    type SpendPolicyUpdateParams as SpendPolicyUpdateParams,
+    type SpendPolicyListParams as SpendPolicyListParams,
+    type SpendPolicyDeleteParams as SpendPolicyDeleteParams,
+    type SpendPolicyGetParams as SpendPolicyGetParams,
   };
 
   export {

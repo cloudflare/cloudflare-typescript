@@ -15,8 +15,8 @@ export class BaseCategories extends APIResource {
   ] as const);
 
   /**
-   * Creates a new threat event category in Cloudforce One for organizing and
-   * classifying threat events.
+   * Creates an event category for classifying events. `name` and `killChain` are
+   * required.
    *
    * @example
    * ```ts
@@ -39,8 +39,10 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Lists all threat event categories configured for classifying and organizing
-   * threat events.
+   * Lists the event categories used by events in the datasets given by `datasetIds`,
+   * or in the default dataset when `datasetIds` is omitted. Dataset scope values are
+   * not supported. To list every category, use
+   * `threat-intel events categories catalog list`.
    *
    * @example
    * ```ts
@@ -59,7 +61,8 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Deprecated; use DELETE /events/event-categories/by-id/{category_id}. Available
+   * Legacy. Use `threat-intel events categories delete`
+   * (`DELETE /events/event-categories/by-id/{category_id}`) instead. Available
    * through 2026-11-28.
    *
    * @deprecated Use DELETE /events/event-categories/by-id/{category_id} before 2026-11-28.
@@ -77,7 +80,8 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Deprecated; use PATCH /events/event-categories/by-id/{category_id}. Available
+   * Legacy. Use `threat-intel events categories update`
+   * (`PATCH /events/event-categories/by-id/{category_id}`) instead. Available
    * through 2026-11-28.
    *
    * @deprecated Use PATCH /events/event-categories/by-id/{category_id} before 2026-11-28.
@@ -95,8 +99,9 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Deprecated; use GET /events/event-categories/by-id/{category_id}. Available
-   * through 2026-11-28.
+   * Legacy. Use `threat-intel events categories get`
+   * (`GET /events/event-categories/by-id/{category_id}`) instead. Available through
+   * 2026-11-28.
    *
    * @deprecated Use GET /events/event-categories/by-id/{category_id} before 2026-11-28.
    */

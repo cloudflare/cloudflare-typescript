@@ -163,19 +163,9 @@ export class BaseWebhooks extends APIResource {
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       app_id: '14a396e7-ca44-4937-bf1f-050a69118543',
-   *       events: [
-   *         'meeting.started',
-   *         'meeting.ended',
-   *         'meeting.participantJoined',
-   *         'meeting.participantLeft',
-   *         'meeting.chatSynced',
-   *         'recording.statusUpdate',
-   *         'livestreaming.statusUpdate',
-   *         'meeting.transcript',
-   *         'meeting.summary',
-   *       ],
-   *       name: 'All events webhook',
-   *       url: 'https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e',
+   *       events: ['meeting.started'],
+   *       name: 'My Webhook',
+   *       url: 'https://example.com/webhook',
    *     },
    *   );
    * ```

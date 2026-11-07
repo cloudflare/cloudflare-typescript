@@ -115,6 +115,14 @@ export interface DomainUpdateResponse {
   cert_id: string;
 
   /**
+   * Whether the configured hostname is routable for the domain. If disabled, then
+   * requests to the configured hostname will not be routed to the configured Worker.
+   * If disabled, then preview routing must be enabled, and only subdomains of the
+   * configured hostname will be routable.
+   */
+  enabled: boolean;
+
+  /**
    * @deprecated Worker environment associated with the domain.
    */
   environment: string;
@@ -124,6 +132,16 @@ export interface DomainUpdateResponse {
    * Requests to this hostname will be routed to the configured Worker.
    */
   hostname: string;
+
+  /**
+   * Whether previews are routable for the domain. If enabled, previews will be
+   * routable as subdomains of the configured hostname. For example, if the
+   * configured hostname is `app.example.com`, then requests to
+   * `my-feature.app.example.com` will be routed to the preview with slug
+   * `my-feature`, if such a preview exists. If preview routing is disabled, then
+   * hostname routing must be enabled.
+   */
+  previews_enabled: boolean;
 
   /**
    * Name of the Worker associated with the domain. Requests to the configured
@@ -154,6 +172,14 @@ export interface DomainListResponse {
   cert_id: string;
 
   /**
+   * Whether the configured hostname is routable for the domain. If disabled, then
+   * requests to the configured hostname will not be routed to the configured Worker.
+   * If disabled, then preview routing must be enabled, and only subdomains of the
+   * configured hostname will be routable.
+   */
+  enabled: boolean;
+
+  /**
    * @deprecated Worker environment associated with the domain.
    */
   environment: string;
@@ -163,6 +189,16 @@ export interface DomainListResponse {
    * Requests to this hostname will be routed to the configured Worker.
    */
   hostname: string;
+
+  /**
+   * Whether previews are routable for the domain. If enabled, previews will be
+   * routable as subdomains of the configured hostname. For example, if the
+   * configured hostname is `app.example.com`, then requests to
+   * `my-feature.app.example.com` will be routed to the preview with slug
+   * `my-feature`, if such a preview exists. If preview routing is disabled, then
+   * hostname routing must be enabled.
+   */
+  previews_enabled: boolean;
 
   /**
    * Name of the Worker associated with the domain. Requests to the configured
@@ -238,6 +274,14 @@ export interface DomainGetResponse {
   cert_id: string;
 
   /**
+   * Whether the configured hostname is routable for the domain. If disabled, then
+   * requests to the configured hostname will not be routed to the configured Worker.
+   * If disabled, then preview routing must be enabled, and only subdomains of the
+   * configured hostname will be routable.
+   */
+  enabled: boolean;
+
+  /**
    * @deprecated Worker environment associated with the domain.
    */
   environment: string;
@@ -247,6 +291,16 @@ export interface DomainGetResponse {
    * Requests to this hostname will be routed to the configured Worker.
    */
   hostname: string;
+
+  /**
+   * Whether previews are routable for the domain. If enabled, previews will be
+   * routable as subdomains of the configured hostname. For example, if the
+   * configured hostname is `app.example.com`, then requests to
+   * `my-feature.app.example.com` will be routed to the preview with slug
+   * `my-feature`, if such a preview exists. If preview routing is disabled, then
+   * hostname routing must be enabled.
+   */
+  previews_enabled: boolean;
 
   /**
    * Name of the Worker associated with the domain. Requests to the configured
@@ -284,6 +338,24 @@ export interface DomainUpdateParams {
   service: string;
 
   /**
+   * Body param: Whether the configured hostname is routable for the domain. If
+   * disabled, then requests to the configured hostname will not be routed to the
+   * configured Worker. If disabled, then preview routing must be enabled, and only
+   * subdomains of the configured hostname will be routable.
+   */
+  enabled?: boolean;
+
+  /**
+   * Body param: Whether previews are routable for the domain. If enabled, previews
+   * will be routable as subdomains of the configured hostname. For example, if the
+   * configured hostname is `app.example.com`, then requests to
+   * `my-feature.app.example.com` will be routed to the preview with slug
+   * `my-feature`, if such a preview exists. If preview routing is disabled, then
+   * hostname routing must be enabled.
+   */
+  previews_enabled?: boolean;
+
+  /**
    * Body param: ID of the zone containing the domain hostname.
    */
   zone_id?: string;
@@ -301,6 +373,11 @@ export interface DomainListParams {
   account_id: string;
 
   /**
+   * Query param: Whether the configured hostname is routable for the domain.
+   */
+  enabled?: boolean;
+
+  /**
    * Query param: Worker environment associated with the domain.
    */
   environment?: string;
@@ -309,6 +386,11 @@ export interface DomainListParams {
    * Query param: Hostname of the domain.
    */
   hostname?: string;
+
+  /**
+   * Query param: Whether previews are routable for the domain.
+   */
+  previews_enabled?: boolean;
 
   /**
    * Query param: Name of the Worker associated with the domain.

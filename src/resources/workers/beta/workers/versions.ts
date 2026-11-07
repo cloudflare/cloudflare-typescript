@@ -8,6 +8,7 @@ import {
   V4PagePaginationArray,
   type V4PagePaginationArrayParams,
 } from '../../../../core/pagination';
+import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -119,6 +120,40 @@ export class BaseVersions extends APIResource {
         ...options,
       }) as APIPromise<{ result: Version }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Captures a CPU or heap profile from a recently active isolate running the
+   * specified Worker version. This endpoint requires the Worker profiling feature to
+   * be enabled for the account.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.workers.beta.workers.versions.profile(
+   *     'version_id',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       worker_id: 'worker_id',
+   *       duration_ms: 1000,
+   *     },
+   *   );
+   *
+   * const content = await response.blob();
+   * console.log(content);
+   * ```
+   */
+  profile(versionID: string, params: VersionProfileParams, options?: RequestOptions): APIPromise<Response> {
+    const { account_id, worker_id, ...body } = params;
+    return this._client.post(
+      path`/accounts/${account_id}/workers/workers/${worker_id}/versions/${versionID}/profile`,
+      {
+        body,
+        ...options,
+        headers: buildHeaders([{ Accept: 'application/vnd.google.protobuf' }, options?.headers]),
+        __binaryResponse: true,
+      },
+    );
   }
 }
 export class Versions extends BaseVersions {}
@@ -738,9 +773,13 @@ export namespace Version {
     old_name?: string;
 
     /**
-     * Identifier for the version to inherit the binding from, which can be the version
-     * ID or the literal "latest" to inherit from the latest version. Defaults to
-     * inheriting the binding from the latest version.
+     * Identifier for the version to inherit the binding from. This can be a version
+     * ID, or the literal "latest" to inherit from the most recently uploaded version,
+     * which may not be the deployed version. Defaults to "latest". Only the Workers
+     * API version endpoints under
+     * `/accounts/{account_id}/workers/workers/{worker_id}/versions` accept a version
+     * ID. Other endpoints, including script upload and script version upload, accept
+     * only "latest" and reject a version ID with error 10057.
      */
     version_id?: string;
   }
@@ -1222,13 +1261,15 @@ export namespace Version {
 
     /**
      * Enables Gateway identity for the binding. Requires network_id to be
-     * "cf1:network" and cannot be combined with tunnel_id.
+     * "cf1:network" and cannot be combined with tunnel_id or an explicit
+     * "cf1:vnet:<UUID>" network_id.
      */
     identity?: 'runtime-email-alpha';
 
     /**
-     * Identifier of the network to bind to. Only "cf1:network" is currently supported.
-     * Mutually exclusive with tunnel_id.
+     * Identifier of the network to bind to. Use "cf1:network" to select the account's
+     * default virtual network at runtime, or "cf1:vnet:<UUID>" to select an explicit
+     * virtual network in the Worker's account. Mutually exclusive with tunnel_id.
      */
     network_id?: string;
 
@@ -2436,9 +2477,13 @@ export namespace VersionCreateParams {
     old_name?: string;
 
     /**
-     * Identifier for the version to inherit the binding from, which can be the version
-     * ID or the literal "latest" to inherit from the latest version. Defaults to
-     * inheriting the binding from the latest version.
+     * Identifier for the version to inherit the binding from. This can be a version
+     * ID, or the literal "latest" to inherit from the most recently uploaded version,
+     * which may not be the deployed version. Defaults to "latest". Only the Workers
+     * API version endpoints under
+     * `/accounts/{account_id}/workers/workers/{worker_id}/versions` accept a version
+     * ID. Other endpoints, including script upload and script version upload, accept
+     * only "latest" and reject a version ID with error 10057.
      */
     version_id?: string;
   }
@@ -2937,13 +2982,15 @@ export namespace VersionCreateParams {
 
     /**
      * Enables Gateway identity for the binding. Requires network_id to be
-     * "cf1:network" and cannot be combined with tunnel_id.
+     * "cf1:network" and cannot be combined with tunnel_id or an explicit
+     * "cf1:vnet:<UUID>" network_id.
      */
     identity?: 'runtime-email-alpha';
 
     /**
-     * Identifier of the network to bind to. Only "cf1:network" is currently supported.
-     * Mutually exclusive with tunnel_id.
+     * Identifier of the network to bind to. Use "cf1:network" to select the account's
+     * default virtual network at runtime, or "cf1:vnet:<UUID>" to select an explicit
+     * virtual network in the Worker's account. Mutually exclusive with tunnel_id.
      */
     network_id?: string;
 
@@ -3370,6 +3417,41 @@ export interface VersionGetParams {
   include?: 'modules';
 }
 
+export interface VersionProfileParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Path param: Identifies the Worker by ID or name.
+   */
+  worker_id: string;
+
+  /**
+   * Body param: Profile duration in milliseconds.
+   */
+  duration_ms: number;
+
+  /**
+   * Body param: Identifies the exact Durable Object actor to profile. Must be
+   * specified together with namespace_id. The actor must currently be active and
+   * running the requested version.
+   */
+  actor_id?: string;
+
+  /**
+   * Body param: Identifies the Durable Object namespace containing the actor to
+   * profile. Must be specified together with actor_id.
+   */
+  namespace_id?: string;
+
+  /**
+   * Body param
+   */
+  profile_type?: 'cpu' | 'heap';
+}
+
 export declare namespace Versions {
   export {
     type Version as Version,
@@ -3379,5 +3461,6 @@ export declare namespace Versions {
     type VersionListParams as VersionListParams,
     type VersionDeleteParams as VersionDeleteParams,
     type VersionGetParams as VersionGetParams,
+    type VersionProfileParams as VersionProfileParams,
   };
 }

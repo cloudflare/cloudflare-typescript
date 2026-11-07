@@ -68,11 +68,6 @@ const runTests = (
   test('update: only required params', async () => {
     const responsePromise = client.workers.observability.destinations.update('slug', {
       account_id: 'account_id',
-      configuration: {
-        headers: { foo: 'string' },
-        type: 'logpush',
-        url: 'url',
-      },
       enabled: true,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -87,12 +82,13 @@ const runTests = (
   test('update: required and optional params', async () => {
     const response = await client.workers.observability.destinations.update('slug', {
       account_id: 'account_id',
+      enabled: true,
       configuration: {
         headers: { foo: 'string' },
         type: 'logpush',
         url: 'url',
+        replaceHeaders: true,
       },
-      enabled: true,
     });
   });
 

@@ -151,6 +151,7 @@ const runTests = (client: PartialCloudflare<{ d1: { database: BaseDatabase } }>)
       output_format: 'polling',
       current_bookmark: 'current_bookmark',
       dump_options: {
+        compatibility: 'd1',
         no_data: true,
         no_schema: true,
         tables: ['string'],
@@ -242,6 +243,26 @@ const runTests = (client: PartialCloudflare<{ d1: { database: BaseDatabase } }>)
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       sql: 'SELECT * FROM myTable WHERE field = ? OR field = ?;',
       params: ['firstParam', 'secondParam'],
+    });
+  });
+
+  test('undelete: only required params', async () => {
+    const responsePromise = client.d1.database.undelete('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('undelete: required and optional params', async () => {
+    const response = await client.d1.database.undelete('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      new_name: 'my-database',
     });
   });
 };

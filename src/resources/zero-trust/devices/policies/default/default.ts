@@ -120,6 +120,13 @@ export interface DefaultEditResponse {
   dns_search_suffixes?: Array<DefaultEditResponse.DNSSearchSuffix>;
 
   /**
+   * Determines whether the WARP client can silently reauthenticate the user with
+   * device credentials (Microsoft Entra) instead of prompting for browser-based
+   * reauthentication.
+   */
+  enable_device_credential_authentication?: boolean;
+
+  /**
    * Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -243,6 +250,12 @@ export namespace DefaultEditResponse {
     wireguard_endpoints: Array<string>;
 
     /**
+     * Whether WARP users may manually override the automatic Global Acceleration
+     * decision. Defaults to true when not provided.
+     */
+    allow_manual_override?: boolean;
+
+    /**
      * Automatically switch Global Acceleration regions based on device location.
      * Defaults to false when not provided.
      */
@@ -322,6 +335,13 @@ export interface DefaultGetResponse {
    * order. Use an empty array to clear.
    */
   dns_search_suffixes?: Array<DefaultGetResponse.DNSSearchSuffix>;
+
+  /**
+   * Determines whether the WARP client can silently reauthenticate the user with
+   * device credentials (Microsoft Entra) instead of prompting for browser-based
+   * reauthentication.
+   */
+  enable_device_credential_authentication?: boolean;
 
   /**
    * Whether the policy will be applied to matching devices.
@@ -447,6 +467,12 @@ export namespace DefaultGetResponse {
     wireguard_endpoints: Array<string>;
 
     /**
+     * Whether WARP users may manually override the automatic Global Acceleration
+     * decision. Defaults to true when not provided.
+     */
+    allow_manual_override?: boolean;
+
+    /**
      * Automatically switch Global Acceleration regions based on device location.
      * Defaults to false when not provided.
      */
@@ -527,6 +553,13 @@ export interface DefaultEditParams {
    * evaluated in order. Use an empty array to clear.
    */
   dns_search_suffixes?: Array<DefaultEditParams.DNSSearchSuffix>;
+
+  /**
+   * Body param: Determines whether the WARP client can silently reauthenticate the
+   * user with device credentials (Microsoft Entra) instead of prompting for
+   * browser-based reauthentication.
+   */
+  enable_device_credential_authentication?: boolean;
 
   /**
    * Body param: List of routes excluded in the WARP client's tunnel. Both 'exclude'
@@ -654,6 +687,12 @@ export namespace DefaultEditParams {
      * or masque_endpoints must be provided.
      */
     wireguard_endpoints: Array<string>;
+
+    /**
+     * Whether WARP users may manually override the automatic Global Acceleration
+     * decision. Defaults to true when not provided.
+     */
+    allow_manual_override?: boolean;
 
     /**
      * Automatically switch Global Acceleration regions based on device location.

@@ -1,5 +1,149 @@
 # Changelog
 
+## 7.4.0 (2026-11-05)
+
+Full Changelog: [v7.3.0...v7.4.0](https://github.com/cloudflare/cloudflare-typescript/compare/v7.3.0...v7.4.0)
+
+This release removes several resources and types, changes a number of return and
+pagination types, and reworks the AI Search namespace endpoints. See the
+[v7.4.0 Migration Guide](./docs/migration-guides/v7.4.0-migration-guide.md)
+before upgrading. The `cloudflare migrate` tool has not been updated for these
+changes; affected call sites must be updated by hand.
+
+---
+
+### Breaking Changes
+
+#### Removed Resources
+
+- `magicCloudNetworking` -- the entire top-level resource has been removed, along
+  with all of its sub-resources: `catalogSyncs`, `catalogSyncs.prebuiltPolicies`,
+  `onRamps`, `onRamps.addressSpaces`, `cloudIntegrations`, and `resources`.
+- `registrar.domains` -- removed.
+
+#### Removed Methods
+
+- `accounts.payBadDebt.create()` -- removed along with the `PayBadDebtCreateResponse` type
+- `tenants.get()` -- removed along with the `Tenant` type
+- `tenants.accountTypes.list()` -- removed along with the `AccountTypeListResponse` type
+- `tenants.entitlements.get()` -- removed along with the `TenantEntitlements` type
+- `tenants.memberships.list()` -- removed along with the `TenantMembership` type
+- `tenantCustomNameservers.create()`, `.delete()`, `.get()` -- removed along with
+  the `TenantCustomNameserverCreateResponse`, `TenantCustomNameserverDeleteResponse`,
+  and `TenantCustomNameserverGetResponse` types
+- `browserRendering.devtools.browser.connect()`, `.launch()` -- removed
+- `browserRendering.devtools.browser.page.get()` -- removed
+
+#### Removed Types
+
+- `Shared.LoadBalancerPreview`
+- `brandProtection.Info`, `brandProtection.Submit`
+- `intel.whois.Whois`
+- `precursor.EnforcementRule` and `precursor.EnforcementRuleParam`
+- `magicTransit.sites.wans.WANStaticAddressingParam` -- use `WANStaticAddressing` instead
+- `organizations.organizationProfile.OrganizationProfileParam` -- use `OrganizationProfile` instead
+
+#### Pagination and return type changes
+
+The following `list()` methods changed pagination type. Auto-pagination
+(`for await (const item of ...)`) continues to work, but code that reads
+page-level fields or assigns the page to a typed variable must be updated:
+
+| Method | Before | After |
+|--------|--------|-------|
+| `rulesets.list()` | `RulesetListResponsesCursorPagination` | `RulesetListResponse` (no longer paginated) |
+| `rulesets.phases.versions.list()` | `VersionListResponsesSinglePage` | `VersionListResponse` (no longer paginated) |
+| `rulesets.versions.list()` | `VersionListResponsesSinglePage` | `VersionListResponse` (no longer paginated) |
+| `tenants.accounts.list()` | `TenantAccountsSinglePage` | `AccountListResponsesV4PagePaginationArray` |
+| `user.tenants.list()` | `OrganizationsSinglePage` | `TenantListResponsesSinglePage` |
+| `diagnostics.endpointHealthchecks.list()` | `EndpointHealthcheckListResponse` | `EndpointHealthcheckListResponsesSinglePage` (now paginated) |
+| `zeroTrust.resourceLibrary.applications.list()` | `ApplicationListResponsesSinglePage` | `ApplicationListResponsesCursorPaginationAfter` |
+| `zeroTrust.resourceLibrary.categories.list()` | `CategoryListResponsesSinglePage` | `CategoryListResponsesCursorPaginationAfter` |
+
+`tenants.accounts.list()` now also accepts a params object and returns
+`AccountListResponse` elements (the `TenantAccounts` element type was removed).
+
+Other return type changes:
+
+- `zeroTrust.access.users.lastSeenIdentity.get()` now returns
+  `LastSeenIdentityGetResponse` instead of `Identity`.
+- `accounts.subscriptions.bulk.create()` now returns `BulkCreateResponse`
+  (previously `BulkCreateResponse | null`).
+- `workersForPlatforms.dispatch.namespaces.scripts.tags.delete()` now returns
+  `TagDeleteResponse` (previously `TagDeleteResponse | null`).
+- `vectorize.indexes.getByIDs()` now returns `IndexGetByIDsResponsesSinglePage`
+  (previously `IndexGetByIDsResponse | null`).
+
+#### AI Search endpoint changes
+
+The `name` path parameter on all `aiSearch.namespaces.instances` methods (and the
+nested `instances.jobs` and `instances.items` resources) has been renamed to
+`namespace`. The endpoints changed from
+`/accounts/{account_id}/ai-search/namespaces/{name}/...` to
+`/accounts/{account_id}/ai-search/namespaces/{namespace}/...`. The positional
+argument is unchanged in position; only its name changed.
+
+---
+
+### Features
+
+#### K2 Streams
+
+Added a new top-level `k2` resource for managing K2 streams.
+
+- `k2.streams.create()`, `.update()`, `.list()`, `.delete()`, `.get()`
+- `k2.streams.subscriptions.list()`
+
+Stream input toggles (HTTP and Workers bindings) are modeled as a simple
+`{ enabled: boolean }` shape.
+
+#### Monetization
+
+Added a new top-level `monetization` resource.
+
+- `monetization.rules.update()`, `.delete()`, `.deleteRule()`, `.editRule()`, `.get()`, `.getRule()`
+
+#### Zero Trust CWS (`zeroTrust.cws`)
+
+Added a new `zeroTrust.cws` resource group.
+
+- `zeroTrust.cws.basicAuthCredentials.create()`, `.list()`, `.delete()`, `.get()`,
+  and `basicAuthCredentials.secrets.create()`, `.list()`, `.delete()`, `.get()`
+- `zeroTrust.cws.deployments`, `domainACLs`, `policies`, `policySets`,
+  `regoMetadata`, `regoModules`, `workloads` -- each with `create()`, `update()`,
+  `list()`, `delete()`, `get()`
+- `zeroTrust.cws.tenantStructures.create()`, `.update()`, `.list()`, `.delete()`,
+  `.get()`, and `tenantStructures.nodes.create()`, `.update()`, `.list()`,
+  `.delete()`, `.batch()`, `.get()`
+
+#### Other new resources
+
+- `dns.settings.account.nameserverSets.create()`, `.list()`, `.delete()`, `.get()`
+- `billing.spendPolicies.create()`, `.update()`, `.list()`, `.delete()`, `.get()`,
+  `billing.spendPolicies.audit.list()`, `billing.spendPolicies.activity.list()`
+- `r2.buckets.jobs.create()`, `.list()`, `.get()`
+- `zeroTrust.access.userPopulations.create()`, `.update()`, `.list()`, `.delete()`,
+  `.get()`, and `userPopulations.users.create()`, `.update()`, `.list()`,
+  `.delete()`, `.get()`, `.replace()`
+- `zeroTrust.access.logs.jitRequests.list()`, `.get()`
+- `zeroTrust.access.users.mfaAuthenticators.delete()`, `zeroTrust.access.users.passkeys.delete()`
+- `zeroTrust.access.mfa.authenticatorCatalog.list()`
+- `zeroTrust.casb.posture.assetSchemas.list()`, `.get()`
+- `zeroTrust.dlp.validators.list()`, `.get()`, and
+  `validators.proximityWords.create()`, `.update()`, `.list()`, `.delete()`, `.get()`
+- `zeroTrust.gateway.dnsDestinationIPs.list()`
+
+#### New methods on existing resources
+
+- `workers.beta.workers.versions.profile()`
+- `apiGateway.discovery.operations.edit()`
+- `d1.database.undelete()`
+- `zeroTrust.identityProviders.scim.groups.delete()`, `.get()`
+- `zeroTrust.identityProviders.scim.users.delete()`, `.get()`
+- `zeroTrust.access.customPages.validate()`
+- `zeroTrust.casb.posture.findingTypes.create()`, `.update()`, `.delete()`, `.validate()`
+- `aiSearch.namespaces.instances.move()`
+
 ## 7.3.0 (2026-10-02)
 
 Full Changelog: [v7.2.0...v7.3.0](https://github.com/cloudflare/cloudflare-typescript/compare/v7.2.0...v7.3.0)

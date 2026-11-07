@@ -25,7 +25,7 @@ export class BaseWebhooks extends APIResource {
    * const webhook =
    *   await client.zeroTrust.casb.posture.webhooks.create({
    *     account_id: '46148281d8a93d002ef242d8b0d5f9f6',
-   *     authentication_type: 'Bearer Auth',
+   *     authentication_type: 'HMAC-Signing',
    *     destination_url: 'https://example.com/webhook',
    *     label: 'Send to Slack',
    *   });
@@ -51,7 +51,7 @@ export class BaseWebhooks extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '46148281d8a93d002ef242d8b0d5f9f6',
-   *       authentication_type: 'Bearer Auth',
+   *       authentication_type: 'HMAC-Signing',
    *       destination_url: 'https://example.com/webhook',
    *       label: 'Send to Slack',
    *       status: 'enabled',
@@ -142,7 +142,7 @@ export class BaseWebhooks extends APIResource {
    * const response =
    *   await client.zeroTrust.casb.posture.webhooks.evaluate({
    *     account_id: '46148281d8a93d002ef242d8b0d5f9f6',
-   *     authentication_type: 'Bearer Auth',
+   *     authentication_type: 'HMAC-Signing',
    *     destination_url: 'https://example.com/webhook',
    *   });
    * ```

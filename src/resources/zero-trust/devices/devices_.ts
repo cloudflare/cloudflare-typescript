@@ -195,6 +195,12 @@ export interface DeviceListResponse {
   model?: string | null;
 
   /**
+   * True if this device is in
+   * [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/).
+   */
+  multiuser?: boolean;
+
+  /**
    * The device operating system version number.
    */
   os_version?: string | null;
@@ -369,6 +375,12 @@ export interface DeviceGetResponse {
    * The model name of the device.
    */
   model?: string | null;
+
+  /**
+   * True if this device is in
+   * [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/).
+   */
+  multiuser?: boolean;
 
   /**
    * The device operating system version number.

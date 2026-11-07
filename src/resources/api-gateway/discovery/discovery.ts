@@ -6,6 +6,8 @@ import {
   BaseOperations,
   OperationBulkEditParams,
   OperationBulkEditResponse,
+  OperationEditParams,
+  OperationEditResponse,
   OperationListParams,
   Operations,
 } from './operations';
@@ -138,7 +140,9 @@ export declare namespace Discovery {
     Operations as Operations,
     BaseOperations as BaseOperations,
     type OperationBulkEditResponse as OperationBulkEditResponse,
+    type OperationEditResponse as OperationEditResponse,
     type OperationListParams as OperationListParams,
     type OperationBulkEditParams as OperationBulkEditParams,
+    type OperationEditParams as OperationEditParams,
   };
 }

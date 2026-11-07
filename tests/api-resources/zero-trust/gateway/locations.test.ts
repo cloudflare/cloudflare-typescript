@@ -47,6 +47,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { locations:
       name: 'Austin Office Location',
       client_default: false,
       dns_destination_ips_id: '0e4a32c6-6fb8-4858-9296-98f51631e8e6',
+      dns64_enabled: false,
       ecs_support: false,
       endpoints: {
         doh: {
@@ -83,6 +84,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { locations:
       name: 'Austin Office Location',
       client_default: false,
       dns_destination_ips_id: '0e4a32c6-6fb8-4858-9296-98f51631e8e6',
+      dns64_enabled: false,
       ecs_support: false,
       endpoints: {
         doh: {

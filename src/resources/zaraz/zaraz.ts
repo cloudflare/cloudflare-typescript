@@ -21,6 +21,7 @@ import {
   HistoryUpdateParams,
 } from './history/history';
 import { APIPromise } from '../../core/api-promise';
+import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -44,6 +45,7 @@ export class BaseZaraz extends APIResource {
       this._client.put(path`/zones/${zone_id}/settings/zaraz/workflow`, {
         body: workflow,
         ...options,
+        headers: buildHeaders([{ 'Content-Type': 'text/plain' }, options?.headers]),
       }) as APIPromise<{ result: WorkflowAPI.Workflow }>
     )._thenUnwrap((obj) => obj.result);
   }

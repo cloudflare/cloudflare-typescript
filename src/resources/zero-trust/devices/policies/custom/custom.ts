@@ -231,6 +231,13 @@ export interface CustomCreateParams {
   dns_search_suffixes?: Array<CustomCreateParams.DNSSearchSuffix>;
 
   /**
+   * Body param: Determines whether the WARP client can silently reauthenticate the
+   * user with device credentials (Microsoft Entra) instead of prompting for
+   * browser-based reauthentication.
+   */
+  enable_device_credential_authentication?: boolean;
+
+  /**
    * Body param: Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -279,7 +286,7 @@ export interface CustomCreateParams {
    * Body param: The wirefilter expression to match devices. Available values:
    * "identity.email", "identity.groups.id", "identity.groups.name",
    * "identity.groups.email", "identity.service_token_uuid",
-   * "identity.saml_attributes", "network", "os.name", "os.version".
+   * "identity.saml_attributes", "network", "os.name", "os.version", "device.tags".
    */
   match?: string;
 
@@ -399,6 +406,12 @@ export namespace CustomCreateParams {
     wireguard_endpoints: Array<string>;
 
     /**
+     * Whether WARP users may manually override the automatic Global Acceleration
+     * decision. Defaults to true when not provided.
+     */
+    allow_manual_override?: boolean;
+
+    /**
      * Automatically switch Global Acceleration regions based on device location.
      * Defaults to false when not provided.
      */
@@ -515,6 +528,13 @@ export interface CustomEditParams {
   dns_search_suffixes?: Array<CustomEditParams.DNSSearchSuffix>;
 
   /**
+   * Body param: Determines whether the WARP client can silently reauthenticate the
+   * user with device credentials (Microsoft Entra) instead of prompting for
+   * browser-based reauthentication.
+   */
+  enable_device_credential_authentication?: boolean;
+
+  /**
    * Body param: Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -563,7 +583,7 @@ export interface CustomEditParams {
    * Body param: The wirefilter expression to match devices. Available values:
    * "identity.email", "identity.groups.id", "identity.groups.name",
    * "identity.groups.email", "identity.service_token_uuid",
-   * "identity.saml_attributes", "network", "os.name", "os.version".
+   * "identity.saml_attributes", "network", "os.name", "os.version", "device.tags".
    */
   match?: string;
 
@@ -680,6 +700,12 @@ export namespace CustomEditParams {
      * or masque_endpoints must be provided.
      */
     wireguard_endpoints: Array<string>;
+
+    /**
+     * Whether WARP users may manually override the automatic Global Acceleration
+     * decision. Defaults to true when not provided.
+     */
+    allow_manual_override?: boolean;
 
     /**
      * Automatically switch Global Acceleration regions based on device location.

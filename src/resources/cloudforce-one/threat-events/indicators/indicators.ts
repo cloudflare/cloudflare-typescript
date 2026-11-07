@@ -26,11 +26,10 @@ export class BaseIndicators extends APIResource {
   ] as const);
 
   /**
-   * Retrieves indicators across specified datasets, ordered by createdAt descending
-   * then UUID, dataset ID, and shard ID ascending. Use the standalone datasetIds
-   * value 'all'/'\*' for legacy all-datasets behavior, 'analytics' for
-   * isAnalytics=true datasets, or 'operational' for isAnalytics=false datasets. If
-   * no datasetIds are provided, uses the default dataset.
+   * Lists indicators across datasets, newest first. `datasetIds` accepts dataset
+   * UUIDs or one scope value used alone: `all` (or `*`) and `operational` select the
+   * intelligence datasets you can read, and `analytics` selects the analytics
+   * datasets you can read. Without `datasetIds`, the default dataset is used.
    *
    * @example
    * ```ts
@@ -350,9 +349,9 @@ export interface IndicatorListParams {
 
   /**
    * Query param: Dataset UUIDs to query, or one standalone scope value: 'all'/'\*'
-   * for legacy all-datasets behavior, 'analytics' for isAnalytics=true datasets, or
-   * 'operational' for isAnalytics=false datasets. If not provided, uses the default
-   * dataset.
+   * or 'operational' for readable intelligence datasets (isAnalytics=false), or
+   * 'analytics' for readable analytics datasets (isAnalytics=true). If not provided,
+   * uses the default dataset.
    */
   datasetIds?: Array<string>;
 

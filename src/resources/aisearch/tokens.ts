@@ -63,7 +63,8 @@ export class BaseTokens extends APIResource {
   }
 
   /**
-   * List stored AI Search credentials in the account without exposing their secrets.
+   * Lists stored AI Search credentials in the account without exposing their
+   * secrets.
    *
    * @example
    * ```ts
@@ -88,7 +89,7 @@ export class BaseTokens extends APIResource {
   }
 
   /**
-   * Permanently delete a stored AI Search credential. Credentials in use by an
+   * Deletes a stored AI Search credential permanently. Credentials in use by an
    * instance cannot be deleted.
    *
    * @example

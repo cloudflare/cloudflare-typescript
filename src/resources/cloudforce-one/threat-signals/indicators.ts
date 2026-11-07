@@ -92,27 +92,33 @@ export interface IndicatorListParams {
   account_id: string;
 
   /**
-   * Query param
+   * Query param: Article UUID filter. Omit to include indicators from every article.
    */
   article_id?: string;
 
   /**
-   * Query param
+   * Query param: Opaque cursor from the previous response's `pagination.cursor`.
+   * When provided, page size, ordering, and filters come from the cursor. Sending
+   * `per_page`, `sort`, `include_total`, `feed_id`, `article_id`, or `search`
+   * alongside it returns a 400 `CursorFilterConflictError`.
    */
   cursor?: string;
 
   /**
-   * Query param
+   * Query param: Feed UUID filter. Omit to include indicators from every account
+   * feed.
    */
   feed_id?: string;
 
   /**
-   * Query param
+   * Query param: When true on the first page, count matching indicators and return
+   * an exact total. Defaults to false; cursor pages do not recalculate totals.
    */
   include_total?: boolean;
 
   /**
-   * Query param
+   * Query param: Number of indicators per cursor page, from 1 to 100. Defaults
+   * to 20.
    */
   per_page?: number;
 
@@ -125,7 +131,8 @@ export interface IndicatorListParams {
   search?: string;
 
   /**
-   * Query param
+   * Query param: Sort by id. Use id for ascending or -id for descending order;
+   * defaults to id.
    */
   sort?: string;
 }

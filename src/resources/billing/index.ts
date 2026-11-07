@@ -25,6 +25,21 @@ export {
 } from './profiles/index';
 export { RatePlans, BaseRatePlans, type RatePlanGetResponse } from './rate-plans';
 export {
+  SpendPolicies,
+  BaseSpendPolicies,
+  type SpendPolicyCreateResponse,
+  type SpendPolicyUpdateResponse,
+  type SpendPolicyListResponse,
+  type SpendPolicyDeleteResponse,
+  type SpendPolicyGetResponse,
+  type SpendPolicyCreateParams,
+  type SpendPolicyUpdateParams,
+  type SpendPolicyListParams,
+  type SpendPolicyDeleteParams,
+  type SpendPolicyGetParams,
+  type SpendPolicyListResponsesSinglePage,
+} from './spend-policies/index';
+export {
   UnpaidInvoice,
   BaseUnpaidInvoice,
   type UnpaidInvoiceGetResponse,

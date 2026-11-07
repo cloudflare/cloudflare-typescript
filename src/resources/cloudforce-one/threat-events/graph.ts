@@ -93,8 +93,11 @@ export interface GraphListParams {
 
   /**
    * Query param: Comma-separated dataset UUIDs to restrict neighbor scope, or one
-   * standalone scope value: 'all'/'\*', 'analytics' for isAnalytics=true datasets,
-   * or 'operational' for isAnalytics=false datasets. Intersected with access grants.
+   * standalone scope value: 'operational' for readable intelligence datasets
+   * (isAnalytics=false), 'analytics' for readable analytics datasets
+   * (isAnalytics=true), or 'all'/'\*' for every readable dataset including analytics
+   * datasets (the graph reads analytics relationships from R2). Intersected with
+   * access grants.
    */
   datasetIds?: Array<string>;
 

@@ -145,6 +145,30 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { customPages
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
+
+  test('validate: only required params', async () => {
+    const responsePromise = client.zeroTrust.access.customPages.validate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      template: 'template',
+      type: 'identity_denied',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('validate: required and optional params', async () => {
+    const response = await client.zeroTrust.access.customPages.validate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      template: 'template',
+      type: 'identity_denied',
+      version: 0,
+    });
+  });
 };
 describe('resource customPages', () => runTests(client));
 describe('resource customPages (tree shakable, base)', () => runTests(partialClient));

@@ -49,6 +49,8 @@ const runTests = (client: PartialCloudflare<{ workers: { domains: BaseDomains } 
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       hostname: 'app.example.com',
       service: 'my-worker',
+      enabled: true,
+      previews_enabled: false,
       zone_id: '593c9c94de529bbbfaac7c53ced0447d',
       zone_name: 'example.com',
     });
@@ -68,8 +70,10 @@ const runTests = (client: PartialCloudflare<{ workers: { domains: BaseDomains } 
   test('list: required and optional params', async () => {
     const response = await client.workers.domains.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      enabled: true,
       environment: 'production',
       hostname: 'app.example.com',
+      previews_enabled: false,
       service: 'my-worker',
       zone_id: '593c9c94de529bbbfaac7c53ced0447d',
       zone_name: 'example.com',

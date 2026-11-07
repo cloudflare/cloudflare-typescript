@@ -1013,9 +1013,19 @@ export interface SinkListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
+   * Query param: Sort direction.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
    * Query param: Filters sinks by name (case-insensitive substring).
    */
   name?: string;
+
+  /**
+   * Query param: Sorts sinks by this field. Defaults to `created_at`.
+   */
+  order_by?: 'name' | 'created_at';
 
   /**
    * Query param

@@ -222,6 +222,13 @@ export interface ContentPolicyCreateResponse {
    */
   enabled?: boolean;
 
+  /**
+   * Timestamp at which the policy expires. After this time, Email Security ignores
+   * the policy. The value must lie in the future. Send `null` to clear the
+   * expiration.
+   */
+  expires_at?: string | null;
+
   modified_at?: string;
 
   /**
@@ -260,6 +267,13 @@ export interface ContentPolicyListResponse {
    * Whether the policy is active.
    */
   enabled?: boolean;
+
+  /**
+   * Timestamp at which the policy expires. After this time, Email Security ignores
+   * the policy. The value must lie in the future. Send `null` to clear the
+   * expiration.
+   */
+  expires_at?: string | null;
 
   modified_at?: string;
 
@@ -325,6 +339,13 @@ export namespace ContentPolicyBatchResponse {
      */
     enabled?: boolean;
 
+    /**
+     * Timestamp at which the policy expires. After this time, Email Security ignores
+     * the policy. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
     modified_at?: string;
 
     /**
@@ -364,6 +385,13 @@ export namespace ContentPolicyBatchResponse {
      */
     enabled?: boolean;
 
+    /**
+     * Timestamp at which the policy expires. After this time, Email Security ignores
+     * the policy. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
     modified_at?: string;
 
     /**
@@ -402,6 +430,13 @@ export namespace ContentPolicyBatchResponse {
      * Whether the policy is active.
      */
     enabled?: boolean;
+
+    /**
+     * Timestamp at which the policy expires. After this time, Email Security ignores
+     * the policy. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
 
     modified_at?: string;
 
@@ -443,6 +478,13 @@ export interface ContentPolicyEditResponse {
    */
   enabled?: boolean;
 
+  /**
+   * Timestamp at which the policy expires. After this time, Email Security ignores
+   * the policy. The value must lie in the future. Send `null` to clear the
+   * expiration.
+   */
+  expires_at?: string | null;
+
   modified_at?: string;
 
   /**
@@ -481,6 +523,13 @@ export interface ContentPolicyGetResponse {
    * Whether the policy is active.
    */
   enabled?: boolean;
+
+  /**
+   * Timestamp at which the policy expires. After this time, Email Security ignores
+   * the policy. The value must lie in the future. Send `null` to clear the
+   * expiration.
+   */
+  expires_at?: string | null;
 
   modified_at?: string;
 
@@ -532,6 +581,13 @@ export interface ContentPolicyCreateParams {
   targets: Array<'SUBJECT' | 'BODY'>;
 
   /**
+   * Body param: Timestamp at which the policy expires. After this time, Email
+   * Security ignores the policy. The value must lie in the future. Send `null` to
+   * clear the expiration.
+   */
+  expires_at?: string | null;
+
+  /**
    * Body param: Optional note describing the purpose of the policy.
    */
   notes?: string | null;
@@ -552,6 +608,12 @@ export interface ContentPolicyListParams extends V4PagePaginationArrayParams {
    * Query param: Filter by enabled status.
    */
   enabled?: boolean;
+
+  /**
+   * Query param: Filter to return only expired policies (`true`) or only policies
+   * that still apply (`false`). Omit to return both.
+   */
+  expired?: boolean;
 
   /**
    * Query param: Filter by exact policy name.
@@ -623,6 +685,13 @@ export namespace ContentPolicyBatchParams {
     enabled?: boolean;
 
     /**
+     * Timestamp at which the policy expires. After this time, Email Security ignores
+     * the policy. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
+    /**
      * Human-readable name of the policy.
      */
     name?: string;
@@ -668,6 +737,13 @@ export namespace ContentPolicyBatchParams {
     targets: Array<'SUBJECT' | 'BODY'>;
 
     /**
+     * Timestamp at which the policy expires. After this time, Email Security ignores
+     * the policy. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
+    /**
      * Optional note describing the purpose of the policy.
      */
     notes?: string | null;
@@ -698,6 +774,13 @@ export namespace ContentPolicyBatchParams {
     targets: Array<'SUBJECT' | 'BODY'>;
 
     /**
+     * Timestamp at which the policy expires. After this time, Email Security ignores
+     * the policy. The value must lie in the future. Send `null` to clear the
+     * expiration.
+     */
+    expires_at?: string | null;
+
+    /**
      * Optional note describing the purpose of the policy.
      */
     notes?: string | null;
@@ -714,6 +797,13 @@ export interface ContentPolicyEditParams {
    * Body param: Whether the policy is active.
    */
   enabled?: boolean;
+
+  /**
+   * Body param: Timestamp at which the policy expires. After this time, Email
+   * Security ignores the policy. The value must lie in the future. Send `null` to
+   * clear the expiration.
+   */
+  expires_at?: string | null;
 
   /**
    * Body param: Human-readable name of the policy.

@@ -132,7 +132,7 @@ export class BaseMonitors extends APIResource {
   }
 
   /**
-   * List a single configured monitor for an account.
+   * Fetch a single configured monitor for an account.
    *
    * @example
    * ```ts

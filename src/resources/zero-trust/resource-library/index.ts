@@ -13,7 +13,7 @@ export {
   type ApplicationListParams,
   type ApplicationDeleteParams,
   type ApplicationGetParams,
-  type ApplicationListResponsesSinglePage,
+  type ApplicationListResponsesCursorPaginationAfter,
 } from './applications';
 export {
   Categories,
@@ -22,6 +22,6 @@ export {
   type CategoryGetResponse,
   type CategoryListParams,
   type CategoryGetParams,
-  type CategoryListResponsesSinglePage,
+  type CategoryListResponsesCursorPaginationAfter,
 } from './categories';
 export { ResourceLibrary, BaseResourceLibrary } from './resource-library';

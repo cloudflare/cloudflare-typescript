@@ -241,7 +241,7 @@ export namespace MessageListResponse {
 
     to_name?: Array<string> | null;
 
-    validation?: Message.Validation | null;
+    validation?: Message.EmailSecurityValidation | unknown;
 
     x_originating_ip?: string | null;
   }
@@ -373,7 +373,7 @@ export namespace MessageListResponse {
       value?: string | null;
     }
 
-    export interface Validation {
+    export interface EmailSecurityValidation {
       comment?: string | null;
 
       dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;

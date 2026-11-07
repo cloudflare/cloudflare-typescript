@@ -32,7 +32,7 @@ const runTests = (
   test('create: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.jobs.create('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +46,7 @@ const runTests = (
   test('create: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.jobs.create('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       description: 'description',
     });
   });
@@ -54,7 +54,7 @@ const runTests = (
   test('update: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.jobs.update('job_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
       action: 'cancel',
     });
@@ -70,7 +70,7 @@ const runTests = (
   test('update: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.jobs.update('job_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
       action: 'cancel',
     });
@@ -79,7 +79,7 @@ const runTests = (
   test('list: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.jobs.list('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -93,7 +93,7 @@ const runTests = (
   test('list: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.jobs.list('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       page: 1,
       per_page: 0,
     });
@@ -102,7 +102,7 @@ const runTests = (
   test('get: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.jobs.get('job_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -117,7 +117,7 @@ const runTests = (
   test('get: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.jobs.get('job_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
     });
   });
@@ -125,7 +125,7 @@ const runTests = (
   test('logs: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.instances.jobs.logs('job_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -140,7 +140,7 @@ const runTests = (
   test('logs: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.jobs.logs('job_id', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'my-namespace',
+      namespace: 'my-namespace',
       id: 'my-ai-search',
       page: 1,
       per_page: 0,

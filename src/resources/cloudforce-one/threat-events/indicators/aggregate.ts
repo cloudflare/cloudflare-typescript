@@ -94,9 +94,10 @@ export interface AggregateListParams {
 
   /**
    * Query param: Dataset UUIDs to filter by, or one standalone scope value:
-   * 'all'/'\*' for all accessible datasets, 'analytics' for isAnalytics=true
-   * datasets, or 'operational' for isAnalytics=false datasets. If not provided,
-   * aggregates across all accessible datasets.
+   * 'operational' for readable intelligence datasets (isAnalytics=false),
+   * 'analytics' for readable analytics datasets (isAnalytics=true), or 'all'/'\*'
+   * for every readable dataset including analytics datasets. If not provided,
+   * aggregates across all accessible datasets, including analytics datasets.
    */
   datasetIds?: Array<string>;
 

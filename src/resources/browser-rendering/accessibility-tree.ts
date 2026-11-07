@@ -30,10 +30,10 @@ export class BaseAccessibilityTree extends APIResource {
     params: AccessibilityTreeCreateParams,
     options?: RequestOptions,
   ): APIPromise<AccessibilityTreeCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id, browser, cacheTTL, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/browser-rendering/accessibilityTree`, {
-        query: { cacheTTL },
+        query: { browser, cacheTTL },
         body,
         ...options,
       }) as APIPromise<{ result: AccessibilityTreeCreateResponse }>
@@ -123,6 +123,11 @@ export declare namespace AccessibilityTreeCreateParams {
      * Body param
      */
     url: string;
+
+    /**
+     * Query param: Rendering backend. Set to `kitesurf` to use Kitesurf (beta).
+     */
+    browser?: 'kitesurf';
 
     /**
      * Query param: Cache TTL default is 5s. Set to 0 to disable.
@@ -401,6 +406,11 @@ export declare namespace AccessibilityTreeCreateParams {
      * Body param
      */
     html: string;
+
+    /**
+     * Query param: Rendering backend. Set to `kitesurf` to use Kitesurf (beta).
+     */
+    browser?: 'kitesurf';
 
     /**
      * Query param: Cache TTL default is 5s. Set to 0 to disable.

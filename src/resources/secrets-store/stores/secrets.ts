@@ -29,17 +29,7 @@ export class BaseSecrets extends APIResource {
    *   {
    *     account_id: '985e105f4ecef8ad9ca31a8372d0c353',
    *     body: [
-   *       {
-   *         name: 'MY_API_KEY',
-   *         scopes: [
-   *           'workers',
-   *           'ai_gateway',
-   *           'dex',
-   *           'access',
-   *           'websearch',
-   *         ],
-   *         value: 'api-token-secret-123',
-   *       },
+   *       { name: 'MY_API_KEY', value: 'api-token-secret-123' },
    *     ],
    *   },
    * )) {
@@ -154,13 +144,6 @@ export class BaseSecrets extends APIResource {
    *       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
    *       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       name: 'MY_API_KEY',
-   *       scopes: [
-   *         'workers',
-   *         'ai_gateway',
-   *         'dex',
-   *         'access',
-   *         'websearch',
-   *       ],
    *     },
    *   );
    * ```
@@ -268,9 +251,11 @@ export interface SecretCreateResponse {
   comment?: string;
 
   /**
-   * The list of services that can use this secret.
+   * The list of services that can use this secret, or null when the secret inherits
+   * its store's scopes. Set it to null in a patch to inherit again. An empty list
+   * lets no service use the secret.
    */
-  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'> | null;
 }
 
 export interface SecretListResponse {
@@ -307,9 +292,11 @@ export interface SecretListResponse {
   comment?: string;
 
   /**
-   * The list of services that can use this secret.
+   * The list of services that can use this secret, or null when the secret inherits
+   * its store's scopes. Set it to null in a patch to inherit again. An empty list
+   * lets no service use the secret.
    */
-  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'> | null;
 }
 
 /**
@@ -356,9 +343,11 @@ export interface SecretDuplicateResponse {
   comment?: string;
 
   /**
-   * The list of services that can use this secret.
+   * The list of services that can use this secret, or null when the secret inherits
+   * its store's scopes. Set it to null in a patch to inherit again. An empty list
+   * lets no service use the secret.
    */
-  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'> | null;
 }
 
 export interface SecretEditResponse {
@@ -395,9 +384,11 @@ export interface SecretEditResponse {
   comment?: string;
 
   /**
-   * The list of services that can use this secret.
+   * The list of services that can use this secret, or null when the secret inherits
+   * its store's scopes. Set it to null in a patch to inherit again. An empty list
+   * lets no service use the secret.
    */
-  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'> | null;
 }
 
 export interface SecretGetResponse {
@@ -434,9 +425,11 @@ export interface SecretGetResponse {
   comment?: string;
 
   /**
-   * The list of services that can use this secret.
+   * The list of services that can use this secret, or null when the secret inherits
+   * its store's scopes. Set it to null in a patch to inherit again. An empty list
+   * lets no service use the secret.
    */
-  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'> | null;
 }
 
 export interface SecretCreateParams {
@@ -459,11 +452,6 @@ export namespace SecretCreateParams {
     name: string;
 
     /**
-     * The list of services that can use this secret.
-     */
-    scopes: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
-
-    /**
      * The value of the secret. Maximum 64 KiB (65,536 bytes). Note that this is 'write
      * only' - the API never returns this value; it exists only to create or modify
      * secrets.
@@ -474,6 +462,12 @@ export namespace SecretCreateParams {
      * Freeform text describing the secret.
      */
     comment?: string;
+
+    /**
+     * The list of services that can use this secret. Omit it on create or duplicate to
+     * inherit the store's scopes. An empty list lets no service use the secret.
+     */
+    scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
   }
 }
 
@@ -541,14 +535,16 @@ export interface SecretDuplicateParams {
   name: string;
 
   /**
-   * Body param: The list of services that can use this secret.
-   */
-  scopes: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
-
-  /**
    * Body param: Freeform text describing the secret.
    */
   comment?: string;
+
+  /**
+   * Body param: The list of services that can use this secret. Omit it on create or
+   * duplicate to inherit the store's scopes. An empty list lets no service use the
+   * secret.
+   */
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
 }
 
 export interface SecretEditParams {
@@ -568,9 +564,11 @@ export interface SecretEditParams {
   comment?: string;
 
   /**
-   * Body param: The list of services that can use this secret.
+   * Body param: The list of services that can use this secret, or null when the
+   * secret inherits its store's scopes. Set it to null in a patch to inherit again.
+   * An empty list lets no service use the secret.
    */
-  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'> | null;
 
   /**
    * Body param: The value of the secret. Maximum 64 KiB (65,536 bytes). Note that

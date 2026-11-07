@@ -1055,6 +1055,11 @@ export namespace TelemetryQueryResponse {
         endTime?: number;
 
         /**
+         * Span end time as a Unix epoch in nanoseconds.
+         */
+        endTimeNs?: string;
+
+        /**
          * Error message, present when the log represents an error.
          */
         error?: string;
@@ -1063,6 +1068,11 @@ export namespace TelemetryQueryResponse {
          * Templatized version of the error message used for grouping similar errors.
          */
         errorTemplate?: string;
+
+        /**
+         * Size of the stored telemetry event in bytes.
+         */
+        eventSize?: number;
 
         /**
          * Content-based fingerprint used to group similar events.
@@ -1136,6 +1146,18 @@ export namespace TelemetryQueryResponse {
         spanName?: string;
 
         /**
+         * OpenTelemetry span status. Present only on spans. `unset` when the span did not
+         * set a status, including spans recorded before status was captured.
+         */
+        spanStatus?: 'unset' | 'ok' | 'error';
+
+        /**
+         * OpenTelemetry span status message. Present only on spans when the status is
+         * `error` and a message was set.
+         */
+        spanStatusMessage?: string;
+
+        /**
          * Stack / deployment identifier.
          */
         stackId?: string;
@@ -1146,9 +1168,19 @@ export namespace TelemetryQueryResponse {
         startTime?: number;
 
         /**
+         * Span start time as a Unix epoch in nanoseconds.
+         */
+        startTimeNs?: string;
+
+        /**
          * HTTP response status code returned by the Worker.
          */
         statusCode?: number;
+
+        /**
+         * Event time as a Unix epoch in nanoseconds.
+         */
+        timestampNs?: string;
 
         /**
          * Total duration of the entire trace in milliseconds.
@@ -1476,6 +1508,11 @@ export namespace TelemetryQueryResponse {
       endTime?: number;
 
       /**
+       * Span end time as a Unix epoch in nanoseconds.
+       */
+      endTimeNs?: string;
+
+      /**
        * Error message, present when the log represents an error.
        */
       error?: string;
@@ -1484,6 +1521,11 @@ export namespace TelemetryQueryResponse {
        * Templatized version of the error message used for grouping similar errors.
        */
       errorTemplate?: string;
+
+      /**
+       * Size of the stored telemetry event in bytes.
+       */
+      eventSize?: number;
 
       /**
        * Content-based fingerprint used to group similar events.
@@ -1557,6 +1599,18 @@ export namespace TelemetryQueryResponse {
       spanName?: string;
 
       /**
+       * OpenTelemetry span status. Present only on spans. `unset` when the span did not
+       * set a status, including spans recorded before status was captured.
+       */
+      spanStatus?: 'unset' | 'ok' | 'error';
+
+      /**
+       * OpenTelemetry span status message. Present only on spans when the status is
+       * `error` and a message was set.
+       */
+      spanStatusMessage?: string;
+
+      /**
        * Stack / deployment identifier.
        */
       stackId?: string;
@@ -1567,9 +1621,19 @@ export namespace TelemetryQueryResponse {
       startTime?: number;
 
       /**
+       * Span start time as a Unix epoch in nanoseconds.
+       */
+      startTimeNs?: string;
+
+      /**
        * HTTP response status code returned by the Worker.
        */
       statusCode?: number;
+
+      /**
+       * Event time as a Unix epoch in nanoseconds.
+       */
+      timestampNs?: string;
 
       /**
        * Total duration of the entire trace in milliseconds.

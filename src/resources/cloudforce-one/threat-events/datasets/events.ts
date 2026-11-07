@@ -10,7 +10,7 @@ export class BaseEvents extends APIResource {
     Object.freeze(['cloudforceOne', 'threatEvents', 'datasets', 'events'] as const);
 
   /**
-   * Retrieves a specific event by its UUID.
+   * Returns an event from a dataset by its UUID.
    *
    * @example
    * ```ts

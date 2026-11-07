@@ -213,6 +213,12 @@ export interface CertificateCreateResponse {
   issuer_raw?: string;
 
   /**
+   * Indicate the read-only region the certificate authority's key material is pinned
+   * to. Omitted for certificates that were created without a region.
+   */
+  region?: string;
+
+  /**
    * Indicate the read-only certificate type, BYO-PKI (custom) or Gateway-managed.
    */
   type?: 'custom' | 'gateway_managed';
@@ -265,6 +271,12 @@ export interface CertificateListResponse {
    * Provide the entire issuer field of the certificate (read-only).
    */
   issuer_raw?: string;
+
+  /**
+   * Indicate the read-only region the certificate authority's key material is pinned
+   * to. Omitted for certificates that were created without a region.
+   */
+  region?: string;
 
   /**
    * Indicate the read-only certificate type, BYO-PKI (custom) or Gateway-managed.
@@ -321,6 +333,12 @@ export interface CertificateDeleteResponse {
   issuer_raw?: string;
 
   /**
+   * Indicate the read-only region the certificate authority's key material is pinned
+   * to. Omitted for certificates that were created without a region.
+   */
+  region?: string;
+
+  /**
    * Indicate the read-only certificate type, BYO-PKI (custom) or Gateway-managed.
    */
   type?: 'custom' | 'gateway_managed';
@@ -373,6 +391,12 @@ export interface CertificateActivateResponse {
    * Provide the entire issuer field of the certificate (read-only).
    */
   issuer_raw?: string;
+
+  /**
+   * Indicate the read-only region the certificate authority's key material is pinned
+   * to. Omitted for certificates that were created without a region.
+   */
+  region?: string;
 
   /**
    * Indicate the read-only certificate type, BYO-PKI (custom) or Gateway-managed.
@@ -429,6 +453,12 @@ export interface CertificateDeactivateResponse {
   issuer_raw?: string;
 
   /**
+   * Indicate the read-only region the certificate authority's key material is pinned
+   * to. Omitted for certificates that were created without a region.
+   */
+  region?: string;
+
+  /**
    * Indicate the read-only certificate type, BYO-PKI (custom) or Gateway-managed.
    */
   type?: 'custom' | 'gateway_managed';
@@ -481,6 +511,12 @@ export interface CertificateGetResponse {
    * Provide the entire issuer field of the certificate (read-only).
    */
   issuer_raw?: string;
+
+  /**
+   * Indicate the read-only region the certificate authority's key material is pinned
+   * to. Omitted for certificates that were created without a region.
+   */
+  region?: string;
 
   /**
    * Indicate the read-only certificate type, BYO-PKI (custom) or Gateway-managed.

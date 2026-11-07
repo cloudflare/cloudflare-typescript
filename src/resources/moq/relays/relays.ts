@@ -162,6 +162,10 @@ export type RelayListResponsesSinglePage = SinglePage<RelayListResponse>;
  * the issuers envelope.
  */
 export interface RelayCreateResponse {
+  /**
+   * Relay configuration. All sub-objects use whole-object replacement when present;
+   * omitted sub-objects preserve the existing value.
+   */
   config: RelayCreateResponse.Config;
 
   created: string;
@@ -183,6 +187,10 @@ export interface RelayCreateResponse {
 }
 
 export namespace RelayCreateResponse {
+  /**
+   * Relay configuration. All sub-objects use whole-object replacement when present;
+   * omitted sub-objects preserve the existing value.
+   */
   export interface Config {
     /**
      * Upstreams are external MOQT server publishers that a relay falls back to when it
@@ -274,6 +282,10 @@ export namespace RelayCreateResponse {
  * Full relay details (no tokens).
  */
 export interface RelayUpdateResponse {
+  /**
+   * Relay configuration. All sub-objects use whole-object replacement when present;
+   * omitted sub-objects preserve the existing value.
+   */
   config: RelayUpdateResponse.Config;
 
   created: string;
@@ -291,6 +303,10 @@ export interface RelayUpdateResponse {
 }
 
 export namespace RelayUpdateResponse {
+  /**
+   * Relay configuration. All sub-objects use whole-object replacement when present;
+   * omitted sub-objects preserve the existing value.
+   */
   export interface Config {
     /**
      * Upstreams are external MOQT server publishers that a relay falls back to when it
@@ -350,6 +366,10 @@ export type RelayDeleteResponse = unknown;
  * Full relay details (no tokens).
  */
 export interface RelayGetResponse {
+  /**
+   * Relay configuration. All sub-objects use whole-object replacement when present;
+   * omitted sub-objects preserve the existing value.
+   */
   config: RelayGetResponse.Config;
 
   created: string;
@@ -367,6 +387,10 @@ export interface RelayGetResponse {
 }
 
 export namespace RelayGetResponse {
+  /**
+   * Relay configuration. All sub-objects use whole-object replacement when present;
+   * omitted sub-objects preserve the existing value.
+   */
   export interface Config {
     /**
      * Upstreams are external MOQT server publishers that a relay falls back to when it
@@ -426,7 +450,8 @@ export interface RelayUpdateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Relay configuration. All sub-objects use whole-object replacement
+   * when present; omitted sub-objects preserve the existing value.
    */
   config?: RelayUpdateParams.Config;
 
@@ -437,6 +462,10 @@ export interface RelayUpdateParams {
 }
 
 export namespace RelayUpdateParams {
+  /**
+   * Relay configuration. All sub-objects use whole-object replacement when present;
+   * omitted sub-objects preserve the existing value.
+   */
   export interface Config {
     /**
      * Upstreams are external MOQT server publishers that a relay falls back to when it

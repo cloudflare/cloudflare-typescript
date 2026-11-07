@@ -25,7 +25,11 @@ export class BaseFeeds extends APIResource {
   ] as const);
 
   /**
-   * Subscribes the account to a custom or curated Threat Signals feed.
+   * Subscribes the account to a custom or curated Threat Signals feed. Adding a
+   * custom feed when the account is at its custom-feed limit returns 403 with
+   * `errors[0].reason` `threat_signals_feed_limit`, and
+   * `errors[0].custom_feed_limit` and `errors[0].custom_feed_count` give the limit
+   * and current count. Curated feeds are not subject to this limit.
    *
    * @example
    * ```ts
@@ -194,6 +198,16 @@ export interface FeedListResponse {
    * Number of feeds on this page.
    */
   count: number;
+
+  /**
+   * The current count of custom feeds for the account.
+   */
+  custom_feed_count: number;
+
+  /**
+   * The resolved custom feed limit for the account.
+   */
+  custom_feed_limit: number;
 
   feeds: Array<FeedListResponse.Feed>;
 
@@ -389,32 +403,37 @@ export interface FeedCreateParams {
     | null;
 
   /**
-   * Body param
+   * Body param: UUID of a curated feed to subscribe to. Provide exactly one of url
+   * or curated_feed_id. The account must have feed creation entitlement and not
+   * exceed feed allowance.
    */
   curated_feed_id?: string;
 
   /**
-   * Body param
+   * Body param: Override the feed's display name. Null clears it; omit to keep
+   * existing or derived value.
    */
   display_name?: string | null;
 
   /**
-   * Body param
+   * Body param: Whether to actively poll the feed. Default true.
    */
   enabled?: boolean;
 
   /**
-   * Body param
+   * Body param: Polling interval in seconds (60-86400). Default 300s (5 minutes).
    */
   poll_interval_s?: number;
 
   /**
-   * Body param
+   * Body param: Override the feed's title. Null clears it; omit to keep existing or
+   * derived value.
    */
   title?: string | null;
 
   /**
-   * Body param
+   * Body param: HTTPS RSS feed URL. Provide exactly one of url or curated_feed_id.
+   * The account must have feed creation entitlement and not exceed feed allowance.
    */
   url?: string;
 }
@@ -426,32 +445,38 @@ export interface FeedListParams extends V4PagePaginationParams {
   account_id: string;
 
   /**
-   * Query param
+   * Query param: Exact feed-category filter, up to 100 characters. Omit to include
+   * all categories.
    */
   category?: string;
 
   /**
-   * Query param
+   * Query param: Filter by enabled state. Accepts true, false, 1, or 0; omit to
+   * include enabled and disabled feeds.
    */
   enabled?: boolean;
 
   /**
-   * Query param
+   * Query param: Optional 1–100 alias for per_page. When provided, limit takes
+   * precedence.
    */
   limit?: number;
 
   /**
-   * Query param
+   * Query param: Sort by created_at, title, category, or url. Prefix the field
+   * with - for descending order; defaults to -created_at.
    */
   sort?: string;
 
   /**
-   * Query param
+   * Query param: Filter by curated or custom feed source. Omit to include both
+   * source types.
    */
   source_type?: 'curated' | 'custom';
 
   /**
-   * Query param
+   * Query param: Exact stored polling-status filter, such as active or error. Omit
+   * to include every status.
    */
   status?: string;
 }
@@ -482,22 +507,25 @@ export interface FeedEditParams {
     | null;
 
   /**
-   * Body param
+   * Body param: Override the feed's display name. Null clears it; omit to keep
+   * existing or derived value.
    */
   display_name?: string | null;
 
   /**
-   * Body param
+   * Body param: Whether to actively poll the feed. Omit to keep current value.
    */
   enabled?: boolean;
 
   /**
-   * Body param
+   * Body param: New polling interval in seconds (60-86400). Omit to keep current
+   * value.
    */
   poll_interval_s?: number;
 
   /**
-   * Body param
+   * Body param: Override the feed's title. Null clears it; omit to keep existing or
+   * derived value.
    */
   title?: string | null;
 }
@@ -509,7 +537,8 @@ export interface FeedPollParams {
   account_id: string;
 
   /**
-   * Query param
+   * Query param: UUID of a specific feed to poll, or "all" to poll all feeds. Omit
+   * or pass "all" for all feeds.
    */
   feed_id?: (string & {}) | 'all';
 }

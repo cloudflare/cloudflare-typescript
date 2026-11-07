@@ -57,138 +57,686 @@ export class ManagedTransforms extends BaseManagedTransforms {}
 /**
  * A result.
  */
-export interface ManagedTransformListResponse {
-  /**
-   * The list of Managed Request Transforms.
-   */
-  managed_request_headers: Array<ManagedTransformListResponse.ManagedRequestHeader>;
-
-  /**
-   * The list of Managed Response Transforms.
-   */
-  managed_response_headers: Array<ManagedTransformListResponse.ManagedResponseHeader>;
-}
+export type ManagedTransformListResponse =
+  | ManagedTransformListResponse.UnionMember0
+  | null
+  | ManagedTransformListResponse.UnionMember1
+  | ManagedTransformListResponse.UnionMember2
+  | ManagedTransformListResponse.UnionMember3
+  | ManagedTransformListResponse.UnionMember4;
 
 export namespace ManagedTransformListResponse {
-  /**
-   * A Managed Transform object.
-   */
-  export interface ManagedRequestHeader {
+  export interface UnionMember0 {
     /**
-     * The human-readable identifier of the Managed Transform.
+     * The list of Managed Request Transforms.
      */
-    id: string;
+    managed_request_headers?: Array<UnionMember0.ManagedRequestHeader>;
 
     /**
-     * Whether the Managed Transform is enabled.
+     * The list of Managed Response Transforms.
      */
-    enabled: boolean;
-
-    /**
-     * Whether the Managed Transform conflicts with the currently-enabled Managed
-     * Transforms.
-     */
-    has_conflict: boolean;
-
-    /**
-     * The Managed Transforms that this Managed Transform conflicts with.
-     */
-    conflicts_with?: Array<string>;
+    managed_response_headers?: Array<UnionMember0.ManagedResponseHeader>;
   }
 
-  /**
-   * A Managed Transform object.
-   */
-  export interface ManagedResponseHeader {
+  export namespace UnionMember0 {
     /**
-     * The human-readable identifier of the Managed Transform.
+     * A Managed Transform object.
      */
-    id: string;
+    export interface ManagedRequestHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
 
     /**
-     * Whether the Managed Transform is enabled.
+     * A Managed Transform object.
      */
-    enabled: boolean;
+    export interface ManagedResponseHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+  }
+
+  export interface UnionMember1 {
+    /**
+     * The list of Managed Request Transforms.
+     */
+    managed_request_headers?: Array<UnionMember1.ManagedRequestHeader>;
 
     /**
-     * Whether the Managed Transform conflicts with the currently-enabled Managed
-     * Transforms.
+     * The list of Managed Response Transforms.
      */
-    has_conflict: boolean;
+    managed_response_headers?: Array<UnionMember1.ManagedResponseHeader>;
+  }
+
+  export namespace UnionMember1 {
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedRequestHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
 
     /**
-     * The Managed Transforms that this Managed Transform conflicts with.
+     * A Managed Transform object.
      */
-    conflicts_with?: Array<string>;
+    export interface ManagedResponseHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+  }
+
+  export interface UnionMember2 {
+    /**
+     * The list of Managed Request Transforms.
+     */
+    managed_request_headers?: Array<UnionMember2.ManagedRequestHeader>;
+
+    /**
+     * The list of Managed Response Transforms.
+     */
+    managed_response_headers?: Array<UnionMember2.ManagedResponseHeader>;
+  }
+
+  export namespace UnionMember2 {
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedRequestHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedResponseHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+  }
+
+  export interface UnionMember3 {
+    /**
+     * The list of Managed Request Transforms.
+     */
+    managed_request_headers?: Array<UnionMember3.ManagedRequestHeader>;
+
+    /**
+     * The list of Managed Response Transforms.
+     */
+    managed_response_headers?: Array<UnionMember3.ManagedResponseHeader>;
+  }
+
+  export namespace UnionMember3 {
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedRequestHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedResponseHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+  }
+
+  export interface UnionMember4 {
+    /**
+     * The list of Managed Request Transforms.
+     */
+    managed_request_headers?: Array<UnionMember4.ManagedRequestHeader>;
+
+    /**
+     * The list of Managed Response Transforms.
+     */
+    managed_response_headers?: Array<UnionMember4.ManagedResponseHeader>;
+  }
+
+  export namespace UnionMember4 {
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedRequestHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedResponseHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
   }
 }
 
 /**
  * A result.
  */
-export interface ManagedTransformEditResponse {
-  /**
-   * The list of Managed Request Transforms.
-   */
-  managed_request_headers: Array<ManagedTransformEditResponse.ManagedRequestHeader>;
-
-  /**
-   * The list of Managed Response Transforms.
-   */
-  managed_response_headers: Array<ManagedTransformEditResponse.ManagedResponseHeader>;
-}
+export type ManagedTransformEditResponse =
+  | ManagedTransformEditResponse.UnionMember0
+  | null
+  | ManagedTransformEditResponse.UnionMember1
+  | ManagedTransformEditResponse.UnionMember2
+  | ManagedTransformEditResponse.UnionMember3
+  | ManagedTransformEditResponse.UnionMember4;
 
 export namespace ManagedTransformEditResponse {
-  /**
-   * A Managed Transform object.
-   */
-  export interface ManagedRequestHeader {
+  export interface UnionMember0 {
     /**
-     * The human-readable identifier of the Managed Transform.
+     * The list of Managed Request Transforms.
      */
-    id: string;
+    managed_request_headers?: Array<UnionMember0.ManagedRequestHeader>;
 
     /**
-     * Whether the Managed Transform is enabled.
+     * The list of Managed Response Transforms.
      */
-    enabled: boolean;
-
-    /**
-     * Whether the Managed Transform conflicts with the currently-enabled Managed
-     * Transforms.
-     */
-    has_conflict: boolean;
-
-    /**
-     * The Managed Transforms that this Managed Transform conflicts with.
-     */
-    conflicts_with?: Array<string>;
+    managed_response_headers?: Array<UnionMember0.ManagedResponseHeader>;
   }
 
-  /**
-   * A Managed Transform object.
-   */
-  export interface ManagedResponseHeader {
+  export namespace UnionMember0 {
     /**
-     * The human-readable identifier of the Managed Transform.
+     * A Managed Transform object.
      */
-    id: string;
+    export interface ManagedRequestHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
 
     /**
-     * Whether the Managed Transform is enabled.
+     * A Managed Transform object.
      */
-    enabled: boolean;
+    export interface ManagedResponseHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+  }
+
+  export interface UnionMember1 {
+    /**
+     * The list of Managed Request Transforms.
+     */
+    managed_request_headers?: Array<UnionMember1.ManagedRequestHeader>;
 
     /**
-     * Whether the Managed Transform conflicts with the currently-enabled Managed
-     * Transforms.
+     * The list of Managed Response Transforms.
      */
-    has_conflict: boolean;
+    managed_response_headers?: Array<UnionMember1.ManagedResponseHeader>;
+  }
+
+  export namespace UnionMember1 {
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedRequestHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
 
     /**
-     * The Managed Transforms that this Managed Transform conflicts with.
+     * A Managed Transform object.
      */
-    conflicts_with?: Array<string>;
+    export interface ManagedResponseHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+  }
+
+  export interface UnionMember2 {
+    /**
+     * The list of Managed Request Transforms.
+     */
+    managed_request_headers?: Array<UnionMember2.ManagedRequestHeader>;
+
+    /**
+     * The list of Managed Response Transforms.
+     */
+    managed_response_headers?: Array<UnionMember2.ManagedResponseHeader>;
+  }
+
+  export namespace UnionMember2 {
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedRequestHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedResponseHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+  }
+
+  export interface UnionMember3 {
+    /**
+     * The list of Managed Request Transforms.
+     */
+    managed_request_headers?: Array<UnionMember3.ManagedRequestHeader>;
+
+    /**
+     * The list of Managed Response Transforms.
+     */
+    managed_response_headers?: Array<UnionMember3.ManagedResponseHeader>;
+  }
+
+  export namespace UnionMember3 {
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedRequestHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedResponseHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+  }
+
+  export interface UnionMember4 {
+    /**
+     * The list of Managed Request Transforms.
+     */
+    managed_request_headers?: Array<UnionMember4.ManagedRequestHeader>;
+
+    /**
+     * The list of Managed Response Transforms.
+     */
+    managed_response_headers?: Array<UnionMember4.ManagedResponseHeader>;
+  }
+
+  export namespace UnionMember4 {
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedRequestHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
+
+    /**
+     * A Managed Transform object.
+     */
+    export interface ManagedResponseHeader {
+      /**
+       * The human-readable identifier of the Managed Transform.
+       */
+      id: string;
+
+      /**
+       * Whether the Managed Transform is enabled.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether the Managed Transform conflicts with the currently-enabled Managed
+       * Transforms.
+       */
+      has_conflict: boolean;
+
+      /**
+       * The Managed Transforms that this Managed Transform conflicts with.
+       */
+      conflicts_with?: Array<string>;
+    }
   }
 }
 

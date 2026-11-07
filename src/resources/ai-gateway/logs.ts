@@ -227,7 +227,7 @@ export interface LogGetResponse {
 
   request_content_type?: string;
 
-  request_head?: string;
+  request_head?: string | null;
 
   request_head_complete?: boolean;
 
@@ -237,7 +237,7 @@ export interface LogGetResponse {
 
   response_content_type?: string;
 
-  response_head?: string;
+  response_head?: string | null;
 
   response_head_complete?: boolean;
 

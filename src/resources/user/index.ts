@@ -20,7 +20,7 @@ export {
   type SubscriptionDeleteResponse,
   type SubscriptionUpdateParams,
 } from './subscriptions';
-export { Tenants, BaseTenants } from './tenants';
+export { Tenants, BaseTenants, type TenantListResponse, type TenantListResponsesSinglePage } from './tenants';
 export {
   Tokens,
   BaseTokens,

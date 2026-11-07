@@ -582,6 +582,13 @@ export interface Project {
   build_config?: Project.BuildConfig;
 
   /**
+   * Present when the project is set to a retired build image major version and its
+   * builds have been moved to a newer one. `build_image_major_version` in
+   * `deployment_configs` then reports the version the builds run on.
+   */
+  build_image_auto_upgrade?: Project.BuildImageAutoUpgrade;
+
+  /**
    * A list of associated custom domains for the project.
    */
   domains?: Array<string>;
@@ -624,7 +631,10 @@ export namespace Project {
       always_use_latest_compatibility_date: boolean;
 
       /**
-       * The major version of the build image to use for Pages Functions.
+       * The major version of the build image to use for Pages Functions. Version 1 is
+       * retired and its projects are moved to version 3. Once a project's builds have
+       * been moved, this is the version the builds run on and `build_image_auto_upgrade`
+       * is set on the project.
        */
       build_image_major_version: number;
 
@@ -905,7 +915,10 @@ export namespace Project {
       always_use_latest_compatibility_date: boolean;
 
       /**
-       * The major version of the build image to use for Pages Functions.
+       * The major version of the build image to use for Pages Functions. Version 1 is
+       * retired and its projects are moved to version 3. Once a project's builds have
+       * been moved, this is the version the builds run on and `build_image_auto_upgrade`
+       * is set on the project.
        */
       build_image_major_version: number;
 
@@ -1213,6 +1226,23 @@ export namespace Project {
   }
 
   /**
+   * Present when the project is set to a retired build image major version and its
+   * builds have been moved to a newer one. `build_image_major_version` in
+   * `deployment_configs` then reports the version the builds run on.
+   */
+  export interface BuildImageAutoUpgrade {
+    /**
+     * The retired build image major version the project is set to.
+     */
+    from_version: number;
+
+    /**
+     * The build image major version the project's builds run on.
+     */
+    to_version: number;
+  }
+
+  /**
    * Configs for the project source control.
    */
   export interface Source {
@@ -1448,7 +1478,9 @@ export namespace ProjectCreateParams {
       browsers?: { [key: string]: Preview.Browsers | null };
 
       /**
-       * The major version of the build image to use for Pages Functions.
+       * The major version of the build image to use for Pages Functions. Version 1 is
+       * retired and its projects are moved to version 3. Once a project's builds have
+       * been moved, a request that sets version 1 is rejected.
        */
       build_image_major_version?: number;
 
@@ -1729,7 +1761,9 @@ export namespace ProjectCreateParams {
       browsers?: { [key: string]: Production.Browsers | null };
 
       /**
-       * The major version of the build image to use for Pages Functions.
+       * The major version of the build image to use for Pages Functions. Version 1 is
+       * retired and its projects are moved to version 3. Once a project's builds have
+       * been moved, a request that sets version 1 is rejected.
        */
       build_image_major_version?: number;
 
@@ -2200,7 +2234,9 @@ export namespace ProjectEditParams {
       browsers?: { [key: string]: Preview.Browsers | null };
 
       /**
-       * The major version of the build image to use for Pages Functions.
+       * The major version of the build image to use for Pages Functions. Version 1 is
+       * retired and its projects are moved to version 3. Once a project's builds have
+       * been moved, a request that sets version 1 is rejected.
        */
       build_image_major_version?: number;
 
@@ -2481,7 +2517,9 @@ export namespace ProjectEditParams {
       browsers?: { [key: string]: Production.Browsers | null };
 
       /**
-       * The major version of the build image to use for Pages Functions.
+       * The major version of the build image to use for Pages Functions. Version 1 is
+       * retired and its projects are moved to version 3. Once a project's builds have
+       * been moved, a request that sets version 1 is rejected.
        */
       build_image_major_version?: number;
 

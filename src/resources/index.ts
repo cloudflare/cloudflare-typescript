@@ -74,6 +74,7 @@ export { IAM, BaseIAM } from './iam/iam';
 export { IPs, BaseIPs } from './ips';
 export { Images, BaseImages } from './images/images';
 export { Intel, BaseIntel } from './intel/intel';
+export { K2, BaseK2 } from './k2/k2';
 export { KV, BaseKV } from './kv/kv';
 export { KeylessCertificates, BaseKeylessCertificates } from './keyless-certificates';
 export {
@@ -85,10 +86,6 @@ export { Logpush, BaseLogpush } from './logpush/logpush';
 export { Logs, BaseLogs } from './logs/logs';
 export { MTLSCertificates, BaseMTLSCertificates } from './mtls-certificates/mtls-certificates';
 export {
-  MagicCloudNetworking,
-  BaseMagicCloudNetworking,
-} from './magic-cloud-networking/magic-cloud-networking';
-export {
   MagicNetworkMonitoring,
   BaseMagicNetworkMonitoring,
 } from './magic-network-monitoring/magic-network-monitoring';
@@ -97,6 +94,7 @@ export { ManagedDefense, BaseManagedDefense } from './managed-defense/managed-de
 export { ManagedTransforms, BaseManagedTransforms } from './managed-transforms';
 export { Memberships, BaseMemberships } from './memberships';
 export { MoQ, BaseMoQ } from './moq/moq';
+export { Monetization, BaseMonetization } from './monetization/monetization';
 export {
   NetworkInterconnects,
   BaseNetworkInterconnects,

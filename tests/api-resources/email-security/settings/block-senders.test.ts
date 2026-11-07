@@ -52,6 +52,7 @@ const runTests = (
       pattern: 'test@example.com',
       pattern_type: 'EMAIL',
       comments: 'Block sender with email test@example.com',
+      expires_at: '2027-01-01T00:00:00Z',
     });
   });
 
@@ -72,6 +73,7 @@ const runTests = (
     const response = await client.emailSecurity.settings.blockSenders.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
+      expired: true,
       order: 'pattern',
       page: 1,
       pattern: 'pattern',
@@ -138,6 +140,7 @@ const runTests = (
       patches: [
         {
           comments: 'Block sender with email test@example.com',
+          expires_at: '2027-01-01T00:00:00Z',
           is_regex: false,
           pattern: 'test@example.com',
           pattern_type: 'EMAIL',
@@ -149,6 +152,7 @@ const runTests = (
           pattern: 'test@example.com',
           pattern_type: 'EMAIL',
           comments: 'Block sender with email test@example.com',
+          expires_at: '2027-01-01T00:00:00Z',
         },
       ],
       puts: [
@@ -157,6 +161,7 @@ const runTests = (
           pattern: 'test@example.com',
           pattern_type: 'EMAIL',
           comments: 'Block sender with email test@example.com',
+          expires_at: '2027-01-01T00:00:00Z',
         },
       ],
     });
@@ -184,6 +189,7 @@ const runTests = (
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         comments: 'Block sender with email test@example.com',
+        expires_at: '2027-01-01T00:00:00Z',
         is_regex: false,
         pattern: 'test@example.com',
         pattern_type: 'EMAIL',

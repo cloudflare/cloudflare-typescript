@@ -215,6 +215,12 @@ export interface MitigationReviewParams {
   data?: MitigationReviewParams.Data;
 
   /**
+   * Body param: Optional explanation for a "content_removed" appeal, such as how the
+   * content was removed. Not accepted for other appeal types.
+   */
+  explanation?: string;
+
+  /**
    * Body param: The type of appeal being submitted.
    */
   type?: 'counter_notice' | 'content_removed';

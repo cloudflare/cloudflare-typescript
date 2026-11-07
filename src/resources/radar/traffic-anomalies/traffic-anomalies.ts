@@ -52,8 +52,18 @@ export namespace TrafficAnomalyGetResponse {
 
     originDetails: TrafficAnomaly.OriginDetails | null;
 
+    /**
+     * ID of the published outage this anomaly was confirmed as, if any.
+     */
+    outageId: string | null;
+
     startDate: string;
 
+    /**
+     * Verification status: UNVERIFIED (automatically detected, not yet validated by
+     * Radar), TP (verified by Radar) or VERIFIED (verified by Radar and a third-party
+     * source).
+     */
     status: string;
 
     type: string;

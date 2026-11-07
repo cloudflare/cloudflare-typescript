@@ -113,6 +113,11 @@ export class BotManagement extends BaseBotManagement {}
 
 export interface BotFightModeConfiguration {
   /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  ai_agents?: BotFightModeConfiguration.AIAgents;
+
+  /**
    * Temporary migration flag tracking zones opted out of AI bots managed-rule
    * updates.
    */
@@ -200,6 +205,36 @@ export interface BotFightModeConfiguration {
 
 export namespace BotFightModeConfiguration {
   /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  export interface AIAgents {
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    anthropic_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    google_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    instinct?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    muse?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    openai_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+  }
+
+  /**
    * A read-only field that shows which unauthorized settings are currently active on
    * the zone. These settings typically result from upgrades or downgrades.
    */
@@ -239,6 +274,11 @@ export namespace BotFightModeConfiguration {
 }
 
 export interface BotFightModeConfigurationParam {
+  /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  ai_agents?: BotFightModeConfigurationParam.AIAgents;
+
   /**
    * Temporary migration flag tracking zones opted out of AI bots managed-rule
    * updates.
@@ -313,7 +353,44 @@ export interface BotFightModeConfigurationParam {
   jsd_api_results_enabled?: boolean;
 }
 
+export namespace BotFightModeConfigurationParam {
+  /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  export interface AIAgents {
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    anthropic_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    google_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    instinct?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    muse?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    openai_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+  }
+}
+
 export interface SubscriptionConfiguration {
+  /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  ai_agents?: SubscriptionConfiguration.AIAgents;
+
   /**
    * Temporary migration flag tracking zones opted out of AI bots managed-rule
    * updates.
@@ -416,6 +493,36 @@ export interface SubscriptionConfiguration {
 
 export namespace SubscriptionConfiguration {
   /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  export interface AIAgents {
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    anthropic_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    google_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    instinct?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    muse?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    openai_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+  }
+
+  /**
    * A read-only field that shows which unauthorized settings are currently active on
    * the zone. These settings typically result from upgrades or downgrades.
    */
@@ -455,6 +562,11 @@ export namespace SubscriptionConfiguration {
 }
 
 export interface SubscriptionConfigurationParam {
+  /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  ai_agents?: SubscriptionConfigurationParam.AIAgents;
+
   /**
    * Temporary migration flag tracking zones opted out of AI bots managed-rule
    * updates.
@@ -543,7 +655,44 @@ export interface SubscriptionConfigurationParam {
   suppress_session_score?: boolean;
 }
 
+export namespace SubscriptionConfigurationParam {
+  /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  export interface AIAgents {
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    anthropic_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    google_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    instinct?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    muse?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    openai_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+  }
+}
+
 export interface SuperBotFightModeDefinitelyConfiguration {
+  /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  ai_agents?: SuperBotFightModeDefinitelyConfiguration.AIAgents;
+
   /**
    * Temporary migration flag tracking zones opted out of AI bots managed-rule
    * updates.
@@ -649,6 +798,36 @@ export interface SuperBotFightModeDefinitelyConfiguration {
 
 export namespace SuperBotFightModeDefinitelyConfiguration {
   /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  export interface AIAgents {
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    anthropic_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    google_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    instinct?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    muse?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    openai_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+  }
+
+  /**
    * A read-only field that shows which unauthorized settings are currently active on
    * the zone. These settings typically result from upgrades or downgrades.
    */
@@ -667,6 +846,11 @@ export namespace SuperBotFightModeDefinitelyConfiguration {
 }
 
 export interface SuperBotFightModeDefinitelyConfigurationParam {
+  /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  ai_agents?: SuperBotFightModeDefinitelyConfigurationParam.AIAgents;
+
   /**
    * Temporary migration flag tracking zones opted out of AI bots managed-rule
    * updates.
@@ -758,7 +942,44 @@ export interface SuperBotFightModeDefinitelyConfigurationParam {
   sbfm_verified_bots?: 'allow' | 'block';
 }
 
+export namespace SuperBotFightModeDefinitelyConfigurationParam {
+  /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  export interface AIAgents {
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    anthropic_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    google_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    instinct?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    muse?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    openai_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+  }
+}
+
 export interface SuperBotFightModeLikelyConfiguration {
+  /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  ai_agents?: SuperBotFightModeLikelyConfiguration.AIAgents;
+
   /**
    * Temporary migration flag tracking zones opted out of AI bots managed-rule
    * updates.
@@ -869,6 +1090,36 @@ export interface SuperBotFightModeLikelyConfiguration {
 
 export namespace SuperBotFightModeLikelyConfiguration {
   /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  export interface AIAgents {
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    anthropic_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    google_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    instinct?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    muse?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    openai_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+  }
+
+  /**
    * A read-only field that shows which unauthorized settings are currently active on
    * the zone. These settings typically result from upgrades or downgrades.
    */
@@ -881,6 +1132,11 @@ export namespace SuperBotFightModeLikelyConfiguration {
 }
 
 export interface SuperBotFightModeLikelyConfigurationParam {
+  /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  ai_agents?: SuperBotFightModeLikelyConfigurationParam.AIAgents;
+
   /**
    * Temporary migration flag tracking zones opted out of AI bots managed-rule
    * updates.
@@ -977,6 +1233,38 @@ export interface SuperBotFightModeLikelyConfigurationParam {
   sbfm_verified_bots?: 'allow' | 'block';
 }
 
+export namespace SuperBotFightModeLikelyConfigurationParam {
+  /**
+   * Configure blocking behavior for supported personal AI agents.
+   */
+  export interface AIAgents {
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    anthropic_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    google_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    instinct?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    muse?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+    /**
+     * Action to apply to one supported personal AI agent.
+     */
+    openai_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+  }
+}
+
 export type BotManagementUpdateResponse =
   | BotFightModeConfiguration
   | SuperBotFightModeDefinitelyConfiguration
@@ -1001,6 +1289,11 @@ export declare namespace BotManagementUpdateParams {
      * Path param: Identifier.
      */
     zone_id: string;
+
+    /**
+     * Body param: Configure blocking behavior for supported personal AI agents.
+     */
+    ai_agents?: BotFightModeConfiguration.AIAgents;
 
     /**
      * Body param: Temporary migration flag tracking zones opted out of AI bots
@@ -1077,11 +1370,48 @@ export declare namespace BotManagementUpdateParams {
     jsd_api_results_enabled?: boolean;
   }
 
+  export namespace BotFightModeConfiguration {
+    /**
+     * Configure blocking behavior for supported personal AI agents.
+     */
+    export interface AIAgents {
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      anthropic_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      google_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      instinct?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      muse?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      openai_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+    }
+  }
+
   export interface SuperBotFightModeDefinitelyConfiguration {
     /**
      * Path param: Identifier.
      */
     zone_id: string;
+
+    /**
+     * Body param: Configure blocking behavior for supported personal AI agents.
+     */
+    ai_agents?: SuperBotFightModeDefinitelyConfiguration.AIAgents;
 
     /**
      * Body param: Temporary migration flag tracking zones opted out of AI bots
@@ -1177,11 +1507,48 @@ export declare namespace BotManagementUpdateParams {
     sbfm_verified_bots?: 'allow' | 'block';
   }
 
+  export namespace SuperBotFightModeDefinitelyConfiguration {
+    /**
+     * Configure blocking behavior for supported personal AI agents.
+     */
+    export interface AIAgents {
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      anthropic_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      google_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      instinct?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      muse?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      openai_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+    }
+  }
+
   export interface SuperBotFightModeLikelyConfiguration {
     /**
      * Path param: Identifier.
      */
     zone_id: string;
+
+    /**
+     * Body param: Configure blocking behavior for supported personal AI agents.
+     */
+    ai_agents?: SuperBotFightModeLikelyConfiguration.AIAgents;
 
     /**
      * Body param: Temporary migration flag tracking zones opted out of AI bots
@@ -1283,11 +1650,48 @@ export declare namespace BotManagementUpdateParams {
     sbfm_verified_bots?: 'allow' | 'block';
   }
 
+  export namespace SuperBotFightModeLikelyConfiguration {
+    /**
+     * Configure blocking behavior for supported personal AI agents.
+     */
+    export interface AIAgents {
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      anthropic_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      google_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      instinct?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      muse?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      openai_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+    }
+  }
+
   export interface SubscriptionConfiguration {
     /**
      * Path param: Identifier.
      */
     zone_id: string;
+
+    /**
+     * Body param: Configure blocking behavior for supported personal AI agents.
+     */
+    ai_agents?: SubscriptionConfiguration.AIAgents;
 
     /**
      * Body param: Temporary migration flag tracking zones opted out of AI bots
@@ -1376,6 +1780,38 @@ export declare namespace BotManagementUpdateParams {
      * the Bot Management cookie.
      */
     suppress_session_score?: boolean;
+  }
+
+  export namespace SubscriptionConfiguration {
+    /**
+     * Configure blocking behavior for supported personal AI agents.
+     */
+    export interface AIAgents {
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      anthropic_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      google_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      instinct?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      muse?: 'disabled' | 'block' | 'only_on_ad_pages';
+
+      /**
+       * Action to apply to one supported personal AI agent.
+       */
+      openai_agent?: 'disabled' | 'block' | 'only_on_ad_pages';
+    }
   }
 }
 

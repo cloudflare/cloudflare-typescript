@@ -52,6 +52,7 @@ const runTests = (
       captive_portal: 180,
       disable_auto_fallback: true,
       dns_search_suffixes: [{ suffix: 'internal.corp', description: 'Example internal domains' }],
+      enable_device_credential_authentication: false,
       exclude: [{ address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' }],
       exclude_office_ips: true,
       global_acceleration: {
@@ -59,6 +60,7 @@ const runTests = (
         enabled: true,
         masque_endpoints: ['198.51.100.1:443'],
         wireguard_endpoints: ['198.51.100.1:2408'],
+        allow_manual_override: true,
         autoswitch: true,
       },
       include: [{ address: '192.0.2.0/24', description: 'Include testing domains in the tunnel' }],

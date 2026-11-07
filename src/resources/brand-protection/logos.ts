@@ -14,7 +14,7 @@ export class BaseLogos extends APIResource {
   ] as const);
 
   /**
-   * Return new saved logo queries created from image files
+   * Return new saved logo queries created from image files.
    */
   create(params: LogoCreateParams, options?: RequestOptions): APIPromise<LogoCreateResponse> {
     const { account_id, match_type, tag, threshold, ...body } = params;
@@ -27,7 +27,7 @@ export class BaseLogos extends APIResource {
   }
 
   /**
-   * Return a success message after deleting saved logo queries by ID
+   * Return a success message after deleting saved logo queries by ID.
    */
   delete(logoID: string, params: LogoDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { account_id } = params;

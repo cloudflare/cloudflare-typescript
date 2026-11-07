@@ -89,6 +89,7 @@ const runTests = (client: PartialCloudflare<{ r2DataCatalog: BaseR2DataCatalog }
   test('enable: required and optional params', async () => {
     const response = await client.r2DataCatalog.enable('my-data-bucket', {
       account_id: '0123456789abcdef0123456789abcdef',
+      credential: { token: 'your-cloudflare-api-token-here' },
     });
   });
 

@@ -334,6 +334,12 @@ export interface PoolCreateParams {
   origins: Array<LoadBalancersAPI.OriginParam>;
 
   /**
+   * Body param: A list of regions from which to run health checks. Null means every
+   * Cloudflare data center.
+   */
+  check_regions?: Array<LoadBalancersAPI.CheckRegionParam> | null;
+
+  /**
    * Body param: A human-readable description of the pool.
    */
   description?: string;
@@ -344,6 +350,18 @@ export interface PoolCreateParams {
    * will cause any load balancers using it to failover to the next pool (if any).
    */
   enabled?: boolean;
+
+  /**
+   * Body param: A list of health sources, ordered from highest to lowest priority,
+   * used to evaluate individual origin health and overall pool health. The load
+   * balancer uses the first source that has data and falls back to the next.
+   * Currently accepted values are null or the exact array ["regional", "global"];
+   * any other combination is rejected. Null (the default) behaves like ["local",
+   * "global"]. ["regional", "global"] makes each region steer on its own health,
+   * falling back to the global decision when a region has no fresh data. Setting
+   * regional requires at least one region in check_regions.
+   */
+  health_sources?: Array<'local' | 'regional' | 'global'> | null;
 
   /**
    * Body param: The latitude of the data center containing the origins used in this
@@ -380,6 +398,11 @@ export interface PoolCreateParams {
    * origins within this pool.
    */
   monitor_group?: string;
+
+  /**
+   * Body param: List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
 
   /**
    * Body param: This field is now deprecated. It has been moved to Cloudflare's
@@ -487,6 +510,11 @@ export interface PoolUpdateParams {
    * origins within this pool.
    */
   monitor_group?: string;
+
+  /**
+   * Body param: List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
 
   /**
    * Body param: This field is now deprecated. It has been moved to Cloudflare's
@@ -621,6 +649,11 @@ export interface PoolEditParams {
    * hyphens, and underscores are allowed.
    */
   name?: string;
+
+  /**
+   * Body param: List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
 
   /**
    * Body param: This field is now deprecated. It has been moved to Cloudflare's

@@ -13,7 +13,8 @@ export class BaseRelationships extends APIResource {
   ] as const);
 
   /**
-   * Deprecated; use GET /events/by-id/{event_id}/relationships. Available through
+   * Legacy. Use `threat-intel events relationships list`
+   * (`GET /events/by-id/{event_id}/relationships`) instead. Available through
    * 2026-11-28.
    *
    * @deprecated Use GET /events/by-id/{event_id}/relationships before 2026-11-28.

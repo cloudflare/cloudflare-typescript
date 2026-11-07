@@ -164,7 +164,7 @@ export type UserGroupListResponsesV4PagePaginationArray = V4PagePaginationArray<
  */
 export interface UserGroupCreateResponse {
   /**
-   * User Group identifier tag.
+   * Identifier of the user group.
    */
   id: string;
 
@@ -294,7 +294,7 @@ export namespace UserGroupCreateResponse {
       id: string;
 
       /**
-       * A scope is a combination of scope objects which provides additional context.
+       * The scope associated to the resource group
        */
       scope: ResourceGroup.Scope;
 
@@ -311,7 +311,7 @@ export namespace UserGroupCreateResponse {
 
     export namespace ResourceGroup {
       /**
-       * A scope is a combination of scope objects which provides additional context.
+       * The scope associated to the resource group
        */
       export interface Scope {
         /**
@@ -357,7 +357,7 @@ export namespace UserGroupCreateResponse {
  */
 export interface UserGroupUpdateResponse {
   /**
-   * User Group identifier tag.
+   * Identifier of the user group.
    */
   id: string;
 
@@ -487,7 +487,7 @@ export namespace UserGroupUpdateResponse {
       id: string;
 
       /**
-       * A scope is a combination of scope objects which provides additional context.
+       * The scope associated to the resource group
        */
       scope: ResourceGroup.Scope;
 
@@ -504,7 +504,7 @@ export namespace UserGroupUpdateResponse {
 
     export namespace ResourceGroup {
       /**
-       * A scope is a combination of scope objects which provides additional context.
+       * The scope associated to the resource group
        */
       export interface Scope {
         /**
@@ -550,7 +550,7 @@ export namespace UserGroupUpdateResponse {
  */
 export interface UserGroupListResponse {
   /**
-   * User Group identifier tag.
+   * Identifier of the user group.
    */
   id: string;
 
@@ -680,7 +680,7 @@ export namespace UserGroupListResponse {
       id: string;
 
       /**
-       * A scope is a combination of scope objects which provides additional context.
+       * The scope associated to the resource group
        */
       scope: ResourceGroup.Scope;
 
@@ -697,7 +697,7 @@ export namespace UserGroupListResponse {
 
     export namespace ResourceGroup {
       /**
-       * A scope is a combination of scope objects which provides additional context.
+       * The scope associated to the resource group
        */
       export interface Scope {
         /**
@@ -750,7 +750,7 @@ export interface UserGroupDeleteResponse {
  */
 export interface UserGroupGetResponse {
   /**
-   * User Group identifier tag.
+   * Identifier of the user group.
    */
   id: string;
 
@@ -880,7 +880,7 @@ export namespace UserGroupGetResponse {
       id: string;
 
       /**
-       * A scope is a combination of scope objects which provides additional context.
+       * The scope associated to the resource group
        */
       scope: ResourceGroup.Scope;
 
@@ -897,7 +897,7 @@ export namespace UserGroupGetResponse {
 
     export namespace ResourceGroup {
       /**
-       * A scope is a combination of scope objects which provides additional context.
+       * The scope associated to the resource group
        */
       export interface Scope {
         /**

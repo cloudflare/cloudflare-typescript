@@ -121,6 +121,11 @@ export interface CrawlGetResponse {
   records: Array<CrawlGetResponse.Record>;
 
   /**
+   * Robots.txt state for the first 50 origins encountered by the crawl.
+   */
+  robots: Array<CrawlGetResponse.Robot>;
+
+  /**
    * Total number of URLs that were skipped due to include/exclude/subdomain filters.
    * Skipped URLs are included in records but are not counted toward total/finished.
    */
@@ -173,6 +178,23 @@ export namespace CrawlGetResponse {
      * Absent for urls that never reached a fetch.
      */
     metadata?: Record.Metadata;
+
+    /**
+     * Result of processing the URL. Absent for older records.
+     */
+    outcome?:
+      | 'success'
+      | 'robots_disallowed'
+      | 'crawl_purpose_disallowed'
+      | 'content_use_disallowed'
+      | 'connection_error'
+      | 'timeout'
+      | 'browser_unavailable'
+      | 'format_generation_error'
+      | 'unsupported_content_type'
+      | 'unclassified_error'
+      | 'page_error'
+      | 'too_large';
   }
 
   export namespace Record {
@@ -191,10 +213,58 @@ export namespace CrawlGetResponse {
       url: string;
 
       /**
+       * Value of the Last-Modified response header, when provided by the origin.
+       */
+      lastModified?: string;
+
+      /**
+       * Open Graph description of the crawled page.
+       */
+      'og:description'?: string;
+
+      /**
+       * Open Graph image of the crawled page.
+       */
+      'og:image'?: string;
+
+      /**
+       * Open Graph site name of the crawled page.
+       */
+      'og:site_name'?: string;
+
+      /**
+       * Open Graph title of the crawled page.
+       */
+      'og:title'?: string;
+
+      /**
+       * Open Graph type of the crawled page.
+       */
+      'og:type'?: string;
+
+      /**
        * Title of the crawled page.
        */
       title?: string;
     }
+  }
+
+  export interface Robot {
+    /**
+     * Origin whose robots.txt was checked.
+     */
+    origin: string;
+
+    /**
+     * Whether usable robots.txt rules were available.
+     */
+    state: 'available' | 'absent' | 'fetch_failed';
+
+    /**
+     * HTTP status that established the current robots.txt state. Absent when no HTTP
+     * response was received.
+     */
+    status?: number;
   }
 }
 

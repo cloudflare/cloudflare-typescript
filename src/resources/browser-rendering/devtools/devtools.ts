@@ -14,12 +14,10 @@ import * as BrowserAPI from './browser/browser';
 import {
   BaseBrowser,
   Browser,
-  BrowserConnectParams,
   BrowserCreateParams,
   BrowserCreateResponse,
   BrowserDeleteParams,
   BrowserDeleteResponse,
-  BrowserLaunchParams,
   BrowserProtocolParams,
   BrowserProtocolResponse,
   BrowserVersionParams,
@@ -61,8 +59,6 @@ export declare namespace Devtools {
     type BrowserVersionResponse as BrowserVersionResponse,
     type BrowserCreateParams as BrowserCreateParams,
     type BrowserDeleteParams as BrowserDeleteParams,
-    type BrowserConnectParams as BrowserConnectParams,
-    type BrowserLaunchParams as BrowserLaunchParams,
     type BrowserProtocolParams as BrowserProtocolParams,
     type BrowserVersionParams as BrowserVersionParams,
   };

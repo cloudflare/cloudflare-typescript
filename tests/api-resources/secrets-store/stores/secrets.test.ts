@@ -30,13 +30,7 @@ const runTests = (client: PartialCloudflare<{ secretsStore: { stores: { secrets:
   test('create: only required params', async () => {
     const responsePromise = client.secretsStore.stores.secrets.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
-      body: [
-        {
-          name: 'MY_API_KEY',
-          scopes: ['workers', 'ai_gateway', 'dex', 'access', 'websearch'],
-          value: 'api-token-secret-123',
-        },
-      ],
+      body: [{ name: 'MY_API_KEY', value: 'api-token-secret-123' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -53,9 +47,9 @@ const runTests = (client: PartialCloudflare<{ secretsStore: { stores: { secrets:
       body: [
         {
           name: 'MY_API_KEY',
-          scopes: ['workers', 'ai_gateway', 'dex', 'access', 'websearch'],
           value: 'api-token-secret-123',
           comment: 'info about my secret',
+          scopes: ['workers', 'ai_gateway', 'dex', 'access', 'websearch'],
         },
       ],
     });
@@ -135,7 +129,6 @@ const runTests = (client: PartialCloudflare<{ secretsStore: { stores: { secrets:
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'MY_API_KEY',
-      scopes: ['workers', 'ai_gateway', 'dex', 'access', 'websearch'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -152,8 +145,8 @@ const runTests = (client: PartialCloudflare<{ secretsStore: { stores: { secrets:
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'MY_API_KEY',
-      scopes: ['workers', 'ai_gateway', 'dex', 'access', 'websearch'],
       comment: 'info about my secret',
+      scopes: ['workers', 'ai_gateway', 'dex', 'access', 'websearch'],
     });
   });
 

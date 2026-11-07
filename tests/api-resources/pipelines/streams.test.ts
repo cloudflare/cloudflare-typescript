@@ -111,7 +111,9 @@ const runTests = (client: PartialCloudflare<{ pipelines: { streams: BaseStreams 
   test('list: required and optional params', async () => {
     const response = await client.pipelines.streams.list({
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      direction: 'asc',
       name: 'x',
+      order_by: 'name',
       page: 0,
       per_page: 0,
       pipeline_id: '043e105f4ecef8ad9ca31a8372d0c353',

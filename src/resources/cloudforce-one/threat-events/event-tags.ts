@@ -13,7 +13,8 @@ export class BaseEventTags extends APIResource {
   ] as const);
 
   /**
-   * Adds a tag to a threat event in Cloudforce One for classification and filtering.
+   * Legacy. Use `threat-intel tags relationships create`
+   * (`POST /events/tags/{tag_uuid}/relationships`) instead.
    *
    * @example
    * ```ts
@@ -39,7 +40,8 @@ export class BaseEventTags extends APIResource {
   }
 
   /**
-   * Removes a tag from a threat event in Cloudforce One.
+   * Legacy. Use `threat-intel tags relationships delete`
+   * (`DELETE /events/tags/{tag_uuid}/relationships/{rel_uuid}`) instead.
    *
    * @example
    * ```ts

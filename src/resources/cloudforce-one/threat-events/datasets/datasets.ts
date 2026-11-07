@@ -17,8 +17,8 @@ export class BaseDatasets extends APIResource {
   ] as const);
 
   /**
-   * Creates a new threat event dataset in Cloudforce One for organizing related
-   * threat events.
+   * Creates a dataset for grouping events. Set `isPublic` to true to let anyone
+   * search it; otherwise only the account can.
    *
    * @example
    * ```ts
@@ -39,7 +39,7 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Lists all threat event datasets configured in Cloudforce One.
+   * Lists the account's datasets. Set `includeDeleted` to include deleted datasets.
    *
    * @example
    * ```ts
@@ -58,7 +58,8 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Soft-deletes a dataset given a datasetId.
+   * Deletes a dataset. To see deleted datasets, use `threat-intel datasets list`
+   * with `includeDeleted`.
    *
    * @example
    * ```ts
@@ -82,8 +83,7 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Partially updates a threat event dataset in Cloudforce One, modifying specific
-   * fields without replacing the entire dataset configuration.
+   * Updates a dataset's `name` and `isPublic` setting. Both fields are required.
    *
    * @example
    * ```ts
@@ -111,7 +111,7 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Retrieves details for a specific threat event dataset.
+   * Returns a dataset by its ID.
    *
    * @example
    * ```ts
@@ -131,8 +131,9 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Deprecated; use GET /events/datasets/{dataset_id}/events/{event_id}/raw.
-   * Available through 2026-11-28.
+   * Legacy. Use `threat-intel events raw get`
+   * (`GET /events/datasets/{dataset_id}/events/{event_id}/raw`) instead. Available
+   * through 2026-11-28.
    *
    * @deprecated Use GET /events/datasets/{dataset_id}/events/{event_id}/raw before 2026-11-28.
    */

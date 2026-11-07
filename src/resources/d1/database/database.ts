@@ -283,6 +283,39 @@ export class BaseDatabase extends APIResource {
       { body, method: 'post', ...options },
     );
   }
+
+  /**
+   * Restore a deleted D1 database. The database is restored with the name it had
+   * when it was deleted, unless `new_name` is provided. The restored database counts
+   * against the account's limits. Undeleting a database that is not deleted succeeds
+   * without changes, unless `new_name` differs from its current name which errors. A
+   * database can only be undeleted within 7 days (7 \* 24 hours) of its deletion.
+   *
+   * Once a database is undeleted, Time Travel (point-in-time recovery) cannot
+   * restore it to a bookmark or timestamp at or before the undeletion. Only states
+   * after the undeletion can be restored.
+   *
+   * @example
+   * ```ts
+   * const d1 = await client.d1.database.undelete(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  undelete(
+    databaseID: string,
+    params: DatabaseUndeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<D1API.D1> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/d1/database/${databaseID}/undelete`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: D1API.D1 }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class Database extends BaseDatabase {
   timeTravel: TimeTravelAPI.TimeTravel = new TimeTravelAPI.TimeTravel(this._client);
@@ -822,6 +855,14 @@ export interface DatabaseExportParams {
 export namespace DatabaseExportParams {
   export interface DumpOptions {
     /**
+     * Dump format. `d1` (the default) gives a dump that D1 can import.
+     * `sqlite3_cli_only` matches the output of the `sqlite3 .dump` command, including
+     * virtual tables such as FTS5 or R\*Tree tables, but cannot be imported back into
+     * D1.
+     */
+    compatibility?: 'd1' | 'sqlite3_cli_only';
+
+    /**
      * Export only the table definitions, not their contents
      */
     no_data?: boolean;
@@ -1028,6 +1069,20 @@ export declare namespace DatabaseRawParams {
   }
 }
 
+export interface DatabaseUndeleteParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Restore the database with this name instead of the name it had when
+   * it was deleted. Required if another database in the account already uses that
+   * name.
+   */
+  new_name?: string;
+}
+
 Database.TimeTravel = TimeTravel;
 Database.BaseTimeTravel = BaseTimeTravel;
 
@@ -1052,6 +1107,7 @@ export declare namespace Database {
     type DatabaseImportParams as DatabaseImportParams,
     type DatabaseQueryParams as DatabaseQueryParams,
     type DatabaseRawParams as DatabaseRawParams,
+    type DatabaseUndeleteParams as DatabaseUndeleteParams,
   };
 
   export {

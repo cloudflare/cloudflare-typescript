@@ -16,6 +16,8 @@ import * as AccessAPI from './access/access';
 import { Access, BaseAccess } from './access/access';
 import * as CasbAPI from './casb/casb';
 import { BaseCasb, Casb } from './casb/casb';
+import * as CWSAPI from './cws/cws';
+import { BaseCWS, CWS } from './cws/cws';
 import * as DevicesAPI from './devices/devices';
 import {
   BaseDevices,
@@ -103,6 +105,7 @@ export class BaseZeroTrust extends APIResource {
   static override readonly _key: readonly ['zeroTrust'] = Object.freeze(['zeroTrust'] as const);
 }
 export class ZeroTrust extends BaseZeroTrust {
+  cws: CWSAPI.CWS = new CWSAPI.CWS(this._client);
   devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
   identityProviders: IdentityProvidersAPI.IdentityProviders = new IdentityProvidersAPI.IdentityProviders(
     this._client,
@@ -122,6 +125,8 @@ export class ZeroTrust extends BaseZeroTrust {
   resourceLibrary: ResourceLibraryAPI.ResourceLibrary = new ResourceLibraryAPI.ResourceLibrary(this._client);
 }
 
+ZeroTrust.CWS = CWS;
+ZeroTrust.BaseCWS = BaseCWS;
 ZeroTrust.Devices = Devices;
 ZeroTrust.BaseDevices = BaseDevices;
 ZeroTrust.IdentityProviders = IdentityProviders;
@@ -152,6 +157,8 @@ ZeroTrust.ResourceLibrary = ResourceLibrary;
 ZeroTrust.BaseResourceLibrary = BaseResourceLibrary;
 
 export declare namespace ZeroTrust {
+  export { CWS as CWS, BaseCWS as BaseCWS };
+
   export {
     Devices as Devices,
     BaseDevices as BaseDevices,
