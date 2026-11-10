@@ -2,7 +2,8 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
-import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../core/pagination';
+import { PagePromise, type V4PagePaginationParams } from '../../../core/pagination';
+import { WorkerDeploymentsPage } from '../../../lib/worker-deployments-page';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -72,11 +73,11 @@ export class BaseDeployments extends APIResource {
     scriptName: string,
     params: DeploymentListParams,
     options?: RequestOptions,
-  ): PagePromise<DeploymentListResponsesV4PagePagination, DeploymentListResponse> {
+  ): PagePromise<DeploymentListResponsesV4PagePagination, Deployment> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`,
-      V4PagePagination<DeploymentListResponse>,
+      WorkerDeploymentsPage<Deployment>,
       { query, ...options },
     );
   }
@@ -136,7 +137,7 @@ export class BaseDeployments extends APIResource {
 }
 export class Deployments extends BaseDeployments {}
 
-export type DeploymentListResponsesV4PagePagination = V4PagePagination<DeploymentListResponse>;
+export type DeploymentListResponsesV4PagePagination = WorkerDeploymentsPage<Deployment>;
 
 export interface Deployment {
   id: string;
